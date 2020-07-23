@@ -67,7 +67,7 @@
 		<!-- EXTERNAS -->
 		<versao.jasperreports>5.2.0</versao.jasperreports>
 		<versao.granite>1.1.0</versao.granite>
-		<versao.log4j-core>2.12.1</versao.log4j-core>
+		<versao.log4j-core>2.13.3</versao.log4j-core>
 	</properties>
 	
 	<profiles>
