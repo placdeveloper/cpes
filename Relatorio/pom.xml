@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+
+	<artifactId>capes-modulo-relatorio</artifactId>
+	<packaging>pom</packaging>
+
+	<name>CAPES - Relatorio</name>
+
+	<parent>
+		<groupId>br.com.sicoob.capes</groupId>
+		<artifactId>capes</artifactId>
+		<version>2.0.8.1</version>
+		<relativePath>..</relativePath>
+	</parent>
+
+	<scm>
+		<connection>scm:svn:http://svn.sicoob.com.br/fontesbancoob/SISBR/Aplicativos/JAVA/trunk/CAPES/tags/capes-2.0.8.1/Relatorio</connection>
+		<developerConnection>scm:svn:http://svn.sicoob.com.br/fontesbancoob/SISBR/Aplicativos/JAVA/trunk/CAPES/tags/capes-2.0.8.1/Relatorio</developerConnection>
+		<url>http://svn.sicoob.com.br/fontesbancoob/SISBR/Aplicativos/JAVA/trunk/CAPES/tags/capes-2.0.8.1/Relatorio</url>
+	</scm>
+
+	<modules>
+		<module>CAPESRelatorioEJB</module>
+		<module>CAPESRelatorioFachada</module>
+	</modules>
+
+	<build>
+		<pluginManagement>
+			<plugins>
+				<!--This plugin's configuration is used to store Eclipse m2e settings only. It has no influence on the Maven build itself. -->
+				<plugin>
+					<groupId>org.eclipse.m2e</groupId>
+					<artifactId>lifecycle-mapping</artifactId>
+					<version>1.0.0</version>
+					<configuration>
+						<lifecycleMappingMetadata>
+							<pluginExecutions>
+								<pluginExecution>
+									<pluginExecutionFilter>
+										<groupId>org.codehaus.mojo</groupId>
+										<artifactId>jasperreports-maven-plugin</artifactId>
+										<versionRange>[1.0-beta-2,)</versionRange>
+										<goals>
+											<goal>compile-reports</goal>
+										</goals>
+									</pluginExecutionFilter>
+									<action>
+										<ignore />
+									</action>
+								</pluginExecution>
+							</pluginExecutions>
+						</lifecycleMappingMetadata>
+					</configuration>
+				</plugin>
+			</plugins>
+		</pluginManagement>
+	</build>
+
+</project>

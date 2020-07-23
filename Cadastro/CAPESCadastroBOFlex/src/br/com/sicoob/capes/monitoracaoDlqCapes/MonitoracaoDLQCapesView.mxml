@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<bancoob:Modulo xmlns:mx="http://www.adobe.com/2006/mxml"
+			xmlns:bancoob="br.com.bancoob.componentes.*"
+			xmlns:bancoobNavegacao="br.com.bancoob.componentes.navegacao.*"
+			xmlns:incluir="br.com.sicoob.capes.monitoracaoDlqCapes.abas.*"
+	 		width="100%" height="100%" xmlns:bancoobInput1="http://www.bancoob.com/2007/mxml">		 		
+
+	<bancoobNavegacao:Tab x="10" y="10" width="100%" height="100%" id="navegacaoTab">
+		<incluir:abaAtualizacaoCadastro id="abaAtualizacaoCadastro" label="Atualização Cadastral"/>
+		<incluir:abaConsultasExternas id="abaConsultasExternas" label="Consultas Externas/Anotações"/>
+	</bancoobNavegacao:Tab>
+
+</bancoob:Modulo>

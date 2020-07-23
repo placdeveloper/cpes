@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8"?>
+<bancoobValidaveis:ModuloValidavel xmlns:mx="http://www.adobe.com/2006/mxml"
+								   xmlns:bancoobValidaveis="br.com.bancoob.componentes.containers.validaveis.*"
+								   xmlns:navegacao="br.com.bancoob.componentes.navegacao.*"
+								   xmlns:abas="br.com.sicoob.capes.utils.autorizacao.abas.*" 
+								   xmlns:namespace="http://namespace"
+								   width="100%" height="100%" layout="absolute"
+								   styleName="ModuloSemEstilo" verticalScrollPolicy="auto">
+	
+	<navegacao:Tab x="0" y="0" width="100%" height="100%" id="navegacao">
+		<mx:Canvas width="100%" height="100%" label="Informações">
+			
+			<bancoobValidaveis:ModuloValidavel 
+				width="100%" 
+				height="100%" 
+				verticalScrollPolicy="auto"
+				xmlns="br.com.bancoob.componentes.containers.validaveis.*" 
+				xmlns:mx="http://www.adobe.com/2006/mxml" 
+				xmlns:componentes="br.com.bancoob.componentes.*" 
+				xmlns:input="br.com.bancoob.componentes.input.*" 
+				xmlns:campos="br.com.bancoob.componentes.campos.*" 
+				xmlns:containersCUC="br.com.sicoob.capes.comum.componentes.containers.*" 
+				xmlns:procurarPessoa="br.com.sicoob.capes.corporativo.componentes.procurarPessoa.*" 
+				xmlns:listaSelecao="br.com.bancoob.componentes.listaSelecao.*"			
+				styleName="ModuloSemEstilo" >
+				
+				<mx:Image x="7" y="9" source="br/com/bancoob/imagens/icos/note.png" alpha=".5"/>
+				<mx:Label x="27" y="8" text="DADOS DO RELACIONAMENTO" fontWeight="bold" fontFamily="ArialEmbedded" alpha=".8"/>
+				<mx:Image y="14" source="br/com/bancoob/imagens/imgsTelas/linha.swf" scaleContent="false" left="190" right="10"/>
+				
+				<campos:CampoData id="dtDataCadastro" x="155" y="33" visible="false"/> 
+				
+				<componentes:Rotulo x="10" y="36" text="Pessoa Relacionada *:" width="140" textAlign="right" />
+				<procurarPessoa:ProcurarPessoaCAPES x="155" y="33" id="procurarPessoa" validarObrigatorio="true"
+													toolTip="CPF/CNPJ de identificação da Pessoa e respectivo nome." />
+				
+				<componentes:Rotulo x="10" y="65" text="Tipo de Relacionamento *:" width="140" textAlign="right" />
+				<input:Combo id="cmbTipoRelacionamento" validarObrigatorio="true" inserirItemOpcional="true"
+							 labelField="descricao" identificadorItem="codigo" width="450" x="155" y="59"/>
+				<componentes:Rotulo id="txtCompartilhado" width="180" x="609" y="65" textAlign="right" />
+				
+				<componentes:Rotulo x="10" y="91" text="Percentual do Capital Social:" width="140" textAlign="right" />
+				<campos:CampoNumerico id="percentualCapitalEmpresa" valorMinimo="0.0" valorMaximo="100" travarDigitacaoCasasDecimais="false"
+									  casasDecimais="2" validarTipo="{CampoNumerico.DOUBLE_POSITIVO}" x="155" y="88" width="90"
+									  toolTip="0,00 a 100,00" aceitaNulos="true" />
+				
+				<componentes:Rotulo x="10" y="119" text="Data Cadastro:" width="140" textAlign="right" />
+				<componentes:Rotulo id="dtDataInicioRelacionamento" x="155" y="116"/>
+				
+				<containersCUC:Fieldset id="fieldsetDadosRegistro" label="Dados do Registro" left="10" right="40" height="194" y="147">
+					
+					<componentes:Rotulo x="5" y="15" text="Início Mandato *:" width="140" />
+					<campos:CampoData id="dtDataInicioMandato" x="155" y="12"/>
+					
+					<componentes:Rotulo x="5" y="45" text="Fim Mandato *:" width="140" />
+					<input:Check id="chkIndeterminado" label="Indeterminado ou até" x="155" y="42" selected="true" />
+					<campos:CampoData id="dtDataFimMandato" x="280" y="42" dataDefault="{null}" />
+					
+					
+					<componentes:Rotulo x="5" y="75" text="Número do Registro:" />
+					<input:Texto id="numeroRegistro" x="145" y="72" maxChars="20" />
+					
+					<componentes:Rotulo x="5" y="105" text="Número do Livro:" />
+					<input:Texto id="numeroLivro" x="145" y="102" maxChars="10" />
+					
+					<componentes:Rotulo x="5" y="135" text="Número da Folha:" />
+					<input:Texto id="numeroFolha" x="145" y="132" maxChars="4" />
+					
+					<componentes:Rotulo x="5" y="165" text="Nome do Cartório:" />
+					<input:Texto id="nomeCartorio" x="145" y="162" maxChars="100" width="450" />
+				</containersCUC:Fieldset>
+				
+				<containersCUC:Fieldset id="fieldsetPoderes" label="Poderes" left="10" right="40" height="250" y="360">
+					<listaSelecao:ListaSelecaoView id="listaPoderes" labelField="descricao" left="10"
+												   nomeLista="poderes"	nomeListaNaoSelecionado="poderesSelecionados" right="10" 
+												   tamanhoList="400" tituloListaSelecao="Disponíveis" tituloListaSelecionados="Concedidos" y="15" >
+					</listaSelecao:ListaSelecaoView>
+				</containersCUC:Fieldset>
+				
+			</bancoobValidaveis:ModuloValidavel>
+			
+		</mx:Canvas>		
+		<abas:abaUploadGed id="abaDocumentos" label="Documentos" _siglaClasseDocumento="RELAC" />
+	</navegacao:Tab>
+	
+</bancoobValidaveis:ModuloValidavel>

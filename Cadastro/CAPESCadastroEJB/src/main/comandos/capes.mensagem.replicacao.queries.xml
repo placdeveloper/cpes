@@ -1,0 +1,293 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE queries [
+	<!ELEMENT queries (query*)>
+	<!ELEMENT query (use-case+,description,paginacao?,command+,projecao?,ordenacoes?)>
+	<!ELEMENT use-case    (#PCDATA)>
+	<!ELEMENT description (#PCDATA)>
+	<!ELEMENT command     (#PCDATA)>
+	<!ELEMENT parametros  (#PCDATA)>
+	<!ELEMENT projecao  (#PCDATA)>
+	<!ELEMENT paginar  (#PCDATA)>
+	<!ELEMENT paginacao (#PCDATA)>
+	<!ELEMENT colunaCodigo    (#PCDATA)>
+	<!ELEMENT colunaDescricao    (#PCDATA)>
+	<!ELEMENT numeroOcorrenciasPorPagina    (#PCDATA)>
+	<!ELEMENT primeiraCondicao    (#PCDATA)>
+	<!ELEMENT ascendente    (#PCDATA)>
+	<!ELEMENT ordenacoes (ordenacao+)>
+	<!ELEMENT ordenacao (#PCDATA)>
+	<!ELEMENT sql  (#PCDATA)>
+	<!ATTLIST ordenacao chave CDATA    #REQUIRED>
+	<!ATTLIST ordenacao default CDATA    #IMPLIED>
+	<!ATTLIST command parametros CDATA    #IMPLIED>
+	<!ATTLIST command paginar CDATA    #IMPLIED>
+	<!ATTLIST use-case name CDATA    #REQUIRED>
+	<!ATTLIST query name CDATA    #REQUIRED>
+	<!ATTLIST paginacao colunaCodigo CDATA    #REQUIRED>
+	<!ATTLIST paginacao colunaDescricao CDATA    #REQUIRED>
+	<!ATTLIST paginacao numeroOcorrenciasPorPagina CDATA    #REQUIRED>
+	<!ATTLIST paginacao primeiraCondicao CDATA    #REQUIRED>
+	<!ATTLIST paginacao ascendente CDATA    #REQUIRED>
+	<!ATTLIST paginacao hint CDATA    #REQUIRED>
+	<!ATTLIST paginacao hintAuxiliar CDATA   #IMPLIED>
+]>
+
+<queries>
+	
+	<query name="INSERIR_MENSAGEM_REPLICACAO">
+		<use-case name="Replicação" />
+		<description>Salva uma mensagem</description>
+		<command>
+			<![CDATA[
+				INSERT INTO 
+					CLI.MENSAGEMREPLICACAO(IDMENSAGEMREPLICACAO, 
+						CODTRANSACAO, 
+						IDINSTITUICAO, 
+						IDPESSOALEGADO, 
+						DESCTIPOOPERACAO, 
+						DESCCONTEUDOMENSAGEM,
+				        DATAHORACADASTRO, 
+				        DATAHORAENVIO, 
+				        DATAHORAPROCESSAMENTO, 
+				        DESCERRO,
+				        DESCENTIDADECADASTRO,
+				        IDREGISTRODB2
+				    )
+				VALUES (DEFAULT, 
+			        <bancoob:valor valor="${mensagem.identificadorOperacao}" tipo="String" />,
+			        <bancoob:valor valor="${mensagem.idInstituicao}" tipo="Integer" />,
+			        <bancoob:valor valor="${mensagem.idPessoaLegado}" tipo="Integer" />,
+			        <bancoob:valor valor="${mensagem.tipoOperacao}" tipo="String" />,
+			        <bancoob:valor valor="${mensagem.conteudoMensagem}" tipo="String" />,
+			        <bancoob:valor valor="${mensagem.dataCadastro}" tipo="Date" />,
+			        <bancoob:valor valor="${mensagem.dataEnvio}" tipo="Date" />,
+			        <bancoob:valor valor="${mensagem.dataProcessamento}" tipo="Date" />,
+			        <bancoob:valor valor="${mensagem.erro}" tipo="String" />,
+			        <bancoob:valor valor="${mensagem.entidadeCadastro}" tipo="String" />,
+			        <bancoob:valor valor="${mensagem.idRegistro}" tipo="String" />
+			    )
+  			]]>
+		</command>
+	</query>
+
+	<query name="ATUALIZAR_DATAS_ENVIO_MENSAGEM_REPLICACAO">
+		<use-case name="Replicação" />
+		<description>Atualiza a data de envio de um conjunto de mensagens</description>
+		<command>
+			<![CDATA[
+				UPDATE
+				    CLI.MENSAGEMREPLICACAO
+				SET
+				    DATAHORAENVIO = <bancoob:valor valor="${mensagem.dataEnvio}" tipo="Date" />
+				WHERE
+					DATAHORAPROCESSAMENTO IS NULL
+				    AND CODTRANSACAO = <bancoob:valor valor="${mensagem.identificadorOperacao}" tipo="String" />
+					AND IDINSTITUICAO = <bancoob:valor valor="${mensagem.idInstituicao}" tipo="Integer" />
+			]]>
+		</command>
+	</query>
+
+	<query name="ATUALIZAR_DATA_PROCESSAMENTO_MENSAGEM_REPLICACAO">
+		<use-case name="Replicação" />
+		<description>Atualiza a data de processamento de uma mensagem</description>
+		<command>
+			<![CDATA[
+				UPDATE
+				    CLI.MENSAGEMREPLICACAO
+				SET
+				    DATAHORAPROCESSAMENTO = <bancoob:valor valor="${mensagem.dataProcessamento}" tipo="Date" />,
+					DESCERRO = <bancoob:valor valor="${mensagem.erro}" tipo="String" />
+				WHERE
+				    IDMENSAGEMREPLICACAO = <bancoob:valor valor="${mensagem.idMensagemReplicacao}" tipo="Integer" />
+			]]>
+		</command>
+	</query>
+
+	<query name="PESQUISAR_MENSAGEM_REPLICACAO_POR_FILTRO">
+		<use-case name="Replicação" />
+		<description>
+			Pesquisa MensagemReplicacao por filtro (utilizada pelo método pesquisar e nas telas de monitoração)
+		</description>
+		<command>
+			<![CDATA[
+				FROM br.com.sicoob.capes.negocio.entidades.MensagemReplicacao mensagem
+				WHERE 1 = 1
+				<j:if test="${(criterios.tipoProcura != null) and (criterios.tipoProcura == 'naoProcessadas')}">
+					AND mensagem.dataEnvio &lt; <bancoob:valorOql valor="${criterios.filtro.dataEnvio}" tipo="Date" />
+					AND mensagem.dataProcessamento IS NULL
+					AND NOT EXISTS (
+						SELECT 
+							1 
+						FROM 
+							br.com.sicoob.capes.negocio.entidades.MensagemReplicacao M
+						WHERE 
+							M.identificadorOperacao = mensagem.identificadorOperacao
+						AND M.idInstituicao = mensagem.idInstituicao
+						AND M.erro IS NOT NULL
+					)
+				</j:if>
+				<j:if test="${(criterios.tipoProcura != null) and (criterios.tipoProcura == 'processadasComErro')}">
+					AND mensagem.dataProcessamento IS NOT NULL
+					AND mensagem.erro IS NOT NULL
+				</j:if>
+				<j:if test="${criterios.filtro.identificadorOperacao != null}">
+					AND mensagem.identificadorOperacao = <bancoob:valorOql valor="${criterios.filtro.identificadorOperacao}" tipo="String" />
+				</j:if>
+				<j:if test="${riterios.filtro.idInstituicao != null}">
+					AND mensagem.idInstituicao = <bancoob:valorOql valor="${criterios.filtro.idInstituicao}" tipo="Integer" />
+				</j:if>
+			]]>
+		</command>
+		<ordenacoes>
+			<ordenacao chave="id" default="true">
+				<![CDATA[ORDER BY mensagem.idMensagemReplicacao]]>
+			</ordenacao>
+			<ordenacao chave="data" default="false">
+				<![CDATA[ORDER BY mensagem.dataCadastro]]>
+			</ordenacao>
+		</ordenacoes>
+	</query>
+	
+	<query name="PESQUISAR_MENSAGEM_REPLICACAO_NAO_ENVIADA_POR_FILTRO">
+		<use-case name="Replicação" />
+		<description>Pesquisa MensagemReplicacao NÃO enviada por filtro</description>
+		<command>
+			<![CDATA[
+				FROM br.com.sicoob.capes.negocio.entidades.MensagemReplicacao mensagem
+				WHERE mensagem.dataEnvio IS NULL
+					AND mensagem.dataProcessamento IS NULL
+				<j:if test="${criterios.filtro.dataCadastro != null}">
+					AND mensagem.dataCadastro &lt; <bancoob:valorOql valor="${criterios.filtro.dataCadastro}" tipo="Date" />
+				</j:if>
+				<j:if test="${criterios.filtro.identificadorOperacao != null}">
+					AND mensagem.identificadorOperacao = <bancoob:valorOql valor="${criterios.filtro.identificadorOperacao}" tipo="String" />
+				</j:if>
+			]]>
+		</command>
+		<ordenacoes>
+			<ordenacao chave="dataCadastro" default="true">
+				<![CDATA[ORDER BY mensagem.idMensagemReplicacao]]>
+			</ordenacao>
+		</ordenacoes>
+	</query>
+	
+	<query name="RECUPERAR_MENSAGENS_NAO_PROCESSADAS_POR_FILTRO">
+		<use-case name="Replicação" />
+		<description>
+			Pesquisa MensagemReplicacao NÃO processada para utilização no MDB e no reenvio de mensagens da DLQ
+		</description>
+		<command>
+			<![CDATA[
+				FROM br.com.sicoob.capes.negocio.entidades.MensagemReplicacao mensagem
+				WHERE 1 = 1 
+				<j:if test="${(incluiMsgComErro != null) and !incluiMsgComErro}">
+					AND mensagem.dataProcessamento IS NULL
+					AND NOT EXISTS (
+						SELECT 
+							1 
+						FROM 
+							br.com.sicoob.capes.negocio.entidades.MensagemReplicacao M
+						WHERE 
+							M.identificadorOperacao = mensagem.identificadorOperacao
+						AND M.idInstituicao = mensagem.idInstituicao
+						AND M.erro IS NOT NULL
+					)
+				</j:if>
+				<j:if test="${(incluiMsgComErro != null) and incluiMsgComErro}">
+					AND (mensagem.dataProcessamento IS NULL
+						OR (mensagem.dataProcessamento IS NOT NULL
+							AND mensagem.erro IS NOT NULL))
+				</j:if>
+				<j:if test="${filtro.idMensagemReplicacao != null}">
+					AND mensagem.idMensagemReplicacao = <bancoob:valorOql valor="${filtro.idMensagemReplicacao}" tipo="Integer" />
+				</j:if>
+				<j:if test="${filtro.identificadorOperacao != null}">
+					AND mensagem.identificadorOperacao = <bancoob:valorOql valor="${filtro.identificadorOperacao}" tipo="String" />
+				</j:if>
+				<j:if test="${filtro.idInstituicao != null}">
+					AND mensagem.idInstituicao = <bancoob:valorOql valor="${filtro.idInstituicao}" tipo="Integer" />
+				</j:if>
+				ORDER BY mensagem.idMensagemReplicacao ASC
+			]]>
+		</command>
+	</query>
+	
+	<query name="EXPURGO_MENSAGENS_REPLICACAO">
+		<use-case name="Histórico de informações vencidas."></use-case>
+		<description>Expurga as mensagens de replicação</description>
+		<command>
+			<![CDATA[
+				DELETE FROM CLI.MENSAGEMREPLICACAO mensagem
+				WHERE mensagem.DATAHORAPROCESSAMENTO IS NOT NULL
+			  		AND mensagem.DATAHORAPROCESSAMENTO &lt;= (CURRENT_DATE -2 DAYS)
+			  		AND mensagem.DESCERRO IS NULL			
+			]]>
+		</command>
+	</query>
+	
+	<query name="EXPURGO_MENSAGENS_REPLICACAO_COM_ERRO">
+		<use-case name="Histórico de informações vencidas."></use-case>
+		<description>Expurga as mensagens de replicação</description>
+		<command>
+			<![CDATA[
+				DELETE FROM CLI.MENSAGEMREPLICACAO A
+				WHERE EXISTS (SELECT NULL
+				              FROM CLI.MENSAGEMREPLICACAO B
+				              WHERE A.CODTRANSACAO = B.CODTRANSACAO
+				                AND A.IDINSTITUICAO = B.IDINSTITUICAO
+				                AND B.DESCERRO IS NOT NULL
+				                AND B.DATAHORACADASTRO &lt; (CURRENT_DATE - 15 DAYS))
+			]]>
+		</command>
+	</query>	
+	
+	<query name="CONTAGEM_MENSAGENS_NAO_ENVIADAS">
+		<use-case name="Monitoração de Filas CAPES" />
+		<description>Recupera a quantidade de mensagens não enviadas</description>
+		<command>
+			<![CDATA[
+				SELECT
+				    COUNT(*) AS QUANTIDADE,
+				    MIN(M.DATAHORACADASTRO) AS DATAPRIMEIRA,
+				    MAX(M.DATAHORACADASTRO) AS DATAULTIMA
+				FROM
+				    CLI.MENSAGEMREPLICACAO M
+				WHERE
+				    M.DATAHORACADASTRO &lt; (CURRENT TIMESTAMP - 5 MINUTES)
+				AND M.DATAHORAENVIO IS NULL
+				AND M.DATAHORAPROCESSAMENTO IS NULL
+			]]>
+		</command>
+	</query>	
+	
+	<query name="CONTAGEM_MENSAGENS_NAO_PROCESSADAS">
+		<use-case name="Monitoração de Filas CAPES" />
+		<description>Recupera a quantidade de mensagens não processadas</description>
+		<command>
+			<![CDATA[
+				SELECT
+				    COUNT(*) AS QUANTIDADE,
+				    MIN(DATAHORAENVIO) DATAPRIMEIRA,
+				    MAX(DATAHORAENVIO) DATAULTIMA
+				FROM
+				    CLI.MENSAGEMREPLICACAO A
+				WHERE
+				    DATAHORAENVIO &lt; (CURRENT TIMESTAMP - 5 MINUTES)
+				AND DATAHORAENVIO IS NOT NULL
+				AND DATAHORAPROCESSAMENTO IS NULL
+				AND NOT EXISTS
+				    (
+				        SELECT
+				            1
+				        FROM
+				            CLI.MENSAGEMREPLICACAO B
+				        WHERE
+				            B.CODTRANSACAO = A.CODTRANSACAO
+				        AND B.IDINSTITUICAO = A.IDINSTITUICAO
+				        AND B.DESCERRO IS NOT NULL
+				    )
+    		]]>
+		</command>
+	</query>	
+</queries>

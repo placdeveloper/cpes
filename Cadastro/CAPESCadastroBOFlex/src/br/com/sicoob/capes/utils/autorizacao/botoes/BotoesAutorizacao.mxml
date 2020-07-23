@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mx:Canvas xmlns:mx="http://www.adobe.com/2006/mxml"
+		   xmlns:componentes="br.com.bancoob.componentes.*"
+		   x="0" y="0" borderStyle="none" clipContent="false" horizontalScrollPolicy="off"
+		   verticalScrollPolicy="off" creationComplete="init()" xmlns:containers="br.com.bancoob.componentes.containers.*"
+		   xmlns:botoes="br.com.bancoob.componentes.botoes.*">
+	<mx:Script>
+		<![CDATA[
+			import mx.containers.Canvas;
+			import mx.controls.Label;
+			
+			import br.com.sicoob.capes.comum.enums.SituacaoRegistroEnum;
+			
+			private var _situacao:SituacaoRegistroEnum;
+			private var botaoAnterior:Canvas;
+			
+			private var textoModulo_A_ENCAMINHAR:String = " (A ENCAMINHAR)";
+			private var textoModulo_BLOQUEADO:String = " (BLOQUEADO)";
+			private var textoModulo_DEVOLVIDO:String = " (DEVOLVIDO)";
+			private var textoModulo_EM_AUTORIZACAO:String = " (EM AUTORIZAÇÃO)";
+			
+			private function init():void {
+				bt_A_ENCAMINHAR.addEventListener(MouseEvent.CLICK, onClickAEncaminhar);
+				bt_BLOQUEADO.addEventListener(MouseEvent.CLICK, onClickBloqueado);
+				bt_DEVOLVIDO.addEventListener(MouseEvent.CLICK, onClickDevolvido);
+				bt_EM_AUTORIZACAO.addEventListener(MouseEvent.CLICK, onClickEmAlteracao);
+			}
+			
+			private function trocarTextoModulo(estado:String):void {
+				var tela : Object = obterTela(this.owner);
+				if (tela != null) {
+					Label(tela["txtTextoModulo"]).text = tela["textoModulo"] + this["textoModulo_" + estado] ; 
+				}
+			}
+			
+			private function obterTela(component:Object):Object {
+				var tela : Object = null;
+				if (component != null) {
+					if (component.hasOwnProperty("textoModulo")) {
+						tela = component;
+					} else if (component.hasOwnProperty("owner")) {
+						tela = obterTela(component["owner"]);
+					}
+				}
+				return tela;
+			}
+			
+			private function onClickAEncaminhar(event:MouseEvent=null):void {
+				botaoAnterior = BotaoPlataforma(event.currentTarget); 
+				botaoAnterior.visible = botaoAnterior.includeInLayout = false;
+				exibir(bt_BLOQUEADO, true);
+				trocarTextoModulo("A_ENCAMINHAR");
+			}
+			
+			private function onClickBloqueado(event:MouseEvent=null):void {
+				exibir(botaoAnterior, true);
+				exibir(bt_BLOQUEADO, false);
+				trocarTextoModulo("BLOQUEADO");
+			}
+			
+			private function onClickDevolvido(event:MouseEvent=null):void {
+				botaoAnterior = BotaoPlataforma(event.currentTarget); 
+				exibir(botaoAnterior, false);
+				exibir(bt_BLOQUEADO, true);
+				trocarTextoModulo("DEVOLVIDO");
+			}
+			
+			private function onClickEmAlteracao(event:MouseEvent=null):void {
+				botaoAnterior = BotaoPlataforma(event.currentTarget); 
+				exibir(botaoAnterior, false);
+				exibir(bt_BLOQUEADO, true);
+				trocarTextoModulo("EM_AUTORIZACAO");
+			}
+			
+			public function get situacao():SituacaoRegistroEnum {
+				return _situacao;
+			}
+			
+			public function set situacao(value:SituacaoRegistroEnum):void {
+				this._situacao = value;
+				
+				if (exibirBotao("bt_" + value.name)) {
+					trocarTextoModulo("BLOQUEADO");
+				}
+			}
+			
+			private function exibirBotao(id:String) : Boolean {
+				ocultarTodosBotoes();
+				var exibiu:Boolean = false;
+				if (this.hasOwnProperty(id)) {
+					exibiu = true;
+					exibir(BotaoPlataforma(this[id]), exibiu); 
+				}
+				return exibiu;
+			}
+			
+			private function exibir(bt:Canvas, value:Boolean):void {
+				bt.visible = bt.includeInLayout = value;
+			}
+			
+			private function ocultarTodosBotoes():void {
+				exibir(bt_A_ENCAMINHAR, false);
+				exibir(bt_BLOQUEADO, false);
+				exibir(bt_DEVOLVIDO, false);
+				exibir(bt_EM_AUTORIZACAO, false);
+			}
+			
+		]]>
+	</mx:Script>
+	
+	<containers:VBoxBancoob width="100%" height="100%">
+		<botoes:BotaoPlataforma x="0" y="0" id="bt_GED_GFT" rotulo="Exibir GED/GFT" imagem="br\com\bancoob\imagens\icos\srch_32.png" buttonMode="true" enabled="true" tabIndex="401" useHandCursor="true" visible="false" includeInLayout="false" />
+		<botoes:BotaoPlataforma x="0" y="0" id="bt_BLOQUEADO" rotulo="Exibir Bloqueado" imagem="br\com\bancoob\imagens\documentLocked_32.png" buttonMode="true" enabled="true" tabIndex="401" useHandCursor="true" visible="false" includeInLayout="false" />
+		<botoes:BotaoPlataforma x="0" y="0" id="bt_EM_AUTORIZACAO" rotulo="Exibir em Autorização" imagem="br\com\bancoob\imagens\documentAlert_32.png" buttonMode="true" enabled="true" tabIndex="401" useHandCursor="true" visible="false" includeInLayout="false" />
+		<botoes:BotaoPlataforma x="0" y="0" id="bt_DEVOLVIDO" rotulo="Exibir Devolvido" imagem="br\com\bancoob\imagens\documentEditBloq_32.png" buttonMode="true" enabled="true" tabIndex="401" useHandCursor="true" visible="false" includeInLayout="false" />
+		<botoes:BotaoPlataforma x="0" y="0" id="bt_A_ENCAMINHAR" rotulo="Exibir a Encaminhar" imagem="br\com\bancoob\imagens\documentEdit_32.png" buttonMode="true" enabled="true" tabIndex="401" useHandCursor="true" visible="false" includeInLayout="false" />
+	</containers:VBoxBancoob>
+	
+</mx:Canvas>

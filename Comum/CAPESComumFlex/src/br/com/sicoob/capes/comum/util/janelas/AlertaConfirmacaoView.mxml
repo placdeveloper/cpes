@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<bancoob:Modulo xmlns:mx="http://www.adobe.com/2006/mxml"
+		xmlns:bancoobInput="br.com.bancoob.componentes.input.*"
+		xmlns:bancoobGrid="br.com.bancoob.componentes.grid.*"
+		xmlns:bancoob="br.com.bancoob.componentes.*"
+		xmlns:containers="br.com.bancoob.componentes.containers.*"
+		xmlns:bancoobNavegacao="br.com.bancoob.componentes.navegacao.*"
+		width="400" height="240" layout="absolute">
+
+	<bancoobInput:TextoArea left="100" right="15" top="10" height="165" fontWeight="bold" focusEnabled="false" id="txtMsg" 
+		borderThickness="0" backgroundAlpha="0" editable="false" tabEnabled="false" />
+	<containers:HBoxBancoob horizontalAlign="right" horizontalGap="5" height="25" 
+		verticalAlign="middle" bottom="10" right="15" width="156">
+		<bancoob:Botao x="158" y="134" label="SIM" id="btSim" width="71" visible="true" buttonMode="true"/>
+		<bancoob:Botao x="234" y="134" label="NÃO" id="btNao" width="71" visible="true" buttonMode="true"/>
+	</containers:HBoxBancoob>
+	<bancoob:Imagem left="20" id="imgIcone" source="br/com/bancoob/imagens/imgsAlerta/alert.png" alpha="1.0" verticalCenter="-30"/>
+		
+</bancoob:Modulo>

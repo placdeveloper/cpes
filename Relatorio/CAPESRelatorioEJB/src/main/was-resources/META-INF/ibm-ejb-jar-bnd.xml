@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ejb-jar-bnd xmlns="http://websphere.ibm.com/xml/ns/javaee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://websphere.ibm.com/xml/ns/javaee http://websphere.ibm.com/xml/ns/javaee/ibm-ejb-jar-bnd_1_1.xsd" version="1.1">
+
+	<session name="RelatorioGrupoCompartilhamentoServicoEJB">
+		<interface class="br.com.sicoob.relatorio.api.interfaces.IProcessamentoRelatorioServico" binding-name="capes/relatorio/RelatorioGrupoCompartilhamentoServicoRemote" />
+	</session>
+	<session name="RelatorioPessoaCompartilhamentoServicoEJB">
+		<interface class="br.com.sicoob.relatorio.api.interfaces.IProcessamentoRelatorioServico" binding-name="capes/relatorio/RelatorioPessoaCompartilhamentoServicoRemote" />
+	</session>
+	<session name="RelatorioFichaCadastralServicoEJB">
+		<interface class="br.com.sicoob.relatorio.api.interfaces.IProcessamentoRelatorioServico" binding-name="capes/relatorio/RelatorioFichaCadastralServicoRemote" />
+	</session>
+	<session name="RelatorioFichaCadastralNovaServicoEJB">
+		<interface class="br.com.sicoob.relatorio.api.interfaces.IProcessamentoRelatorioServico" binding-name="capes/relatorio/RelatorioFichaCadastralNovaServicoRemote" />
+	</session>
+	<session name="RelatorioVencimentoCadastroServicoEJB">
+		<interface class="br.com.sicoob.relatorio.api.interfaces.IProcessamentoRelatorioServico" binding-name="capes/relatorio/RelatorioVencimentoCadastroServicoRemote" />
+	</session>
+	<session name="RelatorioAnotacaoServicoEJB">
+		<interface class="br.com.sicoob.relatorio.api.interfaces.IProcessamentoRelatorioServico" binding-name="capes/relatorio/RelatorioAnotacaoServicoRemote" />
+	</session>
+	<session name="RelatorioFichaCadastralEmBrancoServicoEJB">
+		<interface class="br.com.sicoob.relatorio.api.interfaces.IProcessamentoRelatorioServico" binding-name="capes/relatorio/RelatorioFichaCadastralEmBrancoServicoRemote" />
+	</session>
+	<session name="RelatorioFichaCadastralNovaEmBrancoServicoEJB">
+		<interface class="br.com.sicoob.relatorio.api.interfaces.IProcessamentoRelatorioServico" binding-name="capes/relatorio/RelatorioFichaCadastralNovaEmBrancoServicoRemote" />
+	</session>
+	<session name="RelatorioCompartilhamentoServicoEJB">
+		<interface class="br.com.sicoob.relatorio.api.interfaces.IProcessamentoRelatorioServico" binding-name="capes/relatorio/RelatorioCompartilhamentoServicoRemote" />
+	</session>
+	<session name="RelatorioCadastroCompartilhadoServicoEJB">
+		<interface class="br.com.sicoob.relatorio.api.interfaces.IProcessamentoRelatorioServico" binding-name="capes/relatorio/RelatorioCadastroCompartilhadoServicoRemote" />
+	</session>
+	<session name="RelatorioTipoAnotacaoServicoEJB">
+		<interface class="br.com.sicoob.relatorio.api.interfaces.IProcessamentoRelatorioServico" binding-name="capes/relatorio/RelatorioTipoAnotacaoServicoRemote" />
+	</session>
+	<session name="RelatorioTipoTelefoneServicoEJB">
+		<interface class="br.com.sicoob.relatorio.api.interfaces.IProcessamentoRelatorioServico" binding-name="capes/relatorio/RelatorioTipoTelefoneServicoRemote" />
+	</session>
+	<session name="RelatorioTipoRelacionamentoPessoaServicoEJB">
+		<interface class="br.com.sicoob.relatorio.api.interfaces.IProcessamentoRelatorioServico" binding-name="capes/relatorio/RelatorioTipoRelacionamentoPessoaServicoRemote" />
+	</session>
+	<session name="RelatorioTipoFonteRendaServicoEJB">
+		<interface class="br.com.sicoob.relatorio.api.interfaces.IProcessamentoRelatorioServico" binding-name="capes/relatorio/RelatorioTipoFonteRendaServicoRemote" />
+	</session>
+	<session name="RelatorioGrupoEconomicoServicoEJB">
+		<interface class="br.com.sicoob.relatorio.api.interfaces.IProcessamentoRelatorioServico" binding-name="capes/relatorio/RelatorioGrupoEconomicoServicoRemote" />
+	</session>
+	<session name="RelatorioGrupoEconomicoNovoServicoEJB">
+		<interface class="br.com.sicoob.relatorio.api.interfaces.IProcessamentoRelatorioServico" binding-name="capes/relatorio/RelatorioGrupoEconomicoNovoServicoRemote" />
+	</session>
+	<session name="RelatorioTipoEnderecoServicoEJB">
+		<interface class="br.com.sicoob.relatorio.api.interfaces.IProcessamentoRelatorioServico" binding-name="capes/relatorio/RelatorioTipoEnderecoServicoRemote" />
+	</session>
+	<session name="RelatorioTipoEmailServicoEJB">
+		<interface class="br.com.sicoob.relatorio.api.interfaces.IProcessamentoRelatorioServico" binding-name="capes/relatorio/RelatorioTipoEmailServicoRemote" />
+	</session>
+	<session name="RelatorioValidacaoCadastralServicoEJB">
+		<interface class="br.com.sicoob.relatorio.api.interfaces.IProcessamentoRelatorioServico" binding-name="capes/relatorio/RelatorioValidacaoCadastralServicoRemote" />
+	</session>
+	<session name="RelatorioTributacaoServicoEJB">
+		<interface class="br.com.sicoob.relatorio.api.interfaces.IProcessamentoRelatorioServico" binding-name="capes/relatorio/RelatorioTributacaoServicoRemote" />
+	</session>
+	<session name="RelatorioDeclaracaoPropositoServicoEJB">
+		<interface class="br.com.sicoob.relatorio.api.interfaces.IProcessamentoRelatorioServico" binding-name="capes/relatorio/RelatorioDeclaracaoPropositoServicoRemote" />
+	</session>
+	<session name="RelatorioProvaVidaServicoEJB">
+		<interface class="br.com.sicoob.relatorio.api.interfaces.IProcessamentoRelatorioServico" binding-name="capes/relatorio/RelatorioProvaVidaServicoRemote" />
+	</session>
+	<session name="RelatorioFormularioVisitaEJB">
+		<interface class="br.com.sicoob.relatorio.api.interfaces.IProcessamentoRelatorioServico" binding-name="capes/relatorio/RelatorioFormularioVisitaServicoRemote" />
+	</session>
+	<session name="RelatorioClienteProdutoServicoEJB">
+		<interface class="br.com.sicoob.relatorio.api.interfaces.IProcessamentoRelatorioServico" binding-name="capes/relatorio/RelatorioClienteProdutoServicoRemote" />
+	</session>
+	
+</ejb-jar-bnd>

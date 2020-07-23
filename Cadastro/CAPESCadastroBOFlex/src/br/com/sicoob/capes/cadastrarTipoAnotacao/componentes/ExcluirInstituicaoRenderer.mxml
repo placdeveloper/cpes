@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<containers:HBoxBancoob xmlns:mx="http://www.adobe.com/2006/mxml"
+						xmlns:componentes="br.com.bancoob.componentes.*"
+						xmlns:containers="br.com.bancoob.componentes.containers.*"
+						width="100%" height="100%" creationComplete="init()"
+						horizontalAlign="center" horizontalScrollPolicy="off"
+						implements="mx.controls.listClasses.IDropInListItemRenderer"
+						verticalScrollPolicy="off">
+	
+	<mx:Script>
+		<![CDATA[
+			import br.com.bancoob.componentes.grid.Grid;
+			import br.com.bancoob.sisbr.componentes.pti.ObjetoEvent;
+			
+			import mx.controls.dataGridClasses.DataGridListData;
+			import mx.controls.listClasses.BaseListData;
+			
+			[Bindable("dataChange")]
+			private var _listData:BaseListData;
+			
+			private static const HINT_BOTAO:String = "Excluir instituição";
+			
+			public function get listData():BaseListData {
+				return _listData;
+			}
+			
+			public function set listData(value:BaseListData):void {
+				_listData = value;
+			}
+			
+			public function init():void{
+				botaoExcluir.addEventListener(MouseEvent.CLICK, botaoExcluirClicado);
+			}
+			
+			private function botaoExcluirClicado(event:MouseEvent):void {
+				var dataGrid:DataGridListData = DataGridListData(this.listData);
+				var grid:Grid = Grid(dataGrid.owner);
+				grid.dispatchEvent(new ObjetoEvent(SelecionarCooperativas.EVENTO_EXCLUIR_INSTITUICAO, data));
+			}
+			
+		]]>
+	</mx:Script>
+	
+	<componentes:Botao id="botaoExcluir" styleName="botaoCrudRemoverPeq" toolTip="{HINT_BOTAO}" paddingBottom="0" paddingLeft="0" paddingRight="0" paddingTop="0" />
+	
+</containers:HBoxBancoob>

@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<validaveis:CanvasValidavel  xmlns="br.com.bancoob.componentes.containers.*" 
+							 xmlns:mx="http://www.adobe.com/2006/mxml" 
+							 xmlns:bancoobInput="br.com.bancoob.componentes.input.*"
+							 xmlns:bancoob="br.com.bancoob.componentes.*"	
+							 xmlns:grid="br.com.bancoob.componentes.grid.*"
+							 xmlns:validaveis="br.com.bancoob.componentes.containers.validaveis.*"
+							 width="500" height="350" xmlns:titulo="br.com.bancoob.componentes.titulo.*" >
+	
+	<validaveis:HBoxValidavel width="100%" height="350">
+		
+		<validaveis:CanvasValidavel width="230" height="275">
+			<validaveis:VBoxValidavel id="boxCampos" paddingLeft="10">
+				<bancoobInput:Check id="ckTodos" label="Todos"/>
+				<bancoobInput:Check id="ckRelacionamento" label="Relacionamentos e Poderes"/>
+				<bancoobInput:Check id="ckEndereco" label="Endereços"/>
+				<bancoobInput:Check id="ckTelefone" label="Telefones"/>
+				<bancoobInput:Check id="ckEmail" label="E-mails"/>
+				<bancoobInput:Check id="ckReferencia" label="Referências Pessoais"/>
+				<bancoobInput:Check id="ckBem" label="Bens"/>
+				<bancoobInput:Check id="ckCertidao" label="Certidões"/>
+				<bancoobInput:Check id="ckFonteRenda" label="Fontes de Renda"/>
+				<bancoobInput:Check id="ckProdutor" label="Produtores"/>
+			</validaveis:VBoxValidavel>
+		</validaveis:CanvasValidavel>
+		
+		<validaveis:CanvasValidavel width="250" borderSides="[left]" height="275" borderStyle="solid" borderThickness="2" > 
+			<validaveis:VBoxValidavel paddingLeft="10" id="opcoes">
+				<bancoobInput:Radio id="rdAtual" label="Atual"/>
+				<validaveis:HBoxValidavel>
+					<bancoobInput:Radio id="rdPosicao" label="Posição em:"/>
+					<bancoobInput:Data id="dtData" validarObrigatorio="true" autoValidacao="true" />
+				</validaveis:HBoxValidavel>
+				<bancoobInput:Radio id="rdTudo" label="Tudo (Atual e Histórico)"/>
+			</validaveis:VBoxValidavel>
+		</validaveis:CanvasValidavel>
+	</validaveis:HBoxValidavel>
+	
+	<bancoob:Botao y="283" x="131" label="Imprimir" id="btImprimir"/>
+	<bancoob:Botao y="283" x="265" label="Cancelar" id="btCancelar"/> 
+	
+</validaveis:CanvasValidavel>

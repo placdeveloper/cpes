@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<bancoobValidaveis:ModuloValidavel xmlns:mx="http://www.adobe.com/2006/mxml"
+		   		xmlns:bancoobInput="br.com.bancoob.componentes.input.*"
+				xmlns:bancoob="br.com.bancoob.componentes.*"
+				xmlns:selecaoGeral="br.com.bancoob.sisbr.componentes.selecaoGeral.*"
+				xmlns:bancoobValidaveis="br.com.bancoob.componentes.containers.validaveis.*"
+				xmlns:campos="br.com.bancoob.componentes.campos.*"
+				width="100%" height="100%" layout="absolute" styleName="ModuloSemEstilo" >
+				
+	<bancoob:Rotulo x="27" y="8" text="CADASTRO DE PRODUÇÂO" fontWeight="bold" fontFamily="ArialEmbedded" alpha=".8"/>
+	<bancoob:Imagem y="14" source="br/com/bancoob/imagens/imgsTelas/linha.swf" scaleContent="false" left="173" right="10"/>
+	<bancoob:Imagem x="7" y="9" source="br/com/bancoob/imagens/icos/smicn_16.png" alpha=".5"/>
+	
+	<bancoob:Rotulo x="10" y="47" text="Ano Safra:"/>
+	<bancoobInput:Texto x="147" y="45" width="39" id="txtAnoInicio" restrict="0-9" maxChars="4" tabIndex="1" tabEnabled="true"
+			validarObrigatorio="true" />
+	<bancoob:Rotulo x="191" y="47" text="/" width="10"/>
+	<bancoobInput:Texto x="203" y="45" width="39" id="txtAnoFim" restrict="0-9" maxChars="4" tabIndex="2" tabEnabled="true" 
+			validarObrigatorio="true" />
+			
+	<bancoob:Rotulo x="10" y="73" text="Empreendimento:"/>
+	<selecaoGeral:ProcurarGeralV2 id="procurarEmpreendimento" width="500" validarObrigatorio="true"
+		tipoProcura="9011" titulo="Procurar Empreendimento" tabEnabled="true"
+		campoCodigo="CODEMPREENDIMENTO"
+		campoDescricao="DESCEMPREENDIMENTO" x="147" y="71" tabIndex="3"/>
+	
+	<bancoob:Rotulo x="10" y="99" text="Imóvel"/>
+	<bancoobInput:Combo x="147" y="97" width="433" id="cboBemImovel" labelField="denominacao" tabIndex="4" tabEnabled="true" inserirItemOpcional="true"/>
+	
+	<bancoob:Rotulo x="10" y="126" text="Descrição:"/>
+	<bancoobInput:TextoArea x="147" y="125" width="433" height="48" id="txtDescricao" maxChars="200" tabEnabled="true" tabIndex="5"/>
+
+	<bancoob:Rotulo x="10" y="183" text="Produção:"/>	
+	<campos:CampoNumerico x="147" y="181" width="111" id="txtProducao" maxChars="10" casasDecimais="2" validarObrigatorio="true" 
+			tabIndex="6" tabEnabled="true" valorMinimo="0" valorMaximo="9999999.99" />
+	<bancoob:Rotulo id="lblUnidadeProducao" x="266" y="183"/>
+		 
+	<bancoob:Rotulo x="10" y="209" text="Área / Quantidade:"/>
+	<campos:CampoNumerico x="147" y="207" width="111" id="txtAreaQuantidade" maxChars="10" casasDecimais="2" 
+			tabIndex="7" tabEnabled="true" valorMinimo="0" valorMaximo="9999999.99" />
+	<bancoob:Rotulo id="lblUnidadeAreaQuantidade" x="266" y="209"/>
+
+	<bancoob:Rotulo x="10" y="235" text="Percentual de Rebate:"/>
+	<campos:CampoMoedaView x="147" y="233" width="39" id="txtValorPercentualRebate" maxChars="6" validarObrigatorio="true" 
+			tabIndex="8" tabEnabled="true" valorMinimo="0" valorMaximo="100"/>
+			
+	<bancoob:Rotulo x="190" y="235" text="%"/>
+	
+	<bancoob:Rotulo x="10" y="261" text="Preço Médio:"/>
+	<campos:CampoNumerico x="147" y="259" width="177" id="txtPrecoMedio" maxChars="9" casasDecimais="2" validarObrigatorio="true" 
+			tabIndex="9" tabEnabled="true" valorMinimo="0" valorMaximo="999999.99" />
+	<bancoob:Rotulo text="Por" x="332" y="261"/>
+	<bancoob:Rotulo id="lblUnidadePrecoMedio" x="355" y="261"/>
+	
+	<bancoob:Rotulo x="10" y="287" text="Renda Bruta:"/>
+	<campos:CampoNumerico x="147" y="285" width="177" id="txtRendaBruta" maxChars="15" casasDecimais="2" validarObrigatorio="true" 
+			tabIndex="10" tabEnabled="true" valorMinimo="0" valorMaximo="9999999999999.99" />
+	<bancoob:Rotulo x="330" y="287" text="(12 meses)"/>
+	
+	<bancoob:Rotulo x="10" y="313" text="Renda Líquida:"/>
+	<campos:CampoNumerico x="147" y="311" width="177" id="txtRendaLiquida" enabled="false" tabIndex="11"  />
+	<bancoob:Rotulo x="330" y="313" text="(12 meses)"/>
+	
+</bancoobValidaveis:ModuloValidavel>

@@ -1,0 +1,307 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="FichaCadastralPessoa" pageWidth="595" pageHeight="842" columnWidth="575" leftMargin="10" rightMargin="10" topMargin="10" bottomMargin="10" uuid="885538bb-b7f3-4fe2-a4ab-1ef9103d9951">
+	<property name="ireport.zoom" value="1.2100000000000002"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<style name="Linha Zebrada" mode="Opaque" backcolor="#DDDDDE">
+		<conditionalStyle>
+			<conditionExpression><![CDATA[new Boolean(($V{REPORT_COUNT_ZEBRA}.intValue() % 2) == 0)]]></conditionExpression>
+			<style mode="Opaque"/>
+		</conditionalStyle>
+	</style>
+	<parameter name="TITULO_RELATORIO" class="java.lang.String"/>
+	<parameter name="URL_LOGO" class="java.net.URL"/>
+	<parameter name="DATA_ULTIMA_ATUALIZACAO" class="java.util.Date"/>
+	<parameter name="pessoa" class="br.com.sicoob.capes.negocio.entidades.vigente.PessoaCompartilhamento"/>
+	<parameter name="ID_UNIDADE_INST" class="java.lang.Integer"/>
+	<parameter name="SUB_HEADER" class="net.sf.jasperreports.engine.JasperReport"/>
+	<parameter name="SUB_DADOS_PESSOAIS" class="net.sf.jasperreports.engine.JasperReport"/>
+	<parameter name="SUB_INFORMACOES_COMPLEMENTARES" class="net.sf.jasperreports.engine.JasperReport"/>
+	<parameter name="DS_SUB_REFERENCIAS" class="java.lang.Object"/>
+	<parameter name="SUB_REFERENCIAS" class="net.sf.jasperreports.engine.JasperReport"/>
+	<parameter name="SUB_RELACIONAMENTOS" class="net.sf.jasperreports.engine.JasperReport"/>
+	<parameter name="DS_SUB_RELACIONAMENTOS" class="java.lang.Object"/>
+	<parameter name="SUB_CERTIDOES" class="net.sf.jasperreports.engine.JasperReport"/>
+	<parameter name="DS_SUB_CERTIDOES" class="java.lang.Object"/>
+	<parameter name="SUB_FONTES_DE_RENDA" class="net.sf.jasperreports.engine.JasperReport"/>
+	<parameter name="DS_SUB_FONTES_DE_RENDA" class="java.lang.Object"/>
+	<parameter name="SUB_BENS" class="net.sf.jasperreports.engine.JasperReport"/>
+	<parameter name="SUB_BENS_ONUS" class="net.sf.jasperreports.engine.JasperReport"/>
+	<parameter name="DS_SUB_BENS" class="java.lang.Object"/>
+	<parameter name="SUB_BENS_REGISTROS" class="net.sf.jasperreports.engine.JasperReport"/>
+	<parameter name="SUB_BENS_POSSES" class="net.sf.jasperreports.engine.JasperReport"/>
+	<parameter name="SUB_BENS_DEPENDENCIAS" class="net.sf.jasperreports.engine.JasperReport"/>
+	<parameter name="SUB_DECLARACAO" class="net.sf.jasperreports.engine.JasperReport"/>
+	<parameter name="pessoaInstituicao" class="br.com.sicoob.capes.negocio.entidades.vigente.PessoaInstituicao"/>
+	<parameter name="tributacao" class="br.com.sicoob.capes.negocio.entidades.vigente.Tributacao"/>
+	<parameter name="conjuge" class="br.com.sicoob.capes.negocio.entidades.vigente.PessoaFisica" isForPrompting="false"/>
+	<parameter name="DS_SUB_DADOS_PESSOAIS" class="net.sf.jasperreports.engine.JRDataSource"/>
+	<parameter name="SUB_TRIBUTACAO" class="net.sf.jasperreports.engine.JasperReport"/>
+	<parameter name="DS_SUB_TRIBUTACAO" class="java.lang.Object"/>
+	<parameter name="SUB_PESSOA_INSTITUICAO" class="net.sf.jasperreports.engine.JasperReport"/>
+	<parameter name="DS_SUB_PESSOA_INSTITUICAO" class="net.sf.jasperreports.engine.JRDataSource" isForPrompting="false"/>
+	<parameter name="SUB_BEM_DETALHE" class="net.sf.jasperreports.engine.JasperReport"/>
+	<parameter name="SUB_PRODUTOR" class="net.sf.jasperreports.engine.JasperReport"/>
+	<parameter name="DS_SUB_PRODUTOR" class="java.lang.Object"/>
+	<parameter name="SUB_PRODUTIVIDADE" class="net.sf.jasperreports.engine.JasperReport"/>
+	<parameter name="DS_SUB_PRODUTIVIDADE" class="java.lang.Object"/>
+	<parameter name="ID_INSTITUICAO" class="java.lang.Integer"/>
+	<parameter name="LABEL_FILTRO_DATA" class="java.lang.String"/>
+	<parameter name="NUM_COOPERATIVA" class="java.lang.Integer"/>
+	<parameter name="EXIBIR_TOTAL_PRODUTIVIDADE" class="java.lang.Boolean">
+		<defaultValueExpression><![CDATA[java.lang.Boolean.FALSE]]></defaultValueExpression>
+	</parameter>
+	<parameter name="SUB_BEM_DETALHE_IMOVEL" class="net.sf.jasperreports.engine.JasperReport"/>
+	<parameter name="DESCRICAO_ESFERA_ADMINISTRATIVA" class="java.lang.String"/>
+	<parameter name="SUB_CONTATOS" class="net.sf.jasperreports.engine.JasperReport"/>
+	<parameter name="DS_SUB_CONTATOS" class="net.sf.jasperreports.engine.JRDataSource"/>
+	<parameter name="SUB_ENDERECOS" class="net.sf.jasperreports.engine.JasperReport"/>
+	<parameter name="SUB_TELEFONES" class="net.sf.jasperreports.engine.JasperReport"/>
+	<parameter name="SUB_EMAILS" class="net.sf.jasperreports.engine.JasperReport"/>
+	<parameter name="filiacao" class="java.lang.String"/>
+	<parameter name="TOTAL_RENDA_MENSAL" class="java.math.BigDecimal"/>
+	<parameter name="TOTAL_VALOR_PARTICIPACAO" class="java.math.BigDecimal"/>
+	<parameter name="TOTAL_VALOR_PATRIMONIO" class="java.math.BigDecimal"/>
+	<parameter name="SUBREPORT_DIR" class="java.lang.String" isForPrompting="false">
+		<defaultValueExpression><![CDATA["C:\\SisbrIDE-4.5\\workspace\\capes-ficha-cadastral\\capes\\Relatorio\\CAPESRelatorioEJB\\relatorios\\"]]></defaultValueExpression>
+	</parameter>
+	<parameter name="SUB_BENS_NOVO" class="net.sf.jasperreports.engine.JasperReport"/>
+	<parameter name="DS_SUB_BENS_NOVO" class="net.sf.jasperreports.engine.JRDataSource"/>
+	<parameter name="SUB_BENS_NOVO_DETALHE_MOVEL" class="net.sf.jasperreports.engine.JasperReport"/>
+	<parameter name="SUB_BENS_NOVO_DETALHE_IMOVEL" class="net.sf.jasperreports.engine.JasperReport"/>
+	<parameter name="SUB_BENS_NOVO_DETALHE_AVALIACAO_IMOVEL_PARCEIRO" class="net.sf.jasperreports.engine.JasperReport"/>
+	<parameter name="SUB_BENS_NOVO_DETALHE_AVALIACAO_IMOVEL" class="net.sf.jasperreports.engine.JasperReport"/>
+	<parameter name="SUB_BENS_NOVO_DETALHE_AVALIACAO_MOVEL" class="net.sf.jasperreports.engine.JasperReport"/>
+	<parameter name="SUB_BENS_NOVO_OUTRO" class="net.sf.jasperreports.engine.JasperReport"/>
+	<parameter name="SUB_BENS_NOVO_OUTRO_DETALHE" class="net.sf.jasperreports.engine.JasperReport"/>
+	<variable name="REPORT_COUNT_ZEBRA" class="java.lang.Integer" calculation="Count">
+		<variableExpression><![CDATA[new Integer( $V{REPORT_COUNT_ZEBRA}.intValue() + 1)]]></variableExpression>
+		<initialValueExpression><![CDATA[new Integer(1)]]></initialValueExpression>
+	</variable>
+	<variable name="REPORT_COUNT_ZEBRA_2" class="java.lang.Integer" calculation="Count">
+		<variableExpression><![CDATA[new Integer( $V{REPORT_COUNT_ZEBRA_2}.intValue() + 1)]]></variableExpression>
+		<initialValueExpression><![CDATA[new Integer(1)]]></initialValueExpression>
+	</variable>
+	<group name="Perfil Tributario">
+		<groupHeader>
+			<band height="53">
+				<subreport>
+					<reportElement uuid="ec4cded2-da5c-49b5-8c3b-1e76eaf1de6c" isPrintRepeatedValues="false" x="0" y="1" width="575" height="50"/>
+					<subreportParameter name="filiacao">
+						<subreportParameterExpression><![CDATA[$P{filiacao}]]></subreportParameterExpression>
+					</subreportParameter>
+					<subreportParameter name="DESCRICAO_ESFERA_ADMINISTRATIVA">
+						<subreportParameterExpression><![CDATA[$P{DESCRICAO_ESFERA_ADMINISTRATIVA}]]></subreportParameterExpression>
+					</subreportParameter>
+					<subreportParameter name="pessoa">
+						<subreportParameterExpression><![CDATA[$P{pessoa}]]></subreportParameterExpression>
+					</subreportParameter>
+					<subreportParameter name="REPORT_COUNT_ZEBRA">
+						<subreportParameterExpression><![CDATA[$V{REPORT_COUNT_ZEBRA}]]></subreportParameterExpression>
+					</subreportParameter>
+					<subreportParameter name="conjuge">
+						<subreportParameterExpression><![CDATA[$P{conjuge}]]></subreportParameterExpression>
+					</subreportParameter>
+					<dataSourceExpression><![CDATA[$P{DS_SUB_DADOS_PESSOAIS}]]></dataSourceExpression>
+					<subreportExpression><![CDATA[$P{SUB_DADOS_PESSOAIS}]]></subreportExpression>
+				</subreport>
+			</band>
+			<band height="44">
+				<printWhenExpression><![CDATA[new Boolean(((net.sf.jasperreports.engine.data.JRBeanCollectionDataSource) $P{DS_SUB_TRIBUTACAO}).getRecordCount() > 0)]]></printWhenExpression>
+				<subreport>
+					<reportElement uuid="9ebfed5d-2b77-40c5-a407-64baf4edc605" x="0" y="0" width="575" height="44"/>
+					<dataSourceExpression><![CDATA[$P{DS_SUB_TRIBUTACAO}]]></dataSourceExpression>
+					<subreportExpression><![CDATA[$P{SUB_TRIBUTACAO}]]></subreportExpression>
+				</subreport>
+			</band>
+		</groupHeader>
+	</group>
+	<group name="RELACIONAMENTO">
+		<groupHeader>
+			<band height="50" splitType="Immediate">
+				<printWhenExpression><![CDATA[new Boolean(((net.sf.jasperreports.engine.data.JRBeanCollectionDataSource) $P{DS_SUB_RELACIONAMENTOS}).getRecordCount() > 0)]]></printWhenExpression>
+				<subreport>
+					<reportElement uuid="fe9043be-d1ab-45ff-9389-31997e394daf" positionType="Float" stretchType="RelativeToTallestObject" x="0" y="0" width="575" height="48"/>
+					<dataSourceExpression><![CDATA[$P{DS_SUB_RELACIONAMENTOS}]]></dataSourceExpression>
+					<subreportExpression><![CDATA[$P{SUB_RELACIONAMENTOS}]]></subreportExpression>
+				</subreport>
+			</band>
+		</groupHeader>
+	</group>
+	<group name="CONTATOS">
+		<groupHeader>
+			<band height="77" splitType="Immediate">
+				<printWhenExpression><![CDATA[new Boolean(((net.sf.jasperreports.engine.data.JRBeanCollectionDataSource)$P{DS_SUB_CONTATOS}).getRecordCount() > 0)]]></printWhenExpression>
+				<subreport>
+					<reportElement uuid="c7a3ed41-a6e4-472d-9669-552012abd37c" positionType="Float" stretchType="RelativeToTallestObject" isPrintRepeatedValues="false" x="0" y="0" width="575" height="75"/>
+					<subreportParameter name="SUB_TELEFONES">
+						<subreportParameterExpression><![CDATA[$P{SUB_TELEFONES}]]></subreportParameterExpression>
+					</subreportParameter>
+					<subreportParameter name="SUB_ENDERECOS">
+						<subreportParameterExpression><![CDATA[$P{SUB_ENDERECOS}]]></subreportParameterExpression>
+					</subreportParameter>
+					<subreportParameter name="SUB_EMAILS">
+						<subreportParameterExpression><![CDATA[$P{SUB_EMAILS}]]></subreportParameterExpression>
+					</subreportParameter>
+					<dataSourceExpression><![CDATA[$P{DS_SUB_CONTATOS}]]></dataSourceExpression>
+					<subreportExpression><![CDATA[$P{SUB_CONTATOS}]]></subreportExpression>
+				</subreport>
+			</band>
+		</groupHeader>
+	</group>
+	<group name="FONTES DE RENDA">
+		<groupHeader>
+			<band height="76" splitType="Immediate">
+				<printWhenExpression><![CDATA[new Boolean(((net.sf.jasperreports.engine.data.JRBeanCollectionDataSource) $P{DS_SUB_FONTES_DE_RENDA}).getRecordCount() > 0)]]></printWhenExpression>
+				<subreport>
+					<reportElement uuid="d45ba961-9b64-4e1e-942e-a23a299b725d" positionType="Float" stretchType="RelativeToTallestObject" x="0" y="0" width="575" height="75"/>
+					<subreportParameter name="TOTAL_RENDA_MENSAL">
+						<subreportParameterExpression><![CDATA[$P{TOTAL_RENDA_MENSAL}]]></subreportParameterExpression>
+					</subreportParameter>
+					<subreportParameter name="REPORT_COUNT_ZEBRA">
+						<subreportParameterExpression><![CDATA[$V{REPORT_COUNT_ZEBRA_2}]]></subreportParameterExpression>
+					</subreportParameter>
+					<dataSourceExpression><![CDATA[$P{DS_SUB_FONTES_DE_RENDA}]]></dataSourceExpression>
+					<subreportExpression><![CDATA[$P{SUB_FONTES_DE_RENDA}]]></subreportExpression>
+				</subreport>
+			</band>
+		</groupHeader>
+	</group>
+	<group name="BENS_NOVO">
+		<groupHeader>
+			<band height="78" splitType="Immediate">
+				<subreport>
+					<reportElement uuid="8a9afb70-5705-4a33-90a1-c662ebdfff59" positionType="Float" stretchType="RelativeToTallestObject" x="0" y="0" width="575" height="75"/>
+					<subreportParameter name="DS_SUB_BENS_NOVO">
+						<subreportParameterExpression><![CDATA[$P{DS_SUB_BENS_NOVO}]]></subreportParameterExpression>
+					</subreportParameter>
+					<subreportParameter name="SUB_BENS_NOVO_DETALHE_IMOVEL">
+						<subreportParameterExpression><![CDATA[$P{SUB_BENS_NOVO_DETALHE_IMOVEL}]]></subreportParameterExpression>
+					</subreportParameter>
+					<subreportParameter name="SUB_BENS_NOVO_OUTRO">
+						<subreportParameterExpression><![CDATA[$P{SUB_BENS_NOVO_OUTRO}]]></subreportParameterExpression>
+					</subreportParameter>
+					<subreportParameter name="SUB_BENS_NOVO_OUTRO_DETALHE">
+						<subreportParameterExpression><![CDATA[$P{SUB_BENS_NOVO_OUTRO_DETALHE}]]></subreportParameterExpression>
+					</subreportParameter>
+					<subreportParameter name="SUB_BENS_NOVO_DETALHE_MOVEL">
+						<subreportParameterExpression><![CDATA[$P{SUB_BENS_NOVO_DETALHE_MOVEL}]]></subreportParameterExpression>
+					</subreportParameter>
+					<subreportParameter name="SUB_BENS_NOVO_DETALHE_AVALIACAO_IMOVEL_PARCEIRO">
+						<subreportParameterExpression><![CDATA[$P{SUB_BENS_NOVO_DETALHE_AVALIACAO_IMOVEL_PARCEIRO}]]></subreportParameterExpression>
+					</subreportParameter>
+					<subreportParameter name="SUB_BENS_NOVO_DETALHE_AVALIACAO_MOVEL">
+						<subreportParameterExpression><![CDATA[$P{SUB_BENS_NOVO_DETALHE_AVALIACAO_MOVEL}]]></subreportParameterExpression>
+					</subreportParameter>
+					<dataSourceExpression><![CDATA[$P{DS_SUB_BENS_NOVO}]]></dataSourceExpression>
+					<subreportExpression><![CDATA[$P{SUB_BENS_NOVO}]]></subreportExpression>
+				</subreport>
+			</band>
+		</groupHeader>
+	</group>
+	<group name="produtor">
+		<groupExpression><![CDATA[$V{PAGE_NUMBER}]]></groupExpression>
+		<groupHeader>
+			<band height="51">
+				<printWhenExpression><![CDATA[new Boolean(((net.sf.jasperreports.engine.data.JRBeanCollectionDataSource) $P{DS_SUB_PRODUTOR}).getRecordCount() > 0)]]></printWhenExpression>
+				<subreport>
+					<reportElement uuid="9a4a9e9c-d8ab-49c0-a4c0-38f9a74dc2d4" positionType="Float" stretchType="RelativeToTallestObject" x="0" y="0" width="575" height="48"/>
+					<dataSourceExpression><![CDATA[$P{DS_SUB_PRODUTOR}]]></dataSourceExpression>
+					<subreportExpression><![CDATA[$P{SUB_PRODUTOR}]]></subreportExpression>
+				</subreport>
+			</band>
+		</groupHeader>
+	</group>
+	<group name="produtividade">
+		<groupHeader>
+			<band height="50">
+				<printWhenExpression><![CDATA[new Boolean(((net.sf.jasperreports.engine.data.JRBeanCollectionDataSource) $P{DS_SUB_PRODUTIVIDADE}).getRecordCount() > 0)]]></printWhenExpression>
+				<subreport>
+					<reportElement uuid="e62df400-d50e-4535-a3f2-a7babc83423a" positionType="Float" stretchType="RelativeToTallestObject" isPrintRepeatedValues="false" x="0" y="0" width="575" height="50"/>
+					<subreportParameter name="EXIBIR_TOTAL_PRODUTIVIDADE">
+						<subreportParameterExpression><![CDATA[$P{EXIBIR_TOTAL_PRODUTIVIDADE}]]></subreportParameterExpression>
+					</subreportParameter>
+					<dataSourceExpression><![CDATA[$P{DS_SUB_PRODUTIVIDADE}]]></dataSourceExpression>
+					<subreportExpression><![CDATA[$P{SUB_PRODUTIVIDADE}]]></subreportExpression>
+				</subreport>
+			</band>
+		</groupHeader>
+	</group>
+	<group name="REFERENCIAS">
+		<groupHeader>
+			<band height="53" splitType="Immediate">
+				<printWhenExpression><![CDATA[new Boolean(((net.sf.jasperreports.engine.data.JRBeanCollectionDataSource) $P{DS_SUB_REFERENCIAS}).getRecordCount() > 0)]]></printWhenExpression>
+				<subreport>
+					<reportElement uuid="8249451b-347e-4ffa-8ece-58300f5b320c" positionType="Float" stretchType="RelativeToTallestObject" x="0" y="2" width="575" height="48"/>
+					<dataSourceExpression><![CDATA[$P{DS_SUB_REFERENCIAS}]]></dataSourceExpression>
+					<subreportExpression><![CDATA[$P{SUB_REFERENCIAS}]]></subreportExpression>
+				</subreport>
+			</band>
+		</groupHeader>
+	</group>
+	<group name="CERTIDOES"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="82" splitType="Stretch">
+			<subreport>
+				<reportElement uuid="099bff53-0b14-4119-94f5-aaf4bbbf906c" x="0" y="0" width="575" height="80"/>
+				<subreportParameter name="ID_INSTITUICAO">
+					<subreportParameterExpression><![CDATA[$P{ID_INSTITUICAO}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="TITULO_RELATORIO">
+					<subreportParameterExpression><![CDATA[$P{TITULO_RELATORIO}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="NUM_COOPERATIVA">
+					<subreportParameterExpression><![CDATA[$P{NUM_COOPERATIVA}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="SUB_HEADER">
+					<subreportParameterExpression><![CDATA[$P{SUB_HEADER}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="LABEL_FILTRO_DATA">
+					<subreportParameterExpression><![CDATA[$P{LABEL_FILTRO_DATA}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="DATA_ULTIMA_ATUALIZACAO">
+					<subreportParameterExpression><![CDATA[$P{DATA_ULTIMA_ATUALIZACAO}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="URL_LOGO">
+					<subreportParameterExpression><![CDATA[$P{URL_LOGO}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="pessoa">
+					<subreportParameterExpression><![CDATA[$P{pessoa}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="ID_UNIDADE_INST">
+					<subreportParameterExpression><![CDATA[$P{ID_UNIDADE_INST}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportExpression><![CDATA[$P{SUB_HEADER}]]></subreportExpression>
+			</subreport>
+		</band>
+	</title>
+	<pageFooter>
+		<band height="20" splitType="Stretch">
+			<textField>
+				<reportElement uuid="0d8448d5-aec8-48f9-8373-d637f719e8dd" x="475" y="3" width="36" height="17"/>
+				<box>
+					<topPen lineWidth="0.0"/>
+					<leftPen lineWidth="0.0"/>
+					<bottomPen lineWidth="0.0"/>
+					<rightPen lineWidth="0.0"/>
+				</box>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression><![CDATA[$V{PAGE_NUMBER}+" /"]]></textFieldExpression>
+			</textField>
+			<textField evaluationTime="Report">
+				<reportElement uuid="95a86486-44e9-4468-a5ee-e4b430d8ca6e" x="514" y="3" width="40" height="17"/>
+				<box>
+					<topPen lineWidth="0.0"/>
+					<leftPen lineWidth="0.0"/>
+					<bottomPen lineWidth="0.0"/>
+					<rightPen lineWidth="0.0"/>
+				</box>
+				<textElement/>
+				<textFieldExpression><![CDATA[" " + $V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageFooter>
+</jasperReport>

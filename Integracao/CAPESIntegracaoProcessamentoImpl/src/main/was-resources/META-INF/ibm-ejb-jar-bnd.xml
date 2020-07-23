@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ejb-jar-bnd xmlns="http://websphere.ibm.com/xml/ns/javaee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://websphere.ibm.com/xml/ns/javaee http://websphere.ibm.com/xml/ns/javaee/ibm-ejb-jar-bnd_1_1.xsd" version="1.1">
+
+	<session name="CTAIntegracaoServicoEJB">
+		<interface class="br.com.sicoob.capes.integracao.negocio.servicos.interfaces.CTAIntegracaoServicoLocal" binding-name="ejblocal:capes/integracao/CTAIntegracaoServico" />
+		<interface class="br.com.sicoob.capes.integracao.negocio.servicos.interfaces.CTAIntegracaoServicoRemote" binding-name="capes/integracao/CTAIntegracaoServicoRemote" />
+	</session>
+	
+	<session name="CTZIntegracaoServicoEJB">
+		<interface class="br.com.sicoob.capes.integracao.negocio.servicos.interfaces.CTZIntegracaoServicoLocal" binding-name="ejblocal:capes/integracao/CTZIntegracaoServico" />
+		<interface class="br.com.sicoob.capes.integracao.negocio.servicos.interfaces.CTZIntegracaoServicoRemote" binding-name="capes/integracao/CTZIntegracaoServicoRemote" />
+	</session>
+	
+	<session name="GEDIntegracaoServicoEJB">
+		<interface class="br.com.sicoob.capes.integracao.negocio.servicos.interfaces.GEDIntegracaoServicoLocal" binding-name="ejblocal:capes/integracao/GEDIntegracaoServico" />
+		<interface class="br.com.sicoob.capes.integracao.negocio.servicos.interfaces.GEDIntegracaoServicoRemote" binding-name="capes/integracao/GEDIntegracaoServicoRemote" />
+	</session>
+	
+	<session name="GFTIntegracaoServicoEJB">
+		<interface class="br.com.sicoob.capes.integracao.negocio.servicos.interfaces.GFTIntegracaoServicoLocal" binding-name="ejblocal:capes/integracao/GFTIntegracaoServico" />
+		<interface class="br.com.sicoob.capes.integracao.negocio.servicos.interfaces.GFTIntegracaoServicoRemote" binding-name="capes/integracao/GFTIntegracaoServicoRemote" />
+	</session>
+
+</ejb-jar-bnd>

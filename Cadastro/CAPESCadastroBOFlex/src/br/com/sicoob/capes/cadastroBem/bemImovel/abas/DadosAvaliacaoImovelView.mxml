@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="utf-8"?>
+<bancoobValidaveis:CanvasValidavel xmlns="br.com.bancoob.componentes.containers.*"
+								   xmlns:mx="http://www.adobe.com/2006/mxml"
+								   xmlns:componentes="br.com.bancoob.componentes.*" 
+								   xmlns:input="br.com.bancoob.componentes.input.*" 
+								   xmlns:titulo="br.com.bancoob.componentes.titulo.*"
+								   xmlns:campos="br.com.bancoob.componentes.campos.*"
+								   xmlns:containers="br.com.bancoob.componentes.containers.*"
+								   xmlns:listaSelecao="br.com.sicoob.capes.comum.componentes.listaSelecao.*"
+								   xmlns:bancoobValidaveis="br.com.bancoob.componentes.containers.validaveis.*"
+								   xmlns:procurarPessoa="br.com.sicoob.capes.corporativo.componentes.procurarPessoa.*"
+								   xmlns:componentesCapes="br.com.sicoob.capes.comum.componentes.input.*"
+								   verticalScrollPolicy="auto" width="100%" height="100%" styleName="ModuloSemEstilo">
+	
+	<!-- ÁREA DE AVALIAÇÃO URBANO -->
+	<containers:CanvasBancoob id="canvasAvaliacaoUrbano" y="0" width="100%" height="275" visible="false" includeInLayout="false">
+		<titulo:SubtituloView texto="Avaliação - Urbano" x="5" y="0" />
+		
+		<componentes:Rotulo x="10" y="27" text="Tipo implantação: " textAlign="left" />
+		<input:Combo id="comboTipoImplantacao" left="140" y="25" right="15" labelField="descricao" validarObrigatorio="false" somenteMaiusculas="true" inserirItemOpcional="true" labelItemOpcional="SELECIONE" tabIndex="1" />
+		
+		<componentes:Rotulo x="10" y="52" text="Estado de conservação: " textAlign="left" />
+		<input:Combo id="comboEstadoConservacao" left="140" y="50" right="15" labelField="descricao" validarObrigatorio="false" somenteMaiusculas="true" inserirItemOpcional="true" labelItemOpcional="SELECIONE" tabIndex="2" />
+		
+		<componentes:Rotulo x="10" y="77" text="Padrão de acabamento: " textAlign="left" />
+		<input:Combo id="comboPadraoAcabamento" left="140" y="75" right="15" labelField="descricao" validarObrigatorio="false" somenteMaiusculas="true" inserirItemOpcional="true" labelItemOpcional="SELECIONE" tabIndex="3" />
+		
+		<componentes:RotuloMultLine x="10" y="98" width="150" text="Estado de conservação do condomínio: " textAlign="left"  />
+		<input:Combo id="comboServicosCondominiais" left="140" y="100" right="15" labelField="descricao" validarObrigatorio="false" somenteMaiusculas="true" inserirItemOpcional="true" labelItemOpcional="SELECIONE" tabIndex="4" />
+		
+		<componentes:Rotulo text="Área privativa: " x="10" y="129" textAlign="left" />
+		<componentesCapes:CampoNumerico id="campoAreaPrivativa" x="140" y="125" width="100" permitirValoreNegativos="false" valorMinimo="0" valorMaximo="999999999.9999" casasDecimais="4" maxChars="13" tabIndex="5" />
+		
+		<componentes:Rotulo text="Quantidade dormitórios: " x="10" y="152" textAlign="left" />
+		<componentesCapes:CampoNumerico id="campoQuantidadeDormitorios" x="140" y="150" width="40" maxChars="3" agruparDigitos="false" permitirValoreNegativos="false" valorMinimo="0" valorMaximo="999" tabIndex="6" />
+		
+		<componentes:Rotulo text="Quantidade vagas garagem: " x="10" y="177" textAlign="left" />
+		<componentesCapes:CampoNumerico id="campoQuantidadeVagasGaragem" x="140" y="175" width="40" maxChars="3" agruparDigitos="false" permitirValoreNegativos="false" valorMinimo="0" valorMaximo="999" tabIndex="7" />
+		
+		<componentes:Rotulo text="Área terreno: " x="10" y="202" textAlign="left" />
+		<componentesCapes:CampoNumerico id="campoAreaTerreno" x="140" y="200" width="100" permitirValoreNegativos="false" valorMinimo="0" valorMaximo="9999999.9999" casasDecimais="4" maxChars="12" tabIndex="8" />
+		
+		<componentes:Rotulo text="Área testada: " x="10" y="227" textAlign="left" />
+		<componentesCapes:CampoNumerico id="campoAreaTestada" x="140" y="225" width="100" permitirValoreNegativos="false" valorMinimo="0" valorMaximo="9999999.9999" casasDecimais="4" maxChars="12" tabIndex="9" />
+		
+		<componentes:Rotulo x="10" y="252" text="Em processo de aquisição: " textAlign="left" />
+		<input:Check id="checkProcessoAquisicao" x="140" y="250" tabIndex="10" />
+	</containers:CanvasBancoob>
+	
+	<!-- ÁREA DE AVALIAÇÃO RURAL -->
+	<containers:CanvasBancoob id="canvasAvaliacaoRural" y="0" width="100%" height="130" visible="false" includeInLayout="false">
+		<titulo:SubtituloView texto="Avaliação - Rural" x="5" y="0" />
+		
+		<componentes:Rotulo x="10" y="27" text="Benfeitorias: " textAlign="left" />
+		<input:TextoArea id="campoBenfeitorias" left="140" y="25" right="10" maxChars="250" wordWrap="true" tabIndex="1" />
+		
+		<componentes:Rotulo x="10" y="77" text="Valor avaliação benfeitorias: " textAlign="left" />
+		<componentesCapes:CampoMoeda id="campoValorAvaliacaoBenfeitorias" x="140" y="75" width="100" permitirValoreNegativos="false" valorMinimo="0.01" valorMaximo="99999999999.99" casasDecimais="2" maxChars="14" tabIndex="2" />
+		
+		<componentes:Rotulo x="10" y="102" text="Em processo de aquisição: " textAlign="left" />
+		<input:Check id="checkProcessoAquisicao2" x="140" y="100" tabIndex="10" />
+	</containers:CanvasBancoob>
+	
+	<!-- ÁREA DE COMPRA E VENDA -->
+	<containers:CanvasBancoob id="canvasCompraVenda" y="0" width="100%" height="75">
+		<titulo:SubtituloView texto="Compra/Venda" x="5" y="0" />
+		
+		<componentes:Rotulo x="10" y="27" text="Valor de compra e venda: " textAlign="left" />
+		<componentesCapes:CampoMoeda id="campoValorCompraVenda" x="140" y="25" width="150" permitirValoreNegativos="false" valorMinimo="0.01" valorMaximo="99999999999.99" casasDecimais="2" maxChars="14" tabIndex="11" />
+		
+		<componentes:Rotulo x="10" y="52" text="Data de compra e venda: " textAlign="left" />
+		<input:Data id="campoDataCompraVenda" x="140" y="50" dataDefault="{null}" tabIndex="12" />
+	</containers:CanvasBancoob>
+	
+	<!-- ÁREA DE AVALIADOR -->
+	<containers:CanvasBancoob id="canvasAvaliador" y="0" width="100%" height="100">
+		<titulo:SubtituloView texto="Avaliador" x="5" y="0" />
+		
+		<componentes:Rotulo x="10" y="27" text="Valor da avaliação: " textAlign="left" />
+		<componentesCapes:CampoMoeda id="campoValorAvaliacao" x="140" y="25" width="100" permitirValoreNegativos="false" valorMinimo="0.01" valorMaximo="99999999999.99" casasDecimais="2" maxChars="14" tabIndex="13" />
+		
+		<componentes:Rotulo x="10" y="52" text="Data da avaliação: " textAlign="left" />
+		<input:Data id="campoDataAvaliacao" x="140" y="50" dataDefault="{null}" tabIndex="14" />
+		
+		<componentes:Rotulo x="10" y="77" text="CPF/CNPJ Avaliador: " textAlign="left" />
+		<procurarPessoa:ProcurarPessoaCAPES id="componenteProcurarPessoa" x="140" y="75" validarObrigatorio="false" toolTip="CPF de identificação do avaliador." tabIndex="15" />
+	</containers:CanvasBancoob>
+	
+	<!-- ÁREA DE TIPO DE ÔNUS -->
+	<containers:CanvasBancoob id="canvasTipoOnus" y="0" width="100%" height="300">
+		<titulo:SubtituloView texto="Tipos de ônus" x="5" y="0" />
+		<listaSelecao:ListaSelecao id="componenteSelecaoTipoOnus" left="10" top="25" bottom="0" right="10" tamanhoLista="345" alturaLista="200" labelField="descricao" tabIndex="16"/>
+	</containers:CanvasBancoob>
+	
+</bancoobValidaveis:CanvasValidavel>

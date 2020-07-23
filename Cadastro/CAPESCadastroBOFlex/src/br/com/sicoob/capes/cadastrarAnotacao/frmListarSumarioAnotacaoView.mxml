@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<bancoob:Modulo xmlns:mx="http://www.adobe.com/2006/mxml"
+			xmlns:bancoobGrid="br.com.bancoob.componentes.grid.*"
+			xmlns:bancoob="br.com.bancoob.componentes.*"
+	 		width="100%" height="100%">
+	<mx:Script>
+		<![CDATA[
+			import br.com.bancoob.componentes.tabelapaginada.TabelaPaginadaUtils;
+		]]>
+	</mx:Script>	 		
+   <mx:Canvas y="2" height="27" cornerRadius="10" borderStyle="solid" left="0" right="0" borderThickness="0" backgroundColor="#ffffff" backgroundAlpha=".4" horizontalScrollPolicy="off" verticalScrollPolicy="off">
+   	<bancoob:Rotulo x="37" y="5" text="RESUMO DE ANOTAÇÕES DO CLIENTE." width="568" fontSize="11" fontWeight="bold" alpha=".7" fontFamily="ArialEmbedded"/>
+   	<mx:Image x="10" y="5" source="br/com/bancoob/imagens/icos/paste_16.png" alpha=".5"/>		
+   </mx:Canvas>
+     	 		
+	<bancoobGrid:Grid id="gridSumarioAnotacoes" width="100%" x="0" top="36" bottom="10" tabIndex="1">
+		<bancoobGrid:columns>
+				
+			<bancoobGrid:ColunaGrid headerText="Origem" id="origem" dataField="origem" 
+					labelFunction="{TabelaPaginadaUtils.defaultLabelFunction}" />
+			
+			<bancoobGrid:ColunaGrid headerText="Data Última Atualização" id="dataUltima" dataField="dataUltima" 
+					labelFunction="{TabelaPaginadaUtils.defaultDateLabelFunction}" textAlign="center" />
+			
+			<bancoobGrid:ColunaGrid headerText="Situação" id="situacao" dataField="situacao"
+					labelFunction="{TabelaPaginadaUtils.defaultLabelFunction}" />
+			
+			<bancoobGrid:ColunaGrid headerText="Categoria" id="categoria" dataField="categoria"
+					labelFunction="{TabelaPaginadaUtils.defaultLabelFunction}" />
+			
+			<bancoobGrid:ColunaGrid headerText="Quantidade" id="quantidade" dataField="quantidade"
+					labelFunction="{TabelaPaginadaUtils.defaultLabelFunction}" textAlign="right" />
+			
+			<bancoobGrid:ColunaGrid headerText="Valor" id="valor" dataField="valor" 
+					labelFunction="{TabelaPaginadaUtils.defaultValorNumericoLabelFunction}"
+					textAlign="right" />
+						
+		</bancoobGrid:columns>
+	</bancoobGrid:Grid>
+   <mx:Canvas bottom="2" height="27" cornerRadius="10" borderStyle="solid" left="0" right="0" borderThickness="0" backgroundColor="#ffffff" backgroundAlpha=".4" horizontalScrollPolicy="off" verticalScrollPolicy="off">
+   	<bancoob:Rotulo x="37" bottom="5" text="(*) Consulta ainda não implementada." width="568" fontSize="11" fontWeight="bold" alpha=".7" fontFamily="ArialEmbedded"/>
+   </mx:Canvas>	
+</bancoob:Modulo>

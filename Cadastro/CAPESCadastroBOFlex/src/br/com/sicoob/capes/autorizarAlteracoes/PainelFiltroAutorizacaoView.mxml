@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<CanvasValidavel xmlns="br.com.bancoob.componentes.containers.validaveis.*" 
+	xmlns:mx="http://www.adobe.com/2006/mxml"
+	xmlns:ns1="br.com.bancoob.componentes.titulo.*" 
+	xmlns:ns2="br.com.bancoob.componentes.containers.validaveis.*" 
+	xmlns:ns3="br.com.bancoob.componentes.*" 
+	xmlns:ns4="br.com.bancoob.componentes.input.*" 
+    xmlns:ns5="br.com.bancoob.componentes.campos.*"
+	xmlns:ns6="br.com.bancoob.componentes.painellista.*"
+	xmlns:ns7="br.com.bancoob.componentes.grid.*" 
+	defaultButton="{btFiltrar}"
+	width="100%" height="86">
+	<mx:Script>
+		<![CDATA[
+			[Bindable]
+			private var _labelCooperativa : String;
+			
+			public function set labelCooperativa(valor : String) : void {
+				this._labelCooperativa = valor;
+			}
+			public function get labelCooperativa() : String {
+				return this._labelCooperativa;
+			}
+		]]>
+	</mx:Script>
+	<ns1:SubtituloView texto="Filtros" booTituloPesquisa="true" x="0" y="0" />
+
+	<ns3:Rotulo text="Cód. de Autorização" textAlign="left" x="10" y="34" height="18"/>
+	<ns5:CampoInteiroView id="codigoAutorizacao" x="10" y="50" width="95"  height="22" maxChars="19"/>
+
+	<ns3:Rotulo text="CPF/CNPJ" textAlign="left" x="115" y="34" height="18"/>
+	<ns4:Texto id="cpfCnpj" x="115" y="50" width="110" restrict="0-9" maxChars="14" tipoEntrada="{Texto.TEXTO}" />
+	
+	<ns3:Rotulo text="{labelCooperativa}" textAlign="left" x="235" y="34" />
+	<ns5:CampoInteiroView id="numeroCooperativa" x="235" y="50" width="120" maxChars="4" />
+
+	<ns3:Rotulo text="Unidade de Destino" textAlign="left" x="365" y="34"  height="18"/>
+	<ns5:CampoInteiroView id="idUnidadeInst" x="365" y="50" width="100" maxChars="3" />
+
+	<ns3:Rotulo text="Tipo de Autorização" textAlign="left" x="475" y="34" height="18"/>
+	<ns4:Combo id="cmbTipoAutorizacao" width="250" conteudoMaiusculo="true"
+		labelField="descricao" inserirItemOpcional="true" labelItemOpcional="TODOS" x="475" y="50"/>
+
+	<ns6:BotaoProcurarView width="85" id="btFiltrar" right="100" y="50" label="FILTRAR"/>
+	
+	<ns3:Botao width="85" id="btLimpar" right="0"  y="50" label="LIMPAR" />
+
+</CanvasValidavel>

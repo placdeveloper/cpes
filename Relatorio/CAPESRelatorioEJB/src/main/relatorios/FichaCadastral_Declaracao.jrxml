@@ -1,0 +1,158 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="FichaCadastral_Declaracao" pageWidth="555" pageHeight="900" whenNoDataType="AllSectionsNoDetail" columnWidth="555" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0">
+	<style name="Linha Zebrada" isDefault="false" backcolor="#CCCCCC"/>
+	<queryString>
+		<![CDATA[]]>
+	</queryString>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band splitType="Stretch"/>
+	</title>
+	<pageHeader>
+		<band splitType="Stretch"/>
+	</pageHeader>
+	<columnHeader>
+		<band height="403" splitType="Prevent">
+			<staticText>
+				<reportElement style="Linha Zebrada" mode="Opaque" x="0" y="0" width="555" height="338"/>
+				<box topPadding="3" leftPadding="3" bottomPadding="0" rightPadding="3">
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Justified" verticalAlignment="Top">
+					<font size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[DECLARO QUE AS INFORMAÇÕES PRESTADAS SÃO VERDADEIRAS. RESPONSABILIZANDO-ME CIVIL E CRIMINALMENTE POR SUA AUTENTICIDADE.
+
+DECLARO QUE QUALQUER MUDANÇA NAS INFORMAÇÕES SERÁ INFORMADA NO PRAZO MAXIMO DE 30 DIAS.
+
+AUTORIZO QUE OS MEUS DADOS CADASTRAIS, PATRIMONIAIS E FINANCEIROS INFORMADOS A QUALQUER DAS ENTIDADES DO SICOOB - SISTEMA DE COOPERATIVAS DE CRÉDITO DO BRASIL POSSAM SER COMPARTILHADOS ENTRE TODAS AS ENTIDADES DESSE SISTEMA, INCLUSIVE FUNDAÇÃO SICOOB DE PREVIDÊNCIA PRIVADA, BANCOOB DTVM LTDA., E OUTRAS EMPRESAS COM PARTICIPAÇÃO DIRETA OU INDIRETA DE ENTIDADE SICOOB.
+
+AUTORIZO A COOPERATIVA SINGULAR, A COOPERATIVA CENTRAL A QUE ESTEJA ASSOCIADA, BEM COMO O BANCO COOPERATIVO DO BRASIL S.A. – BANCOOB, A:
+- ACESSAR O SISTEMA DE INFORMAÇÕES DE CRÉDITO (SCR), GERIDO PELO BANCO CENTRAL DO BRASIL, E TAMBÉM OS EVENTUAIS SISTEMAS QUE VENHAM A SUBSTITUIR OU A COMPLEMENTAR O SCR, PARA OBTENÇÃO DE DADOS SOBRE DÉBITOS E RESPONSABILIDADES DE MINHA TITULARIDADE JUNTO AO SISTEMA FINANCEIRO NACIONAL.
+- EFETUAR O REGISTRO DE MEUS DADOS NO SISTEMA DE INFORMAÇÕES DE CRÉDITO (SCR), QUANDO FOR O CASO.
+- EFETUAR AS DEMAIS CONSULTAS CADASTRAIS NECESSÁRIAS À AVALIAÇÃO DE RISCO PARA A APROVAÇÃO DE PEDIDO DE CONCESSÃO DE CRÉDITO JUNTO AOS ÓRGAOS DE PROTEÇAÕ AO CRÉDITO (SPC, SERASA, CCF E CONGÊNERES), SENDO VEDADA A SUA DIVULGAÇÃO PARA TERCEIROS.
+- O SCR TEM POR FINALIDADES:
+A) FORNECER INFORMAÇÕES AO BACEN PARA FINS DE SUPERVISÃO DO RISCO DE CRÉDITO A QUE ESTÃO EXPOSTAS AS INSTITUIÇÕES FINANCEIRAS;
+B) PROPICIAR O INTERCÂMBIO, ENTRE AS INSTITUIÇÕES OBRIGADAS A PRESTAR INFORMAÇÕES AO SCR, DAS INFORMAÇÕES REFERENTES A DÉBITOS E RESPONSABILIDADES DE CLIENTES DE OPERAÇÕES DE CRÉDITO, COM O OBJETIVO DE SUBSIDIAR DECISÕES DE CRÉDITO E DE NEGÓCIOS.
+
+O(S) ASSOCIADO(S) PODERÁ(ÃO) TER ACESSO AOS DADOS CONSTANTES EM SEUS NOMES NO SCR, POR MEIO DA CENTRAL DE ATENDIMENTO AO PÚBLICO DO BANCO CENTRAL DO BRASIL – BACEN;
+AS MANISFESTAÇÕES DE DISCORDÂNCIA QUANTO ÀS INFORMAÇÕES CONSTANTES DO SCR E OS PEDIDOS DE CORREÇÕES, EXCLUSÕES E REGISTROS DE MEDIDAS JUDICIAIS NO SCR DEVERÃO SER DIRIGIDOS À COOPERATIVA SINGULAR, POR MEIO DE REQUERIMENTO ESCRITO E FUNDAMENTADO DO(S) ASSOCIADO(S), ACOMPANHADO DA RESPECTIVA DECISÃO JUDICIAL, QUANDO FOR O CASO;
+A CONSULTA SOBRE QUALQUER INFORMAÇÃO CONSTANTE DO SCR DEPENDERÁ DE PRÉVIA AUTORIZAÇÃO DO(S) ASSOCIADO(S).
+]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="338" width="278" height="65"/>
+				<box leftPadding="3">
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement>
+					<font size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Local e Data:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="278" y="338" width="277" height="65"/>
+				<box leftPadding="3">
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement>
+					<font size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Assinatura do Cliente:]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band splitType="Stretch"/>
+	</detail>
+	<columnFooter>
+		<band height="115" splitType="Prevent">
+			<staticText>
+				<reportElement style="Linha Zebrada" mode="Opaque" x="0" y="0" width="555" height="36"/>
+				<box topPadding="3" leftPadding="3" rightPadding="3">
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Justified">
+					<font size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[USO DA(O) COOPERATIVA/BANCOOB: RESPONZABILIZAMO-NOS, NOS TERMOS DA LEI, PELA EXATIDÃO DAS INFORMAÇÕES PRESTADAS, À VISTA DOS ORIGINAIS DOS DOCUMENTOS DE IDENTIFICAÇÃO E COMPROBATÓRIOS DOS DEMAIS ELEMENTOS DE INFORMAÇÕES APRESENTADOS.]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="36" width="278" height="78"/>
+				<box leftPadding="3">
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Left" verticalAlignment="Top">
+					<font size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Responsável pela inclusão/atualização/renovação:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="16" y="101" width="238" height="13"/>
+				<box leftPadding="7">
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.0"/>
+					<bottomPen lineWidth="0.0"/>
+					<rightPen lineWidth="0.0"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Top">
+					<font size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Usuário responsável]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="278" y="36" width="277" height="78"/>
+				<box leftPadding="3">
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Left" verticalAlignment="Top">
+					<font size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Responsável pela conferência/confirmação:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="295" y="101" width="238" height="13"/>
+				<box leftPadding="7">
+					<topPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.0"/>
+					<rightPen lineWidth="0.0"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Top">
+					<font size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Gerente responsável pela conta]]></text>
+			</staticText>
+		</band>
+	</columnFooter>
+	<pageFooter>
+		<band splitType="Stretch"/>
+	</pageFooter>
+	<summary>
+		<band splitType="Stretch"/>
+	</summary>
+</jasperReport>

@@ -1,0 +1,13 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<config>
+	<destinos>
+		<destinoArquivosCAPES
+			local-url="http://localhost:9810/capes/sisbr/"
+			bancoob-url="http://localhost:9810/capes/sisbr/" 
+			cooperativa-url="http://localhost:9810/capes/sisbr/"
+			internet-url="http://localhost:9810/capes/sisbr/" 
+			intranet-url="http://localhost:9810/capes/sisbr/"
+			cps-url="http://localhost:9810/capes/sisbr/" 
+			vpn1-url="http://localhost:9810/capes/sisbr/" />
+	</destinos>
+</config>

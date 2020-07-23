@@ -1,0 +1,205 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+
+	<artifactId>capes-comum-flex</artifactId>
+	<packaging>swc</packaging>
+
+	<name>CAPES - Comum - CAPESComumFlex</name>
+	<description>Biblioteca Flex contendo as classes que são utilizadas por vários módulos do capes-cadastro-bo-flex</description>
+
+	<parent>
+		<groupId>br.com.sicoob.capes</groupId>
+		<artifactId>capes-modulo-comum</artifactId>
+		<version>2.0.8.1</version>
+		<relativePath>..</relativePath>
+	</parent>
+
+	<scm>
+		<url>http://svn.sicoob.com.br/fontesbancoob/SISBR/Aplicativos/JAVA/trunk/CAPES/tags/capes-2.0.8.1/Comum/CAPESComumFlex</url>
+		<connection>scm:svn:http://svn.sicoob.com.br/fontesbancoob/SISBR/Aplicativos/JAVA/trunk/CAPES/tags/capes-2.0.8.1/Comum/CAPESComumFlex</connection>
+		<developerConnection>scm:svn:http://svn.sicoob.com.br/fontesbancoob/SISBR/Aplicativos/JAVA/trunk/CAPES/tags/capes-2.0.8.1/Comum/CAPESComumFlex</developerConnection>
+	</scm>
+
+	<properties>
+		<sonar.language>flex</sonar.language>
+	</properties>
+
+	<build>
+		<sourceDirectory>./src/</sourceDirectory>
+		<plugins>
+			<plugin>
+				<groupId>org.sonatype.flexmojos</groupId>
+				<artifactId>flexmojos-maven-plugin</artifactId>
+				<extensions>true</extensions>
+				<executions>
+					<execution>
+						<goals>
+							<goal>compile-swc</goal>
+							<goal>create-rsl</goal>
+						</goals>
+					</execution>
+				</executions>
+				<configuration>
+					<includeClasses>
+						<scan>
+							<includes>
+								<include>**/*.as</include>
+								<include>**/*.mxml</include>
+							</includes>
+						</scan>
+					</includeClasses>
+				</configuration>
+			</plugin>
+		</plugins>
+		<pluginManagement>
+			<plugins>
+				<!--This plugin's configuration is used to store Eclipse m2e settings 
+					only. It has no influence on the Maven build itself. -->
+				<plugin>
+					<groupId>org.eclipse.m2e</groupId>
+					<artifactId>lifecycle-mapping</artifactId>
+					<version>1.0.0</version>
+					<configuration>
+						<lifecycleMappingMetadata>
+							<pluginExecutions>
+								<pluginExecution>
+									<pluginExecutionFilter>
+										<groupId>
+											org.sonatype.flexmojos
+										</groupId>
+										<artifactId>
+											flexmojos-maven-plugin
+										</artifactId>
+										<versionRange>
+											[4.2-beta,)
+										</versionRange>
+										<goals>
+											<goal>test-compile</goal>
+											<goal>compile-swf</goal>
+										</goals>
+									</pluginExecutionFilter>
+									<action>
+										<ignore />
+									</action>
+								</pluginExecution>
+							</pluginExecutions>
+						</lifecycleMappingMetadata>
+					</configuration>
+				</plugin>
+			</plugins>
+		</pluginManagement>
+
+	</build>
+
+	<dependencies>
+
+		<!-- INTERNAS -->
+		<dependency>
+			<groupId>br.com.sicoob.framework.flex</groupId>
+			<artifactId>prt-base-sicoob-flex</artifactId>
+			<version>${versao.prt-framework}</version>
+			<type>swc</type>
+			<scope>external</scope>
+		</dependency>
+		<dependency>
+			<groupId>br.com.sicoob.framework.flex</groupId>
+			<artifactId>prt-base-componentes-flex</artifactId>
+			<version>${versao.prt-framework}</version>
+			<type>swc</type>
+			<scope>external</scope>
+		</dependency>
+		<dependency>
+			<groupId>br.com.sicoob.framework.flex</groupId>
+			<artifactId>prt-base-constantes-flex</artifactId>
+			<version>${versao.prt-framework}</version>
+			<type>swc</type>
+			<scope>external</scope>
+		</dependency>
+		<dependency>
+			<groupId>br.com.sicoob.framework.flex</groupId>
+			<artifactId>prt-base-sisbr-assets-flex</artifactId>
+			<version>${versao.prt-base-sisbr-assets}</version>
+			<type>swc</type>
+			<scope>external</scope>
+		</dependency>
+		<dependency>
+			<groupId>br.com.sicoob.framework.flex</groupId>
+			<artifactId>prt-base-sisbr-flex</artifactId>
+			<version>${versao.prt-framework}</version>
+			<type>swc</type>
+			<scope>external</scope>
+		</dependency>
+		<dependency>
+			<groupId>br.com.sicoob.framework.relatorio</groupId>
+			<artifactId>relatorio-flex</artifactId>
+			<version>${versao.relatorio.flex}</version>
+			<type>swc</type>
+			<scope>external</scope>
+		</dependency>
+		<dependency>
+			<groupId>br.com.sicoob.framework.flex</groupId>
+			<artifactId>prt-base-sisbr-flex-air</artifactId>
+			<version>${versao.prt-framework}</version>
+			<type>swc</type>
+			<scope>external</scope>
+		</dependency>
+		<!-- INTERNAS -->
+
+		<!-- EXTERNAS -->
+		<dependency>
+			<groupId>com.adobe.flex.framework</groupId>
+			<artifactId>flex-framework</artifactId>
+			<version>${versao.sdk.flex}</version>
+			<type>pom</type>
+			<exclusions>
+				<exclusion>
+					<groupId>com.adobe.flex.framework</groupId>
+					<artifactId>playerglobal</artifactId>
+				</exclusion>
+			</exclusions>
+		</dependency>
+		<dependency>
+			<groupId>com.adobe.flex.framework</groupId>
+			<artifactId>datavisualization</artifactId>
+			<version>${versao.sdk.flex}</version>
+			<type>swc</type>
+		</dependency>
+		<dependency>
+			<groupId>com.adobe.flex.framework</groupId>
+			<artifactId>aircore</artifactId>
+			<version>${versao.sdk.flex}</version>
+			<type>swc</type>
+			<scope>merged</scope>
+		</dependency>
+		<dependency>
+			<groupId>com.adobe.flex.framework</groupId>
+			<artifactId>airglobal</artifactId>
+			<version>${versao.sdk.flex}</version>
+			<type>swc</type>
+			<scope>external</scope>
+		</dependency>
+		<dependency>
+			<groupId>com.adobe.flex.framework</groupId>
+			<artifactId>airframework</artifactId>
+			<version>${versao.sdk.flex}</version>
+			<type>swc</type>
+			<scope>merged</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.graniteds</groupId>
+			<artifactId>granite-swc</artifactId>
+			<version>${versao.granite}</version>
+			<type>swc</type>
+		</dependency>
+		<dependency>
+			<groupId>org.graniteds</groupId>
+			<artifactId>granite-hibernate-swc</artifactId>
+			<version>${versao.granite}</version>
+			<type>swc</type>
+		</dependency>
+		<!-- EXTERNAS -->
+	</dependencies>
+</project>

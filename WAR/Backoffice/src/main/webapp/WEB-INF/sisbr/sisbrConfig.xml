@@ -1,0 +1,216 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<config>
+
+  <upload>
+    <urlUpload>Upload.aspx</urlUpload>
+    <servidorUpload 
+    	local="http://testeintegrado.sicoob.com.br/sisbr/"
+    	bancoob="http://testeintegrado.sicoob.com.br/sisbr/"
+      	cooperativa="http://testeintegrado.sicoob.com.br/sisbr/"
+      	internet="http://testeintegrado.sicoob.com.br/sisbr/"
+      	intranet="http://testeintegrado.sicoob.com.br/sisbr/"
+      	cps="http://testeintegrado.sicoob.com.br/sisbr/"
+      	
+      	local_java="http://localhost:8080/sisbr/"
+      	bancoob_java="http://localhost:8080/sisbr/"
+      	cooperativa_java="http://localhost:8080/sisbr/"
+      	internet_java="http://localhost:8080/sisbr/"
+      	intranet_java="http://localhost:8080/sisbr/"
+      	cps_java="http://localhost:8080/sisbr/"
+      	
+      	localGravacao="{LOCAL}" />
+  </upload>
+
+  <servidorMetaframe>sps002</servidorMetaframe>
+
+  <destinos>
+    <servicosJavaCapes tipo="JAVA"
+      local="servicosJavaCapes"
+      local-srv="http://localhost:9810/capes/"
+      local-ep="{srv}graniteamf/amf"
+      local-push-destination="dataTopic"
+      local-push="{srv}gravityamf/amf"
+      local-ssl="0"
+      
+      bancoob="servicosJavaCapes"
+      bancoob-srv="http://localhost:9810/capes/"
+      bancoob-ep="{srv}graniteamf/amf"
+      bancoob-push-destination="dataTopic"
+      bancoob-push="{srv}gravityamf/amf"
+      bancoob-ssl="0"
+      
+      cooperativa="servicosJavaCapes"
+      cooperativa-srv="http://localhost:9810/capes/"
+      cooperativa-ep="{srv}graniteamf/amf"
+      cooperativa-push-destination="dataTopic"
+      cooperativa-push="{srv}gravityamf/amf"
+      cooperativa-ssl="0"
+      
+      internet="servicosJavaCapes"
+      internet-srv="http://localhost:9810/capes/"
+      internet-ep="{srv}graniteamf/amf"
+      internet-push-destination="dataTopic"
+      internet-push="{srv}gravityamf/amf"
+      internet-ssl="0"
+      
+      intranet="servicosJavaCapes"
+      intranet-srv="http://localhost:9810/capes/"
+      intranet-ep="{srv}graniteamf/amf"
+      intranet-push-destination="dataTopic"
+      intranet-push="{srv}gravityamf/amf"
+      intranet-ssl="0"
+      
+      cps="servicosJavaCapes"
+      cps-srv="http://localhost:9810/capes/"
+      cps-ep="{srv}graniteamf/amf"
+      cps-push-destination="dataTopic"
+      cps-push="{srv}gravityamf/amf"
+      cps-ssl="0" />
+
+		<servicosLogin tipo="JAVA"
+			local="servicosLogin"
+			local-srv="http://boti.homologacao.com.br:8080/sisbr/"
+			local-ep="{srv}graniteamf/amf"
+			local-ssl="0"
+
+			bancoob="servicosLogin"
+			bancoob-srv="http://boti.homologacao.com.br:8080/sisbr/"
+			bancoob-ep="{srv}graniteamf/amf"
+			bancoob-ssl="0"
+
+			cooperativa="servicosLogin"
+			cooperativa-srv="http://boti.homologacao.com.br:8080/sisbr/"
+			cooperativa-ep="{srv}graniteamf/amf"
+			cooperativa-ssl="0"
+
+			internet="servicosLogin"
+			internet-srv="http://boti.homologacao.com.br:8080/sisbr/"
+			internet-ep="{srv}graniteamf/amf"
+			internet-ssl="0"
+
+			intranet="servicosLogin"
+			intranet-srv="http://boti.homologacao.com.br:8080/sisbr/"
+			intranet-ep="{srv}graniteamf/amf"
+			intranet-ssl="0"
+
+			cps="servicosLogin"
+			cps-srv="http://boti.homologacao.com.br:8080/sisbr/"
+			cps-ep="{srv}graniteamf/amf"
+			cps-ssl="0"
+		/>
+
+		<servicosPortalJava tipo="JAVA"
+			local="servicosPortalJava"
+			local-srv="https://boti.sisbr.coop.br/sisbr/"
+			local-ep="{srv}graniteamf/amf"
+			local-push-destination="dataTopic"
+			local-push="{srv}gravityamf/amf"
+			local-ssl="1"
+
+			bancoob="servicosPortalJava"
+			bancoob-srv="https://boti.sisbr.coop.br/sisbr/"
+			bancoob-ep="{srv}graniteamf/amf"
+			bancoob-push-destination="dataTopic"
+			bancoob-push="{srv}gravityamf/amf"
+			bancoob-ssl="1"
+
+			cooperativa="servicosPortalJava"
+			cooperativa-srv="https://boti.sisbr.coop.br/sisbr/"
+			cooperativa-ep="{srv}graniteamf/amf"
+			cooperativa-push-destination="dataTopic"
+			cooperativa-push="{srv}gravityamf/amf"
+			cooperativa-ssl="1"
+
+			internet="servicosPortalJava"
+			internet-srv="https://boti.sisbr.coop.br/sisbr/"
+			internet-ep="{srv}graniteamf/amf"
+			internet-push-destination="dataTopic"
+			internet-push="{srv}gravityamf/amf"
+			internet-ssl="1"
+
+			intranet="servicosPortalJava"
+			intranet-srv="https://boti.sisbr.coop.br/sisbr/"
+			intranet-ep="{srv}graniteamf/amf"
+			intranet-push-destination="dataTopic"
+			intranet-push="{srv}gravityamf/amf"
+			intranet-ssl="1"
+
+			cps="servicosPortalJava"
+			cps-srv="https://boti.sisbr.coop.br/sisbr/"
+			cps-ep="{srv}graniteamf/amf"
+			cps-push-destination="dataTopic"
+			cps-push="{srv}gravityamf/amf"
+			cps-ssl="1"
+		/>
+  </destinos>
+
+  <rota>
+    <classes tipo="bancoob">
+      <classe local="" ip="10.10.10." />
+      <classe local="" ip="10.10.8." />
+      <classe local="" ip="10.10.9." />
+      <classe local="" ip="10.100.130." />
+      <classe local="" ip="10.100.129." />
+      <classe local="" ip="10.230." />
+      <classe local="" ip="10.238." />
+    </classes>
+    <classes tipo="cooperativa">
+      <classe local="ES" ip="10.1." />
+      <classe local="AC" ip="10.3." />
+      <classe local="BA" ip="10.4." />
+      <classe local="BA" ip="10.5." />
+      <classe local="DF" ip="10.6." />
+      <classe local="DF" ip="10.7." />
+      <classe local="GO" ip="10.8." />
+      <classe local="MG-CREDIMINAS" ip="10.9." />
+      <classe local="MG-CECREMGE" ip="10.11." />
+      <classe local="MG-CECREMGE" ip="10.12." />
+      <classe local="MG-CREDIMINAS" ip="10.13." />
+      <classe local="BANCOOB-BH" ip="10.29." />
+      <classe local="MT" ip="10.14." />
+      <classe local="PA" ip="10.15." />
+      <classe local="PB" ip="10.16." />
+      <classe local="PE" ip="10.17." />
+      <classe local="PI" ip="10.26." />
+      <classe local="PR" ip="10.28." />
+      <classe local="RJ" ip="10.18." />
+      <classe local="RJ" ip="10.19." />
+      <classe local="RN" ip="10.20." />
+      <classe local="RO" ip="10.21." />
+      <classe local="RS" ip="10.30." />
+      <classe local="RS" ip="10.31." />
+      <classe local="RS" ip="10.32." />
+      <classe local="SC" ip="10.22." />
+      <classe local="SC" ip="10.23." />
+      <classe local="TO" ip="10.24." />
+      <classe local="SP 1006 e 2005" ip="10.25." />
+      <classe local="SP 2005" ip="10.33." />
+      <classe local="SP 1006" ip="10.34." />
+      <classe local="Outros" ip="10.40." />
+    </classes>
+    <classes tipo="intranet">
+      <classe local="" ip="172." />
+    </classes>
+    <classes tipo="cps">
+      <classe local="" ip="10.200." />
+    </classes>
+    <classes tipo="local">
+      <classe local="" ip="127.0.0.1" />
+      <classe local="" ip="0:0:0" />
+    </classes>
+  </rota>
+  
+  <monitoramento>
+    <filtros>
+      <filtro servidor="" cooperativa="" pac="" usuario="" pacote="" classe="" metodo="obterListaDominios" />
+      <filtro servidor="" cooperativa="" pac="" usuario="" pacote="" classe="" metodo="obterToken" />
+      <filtro servidor="" cooperativa="" pac="" usuario="" pacote="" classe="" metodo="login" />
+      <filtro servidor="" cooperativa="" pac="" usuario="" pacote="br.com.bancoob.seguranca.autenticacao.servico" classe="ServicoSeguranca" metodo="" />
+      <filtro servidor="" cooperativa="" pac="" usuario="" pacote="br.com.bancoob.sisbr.monitoracao.srtb.servicos" classe="EstatisticaServico" metodo="" />
+      <filtro servidor="" cooperativa="" pac="" usuario="" pacote="br.com.bancoob.sisbr.monitoracao.srtb.servicos" classe="TransacaoServico" metodo="" />
+    </filtros>
+  </monitoramento>
+  
+  <spoolRelatorios destino="{LOCAL}\spoolRelatorios" caminhoRelativo="../spoolRelatorios" />
+  
+</config>

@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<bancoobValidaveis:CanvasValidavel
+	xmlns:mx="http://www.adobe.com/2006/mxml"
+	xmlns="br.com.bancoob.componentes.containers.*"
+	xmlns:bancoobValidaveis="br.com.bancoob.componentes.containers.validaveis.*"
+	xmlns:componentes="br.com.bancoob.componentes.*"
+	xmlns:input="br.com.bancoob.componentes.input.*"
+	xmlns:containers="br.com.bancoob.componentes.containers.*"
+	xmlns:campos="br.com.bancoob.componentes.campos.*"
+	xmlns:titulo="br.com.bancoob.componentes.titulo.*"
+	xmlns:listaSelecao="br.com.bancoob.componentes.listaSelecao.*"
+	xmlns:procurarPessoa="br.com.sicoob.capes.corporativo.componentes.procurarPessoa.*"
+	xmlns:componentesCapes="br.com.sicoob.capes.comum.componentes.input.*"
+	styleName="ModuloSemEstilo" width="100%" height="100%">
+	
+	<titulo:SubtituloView id="rotuloTitulo" x="5" y="0" />
+	
+	<!--ÁREA DE DADOS AVANÇADOS DO VEÍCULO -->
+	<containers:CanvasBancoob id="canvasAvancadoVeiculo" y="0" width="100%" height="400" visible="false" includeInLayout="false">
+		<componentes:Rotulo text="Tipo chassi: " x="10" y="27" textAlign="left" />
+		<input:Combo id="comboTipoChassi" left="120" y="25" right="10" labelField="descricao" conteudoMaiusculo="true" inserirItemOpcional="true" labelItemOpcional="SELECIONE" tabIndex="1" />
+		
+		<componentes:Rotulo text="Número chassi: " x="10" y="52" textAlign="left" />
+		<input:Texto id="campoNumeroChassi" x="120" y="50" width="200" maxChars="50" tabIndex="2" />
+		
+		<componentes:Rotulo text="Renavam: " x="10" y="77" textAlign="left" />
+		<input:Texto id="campoRenavam" x="120" y="75" width="200" restrict="0-9" maxChars="11" tabIndex="3" />
+		
+		<componentes:Rotulo text="Ano de fabricação: " x="10" y="102" textAlign="left" />
+		<componentesCapes:CampoNumerico id="campoAnoFabricacaoVeiculo" x="120" y="100" permitirValoreNegativos="false" agruparDigitos="false" valorMinimo="1900" valorMaximo="2999" width="40" maxChars="4" tabIndex="4" />
+		
+		<componentes:Rotulo text="Ano do modelo: " x="10" y="127" textAlign="left" />
+		<componentesCapes:CampoNumerico id="campoanoModeloVeiculo" x="120" y="125" permitirValoreNegativos="false" agruparDigitos="false" valorMinimo="1900" valorMaximo="2999" width="40" maxChars="4" tabIndex="5" />
+		
+		<componentes:Rotulo x="10" y="152" text="Placa: " textAlign="left" />
+		<input:Texto id="campoPlaca" x="120" y="150" width="100" maxChars="7" somenteMaiusculas="true" tabIndex="6" />
+		
+		<componentes:Rotulo x="230" y="152" text="UF: " textAlign="left" />
+		<input:Combo id="comboUF" left="260" y="150" right="10" labelField="siglaUF" somenteMaiusculas="true" inserirItemOpcional="true" labelItemOpcional="SELECIONE" tabIndex="7" />
+		
+		<componentes:Rotulo x="10" y="177" text="Cor: " textAlign="left" />
+		<input:Combo id="comboCor" left="120" y="175" right="10" labelField="descricao" somenteMaiusculas="true" inserirItemOpcional="true" labelItemOpcional="SELECIONE" tabIndex="8" />
+		
+		<!-- <tabelaFipe:TabelaFipe id="componenteTabelaFipe" y="200" tamanhoCombos="652" posicaoRotulos="10" posicaoCombos="120" /> -->
+	</containers:CanvasBancoob>
+	
+	<!--ÁREA DE DADOS AVANÇADOS DA EMBARCAÇÃO -->
+	<containers:CanvasBancoob id="canvasAvancadoEmbarcacao" y="0" width="100%" height="75" visible="false" includeInLayout="false">
+		<componentes:Rotulo text="Número de inscrição: " x="10" y="27" textAlign="left" />
+		<input:Texto id="campoInscricaoEmbarcacao" x="120" y="25" width="200" maxChars="50" tabIndex="9" />
+		
+		<componentes:Rotulo text="Ano de construção: " x="10" y="52" textAlign="left" />
+		<componentesCapes:CampoNumerico id="campoAnoConstrucaoEmbarcacao" x="120" y="50" agruparDigitos="false" permitirValoreNegativos="false" valorMinimo="1900" valorMaximo="2999" width="40" maxChars="4" tabIndex="10" />
+	</containers:CanvasBancoob>
+	
+	<!--ÁREA DE DADOS AVANÇADOS DA AERONAVE -->
+	<containers:CanvasBancoob id="canvasAvancadoAeronave" y="0" width="100%" height="75" visible="false" includeInLayout="false">
+		<componentes:Rotulo text="Matrícula: " x="10" y="27" textAlign="left" />
+		<input:Texto id="campoMatriculaAeronave" x="120" y="25" width="200" maxChars="50" tabIndex="11" />
+		
+		<componentes:Rotulo text="Ano de construção: " x="10" y="52" textAlign="left" />
+		<componentesCapes:CampoNumerico id="campoAnoConstrucaoAeronave" x="120" y="50" agruparDigitos="false" permitirValoreNegativos="false" valorMinimo="1900" valorMaximo="2999" width="40" maxChars="4" tabIndex="12" />
+	</containers:CanvasBancoob>
+	
+</bancoobValidaveis:CanvasValidavel>

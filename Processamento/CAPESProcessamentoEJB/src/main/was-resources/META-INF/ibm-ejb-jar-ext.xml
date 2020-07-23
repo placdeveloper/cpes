@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ejb-jar-ext xmlns="http://websphere.ibm.com/xml/ns/javaee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://websphere.ibm.com/xml/ns/javaee http://websphere.ibm.com/xml/ns/javaee/ibm-ejb-jar-ext_1_1.xsd" version="1.1">
+
+	<session name="RenovacaoCadastralJobServicoEJB">
+		<global-transaction transaction-time-out="9999999" />
+	</session>
+	<session name="RenovacaoCadastralStepServicoEJB">
+		<global-transaction transaction-time-out="9999999" />
+	</session>
+	
+	<!-- FECHAMENTO -->
+	<session name="FechamentosJobEJB">
+		<global-transaction transaction-time-out="9999999" />
+	</session>
+	<session name="BaixarAnotacoesVencidasStepEJB">
+		<global-transaction transaction-time-out="9999999" />
+	</session>
+	<session name="CancelarAutorizacoesVencidasStepEJB">
+		<global-transaction transaction-time-out="9999999" />
+	</session>
+	<session name="ExcluirInformacoesVencidasStepEJB">
+		<global-transaction transaction-time-out="9999999" />
+	</session>
+	<session name="ExecutarValidacaoCadastralStepEJB">
+		<global-transaction transaction-time-out="9999999" />
+	</session>
+	<session name="ExportacaoArquivosStepEJB">
+		<global-transaction transaction-time-out="9999999" />
+	</session>
+	
+</ejb-jar-ext>

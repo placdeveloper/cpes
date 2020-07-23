@@ -1,0 +1,10 @@
+<?xml version="1.0"?>
+<jboss>
+	<enterprise-beans>
+		<session>
+			<ejb-name>AtualizarCadastroClienteServicoEJB</ejb-name>
+			<jndi-name>capes/replicacao/AtualizarCadastroClienteServicoRemote</jndi-name>
+			<local-jndi-name>capes/replicacao/AtualizarCadastroClienteServico</local-jndi-name>
+		</session>
+	</enterprise-beans>
+</jboss>

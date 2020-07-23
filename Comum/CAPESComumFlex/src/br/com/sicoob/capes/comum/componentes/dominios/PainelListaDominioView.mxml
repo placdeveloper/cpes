@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PainelListaBanco 
+	xmlns="br.com.bancoob.componentes.painellista.*" 
+	xmlns:mx="http://www.adobe.com/2006/mxml" 
+	xmlns:tabelaPaginada="br.com.bancoob.componentes.tabelapaginada.*" 
+	xmlns:servico="br.com.bancoob.util.servico.*" 
+	xmlns:grid="br.com.bancoob.componentes.grid.*"
+	metodoPesquisa="obterDadosSelecao"
+	deveExibirMensagemNenhumRegistro="true">
+	<mx:Script>
+		<![CDATA[
+			import br.com.bancoob.componentes.tabelapaginada.TabelaPaginadaUtils;
+		]]>
+	</mx:Script>
+	<tabelaPaginada>
+		<tabelaPaginada:TabelaPaginadaBanco titulo="LISTA DE DADOS"
+			tamanhoPagina="15" width="100%" height="100%">
+			<tabelaPaginada:MetadadosTabela>
+				<grid:ColunaGrid labelFunction="{TabelaPaginadaUtils.defaultLabelFunction}" 
+                    propriedade="codigo" headerText="Código" width="100"/>
+				<grid:ColunaGrid labelFunction="{TabelaPaginadaUtils.defaultLabelFunction}" 
+					dataField="descricao" headerText="Descrição" minWidth="200"/>
+			</tabelaPaginada:MetadadosTabela>
+		</tabelaPaginada:TabelaPaginadaBanco>
+	</tabelaPaginada>
+</PainelListaBanco>

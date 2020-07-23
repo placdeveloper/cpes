@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="FichaCadastralNova_PerfilTributario" pageWidth="575" pageHeight="842" columnWidth="575" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0" uuid="dd0c3349-8532-47ff-9dee-e6c9549bdbcb">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<style name="campo" hAlign="Left" vAlign="Middle" fontSize="8" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false">
+		<box leftPadding="6"/>
+	</style>
+	<field name="vigenciaRegistro" class="java.lang.String"/>
+	<field name="cobrarIR" class="java.lang.Boolean"/>
+	<field name="cobrarIOF" class="java.lang.Boolean"/>
+	<field name="cobrarCPMF" class="java.lang.Boolean"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<columnHeader>
+		<band height="16" splitType="Stretch">
+			<staticText>
+				<reportElement uuid="71b3930b-82e7-4512-b259-6474998dad90" mode="Transparent" x="0" y="0" width="575" height="15" backcolor="#CCCCCC"/>
+				<box leftPadding="6">
+					<topPen lineWidth="0.5" lineStyle="Solid"/>
+					<leftPen lineWidth="0.5" lineStyle="Solid"/>
+					<bottomPen lineWidth="0.5" lineStyle="Solid"/>
+					<rightPen lineWidth="0.5" lineStyle="Solid"/>
+				</box>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Arial" size="11" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Perfil tributário]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="31" splitType="Stretch">
+			<staticText>
+				<reportElement uuid="7a778f22-46fa-4f07-b634-6f3cd3c74f4a" x="0" y="0" width="437" height="30"/>
+				<box leftPadding="3">
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.0"/>
+					<leftPen lineWidth="0.0"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement>
+					<font size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Parâmetros Cliente]]></text>
+			</staticText>
+			<textField isBlankWhenNull="true">
+				<reportElement uuid="8460207f-4cb4-4320-b9fa-304e797a1f3a" style="campo" mode="Transparent" x="438" y="11" width="118" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{vigenciaRegistro}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement uuid="a4983b75-d6d7-4236-a2dd-c47310319e39" x="437" y="0" width="138" height="30"/>
+				<box leftPadding="3">
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.0"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.0"/>
+				</box>
+				<textElement>
+					<font size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Período]]></text>
+			</staticText>
+			<textField>
+				<reportElement uuid="daa85d75-66a5-45ac-8244-cb0d3c09e9f3" x="12" y="15" width="12" height="12"/>
+				<box leftPadding="0">
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{cobrarIR} != null && $F{cobrarIR}.booleanValue() ? "X" : ""]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="265262e4-8679-4f83-a28c-cd7b4ce82e02" x="63" y="15" width="12" height="12"/>
+				<box leftPadding="0">
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{cobrarIOF} != null && $F{cobrarIOF}.booleanValue() ? "X" : ""]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement uuid="25aba68e-d56f-4d1a-8c38-81f1e85e56a2" x="79" y="13" width="47" height="16"/>
+				<textElement verticalAlignment="Middle">
+					<font size="8"/>
+				</textElement>
+				<text><![CDATA[IOF]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="9c0f331b-e0f0-4e59-8256-9e0ac3b7ed0e" x="28" y="13" width="56" height="16"/>
+				<textElement verticalAlignment="Middle">
+					<font size="8"/>
+				</textElement>
+				<text><![CDATA[IRF]]></text>
+			</staticText>
+		</band>
+	</detail>
+</jasperReport>

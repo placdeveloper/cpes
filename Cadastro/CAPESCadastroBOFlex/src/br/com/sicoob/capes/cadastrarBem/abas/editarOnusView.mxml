@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<bancoobValidaveis:ModuloValidavel xmlns:mx="http://www.adobe.com/2006/mxml"
+			xmlns:bancoobInput="br.com.bancoob.componentes.input.*"
+			xmlns:bancoob="br.com.bancoob.componentes.*"
+			xmlns:procurarPessoa="br.com.sicoob.capes.corporativo.componentes.procurarPessoa.*"
+			xmlns:barra="br.com.sicoob.capes.cadastrarBem.abas.*"
+			xmlns:campos="br.com.bancoob.componentes.campos.*"
+			xmlns:navegacao="br.com.bancoob.componentes.navegacao.*"
+			xmlns:aba="br.com.sicoob.capes.cadastrarBem.abas.*"
+			xmlns:bancoobValidaveis="br.com.bancoob.componentes.containers.validaveis.*"
+	 		width="550" height="170" layout="absolute" styleName="ModuloSemEstilo">
+
+	<bancoob:Rotulo x="10" y="7" text="Grau:"/>
+	<campos:CampoInteiroView x="133" y="2" width="150" id="grau" valorMinimo="1" valorMaximo="99" validarObrigatorio="true" tabIndex="1" maxChars="2" />
+
+	<bancoob:Rotulo x="10" y="37" text="Descrição:"/>
+	<bancoobInput:TextoArea x="133" y="32" width="407" id="descricao" toolTip="Descrição do Ônus." 
+		validarObrigatorio="true" tabIndex="2" maxChars="200" />	
+
+	<bancoob:Rotulo x="10" y="86" text="Valor do Ônus:"/>
+	<campos:CampoMoedaView  x="133" y="84" width="150" id="valor" valorMinimo="0.01" 
+		valorMaximo="9999999999999.99" validarObrigatorio="true" tabIndex="3" maxChars="16"/>
+
+	<bancoob:Rotulo x="331" y="86" text="Data Liberação:"/>
+	<bancoobInput:Data x="432" y="84" id="liberacao" tabIndex="4" dataDefault="{null}"/>
+
+	<bancoob:Rotulo x="10" y="114" text="Instituição Credora:"/>
+	<bancoobInput:Texto x="133" y="112" width="407" id="instituicaoCredora" validarObrigatorio="true" tabIndex="5" maxChars="100"/>
+	
+	<barra:barraBotoesPopUpView id="barraBotoesPopup" x="133" y="142" width="409" height="24"/>
+
+</bancoobValidaveis:ModuloValidavel>

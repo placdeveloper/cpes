@@ -1,0 +1,201 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="FichaCadastral_BemDetalhe" pageWidth="575" pageHeight="900" whenNoDataType="BlankPage" columnWidth="575" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0">
+	<style name="campo" isDefault="false" hAlign="Left" vAlign="Middle" fontSize="8" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false">
+		<box leftPadding="6"/>
+	</style>
+	<parameter name="SUB_BENS_ONUS" class="net.sf.jasperreports.engine.JasperReport"/>
+	<parameter name="SUB_BENS_REGISTROS" class="net.sf.jasperreports.engine.JasperReport"/>
+	<parameter name="SUB_BENS_POSSES" class="net.sf.jasperreports.engine.JasperReport"/>
+	<parameter name="SUB_BENS_DEPENDENCIAS" class="net.sf.jasperreports.engine.JasperReport"/>
+	<parameter name="DS_BENS" class="java.util.Collection"/>
+	<parameter name="SUB_BEM_DETALHE_IMOVEL" class="net.sf.jasperreports.engine.JasperReport"/>
+	<queryString>
+		<![CDATA[]]>
+	</queryString>
+	<field name="descricao" class="java.lang.String"/>
+	<field name="situacao.descricao" class="java.lang.String"/>
+	<field name="valorSeguro" class="java.math.BigDecimal"/>
+	<field name="dataVencimentoSeguro" class="java.util.Date"/>
+	<field name="nomeSeguradora" class="java.lang.String"/>
+	<field name="bensOnus" class="java.util.Collection"/>
+	<field name="bensRegistro" class="java.util.Collection"/>
+	<field name="bensPosse" class="java.util.Collection"/>
+	<field name="subTipo.tipoBem.descricao" class="java.lang.String"/>
+	<field name="subTipo.tipoBem.codigo" class="java.lang.Short"/>
+	<field name="valorAtualMercado" class="java.math.BigDecimal"/>
+	<field name="subTipo.descricao" class="java.lang.String"/>
+	<field name="vigenciaRegistro" class="java.lang.String"/>
+	<field name="percentual" class="java.math.BigDecimal"/>
+	<variable name="valorAtualTotal" class="java.math.BigDecimal">
+		<variableExpression><![CDATA[$F{valorAtualMercado}]]></variableExpression>
+		<initialValueExpression><![CDATA[java.math.BigDecimal.ZERO]]></initialValueExpression>
+	</variable>
+	<variable name="valorTotalParticipacao" class="java.math.BigDecimal">
+		<variableExpression><![CDATA[$F{valorAtualMercado}.multiply($F{percentual}).divide(new BigDecimal(100))]]></variableExpression>
+		<initialValueExpression><![CDATA[java.math.BigDecimal.ZERO]]></initialValueExpression>
+	</variable>
+	<group name="BEM_IMOVEL">
+		<groupFooter>
+			<band height="31" splitType="Immediate">
+				<printWhenExpression><![CDATA[new Boolean($F{subTipo.tipoBem.codigo}.shortValue() == br.com.sicoob.capes.cadastro.negocio.enums.TipoBemEnum.IMOVEL.getIdTipoBem().shortValue())]]></printWhenExpression>
+				<subreport>
+					<reportElement style="campo" x="0" y="0" width="575" height="31">
+						<printWhenExpression><![CDATA[new Boolean($F{subTipo.tipoBem.codigo}.shortValue() == br.com.sicoob.capes.cadastro.negocio.enums.TipoBemEnum.IMOVEL.getIdTipoBem().shortValue())]]></printWhenExpression>
+					</reportElement>
+					<subreportParameter name="DS">
+						<subreportParameterExpression><![CDATA[$P{REPORT_DATA_SOURCE}]]></subreportParameterExpression>
+					</subreportParameter>
+					<dataSourceExpression><![CDATA[new br.com.sicoob.capes.relatorio.negocio.relatorios.EntidadeCadastroCollectionDataSource($P{DS_BENS})]]></dataSourceExpression>
+					<subreportExpression class="net.sf.jasperreports.engine.JasperReport"><![CDATA[$P{SUB_BEM_DETALHE_IMOVEL}]]></subreportExpression>
+				</subreport>
+			</band>
+		</groupFooter>
+	</group>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<detail>
+		<band height="91" splitType="Immediate">
+			<staticText>
+				<reportElement positionType="Float" x="277" y="0" width="298" height="30"/>
+				<box leftPadding="3">
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.0"/>
+				</box>
+				<textElement>
+					<font size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[SubTipo de bem]]></text>
+			</staticText>
+			<staticText>
+				<reportElement positionType="Float" x="0" y="0" width="277" height="30"/>
+				<box leftPadding="3">
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.0"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement>
+					<font size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Tipo de bem]]></text>
+			</staticText>
+			<textField pattern="" isBlankWhenNull="true">
+				<reportElement style="campo" positionType="Float" x="277" y="10" width="278" height="20"/>
+				<textElement/>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{subTipo.descricao}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement style="campo" positionType="Float" x="0" y="10" width="277" height="20"/>
+				<textElement/>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{subTipo.tipoBem.descricao}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement stretchType="RelativeToTallestObject" x="277" y="60" width="298" height="11"/>
+				<box leftPadding="3">
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.0"/>
+					<rightPen lineWidth="0.0"/>
+				</box>
+				<textElement>
+					<font size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Descrição]]></text>
+			</staticText>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement style="campo" x="277" y="71" width="298" height="19"/>
+				<box topPadding="3" leftPadding="6" bottomPadding="3" rightPadding="3">
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.0"/>
+				</box>
+				<textElement textAlignment="Justified" verticalAlignment="Top"/>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{descricao}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="405" y="30" width="170" height="30"/>
+				<box leftPadding="3">
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.0"/>
+				</box>
+				<textElement>
+					<font size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Período]]></text>
+			</staticText>
+			<textField isBlankWhenNull="true">
+				<reportElement style="campo" mode="Transparent" x="405" y="41" width="149" height="20"/>
+				<textElement/>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{vigenciaRegistro}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement style="campo" positionType="Float" x="0" y="72" width="277" height="18"/>
+				<textElement/>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{situacao.descricao}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement positionType="Float" x="0" y="60" width="277" height="30"/>
+				<box leftPadding="3">
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.0"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement>
+					<font size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Situação]]></text>
+			</staticText>
+			<textField pattern="¤ #,##0.00" isBlankWhenNull="true">
+				<reportElement style="campo" positionType="Float" x="0" y="42" width="215" height="18"/>
+				<box leftPadding="3" rightPadding="3"/>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression class="java.math.BigDecimal"><![CDATA[$F{valorAtualMercado}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement positionType="Float" x="0" y="30" width="215" height="30"/>
+				<box leftPadding="3">
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.0"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement>
+					<font size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Valor do bem]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="215" y="30" width="190" height="30"/>
+				<box leftPadding="3">
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement>
+					<font size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Valor da participação]]></text>
+			</staticText>
+			<textField pattern="¤ #,##0.00" isBlankWhenNull="true">
+				<reportElement style="campo" positionType="Float" x="215" y="42" width="190" height="18"/>
+				<box leftPadding="3" rightPadding="3"/>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression class="java.math.BigDecimal"><![CDATA[$F{valorAtualMercado}.multiply($F{percentual}).divide(new BigDecimal(100))]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+</jasperReport>

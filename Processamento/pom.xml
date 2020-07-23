@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+
+	<artifactId>capes-modulo-processamento</artifactId>
+	<packaging>pom</packaging>
+
+	<name>CAPES - Processamento</name>
+
+	<parent>
+		<groupId>br.com.sicoob.capes</groupId>
+		<artifactId>capes</artifactId>
+		<version>2.0.8.1</version>
+		<relativePath>..</relativePath>
+	</parent>
+
+	<scm>
+		<connection>scm:svn:http://svn.sicoob.com.br/fontesbancoob/SISBR/Aplicativos/JAVA/trunk/CAPES/tags/capes-2.0.8.1/Processamento</connection>
+		<developerConnection>scm:svn:http://svn.sicoob.com.br/fontesbancoob/SISBR/Aplicativos/JAVA/trunk/CAPES/tags/capes-2.0.8.1/Processamento</developerConnection>
+		<url>http://svn.sicoob.com.br/fontesbancoob/SISBR/Aplicativos/JAVA/trunk/CAPES/tags/capes-2.0.8.1/Processamento</url>
+	</scm>
+
+	<modules>
+		<module>CAPESProcessamentoEJB</module>
+	</modules>
+	
+</project>

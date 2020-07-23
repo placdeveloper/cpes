@@ -1,0 +1,206 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="FichaCadastral_FonteRenda" pageWidth="575" pageHeight="115" whenNoDataType="BlankPage" columnWidth="575" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0" uuid="0a012304-7a91-4241-ae05-27b86e8d9dd0">
+	<property name="ireport.zoom" value="1.9487171000000019"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<style name="Linha Zebrada" isDefault="true" mode="Opaque">
+		<box leftPadding="3">
+			<topPen lineWidth="0.25"/>
+			<leftPen lineWidth="0.25"/>
+			<bottomPen lineWidth="0.25"/>
+			<rightPen lineWidth="0.25"/>
+		</box>
+		<conditionalStyle>
+			<conditionExpression><![CDATA[new Boolean(($V{REPORT_COUNT_ZEBRA}.intValue() % 2) == 0)]]></conditionExpression>
+			<style mode="Opaque" backcolor="#DDDDDE"/>
+		</conditionalStyle>
+	</style>
+	<style name="campo" hAlign="Left" vAlign="Middle" fontSize="8" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false">
+		<box leftPadding="6"/>
+	</style>
+	<style name="Linha" isDefault="true" mode="Opaque">
+		<box leftPadding="3">
+			<topPen lineWidth="0.25"/>
+			<leftPen lineWidth="0.25"/>
+			<bottomPen lineWidth="0.25"/>
+			<rightPen lineWidth="0.25"/>
+		</box>
+	</style>
+	<parameter name="TOTAL_RENDA_MENSAL" class="java.math.BigDecimal"/>
+	<queryString>
+		<![CDATA[]]>
+	</queryString>
+	<field name="tipoFonteRenda.descricao" class="java.lang.String"/>
+	<field name="descFonteRenda" class="java.lang.String"/>
+	<field name="valorReceitaBrutaMensal" class="java.math.BigDecimal"/>
+	<field name="vigenciaRegistro" class="java.lang.String"/>
+	<field name="bolRendaFixa" class="java.lang.Boolean"/>
+	<field name="idFonteRenda" class="java.lang.Long"/>
+	<field name="idUsuarioAprovacao" class="java.lang.String"/>
+	<field name="idUsuarioEnvio" class="java.lang.String"/>
+	<variable name="REPORT_COUNT_ZEBRA" class="java.lang.Integer" calculation="Count">
+		<variableExpression><![CDATA[new Integer( $V{REPORT_COUNT_ZEBRA}.intValue() + 1)]]></variableExpression>
+		<initialValueExpression><![CDATA[new Integer(1)]]></initialValueExpression>
+	</variable>
+	<variable name="total" class="java.math.BigDecimal" resetType="Column" calculation="Sum">
+		<variableExpression><![CDATA[$F{valorReceitaBrutaMensal}]]></variableExpression>
+		<initialValueExpression><![CDATA[java.math.BigDecimal.ZERO]]></initialValueExpression>
+	</variable>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band splitType="Stretch"/>
+	</title>
+	<pageHeader>
+		<band splitType="Stretch"/>
+	</pageHeader>
+	<columnHeader>
+		<band height="16" splitType="Stretch">
+			<staticText>
+				<reportElement uuid="6097ce22-3531-4945-aea1-3faf3eb697e6" mode="Transparent" x="0" y="0" width="575" height="15" backcolor="#CCCCCC"/>
+				<box leftPadding="4">
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement>
+					<font fontName="Arial" size="11" isBold="true"/>
+				</textElement>
+				<text><![CDATA[FONTES DE RENDA]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="99" splitType="Stretch">
+			<staticText>
+				<reportElement uuid="a199321b-a62f-46fc-b7bf-c6fba26e2e94" style="Linha Zebrada" x="0" y="0" width="575" height="36"/>
+				<box leftPadding="3">
+					<topPen lineWidth="0.0"/>
+					<leftPen lineWidth="0.0"/>
+					<bottomPen lineWidth="0.25"/>
+					<rightPen lineWidth="0.0"/>
+				</box>
+				<textElement>
+					<font size="8" isBold="true"/>
+					<paragraph spacingBefore="5"/>
+				</textElement>
+				<text><![CDATA[Usuários]]></text>
+			</staticText>
+			<textField isBlankWhenNull="true">
+				<reportElement uuid="46ec27a9-56ca-42b2-a0a6-42bff61d38ee" style="Linha Zebrada" x="275" y="23" width="300" height="15"/>
+				<box leftPadding="3">
+					<topPen lineWidth="0.0"/>
+					<leftPen lineWidth="0.0"/>
+					<bottomPen lineWidth="0.0"/>
+					<rightPen lineWidth="0.0"/>
+				</box>
+				<textElement verticalAlignment="Middle">
+					<font size="8" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[new String("Aprovação: "+($F{idUsuarioAprovacao} != null ? $F{idUsuarioAprovacao} : ""))]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement uuid="5ecb342a-4522-4fea-8acd-aa1a4015a14b" style="Linha Zebrada" x="0" y="23" width="274" height="15"/>
+				<box leftPadding="3">
+					<topPen lineWidth="0.0"/>
+					<leftPen lineWidth="0.0"/>
+					<bottomPen lineWidth="0.0"/>
+					<rightPen lineWidth="0.0"/>
+				</box>
+				<textElement verticalAlignment="Middle">
+					<font size="8" isBold="true"/>
+					<paragraph leftIndent="2"/>
+				</textElement>
+				<textFieldExpression><![CDATA[new String("Atualização: "+($F{idUsuarioEnvio} != null ? $F{idUsuarioEnvio} : ""))]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement uuid="289c61d4-ef4a-4884-813f-5c046e502309" style="Linha Zebrada" mode="Opaque" x="400" y="39" width="175" height="30"/>
+				<box leftPadding="3">
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.0"/>
+				</box>
+				<textElement>
+					<font size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Período]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="40b068ae-e740-411a-83f6-94bdd2dce673" style="Linha Zebrada" positionType="Float" stretchType="RelativeToTallestObject" x="0" y="69" width="575" height="29"/>
+				<box leftPadding="3">
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.0"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.0"/>
+				</box>
+				<textElement>
+					<font size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Descrição]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="c7d85fc6-e1f6-4575-8885-d59965fa7687" style="Linha Zebrada" mode="Opaque" x="0" y="39" width="217" height="30"/>
+				<box leftPadding="3">
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.0"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement>
+					<font size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Tipo de Renda]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="02955775-b127-403f-a009-7cee9091c636" style="Linha Zebrada" mode="Opaque" x="217" y="39" width="183" height="30"/>
+				<box>
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement>
+					<font size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Receita Bruta Mensal]]></text>
+			</staticText>
+			<textField isBlankWhenNull="true">
+				<reportElement uuid="7b35f3dd-afb7-49d0-b6ef-573907c3ff3e" style="campo" x="400" y="49" width="155" height="20"/>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression><![CDATA[$F{vigenciaRegistro}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement uuid="c922c9f9-fc67-4145-bac2-3353d6196668" style="campo" x="0" y="49" width="217" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{tipoFonteRenda.descricao}.toUpperCase()]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement uuid="6b59cbeb-5a13-46a4-b932-92542fd65767" style="campo" positionType="Float" x="0" y="78" width="555" height="20"/>
+				<box topPadding="3" leftPadding="6" bottomPadding="3" rightPadding="3">
+					<bottomPen lineWidth="0.0" lineStyle="Solid"/>
+				</box>
+				<textElement textAlignment="Justified" verticalAlignment="Top"/>
+				<textFieldExpression><![CDATA[$F{descFonteRenda}]]></textFieldExpression>
+			</textField>
+			<textField pattern="¤ #,##0.00" isBlankWhenNull="true">
+				<reportElement uuid="2ebba55f-a70b-4a35-a03f-0abb5083998f" style="campo" x="217" y="49" width="183" height="20"/>
+				<box leftPadding="6" rightPadding="3"/>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression><![CDATA[$F{valorReceitaBrutaMensal}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band splitType="Stretch"/>
+	</pageFooter>
+</jasperReport>

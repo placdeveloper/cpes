@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="utf-8"?>
+<validaveis:CanvasValidavel
+	   xmlns:mx="http://www.adobe.com/2006/mxml"
+	   xmlns:validaveis="br.com.bancoob.componentes.containers.validaveis.*"
+	   xmlns:geral="br.com.bancoob.componentes.*"
+	   xmlns:titulo="br.com.bancoob.componentes.titulo.*"
+	   xmlns:lista="br.com.sicoob.capes.comum.componentes.lista.*"
+	   xmlns:containers="br.com.bancoob.componentes.containers.*"
+	   width="100%" height="100%" borderStyle="none">
+	<mx:Script>
+		<![CDATA[
+			
+			private var _tituloListaSelecao:String = "DISPONÍVEIS";
+			private var _tituloListaItensSelecionados:String = "SELECIONADOS";
+			private var _labelField:String;
+			private var _labelFunction:Function;
+			
+			private var _tamanhoLista:Number = 220;
+			private var _alturaLista:Number = 184;
+			
+			[Bindable]
+			public function get tituloListaSelecionados():String {
+				return _tituloListaItensSelecionados;
+			}
+			
+			public function set tituloListaSelecionados(titulo:String):void {
+				_tituloListaItensSelecionados = titulo;
+			}
+			
+			public function set tituloListaSelecao(titulo:String):void {
+				_tituloListaSelecao = titulo;
+			}
+			
+			[Bindable]
+			public function get tituloListaSelecao():String {
+				return _tituloListaSelecao;
+			}
+			
+			[Bindable]
+			public function get labelField():String {
+				return _labelField;
+			}
+			
+			public function set labelField(labelField:String):void {
+				_labelField = labelField;
+			}
+			
+			[Bindable]
+			public function get labelFunction():Function {
+				return _labelFunction;
+			}
+			
+			public function set labelFunction(labelFunction:Function):void {
+				_labelFunction = labelFunction;
+			}
+			
+			[Bindable]
+			public function get tamanhoLista():Number {
+				return _tamanhoLista;
+			}
+			
+			public function set tamanhoLista(tamanho:Number):void {
+				_tamanhoLista = tamanho;
+			}
+			
+			[Bindable]
+			public function get alturaLista():Number {
+				return _alturaLista;
+			}
+			
+			public function set alturaLista(altura:Number):void {
+				_alturaLista = altura;
+			}
+		]]>
+	</mx:Script>
+	
+	<validaveis:HBoxValidavel width="100%" height="100%" horizontalAlign="center">
+		
+		<containers:VBoxBancoob>
+			<titulo:SubtituloView texto="{tituloListaSelecao}" />
+			<lista:Lista id="listaItensDisponiveis" labelField="{labelField}" height="{alturaLista}" width="{tamanhoLista}" labelFunction="{labelFunction}" />
+		</containers:VBoxBancoob>
+		
+		<containers:VBoxBancoob verticalAlign="middle" height="169">
+			<validaveis:VBoxValidavel width="36" height="118" verticalAlign="middle">
+				<geral:Botao id="botaoAdicionarTodos" label="&gt;&gt;" paddingLeft="0" width="35" enabled="false" height="20" />
+				<geral:Botao id="botaoAdicionar" label="&gt;" paddingLeft="0" width="35" enabled="false" height="20" />
+				<geral:Botao id="botaoRemover" label="&lt;" paddingLeft="0" width="35" enabled="false" />
+				<geral:Botao id="botaoRemoverTodos" label="&lt;&lt;" paddingLeft="0" width="35" enabled="false" />		
+			</validaveis:VBoxValidavel>
+		</containers:VBoxBancoob>
+		
+		<containers:VBoxBancoob>
+			<titulo:SubtituloView texto="{tituloListaSelecionados}" />
+			<lista:Lista id="listaItensSelecionados" labelField="{labelField}" height="{alturaLista}" width="{tamanhoLista}" labelFunction="{labelFunction}" />
+		</containers:VBoxBancoob>
+		
+	</validaveis:HBoxValidavel>
+	
+</validaveis:CanvasValidavel>

@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FormularioCadastroView 
+	xmlns="br.com.bancoob.componentes.cadastro.*" 
+	xmlns:mx="http://www.adobe.com/2006/mxml"
+    xmlns:campo="br.com.bancoob.componentes.campos.*"
+	xmlns:componente="br.com.bancoob.componentes.*"
+   	xmlns:input="br.com.bancoob.componentes.input.*"
+	xmlns:servico="br.com.bancoob.util.servico.*"
+	xmlns:titulo="br.com.bancoob.componentes.titulo.*" 
+	xmlns:validavel="br.com.bancoob.componentes.containers.validaveis.*"
+	layout="vertical"
+	width="1000"
+	height="415">
+
+	<mx:Script>
+		<![CDATA[
+			import br.com.bancoob.componentes.input.Mascara;
+			import br.com.bancoob.componentes.campos.CampoNumerico;
+			import br.com.bancoob.componentes.tabelapaginada.TabelaPaginadaUtils;
+			import br.com.sicoob.capes.comum.util.FormatadorUtil;
+		]]>
+	</mx:Script>
+	
+	<validavel:CanvasValidavel width="100%" height="90%">
+		<titulo:SubtituloView texto="Empreendimento " left="10" top="10" />
+		
+		<componente:Rotulo text="Código *:" textAlign="left" top="46" left="10"  width="138" />
+		<campo:CampoInteiroView id="codigo" validarObrigatorio="true" valorMinimo="1" top="44" x="150" width="80" maxChars="10" 
+			validarTipo="{CampoNumerico.INT_POSITIVO}" /> 
+		
+		<componente:Rotulo text="Nome *:" textAlign="left" top="72" left="10"  width="138"/>
+		<input:Texto id="descricao" validarObrigatorio="true" top="70" x="150" width="300" maxChars="120" />
+		
+		<componente:Rotulo text="Finalidade *:" textAlign="left" top="98" left="10"  width="138"/>
+		<input:Combo id="finalidade" validarObrigatorio="true" top="96" x="150" width="500" 
+					 labelField="descricao" identificadorItem="codigo" inserirItemOpcional="true"/>
+		
+		<componente:Rotulo text="Área / Qtde *:" textAlign="left" top="124" left="10"  width="138"/>
+		<input:Combo id="unidadeArea" validarObrigatorio="true" top="123" x="150" width="200"
+			labelField="descricao" identificadorItem="codigo" inserirItemOpcional="true"/>
+		
+		<componente:Rotulo text="Previsão de Produção *:" textAlign="left" top="150" left="10"  width="138"/>
+		<input:Combo id="unidadePrevisao" validarObrigatorio="true" top="148" x="150" width="200"
+			inserirItemOpcional="true" labelField="descricao" identificadorItem="codigo" />
+		
+		<componente:Rotulo text="Código Bacen *:" id="labelCodigoBacen" textAlign="left" top="176" left="10"  width="138"/>
+		<input:Texto id="codigoBacen" validarObrigatorio="true" top="174" x="150" width="120" maxChars="14"/>
+		
+		<componente:Rotulo text="Exige Imóvel *:" textAlign="left" top="202" left="10"  width="138"/>
+		<input:RadioGrupoBancoob id="grupoRadioImovel" />
+		<input:Radio x="150" top="200" id="imovelSim" label="Sim" groupName="grupoRadioImovel" />
+		<input:Radio x="220" top="200" id="imovelNao" label="Não" groupName="grupoRadioImovel" />
+		
+		<componente:Rotulo text="Exige Área *:" textAlign="left" top="228" left="10"  width="138"/>
+		<input:RadioGrupoBancoob id="grupoRadioArea" />
+		<input:Radio x="150" top="226" id="areaSim" label="Sim" groupName="grupoRadioArea" />
+		<input:Radio x="220" top="226" id="areaNao" label="Não" groupName="grupoRadioArea" />
+		
+		<componente:Rotulo text="Ativo *:" textAlign="left" top="256" left="10"  width="138"/>
+		<input:Check id="ativo" top="254" x="150"  />
+		
+		
+	</validavel:CanvasValidavel>
+	<BarraBotoesFormularioCadastroView id="barraBotoes" width="100%"/>
+	<servicoInclusao>
+		<servico:ServicoJava id="incluirEmpreendimento"
+			source="br.com.sicoob.capes.cadastro.fachada.EmpreendimentoFachada"
+			bloquearOperacao="true"
+			mensagemEspera="Salvando dados..." />
+	</servicoInclusao>
+
+	<servicoEdicao>
+		<servico:ServicoJava id="alterarEmpreendimento"
+			source="br.com.sicoob.capes.cadastro.fachada.EmpreendimentoFachada"
+			bloquearOperacao="true"
+			mensagemEspera="Salvando dados..." />
+	</servicoEdicao>
+</FormularioCadastroView>

@@ -1,0 +1,638 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="FichaCadastral_CompletaPF" pageWidth="842" pageHeight="595" orientation="Landscape" columnWidth="842" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0">
+	<style name="label" isDefault="false" fontSize="8" isItalic="false" isUnderline="false" isStrikeThrough="false">
+		<pen lineWidth="0.0"/>
+		<box>
+			<topPen lineWidth="0.5" lineStyle="Solid"/>
+			<leftPen lineWidth="0.5" lineStyle="Solid"/>
+			<bottomPen lineWidth="0.5" lineStyle="Solid"/>
+			<rightPen lineWidth="0.5" lineStyle="Solid"/>
+		</box>
+	</style>
+	<group name="FichaCadastralCompleta">
+		<groupExpression><![CDATA[$V{PAGE_NUMBER}]]></groupExpression>
+		<groupHeader>
+			<band height="541">
+				<staticText>
+					<reportElement x="0" y="0" width="427" height="30"/>
+					<box>
+						<topPen lineWidth="0.5" lineStyle="Solid"/>
+						<leftPen lineWidth="0.5" lineStyle="Solid"/>
+						<bottomPen lineWidth="0.5" lineStyle="Solid"/>
+						<rightPen lineWidth="0.5" lineStyle="Solid"/>
+					</box>
+					<textElement verticalAlignment="Top">
+						<font size="10" isBold="true"/>
+					</textElement>
+					<text><![CDATA[ Razão Social da Cooperativa/PA]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="427" y="0" width="206" height="30"/>
+					<box>
+						<topPen lineWidth="0.5" lineStyle="Solid"/>
+						<leftPen lineWidth="0.5" lineStyle="Solid"/>
+						<bottomPen lineWidth="0.5" lineStyle="Solid"/>
+						<rightPen lineWidth="0.5" lineStyle="Solid"/>
+					</box>
+					<textElement verticalAlignment="Top">
+						<font size="10" isBold="true"/>
+					</textElement>
+					<text><![CDATA[ CNPJ]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="633" y="0" width="209" height="30"/>
+					<box>
+						<topPen lineWidth="0.5" lineStyle="Solid"/>
+						<leftPen lineWidth="0.5" lineStyle="Solid"/>
+						<bottomPen lineWidth="0.5" lineStyle="Solid"/>
+						<rightPen lineWidth="0.5" lineStyle="Solid"/>
+					</box>
+					<textElement verticalAlignment="Top">
+						<font size="10" isBold="true"/>
+					</textElement>
+					<text><![CDATA[ Ultima Renovação]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="0" y="30" width="842" height="15"/>
+					<box>
+						<topPen lineWidth="0.5" lineStyle="Solid"/>
+						<leftPen lineWidth="0.5" lineStyle="Solid"/>
+						<bottomPen lineWidth="0.5" lineStyle="Solid"/>
+						<rightPen lineWidth="0.5" lineStyle="Solid"/>
+					</box>
+					<textElement>
+						<font isBold="true"/>
+					</textElement>
+					<text><![CDATA[ DADOS CADASTRAIS]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="0" y="45" width="15" height="100"/>
+					<box>
+						<topPen lineWidth="0.5" lineStyle="Solid"/>
+						<leftPen lineWidth="0.5" lineStyle="Solid"/>
+						<bottomPen lineWidth="0.5" lineStyle="Solid"/>
+						<rightPen lineWidth="0.5" lineStyle="Solid"/>
+					</box>
+					<textElement textAlignment="Center" verticalAlignment="Middle" rotation="Left">
+						<font isBold="true" isStrikeThrough="false"/>
+					</textElement>
+					<text><![CDATA[ Dados Pessoais]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="0" y="371" width="15" height="166"/>
+					<box>
+						<topPen lineWidth="0.5" lineStyle="Solid"/>
+						<leftPen lineWidth="0.5" lineStyle="Solid"/>
+						<bottomPen lineWidth="0.5" lineStyle="Solid"/>
+						<rightPen lineWidth="0.5" lineStyle="Solid"/>
+					</box>
+					<textElement textAlignment="Center" rotation="Left">
+						<font isBold="true"/>
+					</textElement>
+					<text><![CDATA[ Bens]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="0" y="201" width="15" height="49"/>
+					<box>
+						<topPen lineWidth="0.5" lineStyle="Solid"/>
+						<leftPen lineWidth="0.5" lineStyle="Solid"/>
+						<bottomPen lineWidth="0.5" lineStyle="Solid"/>
+						<rightPen lineWidth="0.5" lineStyle="Solid"/>
+					</box>
+					<textElement textAlignment="Center" rotation="Left">
+						<font isBold="true"/>
+					</textElement>
+					<text><![CDATA[ Relação]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="0" y="145" width="15" height="56"/>
+					<box>
+						<topPen lineWidth="0.5" lineStyle="Solid"/>
+						<leftPen lineWidth="0.5" lineStyle="Solid"/>
+						<bottomPen lineWidth="0.5" lineStyle="Solid"/>
+						<rightPen lineWidth="0.5" lineStyle="Solid"/>
+					</box>
+					<textElement textAlignment="Center" verticalAlignment="Middle" rotation="Left">
+						<font isBold="true"/>
+					</textElement>
+					<text><![CDATA[ Contatos]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="0" y="317" width="15" height="54"/>
+					<box>
+						<topPen lineWidth="0.5" lineStyle="Solid"/>
+						<leftPen lineWidth="0.5" lineStyle="Solid"/>
+						<bottomPen lineWidth="0.5" lineStyle="Solid"/>
+						<rightPen lineWidth="0.5" lineStyle="Solid"/>
+					</box>
+					<textElement textAlignment="Center" rotation="Left">
+						<font isBold="true"/>
+					</textElement>
+					<text><![CDATA[ Renda]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="0" y="250" width="15" height="67"/>
+					<box>
+						<topPen lineWidth="0.5" lineStyle="Solid"/>
+						<leftPen lineWidth="0.5" lineStyle="Solid"/>
+						<bottomPen lineWidth="0.5" lineStyle="Solid"/>
+						<rightPen lineWidth="0.5" lineStyle="Solid"/>
+					</box>
+					<textElement textAlignment="Center" rotation="Left">
+						<font isBold="true"/>
+					</textElement>
+					<text><![CDATA[ Referências]]></text>
+				</staticText>
+				<break>
+					<reportElement x="0" y="539" width="842" height="1"/>
+				</break>
+				<staticText>
+					<reportElement style="label" x="15" y="145" width="101" height="28"/>
+					<textElement/>
+					<text><![CDATA[ Tipo de Endereço]]></text>
+				</staticText>
+				<staticText>
+					<reportElement style="label" x="15" y="173" width="317" height="28"/>
+					<textElement/>
+					<text><![CDATA[ Telefone(s)]]></text>
+				</staticText>
+				<staticText>
+					<reportElement style="label" x="116" y="145" width="67" height="28"/>
+					<textElement/>
+					<text><![CDATA[ CEP]]></text>
+				</staticText>
+				<staticText>
+					<reportElement style="label" x="183" y="145" width="149" height="28"/>
+					<textElement/>
+					<text><![CDATA[ Endereço]]></text>
+				</staticText>
+				<staticText>
+					<reportElement style="label" x="332" y="145" width="125" height="28"/>
+					<textElement/>
+					<text><![CDATA[ Bairro]]></text>
+				</staticText>
+				<staticText>
+					<reportElement style="label" x="457" y="145" width="106" height="28"/>
+					<textElement/>
+					<text><![CDATA[ Complemento]]></text>
+				</staticText>
+				<staticText>
+					<reportElement style="label" x="563" y="145" width="91" height="28"/>
+					<textElement/>
+					<text><![CDATA[ Município]]></text>
+				</staticText>
+				<staticText>
+					<reportElement style="label" x="725" y="145" width="38" height="28"/>
+					<textElement/>
+					<text><![CDATA[ UF]]></text>
+				</staticText>
+				<staticText>
+					<reportElement style="label" x="654" y="145" width="71" height="28"/>
+					<textElement/>
+					<text><![CDATA[ Número]]></text>
+				</staticText>
+				<staticText>
+					<reportElement style="label" x="457" y="173" width="247" height="28"/>
+					<textElement/>
+					<text><![CDATA[ Email(s)]]></text>
+				</staticText>
+				<staticText>
+					<reportElement style="label" x="298" y="201" width="143" height="49"/>
+					<textElement/>
+					<text><![CDATA[ Tipo do Relacionamento]]></text>
+				</staticText>
+				<staticText>
+					<reportElement style="label" x="441" y="201" width="150" height="49"/>
+					<textElement/>
+					<text><![CDATA[ Vigência do Mandato]]></text>
+				</staticText>
+				<staticText>
+					<reportElement style="label" x="149" y="201" width="149" height="49"/>
+					<textElement/>
+					<text><![CDATA[ Nome]]></text>
+				</staticText>
+				<staticText>
+					<reportElement style="label" x="15" y="201" width="134" height="49"/>
+					<textElement/>
+					<text><![CDATA[ CPF/CNPJ]]></text>
+				</staticText>
+				<staticText>
+					<reportElement style="label" x="15" y="250" width="180" height="33"/>
+					<textElement/>
+					<text><![CDATA[ Tipo de Referência]]></text>
+				</staticText>
+				<staticText>
+					<reportElement style="label" x="195" y="250" width="232" height="33"/>
+					<textElement/>
+					<text><![CDATA[ Nome]]></text>
+				</staticText>
+				<staticText>
+					<reportElement style="label" x="427" y="250" width="277" height="33"/>
+					<textElement/>
+					<text><![CDATA[ Telefone(s)]]></text>
+				</staticText>
+				<staticText>
+					<reportElement style="label" x="427" y="283" width="277" height="34"/>
+					<textElement/>
+					<text><![CDATA[ Telefone(s)]]></text>
+				</staticText>
+				<staticText>
+					<reportElement style="label" x="15" y="283" width="180" height="34"/>
+					<textElement/>
+					<text><![CDATA[ Tipo de Referência]]></text>
+				</staticText>
+				<staticText>
+					<reportElement style="label" x="195" y="283" width="232" height="34"/>
+					<textElement/>
+					<text><![CDATA[ Nome]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="15" y="353" width="827" height="18"/>
+					<box>
+						<topPen lineWidth="0.5" lineStyle="Solid"/>
+						<leftPen lineWidth="0.5" lineStyle="Solid"/>
+						<bottomPen lineWidth="0.5" lineStyle="Solid"/>
+						<rightPen lineWidth="0.5" lineStyle="Solid"/>
+					</box>
+					<textElement verticalAlignment="Middle">
+						<font isBold="true"/>
+					</textElement>
+					<text><![CDATA[ Renda Bruta Total Mensal]]></text>
+				</staticText>
+				<staticText>
+					<reportElement style="label" x="15" y="317" width="180" height="36"/>
+					<textElement/>
+					<text><![CDATA[ Tipo de Renda]]></text>
+				</staticText>
+				<staticText>
+					<reportElement style="label" x="195" y="317" width="232" height="36"/>
+					<textElement/>
+					<text><![CDATA[ Descrição]]></text>
+				</staticText>
+				<staticText>
+					<reportElement style="label" x="427" y="317" width="277" height="36"/>
+					<textElement/>
+					<text><![CDATA[Renda Bruta Mensal]]></text>
+				</staticText>
+				<staticText>
+					<reportElement style="label" x="15" y="471" width="100" height="33"/>
+					<textElement/>
+					<text><![CDATA[ Tipo do Bem]]></text>
+				</staticText>
+				<staticText>
+					<reportElement style="label" x="15" y="438" width="100" height="33"/>
+					<textElement/>
+					<text><![CDATA[ Matrícula]]></text>
+				</staticText>
+				<staticText>
+					<reportElement style="label" x="15" y="405" width="100" height="33"/>
+					<textElement/>
+					<text><![CDATA[ Área Total do Imóvel]]></text>
+				</staticText>
+				<staticText>
+					<reportElement style="label" x="15" y="372" width="100" height="33"/>
+					<textElement/>
+					<text><![CDATA[ Tipo do Bem]]></text>
+				</staticText>
+				<staticText>
+					<reportElement style="label" x="15" y="504" width="350" height="33"/>
+					<textElement>
+						<font isBold="true"/>
+					</textElement>
+					<text><![CDATA[ Valor dos Bens]]></text>
+				</staticText>
+				<staticText>
+					<reportElement style="label" x="365" y="504" width="477" height="33"/>
+					<textElement>
+						<font isBold="true"/>
+					</textElement>
+					<text><![CDATA[ Valor Total na Participação nos Bens]]></text>
+				</staticText>
+				<staticText>
+					<reportElement style="label" x="115" y="372" width="136" height="33"/>
+					<textElement/>
+					<text><![CDATA[ Subtipo do Bem]]></text>
+				</staticText>
+				<staticText>
+					<reportElement style="label" x="251" y="372" width="168" height="33"/>
+					<textElement/>
+					<text><![CDATA[ Descrição]]></text>
+				</staticText>
+				<staticText>
+					<reportElement style="label" x="640" y="405" width="38" height="33"/>
+					<textElement/>
+					<text><![CDATA[ UF]]></text>
+				</staticText>
+				<staticText>
+					<reportElement style="label" x="509" y="405" width="131" height="33"/>
+					<textElement/>
+					<text><![CDATA[ Município]]></text>
+				</staticText>
+				<staticText>
+					<reportElement style="label" x="563" y="372" width="141" height="33"/>
+					<textElement/>
+					<text><![CDATA[ Valor da Participação]]></text>
+				</staticText>
+				<staticText>
+					<reportElement style="label" x="419" y="372" width="144" height="33"/>
+					<textElement/>
+					<text><![CDATA[ Valor do Bem]]></text>
+				</staticText>
+				<staticText>
+					<reportElement style="label" x="211" y="405" width="156" height="33"/>
+					<textElement/>
+					<text><![CDATA[ Denominação]]></text>
+				</staticText>
+				<staticText>
+					<reportElement style="label" x="678" y="405" width="126" height="33"/>
+					<textElement/>
+					<text><![CDATA[ Comarca]]></text>
+				</staticText>
+				<staticText>
+					<reportElement style="label" x="115" y="405" width="96" height="33"/>
+					<textElement/>
+					<text><![CDATA[ Unidade de Medida]]></text>
+				</staticText>
+				<staticText>
+					<reportElement style="label" x="804" y="405" width="38" height="33"/>
+					<textElement/>
+					<text><![CDATA[ UF]]></text>
+				</staticText>
+				<staticText>
+					<reportElement style="label" x="367" y="405" width="142" height="33"/>
+					<textElement/>
+					<text><![CDATA[ Situação]]></text>
+				</staticText>
+				<staticText>
+					<reportElement style="label" x="115" y="438" width="96" height="33"/>
+					<textElement/>
+					<text><![CDATA[ Livro]]></text>
+				</staticText>
+				<staticText>
+					<reportElement style="label" x="211" y="438" width="156" height="33"/>
+					<textElement/>
+					<text><![CDATA[ Folha]]></text>
+				</staticText>
+				<staticText>
+					<reportElement style="label" x="367" y="438" width="199" height="33"/>
+					<textElement/>
+					<text><![CDATA[ Tipo de Posse]]></text>
+				</staticText>
+				<staticText>
+					<reportElement style="label" x="566" y="438" width="276" height="33"/>
+					<textElement/>
+					<text><![CDATA[ Localização]]></text>
+				</staticText>
+				<staticText>
+					<reportElement style="label" x="115" y="471" width="298" height="33"/>
+					<textElement/>
+					<text><![CDATA[ Subtipo do Bem]]></text>
+				</staticText>
+				<staticText>
+					<reportElement style="label" x="413" y="471" width="291" height="33"/>
+					<textElement/>
+					<text><![CDATA[ Descrição]]></text>
+				</staticText>
+				<staticText>
+					<reportElement style="label" x="704" y="45" width="138" height="20"/>
+					<textElement/>
+					<text><![CDATA[ Período]]></text>
+				</staticText>
+				<staticText>
+					<reportElement style="label" x="763" y="145" width="79" height="28"/>
+					<textElement/>
+					<text><![CDATA[ Período]]></text>
+				</staticText>
+				<staticText>
+					<reportElement style="label" x="704" y="173" width="138" height="28"/>
+					<textElement/>
+					<text><![CDATA[ Período]]></text>
+				</staticText>
+				<staticText>
+					<reportElement style="label" x="704" y="201" width="138" height="49"/>
+					<textElement/>
+					<text><![CDATA[ Período]]></text>
+				</staticText>
+				<staticText>
+					<reportElement style="label" x="704" y="250" width="138" height="33"/>
+					<textElement/>
+					<text><![CDATA[ Período]]></text>
+				</staticText>
+				<staticText>
+					<reportElement style="label" x="704" y="283" width="138" height="34"/>
+					<textElement/>
+					<text><![CDATA[ Período]]></text>
+				</staticText>
+				<staticText>
+					<reportElement style="label" x="704" y="317" width="138" height="36"/>
+					<textElement/>
+					<text><![CDATA[ Período]]></text>
+				</staticText>
+				<staticText>
+					<reportElement style="label" x="704" y="372" width="138" height="33"/>
+					<textElement/>
+					<text><![CDATA[ Período]]></text>
+				</staticText>
+				<staticText>
+					<reportElement style="label" x="704" y="471" width="138" height="33"/>
+					<textElement/>
+					<text><![CDATA[ Período]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="15" y="112" width="827" height="33"/>
+					<box>
+						<topPen lineWidth="0.5" lineStyle="Solid"/>
+						<leftPen lineWidth="0.5" lineStyle="Solid"/>
+						<bottomPen lineWidth="0.5" lineStyle="Solid"/>
+						<rightPen lineWidth="0.5" lineStyle="Solid"/>
+					</box>
+					<textElement>
+						<font size="8"/>
+					</textElement>
+					<text><![CDATA[ Resumo Contrato Social]]></text>
+				</staticText>
+				<staticText>
+					<reportElement style="label" x="566" y="87" width="150" height="25"/>
+					<textElement/>
+					<text><![CDATA[ Última Alteração Contrato Social]]></text>
+				</staticText>
+				<staticText>
+					<reportElement style="label" x="469" y="87" width="97" height="25"/>
+					<textElement/>
+					<text><![CDATA[ Data do Registro]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="15" y="45" width="311" height="20"/>
+					<box>
+						<topPen lineWidth="0.5" lineStyle="Solid"/>
+						<leftPen lineWidth="0.5" lineStyle="Solid"/>
+						<bottomPen lineWidth="0.5" lineStyle="Solid"/>
+						<rightPen lineWidth="0.5" lineStyle="Solid"/>
+					</box>
+					<textElement>
+						<font size="8" isBold="false"/>
+					</textElement>
+					<text><![CDATA[ Razão Social Completa]]></text>
+				</staticText>
+				<staticText>
+					<reportElement style="label" x="716" y="87" width="126" height="25"/>
+					<textElement/>
+					<text><![CDATA[ Data de Alteração]]></text>
+				</staticText>
+				<staticText>
+					<reportElement style="label" x="326" y="65" width="170" height="22"/>
+					<textElement/>
+					<text><![CDATA[ Natureza Jurídica]]></text>
+				</staticText>
+				<staticText>
+					<reportElement style="label" x="149" y="87" width="89" height="25"/>
+					<textElement/>
+					<text><![CDATA[ Porte da Empresa]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="558" y="45" width="146" height="20"/>
+					<box>
+						<topPen lineWidth="0.5" lineStyle="Solid"/>
+						<leftPen lineWidth="0.5" lineStyle="Solid"/>
+						<bottomPen lineWidth="0.5" lineStyle="Solid"/>
+						<rightPen lineWidth="0.5" lineStyle="Solid"/>
+					</box>
+					<textElement>
+						<font size="8" isBold="false"/>
+					</textElement>
+					<text><![CDATA[ CNPJ]]></text>
+				</staticText>
+				<staticText>
+					<reportElement style="label" x="165" y="65" width="161" height="22"/>
+					<box>
+						<topPen lineWidth="0.5" lineStyle="Solid"/>
+						<leftPen lineWidth="0.5" lineStyle="Solid"/>
+						<bottomPen lineWidth="0.5" lineStyle="Solid"/>
+						<rightPen lineWidth="0.5" lineStyle="Solid"/>
+					</box>
+					<textElement/>
+					<text><![CDATA[ Códico CNAE]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="15" y="87" width="134" height="25"/>
+					<box>
+						<topPen lineWidth="0.5" lineStyle="Solid"/>
+						<leftPen lineWidth="0.5" lineStyle="Solid"/>
+						<bottomPen lineWidth="0.5" lineStyle="Solid"/>
+						<rightPen lineWidth="0.5" lineStyle="Solid"/>
+					</box>
+					<textElement>
+						<font size="8"/>
+					</textElement>
+					<text><![CDATA[ Esfera Administrativa]]></text>
+				</staticText>
+				<staticText>
+					<reportElement style="label" x="633" y="65" width="209" height="22"/>
+					<textElement/>
+					<text><![CDATA[ Inscrição Estadual]]></text>
+				</staticText>
+				<staticText>
+					<reportElement style="label" x="338" y="87" width="131" height="25"/>
+					<textElement/>
+					<text><![CDATA[ Registro no Órgão Competente]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="15" y="65" width="150" height="22"/>
+					<box>
+						<topPen lineWidth="0.5" lineStyle="Solid"/>
+						<leftPen lineWidth="0.5" lineStyle="Solid"/>
+						<bottomPen lineWidth="0.5" lineStyle="Solid"/>
+						<rightPen lineWidth="0.5" lineStyle="Solid"/>
+					</box>
+					<textElement>
+						<font size="8"/>
+					</textElement>
+					<text><![CDATA[ Atividade Econômica]]></text>
+				</staticText>
+				<staticText>
+					<reportElement style="label" x="238" y="87" width="100" height="25"/>
+					<textElement/>
+					<text><![CDATA[ Capital Social]]></text>
+				</staticText>
+				<staticText>
+					<reportElement style="label" x="496" y="65" width="137" height="22"/>
+					<textElement/>
+					<text><![CDATA[ Data de Constituição]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="326" y="45" width="232" height="20"/>
+					<box>
+						<topPen lineWidth="0.5" lineStyle="Solid"/>
+						<leftPen lineWidth="0.5" lineStyle="Solid"/>
+						<bottomPen lineWidth="0.5" lineStyle="Solid"/>
+						<rightPen lineWidth="0.5" lineStyle="Solid"/>
+					</box>
+					<textElement>
+						<font size="8"/>
+					</textElement>
+					<text><![CDATA[ Nome Fantasia]]></text>
+				</staticText>
+				<staticText>
+					<reportElement style="label" x="332" y="173" width="125" height="28"/>
+					<textElement/>
+					<text><![CDATA[ Período]]></text>
+				</staticText>
+				<staticText>
+					<reportElement style="label" x="591" y="201" width="113" height="49"/>
+					<textElement/>
+					<text><![CDATA[ % de Participação]]></text>
+				</staticText>
+			</band>
+		</groupHeader>
+		<groupFooter>
+			<band height="78">
+				<staticText>
+					<reportElement x="0" y="2" width="15" height="75"/>
+					<box>
+						<topPen lineWidth="0.5" lineStyle="Solid"/>
+						<leftPen lineWidth="0.5" lineStyle="Solid"/>
+						<bottomPen lineWidth="0.5" lineStyle="Solid"/>
+						<rightPen lineWidth="0.5" lineStyle="Solid"/>
+					</box>
+					<textElement textAlignment="Center" verticalAlignment="Middle" rotation="Left">
+						<font isBold="true"/>
+					</textElement>
+					<text><![CDATA[ Produtor]]></text>
+				</staticText>
+				<staticText>
+					<reportElement style="label" x="15" y="2" width="311" height="75"/>
+					<box>
+						<topPen lineWidth="0.5" lineStyle="Solid"/>
+						<leftPen lineWidth="0.5" lineStyle="Solid"/>
+						<bottomPen lineWidth="0.5" lineStyle="Solid"/>
+						<rightPen lineWidth="0.5" lineStyle="Solid"/>
+					</box>
+					<textElement>
+						<font isBold="true"/>
+					</textElement>
+					<text><![CDATA[ Código de Inscrição]]></text>
+				</staticText>
+				<staticText>
+					<reportElement style="label" x="326" y="2" width="378" height="75"/>
+					<box>
+						<topPen lineWidth="0.5" lineStyle="Solid"/>
+						<leftPen lineWidth="0.5" lineStyle="Solid"/>
+						<bottomPen lineWidth="0.5" lineStyle="Solid"/>
+						<rightPen lineWidth="0.5" lineStyle="Solid"/>
+					</box>
+					<textElement>
+						<font isBold="true"/>
+					</textElement>
+					<text><![CDATA[ Categoria]]></text>
+				</staticText>
+				<staticText>
+					<reportElement style="label" x="704" y="2" width="138" height="75"/>
+					<textElement>
+						<font size="8" isBold="true"/>
+					</textElement>
+					<text><![CDATA[ Período]]></text>
+				</staticText>
+			</band>
+		</groupFooter>
+	</group>
+</jasperReport>

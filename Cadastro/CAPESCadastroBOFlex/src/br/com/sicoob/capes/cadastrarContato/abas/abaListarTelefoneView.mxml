@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<bancoob:Modulo xmlns:mx="http://www.adobe.com/2006/mxml"
+				xmlns:bancoob="br.com.bancoob.componentes.*"
+				xmlns:bancoobContainers="br.com.bancoob.componentes.containers.*"
+				xmlns:bancoobGrid="br.com.bancoob.componentes.grid.*"
+				xmlns:renderes="br.com.bancoob.componentes.renderes.*"
+				width="100%" height="100%" layout="absolute" styleName="ModuloSemEstilo">
+		<mx:Script>
+			<![CDATA[
+				import br.com.bancoob.componentes.tabelapaginada.TabelaPaginadaUtils;
+			]]>
+		</mx:Script>
+
+		<mx:Canvas y="2" left="0" right="0" height="27" backgroundAlpha=".4" backgroundColor="#ffffff" borderStyle="solid" borderThickness="0" cornerRadius="10" horizontalScrollPolicy="off" verticalScrollPolicy="off">
+			<mx:Label x="37" y="5" width="568" alpha=".7" fontFamily="ArialEmbedded" fontSize="11" fontWeight="bold" text="SELECIONE UM REGISTRO OU CLIQUE EM NOVO PARA CADASTRAR UM NOVO REGISTRO."/>
+			<mx:Image x="10" y="5" alpha=".5" source="br/com/bancoob/imagens/icos/paste_16.png" />
+		</mx:Canvas>
+
+		<bancoobGrid:Grid id="gridDados" x="0" top="36" bottom="10" width="100%" tabEnabled="true" tabIndex="1">
+			<bancoobGrid:columns>
+				<bancoobGrid:ColunaGrid width="100" dataField="descricaoTipoTelefone" headerText="Tipo" textAlign="left"/>
+				<bancoobGrid:ColunaGrid width="15" dataField="ddd" headerText="DDD" textAlign="left"/>
+				<bancoobGrid:ColunaGrid width="130" dataField="telefone" headerText="Número" textAlign="left"/>
+				<bancoobGrid:ColunaGrid width="30" dataField="ramal" headerText="Ramal" textAlign="left"/>
+				<bancoobGrid:ColunaGrid width="50" dataField="dataHoraInicio" headerText="Data da Última Alteração"	labelFunction="{TabelaPaginadaUtils.defaultDateLabelFunction}" textAlign="center"/>
+				<bancoobGrid:ColunaGrid width="50" dataField="idUsuarioAprovacao" headerText="Último Usuário Alteração" textAlign="left"/>
+			</bancoobGrid:columns>
+		</bancoobGrid:Grid>
+
+</bancoob:Modulo>

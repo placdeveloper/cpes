@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<bancoob:Modulo xmlns:mx="http://www.adobe.com/2006/mxml" layout="absolute" 
+	xmlns:bancoob="br.com.bancoob.componentes.*" 
+	xmlns:input="br.com.bancoob.componentes.input.*" 
+	xmlns:containers="br.com.bancoob.componentes.containers.*"
+	xmlns:bancoobGrid="br.com.bancoob.componentes.grid.*" 
+	xmlns:campos="br.com.bancoob.componentes.campos.*"
+	width="100%" minWidth="280" minHeight="180"
+	cornerRadius="5" paddingLeft="5" paddingRight="5" paddingBottom="5" paddingTop="5"
+	borderStyle="solid" borderThickness="1"	borderColor="#FFFFFF" backgroundColor="#cad4cb"
+	clipContent="true" verticalScrollPolicy="off" horizontalScrollPolicy="off">
+	
+	<bancoob:Rotulo id="labelNomeFila" fontWeight="bold" left="5" color="#5D5D5D" top="3" fontSize="14" 
+		right="5" truncateToFit="true"/>		
+	<mx:Canvas id="canvasIndicador" width="100%" height="100%" top="25" >				
+		<bancoob:Rotulo id="labelNumeroMensagens" text="" fontSize="100" horizontalCenter="0" 
+			fontWeight="bold" color="#FFFFFF" verticalCenter="-20" letterSpacing="-2" textAlign="center" />			
+		<bancoob:Rotulo text="Primeira:" fontSize="20" fontWeight="bold" color="#FFFFFF" left="2"  bottom="25"/>
+		<bancoob:Rotulo text="Última:"   fontSize="20" fontWeight="bold" color="#FFFFFF" left="2"  bottom="2"/>
+		<bancoob:Rotulo id="labelDataPrimeira"   fontSize="20" fontWeight="bold" color="#FFFFFF" right="2" bottom="25"/>			
+		<bancoob:Rotulo id="labelDataUltima"     fontSize="20" fontWeight="bold" color="#FFFFFF" right="2" bottom="2"/>
+	</mx:Canvas>			
+</bancoob:Modulo>

@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<bancoobValidaveis:ModuloValidavel xmlns="br.com.bancoob.componentes.containers.*"
+								   xmlns:mx="http://www.adobe.com/2006/mxml"
+								   xmlns:componentes="br.com.bancoob.componentes.*" 
+								   xmlns:input="br.com.bancoob.componentes.input.*" 
+								   xmlns:campos="br.com.bancoob.componentes.campos.*"
+								   xmlns:titulo="br.com.bancoob.componentes.titulo.*"
+								   xmlns:cadastro="br.com.bancoob.componentes.cadastro.*"
+								   xmlns:procurarPessoa="br.com.sicoob.capes.corporativo.componentes.procurarPessoa.*" 
+								   xmlns:bancoobValidaveis="br.com.bancoob.componentes.containers.validaveis.*"
+								   xmlns:componentesCapes="br.com.sicoob.capes.comum.componentes.input.*"
+								   width="100%" height="100%" styleName="ModuloSemEstilo">
+	
+	<titulo:SubtituloView texto="Associar bem imóvel" x="5" y="0" />
+	
+	<componentes:Rotulo text="Pessoa: " x="10" y="27" textAlign="left" />
+	<procurarPessoa:ProcurarPessoaCAPES id="componenteProcurarPessoa" x="140" y="25" habilitaCadastroPessoa="true" validarObrigatorio="true" toolTip="CPF/CNPJ da pessoa." tabIndex="1" />
+	
+	<componentes:Rotulo text="Tipo relacionamento: " x="10" y="52" textAlign="left" />
+	<input:Combo id="comboTipoRelacionamento" left="140" y="50" right="10" labelField="descricao" validarObrigatorio="true" conteudoMaiusculo="true" inserirItemOpcional="true" labelItemOpcional="SELECIONE" tabIndex="2" />
+	
+	<componentes:Rotulo text="Data início: " x="10" y="77" textAlign="left" />
+	<input:Data id="campoDataInicio" x="140" y="75" dataDefault="{null}" validarObrigatorio="true" tabIndex="3" />
+	
+	<componentes:Rotulo text="Data fim: " x="10" y="102" textAlign="left" />
+	<input:Data id="campoDataFim" x="140" y="100" dataDefault="{null}" tabIndex="4" />
+	
+	<componentes:Rotulo x="10" y="127" text="Área total: " textAlign="left" />
+	<input:Texto id="campoAreaTotal" x="140" y="125" casasDecimais="4" maxChars="12" enabled="false" />
+	
+	<componentes:Rotulo x="10" y="152" text="Área de posse: " textAlign="left" />
+	<componentesCapes:CampoNumerico id="campoAreaPosse" x="140" y="150" permitirValoreNegativos="false" validarObrigatorio="false" valorMinimo="0" valorMaximo="9999999.9999" casasDecimais="4" maxChars="12" tabIndex="5" />
+	
+	<cadastro:BarraBotoesFormularioCadastroView id="barraBotoes" bottom="0" right="10" width="100%"/>
+	
+</bancoobValidaveis:ModuloValidavel>

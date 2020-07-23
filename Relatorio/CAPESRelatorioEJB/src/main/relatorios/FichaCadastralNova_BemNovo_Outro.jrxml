@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="FichaCadastralNova_BemNovo_Outro" pageWidth="575" pageHeight="802" columnWidth="575" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0" uuid="1747eb2b-3264-4b7f-8a10-96b09bc7b313">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="SUBREPORT_DIR" class="java.lang.String" isForPrompting="false">
+		<defaultValueExpression><![CDATA["C:\\SisbrIDE-4.5\\workspace\\capes-ficha-cadastral\\capes\\Relatorio\\CAPESRelatorioEJB\\relatorios\\"]]></defaultValueExpression>
+	</parameter>
+	<parameter name="SUB_BENS_NOVO_OUTRO_DETALHE" class="net.sf.jasperreports.engine.JasperReport"/>
+	<field name="bens" class="java.util.List"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<detail>
+		<band height="55" splitType="Stretch">
+			<printWhenExpression><![CDATA[new Boolean($F{bens} != null && !$F{bens}.isEmpty())]]></printWhenExpression>
+			<subreport>
+				<reportElement uuid="76624857-f5ab-43da-968b-bbc4b6ac2628" x="0" y="0" width="575" height="55"/>
+				<dataSourceExpression><![CDATA[new br.com.sicoob.capes.relatorio.negocio.relatorios.EntidadeCadastroCollectionDataSource($F{bens})]]></dataSourceExpression>
+				<subreportExpression><![CDATA[$P{SUB_BENS_NOVO_OUTRO_DETALHE}]]></subreportExpression>
+			</subreport>
+		</band>
+	</detail>
+</jasperReport>

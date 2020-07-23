@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="utf-8"?>
+<BaseModulo 
+		xmlns="br.com.bancoob.componentes.*" 
+		xmlns:mx="http://www.adobe.com/2006/mxml" 
+		xmlns:canvasvalidavel="br.com.bancoob.componentes.containers.validaveis.*" 
+		xmlns:titulo="br.com.bancoob.componentes.titulo.*"
+		xmlns:input="br.com.bancoob.componentes.input.*"
+		xmlns:containers="br.com.bancoob.componentes.containers.*"
+		xmlns:componentes="br.com.bancoob.componentes.*"
+		width="700" height="252"  layout="absolute">	
+			
+		<Rotulo x="10" y="12" text="Tipo de Transferência:" width="139"/>
+		<input:Combo x="140" y="10" width="269" id="tipoTransferencia" />
+					
+		<mx:Canvas id="containerGerente" visible="true" height="150" width="680" verticalScrollPolicy="off" horizontalScrollPolicy="off" x="10" y="35">
+			<mx:Image source="br/com/bancoob/imagens/icos/funnel.png" alpha=".5" x="1" y="3"/>				
+			<titulo:SubtituloView texto="Gerente" width="100%"/>		
+				
+			<Rotulo y="32" text="Unidade Institucional de Origem:" width="195"/>
+			<input:Combo x="193" y="30" width="477" id="unidInstOrigem_gerente" inserirItemOpcional="true" identificadorItem="idUnidadeInst"/>
+
+			<Rotulo y="62" text="Gerente de Origem:" width="195"/>
+			<input:Combo x="193" y="60" width="477" id="gerenteOrigem_gerente" identificadorItem="idFuncionario" inserirItemOpcional="true"/>
+
+			<Rotulo y="92" text="Unidade Institucional de Destino:" width="195"/>
+			<input:Combo x="193" y="90" width="477" id="unidInstDestino_gerente" inserirItemOpcional="true" identificadorItem="idUnidadeInst"/>
+
+			<Rotulo y="122" text="Gerente de Destino:" width="195"/>
+			<input:Combo x="193" y="120" width="477" id="gerenteDestino_gerente" identificadorItem="idFuncionario" inserirItemOpcional="true"/>
+		</mx:Canvas>
+
+		<mx:Canvas id="containerUnidadeInstitucional" visible="false" height="120" width="680" verticalScrollPolicy="off" horizontalScrollPolicy="off" x="10" y="35">
+			<mx:Image source="br/com/bancoob/imagens/icos/funnel.png" alpha=".5" x="1" y="3"/>				
+			<titulo:SubtituloView texto="Unidade Institucional" width="100%"/>		
+				
+			<Rotulo y="32" text="Unidade Institucional de Origem:" width="195"/>
+			<input:Combo x="193" y="30" width="477" id="unidInstOrigem_unidInst" inserirItemOpcional="true" identificadorItem="idUnidadeInst"/>
+
+			<Rotulo y="62" text="Unidade Institucional de Destino:" width="195"/>
+			<input:Combo x="193" y="60" width="477" id="unidInstDestino_unidInst" inserirItemOpcional="true" identificadorItem="idUnidadeInst"/>
+
+			<Rotulo y="92" text="Gerente de Destino:" width="195"/>
+			<input:Combo x="193" y="90" width="477" id="gerenteDestino_unidInst" identificadorItem="idFuncionario" inserirItemOpcional="true"/>
+		</mx:Canvas>
+
+		<mx:Canvas id="containerGrupoEconomico" visible="false" height="95" width="680" verticalScrollPolicy="off" horizontalScrollPolicy="off" x="10" y="35">
+			<mx:Image source="br/com/bancoob/imagens/icos/funnel.png" alpha=".5" x="1" y="3"/>				
+			<titulo:SubtituloView texto="Grupo Econômico" width="100%"/>		
+				
+			<Rotulo y="32" text="Grupo Econômico de Origem:" width="170"/>
+			<input:Combo x="178" y="30" width="492" id="grupoEcoOrigem_grupoEco" labelField="descricao" identificadorItem="idGrupoEconomico" inserirItemOpcional="true"/>
+
+			<Rotulo y="62" text="Grupo Econômico de Destino:" width="170"/>
+			<input:Combo x="178" y="60" width="492" id="grupoEcoDestino_grupoEco" labelField="descricao" identificadorItem="idGrupoEconomico" inserirItemOpcional="true"/>
+		</mx:Canvas>
+
+		<mx:Canvas id="containerNucleo" visible="false" height="95" width="680" verticalScrollPolicy="off" horizontalScrollPolicy="off" x="10" y="35">
+			<mx:Image source="br/com/bancoob/imagens/icos/funnel.png" alpha=".5" x="1" y="3"/>				
+			<titulo:SubtituloView texto="Núcleo" width="100%"/>		
+				
+			<Rotulo y="32" text="Núcleo de Origem:" width="114"/>
+			<input:Combo x="112" y="30" width="558" id="nucleoOrigem_nucleo" inserirItemOpcional="true" labelField="descricao" identificadorItem="idNucleo"/>
+
+			<Rotulo y="62" text="Núcleo de Destino:" width="114"/>
+			<input:Combo x="112" y="60" width="558" id="nucleoDestino_nucleo" inserirItemOpcional="true" labelField="descricao" identificadorItem="idNucleo"/>
+		</mx:Canvas>
+	
+		<mx:Canvas id="containerCpfCnpj" visible="false" width="680" height="200" verticalScrollPolicy="off" horizontalScrollPolicy="off" x="10" y="35">
+			<mx:Image source="br/com/bancoob/imagens/icos/funnel.png" alpha=".5" x="1" y="3"/>				
+			<titulo:SubtituloView texto="CPF/CNPJ" width="100%"/>		
+			
+			<Rotulo y="32" text="CPF/CNPJ:" width="195"/>			
+			<input:TextoArea x="193" y="30" width="477" id="txtAreaCpfCnpj" maxChars="15000" validarObrigatorio="true" restrict=",0-9" toolTip="Separe o número dos CPFs ou CNPJs por vírgula."/>
+			
+			<Rotulo y="82" text="Unidade Institucional de Destino:" width="195"/>
+			<input:Combo x="193" y="80" width="477" id="unidInstDestino_cpfCnpj" validarObrigatorio="true" inserirItemOpcional="true" identificadorItem="idUnidadeInst"/>
+			
+			<Rotulo y="112" text="Gerente de Destino:" width="195"/>
+			<input:Combo x="193" y="110" width="477" id="gerenteDestino_cpfCnpj" validarObrigatorio="true" inserirItemOpcional="true" identificadorItem="idFuncionario"/>
+			
+			<Rotulo y="142" text="Núcleo de Destino:" width="195"/>
+			<input:Combo x="193" y="140" width="477" id="nucleoDestino_cpfCnpj" inserirItemOpcional="true" labelField="descricao" identificadorItem="idNucleo"/>
+		</mx:Canvas>
+		
+		<containers:HBoxBancoob height="28" width="100%" y="218" horizontalAlign="center">			
+			<Botao id="btOk" label="Executar Transferência" tabIndex="9"/>
+			<Botao id="btStatus" label="Status das transferências" tabIndex="10" />
+		</containers:HBoxBancoob>
+</BaseModulo>

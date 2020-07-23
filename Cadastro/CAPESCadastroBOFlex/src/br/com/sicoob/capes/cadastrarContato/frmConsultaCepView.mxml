@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<CanvasBancoob xmlns="br.com.bancoob.componentes.containers.*"
+			   xmlns:mx="http://www.adobe.com/2006/mxml"
+			   xmlns:bancoob="br.com.bancoob.componentes.*"
+			   xmlns:bancoobGrid="br.com.bancoob.componentes.grid.*"
+			   xmlns:bancoobInput="br.com.bancoob.componentes.input.*"
+			   xmlns:capesComboUf="br.com.sicoob.capes.comum.componentes.input.*"
+			   xmlns:tabelapaginada="br.com.bancoob.componentes.tabelapaginada.*" 
+			   width="854" height="500">
+	
+	<mx:Script>
+		<![CDATA[
+			import br.com.bancoob.componentes.tabelapaginada.TabelaPaginadaUtils;
+		]]>
+	</mx:Script>
+	
+	<bancoob:Rotulo x="0" y="10" text="CEP"/>
+	<bancoobInput:Mascara x="0" y="26" width="90" id="numCepLocalidade" maxChars="8" textAlign="right" restrict="0-9" inputMask="#####-###" />
+	
+	<bancoob:Rotulo x="100" y="10" text="UF"/>
+	<capesComboUf:ComboUf x="100" y="26" id="cboUF" width="70" inserirItemOpcional="true"/>
+	
+	<bancoob:Rotulo x="180" y="10" text="Localidade" />
+	<bancoobInput:Texto x="180" y="26" id="municipio" maxChars="30"/>
+	
+	<bancoob:Rotulo x="347" y="10" text="Bairro"/>
+	<bancoobInput:Texto x="347" y="26" id="bairro" maxChars="30"/>
+	
+	<bancoob:Rotulo x="515" y="10" text="Logradouro"/>
+	<bancoobInput:Texto x="515" y="26" id="logradouro" maxChars="40"/>
+	
+	<bancoob:Botao x="683" y="26" label="Pesquisar" id="btnPesquisar"/>
+	<bancoob:Botao x="773" y="26" label="Limpar" id="btnLimpar"/>
+	
+	<bancoobGrid:Grid id="griConsulta" width="100%" height="100%" y="56">
+		<bancoobGrid:columns>
+			<bancoobGrid:ColunaGrid headerText="CEP" width="90" dataField="numCep" textAlign="center" />
+			<bancoobGrid:ColunaGrid headerText="UF" id="Descricao" dataField="siglaUF" width="60" textAlign="center" labelFunction="{TabelaPaginadaUtils.defaultLabelFunction}" />
+			<bancoobGrid:ColunaGrid headerText="Localidade" id="Municipio" dataField="nomeLocalidade" width="200" textAlign="left" labelFunction="{TabelaPaginadaUtils.defaultLabelFunction}" />
+			<bancoobGrid:ColunaGrid headerText="Bairro" id="Bairro" dataField="nomeBairro" width="200" textAlign="left" labelFunction="{TabelaPaginadaUtils.defaultLabelFunction}"  />
+			<bancoobGrid:ColunaGrid headerText="Logradouro" id="Logradouro" dataField="nomeLogradouro" width="200" textAlign="left" labelFunction="{TabelaPaginadaUtils.defaultLabelFunction}" />
+		</bancoobGrid:columns>
+	</bancoobGrid:Grid>
+	
+</CanvasBancoob>

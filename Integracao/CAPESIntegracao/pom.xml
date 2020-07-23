@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+
+	<artifactId>capes-integracao</artifactId>
+	<name>CAPES - Integracao - CAPESIntegracao</name>
+
+	<parent>
+		<groupId>br.com.sicoob.capes</groupId>
+		<artifactId>capes-modulo-integracao</artifactId>
+		<version>2.0.8.1</version>
+		<relativePath>..</relativePath>
+	</parent>
+
+	<scm>
+		<connection>scm:svn:http://svn.sicoob.com.br/fontesbancoob/SISBR/Aplicativos/JAVA/trunk/CAPES/tags/capes-2.0.8.1/Integracao/CAPESIntegracao</connection>
+		<developerConnection>scm:svn:http://svn.sicoob.com.br/fontesbancoob/SISBR/Aplicativos/JAVA/trunk/CAPES/tags/capes-2.0.8.1/Integracao/CAPESIntegracao</developerConnection>
+		<url>http://svn.sicoob.com.br/fontesbancoob/SISBR/Aplicativos/JAVA/trunk/CAPES/tags/capes-2.0.8.1/Integracao/CAPESIntegracao</url>
+	</scm>
+
+	<dependencies>
+		<!-- CAPES -->
+		<dependency>
+			<groupId>${project.groupId}</groupId>
+			<artifactId>capes-comum-lib</artifactId>
+			<version>${project.version}</version>
+		</dependency>
+		<!-- CAPES -->
+
+		<!-- INTERNAS -->
+		<dependency>
+			<groupId>br.com.sicoob.framework</groupId>
+			<artifactId>sicoob-java</artifactId>
+		</dependency>
+		<!-- INTERNAS -->
+		
+		<!-- EXTERNAS -->
+		<dependency>
+			<groupId>log4j</groupId>
+			<artifactId>log4j</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>com.google.code.gson</groupId>
+			<artifactId>gson</artifactId>
+			<version>1.7.1</version>
+			<scope>provided</scope>
+		</dependency>
+		<!-- EXTERNAS -->
+		
+	</dependencies>
+</project>

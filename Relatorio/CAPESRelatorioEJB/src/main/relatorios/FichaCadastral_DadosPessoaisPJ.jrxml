@@ -1,0 +1,455 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="FichaCadastral_DadosPessoaisPJ" pageWidth="555" pageHeight="1000" whenNoDataType="AllSectionsNoDetail" columnWidth="555" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0" uuid="252b62fd-64a5-4222-bfd6-81acd1e56ee3">
+	<property name="ireport.zoom" value="2.8531167061100047"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<style name="campo" hAlign="Left" vAlign="Middle" fontSize="8" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false">
+		<box leftPadding="6"/>
+	</style>
+	<style name="Linha Zebrada" isDefault="true" mode="Opaque">
+		<box leftPadding="3">
+			<topPen lineWidth="0.25"/>
+			<leftPen lineWidth="0.25"/>
+			<bottomPen lineWidth="0.25"/>
+			<rightPen lineWidth="0.25"/>
+		</box>
+		<conditionalStyle>
+			<conditionExpression><![CDATA[new Boolean(($V{REPORT_COUNT_ZEBRA}.intValue() % 2) == 0)]]></conditionExpression>
+			<style mode="Opaque" backcolor="#DDDDDE"/>
+		</conditionalStyle>
+	</style>
+	<style name="Linha" isDefault="true" mode="Opaque">
+		<box leftPadding="3">
+			<topPen lineWidth="0.25"/>
+			<leftPen lineWidth="0.25"/>
+			<bottomPen lineWidth="0.25"/>
+			<rightPen lineWidth="0.25"/>
+		</box>
+	</style>
+	<parameter name="pessoa" class="br.com.sicoob.capes.negocio.entidades.vigente.PessoaJuridica"/>
+	<parameter name="DESCRICAO_ESFERA_ADMINISTRATIVA" class="java.lang.String"/>
+	<field name="nomePessoa" class="java.lang.String"/>
+	<field name="nomeApelido" class="java.lang.String"/>
+	<field name="pessoa.cpfCnpj" class="java.lang.String"/>
+	<field name="nomeCompleto" class="java.lang.String"/>
+	<field name="cnae.codigo" class="java.lang.String"/>
+	<field name="cnae.descricao" class="java.lang.String"/>
+	<field name="formaConstituicao.descricao" class="java.lang.String"/>
+	<field name="dataConstituicao" class="java.util.Date"/>
+	<field name="inscricaoEstadual" class="java.lang.String"/>
+	<field name="valorCapitalSocial" class="java.math.BigDecimal"/>
+	<field name="tipoEmpresa.descricao" class="java.lang.String"/>
+	<field name="numeroRegistroJuntaComercial" class="java.lang.String"/>
+	<field name="dataRegistroJuntaComercial" class="java.util.Date"/>
+	<field name="dataUltimaAlteracaoContratoSocial" class="java.util.Date"/>
+	<field name="numeroUltimaAlteracaoContratoSocial" class="java.lang.String"/>
+	<field name="numeroRegistroRepresentacao" class="java.lang.String"/>
+	<field name="contratoSocial" class="java.lang.String"/>
+	<field name="vigenciaRegistro" class="java.lang.String"/>
+	<field name="cnae" class="java.lang.Object"/>
+	<field name="idPessoaCompartilhamento" class="java.lang.Long"/>
+	<field name="dataRegistroRepresentacao" class="java.util.Date"/>
+	<field name="atividadeEconomica.descricao" class="java.lang.String"/>
+	<variable name="REPORT_COUNT_ZEBRA" class="java.lang.Integer" calculation="Count">
+		<variableExpression><![CDATA[new Integer( $V{REPORT_COUNT_ZEBRA}.intValue() + 1)]]></variableExpression>
+		<initialValueExpression><![CDATA[new Integer(1)]]></initialValueExpression>
+	</variable>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band splitType="Stretch"/>
+	</title>
+	<pageHeader>
+		<band height="15" splitType="Stretch">
+			<staticText>
+				<reportElement uuid="7f09d0da-3dac-4553-b1c6-b761374260af" mode="Opaque" x="0" y="0" width="554" height="15" backcolor="#CCCCCC"/>
+				<box leftPadding="4">
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement/>
+				<text><![CDATA[1. DADOS PESSOAIS]]></text>
+			</staticText>
+		</band>
+	</pageHeader>
+	<columnHeader>
+		<band splitType="Stretch"/>
+	</columnHeader>
+	<detail>
+		<band height="270" splitType="Stretch">
+			<staticText>
+				<reportElement uuid="cedee147-bdc6-4c5c-bf0d-7b09e27504d2" style="Linha" x="0" y="210" width="185" height="30"/>
+				<box>
+					<topPen lineWidth="0.25"/>
+					<leftPen lineWidth="0.25"/>
+					<bottomPen lineWidth="0.25"/>
+					<rightPen lineWidth="0.25"/>
+				</box>
+				<textElement>
+					<font size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Registro em Órgâo Competente]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="88d3eb94-f0fb-45c4-a851-6a0f95b74f13" style="Linha" x="297" y="120" width="123" height="30"/>
+				<box>
+					<topPen lineWidth="0.25"/>
+					<leftPen lineWidth="0.25"/>
+					<bottomPen lineWidth="0.25"/>
+					<rightPen lineWidth="0.25"/>
+				</box>
+				<textElement>
+					<font size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Data Constituição]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="5ed2de61-11bf-45bc-a089-397a51718a1e" style="Linha" x="125" y="150" width="429" height="30"/>
+				<box>
+					<topPen lineWidth="0.25"/>
+					<leftPen lineWidth="0.25"/>
+					<bottomPen lineWidth="0.25"/>
+					<rightPen lineWidth="0.25"/>
+				</box>
+				<textElement>
+					<font size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Tipo Empresa]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="b8e64480-bc43-464e-95d1-a8a2b5ccfa9d" style="Linha" x="185" y="210" width="185" height="30"/>
+				<box>
+					<topPen lineWidth="0.25"/>
+					<leftPen lineWidth="0.25"/>
+					<bottomPen lineWidth="0.25"/>
+					<rightPen lineWidth="0.25"/>
+				</box>
+				<textElement>
+					<font size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Última Alteração Contrato Social]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="6f9030fb-fc4c-42a8-932d-75692e10bab8" style="Linha" x="370" y="210" width="184" height="30"/>
+				<box>
+					<topPen lineWidth="0.25"/>
+					<leftPen lineWidth="0.25"/>
+					<bottomPen lineWidth="0.25"/>
+					<rightPen lineWidth="0.25"/>
+				</box>
+				<textElement>
+					<font size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Registro Ata Representação]]></text>
+			</staticText>
+			<textField pattern="dd/MM/yyyy" isBlankWhenNull="true">
+				<reportElement uuid="6d03d0e1-9565-4b6a-b9ea-98541a51ba79" style="campo" x="297" y="131" width="121" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{dataConstituicao}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement uuid="f8dc7bfd-6f96-487e-b4a3-eecd6cc2461c" style="campo" x="126" y="160" width="430" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{tipoEmpresa.descricao}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement uuid="5e6c86f3-836c-4bae-9ed9-6a8b23c015da" style="campo" x="185" y="220" width="136" height="20">
+					<printWhenExpression><![CDATA[new Boolean(($F{numeroUltimaAlteracaoContratoSocial} != null)
+    && ($F{numeroUltimaAlteracaoContratoSocial}.trim().length() > 0))]]></printWhenExpression>
+				</reportElement>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression><![CDATA[$F{numeroUltimaAlteracaoContratoSocial} + " em "]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement uuid="e68080af-e55a-434d-bf79-159fcb19b151" style="campo" x="0" y="220" width="136" height="20">
+					<printWhenExpression><![CDATA[new Boolean(($F{numeroRegistroJuntaComercial} != null)
+    && ($F{numeroRegistroJuntaComercial}.trim().length() > 0))]]></printWhenExpression>
+				</reportElement>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression><![CDATA[$F{numeroRegistroJuntaComercial} + " em "]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement uuid="48652731-64da-4ac7-8b91-fc2df8b091ad" style="campo" x="371" y="220" width="136" height="20">
+					<printWhenExpression><![CDATA[new Boolean(($F{numeroRegistroRepresentacao} != null)
+    && ($F{numeroRegistroRepresentacao}.trim().length() > 0))]]></printWhenExpression>
+				</reportElement>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression><![CDATA[$F{numeroRegistroRepresentacao} + " em "]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement uuid="8c7571c0-c2d1-4c1e-ac96-c62520e51038" style="Linha" x="0" y="90" width="554" height="30"/>
+				<box>
+					<topPen lineWidth="0.25"/>
+					<leftPen lineWidth="0.25"/>
+					<bottomPen lineWidth="0.25"/>
+					<rightPen lineWidth="0.25"/>
+				</box>
+				<textElement>
+					<font size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Código / Descrição CNAE]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="a92f8b4b-a11f-4fd9-9e8a-59ea0a524c17" style="Linha Zebrada" x="0" y="0" width="343" height="30"/>
+				<box>
+					<topPen lineWidth="0.25"/>
+					<leftPen lineWidth="0.25"/>
+					<bottomPen lineWidth="0.25"/>
+					<rightPen lineWidth="0.25"/>
+				</box>
+				<textElement>
+					<font size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Razão Social]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="9b42be04-4ec7-46dc-af6f-d3a0a2df3666" style="Linha" x="0" y="60" width="554" height="30"/>
+				<box>
+					<topPen lineWidth="0.25"/>
+					<leftPen lineWidth="0.25"/>
+					<bottomPen lineWidth="0.25"/>
+					<rightPen lineWidth="0.25"/>
+				</box>
+				<textElement>
+					<font size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Razão Social Completa]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="1f8b24ee-1672-4fd4-b2ee-a9941969dd68" style="Linha" x="0" y="240" width="554" height="11"/>
+				<box leftPadding="3">
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement>
+					<font size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Resumo Contrato Social / Administração / Objeto]]></text>
+			</staticText>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement uuid="26bfc6b0-a938-407f-aff2-bfc69a5a4c68" style="campo" mode="Opaque" x="0" y="251" width="554" height="19"/>
+				<box topPadding="3" leftPadding="6" bottomPadding="3" rightPadding="3">
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Justified" verticalAlignment="Top"/>
+				<textFieldExpression><![CDATA[$F{contratoSocial}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement uuid="e8ead8fe-e31c-40a6-9486-934f222c45b4" style="Linha" x="0" y="150" width="125" height="30"/>
+				<box>
+					<topPen lineWidth="0.25"/>
+					<leftPen lineWidth="0.25"/>
+					<bottomPen lineWidth="0.25"/>
+					<rightPen lineWidth="0.25"/>
+				</box>
+				<textElement>
+					<font size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Capital Social]]></text>
+			</staticText>
+			<textField isBlankWhenNull="true">
+				<reportElement uuid="c6cb1859-2d86-4261-a099-7a7cbf6ef480" style="campo" x="-1" y="10" width="344" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{nomePessoa}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement uuid="8c7e218d-bb21-48d0-bdb2-647d11d0fa28" style="campo" x="1" y="70" width="555" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{nomeCompleto}]]></textFieldExpression>
+			</textField>
+			<textField pattern="¤ #,##0.00" isBlankWhenNull="true">
+				<reportElement uuid="640a22a5-0c9d-4b86-b0dc-c8d70f476ca1" style="campo" x="0" y="160" width="125" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{idPessoaCompartilhamento} != null ? $F{valorCapitalSocial} : null]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement uuid="cd4567a3-3c86-4dde-bbfd-8b424b51330f" style="Linha" x="420" y="120" width="134" height="30"/>
+				<box>
+					<topPen lineWidth="0.25"/>
+					<leftPen lineWidth="0.25"/>
+					<bottomPen lineWidth="0.25"/>
+					<rightPen lineWidth="0.25"/>
+				</box>
+				<textElement>
+					<font size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Inscrição Estadual]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="329a1013-0e8e-4bd8-bb59-cd2b2364f4b2" style="Linha" x="0" y="120" width="297" height="30"/>
+				<box>
+					<topPen lineWidth="0.25"/>
+					<leftPen lineWidth="0.25"/>
+					<bottomPen lineWidth="0.25"/>
+					<rightPen lineWidth="0.25"/>
+				</box>
+				<textElement>
+					<font size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Natureza Jurídica]]></text>
+			</staticText>
+			<textField isBlankWhenNull="true">
+				<reportElement uuid="ca881673-6d4c-4244-abd1-39ab4544e8ed" style="campo" x="3" y="130" width="296" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{formaConstituicao.descricao}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement uuid="571f739a-f29f-4e11-af6f-62e8e3e354dc" style="campo" x="420" y="130" width="134" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{inscricaoEstadual}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement uuid="b2f3c267-30d4-4ed5-8ae4-c609f9953001" style="Linha Zebrada" x="343" y="0" width="105" height="30"/>
+				<box>
+					<topPen lineWidth="0.25"/>
+					<leftPen lineWidth="0.25"/>
+					<bottomPen lineWidth="0.25"/>
+					<rightPen lineWidth="0.25"/>
+				</box>
+				<textElement>
+					<font size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[CNPJ]]></text>
+			</staticText>
+			<textField>
+				<reportElement uuid="acde09b6-29e1-4c75-aac4-52f047506368" style="campo" x="0" y="100" width="555" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{cnae} == null? "" : $F{cnae.codigo}.toString() + " - " + $F{cnae.descricao}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="ae6008f8-fd29-491d-9dfd-ecd04f5fe923" style="campo" x="346" y="10" width="102" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{pessoa.cpfCnpj} != null ? java.util.regex.Pattern.compile("(\\d{2})(\\d{3})(\\d{3})(\\d{4})(\\d{2})").matcher($F{pessoa.cpfCnpj}).replaceAll("$1.$2.$3/$4-$5") : ""]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement uuid="ee7bef33-4793-476a-9a1f-e093a513382a" style="Linha" x="0" y="30" width="554" height="30"/>
+				<box>
+					<topPen lineWidth="0.25"/>
+					<leftPen lineWidth="0.25"/>
+					<bottomPen lineWidth="0.25"/>
+					<rightPen lineWidth="0.25"/>
+				</box>
+				<textElement>
+					<font size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Nome Fantasia]]></text>
+			</staticText>
+			<textField isBlankWhenNull="true">
+				<reportElement uuid="4e2d3a22-4252-4177-8e26-2a32e82c1842" style="campo" x="0" y="40" width="552" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{nomeApelido}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement uuid="6c19cc61-5709-452e-8026-1df6d3992ac2" style="Linha Zebrada" x="448" y="0" width="106" height="30"/>
+				<box>
+					<topPen lineWidth="0.25"/>
+					<leftPen lineWidth="0.25"/>
+					<bottomPen lineWidth="0.25"/>
+					<rightPen lineWidth="0.25"/>
+				</box>
+				<textElement>
+					<font size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Período]]></text>
+			</staticText>
+			<textField isBlankWhenNull="true">
+				<reportElement uuid="1d847de9-bb59-4960-920b-f1b6ab5f320f" style="campo" mode="Transparent" x="451" y="11" width="103" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{vigenciaRegistro}]]></textFieldExpression>
+			</textField>
+			<textField pattern="dd/MM/yyyy" isBlankWhenNull="true">
+				<reportElement uuid="27090228-e065-4ad8-9c86-c86feddac92d" mode="Transparent" x="505" y="220" width="49" height="20" forecolor="#000000" backcolor="#FFFFFF"/>
+				<box>
+					<topPen lineWidth="0.0"/>
+					<leftPen lineWidth="0.0"/>
+					<bottomPen lineWidth="0.0"/>
+					<rightPen lineWidth="0.0"/>
+				</box>
+				<textElement textAlignment="Left" verticalAlignment="Middle" rotation="None" markup="none">
+					<font fontName="SansSerif" size="8" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="Helvetica" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{dataRegistroRepresentacao}]]></textFieldExpression>
+			</textField>
+			<textField pattern="dd/MM/yyyy" isBlankWhenNull="true">
+				<reportElement uuid="10b154ca-9279-4663-b02c-fe46a87638de" mode="Transparent" x="321" y="220" width="49" height="20" forecolor="#000000" backcolor="#FFFFFF"/>
+				<box>
+					<topPen lineWidth="0.0"/>
+					<leftPen lineWidth="0.0"/>
+					<bottomPen lineWidth="0.0"/>
+					<rightPen lineWidth="0.0"/>
+				</box>
+				<textElement textAlignment="Left" verticalAlignment="Middle" rotation="None" markup="none">
+					<font fontName="SansSerif" size="8" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="Helvetica" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{dataUltimaAlteracaoContratoSocial}]]></textFieldExpression>
+			</textField>
+			<textField pattern="dd/MM/yyyy" isBlankWhenNull="true">
+				<reportElement uuid="4ae8fcb7-99fe-4546-a6ad-376cb29187ce" mode="Transparent" x="136" y="220" width="49" height="20" forecolor="#000000" backcolor="#FFFFFF"/>
+				<box leftPadding="3">
+					<topPen lineWidth="0.0"/>
+					<leftPen lineWidth="0.0"/>
+					<bottomPen lineWidth="0.0"/>
+					<rightPen lineWidth="0.0"/>
+				</box>
+				<textElement textAlignment="Left" verticalAlignment="Middle" rotation="None" markup="none">
+					<font fontName="SansSerif" size="8" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="Helvetica" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{dataRegistroJuntaComercial}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement uuid="ac5c06e5-a035-47ae-a3c0-a0a40c48e977" style="Linha" x="0" y="180" width="297" height="30"/>
+				<box>
+					<topPen lineWidth="0.25"/>
+					<leftPen lineWidth="0.25"/>
+					<bottomPen lineWidth="0.25"/>
+					<rightPen lineWidth="0.25"/>
+				</box>
+				<textElement>
+					<font size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Atividade Econômica]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="7a4d3c6a-465d-4594-8399-8917d5a9df95" style="Linha" x="297" y="180" width="257" height="30"/>
+				<box>
+					<topPen lineWidth="0.25"/>
+					<leftPen lineWidth="0.25"/>
+					<bottomPen lineWidth="0.25"/>
+					<rightPen lineWidth="0.25"/>
+				</box>
+				<textElement>
+					<font size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Esfera Administrativa]]></text>
+			</staticText>
+			<textField isBlankWhenNull="true">
+				<reportElement uuid="cf916ae6-fe25-4f71-945c-759d05a2420e" style="campo" x="297" y="190" width="259" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$P{DESCRICAO_ESFERA_ADMINISTRATIVA}]]></textFieldExpression>
+			</textField>
+			<textField pattern="" isBlankWhenNull="true">
+				<reportElement uuid="93fa32c7-6b7a-42ee-a101-df1eabc354c7" style="campo" x="0" y="190" width="297" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{atividadeEconomica.descricao}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band splitType="Stretch"/>
+	</pageFooter>
+	<summary>
+		<band splitType="Stretch"/>
+	</summary>
+</jasperReport>

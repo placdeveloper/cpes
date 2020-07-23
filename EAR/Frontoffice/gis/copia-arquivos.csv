@@ -1,0 +1,17 @@
+lib/capes-api-${version}.jar;bibliotecas/Sicoob/capes-api.jar
+lib/capes-api-inclusao-${version}.jar;bibliotecas/Sicoob/capes-api-inclusao.jar
+lib/capes-cadastro-ejb-${version}-client.jar;bibliotecas/Sicoob/capes-cadastro-ejb-client.jar
+lib/capes-cadastro-jboss-${version}.jar;bibliotecas/Sicoob/capes-cadastro-jboss.jar
+lib/capes-comum-lib-${version}.jar;bibliotecas/Sicoob/capes-comum-lib.jar
+lib/capes-integracao-${version}.jar;bibliotecas/Sicoob/capes-integracao.jar
+
+lib/capes-entidades-${version}.jar;ejb/09_02-capes-entidades.jar
+lib/capes-entidades-legado-${version}.jar;ejb/09_03-capes-entidades-legado.jar
+capes-api-impl-${version}.jar;ejb/09_07-capes-api-impl.jar
+capes-api-inclusao-impl-${version}.jar;ejb/09_09-capes-api-inclusao-impl.jar
+capes-cadastro-ejb-${version}.jar;ejb/09_06-capes-cadastro-ejb.jar
+capes-comum-ejb-${version}.jar;ejb/09_00-capes-comum-ejb.jar
+capes-frontoffice-ejb-${version}.jar;ejb/capes-frontoffice-ejb.jar
+capes-integracao-comum-impl-${version}.jar;ejb/09_08-capes-integracao-comum-impl.jar
+capes-integracao-frontoffice-impl-${version}.jar;ejb/09_08-capes-integracao-frontoffice-impl.jar
+capes-replicacao-comum-ejb-${version}.jar;ejb/09_05-capes-replicacao-comum-ejb.jar

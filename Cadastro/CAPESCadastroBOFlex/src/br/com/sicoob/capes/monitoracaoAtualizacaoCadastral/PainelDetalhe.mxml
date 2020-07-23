@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<CanvasBancoob 
+	width="800" height="610"
+	creationComplete="init()"
+	xmlns="br.com.bancoob.componentes.containers.*" 
+	xmlns:mx="http://www.adobe.com/2006/mxml" 
+	xmlns:titulo="br.com.bancoob.componentes.titulo.*" 
+	xmlns:input="br.com.bancoob.componentes.input.*" 
+	xmlns:componentes="br.com.bancoob.componentes.*">
+	
+	<mx:Style>
+		.botaoCopiar {
+			downSkin:		Embed(source='br/com/bancoob/imagens/icos/PNG/copy_16.png');
+			disabledSkin:	Embed(source='br/com/bancoob/imagens/icos/PNG/copy_16.png');
+			upSkin:			Embed(source='br/com/bancoob/imagens/icos/PNG/copy_16.png');
+			overSkin:		Embed(source='br/com/bancoob/imagens/icos/PNG/copy_16.png');
+		}
+	</mx:Style>
+	<mx:Script>
+		<![CDATA[
+			import br.com.bancoob.componentes.containers.Janela;
+			import br.com.sicoob.capes.monitoracaoAtualizacaoCadastral.eventos.ExcluirEvent;
+			
+			private function init():void {
+				this.btExcluir.addEventListener(MouseEvent.CLICK, onClickBtExcluir);
+			}
+			
+			private function onClickBtExcluir(event:MouseEvent):void {
+				Janela(this.parent).fecharJanela();
+				dispatchEvent(new ExcluirEvent());
+			}
+			
+		]]>
+	</mx:Script>
+	
+	<!-- ENTIDADE CADASTRO -->
+	<titulo:SubtituloView texto="Entidade Cadastro" left="10" right="10" top="11"> 
+	</titulo:SubtituloView>
+	<input:Texto top="46" right="10" left="10" editable="false" id="entidadeCadastro" />
+	
+	<!-- CONTEÚDO -->
+	<titulo:SubtituloView texto="Conteúdo" left="10" right="10" top="78"> 
+	</titulo:SubtituloView>
+	<input:TextoArea left="10" right="30" top="113" height="200" id="conteudo" editable="false" selectable="true" />
+	<componentes:Botao id="btCopiarConteudo" right="10" top="297" toolTip="Copiar conteúdo" styleName="botaoCrudAdicionarCopiaPeq"
+			paddingBottom="0" paddingLeft="0" paddingRight="0" paddingTop="0">
+		<componentes:click><![CDATA[System.setClipboard(this.conteudo.text);]]></componentes:click>
+	</componentes:Botao>
+		
+	<!-- ERRO -->
+	<titulo:SubtituloView texto="Erro" left="10" right="10" top="323"> 
+		<titulo:caminhoIcone>@Embed(source='br/com/bancoob/imagens/icos/Cancel.png')</titulo:caminhoIcone>
+	</titulo:SubtituloView>
+	<input:TextoArea left="10" right="30" top="358" height="200" id="erro" editable="false" selectable="true" />
+	<componentes:Botao id="btCopiarErro" right="10" top="542" toolTip="Copiar erro" styleName="botaoCrudAdicionarCopiaPeq"
+			paddingBottom="0" paddingLeft="0" paddingRight="0" paddingTop="0">
+		<componentes:click><![CDATA[System.setClipboard(this.erro.text);]]></componentes:click>
+	</componentes:Botao>
+	<titulo:LinhaView left="10" right="10" top="568"  height="10"/>
+	<HBoxBancoob horizontalAlign="right" top="578" width="100%">
+		<componentes:Botao id="btExcluir" label="Excluir" />
+		<componentes:Botao id="btFechar" label="Fechar">
+			<componentes:click><![CDATA[Janela(this.parent).fecharJanela();]]></componentes:click>
+		</componentes:Botao>
+	</HBoxBancoob>
+</CanvasBancoob>

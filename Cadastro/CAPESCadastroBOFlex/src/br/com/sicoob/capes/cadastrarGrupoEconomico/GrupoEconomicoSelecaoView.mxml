@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ListaCadastroView 
+	xmlns="br.com.bancoob.componentes.cadastro.*" 
+	xmlns:mx="http://www.adobe.com/2006/mxml" 
+	xmlns:servico="br.com.bancoob.util.servico.*"
+	xmlns:cadastrarGrupoEconomico="br.com.sicoob.capes.cadastrarGrupoEconomico.*"
+	fecharFormularioAoIncluir="true"
+	borderStyle="solid"
+	borderThickness="0"
+	width="800" height="600" >
+	<painelLista>
+		<cadastrarGrupoEconomico:PainelListaGrupoEconomicoView width="100%" height="100%" />
+	</painelLista>
+	<servicoRecuperacaoInformacoes>
+		<servico:ServicoJava
+			source="br.com.sicoob.capes.cadastro.fachada.GrupoEconomicoFachada"
+			bloquearOperacao="true"
+			mensagemEspera="Obtendo dados..." />
+	</servicoRecuperacaoInformacoes>
+	<formularioCadastro>
+		<cadastrarGrupoEconomico:GrupoEconomicoEdicao width="800" height="600" />
+	</formularioCadastro>
+	<servicoExclusao>
+		<servico:ServicoJava
+			source="br.com.sicoob.capes.cadastro.fachada.GrupoEconomicoFachada"
+			bloquearOperacao="true"
+			mensagemEspera="Excluindo dados..." />
+	</servicoExclusao>
+</ListaCadastroView>

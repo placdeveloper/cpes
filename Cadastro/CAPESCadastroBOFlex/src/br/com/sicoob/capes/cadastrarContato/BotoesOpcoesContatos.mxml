@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mx:Canvas xmlns:mx="http://www.adobe.com/2006/mxml" 
+	borderStyle="none" verticalScrollPolicy="off" horizontalScrollPolicy="off" width="100%" height="284" clipContent="false" xmlns:componentes="br.com.bancoob.componentes.*">
+		<componentes:Botao id="btCorrespondencia" x="19" y="0" buttonMode="true" useHandCursor="true" enabled="true" visible="false" tabIndex="400">
+			<componentes:downSkin>@Embed(source='br/com/bancoob/imagens/imgsTelas/botoesPlataforma2.swf', symbol='conteudoBtEndereceoCorrNormal')</componentes:downSkin>
+			<componentes:overSkin>@Embed(source='br/com/bancoob/imagens/imgsTelas/botoesPlataforma2.swf', symbol='conteudoBtEndereceoCorrOver')</componentes:overSkin>
+			<componentes:upSkin>      @Embed(source='br/com/bancoob/imagens/imgsTelas/botoesPlataforma2.swf', symbol='conteudoBtEndereceoCorrNormal')</componentes:upSkin>
+			<componentes:disabledSkin>@Embed(source='br/com/bancoob/imagens/imgsTelas/botoesPlataforma2.swf', symbol='conteudoBtEndereceoCorrDesab')</componentes:disabledSkin>
+		</componentes:Botao>	
+</mx:Canvas>

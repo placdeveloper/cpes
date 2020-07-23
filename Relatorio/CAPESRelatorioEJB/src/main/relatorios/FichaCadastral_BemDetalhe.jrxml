@@ -1,0 +1,262 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="FichaCadastral_BemDetalhe" pageWidth="555" pageHeight="900" whenNoDataType="BlankPage" columnWidth="555" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0" uuid="e70e4708-c80e-49c2-a0d9-48a0e3e87a5f">
+	<property name="ireport.zoom" value="2.3579476910000023"/>
+	<property name="ireport.x" value="57"/>
+	<property name="ireport.y" value="0"/>
+	<style name="campo" hAlign="Left" vAlign="Middle" fontSize="8" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false">
+		<box leftPadding="6"/>
+	</style>
+	<parameter name="SUB_BENS_ONUS" class="net.sf.jasperreports.engine.JasperReport"/>
+	<parameter name="SUB_BENS_REGISTROS" class="net.sf.jasperreports.engine.JasperReport"/>
+	<parameter name="SUB_BENS_POSSES" class="net.sf.jasperreports.engine.JasperReport"/>
+	<parameter name="SUB_BENS_DEPENDENCIAS" class="net.sf.jasperreports.engine.JasperReport"/>
+	<parameter name="DS_BENS" class="java.util.Collection"/>
+	<parameter name="SUB_BEM_DETALHE_IMOVEL" class="net.sf.jasperreports.engine.JasperReport"/>
+	<queryString>
+		<![CDATA[]]>
+	</queryString>
+	<field name="descricao" class="java.lang.String"/>
+	<field name="situacao.descricao" class="java.lang.String"/>
+	<field name="valorSeguro" class="java.math.BigDecimal"/>
+	<field name="dataVencimentoSeguro" class="java.util.Date"/>
+	<field name="nomeSeguradora" class="java.lang.String"/>
+	<field name="bensOnus" class="java.util.Collection"/>
+	<field name="bensRegistro" class="java.util.Collection"/>
+	<field name="bensPosse" class="java.util.Collection"/>
+	<field name="subTipo.tipoBem.descricao" class="java.lang.String"/>
+	<field name="subTipo.tipoBem.codigo" class="java.lang.Short"/>
+	<field name="valorAtualMercado" class="java.math.BigDecimal"/>
+	<field name="subTipo.descricao" class="java.lang.String"/>
+	<field name="vigenciaRegistro" class="java.lang.String"/>
+	<field name="percentual" class="java.math.BigDecimal"/>
+	<variable name="valorAtualTotal" class="java.math.BigDecimal">
+		<variableExpression><![CDATA[$F{valorAtualMercado}]]></variableExpression>
+		<initialValueExpression><![CDATA[java.math.BigDecimal.ZERO]]></initialValueExpression>
+	</variable>
+	<variable name="valorTotalParticipacao" class="java.math.BigDecimal">
+		<variableExpression><![CDATA[$F{valorAtualMercado}.multiply($F{percentual}).divide(new BigDecimal(100))]]></variableExpression>
+		<initialValueExpression><![CDATA[java.math.BigDecimal.ZERO]]></initialValueExpression>
+	</variable>
+	<group name="BEM_IMOVEL">
+		<groupFooter>
+			<band height="31" splitType="Immediate">
+				<printWhenExpression><![CDATA[new Boolean($F{subTipo.tipoBem.codigo}.shortValue() == br.com.sicoob.capes.cadastro.negocio.enums.TipoBemEnum.IMOVEL.getIdTipoBem().shortValue())]]></printWhenExpression>
+				<subreport>
+					<reportElement uuid="6b545ef3-53bd-4ba3-8ffd-3ad15ad8cd65" style="campo" x="0" y="0" width="555" height="31">
+						<printWhenExpression><![CDATA[new Boolean($F{subTipo.tipoBem.codigo}.shortValue() == br.com.sicoob.capes.cadastro.negocio.enums.TipoBemEnum.IMOVEL.getIdTipoBem().shortValue())]]></printWhenExpression>
+					</reportElement>
+					<subreportParameter name="DS">
+						<subreportParameterExpression><![CDATA[$P{REPORT_DATA_SOURCE}]]></subreportParameterExpression>
+					</subreportParameter>
+					<dataSourceExpression><![CDATA[new br.com.sicoob.capes.relatorio.negocio.relatorios.EntidadeCadastroCollectionDataSource($P{DS_BENS})]]></dataSourceExpression>
+					<subreportExpression><![CDATA[$P{SUB_BEM_DETALHE_IMOVEL}]]></subreportExpression>
+				</subreport>
+			</band>
+		</groupFooter>
+	</group>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<detail>
+		<band height="120" splitType="Immediate">
+			<staticText>
+				<reportElement uuid="e0da63e1-b333-425e-be63-6bf73c341ce6" positionType="Float" x="263" y="0" width="292" height="30"/>
+				<box leftPadding="3">
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement>
+					<font size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[SubTipo de bem]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="fba183cd-fafa-44db-9a95-f95402e3c945" positionType="Float" x="0" y="0" width="263" height="30"/>
+				<box leftPadding="3">
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement>
+					<font size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Tipo de bem]]></text>
+			</staticText>
+			<textField pattern="" isBlankWhenNull="true">
+				<reportElement uuid="fedd28b2-c2ba-48b4-8227-6fea80333ad7" style="campo" positionType="Float" x="263" y="10" width="292" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{subTipo.descricao}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement uuid="6619c13a-1ff5-4bc9-9ff2-199ff5bc3bd0" style="campo" positionType="Float" x="0" y="10" width="263" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{subTipo.tipoBem.descricao}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement uuid="b10ae994-8a12-483f-86e4-069dd0e690a6" stretchType="RelativeToTallestObject" x="0" y="30" width="418" height="30"/>
+				<box leftPadding="3">
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.0"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement>
+					<font size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Descrição]]></text>
+			</staticText>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement uuid="e6ffb65d-1eab-4300-ba97-8b1e74479e78" style="campo" x="0" y="40" width="418" height="20"/>
+				<box topPadding="3" leftPadding="6" bottomPadding="3" rightPadding="3">
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Justified" verticalAlignment="Top"/>
+				<textFieldExpression><![CDATA[$F{descricao}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement uuid="880f134b-f0d7-407d-8504-de4e5d86cf23" x="418" y="30" width="137" height="30"/>
+				<box leftPadding="3">
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement>
+					<font size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Período]]></text>
+			</staticText>
+			<textField isBlankWhenNull="true">
+				<reportElement uuid="4fd6a23e-497e-4ebd-a45e-42de4f8a3a7e" style="campo" mode="Transparent" x="418" y="40" width="137" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{vigenciaRegistro}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement uuid="cd42f518-35c0-4da4-8134-c299b59c9f84" style="campo" positionType="Float" x="0" y="72" width="263" height="18"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{situacao.descricao}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement uuid="76676de4-ff34-4aaf-b223-e5f7ec10e83a" positionType="Float" x="0" y="60" width="263" height="30"/>
+				<box leftPadding="3">
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement>
+					<font size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Situação]]></text>
+			</staticText>
+			<textField pattern="¤ #,##0.00" isBlankWhenNull="true">
+				<reportElement uuid="22767292-564b-456e-98a7-2904525bf35a" style="campo" positionType="Float" x="263" y="72" width="155" height="18"/>
+				<box leftPadding="3" rightPadding="3"/>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression><![CDATA[$F{valorAtualMercado}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement uuid="6acd9128-35d3-484d-b488-2ab2fd559db1" positionType="Float" x="263" y="60" width="155" height="30"/>
+				<box leftPadding="3">
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement>
+					<font size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Valor do bem]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="540419a4-641c-445a-b88d-1511cfbbb62e" x="418" y="60" width="137" height="30"/>
+				<box leftPadding="3">
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement>
+					<font size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Valor da participação]]></text>
+			</staticText>
+			<textField isStretchWithOverflow="true" pattern="¤ #,##0.00" isBlankWhenNull="true">
+				<reportElement uuid="dd88af6f-28ac-434f-8630-fb13521e8097" style="campo" positionType="Float" x="385" y="100" width="170" height="20"/>
+				<box leftPadding="3" rightPadding="3"/>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression><![CDATA[$F{valorSeguro}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement uuid="b764a401-1787-406e-a7cf-cf2f1795530d" positionType="Float" x="0" y="90" width="325" height="30"/>
+				<box leftPadding="3">
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5" lineStyle="Double"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement>
+					<font size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Seguradora]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="cdbc0808-1025-4d13-8d20-0b4e77b2c965" positionType="Float" x="325" y="90" width="60" height="30"/>
+				<box leftPadding="3">
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5" lineStyle="Double"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement>
+					<font size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Vencimento]]></text>
+			</staticText>
+			<textField pattern="dd/MM/yyyy" isBlankWhenNull="true">
+				<reportElement uuid="fa4d7541-c2fb-46b0-b9ac-6023a169aa04" style="campo" positionType="Float" x="325" y="100" width="60" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{dataVencimentoSeguro}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement uuid="8aae22a9-404c-42d2-bff0-9aede9e24bff" style="campo" positionType="Float" x="0" y="100" width="325" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{nomeSeguradora}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement uuid="3e31aec2-792e-4d56-b560-613ba96bcf56" positionType="Float" x="385" y="90" width="170" height="30"/>
+				<box leftPadding="3">
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5" lineStyle="Double"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement>
+					<font size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Valor Segurado]]></text>
+			</staticText>
+			<textField pattern="¤ #,##0.00" isBlankWhenNull="true">
+				<reportElement uuid="8b1e78f4-452d-42f1-967a-643a60d8383b" style="campo" positionType="Float" x="418" y="72" width="137" height="18"/>
+				<box leftPadding="3" rightPadding="3"/>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression><![CDATA[$F{valorAtualMercado}.multiply($F{percentual}).divide(new BigDecimal(100))]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+</jasperReport>

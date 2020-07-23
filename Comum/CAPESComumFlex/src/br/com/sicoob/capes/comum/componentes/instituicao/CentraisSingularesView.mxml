@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<CanvasBancoob xmlns="br.com.bancoob.componentes.containers.*"
+			   xmlns:mx="http://www.adobe.com/2006/mxml"
+			   xmlns:componentes="br.com.bancoob.componentes.*"
+			   xmlns:input="br.com.bancoob.componentes.input.*"
+			   width="100%" height="100%">
+
+	<componentes:Rotulo x="0" y="2" text="Central: " id="rotuloCentral"/>
+	<input:Combo x="80" y="0" width="100%" id="comboCentral" labelField="numeroCooperativa" editable="false" />
+
+	<componentes:Rotulo x="0" y="32" text="Instituição: " id="rotuloSingular"/>
+	<input:Combo x="80" y="30" width="100%" id="comboSingular" labelField="numeroCooperativa" editable="false" />
+	
+	<CanvasBancoob id="canvasUnidade" width="100%" height="100%" visible="false">
+		<componentes:Rotulo x="0" y="62" text="Unidade: " id="rotuloUnidade"/>
+		<input:Combo x="80" y="60" width="100%" id="comboUnidades" editable="false" inserirItemOpcional="true" labelItemOpcional="TODOS" />
+	</CanvasBancoob>
+	
+	<CanvasBancoob id="canvasNucleo" width="100%" height="100%" visible="false">
+		<componentes:Rotulo x="0" y="92" text="Núcleo: " id="rotuloNucleo"/>
+		<input:Combo x="80" y="90" id="comboNucleos" inserirItemOpcional="true" labelItemOpcional="TODOS" editable="false" />
+	</CanvasBancoob>
+	
+	<CanvasBancoob id="canvasGerente" width="100%" height="100%" visible="false">
+		<componentes:Rotulo x="0" y="122" text="Gerente: " id="rotuloGerente"/>
+		<input:Combo x="80" y="120" id="comboGerentes" inserirItemOpcional="true" labelItemOpcional="TODOS" editable="false" />
+	</CanvasBancoob>
+
+</CanvasBancoob>

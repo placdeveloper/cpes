@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Modulo xmlns="br.com.bancoob.componentes.*"
+		xmlns:mx="http://www.adobe.com/2006/mxml"
+		xmlns:navegacao="br.com.bancoob.componentes.navegacao.*"
+		xmlns:abas="br.com.sicoob.capes.transferenciaInformacoes.monitoracao.abas.*"
+		width="950" height="600" backgroundAlpha="0.0">
+	
+	<navegacao:Tab id="navegacaoTab" width="100%" height="100%" paddingLeft="10">
+		<abas:AbaClientes id="abaAutorizar" label="Clientes" />
+		<abas:AbaGrupoEconomico id="abaDevolvidas" label="Grupo Econômico"/>
+	</navegacao:Tab>
+	
+</Modulo>

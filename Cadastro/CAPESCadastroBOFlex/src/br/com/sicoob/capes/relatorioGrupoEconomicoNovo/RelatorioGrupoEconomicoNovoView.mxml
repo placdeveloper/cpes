@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<containers:VBoxBancoob xmlns:mx="http://www.adobe.com/2006/mxml"
+						xmlns:componentes="br.com.bancoob.componentes.*"
+						xmlns:namespace="http://namespace"
+						xmlns:titulo="br.com.bancoob.componentes.titulo.*"
+						xmlns:containers="br.com.bancoob.componentes.containers.*"
+						xmlns:input="br.com.bancoob.componentes.input.*"
+						xmlns:centraisSingulares="br.com.sicoob.capes.comum.componentes.instituicao.*"
+						xmlns:procurarPessoa="br.com.sicoob.capes.corporativo.componentes.procurarPessoa.*"
+						width="450" height="425">
+	
+	<mx:Number id="diasFiltroHistorico"/>
+	
+	<titulo:SubtituloView width="100%" texto="INSTITUIÇÃO"/>	
+	<containers:VBoxBancoob id="boxComboInstituicao" width="100%" height="100%" paddingLeft="10">
+		<centraisSingulares:CentraisSingulares id="componenteCentraisSingulares" tamanhoCombos="350"
+											   utilizarGerentes="true" utilizarNucleos="true"
+											   utilizarUnidades="true"/>
+	</containers:VBoxBancoob>
+	
+	<titulo:SubtituloView width="100%" texto="Tipo de Grupo"/>
+	<containers:HBoxBancoob width="100%" paddingLeft="10">
+		<input:RadioGrupoBancoob id="tipoOrigemGrupo"/>
+		<input:Radio id="radioOrigemGrupoTodos" width="{lbCpfCnpj.width}" label="Todos"
+					 groupName="tipoOrigemGrupo" selected="true" value="0"/>
+		<input:Radio id="radioOrigemGrupoSomenteAutomaticos" label="Somente os Automáticos"
+					 groupName="tipoOrigemGrupo" value="1"/>
+		<input:Radio id="radioOrigemGrupoSomenteManuais" label="Somente os Manuais"
+					 groupName="tipoOrigemGrupo" value="2"/>
+	</containers:HBoxBancoob>
+	
+	<titulo:SubtituloView width="100%" texto="Vigência"/>
+	<containers:HBoxBancoob width="100%" paddingLeft="10">
+		<input:RadioGrupoBancoob id="tipoVigencia"/>
+		<input:Radio id="radioVigenciaTodos" width="{lbCpfCnpj.width}" label="Todos"
+					 groupName="tipoVigencia" selected="true" value="1"/>
+		<input:Radio id="radioVigenciaSomenteVigentes"
+					 width="{radioOrigemGrupoSomenteAutomaticos.width}" label="Somente os Vigentes"
+					 groupName="tipoVigencia" value="2"/>
+		<input:Radio id="radioVigenciaSomenteHistoricos" label="Somente os Históricos"
+					 groupName="tipoVigencia" value="3"/>
+	</containers:HBoxBancoob>
+	
+	<titulo:SubtituloView width="100%" texto="FILTROS"/>
+	<containers:HBoxBancoob width="100%" paddingLeft="10" verticalAlign="middle">
+		<mx:Label width="{lbCpfCnpj.width}" text="Período:"/>
+		<input:Data id="dataInicio" dataDefault="{new Date()}" dataMaxima="{new Date()}"/>
+		<mx:Label text="a"/>
+		<input:Data id="dataFim" dataDefault="{new Date()}" dataMaxima="{new Date()}"/>
+	</containers:HBoxBancoob>
+		
+	<containers:HBoxBancoob width="100%" paddingLeft="10">
+		<componentes:Rotulo id="lbCpfCnpj" text="CPF / CNPJ: "/>
+		<procurarPessoa:ProcurarPessoaCAPES id="campoCpfCnpj" selecaoAutomaticaDestino="false"
+											toolTip="CPF/CNPJ de identificação da Pessoa e respectivo nome." width="100%"/>
+	</containers:HBoxBancoob>
+		
+	<titulo:LinhaView id="linha" y="314" width="100%"/>
+	
+	<containers:HBoxBancoob bottom="10" width="100%" horizontalAlign="right" horizontalGap="8"
+							verticalAlign="middle">
+		<componentes:Botao id="btnGerarRelatorio" width="85" label="Ok"/>
+		<componentes:Botao id="btnLimpar" width="85" label="Limpar"/>
+		<componentes:Botao id="btnFechar" width="85" label="Fechar"/>
+	</containers:HBoxBancoob>
+	
+</containers:VBoxBancoob>

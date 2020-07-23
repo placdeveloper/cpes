@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<validaveis:CanvasValidavel
+	xmlns:mx="http://www.adobe.com/2006/mxml"
+	xmlns:validaveis="br.com.bancoob.componentes.containers.validaveis.*"
+	xmlns:bancoob="br.com.bancoob.componentes.*"
+	xmlns:input="br.com.bancoob.componentes.input.*"
+	xmlns:painellista="br.com.bancoob.componentes.painellista.*"
+	width="100%" height="24">
+	
+	<mx:Script>
+		<![CDATA[
+			private var _validarObrigatorio:Boolean = false;
+			
+			private static var TEXTO_TOOLTIP:String = "PESQUISAR/INCLUIR UM BEM";
+			
+			public function get validarObrigatorio():Boolean {
+				return _validarObrigatorio;
+			}
+			
+			public function set validarObrigatorio(valor:Boolean):void {
+				_validarObrigatorio = valor;
+			}
+			
+		]]>
+	</mx:Script>
+	
+	<validaveis:HBoxValidavel width="100%" height="100%" verticalAlign="middle">
+		<input:Texto id ="textoCodigo" width="65" height="22" tabEnabled="true" text="" validarObrigatorio="{validarObrigatorio}" toolTip="{TEXTO_TOOLTIP}" />
+		<painellista:BotaoProcurarView id="botaoPesquisar" label="" tabEnabled="true" width="34" height="22" toolTip="{TEXTO_TOOLTIP}" />
+		<bancoob:Botao id="botaoIncluir" width="34" icon="@Embed('br/com/bancoob/imagens/icos/PNG/add_16.png')" visible="true" includeInLayout="true" tabEnabled="true" height="22" toolTip="INCLUIR BEM" />
+		<bancoob:Botao id="botaoEditar" width="34" icon="@Embed('br/com/bancoob/imagens/icos/PNG/edit_16.png')" visible="false" includeInLayout="false" tabEnabled="true" height="22" toolTip="EDITAR BEM" />
+		<bancoob:Rotulo id ="textoDescricao" text="" width="100%" color="#465B45" fontWeight="bold" textAlign="left" height="22" />
+	</validaveis:HBoxValidavel>
+	
+</validaveis:CanvasValidavel>

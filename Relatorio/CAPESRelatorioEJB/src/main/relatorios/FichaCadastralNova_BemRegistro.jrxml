@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="FichaCadastral_BemImovel" pageWidth="575" pageHeight="900" whenNoDataType="BlankPage" columnWidth="575" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0">
+	<style name="Linha Zebrada" isDefault="true" mode="Opaque">
+		<box leftPadding="3">
+			<topPen lineWidth="0.25"/>
+			<leftPen lineWidth="0.25"/>
+			<bottomPen lineWidth="0.25"/>
+			<rightPen lineWidth="0.25"/>
+		</box>
+		<conditionalStyle>
+			<conditionExpression><![CDATA[new Boolean(($V{REPORT_COUNT_ZEBRA}.intValue() % 2) != 0)]]></conditionExpression>
+			<style isDefault="false" style="Linha Zebrada" mode="Opaque" backcolor="#DDDDDE"/>
+		</conditionalStyle>
+	</style>
+	<style name="campo" isDefault="false" hAlign="Left" vAlign="Middle" fontSize="8" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false">
+		<box leftPadding="6"/>
+	</style>
+	<style name="Linha" isDefault="true" mode="Opaque">
+		<box leftPadding="3">
+			<topPen lineWidth="0.25"/>
+			<leftPen lineWidth="0.25"/>
+			<bottomPen lineWidth="0.25"/>
+			<rightPen lineWidth="0.25"/>
+		</box>
+	</style>
+	<parameter name="REPORT_COUNT_ZEBRA" class="java.lang.Integer"/>
+	<parameter name="SUB_BENS_POSSES" class="net.sf.jasperreports.engine.JasperReport"/>
+	<queryString>
+		<![CDATA[]]>
+	</queryString>
+	<field name="matriculaRegistro" class="java.lang.String"/>
+	<field name="livro" class="java.lang.String"/>
+	<field name="folha" class="java.lang.String"/>
+	<field name="ipr" class="java.lang.String"/>
+	<field name="incra" class="java.lang.String"/>
+	<field name="areaMatricula" class="java.math.BigDecimal"/>
+	<field name="observacaoMatricula" class="java.lang.String"/>
+	<field name="dataUltimaMatricula" class="java.util.Date"/>
+	<variable name="REPORT_COUNT_ZEBRA" class="java.lang.Integer">
+		<variableExpression><![CDATA[new Integer($V{REPORT_COUNT_ZEBRA}.intValue() + 1)]]></variableExpression>
+		<initialValueExpression><![CDATA[$P{REPORT_COUNT_ZEBRA}]]></initialValueExpression>
+	</variable>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<detail>
+		<band height="31" splitType="Prevent">
+			<staticText>
+				<reportElement style="Linha Zebrada" x="213" y="0" width="164" height="30"/>
+				<textElement>
+					<font size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Livro]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="Linha Zebrada" x="377" y="0" width="198" height="30"/>
+				<box leftPadding="3">
+					<rightPen lineWidth="0.0"/>
+				</box>
+				<textElement>
+					<font size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Folha]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="Linha Zebrada" x="0" y="0" width="213" height="30"/>
+				<box leftPadding="3">
+					<leftPen lineWidth="0.0"/>
+				</box>
+				<textElement>
+					<font size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Matrícula/Registro]]></text>
+			</staticText>
+			<textField isBlankWhenNull="true">
+				<reportElement style="campo" x="0" y="10" width="213" height="20"/>
+				<textElement/>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{matriculaRegistro}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement style="campo" x="377" y="10" width="178" height="20"/>
+				<textElement/>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{folha}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement style="campo" x="213" y="10" width="164" height="20"/>
+				<textElement/>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{livro}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+</jasperReport>

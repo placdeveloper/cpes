@@ -1,0 +1,161 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="FichaCadastralNova_BemNovo_Detalhes_Imovel_parceiro" pageWidth="575" pageHeight="802" columnWidth="575" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0" uuid="5340a7c2-a537-4a04-8eba-93b0b42a6319">
+	<property name="ireport.zoom" value="1.610510000000001"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<field name="pessoaCompartilhamento.nomeCompleto" class="java.lang.String"/>
+	<field name="pessoaCompartilhamento.pessoa.cpfCnpj" class="java.lang.String"/>
+	<field name="tipoRelacionamento.descricao" class="java.lang.String"/>
+	<field name="dataInicioRelacionamento" class="java.sql.Timestamp"/>
+	<field name="dataFimRelacionamento" class="java.sql.Timestamp"/>
+	<field name="areaPosse" class="java.math.BigDecimal"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<columnHeader>
+		<band height="15">
+			<staticText>
+				<reportElement uuid="bdd024f3-6558-499c-83ff-e0268437bedd" positionType="Float" x="0" y="0" width="277" height="15"/>
+				<box leftPadding="3">
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.0"/>
+					<leftPen lineWidth="0.0"/>
+					<bottomPen lineWidth="0.0"/>
+				</box>
+				<textElement>
+					<font size="9" isBold="true"/>
+				</textElement>
+				<text><![CDATA[CPF/CNPJ do Parceiro]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="3b7c634c-4cc9-4298-b8ab-bd3f7c4e2fa9" positionType="Float" x="277" y="0" width="298" height="15"/>
+				<box leftPadding="3">
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.0"/>
+					<leftPen lineWidth="0.0"/>
+					<bottomPen lineWidth="0.0"/>
+					<rightPen lineWidth="0.0"/>
+				</box>
+				<textElement>
+					<font size="9" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Nome/ Razão Social]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="51" splitType="Stretch">
+			<textField isBlankWhenNull="true">
+				<reportElement uuid="47568c57-8e8f-47c7-a29e-124287c91a11" x="277" y="0" width="298" height="20"/>
+				<box leftPadding="6"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{pessoaCompartilhamento.nomeCompleto}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement uuid="94f145dc-5569-4a7a-8c23-46b5393af9d4" x="0" y="0" width="277" height="20"/>
+				<box leftPadding="6">
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{pessoaCompartilhamento.pessoa.cpfCnpj}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement uuid="ca08615a-ed2e-41c4-b09b-e40492f35a74" positionType="Float" x="415" y="20" width="160" height="30"/>
+				<box leftPadding="3">
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.0"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.0"/>
+				</box>
+				<textElement>
+					<font size="9" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Área de posse]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="812813a7-9172-48e3-8c3e-79ce5dd06dc9" positionType="Float" x="137" y="20" width="140" height="30"/>
+				<box leftPadding="3">
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.0"/>
+					<bottomPen lineWidth="0.5"/>
+				</box>
+				<textElement>
+					<font size="9" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Data Início]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="872aa130-6d55-4125-9cc5-80ecfb7dca25" positionType="Float" x="0" y="20" width="137" height="30"/>
+				<box leftPadding="3">
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.0"/>
+					<bottomPen lineWidth="0.5"/>
+				</box>
+				<textElement>
+					<font size="9" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Tipo Relacionamento]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="f8dff407-a1cf-4be4-8554-df6811a6b9d2" positionType="Float" x="277" y="20" width="140" height="30"/>
+				<box leftPadding="3">
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.0"/>
+					<bottomPen lineWidth="0.5"/>
+				</box>
+				<textElement>
+					<font size="9" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Data Fim]]></text>
+			</staticText>
+			<textField pattern="dd/MM/yyyy" isBlankWhenNull="true">
+				<reportElement uuid="2eca6927-4d56-407e-af0b-89a839957a51" x="137" y="31" width="137" height="20"/>
+				<box leftPadding="6">
+					<rightPen lineWidth="0.0"/>
+				</box>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{dataInicioRelacionamento}]]></textFieldExpression>
+			</textField>
+			<textField pattern="" isBlankWhenNull="true">
+				<reportElement uuid="86c4b2cd-bcd1-4f46-ae62-de39e910a7bd" x="0" y="30" width="140" height="20"/>
+				<box leftPadding="6">
+					<rightPen lineWidth="0.0"/>
+				</box>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{tipoRelacionamento.descricao}]]></textFieldExpression>
+			</textField>
+			<textField pattern="dd/MM/yyyy" isBlankWhenNull="true">
+				<reportElement uuid="939ae167-682a-4a8f-a171-601bd53abbd3" x="277" y="31" width="137" height="20"/>
+				<box leftPadding="6">
+					<rightPen lineWidth="0.0"/>
+				</box>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{dataFimRelacionamento}]]></textFieldExpression>
+			</textField>
+			<textField pattern="" isBlankWhenNull="true">
+				<reportElement uuid="b491f0ce-a5d4-4bb9-90b1-b6ea5d7750ac" x="417" y="31" width="158" height="20"/>
+				<box leftPadding="6">
+					<rightPen lineWidth="0.0"/>
+				</box>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{areaPosse}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+</jasperReport>

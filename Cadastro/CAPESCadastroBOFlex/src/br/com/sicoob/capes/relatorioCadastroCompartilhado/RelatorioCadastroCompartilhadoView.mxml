@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ModuloValidavel xmlns="br.com.bancoob.componentes.containers.validaveis.*"
+				 xmlns:mx="http://www.adobe.com/2006/mxml"
+				 xmlns:titulo="br.com.bancoob.componentes.titulo.*"
+				 xmlns:componente="br.com.bancoob.componentes.*"
+				 xmlns:input="br.com.bancoob.componentes.input.*"
+				 xmlns:containers="br.com.bancoob.componentes.containers.*"
+				 xmlns:procurarPessoa="br.com.sicoob.capes.corporativo.componentes.procurarPessoa.*"
+				 xmlns:centraisSingulares="br.com.sicoob.capes.comum.componentes.instituicao.*"
+				 width="462" height="200" layout="absolute" >
+	
+	<containers:VBoxBancoob>
+		<containers:VBoxBancoob>
+			<titulo:SubtituloView width="462" texto="INSTITUIÇÃO"/>
+		</containers:VBoxBancoob>
+		
+		<containers:HBoxBancoob id="containerInstituicao" visible="true" width="462" verticalScrollPolicy="off" horizontalScrollPolicy="off">
+			<centraisSingulares:CentraisSingulares id="componenteCentraisSingulares" />
+		</containers:HBoxBancoob>
+		
+		<containers:VBoxBancoob>
+			<titulo:SubtituloView width="462" texto="FILTROS"/>
+		</containers:VBoxBancoob>
+		
+		<containers:HBoxBancoob>
+			<componente:Rotulo text="CPF/CNPJ:" width="105"/>
+			<procurarPessoa:ProcurarPessoaCAPES id="campoCpfCnpj" toolTip="CPF/CNPJ de identificação da Pessoa e respectivo nome." selecaoAutomaticaDestino="false" />
+		</containers:HBoxBancoob>
+	</containers:VBoxBancoob>
+	
+	<containers:HBoxBancoob right="10" bottom="10" width="462" height="36"
+							horizontalAlign="right" horizontalGap="8" verticalAlign="middle">
+		<componente:Botao id="btOk" width="86" label="Ok"/>
+		<componente:Botao id="btCancelar" width="86" label="Limpar"/>
+		<componente:Botao id="btFechar" width="86" label="Fechar"/>
+	</containers:HBoxBancoob>
+			
+</ModuloValidavel>

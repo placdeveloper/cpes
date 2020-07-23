@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<validaveis:ModuloValidavel
+	xmlns:mx="http://www.adobe.com/2006/mxml"
+	xmlns:validaveis="br.com.bancoob.componentes.containers.validaveis.*"
+	xmlns:alterarCpfCnpj="br.com.sicoob.capes.alterarCpfCnpj.*"
+	width="650" height="500" layout="absolute" styleName="ModuloSemEstilo">
+
+	<alterarCpfCnpj:PainelPesquisaPessoaCpfCnpj id="telaPesquisa" height="100%" width="100%" x="5" y="10" />
+	<alterarCpfCnpj:PainelAlteracaoCpfCnpj id="telaAlteracao" height="100%" width="100%" x="5" y="20" visible="false" /> 
+	
+</validaveis:ModuloValidavel>

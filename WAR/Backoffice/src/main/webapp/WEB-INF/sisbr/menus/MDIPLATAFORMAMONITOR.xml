@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sisbrweb>
+
+<sisbrweb>
+	<MDIPLATAFORMAMONITOR>
+	
+		<menu id="MNUMONITORCAPES" label="CAPES" icone="br/com/bancoob/imagens/icos/modulos/cadastroClientes">
+			<item id="MNUMONITORATUALIZACAOCADASTRAL" label="Atualizações Cadastrais" swf="/capes/swf/MonitoracaoAtualizacaoCadastral" icone="br/com/bancoob/imagens/icos/listaAplicativos/go_24.png" />
+			<item id="MNUMONITORDLQCAPES" label="Monitoração das DLQs" swf="/capes/swf/MonitoracaoDLQCapes" icone="br/com/bancoob/imagens/icos/listaAplicativos/mail_24.png"/>
+			<item id="MNUMONITORFILASCAPES" label="Monitoração de Mensagens" swf="/capes/swf/MonitoracaoFilasCapes" icone="br/com/bancoob/imagens/icos/performance.png" />
+		</menu>
+		
+	</MDIPLATAFORMAMONITOR>
+</sisbrweb>

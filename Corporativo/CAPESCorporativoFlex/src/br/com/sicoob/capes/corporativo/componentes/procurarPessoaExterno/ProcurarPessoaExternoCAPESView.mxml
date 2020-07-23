@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<componentes:Modulo xmlns:mx="http://www.adobe.com/2006/mxml"
+					xmlns:namespace="http://namespace"
+					xmlns:componentes="br.com.bancoob.componentes.*"
+					xmlns:input="br.com.bancoob.componentes.input.*"
+					xmlns:painel="br.com.bancoob.componentes.painellista.*"
+					width="100%" height="22" layout="absolute">
+	
+	<input:Texto id="campoCodigo" x="0" y="0" width="110" agruparDigitos="false" maxChars="14" tipoEntrada="{Texto.TEXTO}" />
+	<componentes:Botao id="botaoProcurar" x="115" y="0" width="35" height="22"
+					   disabledIcon="@Embed('br/com/bancoob/imagens/icos/srch_mini_desab.png')"
+					   downIcon="@Embed('br/com/bancoob/imagens/icos/srch_mini_desab.png')"
+					   icon="@Embed('br/com/bancoob/imagens/icos/srch_mini.png')"
+					   toolTip="CLIQUE PARA ABRIR A PESQUISA" enabled="false" />
+	<componentes:Rotulo id="campoNome" x="155" y="2" width="100%" color="#465B45" fontWeight="bold" textAlign="left" />
+	
+</componentes:Modulo>

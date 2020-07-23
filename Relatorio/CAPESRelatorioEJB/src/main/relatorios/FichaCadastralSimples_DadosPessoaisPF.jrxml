@@ -1,0 +1,498 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="FichaCadastralSimples_DadosPessoaisPF" pageWidth="575" pageHeight="117" whenNoDataType="AllSectionsNoDetail" columnWidth="575" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0" uuid="d0119516-03e0-496b-8039-f48aa4e9a571">
+	<property name="ireport.zoom" value="1.4641000000000013"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<style name="campo" hAlign="Left" vAlign="Middle" fontSize="8" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false">
+		<box leftPadding="6"/>
+	</style>
+	<style name="Linha Zebrada" isDefault="true" mode="Opaque">
+		<box leftPadding="3">
+			<topPen lineWidth="0.25"/>
+			<leftPen lineWidth="0.25"/>
+			<bottomPen lineWidth="0.25"/>
+			<rightPen lineWidth="0.25"/>
+		</box>
+		<conditionalStyle>
+			<conditionExpression><![CDATA[new Boolean(($V{REPORT_COUNT_ZEBRA}.intValue() % 2) == 0)]]></conditionExpression>
+			<style mode="Opaque" backcolor="#DDDDDE"/>
+		</conditionalStyle>
+	</style>
+	<style name="Linha" isDefault="true" mode="Opaque">
+		<box leftPadding="3">
+			<topPen lineWidth="0.25"/>
+			<leftPen lineWidth="0.25"/>
+			<bottomPen lineWidth="0.25"/>
+			<rightPen lineWidth="0.25"/>
+		</box>
+	</style>
+	<parameter name="CONJUGE" class="br.com.sicoob.capes.negocio.entidades.Pessoa"/>
+	<parameter name="filiacao" class="java.lang.String"/>
+	<field name="tipoSexo" class="java.lang.Character"/>
+	<field name="nomePai" class="java.lang.String"/>
+	<field name="nacionalidade.descricao" class="java.lang.String"/>
+	<field name="nomeMae" class="java.lang.String"/>
+	<field name="dataNascimento" class="java.util.Date"/>
+	<field name="ufOrgaoExpedidorDocumento" class="java.lang.String"/>
+	<field name="ocupacaoProfissional.descricao" class="java.lang.String"/>
+	<field name="orgaoExpedidorDocumento" class="java.lang.String"/>
+	<field name="descNaturalidade" class="java.lang.String"/>
+	<field name="nomeCompleto" class="java.lang.String"/>
+	<field name="estadoCivil.descricao" class="java.lang.String"/>
+	<field name="dataEmissaoDocumento" class="java.util.Date"/>
+	<field name="pessoa.cpfCnpj" class="java.lang.String"/>
+	<field name="numeroDocumento" class="java.lang.String"/>
+	<field name="tipoDocumento.descricao" class="java.lang.String"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band splitType="Stretch"/>
+	</title>
+	<pageHeader>
+		<band height="15" splitType="Stretch">
+			<staticText>
+				<reportElement uuid="584b2546-4890-4c8f-8076-535c97f113ac" mode="Transparent" x="0" y="0" width="575" height="15" backcolor="#CCCCCC"/>
+				<box>
+					<topPen lineWidth="0.75" lineStyle="Solid"/>
+					<leftPen lineWidth="0.75" lineStyle="Solid"/>
+					<bottomPen lineWidth="0.75" lineStyle="Solid"/>
+					<rightPen lineWidth="0.75" lineStyle="Solid"/>
+				</box>
+				<textElement>
+					<font fontName="Arial" size="11" isBold="true"/>
+				</textElement>
+				<text><![CDATA[DADOS CADASTRAIS]]></text>
+			</staticText>
+		</band>
+	</pageHeader>
+	<columnHeader>
+		<band height="1" splitType="Stretch"/>
+	</columnHeader>
+	<detail>
+		<band height="101" splitType="Stretch">
+			<staticText>
+				<reportElement uuid="95cd079d-15ec-4a5f-8d90-6435932ed16e" style="Linha" x="0" y="1" width="366" height="20"/>
+				<box leftPadding="3">
+					<topPen lineWidth="0.25"/>
+					<leftPen lineWidth="0.0"/>
+					<bottomPen lineWidth="0.25"/>
+					<rightPen lineWidth="0.25"/>
+				</box>
+				<textElement>
+					<font fontName="Arial" size="7" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Nome completo]]></text>
+			</staticText>
+			<textField isBlankWhenNull="true">
+				<reportElement uuid="4251c08c-6436-4e27-b6e0-4961617198e0" x="0" y="9" width="357" height="12"/>
+				<box leftPadding="3">
+					<topPen lineWidth="0.0"/>
+					<leftPen lineWidth="0.0"/>
+					<bottomPen lineWidth="0.0"/>
+					<rightPen lineWidth="0.0"/>
+				</box>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Arial" size="10"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{nomeCompleto}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement uuid="b2cdd3e4-a257-4ec5-94ac-c0d88941cd95" style="Linha" x="366" y="1" width="209" height="20"/>
+				<box leftPadding="3">
+					<topPen lineWidth="0.25"/>
+					<leftPen lineWidth="0.25"/>
+					<bottomPen lineWidth="0.25"/>
+					<rightPen lineWidth="0.0"/>
+				</box>
+				<textElement>
+					<font fontName="Arial" size="7" isBold="true"/>
+				</textElement>
+				<text><![CDATA[CPF]]></text>
+			</staticText>
+			<textField isBlankWhenNull="true">
+				<reportElement uuid="fa2246fb-dcc8-42b1-a49c-eebdf253d03a" mode="Transparent" x="366" y="9" width="207" height="12"/>
+				<box leftPadding="3">
+					<topPen lineWidth="0.0"/>
+					<leftPen lineWidth="0.0"/>
+					<bottomPen lineWidth="0.0"/>
+					<rightPen lineWidth="0.0"/>
+				</box>
+				<textElement>
+					<font fontName="Arial" size="10"/>
+				</textElement>
+				<textFieldExpression><![CDATA[java.util.regex.Pattern.compile("(\\d{3})(\\d{3})(\\d{3})(\\d{2})").matcher($F{pessoa.cpfCnpj}).replaceAll("$1.$2.$3-$4")]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement uuid="cdc08247-fea2-4499-91e9-20ca4590b6c3" style="Linha" x="0" y="81" width="106" height="20"/>
+				<box leftPadding="3">
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.0"/>
+					<bottomPen lineWidth="0.25"/>
+					<rightPen lineWidth="0.25"/>
+				</box>
+				<textElement>
+					<font fontName="Arial" size="7" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Estado Civil]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="38ce68ba-83b7-455b-82af-0e0b40cec3a6" style="Linha" x="390" y="21" width="135" height="20"/>
+				<box>
+					<topPen lineWidth="0.25"/>
+					<leftPen lineWidth="0.25"/>
+					<bottomPen lineWidth="0.25"/>
+					<rightPen lineWidth="0.25"/>
+				</box>
+				<textElement>
+					<font fontName="Arial" size="7" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Órgão]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="a48b7932-392b-4924-b048-f27fcf4f8c5b" style="Linha" x="320" y="61" width="255" height="20"/>
+				<box leftPadding="3">
+					<topPen lineWidth="0.25"/>
+					<leftPen lineWidth="0.25"/>
+					<bottomPen lineWidth="0.25"/>
+					<rightPen lineWidth="0.0"/>
+				</box>
+				<textElement>
+					<font fontName="Arial" size="7" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Profissão]]></text>
+			</staticText>
+			<textField isBlankWhenNull="true">
+				<reportElement uuid="8db02c18-feaa-4d8e-90a6-956e9857ad24" x="320" y="68" width="253" height="12"/>
+				<box leftPadding="3">
+					<topPen lineWidth="0.0"/>
+					<leftPen lineWidth="0.0"/>
+					<bottomPen lineWidth="0.0"/>
+					<rightPen lineWidth="0.0"/>
+				</box>
+				<textElement>
+					<font fontName="Arial" size="10"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{ocupacaoProfissional.descricao}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement uuid="24682e0c-b629-41a5-a2eb-5e94590479fc" mode="Transparent" x="390" y="29" width="135" height="12"/>
+				<box leftPadding="3">
+					<topPen lineWidth="0.0"/>
+					<leftPen lineWidth="0.0"/>
+					<bottomPen lineWidth="0.0"/>
+					<rightPen lineWidth="0.0"/>
+				</box>
+				<textElement>
+					<font fontName="Arial" size="10"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{orgaoExpedidorDocumento}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement uuid="1635a960-9f92-4419-93ef-af7194ecfc68" style="Linha" x="306" y="21" width="84" height="20"/>
+				<box>
+					<topPen lineWidth="0.25"/>
+					<leftPen lineWidth="0.25"/>
+					<bottomPen lineWidth="0.25"/>
+					<rightPen lineWidth="0.25"/>
+				</box>
+				<textElement>
+					<font fontName="Arial" size="7" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Emissão]]></text>
+			</staticText>
+			<textField pattern="dd/MM/yyyy" isBlankWhenNull="true">
+				<reportElement uuid="e4828951-e3df-48a0-8e86-81cfb80b15d4" mode="Transparent" x="306" y="29" width="84" height="12"/>
+				<box leftPadding="3">
+					<topPen lineWidth="0.0"/>
+					<leftPen lineWidth="0.0"/>
+					<bottomPen lineWidth="0.0"/>
+					<rightPen lineWidth="0.0"/>
+				</box>
+				<textElement>
+					<font fontName="Arial" size="10"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{dataEmissaoDocumento}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement uuid="7a7279e4-ce66-4c1b-95d5-6d54a988f6a3" style="Linha" x="525" y="21" width="50" height="20"/>
+				<box leftPadding="3">
+					<topPen lineWidth="0.25"/>
+					<leftPen lineWidth="0.25"/>
+					<bottomPen lineWidth="0.25"/>
+					<rightPen lineWidth="0.0"/>
+				</box>
+				<textElement>
+					<font fontName="Arial" size="7" isBold="true"/>
+				</textElement>
+				<text><![CDATA[UF]]></text>
+			</staticText>
+			<textField isBlankWhenNull="true">
+				<reportElement uuid="453408b7-8d09-41a1-936a-1950158587e7" mode="Transparent" x="525" y="29" width="29" height="12"/>
+				<box leftPadding="3">
+					<topPen lineWidth="0.0"/>
+					<leftPen lineWidth="0.0"/>
+					<bottomPen lineWidth="0.0"/>
+					<rightPen lineWidth="0.0"/>
+				</box>
+				<textElement>
+					<font fontName="Arial" size="10"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{ufOrgaoExpedidorDocumento}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement uuid="db6208ac-c750-454b-ab1a-0ab6c5e81c72" style="Linha" x="0" y="21" width="169" height="20"/>
+				<box leftPadding="3">
+					<topPen lineWidth="0.25"/>
+					<leftPen lineWidth="0.0"/>
+					<bottomPen lineWidth="0.25"/>
+					<rightPen lineWidth="0.25"/>
+				</box>
+				<textElement>
+					<font fontName="Arial" size="7" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Documento]]></text>
+			</staticText>
+			<textField isBlankWhenNull="true">
+				<reportElement uuid="4b0ae330-f181-43af-9739-fccef119f78e" mode="Transparent" x="0" y="89" width="106" height="12"/>
+				<box leftPadding="3">
+					<topPen lineWidth="0.0"/>
+					<leftPen lineWidth="0.0"/>
+					<bottomPen lineWidth="0.0"/>
+					<rightPen lineWidth="0.0"/>
+				</box>
+				<textElement>
+					<font fontName="Arial" size="10"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{estadoCivil.descricao}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement uuid="471cde6c-6933-4033-bd69-f5d701d7525a" style="Linha" x="169" y="21" width="137" height="20"/>
+				<box>
+					<topPen lineWidth="0.25"/>
+					<leftPen lineWidth="0.25"/>
+					<bottomPen lineWidth="0.25"/>
+					<rightPen lineWidth="0.25"/>
+				</box>
+				<textElement>
+					<font fontName="Arial" size="7" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Número]]></text>
+			</staticText>
+			<textField isBlankWhenNull="true">
+				<reportElement uuid="9678c5de-3336-4ffe-9c68-7c09dd126d81" mode="Transparent" x="169" y="29" width="137" height="12"/>
+				<box leftPadding="3">
+					<topPen lineWidth="0.0"/>
+					<leftPen lineWidth="0.0"/>
+					<bottomPen lineWidth="0.0"/>
+					<rightPen lineWidth="0.0"/>
+				</box>
+				<textElement>
+					<font fontName="Arial" size="10"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{numeroDocumento}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement uuid="e1989820-08f2-499a-8ec1-4a7b04750368" x="0" y="41" width="574" height="20"/>
+				<box leftPadding="3">
+					<topPen lineWidth="0.25"/>
+					<leftPen lineWidth="0.0"/>
+					<bottomPen lineWidth="0.25"/>
+					<rightPen lineWidth="0.0"/>
+				</box>
+				<textElement>
+					<font fontName="Arial" size="7" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Filiação]]></text>
+			</staticText>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement uuid="b56cba05-f0e2-47ca-8934-6e147765836d" stretchType="RelativeToBandHeight" mode="Transparent" x="0" y="49" width="573" height="12" isPrintWhenDetailOverflows="true"/>
+				<box leftPadding="3">
+					<topPen lineWidth="0.0"/>
+					<leftPen lineWidth="0.0"/>
+					<bottomPen lineWidth="0.0"/>
+					<rightPen lineWidth="0.0"/>
+				</box>
+				<textElement>
+					<font fontName="Arial" size="10"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{filiacao}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement uuid="8af212c2-bf13-4af0-8108-4d8aee40dc92" style="Linha" x="117" y="61" width="102" height="20"/>
+				<box>
+					<topPen lineWidth="0.25"/>
+					<leftPen lineWidth="0.25"/>
+					<bottomPen lineWidth="0.25"/>
+					<rightPen lineWidth="0.25"/>
+				</box>
+				<textElement>
+					<font fontName="Arial" size="7" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Naturalidade]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="2693512e-1a40-436c-a18e-3badc5993a0f" style="Linha" x="0" y="61" width="117" height="20"/>
+				<box leftPadding="3">
+					<topPen lineWidth="0.25"/>
+					<leftPen lineWidth="0.0"/>
+					<bottomPen lineWidth="0.25"/>
+					<rightPen lineWidth="0.25"/>
+				</box>
+				<textElement>
+					<font fontName="Arial" size="7" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Nacionalidade]]></text>
+			</staticText>
+			<textField isBlankWhenNull="true">
+				<reportElement uuid="80e2c8ee-856f-46b4-8718-05430a725071" x="0" y="68" width="116" height="12"/>
+				<box leftPadding="3">
+					<topPen lineWidth="0.0"/>
+					<leftPen lineWidth="0.0"/>
+					<bottomPen lineWidth="0.0"/>
+					<rightPen lineWidth="0.0"/>
+				</box>
+				<textElement verticalAlignment="Top">
+					<font fontName="Arial" size="10"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{nacionalidade.descricao}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement uuid="0da4baee-cb7e-4d29-aee4-72572043aef4" style="Linha" x="219" y="61" width="69" height="20"/>
+				<box>
+					<topPen lineWidth="0.25"/>
+					<leftPen lineWidth="0.25"/>
+					<bottomPen lineWidth="0.25"/>
+					<rightPen lineWidth="0.25"/>
+				</box>
+				<textElement>
+					<font fontName="Arial" size="7" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Nascimento]]></text>
+			</staticText>
+			<textField isBlankWhenNull="true">
+				<reportElement uuid="65910e0a-91e8-44f6-a171-a577f0ff6699" mode="Transparent" x="117" y="69" width="102" height="12"/>
+				<box leftPadding="3">
+					<topPen lineWidth="0.0"/>
+					<leftPen lineWidth="0.0"/>
+					<bottomPen lineWidth="0.0"/>
+					<rightPen lineWidth="0.0"/>
+				</box>
+				<textElement>
+					<font fontName="Arial" size="10"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{descNaturalidade}]]></textFieldExpression>
+			</textField>
+			<textField pattern="dd/MM/yyyy" isBlankWhenNull="true">
+				<reportElement uuid="02995849-c5e4-4378-a458-d7f70c5bc49f" mode="Transparent" x="219" y="69" width="69" height="12"/>
+				<box leftPadding="3">
+					<topPen lineWidth="0.0"/>
+					<leftPen lineWidth="0.0"/>
+					<bottomPen lineWidth="0.0"/>
+					<rightPen lineWidth="0.0"/>
+				</box>
+				<textElement>
+					<font fontName="Arial" size="10"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{dataNascimento}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement uuid="cbaf8ab0-589b-42cc-a47c-4c4eecb4a98c" style="Linha" x="287" y="61" width="33" height="20"/>
+				<box>
+					<topPen lineWidth="0.25"/>
+					<leftPen lineWidth="0.25"/>
+					<bottomPen lineWidth="0.25"/>
+					<rightPen lineWidth="0.25"/>
+				</box>
+				<textElement>
+					<font fontName="Arial" size="7" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Sexo]]></text>
+			</staticText>
+			<textField isBlankWhenNull="true">
+				<reportElement uuid="2e0b5f04-26df-40cd-a460-18200066fe2a" x="289" y="68" width="14" height="12"/>
+				<box leftPadding="0">
+					<topPen lineWidth="0.0"/>
+					<leftPen lineWidth="0.0"/>
+					<bottomPen lineWidth="0.0"/>
+					<rightPen lineWidth="0.0"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Arial" size="10"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{tipoSexo} != null && $F{tipoSexo}.toString().equals("M") ? "M" : "F"]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement uuid="b19be23c-6879-459f-85f8-db9c63ae5420" mode="Transparent" x="0" y="29" width="160" height="12"/>
+				<box leftPadding="3">
+					<topPen lineWidth="0.0"/>
+					<leftPen lineWidth="0.0"/>
+					<bottomPen lineWidth="0.0"/>
+					<rightPen lineWidth="0.0"/>
+				</box>
+				<textElement>
+					<font fontName="Arial" size="10"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{tipoDocumento.descricao}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement uuid="1fee6dfa-f816-4f4f-b68e-610c324de95b" x="106" y="81" width="363" height="20"/>
+				<box leftPadding="3">
+					<leftPen lineWidth="0.25"/>
+				</box>
+				<textElement>
+					<font fontName="Arial" size="7" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Cônjuge / Companheiro (a)]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="805d5ef0-e868-4979-ae3c-8ddbe951b89e" style="Linha" x="469" y="81" width="106" height="20"/>
+				<box leftPadding="3">
+					<topPen lineWidth="0.25"/>
+					<leftPen lineWidth="0.25"/>
+					<bottomPen lineWidth="0.25"/>
+					<rightPen lineWidth="0.0"/>
+				</box>
+				<textElement>
+					<font fontName="Arial" size="7" isBold="true"/>
+				</textElement>
+				<text><![CDATA[CPF]]></text>
+			</staticText>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement uuid="0406eb0b-8049-41c8-be2d-e84a5618e1f3" stretchType="RelativeToTallestObject" mode="Transparent" x="473" y="88" width="105" height="12"/>
+				<box leftPadding="0">
+					<topPen lineWidth="0.0" lineStyle="Solid"/>
+					<leftPen lineWidth="0.0"/>
+					<bottomPen lineWidth="0.0" lineStyle="Solid"/>
+					<rightPen lineWidth="0.0" lineStyle="Solid"/>
+				</box>
+				<textElement verticalAlignment="Middle" markup="none">
+					<font fontName="Arial" size="10"/>
+				</textElement>
+				<textFieldExpression><![CDATA[java.util.regex.Pattern.compile("(\\d{3})(\\d{3})(\\d{3})(\\d{2})").matcher($P{CONJUGE}.getCpfCnpj()).replaceAll("$1.$2.$3-$4")]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement uuid="ee3a81af-d00b-4d29-8611-726e6c50affd" stretchType="RelativeToTallestObject" mode="Transparent" x="106" y="88" width="363" height="12"/>
+				<box>
+					<topPen lineWidth="0.0"/>
+					<leftPen lineWidth="0.0"/>
+					<bottomPen lineWidth="0.0"/>
+					<rightPen lineWidth="0.0"/>
+				</box>
+				<textElement verticalAlignment="Middle" markup="none">
+					<font fontName="Arial" size="10"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{CONJUGE}.getPessoaCompartilhamento().getNomeCompleto()]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band splitType="Stretch"/>
+	</pageFooter>
+	<summary>
+		<band splitType="Stretch"/>
+	</summary>
+</jasperReport>

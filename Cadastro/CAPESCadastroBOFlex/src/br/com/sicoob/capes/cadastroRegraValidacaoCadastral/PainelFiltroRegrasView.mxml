@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<CanvasValidavel xmlns="br.com.bancoob.componentes.containers.validaveis.*" 
+                 xmlns:mx="http://www.adobe.com/2006/mxml"
+                 xmlns:ns1="br.com.bancoob.componentes.titulo.*" 
+                 xmlns:ns2="br.com.bancoob.componentes.containers.validaveis.*" 
+                 xmlns:ns3="br.com.bancoob.componentes.*" 
+                 xmlns:ns4="br.com.bancoob.componentes.input.*" 
+                 xmlns:ns5="br.com.bancoob.componentes.campos.*"
+                 xmlns:ns6="br.com.bancoob.componentes.painellista.*"
+                 xmlns:ns7="br.com.bancoob.componentes.grid.*" 
+                 defaultButton="{btFiltrar}">
+    
+	<mx:Script>
+		<![CDATA[
+		]]>
+	</mx:Script>
+	<ns1:SubtituloView texto="Filtros" booTituloPesquisa="true" x="0" y="0" />
+    
+    <ns3:Rotulo text="Código" textAlign="left" x="10" y="34" height="18"/>
+    <ns5:CampoInteiroView id="codigoRegra" x="10" y="50" width="95" height="22"/>
+
+    <ns3:Rotulo text="Funcionalidade" textAlign="left" x="110" y="34" height="18"/>
+    <ns4:Combo id="cmbFuncionalidade" x="110" y="50" width="215" conteudoMaiusculo="true"
+               labelField="descricao" inserirItemOpcional="true" labelItemOpcional="TODOS" />
+
+    <ns3:Rotulo text="Tipo" textAlign="left" x="330" y="34" />
+    <ns4:Combo id="cmbTipo" x="330" y="50" width="169" conteudoMaiusculo="true"
+               labelField="descricao" inserirItemOpcional="true" labelItemOpcional="TODOS" />
+
+    <ns3:Rotulo text="Situação" textAlign="left" x="504" y="34"  height="18"/>
+    <ns4:ComboBooleana id="cmbSituacao" x="504" y="50" width="100" conteudoMaiusculo="true"
+               labelFalso="INATIVA" labelVerdadeiro="ATIVA" inserirItemOpcional="true" labelItemOpcional="TODOS" />
+
+	<ns3:Rotulo text="Categoria" textAlign="left" x="609" y="34"  height="18"/>
+	<ns4:Combo id="cmbPerfilCadastro" x="609" y="50" width="130" conteudoMaiusculo="true"
+					   labelField="descricao" inserirItemOpcional="true" labelItemOpcional="TODOS" />
+
+	
+    <ns6:BotaoProcurarView width="85" id="btFiltrar" right="90" y="80" label="FILTRAR" toolTip="REALIZA A PESQUISA UTILIZANDO OS FILTROS SELECIONADOS"/>
+    
+    <ns3:Botao width="85" id="btLimpar" right="0"  y="80" label="LIMPAR" toolTip="LIMPAR FILTROS" />
+</CanvasValidavel>

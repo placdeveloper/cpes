@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Modulo 
+	xmlns="br.com.bancoob.componentes.*" 
+	xmlns:mx="http://www.adobe.com/2006/mxml"
+	width="100%" height="100%" 
+	verticalScrollPolicy="auto"
+	layout="absolute"
+	xmlns:containers="br.com.bancoob.componentes.containers.*" 
+	xmlns:grid="br.com.bancoob.componentes.grid.*">
+	
+	<containers:CanvasBancoob width="100%" height="100%">
+		<grid:AdvancedDataGridBancoob id="gridDados" width="100%" height="100%" variableRowHeight="true"
+									  allowDragSelection="false" initialize="{gc.refresh()}" displayItemsExpanded="true">
+			
+			<grid:dataProvider>
+				<mx:GroupingCollection id="gc" >
+					<mx:grouping>
+						<mx:Grouping label="agrupador" compareFunction="{GridUtils.compare}">
+							<mx:GroupingField groupingFunction="{GridUtils.groupFunc}"/>
+						</mx:Grouping>
+					</mx:grouping>
+				</mx:GroupingCollection>
+			</grid:dataProvider>
+			
+			<grid:columns>
+				<mx:AdvancedDataGridColumn headerText="Autorizações" dataField="tipoAutorizacaoLabel" width="35" sortable="false" />
+				<mx:AdvancedDataGridColumn headerText="Operação" dataField="tipoOperacao" width="35" sortable="false" />
+				<mx:AdvancedDataGridColumn headerText="Data/Hora Cadastro" dataField="dataHoraCadastro" width="35" sortable="false" />
+				<mx:AdvancedDataGridColumn headerText="Cód. Autorização" dataField="idAutorizacao" width="35" sortable="false" />
+				<mx:AdvancedDataGridColumn headerText="Origem" dataField="cooperativaOrigem" width="35" sortable="false" />
+				<mx:AdvancedDataGridColumn headerText="Destino" dataField="cooperativaDestino" width="35" sortable="false" />
+				<mx:AdvancedDataGridColumn headerText="Possui Documento?" dataField="possuiDocumento" width="35" sortable="false" textAlign="center"/>
+			</grid:columns>
+			
+		</grid:AdvancedDataGridBancoob>
+	</containers:CanvasBancoob>
+	
+</Modulo>

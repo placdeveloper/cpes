@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<CanvasBancoob	xmlns="br.com.bancoob.componentes.containers.*"
+				xmlns:mx="http://www.adobe.com/2006/mxml"
+				xmlns:grid="br.com.bancoob.componentes.grid.*"
+				xmlns:componentes="br.com.bancoob.componentes.*"
+				width="905" height="530">
+
+	<mx:Script>
+		<![CDATA[import br.com.bancoob.componentes.tabelapaginada.TabelaPaginadaUtils;]]>
+	</mx:Script>
+
+	<grid:Grid id="grid" width="100%" height="90%" horizontalScrollPolicy="off" resizableColumns="true" selectable="false" sortableColumns="false" variableRowHeight="true" verticalScrollPolicy="auto">
+		<grid:columns>
+			<grid:ColunaGrid width="200" headerText="Grupo Econômico" dataField="nomeGrupoEconomico" labelFunction="{TabelaPaginadaUtils.defaultLabelFunction}"/>
+			<grid:ColunaGrid width="50" headerText="Quantidade" dataField="quantidade" labelFunction="{TabelaPaginadaUtils.defaultLabelFunction}"/>
+		</grid:columns>
+	</grid:Grid>
+
+	<HBoxBancoob height="28" width="100%" y="505" horizontalAlign="center">			
+		<componentes:Botao id="btAtualizar" label="Atualizar" tabIndex="1" width="150" />
+	</HBoxBancoob>
+
+</CanvasBancoob>

@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+
+	<artifactId>capes-integracao-comum-impl</artifactId>
+	<packaging>ejb</packaging>
+	<name>CAPES - Integracao - CAPESIntegracaoComumImpl</name>
+
+	<parent>
+		<groupId>br.com.sicoob.capes</groupId>
+		<artifactId>capes-modulo-integracao</artifactId>
+		<version>2.0.8.1</version>
+		<relativePath>..</relativePath>
+	</parent>
+
+	<scm>
+		<connection>scm:svn:http://svn.sicoob.com.br/fontesbancoob/SISBR/Aplicativos/JAVA/trunk/CAPES/tags/capes-2.0.8.1/trunk/CAPESIntegracaoComumImpl</connection>
+		<developerConnection>scm:svn:http://svn.sicoob.com.br/fontesbancoob/SISBR/Aplicativos/JAVA/trunk/CAPES/tags/capes-2.0.8.1/trunk/CAPESIntegracaoComumImpl</developerConnection>
+		<url>http://svn.sicoob.com.br/fontesbancoob/SISBR/Aplicativos/JAVA/trunk/CAPES/tags/capes-2.0.8.1/trunk/CAPESIntegracaoComumImpl</url>
+	</scm>
+
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-ejb-plugin</artifactId>
+			</plugin>
+		</plugins>
+	</build>
+
+	<dependencies>
+		<!-- CAPES -->
+		<dependency>
+			<groupId>${project.groupId}</groupId>
+			<artifactId>capes-integracao</artifactId>
+			<version>${project.version}</version>
+		</dependency>
+		<!-- CAPES -->
+
+		<!-- INTERNAS -->
+		<dependency>
+			<groupId>br.com.sicoob.framework</groupId>
+			<artifactId>sicoob-java</artifactId>
+		</dependency>
+		<!-- INTERNAS -->
+		<dependency>
+			<groupId>br.com.sicoob.adm</groupId>
+			<artifactId>adm-api-api</artifactId>
+			<version>${versao.adm}</version>
+		</dependency>
+		<dependency>
+			<groupId>br.com.sicoob.intext</groupId>
+			<artifactId>intext-api</artifactId>
+			<version>${versao.intext}</version>
+			<exclusions>
+				<exclusion>
+					<groupId>br.com.sicoob.framework</groupId>
+					<artifactId>sicoob-java</artifactId>
+				</exclusion>
+				<exclusion>
+					<groupId>org.apache</groupId>
+					<artifactId>commons-lang</artifactId>
+				</exclusion>
+			</exclusions>
+		</dependency>
+		<dependency>
+			<groupId>br.com.sicoob.loc</groupId>
+			<artifactId>localidade-api</artifactId>
+			<version>${versao.loc}</version>
+		</dependency>
+		<dependency>
+			<groupId>br.com.sicoob.sci</groupId>
+			<artifactId>sci-cadastro-instituicao-integracao-ejb</artifactId>
+			<version>${versao.sci}</version>
+			<type>ejb-client</type>
+		</dependency>
+		<!-- INTERNAS -->
+
+		<!-- EXTERNAS -->
+		<dependency>
+			<groupId>commons-lang</groupId>
+			<artifactId>commons-lang</artifactId>
+		</dependency>
+		<!-- EXTERNAS -->
+
+	</dependencies>
+
+</project>

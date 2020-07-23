@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+
+	<artifactId>capes-ear-processamento-api</artifactId>
+	<packaging>ear</packaging>
+	<name>CAPES - EAR - Processamento API</name>
+
+	<parent>
+		<groupId>br.com.sicoob.capes</groupId>
+		<artifactId>capes-modulo-ear</artifactId>
+		<version>2.0.8.1</version>
+		<relativePath>..</relativePath>
+	</parent>
+
+	<scm>
+		<url>http://svn.sicoob.com.br/fontesbancoob/SISBR/Aplicativos/JAVA/trunk/CAPES/tags/capes-2.0.8.1/EAR/ProcessamentoApi</url>
+		<connection>scm:svn:http://svn.sicoob.com.br/fontesbancoob/SISBR/Aplicativos/JAVA/trunk/CAPES/tags/capes-2.0.8.1/EAR/ProcessamentoApi</connection>
+		<developerConnection>scm:svn:http://svn.sicoob.com.br/fontesbancoob/SISBR/Aplicativos/JAVA/trunk/CAPES/tags/capes-2.0.8.1/EAR/ProcessamentoApi</developerConnection>
+	</scm>
+	
+	<build>
+		<plugins>
+			<plugin>
+				<artifactId>maven-ear-plugin</artifactId>
+				<configuration>
+					<fileNameMapping>no-version</fileNameMapping>
+					<modules>
+						<ejbModule>
+							<groupId>${project.groupId}</groupId>
+							<artifactId>capes-cadastro-ejb</artifactId>
+						</ejbModule>
+						<ejbModule>
+							<groupId>${project.groupId}</groupId>
+							<artifactId>capes-replicacao-comum-ejb</artifactId>
+						</ejbModule>
+						<ejbModule>
+							<groupId>${project.groupId}</groupId>
+							<artifactId>capes-integracao-comum-impl</artifactId>
+						</ejbModule>
+						<ejbModule>
+							<groupId>${project.groupId}</groupId>
+							<artifactId>capes-integracao-processamento-impl</artifactId>
+						</ejbModule>
+						<ejbModule>
+							<groupId>${project.groupId}</groupId>
+							<artifactId>capes-servico-replicacao-ejb</artifactId>
+						</ejbModule>
+						<ejbModule>
+							<groupId>${project.groupId}</groupId>
+							<artifactId>capes-api-impl</artifactId>
+						</ejbModule>
+						<ejbModule>
+							<groupId>${project.groupId}</groupId>
+							<artifactId>capes-api-inclusao-impl</artifactId>
+						</ejbModule>						
+						<webModule>
+							<groupId>${project.groupId}</groupId>
+							<artifactId>capes-war-processamento</artifactId>
+							<contextRoot>/capes</contextRoot>
+						</webModule>
+					</modules>
+				</configuration>
+			</plugin>
+		</plugins>
+	</build>
+
+	<dependencies>
+		<!-- CAPES -->
+		<dependency>
+			<groupId>${project.groupId}</groupId>
+			<artifactId>capes-cadastro-ejb</artifactId>
+			<version>${project.version}</version>
+			<type>ejb</type>
+		</dependency>
+		<dependency>
+			<groupId>${project.groupId}</groupId>
+			<artifactId>capes-replicacao-comum-ejb</artifactId>
+			<version>${project.version}</version>
+			<type>ejb</type>
+		</dependency>
+		<dependency>
+			<groupId>${project.groupId}</groupId>
+			<artifactId>capes-api-impl</artifactId>
+			<version>${project.version}</version>
+			<type>ejb</type>
+		</dependency>
+		<dependency>
+			<groupId>${project.groupId}</groupId>
+			<artifactId>capes-integracao-comum-impl</artifactId>
+			<version>${project.version}</version>
+			<type>ejb</type>
+		</dependency>
+		<dependency>
+			<groupId>${project.groupId}</groupId>
+			<artifactId>capes-integracao-processamento-impl</artifactId>
+			<version>${project.version}</version>
+			<type>ejb</type>
+		</dependency>
+		<dependency>
+			<groupId>${project.groupId}</groupId>
+			<artifactId>capes-servico-replicacao-ejb</artifactId>
+			<version>${project.version}</version>
+			<type>ejb</type>
+		</dependency>
+		<dependency>
+			<groupId>${project.groupId}</groupId>
+			<artifactId>capes-api-inclusao-impl</artifactId>
+			<version>${project.version}</version>
+			<type>ejb</type>
+		</dependency>
+		<dependency>
+			<groupId>${project.groupId}</groupId>
+			<artifactId>capes-war-processamento</artifactId>
+			<version>${project.version}</version>
+			<type>war</type>
+		</dependency>
+		<dependency>
+			<groupId>${project.groupId}</groupId>
+			<artifactId>capes-comum-lib-server</artifactId>
+			<version>${project.version}</version>
+			<type>jar</type>
+		</dependency>
+		<dependency>
+			<groupId>${project.groupId}</groupId>
+			<artifactId>capes-cadastro-was</artifactId>
+			<version>${project.version}</version>
+		</dependency>
+		<!-- CAPES -->
+
+		<!-- INTERNAS -->
+		<!-- INTERNAS -->
+	</dependencies>
+</project>

@@ -1,0 +1,204 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="RelatorioValidacaoCadastral_Sintetico" pageWidth="802" pageHeight="555" orientation="Landscape" columnWidth="802" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0">
+	<parameter name="USUARIO" class="br.com.bancoob.negocio.contexto.InformacoesUsuario"/>
+	<parameter name="FILTRO" class="br.com.sicoob.capes.relatorio.negocio.dto.RelatorioValidacaoCadastralDTO"/>
+	<queryString>
+		<![CDATA[]]>
+	</queryString>
+	<field name="funcionalidade" class="java.lang.String"/>
+	<field name="tipoRegra" class="java.lang.String"/>
+	<field name="erro" class="java.lang.String"/>
+	<field name="quantidade" class="java.lang.Long"/>
+	<field name="central" class="java.lang.String"/>
+	<field name="singular" class="java.lang.String"/>
+	<field name="unidade" class="java.lang.String"/>
+	<field name="nomeUnidade" class="java.lang.String"/>
+	<variable name="central" class="java.lang.Integer" resetType="None">
+		<variableExpression><![CDATA[$P{FILTRO}.getCentral()]]></variableExpression>
+	</variable>
+	<variable name="singular" class="java.lang.Integer" resetType="None">
+		<variableExpression><![CDATA[$P{FILTRO}.getSingular()]]></variableExpression>
+		<initialValueExpression><![CDATA[]]></initialValueExpression>
+	</variable>
+	<variable name="cpfCnpj" class="java.lang.String" resetType="None">
+		<variableExpression><![CDATA[$P{FILTRO}.getCpfCnpj()]]></variableExpression>
+	</variable>
+	<variable name="descricaoTipoErro" class="java.lang.String" resetType="None">
+		<variableExpression><![CDATA[$P{FILTRO}.getDescricaoTipoErro()]]></variableExpression>
+	</variable>
+	<variable name="codigoTipoRegra" class="java.lang.String" resetType="None">
+		<variableExpression><![CDATA[$P{FILTRO}.getCodigoTipoRegra()]]></variableExpression>
+	</variable>
+	<variable name="dataAtual" class="java.util.Date">
+		<variableExpression><![CDATA[new java.util.Date()]]></variableExpression>
+	</variable>
+	<variable name="unidade" class="java.lang.Integer" resetType="None">
+		<variableExpression><![CDATA[$P{FILTRO}.getUnidade()]]></variableExpression>
+	</variable>
+	<group name="grupoSingular" isReprintHeaderOnEachPage="true">
+		<groupExpression><![CDATA[$F{singular}]]></groupExpression>
+		<groupHeader>
+			<band height="27" splitType="Prevent">
+				<rectangle>
+					<reportElement x="0" y="4" width="802" height="23" printWhenGroupChanges="grupoSingular" backcolor="#999999"/>
+					<graphicElement>
+						<pen lineWidth="0.0"/>
+					</graphicElement>
+				</rectangle>
+				<staticText>
+					<reportElement mode="Transparent" x="0" y="4" width="135" height="23" printWhenGroupChanges="grupoSingular"/>
+					<textElement textAlignment="Left" verticalAlignment="Middle">
+						<font fontName="Arial" size="11" isBold="true"/>
+					</textElement>
+					<text><![CDATA[FUNCIONALIDADE]]></text>
+				</staticText>
+				<staticText>
+					<reportElement mode="Transparent" x="135" y="4" width="478" height="23" printWhenGroupChanges="grupoSingular"/>
+					<textElement textAlignment="Left" verticalAlignment="Middle">
+						<font fontName="Arial" size="11" isBold="true"/>
+					</textElement>
+					<text><![CDATA[ERRO]]></text>
+				</staticText>
+				<staticText>
+					<reportElement mode="Transparent" x="613" y="4" width="96" height="23" printWhenGroupChanges="grupoSingular"/>
+					<textElement textAlignment="Left" verticalAlignment="Middle">
+						<font fontName="Arial" size="11" isBold="true"/>
+					</textElement>
+					<text><![CDATA[TIPO DE ERRO]]></text>
+				</staticText>
+				<staticText>
+					<reportElement mode="Transparent" x="709" y="4" width="93" height="23" printWhenGroupChanges="grupoSingular"/>
+					<box rightPadding="1"/>
+					<textElement textAlignment="Left" verticalAlignment="Middle">
+						<font fontName="Arial" size="11" isBold="true"/>
+					</textElement>
+					<text><![CDATA[QUANTIDADE]]></text>
+				</staticText>
+			</band>
+		</groupHeader>
+	</group>
+	<title>
+		<band height="39" splitType="Prevent">
+			<rectangle>
+				<reportElement x="0" y="8" width="802" height="31"/>
+			</rectangle>
+			<staticText>
+				<reportElement mode="Opaque" x="9" y="3" width="60" height="10"/>
+				<box>
+					<pen lineWidth="1.0"/>
+					<topPen lineWidth="0.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="0.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Center">
+					<font fontName="Arial" size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[FILTROS]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Transparent" x="6" y="20" width="35" height="11" forecolor="#000000" backcolor="#FFFFFF"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle" rotation="None" lineSpacing="Single" markup="none">
+					<font fontName="Arial" size="9" isBold="true" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="Helvetica" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+				</textElement>
+				<text><![CDATA[Central:]]></text>
+			</staticText>
+			<textField pattern="" isBlankWhenNull="false">
+				<reportElement mode="Transparent" x="45" y="20" width="69" height="11" forecolor="#000000" backcolor="#FFFFFF"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle" rotation="None" lineSpacing="Single" markup="none">
+					<font fontName="Arial" size="9" isBold="false" isItalic="true" isUnderline="false" isStrikeThrough="false" pdfFontName="Helvetica" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$V{central} != null ?
+$V{central}.toString() :
+"Todos"]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement mode="Transparent" x="151" y="20" width="50" height="11" forecolor="#000000" backcolor="#FFFFFF"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle" rotation="None" lineSpacing="Single" markup="none">
+					<font fontName="Arial" size="9" isBold="true" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="Helvetica" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+				</textElement>
+				<text><![CDATA[Instituição:]]></text>
+			</staticText>
+			<textField pattern="" isBlankWhenNull="false">
+				<reportElement mode="Transparent" x="205" y="20" width="50" height="11" forecolor="#000000" backcolor="#FFFFFF"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle" rotation="None" lineSpacing="Single" markup="none">
+					<font fontName="Arial" size="9" isBold="false" isItalic="true" isUnderline="false" isStrikeThrough="false" pdfFontName="Helvetica" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$V{singular} != null ?
+$V{singular}.toString() :
+"Todos"]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement mode="Transparent" x="324" y="20" width="40" height="11" forecolor="#000000" backcolor="#FFFFFF"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle" rotation="None" lineSpacing="Single" markup="none">
+					<font fontName="Arial" size="9" isBold="true" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="Helvetica" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+				</textElement>
+				<text><![CDATA[Unidade:]]></text>
+			</staticText>
+			<textField pattern="" isBlankWhenNull="false">
+				<reportElement mode="Transparent" x="368" y="20" width="46" height="11" forecolor="#000000" backcolor="#FFFFFF"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle" rotation="None" lineSpacing="Single" markup="none">
+					<font fontName="Arial" size="9" isBold="false" isItalic="true" isUnderline="false" isStrikeThrough="false" pdfFontName="Helvetica" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$V{unidade} != null ?
+$V{unidade}.toString() :
+"Todos"]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement mode="Transparent" x="456" y="20" width="68" height="11" forecolor="#000000" backcolor="#FFFFFF"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle" rotation="None" lineSpacing="Single" markup="none">
+					<font fontName="Arial" size="9" isBold="true" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="Helvetica" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+				</textElement>
+				<text><![CDATA[Tipo Restrição: ]]></text>
+			</staticText>
+			<textField pattern="" isBlankWhenNull="false">
+				<reportElement mode="Transparent" x="529" y="20" width="273" height="11" forecolor="#000000" backcolor="#FFFFFF"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle" rotation="None" lineSpacing="Single" markup="none">
+					<font fontName="Arial" size="9" isBold="false" isItalic="true" isUnderline="false" isStrikeThrough="false" pdfFontName="Helvetica" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$V{codigoTipoRegra} != null ? $V{codigoTipoRegra} : "Todos"]]></textFieldExpression>
+			</textField>
+		</band>
+	</title>
+	<detail>
+		<band height="13">
+			<rectangle>
+				<reportElement stretchType="RelativeToBandHeight" x="0" y="0" width="802" height="13" backcolor="#CCCCCC">
+					<printWhenExpression><![CDATA[new Boolean(($V{REPORT_COUNT}.intValue() % 2) == 0)]]></printWhenExpression>
+				</reportElement>
+				<graphicElement>
+					<pen lineWidth="0.0"/>
+				</graphicElement>
+			</rectangle>
+			<textField isStretchWithOverflow="true" pattern="" isBlankWhenNull="true">
+				<reportElement stretchType="RelativeToTallestObject" mode="Transparent" x="0" y="0" width="135" height="13" forecolor="#000000" backcolor="#FFFFFF"/>
+				<textElement verticalAlignment="Top" rotation="None" lineSpacing="Single" markup="none">
+					<font fontName="Arial" size="11" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="Helvetica" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[br.com.sicoob.capes.comum.negocio.enums.FuncionalidadeValidacaoCadastralEnum.valueOf($F{funcionalidade}).getDescricao()]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement stretchType="RelativeToTallestObject" x="140" y="0" width="473" height="13"/>
+				<textElement>
+					<font fontName="Arial" size="11"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{erro}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" pattern="" isBlankWhenNull="true">
+				<reportElement stretchType="RelativeToTallestObject" mode="Transparent" x="613" y="0" width="96" height="13" forecolor="#000000" backcolor="#FFFFFF"/>
+				<textElement verticalAlignment="Top" rotation="None" lineSpacing="Single" markup="none">
+					<font fontName="Arial" size="11" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="Helvetica" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{tipoRegra}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" pattern="#,##0" isBlankWhenNull="true">
+				<reportElement stretchType="RelativeToTallestObject" mode="Transparent" x="709" y="0" width="93" height="13" forecolor="#000000" backcolor="#FFFFFF"/>
+				<box rightPadding="1"/>
+				<textElement textAlignment="Right" verticalAlignment="Top" rotation="None" lineSpacing="Single" markup="none">
+					<font fontName="Arial" size="11" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="Helvetica" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+				</textElement>
+				<textFieldExpression class="java.lang.Long"><![CDATA[$F{quantidade}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+</jasperReport>

@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<bancoobValidaveis:ModuloValidavel xmlns:bancoob="br.com.bancoob.componentes.*" 
+				xmlns:bancoobInput="br.com.bancoob.componentes.input.*"
+				xmlns:campos="br.com.bancoob.componentes.campos.*"
+				xmlns:pesquisacodigo="br.com.sicoob.capes.comum.componentes.pesquisacodigo.*"
+				xmlns:bancoobValidaveis="br.com.bancoob.componentes.containers.validaveis.*"
+				xmlns:mx="http://www.adobe.com/2006/mxml"
+				width="100%" height="450" layout="absolute" styleName="ModuloSemEstilo" 
+				verticalScrollPolicy="auto" >
+
+	<mx:Image x="17" y="6" source="br/com/bancoob/imagens/icos/sinfo_16.png" alpha=".5"/>
+	<mx:Label x="39" y="6" text="DADOS DO PARCEIRO" fontWeight="bold" fontFamily="ArialEmbedded" alpha=".8"/>
+	<mx:Image y="12" source="br/com/bancoob/imagens/imgsTelas/linha.swf" scaleContent="false" left="154" right="20"/>
+	
+	<bancoob:Rotulo x="25" y="42" text="Inclusão no Sistema:" id="lblDataInclusao" textAlign="right" width="130"/>
+	<campos:CampoData x="158" y="40" id="txtDataInclusao" validarObrigatorio="true" />
+	
+	<bancoob:Rotulo x="25" y="70" text="Data do Cadastro:" id="lblDataCadastro" textAlign="right" width="130"/>
+	<campos:CampoData x="158" y="68" id="txtDataCadastro" enabled="false"/>
+	
+	<bancoob:Rotulo x="377" y="42" id="lblDataSFN"  text="Cliente do SFN desde:" textAlign="right" width="172"/>
+	<campos:CampoData x="552" y="40" id="txtDataSFN" validarObrigatorio="false"/>
+	
+	<bancoob:Rotulo x="377" y="70" id="lblUltimaRenovacao"  text="Última Renovação:" textAlign="right" width="172"/>
+	<bancoob:Rotulo  x="552" y="68" width="100%" id="txtUltimaRenovacao" fontSize="11" fontStyle="normal" fontWeight="bold" textAlign="left" color="#465B45"/>
+
+	<bancoob:Rotulo x="25" y="98" id="lblCpfCnpj"  text="" width="130" textAlign="right"/> 
+	<bancoob:Rotulo x="158" y="96" width="100%" id="txtCpfCnpj" fontSize="12" fontStyle="normal" fontWeight="bold" textAlign="left" color="#465B45"/>
+	
+	<bancoob:Rotulo x="25" y="126" text="Categoria Cadastro:" width="130" textAlign="right"/>
+	<bancoobInput:Combo x="158" y="124" width="160" tabIndex="1" id="cboPerfilCadastro" labelField="descricao" inserirItemOpcional="false" validarObrigatorio="true"/>
+
+	<bancoob:Rotulo x="25" y="154" id="lblNomeReceita" text="Nome na Receita Federal:" width="130" textAlign="right" toolTip="Nome cadastrado na Receita Federal"/>
+	<bancoobInput:Texto x="158" y="152" width="410" id="txtNomeReceita" maxChars="50" somenteMaiusculas="true" enabled="false" toolTip="Nome cadastrado na Receita Federal" />
+
+	<bancoob:Rotulo x="25" y="182" id="lblNomePessoa" text="" width="130" textAlign="right"/>
+	<bancoobInput:Texto x="158" y="180" width="410" id="txtNomePessoa" maxChars="50" somenteMaiusculas="true" validarObrigatorio="true"/>
+
+	<bancoob:Rotulo x="25" y="210" id="lblNomeCompleto" text="" width="130" textAlign="right"/> 
+	<bancoobInput:Texto x="158" y="208" width="410" id="txtNomeCompleto" maxChars="250" somenteMaiusculas="true" validarObrigatorio="true"/>
+
+ 	<bancoob:Rotulo x="25" y="238" id="lblApelido" text="" width="130" textAlign="right"/>
+	<bancoobInput:Texto x="158" y="236" width="216" id="txtApelido" maxChars="30" somenteMaiusculas="true"/>
+
+ 	<bancoob:Rotulo x="25" y="266" id="lblAtividadeEconomica" text="Atividade Econômica:" textAlign="right" width="130"/>
+	<pesquisacodigo:PesquisaCodigo id="procurarAtividadeEconomica" x="158" y="264" width="500"
+		tituloJanelaPesquisa="Procurar Atividade Econômica"
+		classeServico="br.com.sicoob.capes.cadastro.fachada.AtividadeEconomicaFachada"/>
+		
+ 	<bancoob:Rotulo x="25" y="294" id="lblCNAE" text="Código CNAE:" textAlign="right" width="130"/>
+	<pesquisacodigo:PesquisaCodigo id="procurarCNAE" x="158" y="292" width="500"
+		campoCodigoAlfanumerico="true" tituloJanelaPesquisa="Procurar CNAE"
+		classeServico="br.com.sicoob.capes.cadastro.fachada.CnaeFiscalFachada"/>
+		
+	<bancoob:Rotulo x="25" y="322" id="lblObservacao" text="Observação:" textAlign="right" width="130"/>
+	<bancoobInput:TextoArea x="158" y="320" id="txtObservacao" width="529" maxChars="200" />
+	
+	<bancoobInput:Check x="25" y="380" id="chkImportador" label="Importador (Câmbio)" />
+	<bancoobInput:Check x="150" y="380" id="chkExportador" label="Exportador (Câmbio)" />
+	
+	<bancoobInput:Check x="25" y="420" id="chkAutorizaBacen"  
+		label="Autoriza consulta no Sistema de Crédito do Banco Central"/>
+		
+</bancoobValidaveis:ModuloValidavel>

@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<bancoobValidaveis:ModuloValidavel xmlns:mx="http://www.adobe.com/2006/mxml"
+		xmlns:bancoobInput="br.com.bancoob.componentes.input.*"
+		xmlns:bancoob="br.com.bancoob.componentes.*"
+		xmlns:campos="br.com.bancoob.componentes.campos.*"
+		xmlns:bancoobValidaveis="br.com.bancoob.componentes.containers.validaveis.*"
+		width="303" height="202" layout="absolute" >
+		
+		<mx:Script>
+			<![CDATA[
+				import br.com.bancoob.componentes.tabelapaginada.TabelaPaginadaUtils;
+				import br.com.sicoob.capes.comum.util.FormatadorUtil;
+			]]>
+		</mx:Script>
+
+	<mx:Label x="30" y="6" text="FINALIZAR EXPLORAÇÃO" fontWeight="bold" fontFamily="ArialEmbedded" alpha=".8"/>
+	<mx:Image source="br/com/bancoob/imagens/imgsTelas/linha.swf" scaleContent="false" left="171" y="12" right="10"/>
+	<mx:Image x="10" y="4" source="br/com/bancoob/imagens/icos/administrador.png" alpha=".5"/>
+
+	<bancoob:Rotulo x="10" y="47" text="Houve Frustração de Safra ?"/>		
+	<bancoobInput:RadioGrupoBancoob id="rdbSimNao" />
+	<bancoobInput:Radio x="173" y="47" groupName="rdbSimNao" label="Sim" tabEnabled="true" tabIndex="1" value="true"/>
+	<bancoobInput:Radio x="219" y="47" groupName="rdbSimNao" label="Não" tabEnabled="true" tabIndex="2" value="false" selected="true"/>		
+
+	<bancoob:Rotulo x="10" y="77" text="Percentual de Frustração:"/>		
+	<campos:CampoMoedaView x="173" y="77" width="50" id="txtPercentual" maxChars="6" tabIndex="3" 
+		tabEnabled="true" valorMinimo="0" valorMaximo="100" enabled="false"/>
+	<bancoob:Rotulo x="223" y="87" text="%"/>		
+
+	<bancoob:Rotulo x="10" y="107" text="Data da Ocorrência:"/>
+	<campos:CampoData x="173" y="107" id="txtDataOcorrencia" tabIndex="4" />
+
+	<mx:Image source="br/com/bancoob/imagens/imgsTelas/linha.swf" scaleContent="false" left="7" bottom="35" right="10"/>
+	<bancoob:Botao width="77" id="botOk" label="Ok" bottom="7" right="92" tabEnabled="true" tabIndex="5"/>
+	<bancoob:Botao width="77" id="botFechar" label="Fechar" bottom="7" right="7" tabEnabled="true" tabIndex="6"/>
+
+</bancoobValidaveis:ModuloValidavel>

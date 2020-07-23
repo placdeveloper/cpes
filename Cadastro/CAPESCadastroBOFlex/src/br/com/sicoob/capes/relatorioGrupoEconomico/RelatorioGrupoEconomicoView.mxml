@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<containers:CanvasBancoob xmlns:mx="http://www.adobe.com/2006/mxml"
+					xmlns:componentes="br.com.bancoob.componentes.*"
+					xmlns:grid="br.com.bancoob.componentes.grid.*"					
+					xmlns:namespace="http://namespace"
+					xmlns:titulo="br.com.bancoob.componentes.titulo.*"
+					xmlns:containers="br.com.bancoob.componentes.containers.*"
+					xmlns:comp="br.com.bancoob.componentes.*" 
+					xmlns:input="br.com.bancoob.componentes.input.*"
+					xmlns:inputCapes="br.com.sicoob.capes.comum.componentes.input.*"
+					xmlns:camp="br.com.bancoob.componentes.campos.*"
+					xmlns:filtro="br.com.bancoob.componentes.painellista.*"
+					xmlns:tabelaPaginada="br.com.bancoob.componentes.tabelapaginada.*" 
+					xmlns:bancoobGrid="br.com.bancoob.componentes.grid.*"
+					xmlns:bancoobPaginacao="br.com.bancoob.componentes.paginacao.*"
+					xmlns:centraisSingulares="br.com.sicoob.capes.comum.componentes.instituicao.*"
+					xmlns:procurarPessoa="br.com.sicoob.capes.corporativo.componentes.procurarPessoa.*"
+					width="450" height="370">
+	
+	<mx:Canvas id="containerInstituicao" visible="true" height="170" width="450" verticalScrollPolicy="off" horizontalScrollPolicy="off" x="0" y="0">
+		<titulo:SubtituloView x="0" y="0" width="450" texto="INSTITUIÇÃO" />	
+		<centraisSingulares:CentraisSingulares id="componenteCentraisSingulares" x="10" y="25" tamanhoCombos="350" utilizarGerentes="true" utilizarNucleos="true" utilizarUnidades="true" />
+	</mx:Canvas>
+	
+	<mx:Canvas id="containerFiltro" visible="true" height="120" width="450" verticalScrollPolicy="off" horizontalScrollPolicy="off" x="0" y="180">
+		<titulo:SubtituloView x="0" y="0" width="450" texto="FILTROS" />
+		<input:RadioGrupoBancoob id="tipoRelatorio" />
+		<input:Radio id="radioTodos" x="10" y="34" label="Todos" selected="true" groupName="tipoRelatorio" value="1"/>
+		<input:Radio id="radioSomenteAutomaticos" x="90" y="34" label="Somente os Automáticos" groupName="tipoRelatorio" value="2"/>
+		<input:Radio id="radioSomenteManuais" x="263" y="34" label="Somente os Manuais" groupName="tipoRelatorio" value="3"/>
+		
+		<mx:Label x="10" y="64" text="Período:"/>
+		<input:Data id="dataInicio" x="91" y="64" width="127"/>
+		<mx:Label x="230" y="64" text="a"/>
+		<input:Data id="dataFim" x="253" y="64" width="127"/>
+		
+		<componentes:Rotulo x="10" y="94" text="CPF / CNPJ: "/>
+		<procurarPessoa:ProcurarPessoaCAPES x="91" y="94" id="campoCpfCnpj" toolTip="CPF/CNPJ de identificação da Pessoa e respectivo nome." selecaoAutomaticaDestino="false" />
+		
+	</mx:Canvas>
+	
+	<titulo:LinhaView id="linha" y="314" width="100%"/>
+	
+	<containers:HBoxBancoob height="36" width="450" bottom="10" 
+							horizontalAlign="right" horizontalGap="8" 
+							verticalAlign="middle" right="0">
+		<componentes:Botao id="btnGerarRelatorio" label="Ok" width="86"/>
+		<componentes:Botao id="btnLimpar" label="Limpar" width="86"/>
+		<componentes:Botao id="btnFechar" label="Fechar" width="86"/>
+	</containers:HBoxBancoob>
+	
+</containers:CanvasBancoob>

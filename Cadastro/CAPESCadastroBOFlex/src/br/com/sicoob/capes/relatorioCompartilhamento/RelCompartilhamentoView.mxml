@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ModuloValidavel xmlns="br.com.bancoob.componentes.containers.validaveis.*"
+				 xmlns:mx="http://www.adobe.com/2006/mxml"
+				 xmlns:titulo="br.com.bancoob.componentes.titulo.*"
+				 xmlns:componente="br.com.bancoob.componentes.*"
+				 xmlns:input="br.com.bancoob.componentes.input.*"
+				 xmlns:containers="br.com.bancoob.componentes.containers.*"
+				 xmlns:centraisSingulares="br.com.sicoob.capes.comum.componentes.instituicao.*"
+				 width="462" height="245" layout="absolute">
+	
+	<titulo:LinhaView id="linha" y="180" width="100%"/>
+	
+	<containers:HBoxBancoob height="36" width="442" bottom="10" 
+							horizontalAlign="right" horizontalGap="8" 
+							verticalAlign="middle" right="10">
+		<componente:Botao id="btOk" label="Ok" width="86"/>
+		<componente:Botao id="btCancelar" label="Limpar" width="86"/>
+		<componente:Botao id="btFechar" label="Fechar" width="86"/>
+	</containers:HBoxBancoob>
+	
+	<mx:Canvas id="containerFiltro" visible="true" height="120" width="462" verticalScrollPolicy="off" horizontalScrollPolicy="off" x="0" y="90">
+		<titulo:SubtituloView x="0" y="0" width="462" texto="FILTROS" />
+		<componente:Rotulo x="20" y="27" text="Compartilhados:"/>
+		<componente:Rotulo x="20" y="52" text="Período:"/>
+		<input:Data x="99" y="50" width="90" mascara="DD/MM/YYYY" id="dataInicio" name="dataInicio"/>
+		<componente:Rotulo x="201" y="54" width="10" text="a"/>
+		<input:Data x="224" y="50" width="90" mascara="DD/MM/YYYY" id="dataFim" name="dataFim"/>
+		<input:Radio x="99" y="25" label="Sim" id="rdSimGrupo" groupName="radioGrupoCompart" selected="true" value="1"/>
+		<input:Radio x="163" y="25" label="Não" id="rdNaoGrupo" groupName="radioGrupoCompart" selected="false" value="0"/>
+		<input:Radio x="224" y="25" label="Todos" id="rdTodosGrupo" groupName="radioGrupoCompart" selected="false" value="2"/>
+		<input:RadioGrupoBancoob id="radioGrupoCompart" />
+	</mx:Canvas>
+	
+	<mx:Canvas id="containerInstituicao" visible="true"  
+			   height="78" width="462" verticalScrollPolicy="off" horizontalScrollPolicy="off" x="10" y="10">
+		<titulo:SubtituloView x="0" y="0" width="462" texto="INSTITUIÇÃO" />
+		<centraisSingulares:CentraisSingulares id="componenteCentraisSingulares" x="10" y="25" tamanhoCombos="362" />
+	</mx:Canvas>
+	
+</ModuloValidavel>

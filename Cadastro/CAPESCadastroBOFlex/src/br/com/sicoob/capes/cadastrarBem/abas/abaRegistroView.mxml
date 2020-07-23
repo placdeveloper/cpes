@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<bancoobValidaveis:ModuloValidavel  xmlns="br.com.bancoob.componentes.containers.*" 
+	xmlns:mx="http://www.adobe.com/2006/mxml" 
+	xmlns:bancoob="br.com.bancoob.componentes.*"
+	xmlns:barra="br.com.sicoob.capes.cadastrarBem.abas.*"
+xmlns:bancoobValidaveis="br.com.bancoob.componentes.containers.validaveis.*"
+	xmlns:bancoobGrid="br.com.bancoob.componentes.grid.*"
+	width="100%" height="100%" xmlns:titulo="br.com.bancoob.componentes.titulo.*">
+	<mx:Script>
+   	<![CDATA[
+   		import br.com.bancoob.componentes.tabelapaginada.TabelaPaginadaUtils;
+   	]]>
+   </mx:Script>
+   <mx:VBox width="100%" alpha="1" height="100%">
+         <mx:Canvas y="2" height="27" cornerRadius="10" borderStyle="solid" left="0" right="0" borderThickness="0" backgroundColor="#ffffff" backgroundAlpha=".4" horizontalScrollPolicy="off" verticalScrollPolicy="off">
+   			<bancoob:Rotulo x="37" y="5" text="SELECIONE UM REGISTRO OU CLIQUE EM NOVO PARA CADASTRAR UM NOVO REGISTRO." width="568" fontSize="11" fontWeight="bold" alpha=".7" fontFamily="ArialEmbedded"/>
+   			<mx:Image x="10" y="5" source="br/com/bancoob/imagens/icos/paste_16.png" alpha=".5"/>		
+   		</mx:Canvas>
+      
+		<bancoobGrid:Grid id="gridRegistro" width="99.9%"  bottom="10" tabIndex="1" height="365" >
+		<bancoobGrid:columns>
+
+				<bancoobGrid:ColunaGrid headerText="Matrícula" id="matricula" dataField="matriculaRegistro" width="150" labelFunction="{TabelaPaginadaUtils.defaultLabelFunction}"  >
+				</bancoobGrid:ColunaGrid>
+
+				<bancoobGrid:ColunaGrid headerText="Livro" id="livro" dataField="livro" width="120" labelFunction="{TabelaPaginadaUtils.defaultLabelFunction}"  >
+				</bancoobGrid:ColunaGrid>
+
+				<bancoobGrid:ColunaGrid headerText="Folha" id="folha" dataField="folha"  width="120" labelFunction="{TabelaPaginadaUtils.defaultLabelFunction}"  >
+				</bancoobGrid:ColunaGrid>
+
+				<bancoobGrid:ColunaGrid headerText="ITR" id="itr" dataField="ipr" labelFunction="{TabelaPaginadaUtils.defaultLabelFunction}"  >
+				</bancoobGrid:ColunaGrid>
+
+				<bancoobGrid:ColunaGrid headerText="Incra" id="incra" dataField="incra" labelFunction="{TabelaPaginadaUtils.defaultLabelFunction}"  >
+				</bancoobGrid:ColunaGrid>
+
+				<bancoobGrid:ColunaGrid headerText="Área" id="area" dataField="areaMatricula" labelFunction="{TabelaPaginadaUtils.defaultLabelFunction}"  >
+				</bancoobGrid:ColunaGrid>
+
+				<bancoobGrid:ColunaGrid headerText="Data Posse" id="dataPosse" dataField="dataUltimaMatricula" labelFunction="{TabelaPaginadaUtils.defaultDateLabelFunction}"  >
+				</bancoobGrid:ColunaGrid>
+
+				<bancoobGrid:ColunaGrid headerText="Observações" id="observacoes" dataField="observacaoMatricula" labelFunction="{TabelaPaginadaUtils.defaultLabelFunction}"  >
+				</bancoobGrid:ColunaGrid>
+
+		</bancoobGrid:columns>
+		</bancoobGrid:Grid>
+
+		<barra:barraBotoesCrudView id="barraBotoes"/>
+
+	</mx:VBox>
+</bancoobValidaveis:ModuloValidavel >

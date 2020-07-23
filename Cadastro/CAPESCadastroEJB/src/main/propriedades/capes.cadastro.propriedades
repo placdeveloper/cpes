@@ -1,0 +1,31 @@
+#email.gestor.capes=gestorcapes@bancoob.com.br
+capes.emailgestor=juan.damasceno@bancoob.com.br
+capes.mensagem.compartilhamentocadastro=A entidade {1} efetuou busca no Capes pelo CPF/CNPJ {2}.\nAlerta enviado para a entidade que efetuou a busca e para entidade responsável pelo cadastro."
+capes.assunto.compartilhamentocadastro=Alerta Capes
+
+#email.gestor.capes=gestorcapes@bancoob.com.br
+capes.emailgestor=juan.damasceno@bancoob.com.br
+capes.mensagem.compartilhamentocadastro=A entidade {1} efetuou busca no Capes pelo CPF/CNPJ {2}.\nAlerta enviado para a entidade que efetuou a busca e para entidade responsável pelo cadastro."
+capes.assunto.compartilhamentocadastro=Alerta Capes
+
+# O numero minimo de mensagens
+quantidade.mensagens.atencao.fila=2000
+quantidade.mensagens.critico.fila=10000
+
+quantidade.mensagens.atencao.dlq=2000
+quantidade.mensagens.critico.dlq=5000
+
+quantidade.mensagens.atencao.consultasExternas=50000
+quantidade.mensagens.critico.consultasExternas=70000
+quantidade.mensagens.atencao.consultasExternas.dlq=50000
+quantidade.mensagens.critico.consultasExternas.dlq=70000
+
+# O tempo esta em segundos (604800 = 1 semana, 259200 = 3 dias)
+tempo.mensagem.atencao.fila=86400
+tempo.mensagem.critico.fila=259200
+tempo.mensagem.atencao.dlq=259200
+tempo.mensagem.critico.dlq=604800
+
+# Quantidade de registros para paginar uma consulta
+tamanho.pagina=2000
+tamanho.pagina.arquivo.exportacao=10000

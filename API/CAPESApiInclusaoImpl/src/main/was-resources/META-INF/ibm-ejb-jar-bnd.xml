@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ejb-jar-bnd xmlns="http://websphere.ibm.com/xml/ns/javaee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://websphere.ibm.com/xml/ns/javaee http://websphere.ibm.com/xml/ns/javaee/ibm-ejb-jar-bnd_1_1.xsd" version="1.1">
+
+	<session name="AnotacaoServicoEJB">
+		<interface class="br.com.sicoob.capes.api.inclusao.negocio.servicos.interfaces.AnotacaoServicoLocal" binding-name="ejblocal:capes/api/inclusao/AnotacaoServico" />
+		<interface class="br.com.sicoob.capes.api.inclusao.negocio.servicos.interfaces.AnotacaoServicoRemote" binding-name="capes/api/inclusao/AnotacaoServicoRemote" />
+	</session>
+
+	<session name="BemServicoEJB">
+		<interface class="br.com.sicoob.capes.api.inclusao.negocio.servicos.interfaces.BemServicoLocal" binding-name="ejblocal:capes/api/inclusao/BemServico" />
+		<interface class="br.com.sicoob.capes.api.inclusao.negocio.servicos.interfaces.BemServicoRemote" binding-name="capes/api/inclusao/BemServicoRemote" />
+	</session>
+
+	<session name="ClienteServicoEJB">
+		<interface class="br.com.sicoob.capes.api.inclusao.negocio.servicos.interfaces.ClienteServicoLocal" binding-name="ejblocal:capes/api/inclusao/ClienteServico" />
+		<interface class="br.com.sicoob.capes.api.inclusao.negocio.servicos.interfaces.ClienteServicoRemote" binding-name="capes/api/inclusao/ClienteServicoRemote" />
+	</session>
+
+	<session name="EmailServicoEJB">
+		<interface class="br.com.sicoob.capes.api.inclusao.negocio.servicos.interfaces.EmailServicoLocal" binding-name="ejblocal:capes/api/inclusao/EmailServico" />
+		<interface class="br.com.sicoob.capes.api.inclusao.negocio.servicos.interfaces.EmailServicoRemote" binding-name="capes/api/inclusao/EmailServicoRemote" />
+	</session>
+
+	<session name="EnderecoServicoEJB">
+		<interface class="br.com.sicoob.capes.api.inclusao.negocio.servicos.interfaces.EnderecoServicoLocal" binding-name="ejblocal:capes/api/inclusao/EnderecoServico" />
+		<interface class="br.com.sicoob.capes.api.inclusao.negocio.servicos.interfaces.EnderecoServicoRemote" binding-name="capes/api/inclusao/EnderecoServicoRemote" />
+	</session>
+
+	<session name="FonteRendaServicoEJB">
+		<interface class="br.com.sicoob.capes.api.inclusao.negocio.servicos.interfaces.FonteRendaServicoLocal" binding-name="ejblocal:capes/api/inclusao/FonteRendaServico" />
+		<interface class="br.com.sicoob.capes.api.inclusao.negocio.servicos.interfaces.FonteRendaServicoRemote" binding-name="capes/api/inclusao/FonteRendaServicoRemote" />
+	</session>
+	
+	<session name="InformacaoProfissionalServicoEJB">
+		<interface class="br.com.sicoob.capes.api.inclusao.negocio.servicos.interfaces.InformacaoProfissionalServicoLocal" binding-name="ejblocal:capes/api/inclusao/InformacaoProfissionalServico" />
+		<interface class="br.com.sicoob.capes.api.inclusao.negocio.servicos.interfaces.InformacaoProfissionalServicoRemote" binding-name="capes/api/inclusao/InformacaoProfissionalServicoRemote" />
+	</session>
+	
+	<session name="MensagemServicoEJB">
+		<interface class="br.com.sicoob.capes.api.inclusao.negocio.servicos.interfaces.MensagemServicoLocal" binding-name="ejblocal:capes/api/inclusao/MensagemServico" />
+		<interface class="br.com.sicoob.capes.api.inclusao.negocio.servicos.interfaces.MensagemServicoRemote" binding-name="capes/api/inclusao/MensagemServicoRemote" />
+	</session>
+
+	<session name="PessoaServicoEJB">
+		<interface class="br.com.sicoob.capes.api.inclusao.negocio.servicos.interfaces.PessoaServicoLocal" binding-name="ejblocal:capes/api/inclusao/PessoaServico" />
+		<interface class="br.com.sicoob.capes.api.inclusao.negocio.servicos.interfaces.PessoaServicoRemote" binding-name="capes/api/inclusao/PessoaServicoRemote" />
+	</session>
+	
+	<session name="PlataformaContabilServicoEJB">
+		<interface class="br.com.sicoob.capes.api.inclusao.negocio.servicos.interfaces.PlataformaContabilServicoLocal" binding-name="ejblocal:capes/api/inclusao/PlataformaContabilServico" />
+		<interface class="br.com.sicoob.capes.api.inclusao.negocio.servicos.interfaces.PlataformaContabilServicoRemote" binding-name="capes/api/inclusao/PlataformaContabilServicoRemote" />
+	</session>
+
+	<session name="ReferenciaServicoEJB">
+		<interface class="br.com.sicoob.capes.api.inclusao.negocio.servicos.interfaces.ReferenciaServicoLocal" binding-name="ejblocal:capes/api/inclusao/ReferenciaServico" />
+		<interface class="br.com.sicoob.capes.api.inclusao.negocio.servicos.interfaces.ReferenciaServicoRemote" binding-name="capes/api/inclusao/ReferenciaServicoRemote" />
+	</session>
+
+	<session name="RelacionamentoServicoEJB">
+		<interface class="br.com.sicoob.capes.api.inclusao.negocio.servicos.interfaces.RelacionamentoServicoLocal" binding-name="ejblocal:capes/api/inclusao/RelacionamentoServico" />
+		<interface class="br.com.sicoob.capes.api.inclusao.negocio.servicos.interfaces.RelacionamentoServicoRemote" binding-name="capes/api/inclusao/RelacionamentoServicoRemote" />
+	</session>
+
+	<session name="TelefoneServicoEJB">
+		<interface class="br.com.sicoob.capes.api.inclusao.negocio.servicos.interfaces.TelefoneServicoLocal" binding-name="ejblocal:capes/api/inclusao/TelefoneServico" />
+		<interface class="br.com.sicoob.capes.api.inclusao.negocio.servicos.interfaces.TelefoneServicoRemote" binding-name="capes/api/inclusao/TelefoneServicoRemote" />
+	</session>
+
+</ejb-jar-bnd>

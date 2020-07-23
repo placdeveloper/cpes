@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<CanvasBancoob xmlns="br.com.bancoob.componentes.containers.*" 
+	xmlns:mx="http://www.adobe.com/2006/mxml" 
+	xmlns:bancoob="br.com.bancoob.componentes.*"	
+	xmlns:bancoobInput="br.com.bancoob.componentes.input.*"
+	width="300" height="360">
+	
+	<CanvasBancoob width="230" height="330">
+		<mx:VBox id="boxCampos" paddingLeft="10" top="10">
+			<bancoobInput:Check id="checkTodos" label="Todos"/>
+			<bancoobInput:Check id="checkContaPoupanca" label="Conta Poupança"/>
+			<bancoobInput:Check id="checkContaCorrente" label="Conta Corrente / Depósito a vista"/>
+			<bancoobInput:Check id="checkContaSalario" label="Conta Salário"/>
+			<bancoobInput:Check id="checkChequeEspecial" label="Cheque Especial"/>
+			<bancoobInput:Check id="checkEmprestimos" label="Empréstimos / Financiamentos"/>
+			<bancoobInput:Check id="checkInvestimentos" label="Investimentos / Depósito a prazo"/>
+			<bancoobInput:Check id="checkCartoes" label="Cartão de Débito/Crédito"/>
+			<bancoobInput:Check id="checkSeguros" label="Seguros"/>
+			<bancoobInput:Check id="checkConsorcio" label="Consórcio"/>
+			<bancoobInput:Check id="checkPrevidenciaPrivada" label="Previdência privada"/>
+		</mx:VBox>
+	</CanvasBancoob>
+	
+	<bancoob:Botao x="50" y="330" id="btImprimir" label="Imprimir" />
+	<bancoob:Botao x="160" y="330" id="btCancelar" label="Cancelar" /> 
+			
+</CanvasBancoob>

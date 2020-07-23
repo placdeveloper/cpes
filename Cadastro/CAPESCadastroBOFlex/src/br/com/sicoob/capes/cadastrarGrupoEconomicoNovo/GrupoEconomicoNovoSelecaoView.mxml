@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ListaCadastroView xmlns="br.com.bancoob.componentes.cadastro.*"
+				   xmlns:mx="http://www.adobe.com/2006/mxml"
+				   xmlns:servico="br.com.bancoob.util.servico.*"
+				   xmlns:cadastrarGrupoEconomico="br.com.sicoob.capes.cadastrarGrupoEconomicoNovo.*"
+				   width="800" height="600" deveRecuperarInformacoesAlteracao="true"
+				   deveRecuperarInformacoesVisualizacao="true" fecharFormularioAoIncluir="true"
+				   nomePropriedadeItem="dados.grupoEconomico">
+	
+	<mx:Script>
+		<![CDATA[
+			import mx.rpc.events.ResultEvent;
+			
+			import br.com.bancoob.componentes.Alerta;
+			import br.com.bancoob.dto.RequisicaoDTO;
+			import br.com.bancoob.dto.RequisicaoReqDTO;
+			import br.com.sicoob.capes.comum.vo.entidades.GrupoEconomicoNovoVO;
+			
+			private const janelaExclusao:JanelaExclusao = new JanelaExclusao();
+			private var _motivoExclusao:String = null;
+			
+			protected override function montarDtoRecuperacao(item:Object):RequisicaoDTO {
+				var dto:RequisicaoReqDTO = new RequisicaoReqDTO;
+				dto.dados.grupoEconomico = item;
+				return dto;
+			}
+			
+			protected override function solicitarConfirmacaoExclusao():void {
+				if(recuperarItemSelecionado().tipo.codigo == 1) {
+					Alerta.show("Grupos automáticos não podem ser excluídos", 
+						tituloExclusao, Alerta.ALERTA_INFORMACAO);
+					return ;
+				} else {
+					janelaExclusao.textoTitulo = "EXCLUSÃO DE GRUPO ECONÔMICO";
+					janelaExclusao.callbackConfirmacao = removerGrupo;
+					janelaExclusao.abrir(this,true);
+				}
+			}
+			
+			public function removerGrupo(motivoExclusao:String):void {
+				_motivoExclusao = motivoExclusao;
+				super.excluirItem();
+			}
+			
+			protected override function montarDtoExclusao(item:Object):RequisicaoDTO {
+				var dto:RequisicaoReqDTO = new RequisicaoReqDTO();
+				var grupo:GrupoEconomicoNovoVO = item as GrupoEconomicoNovoVO;
+				grupo.motivoExclusao = _motivoExclusao;
+				_motivoExclusao = null;
+				dto.dados.grupoEconomico = item;
+				return dto;
+			}
+			
+			protected override function exibirJanelaAlteracao(objeto:Object):void {
+				var form:GrupoEconomicoNovoEdicao = formularioCadastro as GrupoEconomicoNovoEdicao;
+				form.permitirAlterarNomeAutomatico = this.permitirAlterarNomeAutomatico;
+				super.exibirJanelaAlteracao(objeto)
+			}
+			
+			protected override function exibirFormularioCadastro():void {
+				super.exibirFormularioCadastro();
+				var form:GrupoEconomicoNovoEdicao = formularioCadastro as GrupoEconomicoNovoEdicao;
+				form.permissoes = this.permissoes;
+				focarComponente(form.txtNome);
+				form.txtNome.setSelection(0,0);
+			}
+			
+			protected override function itemExcluido(evento:ResultEvent):void {
+				super.itemExcluido(evento);
+				janelaExclusao.fecharJanela();
+			}
+			
+		]]>
+	</mx:Script>
+	
+	<mx:Boolean id="permitirAlterarNomeAutomatico"/>
+	
+	
+	<painelLista>
+		<cadastrarGrupoEconomico:PainelListaGrupoEconomicoNovoView width="800" height="600"/>
+	</painelLista>
+	<servicoRecuperacaoInformacoes>
+		<servico:ServicoJava bloquearOperacao="true" mensagemEspera="Obtendo dados..."
+							 source="br.com.sicoob.capes.cadastro.fachada.GrupoEconomicoNovoFachada"/>
+	</servicoRecuperacaoInformacoes>
+	<formularioCadastro>
+		<cadastrarGrupoEconomico:GrupoEconomicoNovoEdicao width="800" height="600"/>
+	</formularioCadastro>
+	<servicoExclusao>
+		<servico:ServicoJava bloquearOperacao="true" mensagemEspera="Excluindo dados..."
+							 source="br.com.sicoob.capes.cadastro.fachada.GrupoEconomicoNovoFachada"/>
+	</servicoExclusao>
+</ListaCadastroView>

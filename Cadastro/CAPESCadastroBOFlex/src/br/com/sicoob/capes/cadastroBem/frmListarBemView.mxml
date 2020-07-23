@@ -1,0 +1,148 @@
+<?xml version="1.0" encoding="utf-8"?>
+<bancoob:Modulo xmlns:mx="http://www.adobe.com/2006/mxml"
+				xmlns:bancoobGrid="br.com.bancoob.componentes.grid.*"
+				xmlns:bancoob="br.com.bancoob.componentes.*"
+				xmlns:navegacao="br.com.bancoob.componentes.navegacao.*"
+				xmlns:containers="br.com.bancoob.componentes.containers.*"
+				width="100%" height="100%">
+	<mx:Script>
+		<![CDATA[
+			import mx.controls.dataGridClasses.DataGridColumn;
+			
+			import br.com.bancoob.componentes.tabelapaginada.TabelaPaginadaUtils;
+			import br.com.bancoob.util.FormataNumero;
+			import br.com.sicoob.capes.comum.vo.DadosListagemBemVO;
+			import br.com.sicoob.capes.comum.vo.DadosListagemParceriasBemVO;
+			
+			/**
+			 * Obtém o valor da participação da pessoa no bem. (VALOR DO BEM * PERCENTUAL DE PROPRIEDADE / 100).
+			 */
+			private static function valorParticipacaoDeclarado(objeto:Object, coluna:DataGridColumn):String {
+				var dados:DadosListagemBemVO = objeto as DadosListagemBemVO;
+				
+				if(!isNaN(dados.valor) && dados.valor > 0 && !isNaN(dados.percentualProprietario)) {
+					//(B.VALORBEM * BP.PERCPROPRIETARIO) / 100)
+					var valor:Number = dados.valor * dados.percentualProprietario / 100; 
+					return "R$ " + FormataNumero.formata(valor);
+				}
+				
+				return "";
+			}
+			
+			/**
+			 * Obtém o valor da avaliação da pessoa. (VALOR BEM AVALIAÇÃO * PERCENTUAL DE PROPRIEDADE / 100).
+			 */
+			private static function valorParticipacaoAvaliado(objeto:Object, coluna:DataGridColumn):String {
+				var dados:DadosListagemBemVO = objeto as DadosListagemBemVO;
+				
+				if(!isNaN(dados.valorAvaliacao) && dados.valorAvaliacao > 0) {
+					var total:Number = dados.valorAvaliacao * dados.percentualProprietario / 100; 
+					return "R$ " + FormataNumero.formata(total);
+				}
+				
+				return "";
+			}
+			
+			/**
+			 * Formata o valor da área total.
+			 */
+			private static function formataArea(objeto:Object, coluna:DataGridColumn):String {
+				var dados:DadosListagemParceriasBemVO = objeto as DadosListagemParceriasBemVO;
+				
+				if(!isNaN(dados.areaTotal) && dados.areaTotal > 0) {
+					return FormataNumero.formata(Number(dados.areaTotal), 4);
+				}
+				
+				return "";
+			}
+			
+			/**
+			 * Formata o valor da área posse.
+			 */
+			private static function formataAreaPosse(objeto:Object, coluna:DataGridColumn):String {
+				var dados:DadosListagemParceriasBemVO = objeto as DadosListagemParceriasBemVO;
+				
+				if(!isNaN(dados.areaPosse) && dados.areaPosse > 0) {
+					return FormataNumero.formata(Number(dados.areaPosse), 4);
+				}
+				
+				return "";
+			}
+		]]>
+	</mx:Script>
+	
+	<mx:Canvas y="2" height="27" cornerRadius="10" borderStyle="solid" left="0" right="0" borderThickness="0" backgroundColor="#ffffff" backgroundAlpha=".4" horizontalScrollPolicy="off" verticalScrollPolicy="off">
+		<bancoob:Rotulo x="37" y="5" text="SELECIONE UM REGISTRO OU CLIQUE EM NOVO PARA CADASTRAR UM NOVO REGISTRO." width="568" fontSize="11" fontWeight="bold" alpha=".7" fontFamily="ArialEmbedded"/>
+		<mx:Image x="10" y="5" source="br/com/bancoob/imagens/icos/paste_16.png" alpha=".5"/>		
+	</mx:Canvas>
+	
+	<navegacao:Tab id="navegacao" width="100%" height="75%" left="10" y="36" right="10">
+		
+		<mx:Canvas width="100%" height="100%" label="Propriedades">
+			<bancoobGrid:Grid id="gridPropriedades" width="100%" height="100%" tabIndex="1">
+				<bancoobGrid:columns>
+					<!-- GED/GFT -->
+					<bancoobGrid:ColunaGrid headerText="St" width="10" sortable="false" itemRenderer="br.com.sicoob.capes.utils.autorizacao.renderer.StatusRenderer" />
+					
+					<bancoobGrid:ColunaGrid headerText="Classificação" dataField="descricaoTipoClassificacaoBem" width="70" labelFunction="{TabelaPaginadaUtils.defaultLabelFunction}" />
+					<bancoobGrid:ColunaGrid headerText="Tipo do bem" dataField="descricaoTipoBem" minWidth="100" labelFunction="{TabelaPaginadaUtils.defaultLabelFunction}" />
+					<bancoobGrid:ColunaGrid headerText="Descrição" dataField="descricaoBem" minWidth="200" labelFunction="{TabelaPaginadaUtils.defaultLabelFunction}" />
+					<bancoobGrid:ColunaGrid headerText="Denominação" dataField="denominacaoBem" minWidth="200" labelFunction="{TabelaPaginadaUtils.defaultLabelFunction}" />
+					<bancoobGrid:ColunaGrid headerText="Valor participação declarado" width="90" textAlign="right" labelFunction="{valorParticipacaoDeclarado}" />
+					<bancoobGrid:ColunaGrid headerText="Valor participação avaliado" width="90" textAlign="right" labelFunction="{valorParticipacaoAvaliado}" />
+					<bancoobGrid:ColunaGrid headerText="Data da avaliação" dataField="dataAvaliacao" width="60" textAlign="center" labelFunction="{TabelaPaginadaUtils.defaultDateLabelFunction}" />
+					<bancoobGrid:ColunaGrid headerText="Status" dataField="status" width="50" showDataTips="true" dataTipField="bloqueadoPor" labelFunction="{TabelaPaginadaUtils.defaultLabelFunction}" />
+					
+					<!-- GED/GFT -->
+					<bancoobGrid:ColunaGrid headerText="GED/GFT" width="35" sortable="false" itemRenderer="br.com.sicoob.capes.utils.autorizacao.renderer.GedGftRenderer" />				
+				</bancoobGrid:columns>
+			</bancoobGrid:Grid>
+		</mx:Canvas>
+		
+		<mx:Canvas width="100%" height="100%" label="Participações">
+			<bancoobGrid:Grid id="gridParcerias" width="100%" height="100%" tabIndex="1" doubleClickEnabled="true">
+				<bancoobGrid:columns>
+					<!-- GED/GFT -->
+					<bancoobGrid:ColunaGrid headerText="St" width="10" sortable="false" itemRenderer="br.com.sicoob.capes.utils.autorizacao.renderer.StatusRenderer" />
+					
+					<bancoobGrid:ColunaGrid headerText="Tipo do bem" dataField="descricaoTipoBem" minWidth="60" labelFunction="{TabelaPaginadaUtils.defaultLabelFunction}" />
+					<bancoobGrid:ColunaGrid headerText="Descrição" dataField="descricaoBem" minWidth="150" labelFunction="{TabelaPaginadaUtils.defaultLabelFunction}" />
+					<bancoobGrid:ColunaGrid headerText="Denominação" dataField="denominacaoBem" minWidth="150" labelFunction="{TabelaPaginadaUtils.defaultLabelFunction}" />
+					<bancoobGrid:ColunaGrid headerText="Área total" dataField="areaTotal" minWidth="40" width="60" labelFunction="{formataArea}" textAlign="right" />
+					<bancoobGrid:ColunaGrid headerText="Área posse" dataField="areaPosse" minWidth="40" width="60" labelFunction="{formataAreaPosse}" textAlign="right" />
+			
+					<bancoobGrid:ColunaGrid headerText="Município" dataField="municipio" minWidth="100" labelFunction="{TabelaPaginadaUtils.defaultLabelFunction}" />
+					<bancoobGrid:ColunaGrid headerText="Matrícula" dataField="matricula" minWidth="50" labelFunction="{TabelaPaginadaUtils.defaultLabelFunction}" />
+					<bancoobGrid:ColunaGrid headerText="NIRF" dataField="nirf" minWidth="45" labelFunction="{TabelaPaginadaUtils.defaultLabelFunction}" />
+					<bancoobGrid:ColunaGrid headerText="INCRA" dataField="incra" minWidth="45" labelFunction="{TabelaPaginadaUtils.defaultLabelFunction}" />
+					
+					<!-- GED/GFT -->
+					<bancoobGrid:ColunaGrid headerText="GED/GFT" width="35" sortable="false" itemRenderer="br.com.sicoob.capes.utils.autorizacao.renderer.GedGftRenderer" />
+				</bancoobGrid:columns>
+			</bancoobGrid:Grid>
+		</mx:Canvas>
+		
+	</navegacao:Tab>
+	
+	<containers:CanvasBancoob width="700" height="15%" left="10" bottom="10">
+		<bancoob:Rotulo id="rotuloTotalMovelDeclarado" x="10" y="0" text="Valor total móvel declarado:" />
+		<bancoob:Rotulo id="valorTotalMovelDeclarado" right="450" y="0" textAlign="right" />
+		
+		<bancoob:Rotulo id="rotuloTotalImovelDeclarado" x="10" y="25" text="Valor total imóvel declarado:" />
+		<bancoob:Rotulo id="valorTotalImovelDeclarado" right="450" y="25" textAlign="right" />
+		
+		<bancoob:Rotulo id="rotuloTotalDeclarado" x="10" y="50" text="Valor total declarado:" />
+		<bancoob:Rotulo id="valorTotalDeclarado" right="450" y="50" textAlign="right" />
+		
+		<bancoob:Rotulo id="rotuloTotalMovelAvaliado" x="400" y="0" text="Valor total móvel avaliado:" />
+		<bancoob:Rotulo id="valorTotalMovelAvaliado" right="75" y="0" textAlign="right" />
+		
+		<bancoob:Rotulo id="rotuloTotalImovelAvaliado" x="400" y="25" text="Valor total imóvel avaliado:" />
+		<bancoob:Rotulo id="valorTotalImovelAvaliado" right="75" y="25" textAlign="right" />
+		
+		<bancoob:Rotulo id="rotuloTotalAvaliado" x="400" y="50" text="Valor total avaliado:" />
+		<bancoob:Rotulo id="valorTotalAvaliado" right="75" y="50" textAlign="right" />
+		
+	</containers:CanvasBancoob>
+	
+</bancoob:Modulo>

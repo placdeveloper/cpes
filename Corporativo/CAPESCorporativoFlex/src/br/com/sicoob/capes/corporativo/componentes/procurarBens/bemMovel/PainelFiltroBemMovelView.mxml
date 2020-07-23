@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<CanvasValidavel xmlns="br.com.bancoob.componentes.containers.validaveis.*"
+				 xmlns:mx="http://www.adobe.com/2006/mxml"
+				 xmlns:input="br.com.bancoob.componentes.input.*" 
+				 xmlns:componentes="br.com.bancoob.componentes.*" 
+				 xmlns:titulo="br.com.bancoob.componentes.titulo.*"
+				 width="100%" height="200"
+				 xmlns:campos="br.com.bancoob.componentes.campos.*">
+	
+	<titulo:SubtituloView texto="Critérios de pesquisa" booTituloPesquisa="true" x="0" y="0" />
+	
+	<componentes:Rotulo text="Tipo bem: " x="10" y="27" textAlign="left" />
+	<input:Combo id="comboTipoBem" left="155" y="25" right="10" labelField="descricao" conteudoMaiusculo="true" inserirItemOpcional="true" labelItemOpcional="SELECIONE" tabIndex="1" />
+
+	<componentes:Rotulo text="Descrição: " x="10" y="52" textAlign="left" />
+	<input:Texto id="campoDescricao" left="155" y="50" right="10" maxChars="50" tabIndex="2" />
+	
+	<componentes:Rotulo text="Número chassi: " x="10" y="77" textAlign="left" />
+	<input:Texto id="campoNumeroChassi" x="155" y="75" width="300" maxChars="50" tabIndex="3" />
+	
+	<componentes:Rotulo text="Renavam: " x="10" y="102" textAlign="left" />
+	<input:Texto id="campoRenavam" x="155" y="100" width="300" restrict="0-9" maxChars="11" tabIndex="4" />
+	
+	<componentes:Rotulo text="Número inscrição embarcação: " x="10" y="127" textAlign="left" />
+	<input:Texto id="campoNumeroEmbarcacao" x="155" y="125" width="300" maxChars="50" tabIndex="5" />
+	
+	<componentes:Rotulo text="Matrícula aeronave: " x="10" y="152" textAlign="left" />
+	<input:Texto id="campoMatriculaAeronave" x="155" y="150" width="300" maxChars="50" tabIndex="6" />
+	
+	<componentes:Botao width="100" id="botaoPesquisar" right="115" y="175" label="PESQUISAR" tabIndex="7"
+					   disabledIcon="@Embed('br/com/bancoob/imagens/icos/srch_mini_desab.png')"
+					   downIcon="@Embed('br/com/bancoob/imagens/icos/srch_mini_desab.png')"
+					   icon="@Embed('br/com/bancoob/imagens/icos/srch_mini.png')" />
+	<componentes:Botao width="100" id="botaoLimpar" right="5" y="175" label="LIMPAR" tabIndex="8" />
+	
+</CanvasValidavel>

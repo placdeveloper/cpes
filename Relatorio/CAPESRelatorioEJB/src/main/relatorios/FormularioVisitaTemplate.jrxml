@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="FormularioVisitaTemplate" pageWidth="595" pageHeight="890" whenNoDataType="AllSectionsNoDetail" columnWidth="565" leftMargin="15" rightMargin="15" topMargin="15" bottomMargin="15">
+	<import value="net.sf.jasperreports.engine.data.JRBeanCollectionDataSource"/>
+	<parameter name="SUBREPORT_DIR" class="net.sf.jasperreports.engine.JasperReport" isForPrompting="false">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<parameter name="CABECALHO" class="net.sf.jasperreports.engine.JasperReport">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<parameter name="URL_LOGO" class="java.net.URL"/>
+	<parameter name="TITULO" class="java.lang.String"/>
+	<parameter name="DADOS" class="br.com.sicoob.capes.relatorio.negocio.vo.FormularioVisitaVO"/>
+	<title>
+		<band splitType="Prevent"/>
+	</title>
+	<pageHeader>
+		<band height="76" splitType="Stretch">
+			<subreport>
+				<reportElement x="8" y="3" width="552" height="70" isPrintInFirstWholeBand="true" isPrintWhenDetailOverflows="true"/>
+				<subreportParameter name="TITULO">
+					<subreportParameterExpression><![CDATA[$P{TITULO}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="URL_LOGO">
+					<subreportParameterExpression><![CDATA[$P{URL_LOGO}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportExpression class="net.sf.jasperreports.engine.JasperReport"><![CDATA[$P{CABECALHO}]]></subreportExpression>
+			</subreport>
+		</band>
+	</pageHeader>
+	<detail>
+		<band height="66" splitType="Stretch">
+			<subreport>
+				<reportElement positionType="Float" stretchType="RelativeToBandHeight" isPrintRepeatedValues="false" x="8" y="5" width="552" height="55" isRemoveLineWhenBlank="true" isPrintWhenDetailOverflows="true"/>
+				<parametersMapExpression><![CDATA[$P{REPORT_PARAMETERS_MAP}]]></parametersMapExpression>
+				<subreportParameter name="DADOS">
+					<subreportParameterExpression><![CDATA[$P{DADOS}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportExpression class="net.sf.jasperreports.engine.JasperReport"><![CDATA[$P{SUBREPORT_DIR}]]></subreportExpression>
+			</subreport>
+		</band>
+	</detail>
+</jasperReport>

@@ -1,0 +1,182 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE queries [
+	<!ELEMENT queries (query*)>
+	<!ELEMENT query (use-case+, description,paginacao?,command+, ordenacoes?)>
+	<!ELEMENT use-case    (#PCDATA)>
+	<!ELEMENT description (#PCDATA)>
+	<!ELEMENT command     (#PCDATA)>
+	<!ELEMENT parametros  (#PCDATA)>
+	<!ELEMENT paginar  (#PCDATA)>
+	<!ELEMENT paginacao (#PCDATA)>
+	<!ELEMENT colunaCodigo    (#PCDATA)>
+	<!ELEMENT colunaDescricao    (#PCDATA)>
+	<!ELEMENT numeroOcorrenciasPorPagina    (#PCDATA)>
+	<!ELEMENT primeiraCondicao    (#PCDATA)>
+	<!ELEMENT ascendente    (#PCDATA)>
+	<!ELEMENT ordenacoes (ordenacao+)>
+	<!ELEMENT ordenacao (#PCDATA)>
+	<!ELEMENT sql  (#PCDATA)>
+	<!ATTLIST ordenacao chave CDATA    #REQUIRED>
+	<!ATTLIST ordenacao default CDATA    #IMPLIED>
+	<!ATTLIST command parametros CDATA    #IMPLIED>
+	<!ATTLIST command paginar CDATA    #IMPLIED>
+	<!ATTLIST use-case name CDATA    #REQUIRED>
+	<!ATTLIST query name CDATA    #REQUIRED>
+	<!ATTLIST paginacao colunaCodigo CDATA    #REQUIRED>
+	<!ATTLIST paginacao colunaDescricao CDATA    #REQUIRED>
+	<!ATTLIST paginacao numeroOcorrenciasPorPagina CDATA    #REQUIRED>
+	<!ATTLIST paginacao primeiraCondicao CDATA    #REQUIRED>
+	<!ATTLIST paginacao ascendente CDATA    #REQUIRED>
+	<!ATTLIST paginacao hint CDATA    #REQUIRED>
+	<!ATTLIST paginacao hintAuxiliar CDATA   #IMPLIED>
+]>
+
+<queries>
+	<query name="CONSULTA_TRANSICAO_REPLICACAO">
+		<use-case name="Consumir replicação"></use-case>
+		<description>Pesquisa </description>
+		<command paginar="true">
+			<![CDATA[
+				from br.com.sicoob.capes.negocio.entidades.legado.TransicaoReplicacao id
+				where DataProcessamento is null
+				and id.idInstituicao is not null
+				and id.idUnidade is not null
+				and id.idPessoa is not null
+			]]>
+		</command>
+		<ordenacoes>
+			<ordenacao chave="dataAtualizacao" default="true">
+				<![CDATA[order by dataAtualizacao]]>
+			</ordenacao>
+		</ordenacoes>
+	</query>
+	<query name="REMOVE_TRANSICOES_REPLICADAS">
+		<use-case name="Consumir replicação"></use-case>
+		<description>Pesquisa </description>
+		<command>
+			<![CDATA[
+				delete from br.com.sicoob.capes.negocio.entidades.legado.TransicaoReplicacao
+				where DataProcessamento is not null
+				and descricaoErro is null
+				and id.dataAtualizacao &lt; <bancoob:valorOql valor="${data}" tipo="Date" />
+			]]>
+		</command>
+	</query>
+
+	<query name="LISTAR_BANCO_SERVIDOR">
+		<use-case name="Consumir replicação"></use-case>
+		<description>Pesquisa </description>
+		<command paginar="false">
+			<![CDATA[
+			SELECT b.NomeServer, b.NomeBancoDados, b.NumCooperativa
+			FROM dbo.VIW_Banco_Servidor b
+			INNER JOIN dbo.Cooperativa c ON c.NumCooperativa = b.NumCooperativa
+			WHERE b.NumCooperativa NOT IN (9999,0)
+			AND c.NumPac = 0
+			AND b.NomeBancoDados LIKE 'BD%'
+			GROUP BY b.NomeServer, b.NomeBancoDados, b.NumCooperativa
+			ORDER BY b.NomeServer
+			]]>
+		</command>
+	</query>
+	<query name="MARCA_TRANSICAO_REPLICACAO_CENTRALIZADA">
+		<use-case name="Consumir replicação" />
+		<description>Marca as REPLICAPESSOASQLDB2 para serem centralizadas</description>
+		<command>
+			<![CDATA[
+				UPDATE R
+				SET [DataProcessamento] = CURRENT_TIMESTAMP
+				from [${nomeServidor}].[${nomeBancoDados}].[dbo].REPLICAPESSOASQLDB2 R,
+				     [${nomeServidor}].[${nomeBancoDados}].[dbo].Cooperativa C
+				where R.NumCooperativa = C.NumCooperativa
+				  and R.NumPac         = C.NumPac
+				  and c.IdInstituicao is not null
+				  and c.IdUnidadeInst is not null
+			]]>
+		</command>
+	</query>
+	<query name="CENTRALIZA_TRANSICAO_PESSOA">
+		<use-case name="Consumir replicação" />
+		<description>Recupera o responsavel pelo cadastro da pessoa </description>
+		<command>
+			<![CDATA[
+					INSERT INTO DBO.REPLICAPESSOASQLDB2
+					(codCompartilhamentoCadastro,
+					IdInstituicao,
+					IdUnidadeInst,
+					IdPessoaLegado,
+					NomePessoa,
+					CodTipoPessoa,
+					NumCpfCnpj,
+					CodTipoOperacao,
+					DataAtualizacao)
+                    select 
+					      ${codGrupoCompartilhamento},
+					       b.idInstituicao,
+					       b.idunidadeinst,
+					       a.IdPessoaLegado,
+					       a.NomePessoa,
+					       a.CodTipoPessoa,
+					       a.NumCpfCnpj,
+					       a.CodTipoOperacao,
+					       a.DataAtualizacao
+					from [${nomeServidor}].[${nomeBancoDados}].[dbo].REPLICAPESSOASQLDB2 a,
+                         [${nomeServidor}].[${nomeBancoDados}].[dbo].cooperativa b
+					where a.DataProcessamento is not null 
+                      and a.numcooperativa = b.numcooperativa
+                      and a.numpac         = b.numpac
+					
+			]]>
+		</command>
+	</query>
+	
+	<query name="CENTRALIZA_TRANSICAO_PESSOA_SEM_SISTEMA_COOPERATIVO">
+		<use-case name="Consumir replicação" />
+		<description>Recupera o responsavel pelo cadastro da pessoa </description>
+		<command>
+			<![CDATA[
+					INSERT INTO DBO.REPLICAPESSOASQLDB2
+					(codCompartilhamentoCadastro,
+					IdInstituicao,
+					IdUnidadeInst,
+					IdPessoaLegado,
+					NomePessoa,
+					CodTipoPessoa,
+					NumCpfCnpj,
+					CodTipoOperacao,
+					DataAtualizacao,
+					descErro,
+					dataProcessamento)
+					select 
+						   null,
+						   b.IdInstituicao,
+					       b.idunidadeinst,
+					       a.IdPessoaLegado,
+					       a.NomePessoa,
+					       a.CodTipoPessoa,
+					       a.NumCpfCnpj,
+					       a.CodTipoOperacao,
+					       a.DataAtualizacao,
+					       'A cooperativa ${numCooperativa} não tem grupo compartilhamento cadastrado no CAPES',
+					       CURRENT_TIMESTAMP
+					from [${nomeServidor}].[${nomeBancoDados}].[dbo].REPLICAPESSOASQLDB2 a,
+                    [${nomeServidor}].[${nomeBancoDados}].[dbo].cooperativa b
+					where [DataProcessamento] is not null 
+                      and a.numcooperativa = b.numcooperativa
+                      and a.numpac         = b.numpac
+			]]>
+		</command>
+	</query>
+	
+	<query name="REMOVE_TRANSICAO_REPLICACAO_CENTRALIZADA">
+		<use-case name="Consumir replicação" />
+		<description>Remove as REPLICAPESSOASQLDB2 que já foram centralizadas </description>
+		<command>
+			<![CDATA[
+				DELETE FROM [${nomeServidor}].[${nomeBancoDados}].[dbo].REPLICAPESSOASQLDB2
+				where [DataProcessamento] is not null 
+			]]>
+		</command>
+	</query>
+</queries>

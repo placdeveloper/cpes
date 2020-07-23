@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<VBoxValidavel xmlns="br.com.bancoob.componentes.containers.validaveis.*"
+			   xmlns:mx="http://www.adobe.com/2006/mxml"
+			   xmlns:titulo="br.com.bancoob.componentes.titulo.*"
+			   xmlns:componentes="br.com.bancoob.componentes.*"
+			   xmlns:containers="br.com.bancoob.componentes.containers.*"
+			   xmlns:input="br.com.bancoob.componentes.input.*"
+			   xmlns:painellista="br.com.bancoob.componentes.painellista.*"
+			   width="100%" height="65" defaultButton="{btnProcurar}">
+	
+	<titulo:SubtituloView width="100%" texto="PROCURAR"/>
+
+	
+	<containers:HBoxBancoob width="100%" verticalAlign="middle" >
+		<componentes:Rotulo text="Nome:"/>
+		<input:Texto id="nome" width="100%" maxChars="100"/>
+		<painellista:BotaoProcurarView id="btnProcurar" label="Procurar"/>	
+	</containers:HBoxBancoob>
+	
+</VBoxValidavel>

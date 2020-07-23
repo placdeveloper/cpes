@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<bancoobValidaveis:ModuloValidavel xmlns:mx="http://www.adobe.com/2006/mxml"
+			xmlns:bancoobInput="br.com.bancoob.componentes.input.*"
+			xmlns:bancoob="br.com.bancoob.componentes.*"
+			xmlns:procurarPessoa="br.com.sicoob.capes.corporativo.componentes.procurarPessoa.*"
+			xmlns:campos="br.com.bancoob.componentes.campos.*"
+			xmlns:navegacao="br.com.bancoob.componentes.navegacao.*"
+			xmlns:barra="br.com.sicoob.capes.cadastrarBem.abas.*"
+			xmlns:aba="br.com.sicoob.capes.cadastrarBem.abas.*"
+			xmlns:bancoobValidaveis="br.com.bancoob.componentes.containers.validaveis.*"
+	 		width="410" height="100" layout="absolute" styleName="ModuloSemEstilo">
+
+	<bancoob:Rotulo x="10" y="7" text="Tipo de Posse:"/>
+	<bancoobInput:Combo x="133" y="2" width="262" id="cmbTipoPosse" toolTip="Selecione o tipo de posse." 
+		validarObrigatorio="true" tabIndex="1" labelField="descricao" inserirItemOpcional="true" />	
+
+	<bancoob:Rotulo x="10" y="37" text="Área Posse:"/>
+	<campos:CampoNumerico id="areaPosse" x="133" y="32" width="262" valorMinimo="0.000001" valorMaximo="9999999.999999" maxChars="13" casasDecimais="6" permitirValoreNegativos="false" validarObrigatorio="true" tabIndex="2" />
+
+	<barra:barraBotoesPopUpView id="barra" x="133" y="65" width="269" height="33"/>
+
+</bancoobValidaveis:ModuloValidavel>

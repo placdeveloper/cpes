@@ -1,0 +1,17 @@
+<bancoobValidaveis:ModuloValidavel
+				xmlns:bancoobInput="br.com.bancoob.componentes.input.*"
+				xmlns:bancoobValidaveis="br.com.bancoob.componentes.containers.validaveis.*"
+				xmlns:mx="http://www.adobe.com/2006/mxml"
+				width="911.0606" height="537.9545" layout="absolute" styleName="ModuloSemEstilo"
+				label="Contrato Social" verticalScrollPolicy="auto">
+
+		<mx:Image x="17" y="6" source="br/com/bancoob/imagens/icos/Text.png" alpha=".5"/>
+		<mx:Label x="39" y="6" text="RESUMO CONTRATO SOCIAL / ADMINISTRAÇÃO / OBJETO" fontWeight="bold" fontFamily="ArialEmbedded" alpha=".8"/>
+		<mx:Image y="12" source="br/com/bancoob/imagens/imgsTelas/linha.swf" scaleContent="false" left="344" right="20"/>
+		
+		<bancoobInput:TextoArea left="25" right="25" top="42" bottom="40" id="txtContratoSocial" 
+				width="100%" height="100%" maxChars="65536" />
+		
+</bancoobValidaveis:ModuloValidavel>
+
+

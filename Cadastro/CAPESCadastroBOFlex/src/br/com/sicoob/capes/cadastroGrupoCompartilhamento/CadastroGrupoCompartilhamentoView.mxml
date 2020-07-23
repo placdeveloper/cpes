@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<componentes:Modulo xmlns:mx="http://www.adobe.com/2006/mxml"
+					xmlns:componentes="br.com.bancoob.componentes.*"
+					xmlns:grid="br.com.bancoob.componentes.grid.*"					
+					xmlns:namespace="http://namespace"
+					xmlns:titulo="br.com.bancoob.componentes.titulo.*"
+					xmlns:comp="br.com.bancoob.componentes.*" 
+					xmlns:comb="br.com.bancoob.componentes.input.*" 
+					xmlns:camp="br.com.bancoob.componentes.campos.*"
+					xmlns:filtro="br.com.bancoob.componentes.painellista.*"
+					xmlns:tabelaPaginada="br.com.bancoob.componentes.tabelapaginada.*"
+					xmlns:bancoobGrid="br.com.bancoob.componentes.grid.*"
+					xmlns:bancoobPaginacao="br.com.bancoob.componentes.paginacao.*"
+					width="950" height="514" layout="absolute">
+	
+	<mx:Script>
+		<![CDATA[
+			import br.com.bancoob.componentes.tabelapaginada.TabelaPaginadaUtils;
+		]]>
+	</mx:Script>
+	
+	<titulo:SubtituloView y="0" left="10" right="10" texto="Grupo Compartilhamento"/>
+	
+	<comp:Rotulo x="10" y="40" height="18" textAlign="left" text="Grupos de Compartilhamento" />
+	<comb:Combo x="10" y="56" width="250" id="cmbGrupo" conteudoMaiusculo="true" labelField="descricao" inserirItemOpcional="true" labelItemOpcional="TODOS"  />
+	
+	<comp:Rotulo x="270" y="40" height="18" textAlign="left" text="Nº da Instituição" />
+	<camp:CampoInteiroView x="270" y="56" width="100" maxChars="4" id="idUnidadeInst" />
+	
+	<filtro:BotaoProcurarView x="385" y="56" width="85" id="btFiltrar" label="FILTRAR"/>
+	<comp:Botao x="480" y="56" width="85" id="btLimpar" label="LIMPAR" />
+	
+	<bancoobGrid:Grid y="95" left="10" right="10" height="345" id="grdDados">
+		<bancoobGrid:columns>
+			<bancoobGrid:ColunaGrid width="80" dataField="descricao" headerText="Grupo de Compartilhamento" labelFunction="{TabelaPaginadaUtils.defaultLabelFunction}" />
+			<bancoobGrid:ColunaGrid width="30" dataField="numero" headerText="Nº Instituição" labelFunction="{TabelaPaginadaUtils.defaultLabelFunction}" />
+			<bancoobGrid:ColunaGrid width="160" dataField="nomeInstituicao" headerText="Instituição" labelFunction="{TabelaPaginadaUtils.defaultLabelFunction}" />
+			<bancoobGrid:ColunaGrid width="60" dataField="numCNPJ" headerText="Nº CNPJ" labelFunction="{TabelaPaginadaUtils.defaultCNPJLabelFunction}" />
+			<bancoobGrid:ColunaGrid width="40" dataField="integracaoSrf" headerText="Integração Receita" textAlign="center" labelFunction="{TabelaPaginadaUtils.defaultBooleanLabelFunction}" />
+		</bancoobGrid:columns>
+	</bancoobGrid:Grid>
+	<bancoobPaginacao:BarraPaginacao x="10" y="445" left="10" right="10" id="barraPaginacao"/> 
+	
+	<mx:HBox id="botoesFormularioCadastro" left="10" right="10" bottom="5" horizontalAlign="right" horizontalGap="5">
+		<componentes:Botao width="105" label="Novo Grupo" id="btnNovoGrupo" nomeEvento="ok" height="22" />
+		<componentes:Botao width="105" label="Alterar Grupo" id="btnAlterarGrupo" nomeEvento="ok" height="22" toolTip="Alterar nome do Grupo selecionado." enabled="false" />
+		<componentes:Botao width="105" label="Excluir Grupo" id="btnExcluirGrupo" height="22" toolTip="Excluir o Grupo selecionado." enabled="false" />
+		<mx:Spacer width="100%" height="10"/>
+		<componentes:Botao width="105" label="Incluir Inst." id="btnIncluirInsti" height="22" toolTip="Incluir uma ou várias instituições ao Grupo selecionado." enabled="false" /> 
+		<componentes:Botao width="105" label="Alterar Inst." id="btnAlterarInsti" height="22" toolTip="Alterar uma instituição." enabled="{grdDados.selectedItem}" />
+		<componentes:Botao width="105" label="Excluir Inst." id="btnExcluir" nomeEvento="limpar" height="22" enabled="{grdDados.selectedItem}" />
+		<componentes:Botao id="btnImprimir" width="105" label="IMPRIMIR"
+						   icon="@Embed('br/com/bancoob/imagens/icoImpressora.png')"
+						   nomeEvento="ok" toolTip="Relotorio do Grupo Selecionado." enabled="false"/>
+		<componentes:Botao width="105" label="FECHAR" id="btnFechar" nomeEvento="ajuda" height="22" />
+	</mx:HBox>
+	
+</componentes:Modulo>

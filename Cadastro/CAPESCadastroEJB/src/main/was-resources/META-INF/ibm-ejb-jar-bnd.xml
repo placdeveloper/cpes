@@ -1,0 +1,549 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ejb-jar-bnd xmlns="http://websphere.ibm.com/xml/ns/javaee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://websphere.ibm.com/xml/ns/javaee http://websphere.ibm.com/xml/ns/javaee/ibm-ejb-jar-bnd_1_1.xsd" version="1.1">
+
+	<session name="AlterarDocumentoPessoaServicoEJB">
+		<interface class="br.com.sicoob.capes.cadastro.negocio.servicos.interfaces.AlterarDocumentoPessoaServicoLocal" binding-name="ejblocal:capes/cadastro/AlterarDocumentoPessoaServico" />
+		<interface class="br.com.sicoob.capes.cadastro.negocio.servicos.interfaces.AlterarDocumentoPessoaServicoRemote" binding-name="capes/cadastro/AlterarDocumentoPessoaServicoRemote" />
+	</session>
+	<session name="AnotacaoServicoEJB">
+		<interface class="br.com.sicoob.capes.cadastro.negocio.servicos.interfaces.AnotacaoServicoLocal" binding-name="ejblocal:capes/cadastro/AnotacaoServico" />
+		<interface class="br.com.sicoob.capes.cadastro.negocio.servicos.interfaces.AnotacaoServicoRemote" binding-name="capes/cadastro/AnotacaoServicoRemote" />
+	</session>
+	<session name="AtividadeEconomicaServicoEJB">
+		<interface class="br.com.sicoob.capes.cadastro.negocio.servicos.interfaces.AtividadeEconomicaServicoLocal" binding-name="ejblocal:capes/cadastro/AtividadeEconomicaServico" />
+		<interface class="br.com.sicoob.capes.cadastro.negocio.servicos.interfaces.AtividadeEconomicaServicoRemote" binding-name="capes/cadastro/AtividadeEconomicaServicoRemote" />
+	</session>
+	<session name="AutorizacaoCadastroServicoEJB">
+		<interface class="br.com.sicoob.capes.cadastro.negocio.servicos.interfaces.AutorizacaoCadastroServicoLocal" binding-name="ejblocal:capes/cadastro/AutorizacaoCadastroServico" />
+		<interface class="br.com.sicoob.capes.cadastro.negocio.servicos.interfaces.AutorizacaoCadastroServicoRemote" binding-name="capes/cadastro/AutorizacaoCadastroServicoRemote" />
+	</session>
+	<session name="AutorizacaoDocumentoServicoEJB">
+		<interface class="br.com.sicoob.capes.cadastro.negocio.servicos.interfaces.AutorizacaoDocumentoServicoLocal" binding-name="ejblocal:capes/cadastro/AutorizacaoDocumentoServico" />
+		<interface class="br.com.sicoob.capes.cadastro.negocio.servicos.interfaces.AutorizacaoDocumentoServicoRemote" binding-name="capes/cadastro/AutorizacaoDocumentoServicoRemote" />
+	</session>
+	<session name="AutorizacaoServicoEJB">
+		<interface class="br.com.sicoob.capes.cadastro.negocio.servicos.interfaces.AutorizacaoServicoLocal" binding-name="ejblocal:capes/cadastro/AutorizacaoServico" />
+		<interface class="br.com.sicoob.capes.cadastro.negocio.servicos.interfaces.AutorizacaoServicoRemote" binding-name="capes/cadastro/AutorizacaoServicoRemote" />
+	</session>
+	<session name="AutorizarServicoEJB">
+		<interface class="br.com.sicoob.capes.cadastro.negocio.servicos.interfaces.AutorizarServicoLocal" binding-name="ejblocal:capes/cadastro/AutorizarServico" />
+		<interface class="br.com.sicoob.capes.cadastro.negocio.servicos.interfaces.AutorizarServicoRemote" binding-name="capes/cadastro/AutorizarServicoRemote" />
+	</session>
+	<session name="CategoriaAnotacaoServicoEJB">
+		<interface class="br.com.sicoob.capes.cadastro.negocio.servicos.interfaces.CategoriaAnotacaoServicoLocal" binding-name="ejblocal:capes/cadastro/CategoriaAnotacaoServico" />
+		<interface class="br.com.sicoob.capes.cadastro.negocio.servicos.interfaces.CategoriaAnotacaoServicoRemote" binding-name="capes/cadastro/CategoriaAnotacaoServicoRemote" />
+	</session>
+	<session name="CategoriaProdutorServicoEJB">
+		<interface class="br.com.sicoob.capes.cadastro.negocio.servicos.interfaces.CategoriaProdutorServicoLocal" binding-name="ejblocal:capes/cadastro/CategoriaProdutorServico" />
+		<interface class="br.com.sicoob.capes.cadastro.negocio.servicos.interfaces.CategoriaProdutorServicoRemote" binding-name="capes/cadastro/CategoriaProdutorServicoRemote" />
+	</session>
+	<session name="CentraisSingularesServicoEJB">
+		<interface class="br.com.sicoob.capes.cadastro.negocio.servicos.interfaces.CentraisSingularesServicoLocal" binding-name="ejblocal:capes/cadastro/CentraisSingularesServico" />
+		<interface class="br.com.sicoob.capes.cadastro.negocio.servicos.interfaces.CentraisSingularesServicoRemote" binding-name="capes/cadastro/CentraisSingularesServicoRemote" />
+	</session>
+	<session name="CertidaoServicoEJB">
+		<interface class="br.com.sicoob.capes.cadastro.negocio.servicos.interfaces.CertidaoServicoLocal" binding-name="ejblocal:capes/cadastro/CertidaoServico" />
+		<interface class="br.com.sicoob.capes.cadastro.negocio.servicos.interfaces.CertidaoServicoRemote" binding-name="capes/cadastro/CertidaoServicoRemote" />
+	</session>
+	<session name="CidadaniaServicoEJB">
+		<interface class="br.com.sicoob.capes.cadastro.negocio.servicos.interfaces.CidadaniaServicoLocal" binding-name="ejblocal:capes/cadastro/CidadaniaServico" />
+		<interface class="br.com.sicoob.capes.cadastro.negocio.servicos.interfaces.CidadaniaServicoRemote" binding-name="capes/cadastro/CidadaniaServicoRemote" />
+	</session>
+	<session name="CnaeFiscalServicoEJB">
+		<interface class="br.com.sicoob.capes.cadastro.negocio.servicos.interfaces.CnaeFiscalServicoLocal" binding-name="ejblocal:capes/cadastro/CnaeFiscalServico" />
+		<interface class="br.com.sicoob.capes.cadastro.negocio.servicos.interfaces.CnaeFiscalServicoRemote" binding-name="capes/cadastro/CnaeFiscalServicoRemote" />
+	</session>
+	<session name="CompartilhamentoCadastroServicoEJB">
+		<interface class="br.com.sicoob.capes.cadastro.negocio.servicos.interfaces.CompartilhamentoCadastroServicoLocal" binding-name="ejblocal:capes/cadastro/CompartilhamentoCadastroServico" />
+		<interface class="br.com.sicoob.capes.cadastro.negocio.servicos.interfaces.CompartilhamentoCadastroServicoRemote" binding-name="capes/cadastro/CompartilhamentoCadastroServicoRemote" />
+	</session>
+	<session name="ConselhoRegionalServicoEJB">
+		<interface class="br.com.sicoob.capes.cadastro.negocio.servicos.interfaces.ConselhoRegionalServicoLocal" binding-name="ejblocal:capes/cadastro/ConselhoRegionalServico" />
+		<interface class="br.com.sicoob.capes.cadastro.negocio.servicos.interfaces.ConselhoRegionalServicoRemote" binding-name="capes/cadastro/ConselhoRegionalServicoRemote" />
+	</session>
+	<session name="DadosArquivoExportacaoServicoEJB">
+		<interface class="br.com.sicoob.capes.cadastro.negocio.servicos.interfaces.DadosArquivoExportacaoServicoLocal" binding-name="ejblocal:capes/cadastro/DadosArquivoExportacaoServico" />
+		<interface class="br.com.sicoob.capes.cadastro.negocio.servicos.interfaces.DadosArquivoExportacaoServicoRemote" binding-name="capes/cadastro/DadosArquivoExportacaoServicoRemote" />
+	</session>
+	<session name="DadosConfiguracaoFluxoServicoEJB">
+		<interface class="br.com.sicoob.capes.cadastro.negocio.servicos.interfaces.DadosConfiguracaoFluxoServicoLocal" binding-name="ejblocal:capes/cadastro/DadosConfiguracaoFluxoServico" />
+		<interface class="br.com.sicoob.capes.cadastro.negocio.servicos.interfaces.DadosConfiguracaoFluxoServicoRemote" binding-name="capes/cadastro/DadosConfiguracaoFluxoServicoRemote" />
+	</session>
+	<session name="DestinoExportacaoServicoEJB">
+		<interface class="br.com.sicoob.capes.cadastro.negocio.servicos.interfaces.DestinoExportacaoServicoLocal" binding-name="ejblocal:capes/cadastro/DestinoExportacaoServico" />
+		<interface class="br.com.sicoob.capes.cadastro.negocio.servicos.interfaces.DestinoExportacaoServicoRemote" binding-name="capes/cadastro/DestinoExportacaoServicoRemote" />
+	</session>
+	<session name="DetalharAnotacaoServicoEJB">
+		<interface class="br.com.sicoob.capes.cadastro.negocio.servicos.interfaces.DetalharAnotacaoServicoLocal" binding-name="ejblocal:capes/cadastro/DetalharAnotacaoServico" />
+		<interface class="br.com.sicoob.capes.cadastro.negocio.servicos.interfaces.DetalharAnotacaoServicoRemote" binding-name="capes/cadastro/DetalharAnotacaoServicoRemote" />
+	</session>
+	<session name="EmailServicoEJB">
+		<interface class="br.com.sicoob.capes.cadastro.negocio.servicos.interfaces.EmailServicoLocal" binding-name="ejblocal:capes/cadastro/EmailServico" />
+		<interface class="br.com.sicoob.capes.cadastro.negocio.servicos.interfaces.EmailServicoRemote" binding-name="capes/cadastro/EmailServicoRemote" />
+	</session>
+	<session name="EmpreendimentoServicoEJB">
+		<interface class="br.com.sicoob.capes.cadastro.negocio.servicos.interfaces.EmpreendimentoServicoLocal" binding-name="ejblocal:capes/cadastro/EmpreendimentoServico" />
+		<interface class="br.com.sicoob.capes.cadastro.negocio.servicos.interfaces.EmpreendimentoServicoRemote" binding-name="capes/cadastro/EmpreendimentoServicoRemote" />
+	</session>
+	<session name="EnderecoCorrespondenciaServicoEJB">
+		<interface class="br.com.sicoob.capes.cadastro.negocio.servicos.interfaces.EnderecoCorrespondenciaServicoLocal" binding-name="ejblocal:capes/cadastro/EnderecoCorrespondenciaServico" />
+		<interface class="br.com.sicoob.capes.cadastro.negocio.servicos.interfaces.EnderecoCorrespondenciaServicoRemote" binding-name="capes/cadastro/EnderecoCorrespondenciaServicoRemote" />
+	</session>
+	<session name="EnderecoFiscalServicoEJB">
+		<interface class="br.com.sicoob.capes.cadastro.negocio.servicos.interfaces.EnderecoFiscalServicoLocal" binding-name="ejblocal:capes/cadastro/EnderecoFiscalServico" />
+		<interface class="br.com.sicoob.capes.cadastro.negocio.servicos.interfaces.EnderecoFiscalServicoRemote" binding-name="capes/cadastro/EnderecoFiscalServicoRemote" />
+	</session>
+	<session name="EnderecoServicoEJB">
+		<interface class="br.com.sicoob.capes.cadastro.negocio.servicos.interfaces.EnderecoServicoLocal" binding-name="ejblocal:capes/cadastro/EnderecoServico" />
+		<interface class="br.com.sicoob.capes.cadastro.negocio.servicos.interfaces.EnderecoServicoRemote" binding-name="capes/cadastro/EnderecoServicoRemote" />
+	</session>
+	<session name="EstadoCivilServicoEJB">
+		<interface class="br.com.sicoob.capes.cadastro.negocio.servicos.interfaces.EstadoCivilServicoLocal" binding-name="ejblocal:capes/cadastro/EstadoCivilServico" />
+		<interface class="br.com.sicoob.capes.cadastro.negocio.servicos.interfaces.EstadoCivilServicoRemote" binding-name="capes/cadastro/EstadoCivilServicoRemote" />
+	</session>
+	<session name="ExecutorTransferenciaInformacaoServicoEJB">
+		<interface class="br.com.sicoob.capes.cadastro.negocio.servicos.interfaces.ExecutorTransferenciaInformacaoServicoLocal" binding-name="ejblocal:capes/cadastro/ExecutorTransferenciaInformacaoServico" />
+	</session>
+	<session name="ExportacaoServicoEJB">
+		<interface class="br.com.sicoob.capes.cadastro.negocio.servicos.interfaces.ExportacaoServicoLocal" binding-name="ejblocal:capes/cadastro/ExportacaoServico" />
+		<interface class="br.com.sicoob.capes.cadastro.negocio.servicos.interfaces.ExportacaoServicoRemote" binding-name="capes/cadastro/ExportacaoServicoRemote" />
+	</session>
+	<session name="FichaCadastralServicoEJB">
+		<interface class="br.com.sicoob.capes.cadastro.negocio.servicos.interfaces.FichaCadastralServicoLocal" binding-name="ejblocal:capes/cadastro/FichaCadastralServico" />
+		<interface class="br.com.sicoob.capes.cadastro.negocio.servicos.interfaces.FichaCadastralServicoRemote" binding-name="capes/cadastro/FichaCadastralServicoRemote" />
+	</session>
+	<session name="FichaCadastralNovaServicoEJB">
+		<interface class="br.com.sicoob.capes.cadastro.negocio.servicos.interfaces.FichaCadastralNovaServicoLocal" binding-name="ejblocal:capes/cadastro/FichaCadastralNovaServico" />
+		<interface class="br.com.sicoob.capes.cadastro.negocio.servicos.interfaces.FichaCadastralNovaServicoRemote" binding-name="capes/cadastro/FichaCadastralNovaServicoRemote" />
+	</session>
+	<session name="FinalidadeEmpreendimentoServicoEJB">
+		<interface class="br.com.sicoob.capes.cadastro.negocio.servicos.interfaces.FinalidadeEmpreendimentoServicoLocal" binding-name="ejblocal:capes/cadastro/FinalidadeEmpreendimentoServico" />
+		<interface class="br.com.sicoob.capes.cadastro.negocio.servicos.interfaces.FinalidadeEmpreendimentoServicoRemote" binding-name="capes/cadastro/FinalidadeEmpreendimentoServicoRemote" />
+	</session>
+	<session name="FonteRendaServicoEJB">
+		<interface class="br.com.sicoob.capes.cadastro.negocio.servicos.interfaces.FonteRendaServicoLocal" binding-name="ejblocal:capes/cadastro/FonteRendaServico" />
+		<interface class="br.com.sicoob.capes.cadastro.negocio.servicos.interfaces.FonteRendaServicoRemote" binding-name="capes/cadastro/FonteRendaServicoRemote" />
+	</session>
+	<session name="FuncaoServicoEJB">
+		<interface class="br.com.sicoob.capes.cadastro.negocio.servicos.interfaces.FuncaoServicoLocal" binding-name="ejblocal:capes/cadastro/FuncaoServico" />
+		<interface class="br.com.sicoob.capes.cadastro.negocio.servicos.interfaces.FuncaoServicoRemote" binding-name="capes/cadastro/FuncaoServicoRemote" />
+	</session>
+	<session name="FuncionarioServicoEJB">
+		<interface class="br.com.sicoob.capes.cadastro.negocio.servicos.interfaces.FuncionarioServicoLocal" binding-name="ejblocal:capes/cadastro/FuncionarioServico" />
+		<interface class="br.com.sicoob.capes.cadastro.negocio.servicos.interfaces.FuncionarioServicoRemote" binding-name="capes/cadastro/FuncionarioServicoRemote" />
+	</session>
+	<session name="GrauInstrucaoServicoEJB">
+		<interface class="br.com.sicoob.capes.cadastro.negocio.servicos.interfaces.GrauInstrucaoServicoLocal" binding-name="ejblocal:capes/cadastro/GrauInstrucaoServico" />
+		<interface class="br.com.sicoob.capes.cadastro.negocio.servicos.interfaces.GrauInstrucaoServicoRemote" binding-name="capes/cadastro/GrauInstrucaoServicoRemote" />
+	</session>
+	<session name="GrupoCompartilhamentoServicoEJB">
+		<interface class="br.com.sicoob.capes.cadastro.negocio.servicos.interfaces.GrupoCompartilhamentoServicoLocal" binding-name="ejblocal:capes/cadastro/GrupoCompartilhamentoServico" />
+		<interface class="br.com.sicoob.capes.cadastro.negocio.servicos.interfaces.GrupoCompartilhamentoServicoRemote" binding-name="capes/cadastro/GrupoCompartilhamentoServicoRemote" />
+	</session>
+	<session name="GrupoEconomicoPessoaServicoEJB">
+		<interface class="br.com.sicoob.capes.cadastro.negocio.servicos.interfaces.GrupoEconomicoPessoaServicoLocal" binding-name="ejblocal:capes/cadastro/GrupoEconomicoPessoaServico" />
+		<interface class="br.com.sicoob.capes.cadastro.negocio.servicos.interfaces.GrupoEconomicoPessoaServicoRemote" binding-name="capes/cadastro/GrupoEconomicoPessoaServicoRemote" />
+	</session>
+	<session name="GrupoEconomicoServicoEJB">
+		<interface class="br.com.sicoob.capes.cadastro.negocio.servicos.interfaces.GrupoEconomicoServicoLocal" binding-name="ejblocal:capes/cadastro/GrupoEconomicoServico" />
+		<interface class="br.com.sicoob.capes.cadastro.negocio.servicos.interfaces.GrupoEconomicoServicoRemote" binding-name="capes/cadastro/GrupoEconomicoServicoRemote" />
+	</session>
+	<session name="GrupoEconomicoNovoServicoEJB">
+		<interface class="br.com.sicoob.capes.cadastro.negocio.servicos.interfaces.GrupoEconomicoNovoServicoLocal" binding-name="ejblocal:capes/cadastro/GrupoEconomicoNovoServico" />
+		<interface class="br.com.sicoob.capes.cadastro.negocio.servicos.interfaces.GrupoEconomicoNovoServicoRemote" binding-name="capes/cadastro/GrupoEconomicoNovoServicoRemote" />
+	</session>
+	<session name="GrupoEconomicoNovoLimpoServicoEJB">
+		<interface class="br.com.sicoob.capes.cadastro.negocio.servicos.interfaces.GrupoEconomicoNovoLimpoServicoLocal" binding-name="ejblocal:capes/cadastro/GrupoEconomicoNovoLimpoServico" />
+		<interface class="br.com.sicoob.capes.cadastro.negocio.servicos.interfaces.GrupoEconomicoNovoLimpoServicoRemote" binding-name="capes/cadastro/GrupoEconomicoNovoLimpoServicoRemote" />
+	</session>
+	<session name="GrupoTipoAnotacaoServicoEJB">
+		<interface class="br.com.sicoob.capes.cadastro.negocio.servicos.interfaces.GrupoTipoAnotacaoServicoLocal" binding-name="ejblocal:capes/cadastro/GrupoTipoAnotacaoServico" />
+		<interface class="br.com.sicoob.capes.cadastro.negocio.servicos.interfaces.GrupoTipoAnotacaoServicoRemote" binding-name="capes/cadastro/GrupoTipoAnotacaoServicoRemote" />
+	</session>
+	<session name="HistoricoAlteracaoCpfCnpjServicoEJB">
+		<interface class="br.com.sicoob.capes.cadastro.negocio.servicos.interfaces.HistoricoAlteracaoCpfCnpjServicoLocal" binding-name="ejblocal:capes/cadastro/HistoricoAlteracaoCpfCnpjServico" />
+		<interface class="br.com.sicoob.capes.cadastro.negocio.servicos.interfaces.HistoricoAlteracaoCpfCnpjServicoRemote" binding-name="capes/cadastro/HistoricoAlteracaoCpfCnpjServicoRemote" />
+	</session>
+	<session name="InformacaoProfissionalServicoEJB">
+		<interface class="br.com.sicoob.capes.cadastro.negocio.servicos.interfaces.InformacaoProfissionalServicoLocal" binding-name="ejblocal:capes/cadastro/InformacaoProfissionalServico" />
+		<interface class="br.com.sicoob.capes.cadastro.negocio.servicos.interfaces.InformacaoProfissionalServicoRemote" binding-name="capes/cadastro/InformacaoProfissionalServicoRemote" />
+	</session>
+	<session name="InformacaoUtilizadaServicoEJB">
+		<interface class="br.com.sicoob.capes.cadastro.negocio.servicos.interfaces.InformacaoUtilizadaServicoLocal" binding-name="ejblocal:capes/cadastro/InformacaoUtilizadaServico" />
+		<interface class="br.com.sicoob.capes.cadastro.negocio.servicos.interfaces.InformacaoUtilizadaServicoRemote" binding-name="capes/cadastro/InformacaoUtilizadaServicoRemote" />
+	</session>
+	<session name="LogCompartilhamentoCadastroServicoEJB">
+		<interface class="br.com.sicoob.capes.cadastro.negocio.servicos.interfaces.LogCompartilhamentoCadastroServicoLocal" binding-name="ejblocal:capes/cadastro/LogCompartilhamentoCadastroServico" />
+		<interface class="br.com.sicoob.capes.cadastro.negocio.servicos.interfaces.LogCompartilhamentoCadastroServicoRemote" binding-name="capes/cadastro/LogCompartilhamentoCadastroServicoRemote" />
+	</session>
+	<session name="MapaTipoAnotacaoServicoEJB">
+		<interface class="br.com.sicoob.capes.cadastro.negocio.servicos.interfaces.MapaTipoAnotacaoServicoLocal" binding-name="ejblocal:capes/cadastro/MapaTipoAnotacaoServico" />
+		<interface class="br.com.sicoob.capes.cadastro.negocio.servicos.interfaces.MapaTipoAnotacaoServicoRemote" binding-name="capes/cadastro/MapaTipoAnotacaoServicoRemote" />
+	</session>
+	<session name="MensagemReplicacaoServicoEJB">
+		<interface class="br.com.sicoob.capes.cadastro.negocio.servicos.interfaces.MensagemReplicacaoServicoLocal" binding-name="ejblocal:capes/cadastro/MensagemReplicacaoServico" />
+		<interface class="br.com.sicoob.capes.cadastro.negocio.servicos.interfaces.MensagemReplicacaoServicoRemote" binding-name="capes/cadastro/MensagemReplicacaoServicoRemote" />
+		
+		<resource-ref name="br.com.sicoob.capes.cadastro.negocio.servicos.ejb.MensagemReplicacaoServicoEJB/fabricaConexoes" binding-name="WSMQCAPESQueueConnectionFactory" />
+    	<message-destination-ref name="br.com.sicoob.capes.cadastro.negocio.servicos.ejb.MensagemReplicacaoServicoEJB/filaAtualizaCadastro" binding-name="queue/QL.CONT.EXEC.ATUALIZA.CADASTRO" />
+    	<message-destination-ref name="br.com.sicoob.capes.cadastro.negocio.servicos.ejb.MensagemReplicacaoServicoEJB/dlqAtualizaCadastro" binding-name="queue/QL.CONT.EXEC.ATUALIZA.CADASTRO.DLQ" />
+	</session>
+	<session name="MensagemServicoEJB">
+		<interface class="br.com.sicoob.capes.cadastro.negocio.servicos.interfaces.MensagemServicoLocal" binding-name="ejblocal:capes/cadastro/MensagemServico" />
+		<interface class="br.com.sicoob.capes.cadastro.negocio.servicos.interfaces.MensagemServicoRemote" binding-name="capes/cadastro/MensagemServicoRemote" />
+	</session>
+	<session name="MonitoracaoFilasCapesServicoEJB">
+		<interface class="br.com.sicoob.capes.cadastro.negocio.servicos.interfaces.MonitoracaoFilasCapesServicoLocal" binding-name="ejblocal:capes/cadastro/MonitoracaoFilasCapesServico" />
+		<interface class="br.com.sicoob.capes.cadastro.negocio.servicos.interfaces.MonitoracaoFilasCapesServicoRemote" binding-name="capes/cadastro/MonitoracaoFilasCapesServicoRemote" />
+		
+<!-- 		<resource-env-ref name="queue/QL.CONT.EXEC.ATUALIZA.CADASTRO" binding-name="queue/QL.CONT.EXEC.ATUALIZA.CADASTRO" /> -->
+<!-- 		<resource-env-ref name="queue/QL.CONT.EXEC.ATUALIZA.CADASTRO.DLQ" binding-name="queue/QL.CONT.EXEC.ATUALIZA.CADASTRO.DLQ" /> -->
+<!-- 		<resource-env-ref name="queue/QL.CONT.EXEC.CONS.EXT" binding-name="queue/QL.CONT.EXEC.CONS.EXT" /> -->
+<!-- 		<resource-env-ref name="queue/QL.CONT.EXEC.CONS.EXT.DLQ" binding-name="queue/QL.CONT.EXEC.CONS.EXT.DLQ" /> -->
+		
+		<resource-ref name="br.com.sicoob.capes.cadastro.negocio.servicos.ejb.MonitoracaoFilasCapesServicoEJB/fabricaConexoes" binding-name="WSMQCAPESQueueConnectionFactory" />
+    	<message-destination-ref name="br.com.sicoob.capes.cadastro.negocio.servicos.ejb.MonitoracaoFilasCapesServicoEJB/filaAtualizaCadastro" binding-name="queue/QL.CONT.EXEC.ATUALIZA.CADASTRO" />
+    	<message-destination-ref name="br.com.sicoob.capes.cadastro.negocio.servicos.ejb.MonitoracaoFilasCapesServicoEJB/dlqAtualizaCadastro" binding-name="queue/QL.CONT.EXEC.ATUALIZA.CADASTRO.DLQ" />
+    	<message-destination-ref name="br.com.sicoob.capes.cadastro.negocio.servicos.ejb.MonitoracaoFilasCapesServicoEJB/filaConsultasExternas" binding-name="queue/QL.CONT.EXEC.CONS.EXT" />
+    	<message-destination-ref name="br.com.sicoob.capes.cadastro.negocio.servicos.ejb.MonitoracaoFilasCapesServicoEJB/dlqConsultasExternas" binding-name="queue/QL.CONT.EXEC.CONS.EXT.DLQ" />
+	</session>
+	<session name="NacionalidadeServicoEJB">
+		<interface class="br.com.sicoob.capes.cadastro.negocio.servicos.interfaces.NacionalidadeServicoLocal" binding-name="ejblocal:capes/cadastro/NacionalidadeServico" />
+		<interface class="br.com.sicoob.capes.cadastro.negocio.servicos.interfaces.NacionalidadeServicoRemote" binding-name="capes/cadastro/NacionalidadeServicoRemote" />
+	</session>
+	<session name="NucleoServicoEJB">
+		<interface class="br.com.sicoob.capes.cadastro.negocio.servicos.interfaces.NucleoServicoLocal" binding-name="ejblocal:capes/cadastro/NucleoServico" />
+		<interface class="br.com.sicoob.capes.cadastro.negocio.servicos.interfaces.NucleoServicoRemote" binding-name="capes/cadastro/NucleoServicoRemote" />
+	</session>
+	<session name="ObservacaoAnotacaoServicoEJB">
+		<interface class="br.com.sicoob.capes.cadastro.negocio.servicos.interfaces.ObservacaoAnotacaoServicoLocal" binding-name="ejblocal:capes/cadastro/ObservacaoAnotacaoServico" />
+		<interface class="br.com.sicoob.capes.cadastro.negocio.servicos.interfaces.ObservacaoAnotacaoServicoRemote" binding-name="capes/cadastro/ObservacaoAnotacaoServicoRemote" />
+	</session>
+	<session name="OcupacaoProfissionalServicoEJB">
+		<interface class="br.com.sicoob.capes.cadastro.negocio.servicos.interfaces.OcupacaoProfissionalServicoLocal" binding-name="ejblocal:capes/cadastro/OcupacaoProfissionalServico" />
+		<interface class="br.com.sicoob.capes.cadastro.negocio.servicos.interfaces.OcupacaoProfissionalServicoRemote" binding-name="capes/cadastro/OcupacaoProfissionalServicoRemote" />
+	</session>
+	<session name="OrgaoEmissorCertidaoServicoEJB">
+		<interface class="br.com.sicoob.capes.cadastro.negocio.servicos.interfaces.OrgaoEmissorCertidaoServicoLocal" binding-name="ejblocal:capes/cadastro/OrgaoEmissorCertidaoServico" />
+		<interface class="br.com.sicoob.capes.cadastro.negocio.servicos.interfaces.OrgaoEmissorCertidaoServicoRemote" binding-name="capes/cadastro/OrgaoEmissorCertidaoServicoRemote" />
+	</session>
+	<session name="OrigemInformacaoServicoEJB">
+		<interface class="br.com.sicoob.capes.cadastro.negocio.servicos.interfaces.OrigemInformacaoServicoLocal" binding-name="ejblocal:capes/cadastro/OrigemInformacaoServico" />
+		<interface class="br.com.sicoob.capes.cadastro.negocio.servicos.interfaces.OrigemInformacaoServicoRemote" binding-name="capes/cadastro/OrigemInformacaoServicoRemote" />
+	</session>
+	<session name="ParametroServicoEJB">
+		<interface class="br.com.sicoob.capes.cadastro.negocio.servicos.interfaces.ParametroServicoLocal" binding-name="ejblocal:capes/cadastro/ParametroServico" />
+		<interface class="br.com.sicoob.capes.cadastro.negocio.servicos.interfaces.ParametroServicoRemote" binding-name="capes/cadastro/ParametroServicoRemote" />
+	</session>
+	<session name="PerfilTarifarioServicoEJB">
+		<interface class="br.com.sicoob.capes.cadastro.negocio.servicos.interfaces.PerfilTarifarioServicoLocal" binding-name="ejblocal:capes/cadastro/PerfilTarifarioServico" />
+		<interface class="br.com.sicoob.capes.cadastro.negocio.servicos.interfaces.PerfilTarifarioServicoRemote" binding-name="capes/cadastro/PerfilTarifarioServicoRemote" />
+	</session>
+	<session name="PeriodicidadeAnotacaoServicoEJB">
+		<interface class="br.com.sicoob.capes.cadastro.negocio.servicos.interfaces.PeriodicidadeAnotacaoServicoLocal" binding-name="ejblocal:capes/cadastro/PeriodicidadeAnotacaoServico" />
+		<interface class="br.com.sicoob.capes.cadastro.negocio.servicos.interfaces.PeriodicidadeAnotacaoServicoRemote" binding-name="capes/cadastro/PeriodicidadeAnotacaoServicoRemote" />
+	</session>
+	<session name="PessoaCompartilhamentoServicoEJB">
+		<interface class="br.com.sicoob.capes.cadastro.negocio.servicos.interfaces.PessoaCompartilhamentoServicoLocal" binding-name="ejblocal:capes/cadastro/PessoaCompartilhamentoServico" />
+		<interface class="br.com.sicoob.capes.cadastro.negocio.servicos.interfaces.PessoaCompartilhamentoServicoRemote" binding-name="capes/cadastro/PessoaCompartilhamentoServicoRemote" />
+	</session>
+	<session name="PessoaInstituicaoServicoEJB">
+		<interface class="br.com.sicoob.capes.cadastro.negocio.servicos.interfaces.PessoaInstituicaoServicoLocal" binding-name="ejblocal:capes/cadastro/PessoaInstituicaoServico" />
+		<interface class="br.com.sicoob.capes.cadastro.negocio.servicos.interfaces.PessoaInstituicaoServicoRemote" binding-name="capes/cadastro/PessoaInstituicaoServicoRemote" />
+	</session>
+	<session name="PessoaIntegracaoServicoEJB">
+		<interface class="br.com.sicoob.capes.cadastro.negocio.servicos.interfaces.PessoaIntegracaoServicoLocal" binding-name="ejblocal:capes/cadastro/PessoaIntegracaoServico" />
+		<interface class="br.com.sicoob.capes.cadastro.negocio.servicos.interfaces.PessoaIntegracaoServicoRemote" binding-name="capes/cadastro/PessoaIntegracaoServicoRemote" />
+	</session>
+	<session name="PessoaServicoEJB">
+		<interface class="br.com.sicoob.capes.cadastro.negocio.servicos.interfaces.PessoaServicoLocal" binding-name="ejblocal:capes/cadastro/PessoaServico" />
+		<interface class="br.com.sicoob.capes.cadastro.negocio.servicos.interfaces.PessoaServicoRemote" binding-name="capes/cadastro/PessoaServicoRemote" />
+	</session>
+	<session name="ProdutividadeServicoEJB">
+		<interface class="br.com.sicoob.capes.cadastro.negocio.servicos.interfaces.ProdutividadeServicoLocal" binding-name="ejblocal:capes/cadastro/ProdutividadeServico" />
+		<interface class="br.com.sicoob.capes.cadastro.negocio.servicos.interfaces.ProdutividadeServicoRemote" binding-name="capes/cadastro/ProdutividadeServicoRemote" />
+	</session>
+	<session name="ProdutorServicoEJB">
+		<interface class="br.com.sicoob.capes.cadastro.negocio.servicos.interfaces.ProdutorServicoLocal" binding-name="ejblocal:capes/cadastro/ProdutorServico" />
+		<interface class="br.com.sicoob.capes.cadastro.negocio.servicos.interfaces.ProdutorServicoRemote" binding-name="capes/cadastro/ProdutorServicoRemote" />
+	</session>
+	<session name="ReferenciaServicoEJB">
+		<interface class="br.com.sicoob.capes.cadastro.negocio.servicos.interfaces.ReferenciaServicoLocal" binding-name="ejblocal:capes/cadastro/ReferenciaServico" />
+		<interface class="br.com.sicoob.capes.cadastro.negocio.servicos.interfaces.ReferenciaServicoRemote" binding-name="capes/cadastro/ReferenciaServicoRemote" />
+	</session>
+	<session name="RegimeCasamentoServicoEJB">
+		<interface class="br.com.sicoob.capes.cadastro.negocio.servicos.interfaces.RegimeCasamentoServicoLocal" binding-name="ejblocal:capes/cadastro/RegimeCasamentoServico" />
+		<interface class="br.com.sicoob.capes.cadastro.negocio.servicos.interfaces.RegimeCasamentoServicoRemote" binding-name="capes/cadastro/RegimeCasamentoServicoRemote" />
+	</session>
+	<session name="RegistroRelacionamentoServicoEJB">
+		<interface class="br.com.sicoob.capes.cadastro.negocio.servicos.interfaces.RegistroRelacionamentoServicoLocal" binding-name="ejblocal:capes/cadastro/RegistroRelacionamentoServico" />
+		<interface class="br.com.sicoob.capes.cadastro.negocio.servicos.interfaces.RegistroRelacionamentoServicoRemote" binding-name="capes/cadastro/RegistroRelacionamentoServicoRemote" />
+	</session>
+	<session name="RelacionamentoInstituicaoServicoEJB">
+		<interface class="br.com.sicoob.capes.cadastro.negocio.servicos.interfaces.RelacionamentoInstituicaoServicoLocal" binding-name="ejblocal:capes/cadastro/RelacionamentoInstituicaoServico" />
+		<interface class="br.com.sicoob.capes.cadastro.negocio.servicos.interfaces.RelacionamentoInstituicaoServicoRemote" binding-name="capes/cadastro/RelacionamentoInstituicaoServicoRemote" />
+	</session>
+	<session name="RelacionamentoPessoaServicoEJB">
+		<interface class="br.com.sicoob.capes.cadastro.negocio.servicos.interfaces.RelacionamentoPessoaServicoLocal" binding-name="ejblocal:capes/cadastro/RelacionamentoPessoaServico" />
+		<interface class="br.com.sicoob.capes.cadastro.negocio.servicos.interfaces.RelacionamentoPessoaServicoRemote" binding-name="capes/cadastro/RelacionamentoPessoaServicoRemote" />
+	</session>
+	<session name="ReplicacaoCadastroServicoEJB">
+		<interface class="br.com.sicoob.capes.cadastro.negocio.servicos.interfaces.ReplicacaoCadastroServicoLocal" binding-name="ejblocal:capes/cadastro/ReplicacaoCadastroServico" />
+		<interface class="br.com.sicoob.capes.cadastro.negocio.servicos.interfaces.ReplicacaoCadastroServicoRemote" binding-name="capes/cadastro/ReplicacaoCadastroServicoRemote" />
+	</session>
+	<session name="ResponsavelCadastroServicoEJB">
+		<interface class="br.com.sicoob.capes.cadastro.negocio.servicos.interfaces.ResponsavelCadastroServicoLocal" binding-name="ejblocal:capes/cadastro/ResponsavelCadastroServico" />
+		<interface class="br.com.sicoob.capes.cadastro.negocio.servicos.interfaces.ResponsavelCadastroServicoRemote" binding-name="capes/cadastro/ResponsavelCadastroServicoRemote" />
+	</session>
+	<session name="SolicitacaoTransferenciaInformacoesServicoEJB">
+		<interface class="br.com.sicoob.capes.cadastro.negocio.servicos.interfaces.SolicitacaoTransferenciaInformacoesServicoLocal" binding-name="ejblocal:capes/cadastro/SolicitacaoTransferenciaInformacoesServico" />
+		<interface class="br.com.sicoob.capes.cadastro.negocio.servicos.interfaces.SolicitacaoTransferenciaInformacoesServicoRemote" binding-name="capes/cadastro/SolicitacaoTransferenciaInformacoesServicoRemote" />
+	</session>
+	<session name="SubTipoCertidaoServicoEJB">
+		<interface class="br.com.sicoob.capes.cadastro.negocio.servicos.interfaces.SubTipoCertidaoServicoLocal" binding-name="ejblocal:capes/cadastro/SubTipoCertidaoServico" />
+		<interface class="br.com.sicoob.capes.cadastro.negocio.servicos.interfaces.SubTipoCertidaoServicoRemote" binding-name="capes/cadastro/SubTipoCertidaoServicoRemote" />
+	</session>
+	<session name="TelefoneServicoEJB">
+		<interface class="br.com.sicoob.capes.cadastro.negocio.servicos.interfaces.TelefoneServicoLocal" binding-name="ejblocal:capes/cadastro/TelefoneServico" />
+		<interface class="br.com.sicoob.capes.cadastro.negocio.servicos.interfaces.TelefoneServicoRemote" binding-name="capes/cadastro/TelefoneServicoRemote" />
+	</session>
+	<session name="TipoAbrangenciaCertidaoServicoEJB">
+		<interface class="br.com.sicoob.capes.cadastro.negocio.servicos.interfaces.TipoAbrangenciaCertidaoServicoLocal" binding-name="ejblocal:capes/cadastro/TipoAbrangenciaCertidaoServico" />
+		<interface class="br.com.sicoob.capes.cadastro.negocio.servicos.interfaces.TipoAbrangenciaCertidaoServicoRemote" binding-name="capes/cadastro/TipoAbrangenciaCertidaoServicoRemote" />
+	</session>
+	<session name="TipoAfastamentoServicoEJB">
+		<interface class="br.com.sicoob.capes.cadastro.negocio.servicos.interfaces.TipoAfastamentoServicoLocal" binding-name="ejblocal:capes/cadastro/TipoAfastamentoServico" />
+		<interface class="br.com.sicoob.capes.cadastro.negocio.servicos.interfaces.TipoAfastamentoServicoRemote" binding-name="capes/cadastro/TipoAfastamentoServicoRemote" />
+	</session>
+	<session name="TipoAnotacaoServicoEJB">
+		<interface class="br.com.sicoob.capes.cadastro.negocio.servicos.interfaces.TipoAnotacaoServicoLocal" binding-name="ejblocal:capes/cadastro/TipoAnotacaoServico" />
+		<interface class="br.com.sicoob.capes.cadastro.negocio.servicos.interfaces.TipoAnotacaoServicoRemote" binding-name="capes/cadastro/TipoAnotacaoServicoRemote" />
+	</session>
+	<session name="TipoAtualizacaoRenovacaoServicoEJB">
+		<interface class="br.com.sicoob.capes.cadastro.negocio.servicos.interfaces.TipoAtualizacaoRenovacaoServicoLocal" binding-name="ejblocal:capes/cadastro/TipoAtualizacaoRenovacaoServico" />
+		<interface class="br.com.sicoob.capes.cadastro.negocio.servicos.interfaces.TipoAtualizacaoRenovacaoServicoRemote" binding-name="capes/cadastro/TipoAtualizacaoRenovacaoServicoRemote" />
+	</session>
+	<session name="TipoBeneficiarioSicorServicoEJB">
+		<interface class="br.com.sicoob.capes.cadastro.negocio.servicos.interfaces.TipoBeneficiarioSicorServicoLocal" binding-name="ejblocal:capes/cadastro/TipoBeneficiarioSicorServico" />
+		<interface class="br.com.sicoob.capes.cadastro.negocio.servicos.interfaces.TipoBeneficiarioSicorServicoRemote" binding-name="capes/cadastro/TipoBeneficiarioSicorServicoRemote" />
+	</session>
+	<session name="TipoCapturaServicoEJB">
+		<interface class="br.com.sicoob.capes.cadastro.negocio.servicos.interfaces.TipoCapturaServicoLocal" binding-name="ejblocal:capes/cadastro/TipoCapturaServico" />
+		<interface class="br.com.sicoob.capes.cadastro.negocio.servicos.interfaces.TipoCapturaServicoRemote" binding-name="capes/cadastro/TipoCapturaServicoRemote" />
+	</session>
+	<session name="TipoCertidaoServicoEJB">
+		<interface class="br.com.sicoob.capes.cadastro.negocio.servicos.interfaces.TipoCertidaoServicoLocal" binding-name="ejblocal:capes/cadastro/TipoCertidaoServico" />
+		<interface class="br.com.sicoob.capes.cadastro.negocio.servicos.interfaces.TipoCertidaoServicoRemote" binding-name="capes/cadastro/TipoCertidaoServicoRemote" />
+	</session>
+	<session name="TipoConsultaOrigemServicoEJB">
+		<interface class="br.com.sicoob.capes.cadastro.negocio.servicos.interfaces.TipoConsultaOrigemServicoLocal" binding-name="ejblocal:capes/cadastro/TipoConsultaOrigemServico" />
+		<interface class="br.com.sicoob.capes.cadastro.negocio.servicos.interfaces.TipoConsultaOrigemServicoRemote" binding-name="capes/cadastro/TipoConsultaOrigemServicoRemote" />
+	</session>
+	<session name="TipoDestinoExibicaoServicoEJB">
+		<interface class="br.com.sicoob.capes.cadastro.negocio.servicos.interfaces.TipoDestinoExibicaoServicoLocal" binding-name="ejblocal:capes/cadastro/TipoDestinoExibicaoServico" />
+		<interface class="br.com.sicoob.capes.cadastro.negocio.servicos.interfaces.TipoDestinoExibicaoServicoRemote" binding-name="capes/cadastro/TipoDestinoExibicaoServicoRemote" />
+	</session>
+	<session name="TipoDocumentoIdentificacaoServicoEJB">
+		<interface class="br.com.sicoob.capes.cadastro.negocio.servicos.interfaces.TipoDocumentoIdentificacaoServicoLocal" binding-name="ejblocal:capes/cadastro/TipoDocumentoIdentificacaoServico" />
+		<interface class="br.com.sicoob.capes.cadastro.negocio.servicos.interfaces.TipoDocumentoIdentificacaoServicoRemote" binding-name="capes/cadastro/TipoDocumentoIdentificacaoServicoRemote" />
+	</session>
+	<session name="TipoEmailServicoEJB">
+		<interface class="br.com.sicoob.capes.cadastro.negocio.servicos.interfaces.TipoEmailServicoLocal" binding-name="ejblocal:capes/cadastro/TipoEmailServico" />
+		<interface class="br.com.sicoob.capes.cadastro.negocio.servicos.interfaces.TipoEmailServicoRemote" binding-name="capes/cadastro/TipoEmailServicoRemote" />
+	</session>
+	<session name="TipoEmpresaServicoEJB">
+		<interface class="br.com.sicoob.capes.cadastro.negocio.servicos.interfaces.TipoEmpresaServicoLocal" binding-name="ejblocal:capes/cadastro/TipoEmpresaServico" />
+		<interface class="br.com.sicoob.capes.cadastro.negocio.servicos.interfaces.TipoEmpresaServicoRemote" binding-name="capes/cadastro/TipoEmpresaServicoRemote" />
+	</session>
+	<session name="TipoEnderecoServicoEJB">
+		<interface class="br.com.sicoob.capes.cadastro.negocio.servicos.interfaces.TipoEnderecoServicoLocal" binding-name="ejblocal:capes/cadastro/TipoEnderecoServico" />
+		<interface class="br.com.sicoob.capes.cadastro.negocio.servicos.interfaces.TipoEnderecoServicoRemote" binding-name="capes/cadastro/TipoEnderecoServicoRemote" />
+	</session>
+	<session name="TipoFonteRendaServicoEJB">
+		<interface class="br.com.sicoob.capes.cadastro.negocio.servicos.interfaces.TipoFonteRendaServicoLocal" binding-name="ejblocal:capes/cadastro/TipoFonteRendaServico" />
+		<interface class="br.com.sicoob.capes.cadastro.negocio.servicos.interfaces.TipoFonteRendaServicoRemote" binding-name="capes/cadastro/TipoFonteRendaServicoRemote" />
+	</session>
+	<session name="TipoFormaConstituicaoEsferaAdministrativaServicoEJB">
+		<interface class="br.com.sicoob.capes.cadastro.negocio.servicos.interfaces.TipoFormaConstituicaoEsferaAdministrativaServicoLocal" binding-name="ejblocal:capes/cadastro/TipoFormaConstituicaoEsferaAdministrativaServico" />
+		<interface class="br.com.sicoob.capes.cadastro.negocio.servicos.interfaces.TipoFormaConstituicaoEsferaAdministrativaServicoRemote" binding-name="capes/cadastro/TipoFormaConstituicaoEsferaAdministrativaServicoRemote" />
+	</session>
+	<session name="TipoFormaConstituicaoServicoEJB">
+		<interface class="br.com.sicoob.capes.cadastro.negocio.servicos.interfaces.TipoFormaConstituicaoServicoLocal" binding-name="ejblocal:capes/cadastro/TipoFormaConstituicaoServico" />
+		<interface class="br.com.sicoob.capes.cadastro.negocio.servicos.interfaces.TipoFormaConstituicaoServicoRemote" binding-name="capes/cadastro/TipoFormaConstituicaoServicoRemote" />
+	</session>
+	<session name="TipoFuncionarioServicoEJB">
+		<interface class="br.com.sicoob.capes.cadastro.negocio.servicos.interfaces.TipoFuncionarioServicoLocal" binding-name="ejblocal:capes/cadastro/TipoFuncionarioServico" />
+		<interface class="br.com.sicoob.capes.cadastro.negocio.servicos.interfaces.TipoFuncionarioServicoRemote" binding-name="capes/cadastro/TipoFuncionarioServicoRemote" />
+	</session>
+	<session name="TipoInformacaoServicoEJB">
+		<interface class="br.com.sicoob.capes.cadastro.negocio.servicos.interfaces.TipoInformacaoServicoLocal" binding-name="ejblocal:capes/cadastro/TipoInformacaoServico" />
+		<interface class="br.com.sicoob.capes.cadastro.negocio.servicos.interfaces.TipoInformacaoServicoRemote" binding-name="capes/cadastro/TipoInformacaoServicoRemote" />
+	</session>
+	<session name="TipoMensagemServicoEJB">
+		<interface class="br.com.sicoob.capes.cadastro.negocio.servicos.interfaces.TipoMensagemServicoLocal" binding-name="ejblocal:capes/cadastro/TipoMensagemServico" />
+		<interface class="br.com.sicoob.capes.cadastro.negocio.servicos.interfaces.TipoMensagemServicoRemote" binding-name="capes/cadastro/TipoMensagemServicoRemote" />
+	</session>
+	<session name="TipoObjetoCertidaoServicoEJB">
+		<interface class="br.com.sicoob.capes.cadastro.negocio.servicos.interfaces.TipoObjetoCertidaoServicoLocal" binding-name="ejblocal:capes/cadastro/TipoObjetoCertidaoServico" />
+		<interface class="br.com.sicoob.capes.cadastro.negocio.servicos.interfaces.TipoObjetoCertidaoServicoRemote" binding-name="capes/cadastro/TipoObjetoCertidaoServicoRemote" />
+	</session>
+	<session name="TipoObservacaoAnotacaoServicoEJB">
+		<interface class="br.com.sicoob.capes.cadastro.negocio.servicos.interfaces.TipoObservacaoAnotacaoServicoLocal" binding-name="ejblocal:capes/cadastro/TipoObservacaoAnotacaoServico" />
+		<interface class="br.com.sicoob.capes.cadastro.negocio.servicos.interfaces.TipoObservacaoAnotacaoServicoRemote" binding-name="capes/cadastro/TipoObservacaoAnotacaoServicoRemote" />
+	</session>
+	<session name="TipoPessoaContatoServicoEJB">
+		<interface class="br.com.sicoob.capes.cadastro.negocio.servicos.interfaces.TipoPessoaContatoServicoLocal" binding-name="ejblocal:capes/cadastro/TipoPessoaContatoServico" />
+		<interface class="br.com.sicoob.capes.cadastro.negocio.servicos.interfaces.TipoPessoaContatoServicoRemote" binding-name="capes/cadastro/TipoPessoaContatoServicoRemote" />
+	</session>
+	<session name="TipoPessoaServicoEJB">
+		<interface class="br.com.sicoob.capes.cadastro.negocio.servicos.interfaces.TipoPessoaServicoLocal" binding-name="ejblocal:capes/cadastro/TipoPessoaServico" />
+		<interface class="br.com.sicoob.capes.cadastro.negocio.servicos.interfaces.TipoPessoaServicoRemote" binding-name="capes/cadastro/TipoPessoaServicoRemote" />
+	</session>
+	<session name="TipoPoderRelacionamentoServicoEJB">
+		<interface class="br.com.sicoob.capes.cadastro.negocio.servicos.interfaces.TipoPoderRelacionamentoServicoLocal" binding-name="ejblocal:capes/cadastro/TipoPoderRelacionamentoServico" />
+		<interface class="br.com.sicoob.capes.cadastro.negocio.servicos.interfaces.TipoPoderRelacionamentoServicoRemote" binding-name="capes/cadastro/TipoPoderRelacionamentoServicoRemote" />
+	</session>
+	<session name="PerfilCadastroServicoEJB">
+	    <interface class="br.com.sicoob.capes.cadastro.negocio.servicos.interfaces.PerfilCadastroServicoLocal" binding-name="ejblocal:capes/cadastro/PerfilCadastroServico"/>
+	    <interface class="br.com.sicoob.capes.cadastro.negocio.servicos.interfaces.PerfilCadastroServicoRemote" binding-name="capes/cadastro/PerfilCadastroServicoRemote"/>
+	</session>
+	<session name="TipoPrazoCertidaoServicoEJB">
+		<interface class="br.com.sicoob.capes.cadastro.negocio.servicos.interfaces.TipoPrazoCertidaoServicoLocal" binding-name="ejblocal:capes/cadastro/TipoPrazoCertidaoServico" />
+		<interface class="br.com.sicoob.capes.cadastro.negocio.servicos.interfaces.TipoPrazoCertidaoServicoRemote" binding-name="capes/cadastro/TipoPrazoCertidaoServicoRemote" />
+	</session>
+	<session name="TipoReferenciaServicoEJB">
+		<interface class="br.com.sicoob.capes.cadastro.negocio.servicos.interfaces.TipoReferenciaServicoLocal" binding-name="ejblocal:capes/cadastro/TipoReferenciaServico" />
+		<interface class="br.com.sicoob.capes.cadastro.negocio.servicos.interfaces.TipoReferenciaServicoRemote" binding-name="capes/cadastro/TipoReferenciaServicoRemote" />
+	</session>
+	<session name="TipoRegraValidacaoCadastralServicoEJB">
+		<interface class="br.com.sicoob.capes.cadastro.negocio.servicos.interfaces.TipoRegraValidacaoCadastralServicoLocal" binding-name="ejblocal:capes/cadastro/TipoRegraValidacaoCadastralServico" />
+		<interface class="br.com.sicoob.capes.cadastro.negocio.servicos.interfaces.TipoRegraValidacaoCadastralServicoRemote" binding-name="capes/cadastro/TipoRegraValidacaoCadastralServicoRemote" />
+	</session>
+	<session name="TipoRelacionamentoPessoaServicoEJB">
+		<interface class="br.com.sicoob.capes.cadastro.negocio.servicos.interfaces.TipoRelacionamentoPessoaServicoLocal" binding-name="ejblocal:capes/cadastro/TipoRelacionamentoPessoaServico" />
+		<interface class="br.com.sicoob.capes.cadastro.negocio.servicos.interfaces.TipoRelacionamentoPessoaServicoRemote" binding-name="capes/cadastro/TipoRelacionamentoPessoaServicoRemote" />
+	</session>
+	<session name="TipoTelefoneServicoEJB">
+		<interface class="br.com.sicoob.capes.cadastro.negocio.servicos.interfaces.TipoTelefoneServicoLocal" binding-name="ejblocal:capes/cadastro/TipoTelefoneServico" />
+		<interface class="br.com.sicoob.capes.cadastro.negocio.servicos.interfaces.TipoTelefoneServicoRemote" binding-name="capes/cadastro/TipoTelefoneServicoRemote" />
+	</session>
+	<session name="TransicaoPessoaServicoEJB">
+		<interface class="br.com.sicoob.capes.cadastro.negocio.servicos.interfaces.TransicaoPessoaServicoLocal" binding-name="ejblocal:capes/cadastro/TransicaoPessoaServico" />
+		<interface class="br.com.sicoob.capes.cadastro.negocio.servicos.interfaces.TransicaoPessoaServicoRemote" binding-name="capes/cadastro/TransicaoPessoaServicoRemote" />
+	</session>
+	<session name="TributacaoServicoEJB">
+		<interface class="br.com.sicoob.capes.cadastro.negocio.servicos.interfaces.TributacaoServicoLocal" binding-name="ejblocal:capes/cadastro/TributacaoServico" />
+		<interface class="br.com.sicoob.capes.cadastro.negocio.servicos.interfaces.TributacaoServicoRemote" binding-name="capes/cadastro/TributacaoServicoRemote" />
+	</session>
+	<session name="UnidadeMedidaServicoEJB">
+		<interface class="br.com.sicoob.capes.cadastro.negocio.servicos.interfaces.UnidadeMedidaServicoLocal" binding-name="ejblocal:capes/cadastro/UnidadeMedidaServico" />
+		<interface class="br.com.sicoob.capes.cadastro.negocio.servicos.interfaces.UnidadeMedidaServicoRemote" binding-name="capes/cadastro/UnidadeMedidaServicoRemote" />
+	</session>
+	<session name="ValidacaoCadastralErroServicoEJB">
+		<interface class="br.com.sicoob.capes.cadastro.negocio.servicos.interfaces.ValidacaoCadastralErroServicoLocal" binding-name="ejblocal:capes/cadastro/ValidacaoCadastralErroServico" />
+		<interface class="br.com.sicoob.capes.cadastro.negocio.servicos.interfaces.ValidacaoCadastralErroServicoRemote" binding-name="capes/cadastro/ValidacaoCadastralErroServicoRemote" />
+	</session>
+	<session name="ValidacaoCadastralRegraServicoEJB">
+		<interface class="br.com.sicoob.capes.cadastro.negocio.servicos.interfaces.ValidacaoCadastralRegraServicoLocal" binding-name="ejblocal:capes/cadastro/ValidacaoCadastralRegraServico" />
+		<interface class="br.com.sicoob.capes.cadastro.negocio.servicos.interfaces.ValidacaoCadastralRegraServicoRemote" binding-name="capes/cadastro/ValidacaoCadastralRegraServicoRemote" />
+	</session>
+	<session name="ValidacaoCadastralServicoEJB">
+		<interface class="br.com.sicoob.capes.cadastro.negocio.servicos.interfaces.ValidacaoCadastralServicoLocal" binding-name="ejblocal:capes/cadastro/ValidacaoCadastralServico" />
+		<interface class="br.com.sicoob.capes.cadastro.negocio.servicos.interfaces.ValidacaoCadastralServicoRemote" binding-name="capes/cadastro/ValidacaoCadastralServicoRemote" />
+	</session>
+	<session name="VinculoEmpregaticioServicoEJB">
+		<interface class="br.com.sicoob.capes.cadastro.negocio.servicos.interfaces.VinculoEmpregaticioServicoLocal" binding-name="ejblocal:capes/cadastro/VinculoEmpregaticioServico" />
+		<interface class="br.com.sicoob.capes.cadastro.negocio.servicos.interfaces.VinculoEmpregaticioServicoRemote" binding-name="capes/cadastro/VinculoEmpregaticioServicoRemote" />
+	</session>
+	<session name="VisualizarExportacaoServicoEJB">
+		<interface class="br.com.sicoob.capes.cadastro.negocio.servicos.interfaces.VisualizarExportacaoServicoLocal" binding-name="ejblocal:capes/cadastro/VisualizarExportacaoServico" />
+		<interface class="br.com.sicoob.capes.cadastro.negocio.servicos.interfaces.VisualizarExportacaoServicoRemote" binding-name="capes/cadastro/VisualizarExportacaoServicoRemote" />
+	</session>
+	<session name="BemServicoEJB">
+		<interface class="br.com.sicoob.capes.cadastro.negocio.servicos.interfaces.BemServicoLocal" binding-name="ejblocal:capes/cadastro/BemServico" />
+		<interface class="br.com.sicoob.capes.cadastro.negocio.servicos.interfaces.BemServicoRemote" binding-name="capes/cadastro/BemServicoRemote" />
+	</session>
+	<session name="BemPessoaCompartilhamentoServicoEJB">
+		<interface class="br.com.sicoob.capes.cadastro.negocio.servicos.interfaces.BemPessoaCompartilhamentoServicoLocal" binding-name="ejblocal:capes/cadastro/BemPessoaCompartilhamentoServico" />
+		<interface class="br.com.sicoob.capes.cadastro.negocio.servicos.interfaces.BemPessoaCompartilhamentoServicoRemote" binding-name="capes/cadastro/BemPessoaCompartilhamentoServicoRemote" />
+	</session>
+	<session name="TipoBemImovelServicoEJB">
+		<interface class="br.com.sicoob.capes.cadastro.negocio.servicos.interfaces.TipoBemImovelServicoLocal" binding-name="ejblocal:capes/cadastro/TipoBemImovelServico" />
+		<interface class="br.com.sicoob.capes.cadastro.negocio.servicos.interfaces.TipoBemImovelServicoRemote" binding-name="capes/cadastro/TipoBemImovelServicoRemote" />
+	</session>
+	<session name="TipoBemMovelServicoEJB">
+		<interface class="br.com.sicoob.capes.cadastro.negocio.servicos.interfaces.TipoBemMovelServicoLocal" binding-name="ejblocal:capes/cadastro/TipoBemMovelServico" />
+		<interface class="br.com.sicoob.capes.cadastro.negocio.servicos.interfaces.TipoBemMovelServicoRemote" binding-name="capes/cadastro/TipoBemMovelServicoRemote" />
+	</session>
+	<session name="TipoClassificacaoBemServicoEJB">
+		<interface class="br.com.sicoob.capes.cadastro.negocio.servicos.interfaces.TipoClassificacaoBemServicoLocal" binding-name="ejblocal:capes/cadastro/TipoClassificacaoBemServico" />
+		<interface class="br.com.sicoob.capes.cadastro.negocio.servicos.interfaces.TipoClassificacaoBemServicoRemote" binding-name="capes/cadastro/TipoClassificacaoBemServicoRemote" />
+	</session>
+	<session name="TipoLocalizacaoBemServicoEJB">
+		<interface class="br.com.sicoob.capes.cadastro.negocio.servicos.interfaces.TipoLocalizacaoBemServicoLocal" binding-name="ejblocal:capes/cadastro/TipoLocalizacaoBemServico" />
+		<interface class="br.com.sicoob.capes.cadastro.negocio.servicos.interfaces.TipoLocalizacaoBemServicoRemote" binding-name="capes/cadastro/TipoLocalizacaoBemServicoRemote" />
+	</session>
+	<session name="TipoUsoBemServicoEJB">
+		<interface class="br.com.sicoob.capes.cadastro.negocio.servicos.interfaces.TipoUsoBemServicoLocal" binding-name="ejblocal:capes/cadastro/TipoUsoBemServico" />
+		<interface class="br.com.sicoob.capes.cadastro.negocio.servicos.interfaces.TipoUsoBemServicoRemote" binding-name="capes/cadastro/TipoUsoBemServicoRemote" />
+	</session>
+	<session name="TipoEstadoConservacaoBemServicoEJB">
+		<interface class="br.com.sicoob.capes.cadastro.negocio.servicos.interfaces.TipoEstadoConservacaoBemServicoLocal" binding-name="ejblocal:capes/cadastro/TipoEstadoConservacaoBemServico" />
+		<interface class="br.com.sicoob.capes.cadastro.negocio.servicos.interfaces.TipoEstadoConservacaoBemServicoRemote" binding-name="capes/cadastro/TipoEstadoConservacaoBemServicoRemote" />
+	</session>
+	<session name="TipoImplantacaoBemImovelServicoEJB">
+		<interface class="br.com.sicoob.capes.cadastro.negocio.servicos.interfaces.TipoImplantacaoBemImovelServicoLocal" binding-name="ejblocal:capes/cadastro/TipoImplantacaoBemImovelServico" />
+		<interface class="br.com.sicoob.capes.cadastro.negocio.servicos.interfaces.TipoImplantacaoBemImovelServicoRemote" binding-name="capes/cadastro/TipoImplantacaoBemImovelServicoRemote" />
+	</session>
+	<session name="TipoPadraoAcabamentoBemImovelServicoEJB">
+		<interface class="br.com.sicoob.capes.cadastro.negocio.servicos.interfaces.TipoPadraoAcabamentoBemImovelServicoLocal" binding-name="ejblocal:capes/cadastro/TipoPadraoAcabamentoBemImovelServico" />
+		<interface class="br.com.sicoob.capes.cadastro.negocio.servicos.interfaces.TipoPadraoAcabamentoBemImovelServicoRemote" binding-name="capes/cadastro/TipoPadraoAcabamentoBemImovelServicoRemote" />
+	</session>
+	<session name="TipoServicoCondominialBemImovelServicoEJB">
+		<interface class="br.com.sicoob.capes.cadastro.negocio.servicos.interfaces.TipoServicoCondominialBemImovelServicoLocal" binding-name="ejblocal:capes/cadastro/TipoServicoCondominialBemImovelServico" />
+		<interface class="br.com.sicoob.capes.cadastro.negocio.servicos.interfaces.TipoServicoCondominialBemImovelServicoRemote" binding-name="capes/cadastro/TipoServicoCondominialBemImovelServicoRemote" />
+	</session>
+	<session name="TipoRelacionamentoBemImovelServicoEJB">
+		<interface class="br.com.sicoob.capes.cadastro.negocio.servicos.interfaces.TipoRelacionamentoBemImovelServicoLocal" binding-name="ejblocal:capes/cadastro/TipoRelacionamentoBemImovelServico" />
+		<interface class="br.com.sicoob.capes.cadastro.negocio.servicos.interfaces.TipoRelacionamentoBemImovelServicoRemote" binding-name="capes/cadastro/TipoRelacionamentoBemImovelServicoRemote" />
+	</session>
+	<session name="TipoOnusBemServicoEJB">
+		<interface class="br.com.sicoob.capes.cadastro.negocio.servicos.interfaces.TipoOnusBemServicoLocal" binding-name="ejblocal:capes/cadastro/TipoOnusBemServico" />
+		<interface class="br.com.sicoob.capes.cadastro.negocio.servicos.interfaces.TipoOnusBemServicoRemote" binding-name="capes/cadastro/TipoOnusBemServicoRemote" />
+	</session>
+	<session name="TipoChassiBemServicoEJB">
+		<interface class="br.com.sicoob.capes.cadastro.negocio.servicos.interfaces.TipoChassiBemServicoLocal" binding-name="ejblocal:capes/cadastro/TipoChassiBemServico" />
+		<interface class="br.com.sicoob.capes.cadastro.negocio.servicos.interfaces.TipoChassiBemServicoRemote" binding-name="capes/cadastro/TipoChassiBemServicoRemote" />
+	</session>
+	<session name="TipoCorAutomovelBemServicoEJB">
+		<interface class="br.com.sicoob.capes.cadastro.negocio.servicos.interfaces.TipoCorAutomovelBemServicoLocal" binding-name="ejblocal:capes/cadastro/TipoCorAutomovelBemServico" />
+		<interface class="br.com.sicoob.capes.cadastro.negocio.servicos.interfaces.TipoCorAutomovelBemServicoRemote" binding-name="capes/cadastro/TipoCorAutomovelBemServicoRemote" />
+	</session>
+	
+	<!-- BEM ANTIGO -->
+	<session name="BemImovelAntigoServicoEJB">
+		<interface class="br.com.sicoob.capes.cadastro.negocio.servicos.bemantigo.BemImovelAntigoServicoLocal" binding-name="ejblocal:capes/cadastro/bemAntigo/BemImovelAntigoServico" />
+		<interface class="br.com.sicoob.capes.cadastro.negocio.servicos.bemantigo.BemImovelAntigoServicoRemote" binding-name="capes/cadastro/bemAntigo/BemImovelAntigoServicoRemote" />
+	</session>
+	<session name="BemAntigoServicoEJB">
+		<interface class="br.com.sicoob.capes.cadastro.negocio.servicos.bemantigo.BemAntigoServicoLocal" binding-name="ejblocal:capes/cadastro/bemAntigo/BemAntigoServico" />
+		<interface class="br.com.sicoob.capes.cadastro.negocio.servicos.bemantigo.BemAntigoServicoRemote" binding-name="capes/cadastro/bemAntigo/BemAntigoServicoRemote" />
+	</session>
+	<session name="SituacaoBemAntigoServicoEJB">
+		<interface class="br.com.sicoob.capes.cadastro.negocio.servicos.bemantigo.SituacaoBemAntigoServicoLocal" binding-name="ejblocal:capes/cadastro/bemAntigo/SituacaoBemAntigoServico" />
+		<interface class="br.com.sicoob.capes.cadastro.negocio.servicos.bemantigo.SituacaoBemAntigoServicoRemote" binding-name="capes/cadastro/bemAntigo/SituacaoBemAntigoServicoRemote" />
+	</session>
+	<session name="SubTipoBemAntigoServicoEJB">
+		<interface class="br.com.sicoob.capes.cadastro.negocio.servicos.bemantigo.SubTipoBemAntigoServicoLocal" binding-name="ejblocal:capes/cadastro/bemAntigo/SubTipoBemAntigoServico" />
+		<interface class="br.com.sicoob.capes.cadastro.negocio.servicos.bemantigo.SubTipoBemAntigoServicoRemote" binding-name="capes/cadastro/bemAntigo/SubTipoBemAntigoServicoRemote" />
+	</session>
+	<session name="TipoBemAntigoServicoEJB">
+		<interface class="br.com.sicoob.capes.cadastro.negocio.servicos.bemantigo.TipoBemAntigoServicoLocal" binding-name="ejblocal:capes/cadastro/bemAntigo/TipoBemAntigoServico" />
+		<interface class="br.com.sicoob.capes.cadastro.negocio.servicos.bemantigo.TipoBemAntigoServicoRemote" binding-name="capes/cadastro/bemAntigo/TipoBemAntigoServicoRemote" />
+	</session>
+		<session name="TipoPosseBemAntigoServicoEJB">
+		<interface class="br.com.sicoob.capes.cadastro.negocio.servicos.bemantigo.TipoPosseBemAntigoServicoLocal" binding-name="ejblocal:capes/cadastro/bemAntigo/TipoPosseBemAntigoServico" />
+		<interface class="br.com.sicoob.capes.cadastro.negocio.servicos.bemantigo.TipoPosseBemAntigoServicoRemote" binding-name="capes/cadastro/bemAntigo/TipoPosseBemAntigoServicoRemote" />
+	</session>
+	
+</ejb-jar-bnd>

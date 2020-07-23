@@ -1,0 +1,465 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE queries [
+  <!ELEMENT queries (query*)>
+  <!ELEMENT query (use-case+,description,paginacao?,command+,projecao?,ordenacoes?)>
+  <!ELEMENT use-case    (#PCDATA)>
+  <!ELEMENT description (#PCDATA)>
+  <!ELEMENT command     (#PCDATA)>
+  <!ELEMENT parametros  (#PCDATA)>
+  <!ELEMENT projecao  (#PCDATA)>
+  <!ELEMENT paginar  (#PCDATA)>
+  <!ELEMENT paginacao (#PCDATA)>
+  <!ELEMENT colunaCodigo    (#PCDATA)>
+  <!ELEMENT colunaDescricao    (#PCDATA)>
+  <!ELEMENT numeroOcorrenciasPorPagina    (#PCDATA)>
+  <!ELEMENT primeiraCondicao    (#PCDATA)>
+  <!ELEMENT ascendente    (#PCDATA)>
+  <!ELEMENT ordenacoes (ordenacao+)>
+  <!ELEMENT ordenacao (#PCDATA)>
+  <!ELEMENT sql  (#PCDATA)>
+  <!ATTLIST ordenacao chave CDATA    #REQUIRED>
+  <!ATTLIST ordenacao default CDATA    #IMPLIED>
+  <!ATTLIST command parametros CDATA    #IMPLIED>
+  <!ATTLIST command paginar CDATA    #IMPLIED>
+  <!ATTLIST use-case name CDATA    #REQUIRED>
+  <!ATTLIST query name CDATA    #REQUIRED>
+  <!ATTLIST paginacao colunaCodigo CDATA    #REQUIRED>
+  <!ATTLIST paginacao colunaDescricao CDATA    #REQUIRED>
+  <!ATTLIST paginacao numeroOcorrenciasPorPagina CDATA    #REQUIRED>
+  <!ATTLIST paginacao primeiraCondicao CDATA    #REQUIRED>
+  <!ATTLIST paginacao ascendente CDATA    #REQUIRED>
+  <!ATTLIST paginacao hint CDATA    #REQUIRED>
+  <!ATTLIST paginacao hintAuxiliar CDATA   #IMPLIED>
+]>
+
+<queries>
+  <query name="NOTIFICAR_CADASTROS">
+    <use-case name="Notifica Cadastros" />
+    <description>Notifica Cadastros</description>
+    <command>
+      <![CDATA[
+			INSERT INTO CLI.ANOTACAO
+			        (         
+			        IDPESSOACOMPARTILHAMENTO,          
+			        IDTIPOANOTACAO,          
+			        IDUSUARIOINC,          
+			        DATAHORAANOTACAO,          
+			        DATAHORAOCORRENCIA,         
+			        DESCOBSERVACAO,          
+			        VALORANOTACAO,          
+			        BOLFLEXIBILIDADE,          
+			        QTDANOTACAO,
+			        IDORIGEMINFO        
+			        )          
+			select
+			    pc.IDPESSOACOMPARTILHAMENTO,
+			    <bancoob:valor valor="${idAnotacao}" tipo="Long" />,
+			    'STI 35265',
+			    CURRENT_TIMESTAMP,
+			    CURRENT_TIMESTAMP,
+			    'STI 35265-Renovação Cadastral',
+			    1,
+			    0,
+			    1,
+			    2            
+			from
+			    cli.PESSOACOMPARTILHAMENTO pc        
+			where
+			   ( 
+                  (
+                  	pc.DATARENOVACAOCADASTRAL is not null and pc.DATARENOVACAOCADASTRAL = to_char((current_timestamp-36 MONTH),'YYYY-MM-DD')
+                  )
+                  OR                   
+                  (
+                    pc.DATARENOVACAOCADASTRAL is null AND (pc.DATAHORAINICIO between current_timestamp-1 day and current_timestamp)
+                  ) 
+			   )  
+      ]]>
+    </command>
+  </query>	
+  <query name="REMOVER_NOTIFICACAO_CADASTROS">
+    <use-case name="Remove Notificacao Cadastros" />
+    <description>Remove Notificacao Cadastros</description>
+    <command>
+      <![CDATA[
+	        UPDATE
+	            cli.anotacao a
+	        SET
+	            a.IDTIPOBAIXA = 3,
+	            a.DATAHORABAIXA = current_timestamp
+	        where exists (
+	        select 1
+		        FROM     cli.anotacao a1
+		        INNER JOIN    cli.PESSOACOMPARTILHAMENTO p ON    a1.IDPESSOACOMPARTILHAMENTO = p.IDPESSOACOMPARTILHAMENTO
+	        WHERE
+		        p.DATARENOVACAOCADASTRAL &gt; to_char((
+			        current_timestamp-36 MONTH
+			    ),'YYYY-MM-DD')
+		        AND a1.idtipoanotacao =  <bancoob:valor valor="${idAnotacao}" tipo="Long" />
+		        AND a1.IDANOTACAO = a.IDANOTACAO
+		        AND a.DATAHORABAIXA IS NULL
+	        )
+      ]]>
+    </command>
+  </query>	
+  <query name="COMANDO_REALIZAR_VALIDACAO">
+    <use-case name="Validação Cadastral" />
+    <description>Realiza a validação cadastral</description>
+    <command>
+      <![CDATA[
+        INSERT
+        INTO
+            CLI.VALIDACAOCADASTRALERRO
+            (
+                IDPESSOACOMPARTILHAMENTO,
+                IDINSTITUICAO,
+                CODREGRAVALIDACAOCADASTRAL,
+                DATAHORAVALIDACAOCADASTRALERRO
+            )
+            (
+        	    ${sql} 
+              <j:if test="${idPessoaCompartilhamento != null}">
+                AND VC.IDPESSOACOMPARTILHAMENTO = <bancoob:valor valor="${idPessoaCompartilhamento}" tipo="Long" />
+              </j:if>
+              <j:if test="${dataValidacao != null}">
+                AND ((VC.DATAHORAULTIMAVALIDACAO IS NULL OR 
+                        VC.DATAHORAULTIMAVALIDACAO &lt; VC.DATAHORAULTIMAATUALIZACAO)
+                AND VC.DATAHORAULTIMAATUALIZACAO &lt;= <bancoob:valor valor="${dataValidacao}" tipo="Date" />)
+              </j:if>
+            )
+      ]]>
+    </command>
+  </query>
+  <query name="COMANDO_REALIZAR_VALIDACAO_CATEGORIA_CADASTRO">
+    <use-case name="Validação Cadastral Categoria Cadastro" />
+    <description>Realiza a validação cadastral</description>
+    <command>
+      <![CDATA[
+			MERGE 
+			INTO
+			    CLI.PESSOACOMPARTILHAMENTO DEST  USING 
+				(
+			                SELECT 
+					                PC.IDPESSOACOMPARTILHAMENTO
+					        FROM CLI.PESSOACOMPARTILHAMENTO PC
+					             INNER JOIN CLI.VALIDACAOCADASTRAL VCL                   ON      VCL.IDPESSOACOMPARTILHAMENTO  = PC.IDPESSOACOMPARTILHAMENTO
+					                                                                     AND     VCL.DATAHORAULTIMAATUALIZACAO &gt; CURRENT TIMESTAMP - 1 DAY
+					        WHERE
+					             PC.CODPERFILCADASTRO = 1
+					        
+					        EXCEPT 
+					                                                                 
+					        SELECT 
+					                PC.IDPESSOACOMPARTILHAMENTO
+					        FROM CLI.PESSOACOMPARTILHAMENTO PC
+					             INNER JOIN CLI.VALIDACAOCADASTRAL VCL                   ON      VCL.IDPESSOACOMPARTILHAMENTO 	 = PC.IDPESSOACOMPARTILHAMENTO
+					                                                                     AND     VCL.DATAHORAULTIMAATUALIZACAO   &gt; CURRENT TIMESTAMP - 1 DAY
+					             INNER JOIN CLI.VALIDACAOCADASTRALERRO V                 ON      V.IDPESSOACOMPARTILHAMENTO      = PC.IDPESSOACOMPARTILHAMENTO
+					             INNER JOIN CLI.REGRAVALIDACAOCADASTRAL RV               ON      RV.CODREGRAVALIDACAOCADASTRAL   = V.CODREGRAVALIDACAOCADASTRAL
+					                                                                     AND     RV.CODTIPOREGRA                 = 'R'
+					        WHERE 
+					                PC.CODPERFILCADASTRO = 1
+			          ) SRC         
+			ON DEST.IDPESSOACOMPARTILHAMENTO = SRC.IDPESSOACOMPARTILHAMENTO         
+			WHEN MATCHED THEN UPDATE
+			SET
+			    DEST.CODPERFILCADASTRO = 2,
+			    DEST.DATAALTERACAOPERFILCADASTRO = CURRENT_TIMESTAMP,
+			    DEST.DATAHORAINICIO = CURRENT_TIMESTAMP
+      ]]>
+    </command>
+  </query>
+  <query name="PESQUISAR_VALIDACAO_CADASTRAL_REGRAS_POR_FILTRO">
+    <use-case name="Validação cadastral" />
+    <description>Pesquisa as regras de validação cadastral por filtro</description>
+    <command>
+      <![CDATA[
+        FROM br.com.sicoob.capes.negocio.entidades.ValidacaoCadastralRegra regra
+        WHERE 
+            1 = 1
+            <j:if test="${criterios.filtro.codigoRegra != null}">
+        AND regra.codigoRegra = <bancoob:valorOql valor="${criterios.filtro.codigoRegra}" tipo="Short" />
+            </j:if>
+            <j:if test="${criterios.filtro.tipoRegra != null and criterios.filtro.tipoRegra.codigoTipoRegra != null}">
+        AND regra.tipoRegra.codigoTipoRegra = <bancoob:valorOql valor="${criterios.filtro.tipoRegra.codigoTipoRegra}" tipo="Character" />
+            </j:if>
+            <j:if test="${criterios.filtro.ativo != null}">
+        AND regra.ativo = <bancoob:valorOql valor="${criterios.filtro.ativo}" tipo="Boolean" />
+            </j:if>
+            <j:if test="${criterios.filtro.funcionalidade != null}">
+        AND regra.funcionalidade = <bancoob:valorOql valor="${criterios.filtro.funcionalidade}" />
+            </j:if>
+            <j:if test="${criterios.filtro.descricao != null}">
+        AND regra.descricao = <bancoob:valorOql valor="${criterios.filtro.descricao}" tipo="String" />
+            </j:if>
+            <j:if test="${criterios.filtro.perfilCadastro.codigo != null}">
+        AND regra.perfilCadastro.codigo = <bancoob:valorOql valor="${criterios.filtro.perfilCadastro.codigo}" tipo="String" />
+            </j:if>
+      ]]>
+    </command>
+    <projecao>
+      SELECT new br.com.sicoob.capes.negocio.entidades.ValidacaoCadastralRegra(
+        regra.codigoRegra,
+        regra.descricao,
+        regra.funcionalidade,
+        regra.mensagemErro,
+        regra.ativo,
+        regra.tipoRegra,
+        regra.executarRegra,
+        regra.perfilCadastro
+      )
+    </projecao>
+    <ordenacoes>
+      <ordenacao chave="codigo" default="true">
+        ORDER BY regra.codigoRegra
+      </ordenacao>
+    </ordenacoes>
+  </query>
+  <query name="LISTAR_FALHAS_REGRAS_VALIDACAO_CADASTRAL">
+    <use-case name="Validação cadastral" />
+    <description>Lista as informações que serão exibidas automaticamente na plataforma de atendimento</description>
+    <command>
+      <![CDATA[
+        SELECT
+            new br.com.sicoob.capes.cadastro.negocio.vo.ValidacaoCadastralVO( 
+              pc.idPessoaCompartilhamento,
+              erro.regra.codigoRegra,
+              erro.regra.funcionalidade,
+              erro.regra.mensagemErro,
+              erro.regra.tipoRegra.descricao,
+              erro.regra.perfilCadastro.descricao
+            )
+        FROM
+            br.com.sicoob.capes.negocio.entidades.vigente.PessoaCompartilhamento pc,
+            br.com.sicoob.capes.negocio.entidades.ValidacaoCadastralErro erro
+		<j:if test="${codigoPerfilCadastro != null}">
+			,br.com.sicoob.capes.negocio.entidades.PerfilCadastro perfilCadastro
+		</j:if>
+        WHERE 
+            erro.validacaoCadastral.idPessoaCompartilhamento = pc.idPessoaCompartilhamento
+        AND pc.idPessoaCompartilhamento = <bancoob:valorOql valor="${idPessoaCompartilhamento}" tipo="Long" />
+        AND (erro.idInstituicao IS NULL OR erro.idInstituicao = <bancoob:valorOql valor="${idInstituicao}" tipo="Integer" />)
+        <j:if test="${tipoRegra != null}">
+          AND erro.regra.tipoRegra.codigoTipoRegra = <bancoob:valorOql valor="${tipoRegra}" tipo="Character" />
+        </j:if>
+        <j:if test="${codigoPerfilCadastro != null}">
+          AND perfilCadastro.codigo = <bancoob:valorOql valor="${codigoPerfilCadastro}" tipo="Short" />
+		  AND erro.regra.perfilCadastro.ordem &lt;= perfilCadastro.ordem
+        </j:if>
+        
+      ]]>
+    </command>
+  </query>
+  <query name="VERIFICA_SE_POSSUI_REGRAS_CADASTRAIS_RESTRITIVA">
+    <use-case name="Verificar se possui regras cadastrais restritivas" />
+    <description>Lista as informações que serão exibidas automaticamente na plataforma de atendimento</description>
+    <command>
+      <![CDATA[
+        SELECT
+            COUNT(*)
+        FROM
+            br.com.sicoob.capes.negocio.entidades.vigente.PessoaCompartilhamento pc,
+            br.com.sicoob.capes.negocio.entidades.ValidacaoCadastralErro erro
+        WHERE 
+            erro.validacaoCadastral.idPessoaCompartilhamento = pc.idPessoaCompartilhamento
+        AND pc.idPessoaCompartilhamento = <bancoob:valorOql valor="${idPessoaCompartilhamento}" tipo="Long" />
+        AND (erro.idInstituicao = <bancoob:valorOql valor="${idInstituicao}" tipo="Integer" /> OR erro.idInstituicao IS NULL)
+        AND erro.regra.tipoRegra.codigoTipoRegra = 'R'
+        
+        <j:if test="${codigoPerfilCadastro != null}">
+	        AND erro.regra.perfilCadastro.codigo = <bancoob:valorOql valor="${codigoPerfilCadastro}" tipo="Short" />
+        </j:if>
+        
+      ]]>
+    </command>
+  </query>
+  <query name="LISTAR_REGRAS_EXECUTAVEIS">
+    <use-case name="Validação cadastral" />
+    <description>Lista as regras executáveis</description>
+    <command>
+      <![CDATA[
+        FROM
+            br.com.sicoob.capes.negocio.entidades.ValidacaoCadastralRegra regra
+        WHERE
+            regra.executarRegra = TRUE
+        OR (regra.ativo = TRUE AND regra.query IS NOT NULL)
+        OR (regra.ativo = FALSE AND (
+            SELECT COUNT(erro)
+            FROM br.com.sicoob.capes.negocio.entidades.ValidacaoCadastralErro erro
+            WHERE erro.regra.codigoRegra = regra.codigoRegra) > 0)
+      ]]>
+    </command>
+    <projecao>SELECT regra</projecao>
+  </query>
+  
+  <query name="LISTAR_REGRAS_EXECUTAVEIS_PERFIL_CADASTRAL">
+    <use-case name="Validação cadastral" />
+    <description>Lista as regras executáveis</description>
+    <command>
+      <![CDATA[
+        FROM
+            br.com.sicoob.capes.negocio.entidades.ValidacaoCadastralRegra regra
+        WHERE
+        	regra.ativo = TRUE 
+        AND regra.query IS NOT NULL
+        	<j:if test="${ordem != null}">
+	        	AND regra.perfilCadastro.ordem &lt;= <bancoob:valorOql valor="${ordem}" tipo="Short" />
+	        </j:if>      
+      ]]>
+    </command>
+    <projecao>SELECT regra </projecao>
+  </query>
+  <query name="DELETAR_ERROS_PESSOA">
+    <use-case name="Validação cadastral" />
+    <description>Apaga os erro de validação cadastral de uma pessoa</description>
+    <command>
+      <![CDATA[
+        DELETE 
+            br.com.sicoob.capes.negocio.entidades.ValidacaoCadastralErro erro 
+        WHERE 
+            erro.validacaoCadastral.idPessoaCompartilhamento = <bancoob:valorOql valor="${idPessoaCompartilhamento}" tipo="Long"/> 
+      ]]>
+    </command>
+  </query>
+  <query name="DELETAR_ERROS_REGRA">
+    <use-case name="Validação cadastral" />
+    <description>Apaga os erro de validação cadastral de uma REGRA</description>
+    <command>
+      <![CDATA[
+        DELETE 
+            br.com.sicoob.capes.negocio.entidades.ValidacaoCadastralErro erro 
+        WHERE 
+            erro.regra.codigoRegra = <bancoob:valorOql valor="${codigoRegra}" tipo="Short"/> 
+      ]]>
+    </command>
+  </query>
+  <query name="DELETAR_ERROS">
+    <use-case name="Validação cadastral" />
+    <description>Apaga os erro de validação cadastral de pessoas validáveis</description>
+    <command>
+      <![CDATA[
+        DELETE 
+            br.com.sicoob.capes.negocio.entidades.ValidacaoCadastralErro erro 
+        WHERE
+            erro.regra.codigoRegra = <bancoob:valorOql valor="${codigoRegra}" tipo="Short" /> 
+        AND erro.validacaoCadastral.idPessoaCompartilhamento IN (
+                SELECT 
+                    v.idPessoaCompartilhamento
+                FROM 
+                    br.com.sicoob.capes.negocio.entidades.ValidacaoCadastral v
+                WHERE
+                    (v.dataHoraUltimaValidacao IS NULL
+                        OR  v.dataHoraUltimaValidacao &lt; v.dataHoraUltimaAtualizacao)
+                AND v.dataHoraUltimaAtualizacao &lt;= <bancoob:valorOql valor="${dataValidacao}" tipo="Date" />
+            )
+      ]]>
+    </command>
+  </query>
+  <query name="PESQUISAR_TIPO_REGRA_VALIDACAO_CADASTRAL_POR_FILTRO">
+    <use-case name="Validação cadastral" />
+    <description>Realiza pesquis de TipoRegraValidacaoCadastral por filtro</description>
+    <command>
+      <![CDATA[
+        FROM
+          br.com.sicoob.capes.negocio.entidades.TipoRegraValidacaoCadastral tipoRegra
+      ]]>
+    </command>
+    <projecao>SELECT tipoRegra</projecao>
+    <ordenacoes>
+      <ordenacao chave="alfabetica" default="true">
+        ORDER BY tipoRegra.descricao
+      </ordenacao>
+    </ordenacoes>
+  </query>
+  <query name="PESQUISAR_PROXIMO_CODIGO_REGRA_VALIDACAO">
+    <use-case name="Validação cadastral" />
+    <description>Pesquisa o próximo código disponível para a tabela de ValidacaoCadastralRegra</description>
+    <command>
+      <![CDATA[
+        SELECT
+            a.CODREGRAVALIDACAOCADASTRAL + 1
+        FROM
+            cli.REGRAVALIDACAOCADASTRAL a
+        LEFT JOIN
+            cli.REGRAVALIDACAOCADASTRAL b
+        ON
+            a.CODREGRAVALIDACAOCADASTRAL + 1 = b.CODREGRAVALIDACAOCADASTRAL
+        WHERE
+            b.CODREGRAVALIDACAOCADASTRAL IS NULL
+        ORDER BY 1
+        FETCH
+            FIRST 1 row only
+      ]]>
+    </command>
+  </query>
+  <query name="ATUALIZAR_DATA_ULTIMA_VALIDACAO">
+    <use-case name="Validação cadastral" />
+    <description>Atualiza a data da última validação cadastral</description>
+    <command>
+      <![CDATA[
+        UPDATE 
+            br.com.sicoob.capes.negocio.entidades.ValidacaoCadastral 
+        SET
+            dataHoraUltimaValidacao = <bancoob:valorOql valor="${dataValidacao}" tipo="Date" />
+        WHERE 
+            (dataHoraUltimaValidacao IS NULL
+        OR  dataHoraUltimaValidacao &lt; dataHoraUltimaAtualizacao)
+    <j:choose>
+      <j:when test="${idPessoaCompartilhamento != null}">
+        AND idPessoaCompartilhamento = <bancoob:valorOql valor="${idPessoaCompartilhamento}" tipo="Long" />
+      </j:when>
+      <j:when test="${dataValidacao != null}">
+        AND dataHoraUltimaAtualizacao &lt;= <bancoob:valorOql valor="${dataValidacao}" tipo="Date" />
+      </j:when>
+    </j:choose>
+      ]]>
+    </command>
+  </query>
+  <query name="CONSULTAR_ERROS_POR_FILTRO">
+    <use-case name="Validação Cadastral" />
+    <description>Verifica se existem erros de uma determinada regra</description>
+    <command>
+      <![CDATA[
+        FROM
+            br.com.sicoob.capes.negocio.entidades.ValidacaoCadastralErro e
+        WHERE
+            1 = 1
+          <j:if test="${criterios.filtro.regra != null and criterios.filtro.regra.codigoRegra != null}">
+            AND e.regra.codigoRegra = <bancoob:valorOql valor="${criterios.filtro.regra.codigoRegra}" tipo="Short" />
+          </j:if>
+      ]]>
+    </command>
+  </query>
+  <query name="LISTAR_REGRAS_EXECUTAVEIS_REVALIDACAO">
+    <use-case name="Validação cadastral" />
+    <description>Lista as regras executáveis para a revalidação do cadastro</description>
+    <command>
+      <![CDATA[
+        FROM
+            br.com.sicoob.capes.negocio.entidades.ValidacaoCadastralRegra regra
+        WHERE
+        	regra.ativo = TRUE 
+        AND regra.query IS NOT NULL
+      ]]>
+    </command>
+    <projecao>SELECT regra</projecao>
+  </query>
+  
+  <query name="OBTER_PENDENCIAS_PESSOA_RELACIONADA">
+    <use-case name="Validação obter pendências pessoa relacionada." />
+    <description>Validação obter pendências pessoa relacionada.</description>
+    <command>
+      <![CDATA[
+        SELECT RVC.DESCMENSAGEMERRO AS MENSAGEM
+		FROM CLI.VALIDACAOCADASTRALERRO AS VCE
+			INNER JOIN CLI.REGRAVALIDACAOCADASTRAL AS RVC ON RVC.CODREGRAVALIDACAOCADASTRAL = VCE.CODREGRAVALIDACAOCADASTRAL
+		WHERE 1=1
+			AND RVC.BOLATIVO = 1
+			AND (VCE.IDINSTITUICAO IS NULL OR VCE.IDINSTITUICAO = <bancoob:valor valor="${idInstituicao}" />)
+			AND VCE.IDPESSOACOMPARTILHAMENTO = <bancoob:valor valor="${idPessoaCompartilhamento}" />
+			AND VCE.CODREGRAVALIDACAOCADASTRAL IN (101, 102, 103, 104, 110, 111, 120, 201)
+      ]]>
+    </command>
+  </query>
+</queries>

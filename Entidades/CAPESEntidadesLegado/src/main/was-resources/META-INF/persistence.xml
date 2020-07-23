@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<persistence xmlns="http://java.sun.com/xml/ns/persistence" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://java.sun.com/xml/ns/persistence http://java.sun.com/xml/ns/persistence/persistence_2_0.xsd" version="2.0">
+	<persistence-unit name="emCapesLegado" transaction-type="JTA">
+		<provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>
+		<jta-data-source>jdbc/BancoobDS</jta-data-source>
+		
+		<properties>
+			<property name="br.com.bancoob.infraestrutura.conexao.data_source" value="jdbc/BancoobDS" />
+			<property name="hibernate.connection.provider_class" value="br.com.sicoob.capes.persistencia.provider.CAPESEntidadesLegadoConnectionProvider" />
+			<property name="hibernate.transaction.manager_lookup_class" value="org.hibernate.transaction.WebSphereExtendedJTATransactionLookup" />
+			<property name="hibernate.dialect" value="org.hibernate.dialect.SQLServer2012Dialect" />
+			<property name="hibernate.show_sql" value="true" />
+			<property name="hibernate.default_schema" value="dbo" />
+			<property name="hibernate.delay_cdi_access" value="true"/>
+			
+			<property name="hibernate.transaction.factory_class" value="org.hibernate.ejb.transaction.JoinableCMTTransactionFactory" />
+			<property name="hibernate.transaction.jta.platform" value="org.hibernate.engine.transaction.jta.platform.internal.WebSphereExtendedJtaPlatform" />
+		</properties>
+	</persistence-unit>
+
+	<persistence-unit name="emCapesLegadoReplicacaoClientes">
+		<provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>
+		<jta-data-source>jdbc/CUCServicoReplicacaoDS</jta-data-source>
+		
+		<properties>
+			<property name="br.com.bancoob.infraestrutura.conexao.data_source" value="jdbc/CUCServicoReplicacaoDS" />
+			<property name="hibernate.transaction.manager_lookup_class" value="org.hibernate.transaction.WebSphereExtendedJTATransactionLookup" />
+			<property name="hibernate.dialect" value="org.hibernate.dialect.SQLServer2012Dialect" />
+			<property name="hibernate.show_sql" value="true" />
+			<property name="hibernate.default_schema" value="dbo" />
+			<property name="hibernate.delay_cdi_access" value="true"/>
+			
+			<property name="hibernate.transaction.factory_class" value="org.hibernate.ejb.transaction.JoinableCMTTransactionFactory" />
+			<property name="hibernate.transaction.jta.platform" value="org.hibernate.engine.transaction.jta.platform.internal.WebSphereExtendedJtaPlatform" />
+		</properties>
+	</persistence-unit>
+	
+</persistence>

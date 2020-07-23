@@ -1,0 +1,340 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="FichaCadastral_Endereco" pageWidth="555" pageHeight="135" whenNoDataType="AllSectionsNoDetail" columnWidth="555" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0">
+	<style name="Linha Zebrada" isDefault="true" mode="Opaque">
+		<box leftPadding="3">
+			<topPen lineWidth="0.25"/>
+			<leftPen lineWidth="0.25"/>
+			<bottomPen lineWidth="0.25"/>
+			<rightPen lineWidth="0.25"/>
+		</box>
+		<conditionalStyle>
+			<conditionExpression><![CDATA[new Boolean(($V{REPORT_COUNT_ZEBRA}.intValue() % 2) == 0)]]></conditionExpression>
+			<style isDefault="false" style="Linha Zebrada" mode="Opaque" backcolor="#DDDDDE"/>
+		</conditionalStyle>
+	</style>
+	<style name="campo" isDefault="false" hAlign="Left" vAlign="Middle" fontSize="8" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false">
+		<box leftPadding="6"/>
+	</style>
+	<parameter name="REPORT_COUNT_ZEBRA" class="java.lang.Integer"/>
+	<parameter name="EXIBIR_TOTAL_PRODUTIVIDADE" class="java.lang.Boolean">
+		<defaultValueExpression><![CDATA[java.lang.Boolean.FALSE]]></defaultValueExpression>
+	</parameter>
+	<queryString>
+		<![CDATA[]]>
+	</queryString>
+	<field name="vigenciaRegistro" class="java.lang.String"/>
+	<field name="anoInicioSafra" class="java.lang.Short"/>
+	<field name="anoFimSafra" class="java.lang.Short"/>
+	<field name="quantidadeOuArea" class="java.math.BigDecimal"/>
+	<field name="bemImovelAntigo.denominacao" class="java.lang.String"/>
+	<field name="empreendimento.descricao" class="java.lang.String"/>
+	<field name="producao" class="java.math.BigDecimal"/>
+	<field name="empreendimento.unidadePrevisao.descricao" class="java.lang.String"/>
+	<field name="empreendimento.unidadeArea.sigla" class="java.lang.String"/>
+	<field name="valorRendaBruta" class="java.math.BigDecimal"/>
+	<field name="percentualRebate" class="java.math.BigDecimal"/>
+	<field name="valorPrecoMedio" class="java.math.BigDecimal"/>
+	<field name="empreendimento.unidadePrevisao.sigla" class="java.lang.String"/>
+	<field name="empreendimento.codigo" class="java.lang.Integer"/>
+	<variable name="REPORT_COUNT_ZEBRA" class="java.lang.Integer" calculation="Count">
+		<variableExpression><![CDATA[new Integer( $V{REPORT_COUNT_ZEBRA}.intValue() + 1)]]></variableExpression>
+		<initialValueExpression><![CDATA[$P{REPORT_COUNT_ZEBRA}]]></initialValueExpression>
+	</variable>
+	<variable name="rendaLiquida" class="java.math.BigDecimal">
+		<variableExpression><![CDATA[$F{valorRendaBruta}.subtract(($F{valorRendaBruta}.multiply($F{percentualRebate}.divide(new java.math.BigDecimal(100)))))]]></variableExpression>
+	</variable>
+	<variable name="totalRendaBruta" class="java.math.BigDecimal" calculation="Sum">
+		<variableExpression><![CDATA[$F{valorRendaBruta}]]></variableExpression>
+		<initialValueExpression><![CDATA[java.math.BigDecimal.ZERO]]></initialValueExpression>
+	</variable>
+	<variable name="totalRendaLiquida" class="java.math.BigDecimal" calculation="Sum">
+		<variableExpression><![CDATA[$V{rendaLiquida}]]></variableExpression>
+	</variable>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band splitType="Stretch"/>
+	</title>
+	<pageHeader>
+		<band splitType="Stretch"/>
+	</pageHeader>
+	<columnHeader>
+		<band height="15" splitType="Stretch">
+			<staticText>
+				<reportElement mode="Opaque" x="0" y="0" width="555" height="15" backcolor="#CCCCCC"/>
+				<box leftPadding="4">
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement>
+					<font size="10" isBold="false"/>
+				</textElement>
+				<text><![CDATA[10. RENDA AGROPECUÁRIA / PRODUTIVIDADE RURAL]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="90" splitType="Prevent">
+			<staticText>
+				<reportElement style="Linha Zebrada" mode="Opaque" x="111" y="60" width="143" height="30"/>
+				<box leftPadding="2">
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement>
+					<font size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Área  / Quantidade]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="Linha Zebrada" mode="Opaque" x="374" y="30" width="181" height="30"/>
+				<box leftPadding="2">
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement>
+					<font size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Produção]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="Linha Zebrada" mode="Opaque" x="254" y="60" width="101" height="30"/>
+				<box leftPadding="2">
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement>
+					<font size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Renda Bruta]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="Linha Zebrada" mode="Opaque" x="53" y="0" width="398" height="30"/>
+				<box leftPadding="2">
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement>
+					<font size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Imóvel]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="Linha Zebrada" mode="Opaque" x="0" y="0" width="53" height="30"/>
+				<box leftPadding="2">
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement>
+					<font size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Ano]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="Linha Zebrada" mode="Opaque" x="0" y="30" width="374" height="30"/>
+				<box leftPadding="2">
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement>
+					<font size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Empreendimento]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="Linha Zebrada" mode="Opaque" x="451" y="0" width="104" height="30"/>
+				<box leftPadding="2">
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement>
+					<font size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Período]]></text>
+			</staticText>
+			<textField isBlankWhenNull="true">
+				<reportElement style="campo" x="0" y="10" width="53" height="20"/>
+				<textElement/>
+				<textFieldExpression class="java.lang.String"><![CDATA[($F{anoInicioSafra} !=  null ? $F{anoInicioSafra}.toString() : "")  + ($F{anoFimSafra}.toString() !=  null ? " / " + $F{anoFimSafra}.toString() : "")]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement style="campo" x="53" y="10" width="398" height="20"/>
+				<textElement/>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{bemImovelAntigo.denominacao}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement style="campo" x="0" y="40" width="374" height="20"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[($F{empreendimento.codigo} != null && $F{empreendimento.descricao} != null) ? $F{empreendimento.codigo} + " - " + $F{empreendimento.descricao} : ""]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00" isBlankWhenNull="true">
+				<reportElement style="campo" x="374" y="40" width="181" height="20"/>
+				<textElement textAlignment="Center"/>
+				<textFieldExpression class="java.math.BigDecimal"><![CDATA[$F{producao}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement style="campo" x="451" y="10" width="104" height="20"/>
+				<textElement/>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{vigenciaRegistro}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement style="Linha Zebrada" mode="Opaque" x="0" y="60" width="111" height="30"/>
+				<box leftPadding="2">
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement>
+					<font size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Unidade de Medida]]></text>
+			</staticText>
+			<textField isBlankWhenNull="true">
+				<reportElement style="campo" x="0" y="70" width="111" height="20"/>
+				<textElement textAlignment="Center"/>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{empreendimento.unidadePrevisao.descricao}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement style="campo" x="181" y="70" width="73" height="20"/>
+				<textElement/>
+			</textField>
+			<staticText>
+				<reportElement style="Linha Zebrada" mode="Opaque" x="355" y="60" width="71" height="30"/>
+				<box leftPadding="2">
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement>
+					<font size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Rebate (%)]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="Linha Zebrada" mode="Opaque" x="426" y="60" width="129" height="30"/>
+				<box leftPadding="2">
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement>
+					<font size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Renda Líquida]]></text>
+			</staticText>
+			<textField pattern="¤ #,##0.00" isBlankWhenNull="true">
+				<reportElement style="campo" x="254" y="70" width="101" height="20"/>
+				<textElement/>
+				<textFieldExpression class="java.math.BigDecimal"><![CDATA[$F{valorRendaBruta}]]></textFieldExpression>
+			</textField>
+			<textField pattern="###0.00" isBlankWhenNull="true">
+				<reportElement style="campo" x="355" y="70" width="71" height="20"/>
+				<textElement/>
+				<textFieldExpression class="java.math.BigDecimal"><![CDATA[$F{percentualRebate}]]></textFieldExpression>
+			</textField>
+			<textField pattern="¤ #,##0.00" isBlankWhenNull="true">
+				<reportElement style="campo" x="426" y="70" width="129" height="20"/>
+				<textElement/>
+				<textFieldExpression class="java.math.BigDecimal"><![CDATA[$V{rendaLiquida}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement style="campo" positionType="Float" x="172" y="70" width="82" height="20"/>
+				<box leftPadding="2"/>
+				<textElement/>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{empreendimento.unidadeArea.sigla} != null ?"/ " + $F{empreendimento.unidadeArea.sigla} : ""]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00" isBlankWhenNull="true">
+				<reportElement style="campo" x="111" y="70" width="60" height="20"/>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression class="java.math.BigDecimal"><![CDATA[$F{quantidadeOuArea}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band splitType="Stretch"/>
+	</pageFooter>
+	<summary>
+		<band height="31" splitType="Stretch">
+			<printWhenExpression><![CDATA[$P{EXIBIR_TOTAL_PRODUTIVIDADE}]]></printWhenExpression>
+			<staticText>
+				<reportElement style="Linha Zebrada" mode="Opaque" x="0" y="0" width="278" height="30" backcolor="#CCCCCC"/>
+				<box>
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="1.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement>
+					<font size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Total Renda Bruta]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="Linha Zebrada" mode="Opaque" x="278" y="0" width="277" height="30" backcolor="#CCCCCC"/>
+				<box>
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="1.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement>
+					<font size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Total Renda Líquida]]></text>
+			</staticText>
+			<textField pattern="¤ #,##0.00" isBlankWhenNull="true">
+				<reportElement style="campo" x="0" y="11" width="278" height="20"/>
+				<box leftPadding="6"/>
+				<textElement>
+					<font size="9" isBold="true"/>
+				</textElement>
+				<textFieldExpression class="java.math.BigDecimal"><![CDATA[$V{totalRendaBruta}]]></textFieldExpression>
+			</textField>
+			<textField pattern="¤ #,##0.00" isBlankWhenNull="true">
+				<reportElement style="campo" x="278" y="11" width="277" height="20"/>
+				<box leftPadding="6"/>
+				<textElement>
+					<font size="9" isBold="true"/>
+				</textElement>
+				<textFieldExpression class="java.math.BigDecimal"><![CDATA[$V{totalRendaLiquida}]]></textFieldExpression>
+			</textField>
+		</band>
+	</summary>
+</jasperReport>

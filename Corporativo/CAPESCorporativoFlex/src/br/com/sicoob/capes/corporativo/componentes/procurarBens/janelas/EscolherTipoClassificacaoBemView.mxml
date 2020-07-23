@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<bancoobValidaveis:ModuloValidavel xmlns:mx="http://www.adobe.com/2006/mxml"
+				xmlns:bancoob="br.com.bancoob.componentes.*"
+				xmlns:bancoobValidaveis="br.com.bancoob.componentes.containers.validaveis.*"
+				xmlns:bancoobInput="br.com.bancoob.componentes.input.*"
+				width="100%" height="100%">
+	
+	<bancoob:Rotulo x="0" y="2" text="Classificação: " />
+	<bancoobInput:Combo id="comboClassificacao" x="80" y="0" width="200" labelField="descricao" inserirItemOpcional="true" labelItemOpcional="SELECIONE" validarObrigatorio="true" />
+	
+	<bancoob:Botao id="botaoSelecionar" width="100" right="115" bottom="0" label="SELECIONAR" tabIndex="1" />
+	<bancoob:Botao id="botaoFechar" width="100" right="10" bottom="0" label="FECHAR" tabIndex="2" />
+	
+</bancoobValidaveis:ModuloValidavel>

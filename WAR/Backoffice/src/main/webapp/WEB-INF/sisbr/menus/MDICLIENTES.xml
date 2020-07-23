@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sisbrweb>
+
+<sisbrweb>
+	<MDICLIENTES>
+		<menu id="MNUTABELASBASICAS" label="Tabelas" icone="">
+		
+			<menu id="MNUTABELASPESSOAFISICA" label="Pessoa Física" icone="">
+				<item id="MNUNACIONALIDADE" label="Nacionalidade" titulo="Nacionalidade" usaSelGeral="0" idLista="" usaFiltro="" parametros="" swf="/capes/swf/nacionalidadeselecao" icone="br/com/bancoob/imagens/icos/modulos/edit" />
+				<item id="MNUNATUREZAOCUPACAO" label="Natureza da ocupação"	titulo="Natureza da ocupação" usaSelGeral="0" idLista="" usaFiltro="" parametros="" swf="/capes/swf/vinculoempregaticioselecao" icone="br/com/bancoob/imagens/icos/modulos/edit" />
+			</menu>
+			
+			<menu id="MNUTABELASPESSOAJURIDICA" label="Pessoa Jurídica" icone="">
+				<item id="MNUCONSTITUICAOVINCULADA" label="Constituição vinculada" titulo="Constituição vinculada" usaSelGeral="0" idLista="" usaFiltro="" parametros="" swf="/capes/swf/constituicaovinculadaesferaadm" icone="br/com/bancoob/imagens/icos/modulos/edit" />
+				<item id="MNUTIPOEMPRESA" label="Tipo de Empresa" titulo="Tipo de Empresa" usaSelGeral="0" idLista="" usaFiltro="" parametros="" swf="/capes/swf/tipoempresaselecao" icone="br/com/bancoob/imagens/icos/modulos/edit" />
+			</menu>
+			
+			<menu id="MNUTABELASCERTIDAO" label="Certidões" icone="">
+				<item id="MNUTIPOCERTIDAO" label="Tipo de Certidão" titulo="Tipo de Certidão" usaSelGeral="0" idLista="" usaFiltro="" parametros="" swf="/capes/swf/tipocertidaoselecao" icone="br/com/bancoob/imagens/icos/modulos/certidao" />
+			</menu>
+			
+			<menu id="MNUTABELASCONTATOS" label="Contatos" icone="">
+				<item id="MNUTIPOENDERECO" label="Tipo de Endereço"	titulo="Tipo de Endereço" usaSelGeral="0" idLista="" usaFiltro="" parametros="" swf="/capes/swf/tipoenderecoselecao" icone="br/com/bancoob/imagens/icos/modulos/endereco" />
+				<item id="MNUTIPOTELEFONE" label="Tipo de Telefone" titulo="Tipo de Telefone" usaSelGeral="0" idLista="" usaFiltro="" parametros="" swf="/capes/swf/tipotelefoneselecao" icone="br/com/bancoob/imagens/icos/modulos/telefone" />
+				<item id="MNUTIPOEMAIL" label="Tipo de E-mail" titulo="Tipo de E-mail" usaSelGeral="0" idLista="" usaFiltro="" parametros="" swf="/capes/swf/tipoemailselecao" icone="br/com/bancoob/imagens/icos/modulos/email" />
+			</menu>
+			
+			<item id="MNUTIPORELACIONAMENTOPESSOA" label="Tipo de Relacionamento" titulo="Tipo de Relacionamento" usaSelGeral="0" idLista="" usaFiltro="" parametros="" swf="/capes/swf/tiporelacionamentopessoaselecao" icone="br/com/bancoob/imagens/icos/modulos/parceria" />
+			<item id="MNUTIPOFONTERENDA" label="Tipo de Fonte de Renda"	titulo="Tipo de Fonte de Renda"	usaSelGeral="0"	idLista="" usaFiltro=""	parametros="" swf="/capes/swf/tipofonterenda" icone="br/com/bancoob/imagens/icos/modulos/edit" />
+			<item id="MNUNUCLEO" label="Núcleo" titulo="Núcleo" usaSelGeral="0" idLista="" usaFiltro="" parametros="" swf="/capes/swf/nucleoselecao" icone="br/com/bancoob/imagens/icos/modulos/edit" />
+		
+		</menu>
+		
+		<menu id="MNUCADASTRO" label="Cadastro" icone="">
+		
+			<item id="MNUALTERACAOCPFCNPJ" label="Alteração de CPF/CNPJ" titulo="Alteração de CPF/CNPJ" usaSelGeral="0" idLista="" usaFiltro="" parametros="" swf="/capes/swf/alteracaodocumentopessoa" icone="br/com/bancoob/imagens/icos/modulos/cadastroClientes" />
+			<item id="MNUAUTORIZACAO" label="AUTORIZAÇÃO" titulo="AUTORIZAÇÃO" usaSelGeral="0" idLista="" usaFiltro="" parametros="" swf="/capes/swf/autorizacaoselecao" icone="br/com/bancoob/imagens/icos/modulos/autorizacao" />
+			<item id="MNUGRUPOECONOMICO" label="GRUPO ECONÔMICO" titulo="CONSULTA DE GRUPO ECONÔMICO" swf="/capes/swf/grupoeconomicoselecao" icone="br/com/bancoob/imagens/icos/modulos/edit" />
+			<item id="MNUGRUPOECONOMICONOVO" label="GRUPO ECONÔMICO NOVO" titulo="CONSULTA DE GRUPO ECONÔMICO NOVO" swf="/capes/swf/grupoeconomiconovoselecao" icone="br/com/bancoob/imagens/icos/modulos/edit" />
+			<item id="MNUGRUPOECONOMICOCAPES" label="GRUPO ECONÔMICO (CAPES)" titulo="CONSULTA DE GRUPO ECONÔMICO" swf="/capes/swf/grupoeconomicoselecao" icone="br/com/bancoob/imagens/icos/modulos/grupo" />
+			<item id="MNUTIPOANOTACAO" label="Tipo de Anotações" titulo="Cadastro de Tipo de Anotações" usaSelGeral="0" idLista="" usaFiltro="" parametros="" swf="/capes/swf/tipoanotacaoselecao" icone="br/com/bancoob/imagens/icos/modulos/edit" />
+			<item id="MNUCOMPARTILHAMENTOCADASTRO" label="GRUPO DE COMPARTILHAMENTO DE CADASTRO" titulo="GRUPO DE COMPARTILHAMENTO DE CADASTRO" usaSelGeral="0" idLista="" usaFiltro="" parametros="" swf="/capes/swf/cadastrogrupocompartilhamento" icone="br/com/bancoob/imagens/icos/modulos/edit" />
+			<item id="MNUEMPREENDIMENTO" label="Empreendimento" titulo="Empreendimento" usaSelGeral="0"	idLista="" usaFiltro="" parametros="" swf="/capes/swf/empreendimento" icone="br/com/bancoob/imagens/icos/modulos/edit" />
+			<item id="MNUFUNCIONARIO" label="Funcionário" titulo="Funcionário" usaSelGeral="0" idLista="" usaFiltro="" parametros="" swf="/capes/swf/funcionarioselecao" icone="br/com/bancoob/imagens/icos/modulos/edit" />
+			<item id="MNUREGRASVALIDACAOCADASTRAL" label="REGRA VALIDAÇÃO CADASTRAL" titulo="REGRA VALIDAÇÃO CADASTRAL" usaSelGeral="0" idLista="" usaFiltro="" parametros="" swf="/capes/swf/cadastroregravalidacaocadastralselecao" icone="br/com/bancoob/imagens/icos/modulos/cadastroNucleo" />
+			<item id="MNUTRANSFINFO" label="Transferência de Informações" titulo="Transferência de Informações" usaSelGeral="0" idLista="" usaFiltro="" parametros="" swf="/capes/swf/transferenciainformacoes" icone="br/com/bancoob/imagens/icos/modulos/edit" />
+			
+		</menu>
+		
+		<menu id="MNURELATORIO" label="Relatório" icone="">
+		
+			<item id="MNURELATORIOANOTACAO" label="Anotações" titulo="Anotações" usaSelGeral="0" idLista="" usaFiltro="" parametros="" swf="/capes/swf/relatorioanotacaoselecao" icone="br/com/bancoob/imagens/icos/modulos/edit" />
+			<item id="MNURELATORIOCLIENTEPRODUTO" label="Relatório Cliente Produto" titulo="Relatório Cliente Produto" usaSelGeral="0" idLista="" usaFiltro="0" parametros="" swf="/capes/swf/relclienteproduto" icone="br/com/bancoob/imagens/icos/modulos/cadastroClientes" />
+			<item id="MNURELCOMPARTILHAMENTO" label="Relatório de Compartilhamento" titulo="Relatório de Compartilhamento" usaSelGeral="0" idLista="" usaFiltro="0" parametros="" swf="/capes/swf/relcompartilhamento" icone="br/com/bancoob/imagens/icos/modulos/cadastroClientes" />
+			<item id="MNURELVENCIMENTOCADASTRO" label="Relatório de Vencimento de Cadastro" titulo="Relatório de Vencimento de Cadastro" usaSelGeral="0" idLista="" usaFiltro="0" parametros="" swf="/capes/swf/relvencimentocadastro" icone="br/com/bancoob/imagens/icos/modulos/cadastroClientes" />
+			<item id="MNURELGRUPOECONOMICO" label="Relatório de Grupo econômico" titulo="Relatório de Grupo econômico" swf="/capes/swf/relatoriogrupoeconomico" icone="br/com/bancoob/imagens/icos/modulos/cadastroClientes" />
+			<item id="MNURELGRUPOECONOMICONOVO" label="Relatório de Grupo econômico Novo" titulo="Relatório de Grupo econômico Novo" swf="/capes/swf/relatoriogrupoeconomiconovo" icone="br/com/bancoob/imagens/icos/modulos/cadastroClientes" />
+			<item id="MNURELATORIOTRIBUTACAO" label="Relatório de Tributação" titulo="Relatório de Tributação" usaSelGeral="0" idLista="" usaFiltro="0" parametros="" swf="/capes/swf/relatoriotributacao" icone="br/com/bancoob/imagens/icos/modulos/money" />
+			<item id="MNURELATORIOVALIDACAOCADASTRAL" label="Relatório de validação cadastral" titulo="Relatório de validação cadastral" usaSelGeral="0" idLista="" usaFiltro="" parametros="" swf="/capes/swf/relatoriovalidacaocadastral" icone="br/com/bancoob/imagens/icos/modulos/cadastroClientes" />
+			<item id="MNURELATORIOVENCIMENTOSEGUROS" label="Relatório de vencimento de seguros"	titulo="Relatório de vencimento de seguros"	usaSelGeral="0" idLista="" usaFiltro="" parametros="" swf="/capes/swf/relatoriovencimentoseguros" icone="br/com/bancoob/imagens/icos/modulos/cadastroClientes" />
+			
+			<menu id="MNURELCLIIRRF" label="Informe Declaração IRRF" icone="">
+				<item id="MNURELCLIIRRFCOOP" label="Cooperativa" titulo="Informe Declaração IRRF Cooperativa" usaSelGeral="0" idLista="" usaFiltro="" parametros="Cooperativa" swf="/CadastroUnicoClientes/RelInformeIRRF" icone="br/com/bancoob/imagens/icos/modulos/cadastroClientes" />
+				<item id="MNURELCLIIRRFBANCOOB"	label="Bancoob"	titulo="Informe Declaração IRRF Bancoob" usaSelGeral="0" idLista="" usaFiltro="" parametros="Bancoob" swf="/CadastroUnicoClientes/RelInformeIRRF" icone="br/com/bancoob/imagens/icos/modulos/cadastroClientes" />
+				<item id="MNURELCLIIRRFTODOS" label="Gerar todos/arquivo/gráfica" titulo="Informe Declaração IRRF - Gerar todos/arquivo/gráfica" usaSelGeral="0" idLista="" usaFiltro="" parametros="" swf="/CadastroUnicoClientes/GerarInformeIRRFTodos" icone="br/com/bancoob/imagens/icos/modulos/cadastroClientes" />
+				<item id="MNURELCLIIRRFACOMPANHAMENTO" label="Acompanhamento Informe" titulo="Informe Declaração IRRF - Acompanhamento" usaSelGeral="0" idLista="" usaFiltro="" parametros="" swf="/CadastroUnicoClientes/AcompanhamentoInformeIRRF" icone="br/com/bancoob/imagens/icos/modulos/cadastroClientes" />
+			</menu>
+			
+			<menu id="MNURELCPOPORTFOLIO" label="Portfolio" icone="">
+			    <item id="MNURELCPOPORTFOLIOCLIENTE" label="Clientes" titulo="Relatório de Portfolio de Clientes" usaSelGeral="0" idLista="" usaFiltro="" parametros="" swf="/cpo/swf/relatorioportfolio" icone="br/com/bancoob/imagens/icos/modulos/cadastroClientes" />
+		   	</menu>
+			
+		</menu>
+		
+		<menu id="MNUINTEGRACAO" label="Integração" icone="">
+		   <menu id="MNUEXPORTACAOARQUIVO" label="Exportação" icone="">
+				<item id="MNUEXPORTACAOARQUIVOPARAMETRIZAR" label="Parametrizar" titulo="Parametrizar" usaSelGeral="0" idLista="" usaFiltro="" parametros="" swf="/capes/swf/destinoexportacaoselecao" icone="br/com/bancoob/imagens/icos/modulos/exportacao_parametrizar" />
+				<item id="MNUEXPORTACAOARQUIVOVISUALIZAR" label="Visualizar Arquivo" titulo="Visualizar Arquivo" usaSelGeral="0" idLista="" usaFiltro="" parametros="" swf="/capes/swf/visualizarexportacaoselecao" icone="br/com/bancoob/imagens/icos/modulos/exportacao_visualizar" />
+			</menu>                                           
+		</menu>
+		
+		<menu id="MNUCENTRALIZACAO" label="Centralização" icone="">
+			<item id="MNUINCLUIRDOCUMENTOSCENTRALIZACAO" label="Incluir documentos centralização" titulo="Incluir documentos centralização" usaSelGeral="0" idLista="" usaFiltro="" parametros="" swf="/capes/swf/cadastropessoacentralizada" icone="br/com/bancoob/imagens/icos/modulos/edit" />
+			<item id="MNUAVALIARDOCUMENTOSCENTRALIZACAO" label="Avaliar documentos centralização" titulo="Avaliar documentos centralização" usaSelGeral="0" idLista="" usaFiltro="" parametros="" swf="/capes/swf/pesquisarfichaspropostas" icone="br/com/bancoob/imagens/icos/modulos/edit" />
+		</menu>
+		
+	</MDICLIENTES>
+</sisbrweb>

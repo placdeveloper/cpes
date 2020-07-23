@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<bancoobValidaveis:ModuloValidavel xmlns:mx="http://www.adobe.com/2006/mxml"
+			xmlns:bancoobInput="br.com.bancoob.componentes.input.*"
+			xmlns:bancoob="br.com.bancoob.componentes.*"
+			xmlns:procurarPessoa="br.com.sicoob.capes.corporativo.componentes.procurarPessoa.*"
+			xmlns:campos="br.com.bancoob.componentes.campos.*"
+			xmlns:navegacao="br.com.bancoob.componentes.navegacao.*"
+			xmlns:aba="br.com.sicoob.capes.cadastrarBem.abas.*"
+			xmlns:bancoobValidaveis="br.com.bancoob.componentes.containers.validaveis.*"
+	 		width="100%"  layout="absolute" styleName="ModuloSemEstilo">
+
+	<navegacao:Tab width="100%" height="100%" id="navegacaoTab" paddingBottom="10" paddingLeft="10"
+			paddingRight="10" paddingTop="10" backgroundAlpha=".4">
+
+		<aba:abaCadastroBem label="Cadastro" name="abaCadastroBem" id="abaCadastroBem"/>
+		<aba:abaImovel label="Imóvel" id="abaImovel" name="abaImovel"/>
+		<aba:abaOnus label="Ônus" name="abaOnus"/>
+		<aba:abaRegistro label="Registro"/>
+		<aba:abaPosse label="Posse"/>
+		<aba:abaUploadGed label="Documentos" name="abaDocumentos" id="abaDocumentos"/>
+ 
+	</navegacao:Tab>
+
+</bancoobValidaveis:ModuloValidavel>

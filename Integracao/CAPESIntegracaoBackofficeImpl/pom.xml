@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+
+	<artifactId>capes-integracao-backoffice-impl</artifactId>
+	<name>CAPES - Integracao - CAPESIntegracaoBackofficeImpl</name>
+
+	<parent>
+		<groupId>br.com.sicoob.capes</groupId>
+		<artifactId>capes-modulo-integracao</artifactId>
+		<version>2.0.8.1</version>
+		<relativePath>..</relativePath>
+	</parent>
+
+	<scm>
+		<connection>scm:svn:http://svn.sicoob.com.br/fontesbancoob/SISBR/Aplicativos/JAVA/trunk/CAPES/tags/capes-2.0.8.1/Integracao/CAPESIntegracaoBackofficeImpl</connection>
+		<developerConnection>scm:svn:http://svn.sicoob.com.br/fontesbancoob/SISBR/Aplicativos/JAVA/trunk/CAPES/tags/capes-2.0.8.1/Integracao/CAPESIntegracaoBackofficeImpl</developerConnection>
+		<url>http://svn.sicoob.com.br/fontesbancoob/SISBR/Aplicativos/JAVA/trunk/CAPES/tags/capes-2.0.8.1/Integracao/CAPESIntegracaoBackofficeImpl</url>
+	</scm>
+
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-ejb-plugin</artifactId>
+			</plugin>
+		</plugins>
+	</build>
+
+	<dependencies>
+		<!-- CAPES -->
+		<dependency>
+			<groupId>${project.groupId}</groupId>
+			<artifactId>capes-integracao</artifactId>
+			<version>${project.version}</version>
+		</dependency>
+		<!-- CAPES -->
+
+		<!-- INTERNAS -->
+		<dependency>
+			<groupId>br.com.sicoob.framework</groupId>
+			<artifactId>sicoob-java</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>br.com.sicoob.framework</groupId>
+			<artifactId>sicoob-was9</artifactId>
+		</dependency>
+		
+		<dependency>
+			<groupId>br.com.sicoob.cta</groupId>
+			<artifactId>cta-backoffice-cliente-api</artifactId>
+			<version>${versao.cta.backoffice}</version>
+		</dependency>
+		
+		<dependency>
+		  <groupId>br.com.sicoob.ged</groupId>
+		  <artifactId>ged-api</artifactId>
+		  <version>${versao.ged.api}</version>
+		  <exclusions>
+		  	<exclusion>
+		  		<groupId>commons-lang</groupId>
+		  		<artifactId>commons-lang</artifactId>
+		  	</exclusion>
+		  </exclusions>
+		</dependency>
+		
+		<dependency>
+			<groupId>br.com.sicoob.crl</groupId>
+			<artifactId>crl-api</artifactId>
+			<version>${versao.crl.backoffice}</version>
+		</dependency>
+		
+		<dependency>
+			<groupId>br.com.sicoob.carteirizacao</groupId>
+			<artifactId>ctz-api</artifactId>
+			<version>${versao.ctz.api}</version>
+		</dependency>
+		<!-- INTERNAS -->
+		
+		<!-- EXTERNAS -->
+		<dependency>
+			<groupId>commons-beanutils</groupId>
+			<artifactId>commons-beanutils</artifactId>
+		</dependency>
+		<!-- EXTERNAS -->
+		
+	</dependencies>
+
+</project>

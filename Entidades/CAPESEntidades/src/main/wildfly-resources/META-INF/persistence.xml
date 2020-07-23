@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<persistence xmlns="http://xmlns.jcp.org/xml/ns/persistence" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence http://xmlns.jcp.org/xml/ns/persistence/persistence_2_1.xsd" version="2.1">
+	<persistence-unit name="emCapes" transaction-type="JTA">
+	
+		<provider>org.hibernate.ejb.HibernatePersistence</provider>
+		<jta-data-source>java:jboss/datasources/BancoobCadastroUnicoClientesDS</jta-data-source>
+		
+		<properties>
+			<property name="br.com.bancoob.infraestrutura.conexao.data_source" value="java:/jdbc/BancoobCadastroUnicoClientesDS" />
+			<property name="hibernate.transaction.factory_class" value="org.hibernate.ejb.transaction.JoinableCMTTransactionFactory" />
+			<property name="hibernate.transaction.manager_lookup_class" value="org.hibernate.transaction.JBossTransactionManagerLookup" />
+<!-- 			<property name="hibernate.dialect" value="org.hibernate.dialect.DB2Dialect" /> -->
+			<property name="hibernate.default_schema" value="CLI" />
+			<property name="hibernate.show_sql" value="true" />
+			<property name="jboss.no.implicit.datasource.dependency" value="true" />
+			<property name="hibernate.cache.use_second_level_cache" value="false" />
+			
+			<property name="hibernate.ejb.event.pre-update" value="br.com.sicoob.capes.negocio.entidades.listener.HistoricoListener" />
+			<property name="hibernate.ejb.event.pre-delete" value="br.com.sicoob.capes.negocio.entidades.listener.HistoricoListener" />
+			<property name="hibernate.ejb.event.post-insert" value="br.com.sicoob.capes.negocio.entidades.listener.ValidacaoCadastralListener" />
+			<property name="hibernate.ejb.event.post-update" value="br.com.sicoob.capes.negocio.entidades.listener.ValidacaoCadastralListener" />
+			<property name="hibernate.ejb.event.post-delete" value="br.com.sicoob.capes.negocio.entidades.listener.ValidacaoCadastralListener" />
+			<property name="hibernate.ejb.interceptor" value="br.com.sicoob.capes.negocio.entidades.interceptors.VigenteInterceptor" />
+		</properties>
+		
+	</persistence-unit>
+</persistence>

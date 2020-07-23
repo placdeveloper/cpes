@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="utf-8"?>
+<bancoobValidaveis:ModuloValidavel xmlns:mx="http://www.adobe.com/2006/mxml"
+								   xmlns:bancoobValidaveis="br.com.bancoob.componentes.containers.validaveis.*"
+								   xmlns:navegacao="br.com.bancoob.componentes.navegacao.*"
+								   xmlns:abas="br.com.sicoob.capes.utils.autorizacao.abas.*"
+								   xmlns:namespace="http://namespace"
+								   width="100%" height="100%" layout="absolute"
+								   styleName="ModuloSemEstilo" verticalScrollPolicy="auto">
+	<mx:Script>
+		<![CDATA[
+			import br.com.sicoob.capes.utils.UploadDocGedUtil;
+		]]>
+	</mx:Script>
+	
+	<navegacao:Tab x="0" y="0" width="100%" height="100%" id="navegacao">
+		<mx:Canvas width="100%" height="100%" label="Informações">
+			
+			<bancoobValidaveis:ModuloValidavel xmlns:bancoob="br.com.bancoob.componentes.*" 
+											   xmlns:bancoobInput="br.com.bancoob.componentes.input.*"
+											   xmlns:campos="br.com.bancoob.componentes.campos.*"
+											   xmlns:procurarPessoa="br.com.sicoob.capes.corporativo.componentes.procurarPessoa.*"
+											   xmlns:bancoobValidaveis="br.com.bancoob.componentes.containers.validaveis.*"
+											   xmlns:mx="http://www.adobe.com/2006/mxml"
+											   width="100%" height="100%" layout="absolute" styleName="ModuloSemEstilo"
+											   xmlns:containers="br.com.bancoob.componentes.containers.*" >
+				<mx:Script>
+					<![CDATA[
+						import br.com.bancoob.componentes.campos.CampoNumerico;
+					]]>
+				</mx:Script>
+				
+				<mx:Image x="17" y="6" source="br/com/bancoob/imagens/icos/sinfo_16.png" alpha=".5"/>		
+				<mx:Label x="39" y="6" text="DADOS DA RENDA" fontWeight="bold" fontFamily="ArialEmbedded" alpha=".8" width="103" height="16"/>
+				<mx:Image y="12" source="br/com/bancoob/imagens/imgsTelas/linha.swf" scaleContent="false" left="162" right="10"/>
+				
+				<containers:HBoxBancoob x="10" y="35">
+					<containers:VBoxBancoob width="45%">
+						<bancoob:Rotulo text="Data da última alteração:" id="rotuloDataHoraInicio" height="22"/>
+						<bancoob:Rotulo text="Usuário da última alteração:" id="rotuloUsuarioAlteracao" height="22"/>
+						<bancoob:Rotulo text="Empregador:" id="rotuloEmpregador" height="22"/>
+						<bancoob:Rotulo text="Tipo de Renda:" height="22"/>
+						<bancoob:Rotulo text="Renda Bruta Mensal:" height="22"/>
+						<bancoob:Rotulo text="Renda Anual Calculada:" height="22"/>
+						<bancoob:Rotulo text="Renda Provisória Até:" height="22"/>
+						<bancoob:Rotulo text="Simples Nacional:" id="rotuloSimples" height="22" enabled="false"/>
+						<bancoob:Rotulo text="Ativo Superior 240.000.000,00:" id="rotuloAtivoSuperior" height="22" enabled="false"/>
+						<bancoob:Rotulo text="Descrição:" height="22"/>
+					</containers:VBoxBancoob>
+					
+					<containers:VBoxBancoob width="55%">
+						<campos:CampoData id="dataCadastro" width="105" height="22"
+						enabled="false" tabIndex="1" toolTip="Data de cadastramento da fonte de renda, informada automaticamente pelo sistema."
+						validarObrigatorio="true"/>
+						<bancoob:Rotulo id="usuarioAlteracao" height="22"/>
+						<procurarPessoa:ProcurarPessoaCAPES id="empregador" width="422"
+						height="22" tabEnabled="true" tabIndex="2"
+						toolTip="CPF/CNPJ de identificação do Empregador e respectivo nome."/>
+						<bancoobInput:Combo id="cmbTipoRenda" width="300" height="22"
+						inserirItemOpcional="true" labelField="descricao" somenteMaiusculas="true" tabEnabled="true"
+						tabIndex="3" toolTip="Selecione o tipo de renda." validarObrigatorio="true"/>						
+						<campos:CampoMoedaView id="txtReceitaBrutaMensal" width="105" height="22"
+						tabEnabled="true" tabIndex="5" validarObrigatorio="true"
+						valorMinimo="0" valorMaximo="9999999999.99" maxChars="13"/>
+						<campos:CampoMoedaView id="txtRendaAnual" width="105" height="22"
+						enabled="false" text=""/>
+						<containers:HBoxBancoob width="100%">
+							<bancoobInput:Check id="chkProvisorio" width="10"
+							height="22" tabIndex="6" textAlign="left"/>
+							<campos:CampoData id="dataRendaTemporaria" width="105"
+							height="22" enabled="false" tabIndex="7" toolTip="Data final para a renda temporária."
+							validarObrigatorio="false"/>	
+						</containers:HBoxBancoob>
+						<bancoobInput:Check id="chkSimplNacional" enabled="false" width="10" height="22" tabIndex="6" textAlign="left"/>
+						<bancoobInput:Check id="chkAtivoSuperior" enabled="false" width="10" height="22" tabIndex="6" textAlign="left"/>
+						<bancoobInput:TextoArea id="txtDescRenda" width="300" height="49"
+						maxChars="200" somenteMaiusculas="true" tabEnabled="true" tabIndex="4"/>
+					</containers:VBoxBancoob>
+				</containers:HBoxBancoob>	
+				
+				<mx:Image x="17" y="309" source="br/com/bancoob/imagens/icos/Users.png" alpha=".5"/>
+				<mx:Label x="39" y="309" text="RENDA FIXA/VARIÁVEL" fontWeight="bold" fontFamily="ArialEmbedded" alpha=".8"/>
+				<mx:Image y="315" source="br/com/bancoob/imagens/imgsTelas/linha.swf" scaleContent="false" left="162" right="10"/>
+				
+				<bancoobInput:RadioGrupoBancoob id="rdbFixaVariavel" />
+				<bancoobInput:Radio x="10" y="335" groupName="rdbFixaVariavel" label="Fixa" tabEnabled="true" tabIndex="8" value="true"/>
+				<bancoobInput:Radio x="81" y="335" groupName="rdbFixaVariavel" label="Variável" tabEnabled="true" tabIndex="9" value="false"/>
+				
+				
+			</bancoobValidaveis:ModuloValidavel>
+		</mx:Canvas>		
+		<abas:abaUploadGed id="abaDocumentos" label="Documentos" _siglaClasseDocumento="RENDA"/>
+		
+	</navegacao:Tab>
+	
+</bancoobValidaveis:ModuloValidavel>

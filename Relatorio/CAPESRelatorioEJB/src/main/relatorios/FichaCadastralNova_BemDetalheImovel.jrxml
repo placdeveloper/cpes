@@ -1,0 +1,181 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="FichaCadastral_BemDetalheImovel" pageWidth="575" pageHeight="900" columnWidth="575" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0" uuid="12de5833-5a76-4cf2-b83f-f5d318a462a1">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<style name="campo" hAlign="Left" vAlign="Middle" fontSize="8" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false">
+		<box leftPadding="6"/>
+	</style>
+	<parameter name="SUB_BENS_REGISTROS" class="net.sf.jasperreports.engine.JasperReport"/>
+	<parameter name="SUB_BENS_POSSES" class="net.sf.jasperreports.engine.JasperReport"/>
+	<field name="subTipo.tipoBem.descricao" class="java.lang.String"/>
+	<field name="descricao" class="java.lang.String"/>
+	<field name="codLocalizacao" class="java.lang.String"/>
+	<field name="area" class="java.math.BigDecimal"/>
+	<field name="valorBenfeitoria" class="java.math.BigDecimal"/>
+	<field name="benfeitoria" class="java.lang.String"/>
+	<field name="siglaUFComarca" class="java.lang.String"/>
+	<field name="comarca" class="java.lang.String"/>
+	<field name="siglaUFMunicipio" class="java.lang.String"/>
+	<field name="municipio" class="java.lang.String"/>
+	<field name="unidadeMedida.descricao" class="java.lang.String"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<detail>
+		<band height="92" splitType="Stretch">
+			<textField isBlankWhenNull="true">
+				<reportElement uuid="b5f45a7a-de85-40fb-b92a-38908eb0be5a" style="campo" mode="Transparent" x="246" y="10" width="286" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{descricao}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement uuid="63925b65-5c94-4191-856f-f387ce2854a8" x="246" y="0" width="329" height="30"/>
+				<box leftPadding="3">
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.0"/>
+				</box>
+				<textElement>
+					<font size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Denominação]]></text>
+			</staticText>
+			<textField pattern="#,##0.00" isBlankWhenNull="true">
+				<reportElement uuid="896d620f-39bb-4674-a461-94e2e488d329" style="campo" positionType="Float" x="0" y="10" width="117" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{area}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement uuid="90c9f23c-c589-442c-855c-47ebe173dc8c" style="campo" positionType="Float" x="0" y="70" width="555" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[($F{codLocalizacao} != null) ? $F{codLocalizacao}.equals("R") ? "RURAL":"URBANA" : ""]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement uuid="834f95d7-489c-4e9a-80df-d577575c1f56" positionType="Float" x="0" y="0" width="117" height="30"/>
+				<box leftPadding="3">
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.0"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement>
+					<font size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Área Total do Imovél]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="5ffd0733-ee57-43b5-a71b-351ea7ee3cdc" positionType="Float" x="117" y="0" width="129" height="30"/>
+				<box leftPadding="3">
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement>
+					<font size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Unidade]]></text>
+			</staticText>
+			<textField isBlankWhenNull="true">
+				<reportElement uuid="fae3aa01-6edb-42c4-b57e-7af1949bd5a6" style="campo" positionType="Float" x="117" y="10" width="129" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{unidadeMedida.descricao}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement uuid="4332e96e-503d-4006-8dbf-66b8e55155b8" positionType="Float" x="0" y="60" width="575" height="30"/>
+				<box leftPadding="3">
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.0"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.0"/>
+				</box>
+				<textElement>
+					<font size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Localização]]></text>
+			</staticText>
+			<textField isBlankWhenNull="true">
+				<reportElement uuid="1d0e1bdb-0572-4b2e-8440-b9d236286569" style="campo" positionType="Float" x="278" y="40" width="231" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{comarca}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement uuid="66fba058-eaa0-47af-920b-ae2245ebecc1" positionType="Float" x="232" y="30" width="46" height="30"/>
+				<box leftPadding="3">
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement>
+					<font size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[UF]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="9fe659c8-b40c-46fb-bfe8-0cec81328848" positionType="Float" x="509" y="30" width="66" height="30"/>
+				<box leftPadding="3">
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.0"/>
+				</box>
+				<textElement>
+					<font size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[UF]]></text>
+			</staticText>
+			<textField isBlankWhenNull="true">
+				<reportElement uuid="b42fde1a-b79b-465a-b6ba-8f282fc222fd" style="campo" positionType="Float" x="0" y="40" width="232" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{municipio}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement uuid="33b51624-a2e6-44c2-b978-298ed86ee5b9" positionType="Float" x="0" y="30" width="232" height="30"/>
+				<box leftPadding="3">
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.0"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement>
+					<font size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Município]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="21b8e8e1-dc64-414d-8aa6-92842b6aff0c" positionType="Float" x="278" y="30" width="231" height="30"/>
+				<box leftPadding="3">
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement>
+					<font size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Comarca]]></text>
+			</staticText>
+			<textField isBlankWhenNull="true">
+				<reportElement uuid="1073ce6d-92c0-477c-a6aa-51def83862a6" style="campo" positionType="Float" x="509" y="40" width="46" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{siglaUFComarca}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement uuid="753b261e-fcbf-4b86-8aa1-1f78fc415e99" style="campo" positionType="Float" x="232" y="40" width="46" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{siglaUFMunicipio}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+</jasperReport>

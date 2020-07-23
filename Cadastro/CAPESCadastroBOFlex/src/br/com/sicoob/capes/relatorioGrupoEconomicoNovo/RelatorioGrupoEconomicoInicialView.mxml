@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<componentes:Modulo xmlns:mx="http://www.adobe.com/2006/mxml"
+					xmlns:namespace="http://namespace"
+					xmlns:componentes="br.com.bancoob.componentes.*"
+					xmlns:containers="br.com.bancoob.componentes.containers.*"
+					width="450" height="455" layout="vertical">
+	
+	<mx:Script>
+		<![CDATA[
+			import br.com.bancoob.sisbr.util.log.SisbrLogger;
+			import br.com.bancoob.util.log.ILog;
+			import br.com.sicoob.capes.comum.util.ClassUtil;
+			import br.com.sicoob.capes.relatorioGrupoEconomico.RelatorioGrupoEconomicoAntigo;
+			
+			protected const logger:ILog = SisbrLogger.getLogger("Capes."+ClassUtil.simpleClassName(this));
+			
+			protected function selecionarTela(destinoTela:String):void {
+				logger.info("Destino Tela de Relatório Grupo: "+destinoTela);
+				switch(destinoTela) {
+					case "NOVO": 
+						var telaNova:br.com.sicoob.capes.relatorioGrupoEconomicoNovo.RelatorioGrupoEconomicoNovo = new br.com.sicoob.capes.relatorioGrupoEconomicoNovo.RelatorioGrupoEconomicoNovo;
+						telaNova.diasFiltroHistorico = diasFiltroHistorico;
+						vsTelas.addChild(telaNova);
+						break;
+					default:
+						var telaAntigo:RelatorioGrupoEconomicoAntigo = new RelatorioGrupoEconomicoAntigo;
+						vsTelas.addChild(telaAntigo);
+						break;
+				}
+				vsTelas.selectedIndex = 1;
+			}
+		]]>
+	</mx:Script>
+	
+	<mx:Number id="diasFiltroHistorico"/>
+	
+	<containers:VSBancoob id="vsTelas" resizeToContent="true">
+		<mx:Box>
+			<mx:Label text="Carregando..."/>
+		</mx:Box>
+	</containers:VSBancoob>
+</componentes:Modulo>

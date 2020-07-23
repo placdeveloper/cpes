@@ -1,0 +1,83 @@
+<?xml version="1.0"?>
+<jboss>
+  <enterprise-beans>
+    <session>
+      <ejb-name>VerificarDLQReplicacaoCadastroServicoEJB</ejb-name>
+      <jndi-name>capes/replicacao/VerificarDLQReplicacaoCadastroServicoRemote</jndi-name>
+      <local-jndi-name>capes/replicacao/VerificarDLQReplicacaoCadastroServico</local-jndi-name>
+      <resource-ref>
+        <res-ref-name>jms/QueueConnectionFactory</res-ref-name>
+        <resource-name>queuefactoryref</resource-name>
+      </resource-ref>
+    </session>
+    <session>
+      <ejb-name>ReplicacaoDominiosServicoEJB</ejb-name>
+      <jndi-name>capes/replicacao/ReplicacaoDominiosServicoRemote</jndi-name>
+      <local-jndi-name>capes/replicacao/ReplicacaoDominiosServico</local-jndi-name>
+    </session>
+    <session>
+      <ejb-name>TransicaoReplicacaoServicoEJB</ejb-name>
+      <jndi-name>capes/replicacao/TransicaoReplicacaoServicoRemote</jndi-name>
+      <local-jndi-name>capes/replicacao/TransicaoReplicacaoServico</local-jndi-name>
+    </session>
+    <session>
+      <ejb-name>ReplicarCadastroClientesServicoEJB</ejb-name>
+      <jndi-name>capes/replicacao/ReplicarCadastroClientesServicoRemote</jndi-name>
+      <local-jndi-name>capes/replicacao/ReplicarCadastroClientesServico</local-jndi-name>
+    </session>
+    <session>
+      <ejb-name>BancoServidorServicoEJB</ejb-name>
+      <jndi-name>capes/replicacao/BancoServidorServicoRemote</jndi-name>
+      <local-jndi-name>capes/replicacao/BancoServidorServico</local-jndi-name>
+    </session>
+    <session>
+      <ejb-name>CentralizacaoDadosJobEJB</ejb-name>
+      <jndi-name>capes/replicacao/CentralizacaoDadosJobRemote</jndi-name>
+    </session>
+    <session>
+      <ejb-name>CentralizacaoDadosStepEJB</ejb-name>
+      <jndi-name>capes/replicacao/CentralizacaoDadosStepRemote</jndi-name>
+    </session>
+    <session>
+      <ejb-name>ExpurgoJobEJB</ejb-name>
+      <jndi-name>capes/replicacao/ExpurgoJobRemote</jndi-name>
+    </session>
+    <session>
+      <ejb-name>ExpurgoStepEJB</ejb-name>
+      <jndi-name>capes/replicacao/ExpurgoStepRemote</jndi-name>
+    </session>
+    <session>
+      <ejb-name>ReplicacaoDadosJobEJB</ejb-name>
+      <jndi-name>capes/replicacao/ReplicacaoDadosJobRemote</jndi-name>
+    </session>
+    <session>
+      <ejb-name>ReplicacaoDadosStepEJB</ejb-name>
+      <jndi-name>capes/replicacao/ReplicacaoDadosStepRemote</jndi-name>
+    </session>
+    <session>
+      <ejb-name>VerificarDLQReplicacaoCadastroJobEJB</ejb-name>
+      <jndi-name>capes/replicacao/VerificarDLQReplicacaoCadastroJobRemote</jndi-name>
+    </session>
+    <session>
+      <ejb-name>VerificarDLQReplicacaoCadastroStepEJB</ejb-name>
+      <jndi-name>capes/replicacao/VerificarDLQReplicacaoCadastroStepRemote</jndi-name>
+    </session>
+  </enterprise-beans>
+  
+  <!--JBossMQ -->
+<!--   <resource-managers> -->
+<!--     <resource-manager> -->
+<!--       <res-name>queuefactoryref</res-name> -->
+<!--       <res-jndi-name>java:/ConnectionFactory</res-jndi-name> -->
+<!--     </resource-manager> -->
+<!--   </resource-managers> -->
+  
+  <!--WebsphereMQ -->
+  <resource-managers>
+    <resource-manager>
+      <res-name>queuefactoryref</res-name>
+      <res-jndi-name>WSMQCAPESQueueConnectionFactory</res-jndi-name>
+    </resource-manager>
+  </resource-managers>
+  
+</jboss>

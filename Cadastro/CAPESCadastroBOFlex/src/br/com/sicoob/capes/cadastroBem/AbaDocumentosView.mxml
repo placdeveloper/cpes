@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<bancoobValidaveis:CanvasValidavel 
+	xmlns="br.com.bancoob.componentes.containers.*" 
+	xmlns:mx="http://www.adobe.com/2006/mxml" 
+	xmlns:bancoobValidaveis="br.com.bancoob.componentes.containers.validaveis.*"
+	xmlns:abas="br.com.sicoob.capes.utils.autorizacao.abas.*"
+	width="100%" height="100%" styleName="ModuloSemEstilo" verticalScrollPolicy="auto">
+	
+	<abas:abaUploadGed id="abaDocumentos" label="Documentos" _siglaClasseDocumento="BEMNOVO" />
+	
+</bancoobValidaveis:CanvasValidavel >

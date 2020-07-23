@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<bancoob:Modulo xmlns:mx="http://www.adobe.com/2006/mxml"
+				xmlns:bancoobGrid="br.com.bancoob.componentes.grid.*"
+				xmlns:bancoob="br.com.bancoob.componentes.*"
+				xmlns:titulo="br.com.bancoob.componentes.titulo.*"
+				xmlns:containers="br.com.bancoob.componentes.containers.*"
+				width="100%" height="100%">
+	<mx:Script>
+		<![CDATA[
+			import br.com.bancoob.componentes.tabelapaginada.TabelaPaginadaUtils;
+			import br.com.bancoob.util.FormataNumero;
+			
+			import mx.controls.dataGridClasses.DataGridColumn;
+			
+			/**
+			 * Obtém o valor da área de participação (ÁREA TOTAL * PERCENTUAL DE PARTICIPACAO / 100).
+			 */
+			private static function areaParticipacao(objeto:Object, coluna:DataGridColumn):String {
+				if(!isNaN(objeto.areaTotal) && objeto.areaTotal > 0 && !isNaN(objeto.porcentagem)) {
+					var valor:Number = objeto.areaTotal * objeto.porcentagem / 100; 
+					return FormataNumero.formata(valor);
+				}
+				return "";
+			}
+		]]>
+	</mx:Script>
+	
+	<!-- TODO: Adicionar as informações do bem aberto? -->
+	
+	<titulo:SubtituloView texto="Proprietários" left="10" right="10" top="10" />
+	<bancoobGrid:Grid id="gridProprietarios" width="98%" height="170" left="10" right="10" top="40" tabIndex="1">
+		<bancoobGrid:columns>
+			<bancoobGrid:ColunaGrid dataField="cpfCnpj" headerText="CPF/CNPJ" width="50" labelFunction="{TabelaPaginadaUtils.defaultCNPJLabelFunction}" />
+			<bancoobGrid:ColunaGrid dataField="nome" headerText="NOME" labelFunction="{TabelaPaginadaUtils.defaultLabelFunction}" />
+			<bancoobGrid:ColunaGrid dataField="porcentagem" headerText="PORCENTAGEM" width="50" textAlign="right" labelFunction="{TabelaPaginadaUtils.defaultValorNumericoLabelFunction}" />
+		</bancoobGrid:columns>
+	</bancoobGrid:Grid>
+	
+	<containers:CanvasBancoob id="canvasParticipantes" y="215" width="100%" height="200" visible="false" includeInLayout="false">
+		<titulo:SubtituloView texto="Participantes" left="10" right="10" top="0" />
+		<bancoobGrid:Grid id="gridParticipantes" width="98%" height="170" left="10" right="10" top="30" tabIndex="2">
+			<bancoobGrid:columns>
+				<bancoobGrid:ColunaGrid dataField="cpfCnpj" headerText="CPF/CNPJ" width="70" labelFunction="{TabelaPaginadaUtils.defaultCNPJLabelFunction}" />
+				<bancoobGrid:ColunaGrid dataField="nome" headerText="NOME"  labelFunction="{TabelaPaginadaUtils.defaultLabelFunction}" />
+				<bancoobGrid:ColunaGrid dataField="areaTotal" headerText="ÁREA TOTAL" width="50" labelFunction="{TabelaPaginadaUtils.defaultValorNumericoLabelFunction}" />
+				<bancoobGrid:ColunaGrid dataField="areaPosse" headerText="ÁREA POSSE" width="50" labelFunction="{TabelaPaginadaUtils.defaultValorNumericoLabelFunction}" />
+				<bancoobGrid:ColunaGrid dataField="tipoRelacionamento" headerText="TIPO RELACIONAMENTO"  labelFunction="{TabelaPaginadaUtils.defaultLabelFunction}" />
+			</bancoobGrid:columns>
+		</bancoobGrid:Grid>
+	</containers:CanvasBancoob>
+	
+	<bancoob:Botao id="botaoFechar" width="100" right="10" bottom="0" label="FECHAR" tabIndex="3" />
+	
+</bancoob:Modulo>

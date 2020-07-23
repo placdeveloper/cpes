@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mx:Canvas xmlns:mx="http://www.adobe.com/2006/mxml" 
+	borderStyle="none" verticalScrollPolicy="off" horizontalScrollPolicy="off" width="100%" height="284" clipContent="false" xmlns:componentes="br.com.bancoob.componentes.*">
+	
+	<mx:Script>
+		<![CDATA[
+			import br.com.sicoob.capes.comum.util.AssetsCapes;
+		]]>
+	</mx:Script>
+	
+		<componentes:Botao id="btAnotacoes" x="19" y="0" buttonMode="true" useHandCursor="true" enabled="true" visible="true" tabIndex="400">
+			<componentes:downSkin>@Embed(source='br/com/bancoob/imagens/imgsTelas/botoesPlataforma2.swf', symbol='conteudoBtAnotacoesNormal')</componentes:downSkin>
+			<componentes:overSkin>@Embed(source='br/com/bancoob/imagens/imgsTelas/botoesPlataforma2.swf', symbol='conteudoBtAnotacoesOver')</componentes:overSkin>
+			<componentes:upSkin>      @Embed(source='br/com/bancoob/imagens/imgsTelas/botoesPlataforma2.swf', symbol='conteudoBtAnotacoesNormal')</componentes:upSkin>
+			<componentes:disabledSkin>@Embed(source='br/com/bancoob/imagens/imgsTelas/botoesPlataforma2.swf', symbol='conteudoBtAnotacoesDesab')</componentes:disabledSkin>
+		</componentes:Botao>
+		<componentes:Botao id="btBaixar" x="19" y="60" buttonMode="true" useHandCursor="true" enabled="true" visible="true" tabIndex="400">
+			<componentes:downSkin>@Embed(source='br/com/bancoob/imagens/imgsTelas/botoesPlataforma2.swf', symbol='conteudoBtBaixarNormal')</componentes:downSkin>
+			<componentes:overSkin>@Embed(source='br/com/bancoob/imagens/imgsTelas/botoesPlataforma2.swf', symbol='conteudoBtBaixarOver')</componentes:overSkin>
+			<componentes:upSkin>@Embed(source='br/com/bancoob/imagens/imgsTelas/botoesPlataforma2.swf', symbol='conteudoBtBaixarNormal')</componentes:upSkin>
+			<componentes:disabledSkin>@Embed(source='br/com/bancoob/imagens/imgsTelas/botoesPlataforma2.swf', symbol='conteudoBtBaixarDesab')</componentes:disabledSkin>
+		</componentes:Botao>
+		<componentes:Botao id="btDetalhar" x="19" y="120" buttonMode="true" useHandCursor="true" enabled="true" visible="true" tabIndex="400">
+			<componentes:downSkin>@Embed(source='br/com/bancoob/imagens/imgsTelas/botoesPlataforma2.swf', symbol='conteudoBtDetalharNormal')</componentes:downSkin>
+			<componentes:overSkin>@Embed(source='br/com/bancoob/imagens/imgsTelas/botoesPlataforma2.swf', symbol='conteudoBtDetalharOver')</componentes:overSkin>
+			<componentes:upSkin>@Embed(source='br/com/bancoob/imagens/imgsTelas/botoesPlataforma2.swf', symbol='conteudoBtDetalharNormal')</componentes:upSkin>
+			<componentes:disabledSkin>@Embed(source='br/com/bancoob/imagens/imgsTelas/botoesPlataforma2.swf', symbol='conteudoBtDetalharDesab')</componentes:disabledSkin>
+		</componentes:Botao>
+	    <componentes:Botao id="btBaixarSemValidar" x="16" y="180" buttonMode="true" useHandCursor="true" enabled="true" visible="true" tabIndex="400">
+			<componentes:downSkin>{AssetsCapes.btnBaixarAnotacaoNormal}</componentes:downSkin>
+			<componentes:overSkin>{AssetsCapes.btnBaixarAnotacaoOver}</componentes:overSkin>
+			<componentes:upSkin>{AssetsCapes.btnBaixarAnotacaoNormal}</componentes:upSkin>
+			<componentes:disabledSkin>{AssetsCapes.btnBaixarAnotacaoDesable}</componentes:disabledSkin>
+		</componentes:Botao>
+</mx:Canvas>

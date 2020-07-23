@@ -1,0 +1,325 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE queries [
+  <!ELEMENT queries (query*)>
+  <!ELEMENT query (use-case+,description,paginacao?,command+,projecao?,ordenacoes?)>
+  <!ELEMENT use-case    (#PCDATA)>
+  <!ELEMENT description (#PCDATA)>
+  <!ELEMENT command     (#PCDATA)>
+  <!ELEMENT parametros  (#PCDATA)>
+  <!ELEMENT projecao  (#PCDATA)>
+  <!ELEMENT paginar  (#PCDATA)>
+  <!ELEMENT paginacao (#PCDATA)>
+  <!ELEMENT colunaCodigo    (#PCDATA)>
+  <!ELEMENT colunaDescricao    (#PCDATA)>
+  <!ELEMENT numeroOcorrenciasPorPagina    (#PCDATA)>
+  <!ELEMENT primeiraCondicao    (#PCDATA)>
+  <!ELEMENT ascendente    (#PCDATA)>
+  <!ELEMENT ordenacoes (ordenacao+)>
+  <!ELEMENT ordenacao (#PCDATA)>
+  <!ELEMENT sql  (#PCDATA)>
+  <!ATTLIST ordenacao chave CDATA    #REQUIRED>
+  <!ATTLIST ordenacao default CDATA    #IMPLIED>
+  <!ATTLIST command parametros CDATA    #IMPLIED>
+  <!ATTLIST command paginar CDATA    #IMPLIED>
+  <!ATTLIST use-case name CDATA    #REQUIRED>
+  <!ATTLIST query name CDATA    #REQUIRED>
+  <!ATTLIST paginacao colunaCodigo CDATA    #REQUIRED>
+  <!ATTLIST paginacao colunaDescricao CDATA    #REQUIRED>
+  <!ATTLIST paginacao numeroOcorrenciasPorPagina CDATA    #REQUIRED>
+  <!ATTLIST paginacao primeiraCondicao CDATA    #REQUIRED>
+  <!ATTLIST paginacao ascendente CDATA    #REQUIRED>
+  <!ATTLIST paginacao hint CDATA    #REQUIRED>
+  <!ATTLIST paginacao hintAuxiliar CDATA   #IMPLIED>
+]>
+
+<queries>
+  <query name="PESQUISA_PESSOA">
+    <use-case name="Exportação de arquivos" />
+    <description>Recupera os dados de pessoa jurídica para exportação</description>
+    <command>
+      <![CDATA[
+        SELECT DISTINCT
+            PC.IDPESSOACOMPARTILHAMENTO,
+            P.NUMCPFCNPJ,
+            P.CODTIPOPESSOA,
+            PC.NOMEPESSOA,
+            PC.NOMEAPELIDO,
+            PC.NOMECOMPLETO,
+            PC.CODCNAE,
+            PC.DATAINCLUSAOSISTEMA,
+            PC.DATARENOVACAOCADASTRAL,
+            PC.DATAINCLUSAOSFN,
+            PC.BOLAUTORIZACONSULTABACEN,
+            PF.DATANASCIMENTO,
+            PF.BOLMENOREMANCIPADO,
+            PF.NOMEPAI,
+            PF.NOMEMAE,
+            PF.CODTIPODOCUMENTOIDENTIFICACAO,
+            PF.NUMDOCUMENTOIDENTIFICACAO,
+            PF.DESCORGAOEXPDOCUMENTOIDENTIFICACAO,
+            PF.SIGLAUFORGEXPDOCUMENTOIDENTIFICACAO,
+            PF.DATAEMISSAODOCUMENTOIDENTIFICACAO,
+            PF.CODESTADOCIVIL,
+            PF.CODTIPOSEXO,
+            PF.CODGRAUINSTRUCAO,
+            PF.QTDDEPENDENTE,
+            ( CASE
+                WHEN PF.CODESTADOCIVIL IN(2,7)
+                THEN PF.CODREGIMECASAMENTO
+                ELSE NULL
+              END) AS REGIMECASAMENTO,
+            OP.CODOCUPACAO,
+            PJ.DATACONSTITUICAO,
+            PJ.VALORCAPITALSOCIAL,
+            PJ.NUMINSCRICAOESTADUAL,
+            PJ.CODTIPOEMPRESA,
+            PJ.CODTIPOFORMACONSTITUICAO,
+            PJ.NUMREGISTROJUNTACOMERCIAL,
+            PJ.DATAREGISTROJUNTACOMERCIAL,
+            PJ.NUMULTIMAALTERACAOCONTRATOSOCIAL,
+            PJ.DATAULTIMAALTERACAOCONTRATOSOCIAL
+        FROM
+            CLI.PESSOA P
+        INNER JOIN
+            CLI.PESSOACOMPARTILHAMENTO PC ON P.IDPESSOA = PC.IDPESSOA
+        INNER JOIN
+            CLI.VALIDACAOCADASTRAL V ON V.IDPESSOACOMPARTILHAMENTO = PC.IDPESSOACOMPARTILHAMENTO
+        LEFT JOIN
+            CLI.PESSOAFISICA PF ON PC.IDPESSOACOMPARTILHAMENTO = PF.IDPESSOACOMPARTILHAMENTO
+        LEFT JOIN
+            CLI.PESSOAJURIDICA PJ ON PC.IDPESSOACOMPARTILHAMENTO = PJ.IDPESSOACOMPARTILHAMENTO
+        LEFT JOIN
+        	CLI.OCUPACAOPROFISSIONAL OP ON OP.IDOCUPACAOPROFISSIONAL = PF.IDOCUPACAOPROFISSIONAL
+        ${complementoFrom}
+        WHERE
+            DATE(V.DATAHORAULTIMAATUALIZACAO) = <bancoob:valor valor="${dataMovimento}" tipo="Date" />
+        AND (
+            DATE(PC.DATAHORAINICIO) = DATE(V.DATAHORAULTIMAATUALIZACAO)
+            ${complementoWhere}
+        )
+        ORDER BY P.CODTIPOPESSOA, PC.NOMEPESSOA
+      ]]>
+    </command>
+  </query>
+  
+  <query name="PESQUISA_ENDERECO">
+    <use-case name="Exportação de arquivos" />
+    <description></description>
+    <command>
+      <![CDATA[
+        SELECT
+            E.IDPESSOACOMPARTILHAMENTO,
+            E.CODTIPOENDERECO,
+            E.IDTIPOLOGRADOURO,
+            E.DESCLOGRADOURO,
+            E.DESCNUMERO,
+            E.DESCCOMPLEMENTO,
+            E.NOMEBAIRRO,
+            LOC.NOMELOCALIDADE,
+            LOC.SIGLAUF,
+            E.CODCEP
+        FROM
+            CLI.ENDERECOPESSOA E
+        INNER JOIN 
+            LOC.VIW_LOCALIDADE LOC ON LOC.IDLOCALIDADE = E.IDLOCALIDADE
+        INNER JOIN 
+            CLI.VALIDACAOCADASTRAL V ON V.IDPESSOACOMPARTILHAMENTO = E.IDPESSOACOMPARTILHAMENTO
+        WHERE
+            DATE(E.DATAHORAINICIO) = <bancoob:valor valor="${dataMovimento}" tipo="Date" />
+        AND
+            DATE(E.DATAHORAINICIO) = DATE(V.DATAHORAULTIMAATUALIZACAO)
+      ]]>
+    </command>
+  </query>
+  
+  <query name="PESQUISA_TELEFONE">
+    <use-case name="Exportação de arquivos" />
+    <description></description>
+    <command>
+      <![CDATA[
+        SELECT
+            new br.com.sicoob.capes.processamento.negocio.dominio.exportacaoarquivo.vo.RegistroTelefoneVO(
+              telefone.pessoaCompartilhamento.idPessoaCompartilhamento,
+              telefone.tipoTelefone.codigo,
+              telefone.ddd,
+              telefone.telefone,
+              telefone.ramal
+            )
+        FROM
+            br.com.sicoob.capes.negocio.entidades.vigente.Telefone telefone,
+            br.com.sicoob.capes.negocio.entidades.ValidacaoCadastral validacaoCadastral
+        WHERE
+            DATE(telefone.dataHoraInicio) = <bancoob:valorOql valor="${dataMovimento}" tipo="Date" />
+        AND 
+            validacaoCadastral.pessoaCompartilhamento.idPessoaCompartilhamento = telefone.pessoaCompartilhamento.idPessoaCompartilhamento
+        AND
+            DATE(telefone.dataHoraInicio) = DATE(validacaoCadastral.dataHoraUltimaAtualizacao)
+      ]]>
+    </command>
+  </query>
+  
+  <query name="PESQUISA_EMAIL">
+    <use-case name="Exportação de arquivos" />
+    <description></description>
+    <command>
+      <![CDATA[
+        SELECT
+            new br.com.sicoob.capes.processamento.negocio.dominio.exportacaoarquivo.vo.RegistroEmailVO(
+              email.pessoaCompartilhamento.idPessoaCompartilhamento,
+              email.tipoEmail.codigo,
+              email.descricao
+            )
+        FROM 
+            br.com.sicoob.capes.negocio.entidades.vigente.Email email,
+            br.com.sicoob.capes.negocio.entidades.ValidacaoCadastral validacaoCadastral
+        WHERE
+            DATE(email.dataHoraInicio) = <bancoob:valorOql valor="${dataMovimento}" tipo="Date" />
+        AND 
+            validacaoCadastral.pessoaCompartilhamento.idPessoaCompartilhamento = email.pessoaCompartilhamento.idPessoaCompartilhamento
+        AND
+            DATE(email.dataHoraInicio) = DATE(validacaoCadastral.dataHoraUltimaAtualizacao)
+      ]]>
+    </command>
+  </query>
+  
+  <query name="PESQUISA_RENDA">
+    <use-case name="Exportação de arquivos" />
+    <description></description>
+    <command>
+      <![CDATA[
+        SELECT
+					new br.com.sicoob.capes.processamento.negocio.dominio.exportacaoarquivo.vo.RegistroRendaVO(
+					  fonteRenda.pessoaCompartilhamento.idPessoaCompartilhamento,
+					  fonteRenda.tipoFonteRenda.codigo,
+					  fonteRenda.dataValidadeRenda,
+					  fonteRenda.descFonteRenda,
+					  fonteRenda.valorReceitaBrutaMensal,
+					  fonteRenda.bolRendaFixa
+					)
+				FROM
+					br.com.sicoob.capes.negocio.entidades.vigente.FonteRenda fonteRenda
+				WHERE
+					fonteRenda.pessoaCompartilhamento.idPessoaCompartilhamento IN(
+						SELECT 
+							fonteRenda.pessoaCompartilhamento.idPessoaCompartilhamento
+						FROM 
+							br.com.sicoob.capes.negocio.entidades.vigente.FonteRenda fonteRenda,
+							br.com.sicoob.capes.negocio.entidades.ValidacaoCadastral validacaoCadastral
+						WHERE
+							DATE(fonteRenda.dataHoraInicio) = <bancoob:valorOql valor="${dataMovimento}" tipo="Date" />
+						AND 
+							validacaoCadastral.pessoaCompartilhamento.idPessoaCompartilhamento = fonteRenda.pessoaCompartilhamento.idPessoaCompartilhamento
+						AND
+							DATE(fonteRenda.dataHoraInicio) = DATE(validacaoCadastral.dataHoraUltimaAtualizacao)
+					)
+      ]]>
+    </command>
+  </query>
+  
+  <query name="PESQUISA_BEM">
+    <use-case name="Exportação de arquivos" />
+    <description></description>
+    <command>
+      <![CDATA[
+        SELECT
+          new br.com.sicoob.capes.processamento.negocio.dominio.exportacaoarquivo.vo.RegistroBemVO(
+            bem.pessoaCompartilhamento.idPessoaCompartilhamento,
+            bem.situacao.codigo,
+            bem.descricao,
+            bem.percentual,
+            bem.valorAtualMercado
+          )
+        FROM
+            br.com.sicoob.capes.negocio.entidades.bemantigo.Bem bem,
+            br.com.sicoob.capes.negocio.entidades.ValidacaoCadastral validacaoCadastral
+        WHERE
+            DATE(bem.dataHoraInicio) = <bancoob:valorOql valor="${dataMovimento}" tipo="Date" />
+        AND 
+            validacaoCadastral.pessoaCompartilhamento.idPessoaCompartilhamento = bem.pessoaCompartilhamento.idPessoaCompartilhamento
+        AND
+            DATE(bem.dataHoraInicio) = DATE(validacaoCadastral.dataHoraUltimaAtualizacao)
+      ]]>
+    </command>
+  </query>
+  
+  <query name="PESQUISA_COOPERATIVA">
+    <use-case name="Exportação de arquivos" />
+    <description></description>
+    <command>
+      <![CDATA[
+      	SELECT
+			    PC.IDPESSOACOMPARTILHAMENTO,
+			    CASE
+			        WHEN I.IDINSTITUICAO = 1
+			        THEN I.IDINSTITUICAO
+			        ELSE I.NUMCOOPERATIVA
+			        END AS NUMCOOPERATIVA,
+			    I.DESCSIGLACOOP,
+			    I.DESCNOMECOOP,
+			    CASE
+			        WHEN PAC.IDINSTITUICAO IS NOT NULL
+			        THEN PAC.NUMPAC
+			        ELSE PI.IDUNIDADEINST
+			        END AS NUMPAC,
+			    (CASE WHEN I.IDINSTITUICAO = IRC.IDINSTITUICAO THEN 1 ELSE 0 END) AS BOLRESPONSAVELCADASTRO
+				FROM CLI.PESSOAINSTITUICAO PI
+			    INNER JOIN CLI.PESSOACOMPARTILHAMENTO PC ON PC.IDPESSOA = PI.IDPESSOA
+			    INNER JOIN CLI.INSTITUICAORESPONSAVELCADASTRO IRC ON IRC.IDPESSOACOMPARTILHAMENTO = PC.IDPESSOACOMPARTILHAMENTO
+			    INNER JOIN CLI.VALIDACAOCADASTRAL V ON V.IDPESSOACOMPARTILHAMENTO = PC.IDPESSOACOMPARTILHAMENTO
+			    INNER JOIN SCI.VIW_INSTITUICAO I ON I.IDINSTITUICAO = PI.IDINSTITUICAO AND I.IDUNIDADEINST = PI.IDUNIDADEINST
+			    LEFT JOIN SESSION.TMP_PACS_BANCOOB PAC ON PI.IDINSTITUICAO = PAC.IDINSTITUICAO AND PAC.IDUNIDADEINST = PI.IDUNIDADEINST
+				WHERE
+			    DATE(PI.DATAHORAINICIO) = <bancoob:valor valor="${dataMovimento}" tipo="Date" />
+				AND
+			    DATE(PI.DATAHORAINICIO) = DATE(V.DATAHORAULTIMAATUALIZACAO)
+				GROUP BY
+					PC.IDPESSOACOMPARTILHAMENTO,
+			    CASE
+			        WHEN I.IDINSTITUICAO = 1
+			        THEN I.IDINSTITUICAO
+			        ELSE I.NUMCOOPERATIVA
+			        END,
+			    I.DESCSIGLACOOP,
+			    I.DESCNOMECOOP,
+			    CASE
+			        WHEN PAC.IDINSTITUICAO IS NOT NULL
+			        THEN PAC.NUMPAC
+			        ELSE PI.IDUNIDADEINST
+			        END,
+			    (CASE WHEN I.IDINSTITUICAO = IRC.IDINSTITUICAO THEN 1 ELSE 0 END)
+      ]]>
+    </command>
+  </query>
+  
+  <query name="CRIAR_TABELA_TEMPORARIA_PACS_BANCOOB">
+    <use-case name="Exportação arquivos" />
+    <description></description>
+    <command>
+      <![CDATA[
+        DECLARE GLOBAL TEMPORARY TABLE SESSION.TMP_PACS_BANCOOB (IDINSTITUICAO INTEGER, IDUNIDADEINST INTEGER, NUMCOOPERATIVA INTEGER, NUMPAC INTEGER) NOT LOGGED WITH REPLACE ON COMMIT PRESERVE ROWS
+      ]]>
+    </command>
+  </query>
+  
+  <query name="DELETAR_TABELA_TEMPORARIA_PACS_BANCOOB">
+    <use-case name="Exportação arquivos" />
+    <description></description>
+    <command>
+      <![CDATA[
+        DROP TABLE SESSION.TMP_PACS_BANCOOB
+      ]]>
+    </command>
+  </query>
+  
+  <query name="INSERIR_TABELA_TEMPORARIA_PACS_BANCOOB">
+    <use-case name="Exportação arquivos" />
+    <description></description>
+    <command>
+      <![CDATA[
+        INSERT INTO SESSION.TMP_PACS_BANCOOB(IDINSTITUICAO, IDUNIDADEINST, NUMCOOPERATIVA, NUMPAC) VALUES (?, ?, ?, ?)
+      ]]>
+    </command>
+  </query>
+  
+</queries>

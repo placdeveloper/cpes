@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<CanvasBancoob xmlns="br.com.bancoob.componentes.containers.*" 
+	xmlns:mx="http://www.adobe.com/2006/mxml" 
+	xmlns:bancoob="br.com.bancoob.componentes.*"
+	xmlns:bancoobGrid="br.com.bancoob.componentes.grid.*"
+	width="800" height="450" xmlns:titulo="br.com.bancoob.componentes.titulo.*">
+
+	<mx:HBox height="80" >
+		<bancoob:Botao label="Ok" id="btOk"/> 
+		<bancoob:Botao label="Cancelar" id="btCancelar"/> 
+	</mx:HBox>
+
+</CanvasBancoob>

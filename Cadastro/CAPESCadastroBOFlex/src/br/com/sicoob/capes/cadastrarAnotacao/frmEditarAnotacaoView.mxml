@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<bancoobValidaveis:ModuloValidavel xmlns:mx="http://www.adobe.com/2006/mxml"
+			xmlns:bancoobValidaveis="br.com.bancoob.componentes.containers.validaveis.*"
+			xmlns:bancoobInput="br.com.bancoob.componentes.input.*"
+			xmlns:bancoob="br.com.bancoob.componentes.*"
+			xmlns:validaveis="br.com.bancoob.componentes.containers.validaveis.*"
+			xmlns:titulo="br.com.bancoob.componentes.titulo.*" 
+			xmlns:campos="br.com.bancoob.componentes.campos.*"
+			xmlns:inputCadastroUnico="br.com.sicoob.capes.comum.componentes.input.*"
+			width="100%" height="100%" layout="absolute" styleName="ModuloSemEstilo">
+			
+	<validaveis:CanvasValidavel id="tela" height="100%" width="100%">
+		
+		<titulo:SubtituloView texto="Anotação" left="10" right="10"  top="10" />
+		
+		<bancoob:Rotulo text="Anotação:" textAlign="left" top="46" left="10" right="534"/>
+		<bancoobInput:Combo id="cmbTipoAnotacao" validarObrigatorio="true" top="44" inserirItemOpcional="true" width="529" x="145" labelItemOpcional="SELECIONE" />
+		
+		<bancoob:Rotulo text="Categoria:" textAlign="left" top="73" left="10" right="534"/>
+		<bancoobInput:Texto id="categoria" x="145" y="70" enabled="false" width="199"/>
+		
+		<bancoob:Rotulo text="Data da Anotação:" textAlign="left" top="100" left="10" right="524"/>
+		<campos:CampoData id="dtAnotacao" validarObrigatorio="true" top="98" left="145"  width="100" enabled="false" />
+		
+		<bancoob:Rotulo text="Data da Ocorrência:" textAlign="left" top="126" left="10" right="524"/>
+		<campos:CampoData id="dtOcorrencia" validarObrigatorio="true" top="124" left="145" width="100" />
+		
+		<bancoob:Rotulo text="Quantidade:" 	textAlign="left" top="152" left="10" right="524"/>
+		<campos:CampoNumerico id="quantidade" validarObrigatorio="false" valorMinimo="1" valorMaximo="32767" top="150" width="150" x="145" maxChars="5" validarTipo="{CampoNumerico.SHORT_POSITIVO}" enabled="false"  />
+				
+		<bancoob:Rotulo text="Valor:" textAlign="left" top="177" left="10" right="524"/>
+		<campos:CampoMoedaView id="valorAnotacao" validarObrigatorio="false" valorMinimo="0.01" valorMaximo="9999999999.99" top="176" width="150" x="145" maxChars="12" enabled="false" />
+		
+		<bancoob:Rotulo text="Observação Pré-Cadastrada:" textAlign="left" top="206" left="10" right="1066" id="txtTipoExposicao"/>
+		<bancoobInput:Combo id="cboTipoExposicao" x="145" y="204" width="529" enabled="false" inserirItemOpcional="true" labelItemOpcional="SELECIONE" labelField="descricaoSiglaObservacaoAnotacao" identificadorItem="codigo"/>
+		
+		<bancoob:Rotulo text="Observação:" 	textAlign="left" top="228" left="10" right="524"/>
+		<bancoobInput:TextoArea  id="observacao" x="145" y="231" width="529" maxChars="100"/>
+		
+	</validaveis:CanvasValidavel>
+	
+</bancoobValidaveis:ModuloValidavel>

@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<CanvasValidavel xmlns="br.com.bancoob.componentes.containers.validaveis.*"
+				 xmlns:mx="http://www.adobe.com/2006/mxml"
+				 xmlns:ns1="br.com.bancoob.componentes.titulo.*"
+				 xmlns:ns3="br.com.bancoob.componentes.*"
+				 xmlns:ns4="br.com.bancoob.componentes.input.*"
+				 xmlns:ns5="br.com.bancoob.componentes.campos.*"
+				 xmlns:procurarPessoa="br.com.sicoob.capes.corporativo.componentes.procurarPessoa.*"
+				 xmlns:selecaoGeral="br.com.bancoob.sisbr.componentes.selecaoGeral.*"
+				 width="100%" height="260">
+	
+	<ns1:SubtituloView texto="Critérios de pesquisa" booTituloPesquisa="true" x="0" y="0" />
+	
+	<ns3:Rotulo text="Tipo localização: " x="10" y="32" textAlign="left" />
+	<ns4:Combo id="comboTipoLocalizacao" x="120" y="30" width="650" conteudoMaiusculo="true" labelField="descricao" inserirItemOpcional="true" labelItemOpcional="SELECIONE" tabIndex="1" />
+	
+	<ns3:Rotulo text="Tipo uso: " x="10" y="57" textAlign="left" />
+	<ns4:Combo id="comboTipoUso" x="120" y="55" width="650" conteudoMaiusculo="true" labelField="descricao" inserirItemOpcional="true" labelItemOpcional="SELECIONE" tabIndex="2" />
+	
+	<ns3:Rotulo text="Tipo bem: " x="10" y="82" textAlign="left" />
+	<ns4:Combo id="comboTipoBem" x="120" y="80" width="650" conteudoMaiusculo="true" labelField="descricao" inserirItemOpcional="true" labelItemOpcional="SELECIONE" tabIndex="3" />
+
+	<ns3:Rotulo text="Descrição: " x="10" y="107" textAlign="left" />
+	<ns4:Texto id="campoDescricao" x="120" y="105" width="650" maxChars="50" tabIndex="4" />
+	
+	<ns3:Rotulo x="10" y="132" text="Cartório: " textAlign="left" />
+	<procurarPessoa:ProcurarPessoaCAPES x="120" y="130" id="componenteProcurarPessoa" validarObrigatorio="false" toolTip="CPF/CNPJ de identificação do representante cartorário." tabIndex="5" />
+	
+	<ns3:Rotulo text="Matrícula: " x="10" y="157" textAlign="left" />
+	<ns4:Texto id="campoMatricula" x="120" y="155" width="300" maxChars="6" restrict="0-9" tabIndex="6" />
+	
+	<ns3:Rotulo text="NIRF: " x="10" y="182" textAlign="left" />
+	<ns4:Texto id="campoNirf" x="120" y="180" width="300" maxChars="8" restrict="0-9" tabIndex="7" />
+	
+	<ns3:Rotulo text="Incra: " x="10" y="207" textAlign="left" />
+	<ns4:Texto id="campoIncra" x="120" y="205" width="300" maxChars="13" restrict="0-9" tabIndex="8" />
+	
+	<ns3:Botao width="100" id="botaoPesquisar" right="115" y="230" label="PESQUISAR" tabIndex="9" 
+			   disabledIcon="@Embed('br/com/bancoob/imagens/icos/srch_mini_desab.png')"
+			   downIcon="@Embed('br/com/bancoob/imagens/icos/srch_mini_desab.png')"
+			   icon="@Embed('br/com/bancoob/imagens/icos/srch_mini.png')" />
+	<ns3:Botao width="100" id="botaoLimpar" right="5" y="230" label="LIMPAR" tabIndex="10" />
+	
+</CanvasValidavel>

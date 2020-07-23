@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ListaCadastroView xmlns="br.com.bancoob.componentes.cadastro.*"
+				   xmlns:mx="http://www.adobe.com/2006/mxml"
+				   xmlns:autorizacao="br.com.sicoob.capes.autorizarAlteracoes.*"
+				   xmlns:servico="br.com.bancoob.util.servico.*"
+				   width="950" height="600" backgroundAlpha="0.0" borderStyle="solid" borderThickness="0" 
+				   deveRecuperarInformacoesVisualizacao="true" deveLimparPesquisa="false" 
+				   fecharFormularioAoIncluir="false" nomePropriedadeItem="dados">
+	
+	<mx:Script>
+		<![CDATA[
+			private var _labelCooperativa : String;
+			private var _propriedadeCooperativaGrid:String;
+			
+			public function set labelCooperativa(valor : String) : void {
+				this._labelCooperativa = valor;
+			}
+			public function get labelCooperativa() : String {
+				return this._labelCooperativa;
+			}
+			
+			public function set propriedadeCooperativaGrid(valor : String) : void {
+				this._propriedadeCooperativaGrid = valor;
+			}
+			public function get propriedadeCooperativaGrid() : String {
+				return this._propriedadeCooperativaGrid;
+			}
+		]]>
+	</mx:Script>
+	<painelLista>
+		<autorizacao:PainelListaAutorizacoesView width="100%" height="100%"
+												 labelCooperativa="{labelCooperativa}"
+												 propriedadeCooperativa="{propriedadeCooperativaGrid}"/>
+	</painelLista>
+	
+	<servicoRecuperacaoInformacoes>
+		<servico:ServicoJava bloquearOperacao="true" mensagemEspera="Pesquisando dados..."
+							 source="br.com.sicoob.capes.cadastro.fachada.AutorizarFachada"/>
+	</servicoRecuperacaoInformacoes>
+	
+	<barraBotoesListaCadastro>
+		<BarraBotoesListaCadastroView habilitarBotaoAlterar="false" habilitarBotaoExcluir="false"
+									  habilitarBotaoIncluir="false" />
+	</barraBotoesListaCadastro>
+	
+	<formularioCadastro>
+		<autorizacao:AutorizacaoEdicao labelCooperativa="{labelCooperativa}" 
+									   propriedadeCooperativaGrid="{propriedadeCooperativaGrid}" />
+	</formularioCadastro>
+</ListaCadastroView>

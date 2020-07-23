@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ejb-jar-bnd xmlns="http://websphere.ibm.com/xml/ns/javaee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://websphere.ibm.com/xml/ns/javaee http://websphere.ibm.com/xml/ns/javaee/ibm-ejb-jar-bnd_1_1.xsd" version="1.1">
+
+<!-- Compartilhamento de Cadastros -->
+	<session name="CompartilharCadastrosGrupoEconomicoJobEJB">
+		<interface class="br.com.sicoob.sws.api.servico.JobServico" binding-name="capes/processamento/CompartilharCadastrosGrupoEconomicoJobRemote"/>
+	</session>
+	<session name="CompartilharCadastroGrupoEconomicoStepEJB">
+		<interface class="br.com.sicoob.sws.api.servico.StepServico" binding-name="capes/processamento/CompartilharCadastroGrupoEconomicoStepRemote"/>
+	</session>
+	<session name="CompartilharCadastroBancoobGrupoEconomicoStepEJB">
+		<interface class="br.com.sicoob.sws.api.servico.StepServico" binding-name="capes/processamento/CompartilharCadastroBancoobGrupoEconomicoStepRemote"/>
+	</session>
+
+	<session name="AtualizarAnotacoesConsultasExternasServicoEJB">
+		<interface class="br.com.sicoob.capes.processamento.negocio.servicos.interfaces.AtualizarAnotacoesConsultasExternasServicoLocal" binding-name="ejblocal:capes/processamento/AtualizarAnotacoesConsultasExternasServico" />
+		<interface class="br.com.sicoob.capes.processamento.negocio.servicos.interfaces.AtualizarAnotacoesConsultasExternasServicoRemote" binding-name="capes/processamento/AtualizarAnotacoesConsultasExternasServicoRemote" />
+	</session>
+	<session name="InclusaoBeneficiariosINSSServicoEJB">
+		<interface class="br.com.sicoob.capes.processamento.negocio.servicos.interfaces.InclusaoBeneficiariosINSSServicoLocal" binding-name="ejblocal:capes/processamento/InclusaoBeneficiariosINSSServico" />
+		<interface class="br.com.sicoob.capes.processamento.negocio.servicos.interfaces.InclusaoBeneficiariosINSSServicoRemote" binding-name="capes/processamento/InclusaoBeneficiariosINSSServicoRemote" />
+	</session>
+	<session name="ProdutoServicoEJB">
+		<interface class="br.com.sicoob.capes.processamento.negocio.servicos.interfaces.ProdutoServicoLocal" binding-name="ejblocal:capes/processamento/ProdutoServico" />
+		<interface class="br.com.sicoob.capes.processamento.negocio.servicos.interfaces.ProdutoServicoRemote" binding-name="capes/processamento/ProdutoServicoRemote" />
+	</session>
+	<session name="RenovacaoCadastralJobServicoEJB">
+		<interface class="br.com.sicoob.sws.job.ISicoobContextualJob" binding-name="capes/processamento/RenovacaoCadastralJobRemote"/>
+	</session>
+	<session name="RenovacaoCadastralStepServicoEJB">
+		<interface class="br.com.sicoob.sws.step.ISicoobContextualStep" binding-name="capes/processamento/RenovacaoCadastralStepRemote"/>
+	</session>
+	
+	<!-- FECHAMENTO -->
+	<session name="FechamentosJobEJB">
+		<interface class="br.com.sicoob.sws.api.servico.JobServico" binding-name="capes/processamento/FechamentosJobRemote"/>
+	</session>
+	<session name="BaixarAnotacoesVencidasStepEJB">
+		<interface class="br.com.sicoob.capes.processamento.negocio.servicos.interfaces.BaixarAnotacoesVencidasServicoLocal" binding-name="ejblocal:capes/processamento/BaixarAnotacoesVencidasServicoLocal" />
+		<interface class="br.com.sicoob.sws.api.servico.StepServico" binding-name="capes/processamento/BaixarAnotacoesVencidasStepRemote"/>
+	</session>
+	<session name="CancelarAutorizacoesVencidasStepEJB">
+		<interface class="br.com.sicoob.capes.processamento.negocio.servicos.interfaces.CancelarAutorizacoesVencidasServicoLocal" binding-name="ejblocal:capes/processamento/CancelarAutorizacoesVencidasServicoLocal" />
+		<interface class="br.com.sicoob.sws.api.servico.StepServico" binding-name="capes/processamento/CancelarAutorizacoesVencidasStepRemote"/>
+	</session>
+	<session name="ExcluirInformacoesVencidasStepEJB">
+		<interface class="br.com.sicoob.sws.api.servico.StepServico" binding-name="capes/processamento/ExcluirInformacoesVencidasStepRemote"/>
+	</session>
+	<session name="ExecutarValidacaoCadastralStepEJB">
+		<interface class="br.com.sicoob.sws.api.servico.StepServico" binding-name="capes/processamento/ExecutarValidacaoCadastralStepRemote"/>
+	</session>
+	<session name="ExportacaoArquivosStepEJB">
+		<interface class="br.com.sicoob.capes.processamento.negocio.servicos.interfaces.ExportacaoArquivosServicoLocal" binding-name="ejblocal:capes/processamento/ExportacaoArquivosServicoLocal" />
+		<interface class="br.com.sicoob.sws.api.servico.StepServico" binding-name="capes/processamento/ExportacaoArquivosStepRemote"/>
+	</session>
+	
+	<session name="BemSemPatrimonioJobEJB">
+		<interface class="br.com.sicoob.sws.api.servico.JobServico" binding-name="capes/processamento/BemSemPatrimonioJobRemote"/>
+	</session>
+	
+	<session name="BemSemPatrimonioStepEJB">
+		<interface class="br.com.sicoob.sws.api.servico.StepServico" binding-name="capes/processamento/BemSemPatrimonioStepRemote"/>
+	</session>
+	
+	<!-- Configurações das filas -->
+	<message-driven name="AtualizarAnotacoesConsultasExternasMDB">
+		<jca-adapter activation-spec-binding-name="as/QL.CONT.EXEC.CONS.EXT" destination-binding-name="queue/QL.CONT.EXEC.CONS.EXT" />
+	</message-driven>
+	
+</ejb-jar-bnd>

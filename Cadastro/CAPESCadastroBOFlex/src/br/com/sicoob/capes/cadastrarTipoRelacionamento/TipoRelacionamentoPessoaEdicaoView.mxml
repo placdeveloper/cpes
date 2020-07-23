@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FormularioCadastroView 
+	xmlns="br.com.bancoob.componentes.cadastro.*" 
+	xmlns:mx="http://www.adobe.com/2006/mxml" 
+	xmlns:titulo="br.com.bancoob.componentes.titulo.*" 
+	xmlns:componentes="br.com.bancoob.componentes.*"
+	xmlns:validaveis="br.com.bancoob.componentes.containers.validaveis.*" 
+	xmlns:servico="br.com.bancoob.util.servico.*" 
+	xmlns:campos="br.com.bancoob.componentes.campos.*" 
+	xmlns:input="br.com.bancoob.componentes.input.*" 
+	xmlns:renderes="br.com.bancoob.componentes.renderes.*"
+	xmlns:pesquisacodigo="br.com.sicoob.capes.comum.componentes.pesquisacodigo.*"
+	xmlns:validadores="br.com.sicoob.capes.comum.componentes.validadores.*"
+	layout="vertical"
+	width="830" 
+	height="468">
+	<validaveis:CanvasValidavel width="100%" id="campos">
+		<titulo:SubtituloView texto="Tipo de Relacionamento" left="10" top="10" />
+		
+		<componentes:Rotulo text="Código *:" textAlign="left" top="46" left="10" width="205" />
+		<campos:CampoNumerico id="codigo" validarObrigatorio="true" valorMinimo="1" 
+							  valorMaximo="32766" top="44" x="223" width="80" maxChars="5" 
+							  validarTipo="{CampoNumerico.SHORT_POSITIVO}" />
+		
+		<componentes:Rotulo text="Nome *:" textAlign="left" top="72" left="10" width="205" />
+		<input:Texto id="nome" validarObrigatorio="true" top="70" x="223" width="597" maxChars="200"  height="22"/>
+		
+		<componentes:Rotulo text="Código Reverso:" textAlign="left" top="98" left="10" width="205" />
+		<input:Check id="chkReversoOMesmo" label="O mesmo" top="96"  x="223"/>
+		<pesquisacodigo:PesquisaCodigo id="codigoReverso" y="96" x="330" tituloJanelaPesquisa="PESQUISAR CÓDIGO REVERSO" 
+									   quantidadeMaximaCaracteresCampoCodigo="8"/>
+		
+		<componentes:Rotulo text="Tipo de Pessoa Relacionamento *:" textAlign="left" top="124" left="10" width="205" />
+		<input:Check id="chkTipoPessoaRelacionamentoFisica" label="Pessoa Física"  x="223" y="122"/>
+		<input:Check id="chkTipoPessoaRelacionamentoJuridica" label="Pessoa Jurídica"  x="330" y="122"/>
+		
+		<componentes:Rotulo text="Tipo de Pessoa Relacionada *:" textAlign="left" top="150" left="10" width="205" />
+		<input:Check id="chkTipoPessoaRelacionadaFisica" label="Pessoa Física" x="223"  y="148"/>
+		<input:Check id="chkTipoPessoaRelacionadaJuridica" label="Pessoa Jurídica" x="330"  y="148"/>
+		
+		<componentes:Rotulo text="Habilita Capital Social *:" textAlign="left" top="176" left="10" width="205" />
+		<input:RadioGrupoBancoob id="rdbHabilitaCapitalSocial" />
+		<input:Radio groupName="rdbHabilitaCapitalSocial" label="Sim" value="{true}" top="174" x="223" />
+		<input:Radio groupName="rdbHabilitaCapitalSocial" label="Não" value="{false}" top="174" x="330" selected="true" />
+		
+		<componentes:Rotulo text="Habilita Poderes *:" textAlign="left" top="202" left="10" width="205" />
+		<input:RadioGrupoBancoob id="rdbHabilitaPoderes" />
+		<input:Radio groupName="rdbHabilitaPoderes" label="Sim" value="{true}" top="200" x="223" />
+		<input:Radio groupName="rdbHabilitaPoderes" label="Não" value="{false}" top="200" x="330" selected="true" />
+		
+		<componentes:Rotulo text="Habilita Envio ao CCS *:" textAlign="left" top="228" left="10" width="205" />
+		<input:RadioGrupoBancoob id="rdbHabilitaEnvioCCS" />
+		<input:Radio groupName="rdbHabilitaEnvioCCS" label="Sim" value="{true}" top="226" x="223" />
+		<input:Radio groupName="rdbHabilitaEnvioCCS" label="Não" value="{false}" top="226" x="330" selected="true" />
+		
+		<componentes:Rotulo text="Habilita Dados do Registro *:" textAlign="left" top="254" left="10" width="205" />
+		<input:RadioGrupoBancoob id="rdbHabilitaDadosRegistro" />
+		<input:Radio groupName="rdbHabilitaDadosRegistro" label="Sim" value="{true}" top="252" x="223" />
+		<input:Radio groupName="rdbHabilitaDadosRegistro" label="Não" value="{false}" top="252" x="330" selected="true" />
+		
+		<componentes:Rotulo text="Compõe Cartão de Assinatura *:" textAlign="left" top="280" left="10" width="205" />
+		<input:RadioGrupoBancoob id="rdbCompoeCartaoAssinatura" />
+		<input:Radio groupName="rdbCompoeCartaoAssinatura" label="Sim" value="{true}" top="278" x="223" />
+		<input:Radio groupName="rdbCompoeCartaoAssinatura" label="Não" value="{false}" top="278" x="330" selected="true" />
+		
+		<componentes:Rotulo text="Permitir Duplicidade *:" textAlign="left" top="306" left="10" width="205" />
+		<input:RadioGrupoBancoob id="rdbPermitirDuplicidade" />
+		<input:Radio groupName="rdbPermitirDuplicidade" label="Sim" value="{true}" top="304" x="223" />
+		<input:Radio groupName="rdbPermitirDuplicidade" label="Não" value="{false}" top="304" x="330" selected="true" />
+		
+		<componentes:Rotulo text="Permitir Compartilhamento *:" textAlign="left" top="330" left="10" width="205" />
+		<input:RadioGrupoBancoob id="rdbPermitirCompartilhamento" />
+		<input:Radio groupName="rdbPermitirCompartilhamento" label="Sim" value="{true}" top="328" x="223" />
+		<input:Radio groupName="rdbPermitirCompartilhamento" label="Não" value="{false}" top="328" x="330" selected="true" />
+		
+		<componentes:Rotulo text="Habilita Produtos Bancoob *:" textAlign="left" top="354" left="10" width="205" />
+		<input:RadioGrupoBancoob id="rdbHabilitaProdutosBancoob" />
+		<input:Radio groupName="rdbHabilitaProdutosBancoob" label="Sim" value="{true}" top="352" x="223" />
+		<input:Radio groupName="rdbHabilitaProdutosBancoob" label="Não" value="{false}" top="352" x="330" selected="true" />
+		
+		<componentes:Rotulo text="Habilita Verificação Pendencia *:" textAlign="left" top="376" left="10" width="205" />
+		<input:RadioGrupoBancoob id="rdbHabilitaVerificacaoPendencia" />
+		<input:Radio groupName="rdbHabilitaVerificacaoPendencia" label="Sim" value="{true}" top="374" x="223" />
+		<input:Radio groupName="rdbHabilitaVerificacaoPendencia" label="Não" value="{false}" top="374" x="330" selected="true" />
+		
+		<componentes:Rotulo text="Ativo *:" textAlign="left" top="398" left="10" />
+		<input:RadioGrupoBancoob id="rdbAtivo" />
+		<input:Radio groupName="rdbAtivo" label="Sim" value="{true}" top="396" x="223" />
+		<input:Radio groupName="rdbAtivo" label="Não" value="{false}" top="396" x="330" selected="true" />
+		
+	</validaveis:CanvasValidavel>
+	<BarraBotoesFormularioCadastroView id="barraBotoes" width="100%" />
+	<validacoesAdicionais>
+		<mx:ArrayCollection>
+			<validadores:ValidadorCheckSelecionado id="validadorTipoPessoaRelacionada"
+												   mensagemErro="Selecione pelo menos 1 Tipo de Pessoa Relacionada">
+				<validadores:campos>
+					<input:Check>{chkTipoPessoaRelacionadaFisica}</input:Check>
+					<input:Check>{chkTipoPessoaRelacionadaJuridica}</input:Check>
+				</validadores:campos>
+			</validadores:ValidadorCheckSelecionado>
+			<validadores:ValidadorCheckSelecionado id="validadorTipoPessoaRelacionamento"
+												   mensagemErro="Selecione pelo menos 1 Tipo de Pessoa Relacionamento">
+				<validadores:campos>
+					<input:Check>{chkTipoPessoaRelacionamentoFisica}</input:Check>
+					<input:Check>{chkTipoPessoaRelacionamentoJuridica}</input:Check>
+				</validadores:campos>
+			</validadores:ValidadorCheckSelecionado>
+		</mx:ArrayCollection>
+	</validacoesAdicionais>
+	<servicoInclusao>
+		<servico:ServicoJava
+			source="br.com.sicoob.capes.cadastro.fachada.TipoRelacionamentoPessoaFachada"
+			bloquearOperacao="true"
+			mensagemEspera="Salvando dados..." />
+	</servicoInclusao>
+	<servicoEdicao>
+		<servico:ServicoJava
+			source="br.com.sicoob.capes.cadastro.fachada.TipoRelacionamentoPessoaFachada"
+			bloquearOperacao="true"
+			mensagemEspera="Salvando dados..." />
+	</servicoEdicao>
+</FormularioCadastroView>

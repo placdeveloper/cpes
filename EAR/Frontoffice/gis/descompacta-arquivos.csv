@@ -1,0 +1,8 @@
+capes-api-impl-${version}.jar;capes-api-impl-${version}
+capes-api-inclusao-impl-${version}.jar;capes-api-inclusao-impl-${version}
+capes-cadastro-ejb-${version}.jar;capes-cadastro-ejb-${version}
+capes-comum-ejb-${version}.jar;capes-comum-ejb-${version}
+capes-frontoffice-ejb-${version}.jar;capes-frontoffice-ejb-${version}
+capes-integracao-comum-impl-${version}.jar;capes-integracao-comum-impl-${version}
+capes-integracao-frontoffice-impl-${version}.jar;capes-integracao-frontoffice-impl-${version}
+capes-replicacao-comum-ejb-${version}.jar;capes-replicacao-comum-ejb-${version}

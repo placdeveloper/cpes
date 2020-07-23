@@ -1,0 +1,22 @@
+<Modulo 
+	width="100%" height="100%" 
+	paddingBottom="10" paddingLeft="10" paddingRight="10" paddingTop="10"
+	layout="vertical"
+	xmlns="br.com.bancoob.componentes.*" 
+	xmlns:mx="http://www.adobe.com/2006/mxml" 
+	xmlns:navegacao="br.com.bancoob.componentes.navegacao.*" 
+	xmlns:abas="br.com.sicoob.capes.monitoracaoAtualizacaoCadastral.abas.*" 
+	xmlns:containers="br.com.bancoob.componentes.containers.*" xmlns:input="br.com.bancoob.componentes.input.*">
+	
+	<navegacao:Tab x="10" y="10" width="100%" height="100%" id="navegacaoTab">
+		<abas:abaNaoEnviadas id="naoEnviadas" label="Não enviadas" />
+		<abas:abaNaoProcessadas id="naoProcessadas" label="Não processadas" />
+		<abas:abaProcessadasComErro id="processadasComErro" label="Processadas com erro" /> 
+	</navegacao:Tab>
+	<containers:HBoxBancoob height="40" width="100%" bottom="0" horizontalAlign="right" verticalAlign="middle">
+		<input:RadioGrupoBancoob id="grupoAtualizacao" />
+		<input:Radio groupName="grupoAtualizacao" id="rdAbaAtual" label="Aba atual" value="{true}" selected="true" />
+		<input:Radio groupName="grupoAtualizacao" id="rdTodas" label="Todas as abas" value="{false}" />
+		<Botao label="Pesquisar" id="btPesquisar" verticalCenter="0" />
+	</containers:HBoxBancoob>
+</Modulo>

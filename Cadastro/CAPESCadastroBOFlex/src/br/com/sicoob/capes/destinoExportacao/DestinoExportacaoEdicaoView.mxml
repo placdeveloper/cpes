@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FormularioCadastroView xmlns="br.com.bancoob.componentes.cadastro.*"
+						xmlns:mx="http://www.adobe.com/2006/mxml"
+						xmlns:componentes="br.com.bancoob.componentes.*"
+						xmlns:containers="br.com.bancoob.componentes.containers.*"
+						xmlns:containersCAPES="br.com.sicoob.capes.comum.componentes.containers.*"
+						xmlns:listaSelecao="br.com.sicoob.capes.comum.componentes.listaSelecao.*"
+						xmlns:input="br.com.bancoob.componentes.input.*"
+						xmlns:campos="br.com.bancoob.componentes.campos.*"
+						xmlns:titulo="br.com.bancoob.componentes.titulo.*"
+						xmlns:validaveis="br.com.bancoob.componentes.containers.validaveis.*"
+						visible="true" left="0" top="0" horizontalScrollPolicy="off"
+						layout="vertical" verticalScrollPolicy="auto" >
+	
+	<titulo:SubtituloView x="0" y="0" left="10" right="10" top="0" width="100%" texto="DADOS"/>
+	
+	<validaveis:CanvasValidavel>
+		
+		<componentes:Rotulo text="Descrição *:" textAlign="left" x="10" y="12" height="18" />
+		<input:Texto id="campoDescricao" validarObrigatorio="true" left="100" y="10" right="10" width="600" maxChars="50" somenteMaiusculas="false" tabIndex="1" />
+		
+		<componentes:Rotulo text="Diretório *:" textAlign="left" x="10" y="42" height="18" />
+		<input:Texto id="campoDiretorio" validarObrigatorio="true" left="100" y="40" right="10" width="600" maxChars="100" somenteMaiusculas="false" tabIndex="2" />
+		
+		<componentes:Rotulo text="Codificação *:" textAlign="left" x="10" y="72" height="18" />
+		<input:Combo id="comboCodificacao" y="70" left="100" right="10" width="600" labelField="codigo" conteudoMaiusculo="true" validarObrigatorio="true" inserirItemOpcional="true" labelItemOpcional="SELECIONE" tabIndex="3" />
+		
+		<componentes:Rotulo text="Ativo *:" textAlign="left" x="10" y="102" height="18" />
+		<input:RadioGrupoBancoob id="situacao" />
+		<input:Radio x="100" y="100" groupName="situacao" label="SIM" tabEnabled="true" value="{true}" selected="true" tabIndex="4" />
+		<input:Radio x="180" y="100" groupName="situacao" label="NÃO" tabEnabled="true" value="{false}" tabIndex="5" />
+		
+		<containersCAPES:Fieldset id="fieldsetParametros" label="Parâmetros para exportação" left="10" right="10" height="250" y="140">
+			<listaSelecao:ListaSelecao id="componenteListaTiposInformacao" left="10" y="15" right="10" tamanhoLista="300" alturaLista="200" labelField="descricao" propriedadeItemObrigatorio="informacaoObrigatoriaExportacao" tabIndex="6" />
+		</containersCAPES:Fieldset>
+		
+	</validaveis:CanvasValidavel>
+	
+	<BarraBotoesFormularioCadastroView id="barraBotoes" width="100%"/>
+</FormularioCadastroView>

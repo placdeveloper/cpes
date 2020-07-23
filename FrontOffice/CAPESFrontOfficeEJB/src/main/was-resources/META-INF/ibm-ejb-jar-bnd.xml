@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ejb-jar-bnd xmlns="http://websphere.ibm.com/xml/ns/javaee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://websphere.ibm.com/xml/ns/javaee http://websphere.ibm.com/xml/ns/javaee/ibm-ejb-jar-bnd_1_1.xsd" version="1.1">
+
+	<session name="ConsultaAnotacaoExistenteServicoEJB">
+		<interface class="br.com.bancoob.srtb.servico.Transacao" binding-name="capes/frontoffice/ConsultaAnotacaoExistenteServicoRemote" />
+	</session>
+
+	<session name="ConsultaNomePessoaServicoEJB">
+		<interface class="br.com.bancoob.srtb.servico.Transacao" binding-name="capes/frontoffice/ConsultaNomePessoaServicoRemote" />
+	</session>
+	
+	<session name="ConsultaEmailPessoaServicoEJB">
+		<interface class="br.com.bancoob.srtb.servico.Transacao" binding-name="capes/frontoffice/ConsultaEmailPessoaServicoRemote" />
+	</session>
+	
+	<session name="ConsultaTipoEmailServicoEJB">
+		<interface class="br.com.bancoob.srtb.servico.Transacao" binding-name="capes/frontoffice/ConsultaTipoEmailServicoRemote" />
+	</session>
+	
+	<session name="CriarEmailPessoaServicoEJB">
+		<interface class="br.com.bancoob.srtb.servico.Transacao" binding-name="capes/frontoffice/CriarEmailPessoaServicoRemote" />
+	</session>
+	
+	<session name="AlterarEmailPessoaServicoEJB">
+		<interface class="br.com.bancoob.srtb.servico.Transacao" binding-name="capes/frontoffice/AlterarEmailPessoaServicoRemote" />
+	</session>
+	
+	<session name="ConsultaTipoTelefoneServicoEJB">
+		<interface class="br.com.bancoob.srtb.servico.Transacao" binding-name="capes/frontoffice/ConsultaTipoTelefoneServicoRemote" />
+	</session>
+	
+	<session name="ConsultaTelefonePessoaServicoEJB">
+		<interface class="br.com.bancoob.srtb.servico.Transacao" binding-name="capes/frontoffice/ConsultaTelefonePessoaServicoRemote" />
+	</session>
+	
+	<session name="CriarTelefonePessoaServicoEJB">
+		<interface class="br.com.bancoob.srtb.servico.Transacao" binding-name="capes/frontoffice/CriarTelefonePessoaServicoRemote" />
+	</session>
+	
+	<session name="AlterarTelefonePessoaServicoEJB">
+		<interface class="br.com.bancoob.srtb.servico.Transacao" binding-name="capes/frontoffice/AlterarTelefonePessoaServicoRemote" />
+	</session>
+	
+	<session name="AlterarEnderecoPessoaServicoEJB">
+		<interface class="br.com.bancoob.srtb.servico.Transacao" binding-name="capes/frontoffice/AlterarEnderecoPessoaServicoRemote" />
+	</session>
+	
+	<session name="ConsultarEnderecoPessoaServicoEJB">
+		<interface class="br.com.bancoob.srtb.servico.Transacao" binding-name="capes/frontoffice/ConsultarEnderecoPessoaServicoRemote" />
+	</session>
+	
+	<session name="ConsultarTipoEnderecoPessoaServicoEJB">
+		<interface class="br.com.bancoob.srtb.servico.Transacao" binding-name="capes/frontoffice/ConsultarTipoEnderecoPessoaServicoRemote" />
+	</session>	
+	
+	<session name="AlterarFonteRendaServicoEJB">
+		<interface class="br.com.bancoob.srtb.servico.Transacao" binding-name="capes/frontoffice/AlterarFonteRendaServicoRemote" />
+	</session>
+	
+	<session name="ConsultarFonteRendaServicoEJB">
+		<interface class="br.com.bancoob.srtb.servico.Transacao" binding-name="capes/frontoffice/ConsultarFonteRendaServicoRemote" />
+	</session>
+	
+	<session name="ConsultarTipoFonteRendaServicoEJB">
+		<interface class="br.com.bancoob.srtb.servico.Transacao" binding-name="capes/frontoffice/ConsultarTipoFonteRendaServicoRemote" />
+	</session>
+
+	<session name="CriarFonteRendaServicoEJB">
+		<interface class="br.com.bancoob.srtb.servico.Transacao" binding-name="capes/frontoffice/CriarFonteRendaServicoRemote" />
+	</session>
+	
+	<session name="ConsultarTipoEmpresaServicoEJB">
+		<interface class="br.com.bancoob.srtb.servico.Transacao" binding-name="capes/frontoffice/ConsultarTipoEmpresaServicoRemote" />
+	</session>
+	
+	<session name="ExcluirEmailPessoaServicoEJB">
+		<interface class="br.com.bancoob.srtb.servico.Transacao" binding-name="capes/frontoffice/ExcluirEmailPessoaServicoRemote" />
+	</session>
+	
+	<session name="ExcluirFonteRendaPessoaServicoEJB">
+		<interface class="br.com.bancoob.srtb.servico.Transacao" binding-name="capes/frontoffice/ExcluirFonteRendaPessoaServicoRemote" />
+	</session>
+	
+	<session name="ExcluirTelefonePessoaServicoEJB">
+		<interface class="br.com.bancoob.srtb.servico.Transacao" binding-name="capes/frontoffice/ExcluirTelefonePessoaServicoRemote" />
+	</session>
+</ejb-jar-bnd>

@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ejb-jar-bnd xmlns="http://websphere.ibm.com/xml/ns/javaee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://websphere.ibm.com/xml/ns/javaee http://websphere.ibm.com/xml/ns/javaee/ibm-ejb-jar-bnd_1_1.xsd" version="1.1">
+  
+  <session name="AvaliacaoFinanceiraServicoEJB">
+		<interface class="br.com.sicoob.capes.replicacao.negocio.servicos.interfaces.AvaliacaoFinanceiraServicoLocal" binding-name="ejblocal:capes/replicacao/AvaliacaoFinanceiraServico"/>
+		<interface class="br.com.sicoob.capes.replicacao.negocio.servicos.interfaces.AvaliacaoFinanceiraServicoRemote" binding-name="capes/replicacao/AvaliacaoFinanceiraServicoRemote"/>
+	</session>
+	<session name="BemImovelServicoEJB">
+		<interface class="br.com.sicoob.capes.replicacao.negocio.servicos.interfaces.BemImovelServicoLocal" binding-name="ejblocal:capes/replicacao/BemImovelServico"/>
+		<interface class="br.com.sicoob.capes.replicacao.negocio.servicos.interfaces.BemImovelServicoRemote" binding-name="capes/replicacao/BemImovelServicoRemote"/>
+	</session>
+	<session name="BemOnusServicoEJB">
+		<interface class="br.com.sicoob.capes.replicacao.negocio.servicos.interfaces.BemOnusServicoLocal" binding-name="ejblocal:capes/replicacao/BemOnusServico"/>
+		<interface class="br.com.sicoob.capes.replicacao.negocio.servicos.interfaces.BemOnusServicoRemote" binding-name="capes/replicacao/BemOnusServicoRemote"/>
+	</session>
+	<session name="BemPosseServicoEJB">
+		<interface class="br.com.sicoob.capes.replicacao.negocio.servicos.interfaces.BemPosseServicoLocal" binding-name="ejblocal:capes/replicacao/BemPosseServico"/>
+		<interface class="br.com.sicoob.capes.replicacao.negocio.servicos.interfaces.BemPosseServicoRemote" binding-name="capes/replicacao/BemPosseServicoRemote"/>
+	</session>
+	<session name="BemRegistroServicoEJB">
+		<interface class="br.com.sicoob.capes.replicacao.negocio.servicos.interfaces.BemRegistroServicoLocal" binding-name="ejblocal:capes/replicacao/BemRegistroServico"/>
+		<interface class="br.com.sicoob.capes.replicacao.negocio.servicos.interfaces.BemRegistroServicoRemote" binding-name="capes/replicacao/BemRegistroServicoRemote"/>
+	</session>
+	<session name="BemServicoEJB">
+		<interface class="br.com.sicoob.capes.replicacao.negocio.servicos.interfaces.BemServicoLocal" binding-name="ejblocal:capes/replicacao/BemServico"/>
+		<interface class="br.com.sicoob.capes.replicacao.negocio.servicos.interfaces.BemServicoRemote" binding-name="capes/replicacao/BemServicoRemote"/>
+	</session>
+	<session name="CertidaoServicoEJB">
+		<interface class="br.com.sicoob.capes.replicacao.negocio.servicos.interfaces.CertidaoServicoLocal" binding-name="ejblocal:capes/replicacao/CertidaoServico"/>
+		<interface class="br.com.sicoob.capes.replicacao.negocio.servicos.interfaces.CertidaoServicoRemote" binding-name="capes/replicacao/CertidaoServicoRemote"/>
+	</session>
+	<session name="ClienteServicoEJB">
+		<interface class="br.com.sicoob.capes.replicacao.negocio.servicos.interfaces.ClienteServicoLocal" binding-name="ejblocal:capes/replicacao/ClienteServico"/>
+		<interface class="br.com.sicoob.capes.replicacao.negocio.servicos.interfaces.ClienteServicoRemote" binding-name="capes/replicacao/ClienteServicoRemote"/>
+	</session>
+	<session name="CooperativaServicoEJB">
+		<interface class="br.com.sicoob.capes.replicacao.negocio.servicos.interfaces.CooperativaServicoLocal" binding-name="ejblocal:capes/replicacao/CooperativaServico"/>
+		<interface class="br.com.sicoob.capes.replicacao.negocio.servicos.interfaces.CooperativaServicoRemote" binding-name="capes/replicacao/CooperativaServicoRemote"/>
+	</session>
+	<session name="EmpreendimentoServicoEJB">
+		<interface class="br.com.sicoob.capes.replicacao.negocio.servicos.interfaces.EmpreendimentoServicoLocal" binding-name="ejblocal:capes/replicacao/EmpreendimentoServico"/>
+		<interface class="br.com.sicoob.capes.replicacao.negocio.servicos.interfaces.EmpreendimentoServicoRemote" binding-name="capes/replicacao/EmpreendimentoServicoRemote"/>
+	</session>
+	<session name="EnderecoServicoEJB">
+		<interface class="br.com.sicoob.capes.replicacao.negocio.servicos.interfaces.EnderecoServicoLocal" binding-name="ejblocal:capes/replicacao/EnderecoServico"/>
+		<interface class="br.com.sicoob.capes.replicacao.negocio.servicos.interfaces.EnderecoServicoRemote" binding-name="capes/replicacao/EnderecoServicoRemote"/>
+	</session>
+	<session name="FonteRendaServicoEJB">
+		<interface class="br.com.sicoob.capes.replicacao.negocio.servicos.interfaces.FonteRendaServicoLocal" binding-name="ejblocal:capes/replicacao/FonteRendaServico"/>
+		<interface class="br.com.sicoob.capes.replicacao.negocio.servicos.interfaces.FonteRendaServicoRemote" binding-name="capes/replicacao/FonteRendaServicoRemote"/>
+	</session>
+	<session name="FuncionarioServicoEJB">
+		<interface class="br.com.sicoob.capes.replicacao.negocio.servicos.interfaces.FuncionarioServicoLocal" binding-name="ejblocal:capes/replicacao/FuncionarioServico"/>
+		<interface class="br.com.sicoob.capes.replicacao.negocio.servicos.interfaces.FuncionarioServicoRemote" binding-name="capes/replicacao/FuncionarioServicoRemote"/>
+	</session>
+	<session name="HistoricoAlteracaoCnpjCpfServicoEJB">
+		<interface class="br.com.sicoob.capes.replicacao.negocio.servicos.interfaces.HistoricoAlteracaoCnpjCpfServicoLocal" binding-name="ejblocal:capes/replicacao/HistoricoAlteracaoCnpjCpfServico"/>
+		<interface class="br.com.sicoob.capes.replicacao.negocio.servicos.interfaces.HistoricoAlteracaoCnpjCpfServicoRemote" binding-name="capes/replicacao/HistoricoAlteracaoCnpjCpfServicoRemote"/>
+	</session>
+	<session name="HistoricoCedenteServicoEJB">
+		<interface class="br.com.sicoob.capes.replicacao.negocio.servicos.interfaces.HistoricoCedenteServicoLocal" binding-name="ejblocal:capes/replicacao/HistoricoCedenteServico"/>
+		<interface class="br.com.sicoob.capes.replicacao.negocio.servicos.interfaces.HistoricoCedenteServicoRemote" binding-name="capes/replicacao/HistoricoCedenteServicoRemote"/>
+	</session>
+	<session name="InformacaoProfissionalServicoEJB">
+		<interface class="br.com.sicoob.capes.replicacao.negocio.servicos.interfaces.InformacaoProfissionalServicoLocal" binding-name="ejblocal:capes/replicacao/InformacaoProfissionalServico"/>
+		<interface class="br.com.sicoob.capes.replicacao.negocio.servicos.interfaces.InformacaoProfissionalServicoRemote" binding-name="capes/replicacao/InformacaoProfissionalServicoRemote"/>
+	</session>
+	<session name="ListaItemServicoEJB">
+		<interface class="br.com.sicoob.capes.replicacao.negocio.servicos.interfaces.ListaItemServicoLocal" binding-name="ejblocal:capes/replicacao/ListaItemServico"/>
+		<interface class="br.com.sicoob.capes.replicacao.negocio.servicos.interfaces.ListaItemServicoRemote" binding-name="capes/replicacao/ListaItemServicoRemote"/>
+	</session>
+	<session name="ListaServicoEJB">
+		<interface class="br.com.sicoob.capes.replicacao.negocio.servicos.interfaces.ListaServicoLocal" binding-name="ejblocal:capes/replicacao/ListaServico"/>
+		<interface class="br.com.sicoob.capes.replicacao.negocio.servicos.interfaces.ListaServicoRemote" binding-name="capes/replicacao/ListaServicoRemote"/>
+	</session>
+	<session name="MensagemServicoEJB">
+		<interface class="br.com.sicoob.capes.replicacao.negocio.servicos.interfaces.MensagemServicoLocal" binding-name="ejblocal:capes/replicacao/MensagemServico"/>
+		<interface class="br.com.sicoob.capes.replicacao.negocio.servicos.interfaces.MensagemServicoRemote" binding-name="capes/replicacao/MensagemServicoRemote"/>
+	</session>
+	<session name="NucleoServicoEJB">
+		<interface class="br.com.sicoob.capes.replicacao.negocio.servicos.interfaces.NucleoServicoLocal" binding-name="ejblocal:capes/replicacao/NucleoServico"/>
+		<interface class="br.com.sicoob.capes.replicacao.negocio.servicos.interfaces.NucleoServicoRemote" binding-name="capes/replicacao/NucleoServicoRemote"/>
+	</session>
+	<session name="PessoaServicoEJB">
+		<interface class="br.com.sicoob.capes.replicacao.negocio.servicos.interfaces.PessoaServicoLocal" binding-name="ejblocal:capes/replicacao/PessoaServico"/>
+		<interface class="br.com.sicoob.capes.replicacao.negocio.servicos.interfaces.PessoaServicoRemote" binding-name="capes/replicacao/PessoaServicoRemote"/>
+	</session>
+	<session name="ProdutividadeServicoEJB">
+		<interface class="br.com.sicoob.capes.replicacao.negocio.servicos.interfaces.ProdutividadeServicoLocal" binding-name="ejblocal:capes/replicacao/ProdutividadeServico"/>
+		<interface class="br.com.sicoob.capes.replicacao.negocio.servicos.interfaces.ProdutividadeServicoRemote" binding-name="capes/replicacao/ProdutividadeServicoRemote"/>
+	</session>
+	<session name="ProdutorServicoEJB">
+		<interface class="br.com.sicoob.capes.replicacao.negocio.servicos.interfaces.ProdutorServicoLocal" binding-name="ejblocal:capes/replicacao/ProdutorServico"/>
+		<interface class="br.com.sicoob.capes.replicacao.negocio.servicos.interfaces.ProdutorServicoRemote" binding-name="capes/replicacao/ProdutorServicoRemote"/>
+	</session>
+	<session name="ReferenciaServicoEJB">
+		<interface class="br.com.sicoob.capes.replicacao.negocio.servicos.interfaces.ReferenciaServicoLocal" binding-name="ejblocal:capes/replicacao/ReferenciaServico"/>
+		<interface class="br.com.sicoob.capes.replicacao.negocio.servicos.interfaces.ReferenciaServicoRemote" binding-name="capes/replicacao/ReferenciaServicoRemote"/>
+	</session>
+	<session name="RelacionamentoPessoaServicoEJB">
+		<interface class="br.com.sicoob.capes.replicacao.negocio.servicos.interfaces.RelacionamentoPessoaServicoLocal" binding-name="ejblocal:capes/replicacao/RelacionamentoPessoaServico"/>
+		<interface class="br.com.sicoob.capes.replicacao.negocio.servicos.interfaces.RelacionamentoPessoaServicoRemote" binding-name="capes/replicacao/RelacionamentoPessoaServicoRemote"/>
+	</session>
+	<session name="ReplicacaoCadastroServicoEJB">
+		<interface class="br.com.sicoob.capes.replicacao.negocio.servicos.interfaces.ReplicacaoCadastroServicoLocal" binding-name="ejblocal:capes/replicacao/ReplicacaoCadastroServico"/>
+		<interface class="br.com.sicoob.capes.replicacao.negocio.servicos.interfaces.ReplicacaoCadastroServicoRemote" binding-name="capes/replicacao/ReplicacaoCadastroServicoRemote"/>
+	</session>
+	<session name="ReplicacaoAssincronaServicoEJB">
+		<interface class="br.com.sicoob.capes.replicacao.negocio.servicos.interfaces.ReplicacaoAssincronaServicoLocal" binding-name="ejblocal:capes/replicacao/ReplicacaoAssincronaServico"/>
+	</session>
+	<session name="TelefoneServicoEJB">
+		<interface class="br.com.sicoob.capes.replicacao.negocio.servicos.interfaces.TelefoneServicoLocal" binding-name="ejblocal:capes/replicacao/TelefoneServico"/>
+		<interface class="br.com.sicoob.capes.replicacao.negocio.servicos.interfaces.TelefoneServicoRemote" binding-name="capes/replicacao/TelefoneServicoRemote"/>
+	</session>
+	<session name="TipoBemServicoEJB">
+		<interface class="br.com.sicoob.capes.replicacao.negocio.servicos.interfaces.TipoBemServicoLocal" binding-name="ejblocal:capes/replicacao/TipoBemServico"/>
+		<interface class="br.com.sicoob.capes.replicacao.negocio.servicos.interfaces.TipoBemServicoRemote" binding-name="capes/replicacao/TipoBemServicoRemote"/>
+	</session>
+	<session name="TipoEmpresaServicoEJB">
+		<interface class="br.com.sicoob.capes.replicacao.negocio.servicos.interfaces.TipoEmpresaServicoLocal" binding-name="ejblocal:capes/replicacao/TipoEmpresaServico"/>
+		<interface class="br.com.sicoob.capes.replicacao.negocio.servicos.interfaces.TipoEmpresaServicoRemote" binding-name="capes/replicacao/TipoEmpresaServicoRemote"/>
+	</session>
+	<session name="UnidadeMedidaServicoEJB">
+		<interface class="br.com.sicoob.capes.replicacao.negocio.servicos.interfaces.UnidadeMedidaServicoLocal" binding-name="ejblocal:capes/replicacao/UnidadeMedidaServico"/>
+		<interface class="br.com.sicoob.capes.replicacao.negocio.servicos.interfaces.UnidadeMedidaServicoRemote" binding-name="capes/replicacao/UnidadeMedidaServicoRemote"/>
+	</session>
+	
+</ejb-jar-bnd>

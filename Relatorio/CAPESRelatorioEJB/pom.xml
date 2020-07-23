@@ -1,0 +1,171 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+
+	<artifactId>capes-relatorio-ejb</artifactId>
+	<packaging>ejb</packaging>
+	<name>CAPES - Relatorio - CAPESRelatorioEJB</name>
+
+	<parent>
+		<groupId>br.com.sicoob.capes</groupId>
+		<artifactId>capes-modulo-relatorio</artifactId>
+		<version>2.0.8.1</version>
+		<relativePath>..</relativePath>
+	</parent>
+
+	<scm>
+		<connection>scm:svn:http://svn.sicoob.com.br/fontesbancoob/SISBR/Aplicativos/JAVA/trunk/CAPES/tags/capes-2.0.8.1/Relatorio/CAPESRelatorioEJB</connection>
+		<developerConnection>scm:svn:http://svn.sicoob.com.br/fontesbancoob/SISBR/Aplicativos/JAVA/trunk/CAPES/tags/capes-2.0.8.1/Relatorio/CAPESRelatorioEJB</developerConnection>
+		<url>http://svn.sicoob.com.br/fontesbancoob/SISBR/Aplicativos/JAVA/trunk/CAPES/tags/capes-2.0.8.1/Relatorio/CAPESRelatorioEJB</url>
+	</scm>
+
+	<build>
+		<plugins>
+			<!-- Plugin para geração dos Jaspers -->
+			<plugin>
+				<groupId>org.codehaus.mojo</groupId>
+				<artifactId>jasperreports-maven-plugin</artifactId>
+				<version>1.0-beta-2</version>
+				<configuration>
+					<sourceDirectory>${project.basedir}/src/main/relatorios</sourceDirectory>
+					<outputDirectory>${project.build.outputDirectory}</outputDirectory>
+					<encoding>UTF-8</encoding>
+				</configuration>
+				<executions>
+					<execution>
+						<phase>compile</phase>
+						<goals>
+							<goal>compile-reports</goal>
+						</goals>
+					</execution>
+				</executions>
+				<dependencies>
+					<dependency>
+						<groupId>org.apache</groupId>
+						<artifactId>commons-logging</artifactId>
+						<version>1.0.3</version>
+					</dependency>
+					<dependency>
+						<groupId>net.sf</groupId>
+						<artifactId>jasperreports</artifactId>
+						<version>${versao.jasperreports}</version>
+					</dependency>
+					<dependency>
+						<groupId>log4j</groupId>
+						<artifactId>log4j</artifactId>
+						<version>1.2.17</version>
+					</dependency>
+				</dependencies>
+			</plugin>
+			
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-ejb-plugin</artifactId>
+			</plugin>
+		</plugins>
+	</build>
+
+	<dependencies>
+		<!-- CAPES -->
+		<dependency>
+			<groupId>${project.groupId}</groupId>
+			<artifactId>capes-comum-lib</artifactId>
+			<version>${project.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>${project.groupId}</groupId>
+			<artifactId>capes-entidades</artifactId>
+			<version>${project.version}</version>
+			<exclusions>
+				<exclusion>
+					<groupId>${project.groupId}</groupId>
+					<artifactId>capes-comum-lib</artifactId>
+				</exclusion>
+			</exclusions>
+		</dependency>
+		<dependency>
+			<groupId>${project.groupId}</groupId>
+			<artifactId>capes-integracao</artifactId>
+			<version>${project.version}</version>
+			<exclusions>
+				<exclusion>
+					<groupId>${project.groupId}</groupId>
+					<artifactId>capes-comum-lib</artifactId>
+				</exclusion>
+			</exclusions>
+		</dependency>
+		<dependency>
+			<groupId>${project.groupId}</groupId>
+			<artifactId>capes-cadastro-ejb</artifactId>
+			<version>${project.version}</version>
+			<exclusions>
+				<exclusion>
+					<groupId>${project.groupId}</groupId>
+					<artifactId>capes-replicacao-comum-ejb</artifactId>
+				</exclusion>
+				<exclusion>
+					<groupId>${project.groupId}</groupId>
+					<artifactId>capes-entidades</artifactId>
+				</exclusion>
+				<exclusion>
+					<groupId>${project.groupId}</groupId>
+					<artifactId>capes-entidades-legado</artifactId>
+				</exclusion>
+				<exclusion>
+					<groupId>${project.groupId}</groupId>
+					<artifactId>capes-comum-lib</artifactId>
+				</exclusion>
+			</exclusions>
+		</dependency>
+		<!-- CAPES -->
+
+		<!-- Internas -->
+		<dependency>
+			<groupId>br.com.sicoob.framework</groupId>
+			<artifactId>sicoob-java</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>br.com.sicoob.framework</groupId>
+			<artifactId>sicoob-was9</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>br.com.sicoob.framework.relatorio</groupId>
+			<artifactId>relatorio-api</artifactId>
+		</dependency>
+		<!-- Internas -->
+
+		<!-- Externas -->
+		<dependency>
+			<groupId>junit</groupId>
+			<artifactId>junit</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>net.sf</groupId>
+			<artifactId>jasperreports</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>commons-lang</groupId>
+			<artifactId>commons-lang</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.hibernate</groupId>
+			<artifactId>hibernate-core</artifactId>
+			<exclusions>
+				<exclusion>
+					<groupId>commons-collections</groupId>
+					<artifactId>commons-collections</artifactId>
+				</exclusion>
+			</exclusions>
+		</dependency>
+		<dependency>
+			<groupId>commons-collections</groupId>
+			<artifactId>commons-collections</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>commons-beanutils</groupId>
+			<artifactId>commons-beanutils</artifactId>
+		</dependency>
+		<!-- Externas -->
+
+	</dependencies>
+</project>

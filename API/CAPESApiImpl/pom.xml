@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+
+	<artifactId>capes-api-impl</artifactId>
+	<packaging>ejb</packaging>
+
+	<name>CAPES - API - CAPESApiImpl</name>
+	<description>Implementação da API para disponibilização no ambiente de Backoffice e Processamento</description>
+
+	<parent>
+		<groupId>br.com.sicoob.capes</groupId>
+		<artifactId>capes-modulo-api</artifactId>
+		<version>2.0.8.1</version>
+		<relativePath>..</relativePath>
+	</parent>
+
+	<scm>
+		<connection>scm:svn:http://svn.sicoob.com.br/fontesbancoob/SISBR/Aplicativos/JAVA/trunk/CAPES/tags/capes-2.0.8.1/API/CAPESApiImpl</connection>
+		<developerConnection>scm:svn:http://svn.sicoob.com.br/fontesbancoob/SISBR/Aplicativos/JAVA/trunk/CAPES/tags/capes-2.0.8.1/API/CAPESApiImpl</developerConnection>
+		<url>http://svn.sicoob.com.br/fontesbancoob/SISBR/Aplicativos/JAVA/trunk/CAPES/tags/capes-2.0.8.1/API/CAPESApiImpl</url>
+	</scm>
+
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-ejb-plugin</artifactId>
+			</plugin>
+		</plugins>
+	</build>
+
+	<dependencies>
+		<!-- CAPES -->
+		<dependency>
+			<groupId>${project.groupId}</groupId>
+			<artifactId>capes-api</artifactId>
+			<version>${project.version}</version>
+			<exclusions>
+				<exclusion>
+					<groupId>${project.groupId}</groupId>
+					<artifactId>capes-comum-lib</artifactId>
+				</exclusion>
+			</exclusions>
+		</dependency>
+		<dependency>
+			<groupId>${project.groupId}</groupId>
+			<artifactId>capes-entidades</artifactId>
+			<version>${project.version}</version>
+			<exclusions>
+				<exclusion>
+					<groupId>${project.groupId}</groupId>
+					<artifactId>capes-comum-lib</artifactId>
+				</exclusion>
+			</exclusions>
+		</dependency>
+		<dependency>
+			<groupId>${project.groupId}</groupId>
+			<artifactId>capes-cadastro-ejb</artifactId>
+			<version>${project.version}</version>
+			<exclusions>
+				<exclusion>
+					<groupId>${project.groupId}</groupId>
+					<artifactId>capes-comum-lib</artifactId>
+				</exclusion>
+				<exclusion>
+					<groupId>${project.groupId}</groupId>
+					<artifactId>capes-entidades</artifactId>
+				</exclusion>
+				<exclusion>
+					<groupId>${project.groupId}</groupId>
+					<artifactId>capes-entidades-legado</artifactId>
+				</exclusion>
+				<exclusion>
+					<groupId>${project.groupId}</groupId>
+					<artifactId>capes-replicacao-comum-ejb</artifactId>
+				</exclusion>
+			</exclusions>
+		</dependency>
+		<dependency>
+			<groupId>${project.groupId}</groupId>
+			<artifactId>capes-comum-lib</artifactId>
+			<version>${project.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>${project.groupId}</groupId>
+			<artifactId>capes-integracao</artifactId>
+			<version>${project.version}</version>
+		</dependency>
+		<!-- CAPES -->
+
+		<!-- INTERNAS -->
+		<dependency>
+			<groupId>br.com.sicoob.framework</groupId>
+			<artifactId>sicoob-java</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>br.com.sicoob.framework</groupId>
+			<artifactId>sicoob-was9</artifactId>
+		</dependency>
+		<!-- INTERNAS -->
+
+		<!-- EXTERNAS -->
+		<dependency>
+			<groupId>org.jboss</groupId>
+			<artifactId>jbossall-client</artifactId>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>commons-lang</groupId>
+			<artifactId>commons-lang</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>javax</groupId>
+			<artifactId>javaee-api</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>commons-collections</groupId>
+			<artifactId>commons-collections</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.apache</groupId>
+			<artifactId>commons-logging</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>junit</groupId>
+			<artifactId>junit</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.hibernate</groupId>
+			<artifactId>hibernate-core</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.antlr</groupId>
+			<artifactId>antlr</artifactId>
+		</dependency>
+		<!-- EXTERNAS -->
+	</dependencies>
+</project>

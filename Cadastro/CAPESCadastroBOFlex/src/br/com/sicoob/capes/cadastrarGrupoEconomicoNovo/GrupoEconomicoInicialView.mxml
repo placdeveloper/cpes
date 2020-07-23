@@ -1,0 +1,57 @@
+<componentes:Modulo xmlns:mx="http://www.adobe.com/2006/mxml"
+					xmlns:namespace="http://namespace"
+					xmlns:componentes="br.com.bancoob.componentes.*"
+					xmlns:containers="br.com.bancoob.componentes.containers.*"
+					xmlns:cadastrarGrupoEconomicoNovo="br.com.sicoob.capes.cadastrarGrupoEconomicoNovo.*"
+					xmlns:cadastrarGrupoEconomico="br.com.sicoob.capes.cadastrarGrupoEconomico.*"
+					width="800" height="600" layout="absolute" paddingBottom="0" paddingLeft="0"
+					paddingRight="0" paddingTop="0" creationComplete="modulo1_creationCompleteHandler(event)">
+	
+	<mx:Script>
+		<![CDATA[
+			import mx.core.Container;
+			import mx.events.FlexEvent;
+			
+			import br.com.bancoob.sisbr.util.log.SisbrLogger;
+			import br.com.bancoob.util.log.ILog;
+			import br.com.sicoob.capes.cadastrarGrupoEconomico.GrupoEconomicoAntigo;
+			import br.com.sicoob.capes.comum.util.ClassUtil;
+			
+			protected const logger:ILog = SisbrLogger.getLogger("Capes."+ClassUtil.simpleClassName(this));
+			
+			public function metodoAplicarPermissoes(cont:Container):void {
+				aplicarPermissoes(cont);
+			}
+			
+			protected function selecionarTela(destinoTela:String):void {
+				logger.info("Destino Tela de Grupo: "+destinoTela);
+				switch(destinoTela) {
+					case "NOVO": 
+						var telaNova:GrupoEconomicoNovo = new GrupoEconomicoNovo(this);
+						telaNova.permitirAlterarNomeAutomatico = permitirAlterarNomeAutomatico;
+						vsTelas.addChild(telaNova);
+						break;
+					default:
+						var telaAntigo:GrupoEconomicoAntigo = new GrupoEconomicoAntigo;
+						vsTelas.addChild(telaAntigo);
+						break;
+				}
+				vsTelas.selectedIndex = 1;
+			}
+			
+			protected function modulo1_creationCompleteHandler(event:FlexEvent):void {
+				vsTelas.selectedIndex = 0;
+			}
+			
+		]]>
+	</mx:Script>
+	
+	<mx:Boolean id="permitirAlterarNomeAutomatico"/>
+	
+	<containers:VSBancoob id="vsTelas" width="100%" height="100%" horizontalCenter="0"
+						  resizeToContent="true" verticalCenter="0">
+		<mx:Box>
+			<mx:Label text="Carregando..."/>
+		</mx:Box>
+	</containers:VSBancoob>
+</componentes:Modulo>

@@ -1,0 +1,179 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+
+<!DOCTYPE queries [
+<!ELEMENT queries (query*)>
+<!ELEMENT query (use-case+, description,paginacao?,command+, projecao?, ordenacoes?)>
+<!ELEMENT use-case    (#PCDATA) >
+<!ELEMENT description (#PCDATA) >
+<!ELEMENT command     (#PCDATA) >
+<!ELEMENT parametros  (#PCDATA) >
+<!ELEMENT projecao (#PCDATA) >
+<!ELEMENT paginar  (#PCDATA) >
+<!ELEMENT paginacao (#PCDATA) >
+<!ELEMENT colunaCodigo    (#PCDATA) >
+<!ELEMENT colunaDescricao    (#PCDATA) >
+<!ELEMENT numeroOcorrenciasPorPagina    (#PCDATA) >
+<!ELEMENT primeiraCondicao    (#PCDATA) >
+<!ELEMENT ascendente    (#PCDATA) >
+<!ELEMENT ordenacoes (ordenacao+)>
+<!ELEMENT ordenacao (#PCDATA)>
+<!ELEMENT sql  (#PCDATA) >
+<!ATTLIST ordenacao chave CDATA    #REQUIRED >
+<!ATTLIST ordenacao default CDATA    #IMPLIED >
+<!ATTLIST command parametros CDATA    #IMPLIED  >
+<!ATTLIST command paginar CDATA    #IMPLIED  >
+<!ATTLIST use-case name CDATA    #REQUIRED >
+<!ATTLIST query name CDATA    #REQUIRED >
+<!ATTLIST paginacao colunaCodigo CDATA    #REQUIRED>
+<!ATTLIST paginacao colunaDescricao CDATA    #REQUIRED>
+<!ATTLIST paginacao numeroOcorrenciasPorPagina CDATA    #REQUIRED>
+<!ATTLIST paginacao primeiraCondicao CDATA    #REQUIRED>
+<!ATTLIST paginacao ascendente CDATA    #REQUIRED>
+<!ATTLIST paginacao hint CDATA    #REQUIRED>
+<!ATTLIST paginacao hintAuxiliar CDATA   #IMPLIED >
+]>
+
+<queries>
+	<query name="LISTAR_BENEFICIARIOS_INSS_IMPORTACAO">
+		<use-case name="Importação de beneficiários do INSS" />
+		<description>Lista os beneficiarios do INSS para importacao</description>
+		<command>
+				<![CDATA[
+					SELECT DISTINCT
+						BEN.NumContaCorrente, BEN.NB_NumBeneficiario, BEN.NIT_NumTrabalhador, 
+						RIGHT(REPLICATE('0',11) + CAST(BEN.NumCPF AS VARCHAR(11)),11) AS NumCPF, 
+						BEN.NomeBeneficiario, BEN.NumCooperativa, BEN.NumPac,
+						ISNULL(BEN.NomeMaeBeneficiario, 'NOME DA MAE NAO INFORMADO') NomeMaeBeneficiario,
+						ISNULL(BEN.DataNascBeneficiario, '1900-01-01') AS DataNascBeneficiario,
+						BEN.EndBeneficiarioINSS, BEN.Bairro, BEN.CEP,
+						C.IdInstituicao, C.IdUnidadeInst, C.IdLocalidade,C.DescUF,
+						C.DescEnderecoCoop endCooperativa
+					FROM dbo.INS_BENEFICIARIO BEN, dbo.INS_CREDITO CRE, dbo.COOPERATIVA C
+					WHERE BEN.NumContaCorrente		IS NULL
+						AND BEN.CodMeioPagamento	= 1
+						AND BEN.NumCooperativa		= C.NumCooperativa
+						AND BEN.NumPac            	= C.NumPac
+						AND CRE.NB_NumBeneficiario	= BEN.NB_NumBeneficiario
+						AND CRE.NIT_NumTrabalhador	= BEN.NIT_NumTrabalhador
+						AND CRE.DATAFINALVALIDADE	&gt;= <bancoob:valor valor="${dataProduto}" />
+						AND CRE.DATAENVIOCONTA    	IS NULL
+						AND CRE.DATAPAGAMENTO     	IS NULL
+						AND CRE.BOLPAGAMENTOEFETUADO = 0
+						AND CRE.BolCreditoBloqueado  = 0
+						AND CRE.BolExcluido          = 0
+						AND NOT EXISTS (SELECT NULL
+					                  FROM dbo.ins_tmpinconsistentes B
+					                  WHERE B.NB_NumBeneficiario   = BEN.NB_NumBeneficiario
+					                    AND B.DataGravaCooperativa = <bancoob:valor valor="${dataProduto}" />
+					                    AND B.NB_NumBeneficiario   != 0)
+					  	AND NOT EXISTS (SELECT NULL
+					                  FROM dbo.ins_tmpinconsistentes B
+					                  WHERE B.NIT_NumTrabalhador   = BEN.NIT_NumTrabalhador
+					                    AND B.DataGravaCooperativa = <bancoob:valor valor="${dataProduto}" />
+					                    AND B.NB_NumBeneficiario   != 0)
+				]]>
+		</command>
+	</query>
+	
+	<query name="SPU_INCONSISTENCIA_BENEFICIARIO_INSS">
+		<use-case name="Importação de beneficiários do INSS" />
+		<description>SP para inclus? de inconsist?cias</description>
+		<command>
+				<![CDATA[
+					exec SPU_INS_INCINCONSISTENCIAGERACAOCONTA null, 
+						<bancoob:valor valor="${codErro}" />,
+						<bancoob:valor valor="${dataProcessamento}" />,
+						<bancoob:valor valor="${numBeneficiario}" />,
+						<bancoob:valor valor="${numTrabalhador}" />,
+						null, null, null,
+						<bancoob:valor valor="${codLoteOrigem}" />, 0
+				]]>
+		</command>
+	</query>
+
+	<query name="LISTAR_PESSOAS_DATA_SFN_ATUALIZADA">
+		<use-case name="Atualização de Data SFN" />
+		<description>Atualização de Data SFN</description>
+		<command>
+				<![CDATA[
+					select cli.numcliente, cli.dataCadastramentoSFN, co.idInstituicao, co.idUnidadeInst
+					from cliente cli
+					inner join cooperativa co 
+						on co.NumCooperativa = cli.numcooperativa and co.numPac = cli.Numpac
+					where cli.DataAtualClienteDesdeSFN is not null
+					  AND cli.dataCadastramentoSFN is not null
+				]]>
+		</command>
+	</query>
+
+	<query name="ATUALIZAR_DATA_SFN">
+		<use-case name="Atualização de Data SFN" />
+		<description>Atualização de Data SFN</description>
+		<command>
+        <![CDATA[
+          update cliente set DataAtualClienteDesdeSFN = null
+          where DataAtualClienteDesdeSFN is not null
+          and DataCadastramentoSFN is not null
+        ]]>
+		</command>
+	</query>
+
+	<query name="OBTER_PACS_BANCOOB">
+		<use-case name="Exportação arquivos" />
+		<description>Obtém as informações de PAC do BANCOOB</description>
+		<command>
+        <![CDATA[
+        	SELECT IDINSTITUICAO, NUMCOOPERATIVA, IDUNIDADEINST, NUMPAC
+			FROM COOPERATIVA C
+			WHERE C.NumCooperativa = 1; 
+        ]]>
+		</command>
+	</query>
+	
+	<query name="PESQUISAR_GRUPO_ECONOMICO_PESSOA_SEM_COMPARTILHAMENTO">
+		<use-case name="Grupo Economico Automatico" />
+		<description>Pesquisa grupo econômico automático pessoa sem compartilhamento</description>
+		<command>
+        <![CDATA[
+<j:choose>
+	<j:when test="${projecao == 'count'}">
+SELECT count(*) as total
+	</j:when>
+	<j:when test="${projecao == 'count_distinct_grupo'}">
+SELECT count(distinct gap.IDGRUPOECONOMICOCENTRALIZADO) as total 
+	</j:when>
+	<j:when test="${projecao == 'distinct_idPessoaCompartilhamento'}">
+SELECT distinct gap.IDPESSOACOMPARTILHAMENTO 
+	</j:when>
+	<j:otherwise>
+SELECT * 
+	</j:otherwise>
+</j:choose>
+FROM
+	cli.GRUPOECONOMICOAUTOMATICOPESSOA AS gap
+LEFT JOIN
+	cli.TRANSICAOPESSOA AS t
+ON
+	gap.IDPESSOACOMPARTILHAMENTO = t.IDPESSOACOMPARTILHAMENTO
+AND     t.IDINSTITUICAO = <bancoob:valor valor="${idInstituicao}" />
+WHERE
+	t.IDTRANSICAOPESSOA IS NULL
+AND     EXISTS
+	(
+		SELECT
+			NULL
+		FROM
+			cli.GRUPOECONOMICOAUTOMATICOPESSOA AS gap2
+		INNER JOIN
+			cli.TRANSICAOPESSOA AS t2
+		ON
+			gap2.IDPESSOACOMPARTILHAMENTO = t2.IDPESSOACOMPARTILHAMENTO
+		AND     t2.IDINSTITUICAO = <bancoob:valor valor="${idInstituicao}" />
+		WHERE
+			gap.IDGRUPOECONOMICOCENTRALIZADO = gap2.IDGRUPOECONOMICOCENTRALIZADO )
+fetch first 1000 rows only
+        ]]>
+		</command>
+	</query>
+
+</queries>

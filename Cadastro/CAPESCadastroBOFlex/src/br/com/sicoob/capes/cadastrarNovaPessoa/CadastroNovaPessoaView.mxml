@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<validaveis:ModuloValidavel xmlns:mx="http://www.adobe.com/2006/mxml"
+		xmlns:bancoobInput="br.com.bancoob.componentes.input.*"
+		xmlns:bancoob="br.com.bancoob.componentes.*"
+		xmlns:paineis="br.com.sicoob.capes.cadastrarNovaPessoa.paineis.*"
+		xmlns:validaveis="br.com.bancoob.componentes.containers.validaveis.*"
+		width="586" height="244" layout="absolute" styleName="ModuloSemEstilo">
+		
+	<paineis:PainelValidacaoCpfCnpj id="painelValidacao" width="100%" x="0" y="0" />
+
+	<bancoob:Rotulo x="27" y="95" id="lblNomePessoa"/>
+	<bancoobInput:Texto x="145" y="93"  width="365" tabIndex="4" validarObrigatorio="true" somenteMaiusculas="true" maxChars="50"  id="txtNomePessoa" />
+	
+	<bancoob:Rotulo x="27" y="123" id="lblNomeCompleto" text=""/>
+	<bancoobInput:Texto x="145" y="121" width="365" tabIndex="5" validarObrigatorio="true" somenteMaiusculas="true" maxChars="250" id="txtNomeCompleto" />
+
+	<bancoob:Rotulo x="27" y="151" id="lblApelidoo"/>
+	<bancoobInput:Texto x="145" y="149" width="365" tabIndex="6" somenteMaiusculas="true" maxChars="30"  id="txtApelido" />
+
+	<bancoob:Botao x="340" y="212" width="70" id="botOK" label="OK"  tabIndex="7" enabled="false"/>
+	<bancoob:Botao x="420" y="212" width="90" id="botCancelar" label="Cancelar"  tabIndex="8"/>
+		
+</validaveis:ModuloValidavel>

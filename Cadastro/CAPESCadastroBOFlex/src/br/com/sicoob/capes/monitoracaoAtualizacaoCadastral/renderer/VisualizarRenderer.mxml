@@ -1,0 +1,97 @@
+<containers:HBoxBancoob xmlns:mx="http://www.adobe.com/2006/mxml" 
+						implements="mx.controls.listClasses.IDropInListItemRenderer"
+						width="100%" height="100%" horizontalAlign="center" creationComplete="init()" 
+						xmlns:componentes="br.com.bancoob.componentes.*" 
+						verticalScrollPolicy="off" horizontalScrollPolicy="off"
+						xmlns:containers="br.com.bancoob.componentes.containers.*">
+		
+	<mx:Script>
+		<![CDATA[
+			import br.com.bancoob.componentes.Alerta;
+			import br.com.bancoob.componentes.containers.Janela;
+			import br.com.bancoob.componentes.eventos.EventJanela;
+			import br.com.bancoob.sisbr.componentes.pti.ObjetoEvent;
+			import br.com.sicoob.capes.monitoracaoAtualizacaoCadastral.PainelDetalhe;
+			import br.com.sicoob.capes.monitoracaoAtualizacaoCadastral.abas.abaNaoProcessadas;
+			import br.com.sicoob.capes.monitoracaoAtualizacaoCadastral.abas.abaProcessadasComErro;
+			import br.com.sicoob.capes.monitoracaoAtualizacaoCadastral.eventos.ExcluirEvent;
+			import br.com.sicoob.capes.monitoracaoAtualizacaoCadastral.eventos.ReprocessarEvent;
+			import br.com.sicoob.capes.comum.vo.entidades.MensagemReplicacaoVO;
+			
+			import mx.controls.AdvancedDataGrid;
+			import mx.controls.advancedDataGridClasses.AdvancedDataGridListData;
+			import mx.controls.listClasses.BaseListData;
+			import mx.core.Application;
+			import mx.events.FlexEvent;
+			   
+			private var janela:Janela;
+			private var painelDetalhe : PainelDetalhe;
+			
+			[Bindable("dataChange")]
+			private var _listData:BaseListData;
+   	
+			public function init():void{
+				btnVisualizar.addEventListener(MouseEvent.CLICK, exibirDetalhes);
+			}
+			
+			public function get listData():BaseListData {
+				return _listData;
+			}
+			public function set listData(value:BaseListData):void {
+				_listData = value;
+			}
+			
+			private  function exibirDetalhes(evt:MouseEvent):void{
+ 				if (this.janela == null) {
+ 					this.painelDetalhe = new PainelDetalhe();
+					this.painelDetalhe.addEventListener(ExcluirEvent.CLICK, onExclusaoSolicitada);
+					this.janela = new Janela();
+					this.janela.title = "VISUALIZAÇÃO";
+					this.janela.addEventListener(KeyboardEvent.KEY_DOWN, janelaOnKeyDown);
+					this.janela.addEventListener(Janela.FECHAR_JANELA, fecharJanela);
+					this.janela.addChild(this.painelDetalhe);
+				}
+				this.painelDetalhe.conteudo.text = data.conteudoMensagem;
+				this.painelDetalhe.erro.text = data.erro;
+				this.painelDetalhe.entidadeCadastro.text = data.entidadeCadastro;
+				this.painelDetalhe.btCopiarErro.enabled = (data.erro != null);
+				
+				janelaPrincipal.pararTempo();
+				
+				this.janela.abrir(DisplayObject(Application.application),true);
+			}
+				
+			private function onExclusaoSolicitada(event:ExcluirEvent):void {
+				var myListData:AdvancedDataGridListData = AdvancedDataGridListData(this.listData);
+				var adg:AdvancedDataGrid = AdvancedDataGrid(myListData.owner);
+				adg.dispatchEvent(new ExcluirEvent(ExcluirEvent.EXCLUIR, data.idMensagemReplicacao));
+			}
+			
+			private function get janelaPrincipal():MonitoracaoAtualizacaoCadastral {
+				return MonitoracaoAtualizacaoCadastral(this.parentDocument.parentDocument);
+			}
+				
+			private function janelaOnKeyDown(event : KeyboardEvent):void{
+				switch(event.keyCode){
+					case Keyboard.ESCAPE:
+						event.currentTarget.fecharJanela();					
+					break;
+				}
+			}
+
+			protected function fecharJanela(event : EventJanela) : void {
+				this.painelDetalhe.conteudo.text = null;
+				this.painelDetalhe.erro.text = null;
+				this.painelDetalhe.entidadeCadastro.text = null;
+				janelaPrincipal.iniciarTempo();
+			}
+			
+			public override function set data(value:Object):void {
+				super.data = value;
+			}
+		]]>
+	</mx:Script>
+	
+ 	<componentes:Botao id="btnVisualizar" toolTip="Detalhes" styleName="botaoCrudProcurarPeq" 
+ 		paddingBottom="0" paddingLeft="0" paddingRight="0" paddingTop="0" />
+</containers:HBoxBancoob>

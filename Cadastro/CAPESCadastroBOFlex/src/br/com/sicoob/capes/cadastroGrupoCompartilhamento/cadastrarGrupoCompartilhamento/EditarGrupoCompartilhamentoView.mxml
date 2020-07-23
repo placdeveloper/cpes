@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<componentes:Modulo xmlns:mx="http://www.adobe.com/2006/mxml" 
+		   xmlns:componentes="br.com.bancoob.componentes.*"
+		   xmlns:componente="br.com.bancoob.componentes.*"
+		   xmlns:grid="br.com.bancoob.componentes.grid.*"
+		   xmlns:containers="br.com.bancoob.componentes.containers.*"
+		   xmlns:comb="br.com.bancoob.componentes.input.*" 
+		   xmlns:titulo="br.com.bancoob.componentes.titulo.*"
+		   xmlns:toolTipUtil="br.com.bancoob.sisbr.toolTipUtil.*"
+		   xmlns:ns="http://namespace" layout="absolute" width="462" height="166">
+	
+	<titulo:SubtituloView left="10" right="10" top="10" id="labelTitulo" />
+	
+	<componente:Rotulo x="10" y="56" height="18" textAlign="left" text="Grupo de Compartilhamento: " />
+	<comb:Combo x="145" y="56" width="250" id="cmbGrupo" conteudoMaiusculo="true" labelField="descricao" />
+	
+	<componente:Rotulo x="10" y="95" textAlign="right" text="Integração com a Receita Federal: " />
+	<mx:CheckBox id="chkSRF" x="175" y="93" />
+	
+	<titulo:LinhaView x="10" bottom="33" width="442"/>
+	
+	<containers:HBoxBancoob left="10" right="10" bottom="5" horizontalAlign="right">
+		<componente:Botao label="ALTERAR" id="btnAlterar"/>
+		<componente:Botao label="FECHAR" id="btnFechar"/>
+	</containers:HBoxBancoob>
+	<toolTipUtil:ToolTipUtil id="toolTipUtil"/>
+	
+</componentes:Modulo>

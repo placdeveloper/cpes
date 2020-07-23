@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<containers:HBoxBancoob xmlns:mx="http://www.adobe.com/2006/mxml"
+						xmlns:componentes="br.com.bancoob.componentes.*"
+						xmlns:containers="br.com.bancoob.componentes.containers.*"
+						width="100%" height="100%" creationComplete="init()"
+						horizontalAlign="center" horizontalScrollPolicy="off"
+						implements="mx.controls.listClasses.IDropInListItemRenderer"
+						verticalScrollPolicy="off">
+	
+	<mx:Script>
+		<![CDATA[
+			import br.com.bancoob.componentes.containers.Janela;
+			import br.com.sicoob.capes.corporativo.componentes.plataformaatendimento.ProcuraClientePlataformaCAPES;
+			import br.com.sicoob.capes.utils.autorizacao.DetalhamentoGedGft;
+			
+			import mx.controls.listClasses.BaseListData;
+			import mx.core.Application;
+			
+			[Bindable("dataChange")]
+			private var _listData:BaseListData;
+			
+			[Bindable]
+			private var exibir : Boolean;
+			
+			private static const TITULO_JANELA:String = "DETALHAMENTO GED / GFT";
+			private static const HINT_BOTAO:String = "Detalhes";
+			
+			public function get listData():BaseListData {
+				return _listData;
+			}
+			
+			public function set listData(value:BaseListData):void {
+				_listData = value;
+			}
+			
+			public function init():void{
+				btnVisualizar.addEventListener(MouseEvent.CLICK, onClickAbrir);
+			}
+			
+			private function onClickAbrir(event:MouseEvent):void {
+				var popUpDetalhamentoGedGft:DetalhamentoGedGft = new DetalhamentoGedGft();
+				popUpDetalhamentoGedGft.objeto = data;
+				popUpDetalhamentoGedGft.idTipoPessoaSelecionada = ProcuraClientePlataformaCAPES.getPessoaSelecionada().codTipoPessoa;
+				
+				var janela:Janela = new Janela();
+				janela.title = TITULO_JANELA;
+				janela.addChild(popUpDetalhamentoGedGft);
+				janela.abrir(DisplayObject(Application.application), true);
+			}
+			
+			public override function set data(value:Object):void {
+				super.data = value;
+				
+				if(data != null){
+					if(!ProcuraClientePlataformaCAPES.getPessoaSelecionada().utilizaGedGft){
+						exibir = false;
+					}else{
+						if(!isNaN(data.idInstituicaoAtualizacao) && data.dataHoraInicio == null){
+							exibir = false;
+						}else{
+							exibir = true;
+						}
+					}
+				}
+			}
+		]]>
+	</mx:Script>
+	
+	<componentes:Botao id="btnVisualizar" styleName="botaoCrudProcurarPeq" toolTip="{HINT_BOTAO}" paddingBottom="0" paddingLeft="0" paddingRight="0" paddingTop="0" includeInLayout="{exibir}" visible="{exibir}" />
+	
+</containers:HBoxBancoob>

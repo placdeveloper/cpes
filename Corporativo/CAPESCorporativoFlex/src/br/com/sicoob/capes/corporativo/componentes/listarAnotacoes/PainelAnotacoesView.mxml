@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<bancoob:Modulo xmlns:mx="http://www.adobe.com/2006/mxml" 
+	styleName="ModuloSemEstilo"
+	width="100%" height="100%" layout="absolute" 
+	xmlns:bancoob="br.com.bancoob.componentes.*"
+	borderStyle="none" fontFamily="ArialEmbedded" borderThickness="0" >
+	<mx:ViewStack id="vsTelas" creationPolicy="all" >		
+	</mx:ViewStack>
+</bancoob:Modulo>

@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<CanvasBancoob xmlns="br.com.bancoob.componentes.containers.*" 
+			   xmlns:mx="http://www.adobe.com/2006/mxml" 
+			   xmlns:grid="br.com.bancoob.componentes.grid.*"
+			   xmlns:titulo="br.com.bancoob.componentes.titulo.*" 
+			   xmlns:componentes="br.com.bancoob.componentes.*" 
+			   xmlns:input="br.com.bancoob.componentes.input.*"
+			   creationComplete="configurarHeader()"> 
+	
+	<mx:Script>
+		<![CDATA[
+			import br.com.bancoob.componentes.tabelapaginada.TabelaPaginadaUtils;
+			
+			public static const TIPO_VIGENTE : int = 1;
+			public static const TIPO_NOVO : int = 2;
+			
+			private var _tipo : int;
+			
+			[Embed(source="br/com/bancoob/imagens/document-accept.png")]
+			private var iconeVigente:Class;
+			
+			[Embed(source="br/com/bancoob/imagens/documentEdit_16.png")]
+			private var iconeNovo:Class;
+			
+			private function configurarHeader():void {
+				var caminho:Class = caminhoIcone;
+				if (caminho != null) {
+					this.header.caminhoIcone = caminhoIcone;
+					this.header.texto = titulo;
+					this.header.includeInLayout = this.header.visible = true;
+				} else {
+					this.header.includeInLayout = this.header.visible = false;
+				}
+			}
+			
+			public function set tipo(valor : int) : void {
+				this._tipo = valor;
+				configurarHeader();
+			}
+			public function get tipo() : int {
+				return this._tipo;
+			}
+			
+			protected function get titulo():String {
+				var titulo:String = null;
+				if (TIPO_VIGENTE == tipo) {
+					titulo = "VIGENTE";
+				} else if (TIPO_NOVO == tipo) {
+					titulo = "NOVO";
+				}
+				return titulo;
+			}
+			
+			protected function get caminhoIcone():Class {
+				var caminho:Class = null;
+				if (TIPO_VIGENTE == tipo) {
+					caminho = iconeVigente;
+				} else if (TIPO_NOVO == tipo) {
+					caminho = iconeNovo;
+				}
+				return caminho;
+			}
+		]]>
+	</mx:Script>	 			 		
+	
+	<VBoxBancoob width="100%" height="100%">
+		<titulo:SubtituloView id="header" />
+		<grid:Grid id="grid" left="0" width="100%" height="80%" sortableColumns="false" 
+				   resizableColumns="true" verticalScrollPolicy="auto" horizontalScrollPolicy="off">
+			<grid:columns>
+				<grid:ColunaGrid headerText="Documento" dataField="nome" id="documentos"
+								 labelFunction="{TabelaPaginadaUtils.defaultLabelFunction}" width="300" />
+				<grid:ColunaGrid headerText="Ação" dataField="acao" width="50" sortable="false" 
+								 itemRenderer="br.com.sicoob.capes.utils.autorizacao.renderer.VisualizarDocumentoRenderer" />
+			</grid:columns>
+		</grid:Grid>
+	</VBoxBancoob>
+</CanvasBancoob>

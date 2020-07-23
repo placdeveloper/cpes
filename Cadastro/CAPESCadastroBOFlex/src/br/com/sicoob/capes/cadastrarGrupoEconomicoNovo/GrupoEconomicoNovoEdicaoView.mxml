@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FormularioCadastroView xmlns="br.com.bancoob.componentes.cadastro.*"
+						xmlns:mx="http://www.adobe.com/2006/mxml"
+						xmlns:servico="br.com.bancoob.util.servico.*"
+						xmlns:validaveis="br.com.bancoob.componentes.containers.validaveis.*"
+						xmlns:titulo="br.com.bancoob.componentes.titulo.*"
+						xmlns:componentes="br.com.bancoob.componentes.*"
+						xmlns:input="br.com.bancoob.componentes.input.*"
+						xmlns:grid="br.com.bancoob.componentes.grid.*"
+						xmlns:containers="br.com.bancoob.componentes.containers.*"
+						width="800" height="600" layout="vertical" verticalScrollPolicy="auto">
+
+	<servicoInclusao>
+		<servico:ServicoJava bloquearOperacao="true" mensagemEspera="Salvando dados..."
+							 source="br.com.sicoob.capes.cadastro.fachada.GrupoEconomicoNovoFachada"/>
+	</servicoInclusao>
+	
+	<servicoEdicao>
+		<servico:ServicoJava bloquearOperacao="true" mensagemEspera="Salvando dados..."
+							 source="br.com.sicoob.capes.cadastro.fachada.GrupoEconomicoNovoFachada"/>
+	</servicoEdicao>
+	<mx:Script>
+		<![CDATA[
+			import mx.controls.dataGridClasses.DataGridColumn;
+			import mx.events.ListEvent;
+			
+			import br.com.bancoob.componentes.tabelapaginada.TabelaPaginadaUtils;
+			import br.com.bancoob.util.FormatUtil;
+			import br.com.bancoob.util.reflexao.ReflectionUtils;
+			import br.com.sicoob.capes.comum.vo.entidades.GrupoEconomicoNovoManualPessoaVO;
+			import br.com.sicoob.capes.comum.vo.entidades.TipoGrupoEconomicoVO;
+			
+			private function tipoGrupoLabelFunction(objeto:Object, coluna:DataGridColumn):String {
+				var valor:TipoGrupoEconomicoVO = ReflectionUtils.recuperarPropriedade(objeto, TabelaPaginadaUtils.recuperarNomePropriedade(coluna)) as TipoGrupoEconomicoVO;
+				return (valor == null || valor.descricao == null) ? "" : valor.descricao;
+			}
+			
+			private function gridPessoasTipoLabelFunction(item:Object, coluna:AdvancedDataGridColumn):String {
+				var valor:TipoGrupoEconomicoVO = item.grupoEconomico.tipo as TipoGrupoEconomicoVO;
+				return (valor == null || valor.descricao == null) ? "" : valor.descricao;
+			}
+			
+			private function gridPessoasNomeLabelFunction(item:Object, column:AdvancedDataGridColumn):String {
+				return item.pessoaCompartilhamento.nomePessoa;
+			}
+			
+			private function gridPessoasCpfCnpjLabelFunction(item:Object, column:AdvancedDataGridColumn):String {
+				return FormatUtil.formataCPFCNPJ(String(item.pessoaCompartilhamento.pessoa.cpfCnpj));
+			}
+			
+			private function gridPessoas_itemClickHandler(event:ListEvent):void {
+				if(modo != MODO_VISUALIZACAO && objeto.tipo.codigo != 1) {
+					btExcluir.enabled = gridPessoas.selectedItem is GrupoEconomicoNovoManualPessoaVO;
+				}
+			}
+			
+		]]>
+	</mx:Script>
+	
+	<mx:ArrayCollection id="listaPessoasTree"/>
+	
+	<validaveis:VBoxValidavel width="100%" height="100%">
+		<titulo:SubtituloView texto="GRUPO ECONÔMICO"/>
+		<validaveis:HBoxValidavel width="100%">
+			<componentes:Rotulo width="50" text="Nome *:" textAlign="left"/>
+			<input:Texto id="txtNome" width="100%" height="22" maxChars="100"
+						 validarObrigatorio="true"/>
+		</validaveis:HBoxValidavel>
+		<titulo:SubtituloView texto="INTEGRANTES"/>
+		
+		<validaveis:HBoxValidavel width="100%" height="100%">
+			<grid:AdvancedDataGridBancoob id="gridPessoas" width="100%" height="100%"
+										  allowMultipleSelection="false" defaultLeafIcon="{null}"
+										  displayItemsExpanded="true" dragEnabled="false"
+										  draggableColumns="false" dragMoveEnabled="false"
+										  folderClosedIcon="{null}" folderOpenIcon="{null}"
+										  itemClick="gridPessoas_itemClickHandler(event)"
+										  sortableColumns="false" sortItemRenderer="{null}"
+										  treeColumn="{colunaNome}">
+				<grid:dataProvider>
+					<mx:HierarchicalData childrenField="integrantesAutomatico"
+										 source="{listaPessoasTree}"/>
+				</grid:dataProvider>
+				<grid:columns>
+					<mx:AdvancedDataGridColumn id="colunaNome" headerText="Nome"
+											   labelFunction="{gridPessoasNomeLabelFunction}"
+											   sortable="false"/>
+					<mx:AdvancedDataGridColumn width="120" headerText="CPF/CNPJ"
+											   labelFunction="{gridPessoasCpfCnpjLabelFunction}"
+											   sortable="false"/>
+					<mx:AdvancedDataGridColumn width="75" headerText="Tipo"
+											   labelFunction="{gridPessoasTipoLabelFunction}"
+											   sortable="false"/>
+				</grid:columns>
+			</grid:AdvancedDataGridBancoob>
+			<containers:VBoxBancoob id="barraBotoesClientes"
+									visible="{modo != MODO_VISUALIZACAO &amp;&amp; objeto.tipo.codigo != 1}"
+									height="100%"
+									includeInLayout="{modo != MODO_VISUALIZACAO &amp;&amp; objeto.tipo.codigo != 1}"
+									verticalAlign="bottom">
+				<componentes:Botao id="btAdicionar" styleName="botaoCrudAdicionarPeq"
+								   toolTip="Incluir"/>
+				<componentes:Botao id="btExcluir" enabled="false" styleName="botaoCrudRemoverPeq"
+								   toolTip="Excluir"/>				
+			</containers:VBoxBancoob>
+		</validaveis:HBoxValidavel>
+	</validaveis:VBoxValidavel>
+	
+	<BarraBotoesFormularioCadastroView id="barraBotoes" width="100%"/>		
+</FormularioCadastroView>

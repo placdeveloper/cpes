@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ejb-jar-bnd xmlns="http://websphere.ibm.com/xml/ns/javaee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://websphere.ibm.com/xml/ns/javaee http://websphere.ibm.com/xml/ns/javaee/ibm-ejb-jar-bnd_1_1.xsd" version="1.1">
+
+	<session name="ADMIntegracaoServicoEJB">
+		<interface class="br.com.sicoob.capes.integracao.negocio.servicos.interfaces.ADMIntegracaoServicoLocal" binding-name="ejblocal:capes/integracao/ADMIntegracaoServico" />
+		<interface class="br.com.sicoob.capes.integracao.negocio.servicos.interfaces.ADMIntegracaoServicoRemote" binding-name="capes/integracao/ADMIntegracaoServicoRemote" />
+	</session>
+	
+	<session name="ITXIntegracaoServicoEJB">
+		<interface class="br.com.sicoob.capes.integracao.negocio.servicos.interfaces.ITXIntegracaoServicoLocal" binding-name="ejblocal:capes/integracao/ITXIntegracaoServico" />
+		<interface class="br.com.sicoob.capes.integracao.negocio.servicos.interfaces.ITXIntegracaoServicoRemote" binding-name="capes/integracao/ITXIntegracaoServicoRemote" />
+	</session>
+	
+	<session name="LOCIntegracaoServicoEJB">
+		<interface class="br.com.sicoob.capes.integracao.negocio.servicos.interfaces.LOCIntegracaoServicoLocal" binding-name="ejblocal:capes/integracao/LOCIntegracaoServico" />
+		<interface class="br.com.sicoob.capes.integracao.negocio.servicos.interfaces.LOCIntegracaoServicoRemote" binding-name="capes/integracao/LOCIntegracaoServicoRemote" />
+	</session>
+	
+	<session name="SCIIntegracaoServicoEJB">
+		<interface class="br.com.sicoob.capes.integracao.negocio.servicos.interfaces.SCIIntegracaoServicoLocal" binding-name="ejblocal:capes/integracao/SCIIntegracaoServico" />
+		<interface class="br.com.sicoob.capes.integracao.negocio.servicos.interfaces.SCIIntegracaoServicoRemote" binding-name="capes/integracao/SCIIntegracaoServicoRemote" />
+	</session>
+
+</ejb-jar-bnd>

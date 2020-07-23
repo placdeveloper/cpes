@@ -1,0 +1,828 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="FormularioConhecaSeuClientePJ" pageWidth="550" pageHeight="842" whenNoDataType="AllSectionsNoDetail" columnWidth="550" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0">
+	<parameter name="DADOS" class="br.com.sicoob.capes.relatorio.negocio.vo.FormularioVisitaVO"/>
+	<group name="Formulario">
+		<groupHeader>
+			<band height="690" splitType="Stretch">
+				<staticText>
+					<reportElement mode="Opaque" x="0" y="0" width="550" height="16" backcolor="#CCCCCC"/>
+					<box>
+						<topPen lineWidth="0.5" lineStyle="Solid"/>
+						<leftPen lineWidth="0.5" lineStyle="Solid"/>
+						<bottomPen lineWidth="0.5" lineStyle="Solid"/>
+						<rightPen lineWidth="0.5" lineStyle="Solid"/>
+					</box>
+					<textElement verticalAlignment="Middle">
+						<font isBold="true"/>
+					</textElement>
+					<text><![CDATA[ Informações - Pessoa Jurídica]]></text>
+				</staticText>
+				<staticText>
+					<reportElement mode="Opaque" x="0" y="16" width="550" height="17" backcolor="#CCCCCC"/>
+					<box>
+						<topPen lineWidth="0.5" lineStyle="Solid"/>
+						<leftPen lineWidth="0.5" lineStyle="Solid"/>
+						<bottomPen lineWidth="0.5" lineStyle="Solid"/>
+						<rightPen lineWidth="0.5" lineStyle="Solid"/>
+					</box>
+					<textElement verticalAlignment="Middle">
+						<font isBold="true"/>
+					</textElement>
+					<text><![CDATA[ 1. Dados De Identificação]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="0" y="33" width="360" height="22"/>
+					<box>
+						<topPen lineWidth="0.5" lineStyle="Solid"/>
+						<leftPen lineWidth="0.5" lineStyle="Solid"/>
+						<bottomPen lineWidth="0.5" lineStyle="Solid"/>
+						<rightPen lineWidth="0.5" lineStyle="Solid"/>
+					</box>
+					<textElement>
+						<font size="8" isBold="true"/>
+					</textElement>
+					<text><![CDATA[ Razão Social]]></text>
+				</staticText>
+				<textField isBlankWhenNull="true">
+					<reportElement x="54" y="35" width="303" height="17"/>
+					<textElement verticalAlignment="Middle"/>
+					<textFieldExpression class="java.lang.String"><![CDATA[$P{DADOS}.getRazaoSocial()]]></textFieldExpression>
+				</textField>
+				<staticText>
+					<reportElement x="0" y="98" width="344" height="22"/>
+					<box>
+						<topPen lineWidth="0.5" lineStyle="Solid"/>
+						<leftPen lineWidth="0.5" lineStyle="Solid"/>
+						<bottomPen lineWidth="0.5" lineStyle="Solid"/>
+						<rightPen lineWidth="0.5" lineStyle="Solid"/>
+					</box>
+					<textElement>
+						<font size="8" isBold="true"/>
+					</textElement>
+					<text><![CDATA[ Risco do Associado:]]></text>
+				</staticText>
+				<textField isBlankWhenNull="true">
+					<reportElement x="100" y="104" width="14" height="13"/>
+					<box leftPadding="0">
+						<topPen lineWidth="0.5"/>
+						<leftPen lineWidth="0.5"/>
+						<bottomPen lineWidth="0.5"/>
+						<rightPen lineWidth="0.5"/>
+					</box>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font size="8"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String"><![CDATA[]]></textFieldExpression>
+				</textField>
+				<staticText>
+					<reportElement x="344" y="76" width="206" height="22"/>
+					<box>
+						<topPen lineWidth="0.5" lineStyle="Solid"/>
+						<leftPen lineWidth="0.5" lineStyle="Solid"/>
+						<bottomPen lineWidth="0.5" lineStyle="Solid"/>
+						<rightPen lineWidth="0.5" lineStyle="Solid"/>
+					</box>
+					<textElement>
+						<font size="8" isBold="true"/>
+					</textElement>
+					<text><![CDATA[ Telefones:]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="253" y="104" width="37" height="13"/>
+					<textElement textAlignment="Center"/>
+					<text><![CDATA[Baixo]]></text>
+				</staticText>
+				<textField isBlankWhenNull="true">
+					<reportElement x="158" y="105" width="14" height="13"/>
+					<box leftPadding="0">
+						<topPen lineWidth="0.5"/>
+						<leftPen lineWidth="0.5"/>
+						<bottomPen lineWidth="0.5"/>
+						<rightPen lineWidth="0.5"/>
+					</box>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font size="8"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String"><![CDATA[]]></textFieldExpression>
+				</textField>
+				<textField isBlankWhenNull="true">
+					<reportElement x="387" y="76" width="162" height="22"/>
+					<textElement>
+						<font size="8"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String"><![CDATA[$P{DADOS}.getTelefone()]]></textFieldExpression>
+				</textField>
+				<textField isBlankWhenNull="true">
+					<reportElement x="231" y="104" width="14" height="13"/>
+					<box leftPadding="0">
+						<topPen lineWidth="0.5"/>
+						<leftPen lineWidth="0.5"/>
+						<bottomPen lineWidth="0.5"/>
+						<rightPen lineWidth="0.5"/>
+					</box>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font size="8"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String"><![CDATA[]]></textFieldExpression>
+				</textField>
+				<staticText>
+					<reportElement x="344" y="98" width="206" height="22"/>
+					<box>
+						<topPen lineWidth="0.5" lineStyle="Solid"/>
+						<leftPen lineWidth="0.5" lineStyle="Solid"/>
+						<bottomPen lineWidth="0.5" lineStyle="Solid"/>
+						<rightPen lineWidth="0.5" lineStyle="Solid"/>
+					</box>
+					<textElement>
+						<font size="8" isBold="true"/>
+					</textElement>
+					<text><![CDATA[ Cooperativa:]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="180" y="104" width="37" height="13"/>
+					<textElement textAlignment="Center"/>
+					<text><![CDATA[Médio]]></text>
+				</staticText>
+				<textField isBlankWhenNull="true">
+					<reportElement x="399" y="101" width="148" height="17"/>
+					<textElement verticalAlignment="Middle"/>
+					<textFieldExpression class="java.lang.Integer"><![CDATA[$P{DADOS}.getIdInstituicao()]]></textFieldExpression>
+				</textField>
+				<staticText>
+					<reportElement x="122" y="104" width="21" height="13"/>
+					<textElement textAlignment="Center"/>
+					<text><![CDATA[Alto]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="360" y="33" width="190" height="22"/>
+					<box>
+						<topPen lineWidth="0.5" lineStyle="Solid"/>
+						<leftPen lineWidth="0.5" lineStyle="Solid"/>
+						<bottomPen lineWidth="0.5" lineStyle="Solid"/>
+						<rightPen lineWidth="0.5" lineStyle="Solid"/>
+					</box>
+					<textElement>
+						<font size="8" isBold="true"/>
+					</textElement>
+					<text><![CDATA[ Conta Corrente:]]></text>
+				</staticText>
+				<staticText>
+					<reportElement mode="Opaque" x="0" y="54" width="550" height="22"/>
+					<box>
+						<topPen lineWidth="0.5" lineStyle="Solid"/>
+						<leftPen lineWidth="0.5" lineStyle="Solid"/>
+						<bottomPen lineWidth="0.5" lineStyle="Solid"/>
+						<rightPen lineWidth="0.5" lineStyle="Solid"/>
+					</box>
+					<textElement>
+						<font size="8" isBold="true"/>
+					</textElement>
+					<text><![CDATA[ Endereço]]></text>
+				</staticText>
+				<textField isBlankWhenNull="true">
+					<reportElement x="54" y="56" width="339" height="17"/>
+					<textElement verticalAlignment="Middle"/>
+					<textFieldExpression class="java.lang.String"><![CDATA[$P{DADOS}.getEndereco()]]></textFieldExpression>
+				</textField>
+				<staticText>
+					<reportElement x="0" y="76" width="344" height="22"/>
+					<box>
+						<topPen lineWidth="0.5" lineStyle="Solid"/>
+						<leftPen lineWidth="0.5" lineStyle="Solid"/>
+						<bottomPen lineWidth="0.5" lineStyle="Solid"/>
+						<rightPen lineWidth="0.5" lineStyle="Solid"/>
+					</box>
+					<textElement>
+						<font size="8" isBold="true"/>
+					</textElement>
+					<text><![CDATA[ Tipo de Atividade:]]></text>
+				</staticText>
+				<textField isBlankWhenNull="true">
+					<reportElement x="81" y="78" width="253" height="17"/>
+					<textElement verticalAlignment="Middle"/>
+					<textFieldExpression class="java.lang.String"><![CDATA[$P{DADOS}.getDescricaoAtividade()]]></textFieldExpression>
+				</textField>
+				<staticText>
+					<reportElement key="2. Motivo da Visita" mode="Opaque" x="0" y="120" width="550" height="15" backcolor="#CCCCCC"/>
+					<box leftPadding="4">
+						<topPen lineWidth="0.5"/>
+						<leftPen lineWidth="0.5"/>
+						<bottomPen lineWidth="0.5"/>
+						<rightPen lineWidth="0.5"/>
+					</box>
+					<textElement>
+						<font isBold="true"/>
+					</textElement>
+					<text><![CDATA[2. Motivo da Visita:]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="25" y="140" width="525" height="28"/>
+					<textElement/>
+					<text><![CDATA[As informações cadastrais, mesmo quando atualizadas, não são confiáveis/consistentes frente à atividade econômica, faturamento e/ou perfil do associado/cliente na utilização de produtos e serviços e movimentação financeira.]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="25" y="178" width="525" height="15"/>
+					<textElement/>
+					<text><![CDATA[O associado/cliente se nega ou houve resistência em prestar informações.]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="25" y="207" width="525" height="13"/>
+					<textElement/>
+					<text><![CDATA[Apresenta exposição negativa na mídia e/ou suspeita de envolvimento com crimes.]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="25" y="234" width="525" height="29"/>
+					<textElement/>
+					<text><![CDATA[Abertura, movimentação de contas ou realização de operações por detentor de procuração, ou qualquer outro tipo de mandato.]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="25" y="274" width="525" height="54"/>
+					<textElement/>
+					<text><![CDATA[Outro fator suspeito, que a cooperativa/Bancoob considera passível de realizar a visita.
+Citar:
+]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="37" y="529" width="80" height="14"/>
+					<textElement/>
+					<text><![CDATA[Não (justificar)]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="35" y="505" width="423" height="15"/>
+					<textElement/>
+					<text><![CDATA[Sim (por que os dados cadastrais estavam incompatíveis?)]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="34" y="431" width="519" height="15"/>
+					<textElement/>
+					<text><![CDATA[Sim (relacionar e justificar a falta da informação no cadastro):]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="34" y="578" width="423" height="15"/>
+					<textElement/>
+					<text><![CDATA[Sim (se sim, quais foram os documentos apresentados?)]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="415" y="393" width="30" height="14"/>
+					<textElement/>
+					<text><![CDATA[Não]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="342" y="393" width="34" height="14"/>
+					<textElement/>
+					<text><![CDATA[Sim]]></text>
+				</staticText>
+				<textField isBlankWhenNull="true">
+					<reportElement x="323" y="392" width="15" height="15"/>
+					<box leftPadding="0">
+						<topPen lineWidth="0.5"/>
+						<leftPen lineWidth="0.5"/>
+						<bottomPen lineWidth="0.5"/>
+						<rightPen lineWidth="0.5"/>
+					</box>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font size="8"/>
+					</textElement>
+				</textField>
+				<staticText>
+					<reportElement x="34" y="455" width="30" height="14"/>
+					<textElement/>
+					<text><![CDATA[Não]]></text>
+				</staticText>
+				<textField isBlankWhenNull="true">
+					<reportElement x="395" y="392" width="15" height="15"/>
+					<box leftPadding="0">
+						<topPen lineWidth="0.5"/>
+						<leftPen lineWidth="0.5"/>
+						<bottomPen lineWidth="0.5"/>
+						<rightPen lineWidth="0.5"/>
+					</box>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font size="8"/>
+					</textElement>
+				</textField>
+				<staticText>
+					<reportElement x="35" y="598" width="30" height="14"/>
+					<textElement/>
+					<text><![CDATA[Não]]></text>
+				</staticText>
+				<textField isBlankWhenNull="true">
+					<reportElement x="2" y="207" width="15" height="15"/>
+					<box leftPadding="0">
+						<topPen lineWidth="0.5"/>
+						<leftPen lineWidth="0.5"/>
+						<bottomPen lineWidth="0.5"/>
+						<rightPen lineWidth="0.5"/>
+					</box>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font size="8"/>
+					</textElement>
+				</textField>
+				<textField isBlankWhenNull="true">
+					<reportElement x="2" y="179" width="15" height="15"/>
+					<box leftPadding="0">
+						<topPen lineWidth="0.5"/>
+						<leftPen lineWidth="0.5"/>
+						<bottomPen lineWidth="0.5"/>
+						<rightPen lineWidth="0.5"/>
+					</box>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font size="8"/>
+					</textElement>
+				</textField>
+				<textField isBlankWhenNull="true">
+					<reportElement x="2" y="241" width="15" height="15"/>
+					<box leftPadding="0">
+						<topPen lineWidth="0.5"/>
+						<leftPen lineWidth="0.5"/>
+						<bottomPen lineWidth="0.5"/>
+						<rightPen lineWidth="0.5"/>
+					</box>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font size="8"/>
+					</textElement>
+				</textField>
+				<textField isBlankWhenNull="true">
+					<reportElement x="2" y="274" width="15" height="15"/>
+					<box leftPadding="0">
+						<topPen lineWidth="0.5"/>
+						<leftPen lineWidth="0.5"/>
+						<bottomPen lineWidth="0.5"/>
+						<rightPen lineWidth="0.5"/>
+					</box>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font size="8"/>
+					</textElement>
+				</textField>
+				<textField isBlankWhenNull="true">
+					<reportElement x="2" y="145" width="15" height="15"/>
+					<box leftPadding="0">
+						<topPen lineWidth="0.5"/>
+						<leftPen lineWidth="0.5"/>
+						<bottomPen lineWidth="0.5"/>
+						<rightPen lineWidth="0.5"/>
+					</box>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font size="8"/>
+					</textElement>
+				</textField>
+				<textField isBlankWhenNull="true">
+					<reportElement x="15" y="578" width="15" height="15"/>
+					<box leftPadding="0">
+						<topPen lineWidth="0.5"/>
+						<leftPen lineWidth="0.5"/>
+						<bottomPen lineWidth="0.5"/>
+						<rightPen lineWidth="0.5"/>
+					</box>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font size="8"/>
+					</textElement>
+				</textField>
+				<staticText>
+					<reportElement x="3" y="412" width="547" height="71"/>
+					<textElement/>
+					<text><![CDATA[3.3 Há patrimônio percebido não declarado?]]></text>
+				</staticText>
+				<staticText>
+					<reportElement mode="Opaque" x="0" y="338" width="550" height="15" backcolor="#CCCCCC"/>
+					<box leftPadding="4">
+						<topPen lineWidth="0.5"/>
+						<leftPen lineWidth="0.5"/>
+						<bottomPen lineWidth="0.5"/>
+						<rightPen lineWidth="0.5"/>
+					</box>
+					<textElement>
+						<font isBold="true"/>
+					</textElement>
+					<text><![CDATA[3. Questionário de Apoio:]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="2" y="353" width="546" height="37"/>
+					<textElement/>
+					<text><![CDATA[3.1 Descreva sucintamente como foi o processo de prospecção do associado/cliente: ]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="3" y="390" width="547" height="21"/>
+					<textElement/>
+					<text><![CDATA[3.2 O endereço confere com o comprovante apresentado no cadastro?]]></text>
+				</staticText>
+				<textField isBlankWhenNull="true">
+					<reportElement x="15" y="505" width="15" height="15"/>
+					<box leftPadding="0">
+						<topPen lineWidth="0.5"/>
+						<leftPen lineWidth="0.5"/>
+						<bottomPen lineWidth="0.5"/>
+						<rightPen lineWidth="0.5"/>
+					</box>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font size="8"/>
+					</textElement>
+				</textField>
+				<textField isBlankWhenNull="true">
+					<reportElement x="15" y="431" width="15" height="15"/>
+					<box leftPadding="0">
+						<topPen lineWidth="0.5"/>
+						<leftPen lineWidth="0.5"/>
+						<bottomPen lineWidth="0.5"/>
+						<rightPen lineWidth="0.5"/>
+					</box>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font size="8"/>
+					</textElement>
+				</textField>
+				<textField isBlankWhenNull="true">
+					<reportElement x="15" y="528" width="15" height="15"/>
+					<box leftPadding="0">
+						<topPen lineWidth="0.5"/>
+						<leftPen lineWidth="0.5"/>
+						<bottomPen lineWidth="0.5"/>
+						<rightPen lineWidth="0.5"/>
+					</box>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font size="8"/>
+					</textElement>
+				</textField>
+				<staticText>
+					<reportElement x="4" y="555" width="546" height="72"/>
+					<textElement/>
+					<text><![CDATA[3.5 Foram apresentados documentos adicionais que comprovem as informações relacionadas ao faturamento?]]></text>
+				</staticText>
+				<textField isBlankWhenNull="true">
+					<reportElement x="15" y="455" width="15" height="15"/>
+					<box leftPadding="0">
+						<topPen lineWidth="0.5"/>
+						<leftPen lineWidth="0.5"/>
+						<bottomPen lineWidth="0.5"/>
+						<rightPen lineWidth="0.5"/>
+					</box>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font size="8"/>
+					</textElement>
+				</textField>
+				<staticText>
+					<reportElement x="3" y="485" width="547" height="68"/>
+					<textElement/>
+					<text><![CDATA[3.4 Identificado: movimentações incompatíveis com a atividade econômica faturamento apresentada(s)?]]></text>
+				</staticText>
+				<textField isBlankWhenNull="true">
+					<reportElement x="15" y="597" width="15" height="15"/>
+					<box leftPadding="0">
+						<topPen lineWidth="0.5"/>
+						<leftPen lineWidth="0.5"/>
+						<bottomPen lineWidth="0.5"/>
+						<rightPen lineWidth="0.5"/>
+					</box>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font size="8"/>
+					</textElement>
+				</textField>
+				<staticText>
+					<reportElement x="4" y="628" width="546" height="49"/>
+					<textElement/>
+					<text><![CDATA[3.6 O associado/cliente se negou ou houve resistência em prestar informações durante a visita?]]></text>
+				</staticText>
+				<frame>
+					<reportElement mode="Transparent" x="0" y="135" width="550" height="203"/>
+					<box>
+						<topPen lineWidth="0.5" lineStyle="Solid"/>
+						<leftPen lineWidth="0.5" lineStyle="Solid"/>
+						<bottomPen lineWidth="0.5" lineStyle="Solid"/>
+						<rightPen lineWidth="0.5" lineStyle="Solid"/>
+					</box>
+				</frame>
+				<frame>
+					<reportElement mode="Transparent" x="0" y="353" width="550" height="324"/>
+					<box>
+						<topPen lineWidth="0.5" lineStyle="Solid"/>
+						<leftPen lineWidth="0.5" lineStyle="Solid"/>
+						<bottomPen lineWidth="0.5" lineStyle="Solid"/>
+						<rightPen lineWidth="0.5" lineStyle="Solid"/>
+					</box>
+				</frame>
+				<staticText>
+					<reportElement x="107" y="653" width="30" height="14"/>
+					<textElement/>
+					<text><![CDATA[Não]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="34" y="653" width="34" height="14"/>
+					<textElement/>
+					<text><![CDATA[Sim]]></text>
+				</staticText>
+				<textField isBlankWhenNull="true">
+					<reportElement x="87" y="652" width="15" height="15"/>
+					<box leftPadding="0">
+						<topPen lineWidth="0.5"/>
+						<leftPen lineWidth="0.5"/>
+						<bottomPen lineWidth="0.5"/>
+						<rightPen lineWidth="0.5"/>
+					</box>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font size="8"/>
+					</textElement>
+				</textField>
+				<textField isBlankWhenNull="true">
+					<reportElement x="15" y="652" width="15" height="15"/>
+					<box leftPadding="0">
+						<topPen lineWidth="0.5"/>
+						<leftPen lineWidth="0.5"/>
+						<bottomPen lineWidth="0.5"/>
+						<rightPen lineWidth="0.5"/>
+					</box>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font size="8"/>
+					</textElement>
+				</textField>
+				<break>
+					<reportElement x="0" y="685" width="547" height="1"/>
+				</break>
+			</band>
+		</groupHeader>
+		<groupFooter>
+			<band height="667" splitType="Stretch">
+				<staticText>
+					<reportElement key="4.Descrição da situação financeira" mode="Opaque" x="0" y="1" width="548" height="15" backcolor="#CCCCCC"/>
+					<box>
+						<topPen lineWidth="0.5" lineStyle="Solid"/>
+						<leftPen lineWidth="0.5" lineStyle="Solid"/>
+						<bottomPen lineWidth="0.5" lineStyle="Solid"/>
+						<rightPen lineWidth="0.5" lineStyle="Solid"/>
+					</box>
+					<textElement>
+						<font isBold="true"/>
+					</textElement>
+					<text><![CDATA[ 4.Descrição da situação financeira:]]></text>
+				</staticText>
+				<staticText>
+					<reportElement key="     " x="4" y="17" width="534" height="171"/>
+					<textElement/>
+					<text><![CDATA[(apresentar comentário a respeito da situação patrimonial e financeira percebida quando da visita e o total de Renda e Patrimônio informada no cadastro, caso seja possível identificar quais são as principais instituições financeiras que o associado/cliente se relaciona).
+Patrimonial:
+
+Financeira:
+
+Principais instituições financeiras que o associado se relaciona:
+]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="0" y="594" width="547" height="0"/>
+					<box>
+						<pen lineStyle="Dotted"/>
+						<topPen lineWidth="0.75" lineStyle="Dotted"/>
+						<leftPen lineStyle="Dotted"/>
+						<bottomPen lineStyle="Dotted"/>
+						<rightPen lineStyle="Dotted"/>
+					</box>
+					<textElement/>
+					<text><![CDATA[Static text]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="398" y="565" width="140" height="17"/>
+					<textElement/>
+					<text><![CDATA[Data: _____/_____/_______]]></text>
+				</staticText>
+				<line>
+					<reportElement x="157" y="629" width="200" height="1"/>
+				</line>
+				<staticText>
+					<reportElement key="Declaracao" mode="Opaque" x="0" y="458" width="548" height="17" backcolor="#CCCCCC"/>
+					<box>
+						<topPen lineWidth="0.5" lineStyle="Solid"/>
+						<leftPen lineWidth="0.5" lineStyle="Solid"/>
+						<bottomPen lineWidth="0.5" lineStyle="Solid"/>
+						<rightPen lineWidth="0.5" lineStyle="Solid"/>
+					</box>
+					<textElement textAlignment="Center">
+						<font isBold="true"/>
+					</textElement>
+					<text><![CDATA[Declaração do responsável pela visita]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="1" y="475" width="546" height="119"/>
+					<textElement/>
+					<text><![CDATA[Declaro ter visitado a Pessoa Jurídica (PJ) em referência, e que as informações contidas neste documento foram identificadas durante a visita e as análises realizadas, comparadas e analisadas em relação às informações contidas no cadastro na cooperativa/Banco.
+Declaro, ainda, que a visita foi realizada de acordo com os procedimentos relacionados no MIG - PLD/FT sobre “Conheça seu Associado” do Sicoob.
+Certifico, para todos os fins, que as informações prestadas acima são verdadeiras.
+]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="1" y="633" width="546" height="32"/>
+					<textElement/>
+					<text><![CDATA[Carimbo e assinatura do responsável pelas conclusões quanto à capacidade econômica, financeira e patrimonial do associado/cliente.]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="0" y="427" width="547" height="31"/>
+					<textElement/>
+					<text><![CDATA[Comunicar ao Coaf?]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="233" y="430" width="30" height="14"/>
+					<textElement/>
+					<text><![CDATA[Não]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="24" y="401" width="34" height="14"/>
+					<textElement/>
+					<text><![CDATA[Sim]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="1" y="279" width="547" height="55"/>
+					<textElement/>
+					<text><![CDATA[]]></text>
+				</staticText>
+				<textField isBlankWhenNull="true">
+					<reportElement x="213" y="356" width="15" height="15"/>
+					<box leftPadding="0">
+						<topPen lineWidth="0.5"/>
+						<leftPen lineWidth="0.5"/>
+						<bottomPen lineWidth="0.5"/>
+						<rightPen lineWidth="0.5"/>
+					</box>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font size="8"/>
+					</textElement>
+				</textField>
+				<staticText>
+					<reportElement x="97" y="401" width="30" height="14"/>
+					<textElement/>
+					<text><![CDATA[Não]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="233" y="357" width="30" height="14"/>
+					<textElement/>
+					<text><![CDATA[Não]]></text>
+				</staticText>
+				<staticText>
+					<reportElement key="6. Resumo" mode="Opaque" x="0" y="259" width="548" height="20" backcolor="#CCCCCC"/>
+					<box>
+						<topPen lineWidth="0.5" lineStyle="Solid"/>
+						<leftPen lineWidth="0.5" lineStyle="Solid"/>
+						<bottomPen lineWidth="0.5" lineStyle="Solid"/>
+						<rightPen lineWidth="0.5" lineStyle="Solid"/>
+					</box>
+					<textElement>
+						<font isBold="true"/>
+					</textElement>
+					<text><![CDATA[ 6.Resumo das informações obtidas na visita e consideradas importantes para o processo, não incluídas nos demais campos ou complemento do item “3. Questionário de apoio”.]]></text>
+				</staticText>
+				<textField isBlankWhenNull="true">
+					<reportElement x="213" y="429" width="15" height="15"/>
+					<box leftPadding="0">
+						<topPen lineWidth="0.5"/>
+						<leftPen lineWidth="0.5"/>
+						<bottomPen lineWidth="0.5"/>
+						<rightPen lineWidth="0.5"/>
+					</box>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font size="8"/>
+					</textElement>
+				</textField>
+				<staticText>
+					<reportElement mode="Opaque" x="0" y="331" width="548" height="19" backcolor="#CCCCCC"/>
+					<box>
+						<topPen lineWidth="0.5" lineStyle="Solid"/>
+						<leftPen lineWidth="0.5" lineStyle="Solid"/>
+						<bottomPen lineWidth="0.5" lineStyle="Solid"/>
+						<rightPen lineWidth="0.5" lineStyle="Solid"/>
+					</box>
+					<textElement>
+						<font isBold="true"/>
+					</textElement>
+					<text><![CDATA[ 7.Resultado da visita, ações a serem tomadas:]]></text>
+				</staticText>
+				<textField isBlankWhenNull="true">
+					<reportElement x="77" y="400" width="15" height="15"/>
+					<box leftPadding="0">
+						<topPen lineWidth="0.5"/>
+						<leftPen lineWidth="0.5"/>
+						<bottomPen lineWidth="0.5"/>
+						<rightPen lineWidth="0.5"/>
+					</box>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font size="8"/>
+					</textElement>
+				</textField>
+				<staticText>
+					<reportElement x="126" y="430" width="68" height="14"/>
+					<textElement/>
+					<text><![CDATA[Sim (por que?)]]></text>
+				</staticText>
+				<textField isBlankWhenNull="true">
+					<reportElement x="107" y="429" width="15" height="15"/>
+					<box leftPadding="0">
+						<topPen lineWidth="0.5"/>
+						<leftPen lineWidth="0.5"/>
+						<bottomPen lineWidth="0.5"/>
+						<rightPen lineWidth="0.5"/>
+					</box>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font size="8"/>
+					</textElement>
+				</textField>
+				<textField isBlankWhenNull="true">
+					<reportElement x="5" y="400" width="15" height="15"/>
+					<box leftPadding="0">
+						<topPen lineWidth="0.5"/>
+						<leftPen lineWidth="0.5"/>
+						<bottomPen lineWidth="0.5"/>
+						<rightPen lineWidth="0.5"/>
+					</box>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font size="8"/>
+					</textElement>
+				</textField>
+				<textField isBlankWhenNull="true">
+					<reportElement x="141" y="356" width="15" height="15"/>
+					<box leftPadding="0">
+						<topPen lineWidth="0.5"/>
+						<leftPen lineWidth="0.5"/>
+						<bottomPen lineWidth="0.5"/>
+						<rightPen lineWidth="0.5"/>
+					</box>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font size="8"/>
+					</textElement>
+				</textField>
+				<staticText>
+					<reportElement x="1" y="383" width="547" height="43"/>
+					<textElement/>
+					<text><![CDATA[Na percepção do responsável pela visita, há justificativa legal para as movimentações do associado?]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="160" y="357" width="34" height="14"/>
+					<textElement/>
+					<text><![CDATA[Sim]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="1" y="353" width="547" height="30"/>
+					<textElement/>
+					<text><![CDATA[Deve-se atualizar o cadastro?]]></text>
+				</staticText>
+				<staticText>
+					<reportElement key="5.Descrição do relacionamento" mode="Opaque" x="0" y="186" width="548" height="16" backcolor="#CCCCCC"/>
+					<box>
+						<topPen lineWidth="0.5" lineStyle="Solid"/>
+						<leftPen lineWidth="0.5" lineStyle="Solid"/>
+						<bottomPen lineWidth="0.5" lineStyle="Solid"/>
+						<rightPen lineWidth="0.5" lineStyle="Solid"/>
+					</box>
+					<textElement>
+						<font isBold="true"/>
+					</textElement>
+					<text><![CDATA[ 5.Descrição do relacionamento com o responsável da conta/procurador/representante (se for o caso):]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="2" y="210" width="546" height="35"/>
+					<textElement/>
+					<text><![CDATA[(apresentar o grau de relacionamento observado do associado/correntista com o responsável da conta)
+]]></text>
+				</staticText>
+				<frame>
+					<reportElement mode="Transparent" x="0" y="16" width="548" height="170"/>
+					<box>
+						<topPen lineWidth="0.5" lineStyle="Solid"/>
+						<leftPen lineWidth="0.5" lineStyle="Solid"/>
+						<bottomPen lineWidth="0.5" lineStyle="Solid"/>
+						<rightPen lineWidth="0.5" lineStyle="Solid"/>
+					</box>
+				</frame>
+				<frame>
+					<reportElement mode="Transparent" x="0" y="202" width="548" height="57"/>
+					<box>
+						<topPen lineWidth="0.5" lineStyle="Solid"/>
+						<leftPen lineWidth="0.5" lineStyle="Solid"/>
+						<bottomPen lineWidth="0.5" lineStyle="Solid"/>
+						<rightPen lineWidth="0.5" lineStyle="Solid"/>
+					</box>
+				</frame>
+				<frame>
+					<reportElement mode="Transparent" x="0" y="279" width="548" height="52"/>
+					<box>
+						<topPen lineWidth="0.5" lineStyle="Solid"/>
+						<leftPen lineWidth="0.5" lineStyle="Solid"/>
+						<bottomPen lineWidth="0.5" lineStyle="Solid"/>
+						<rightPen lineWidth="0.5" lineStyle="Solid"/>
+					</box>
+				</frame>
+				<frame>
+					<reportElement mode="Transparent" x="0" y="350" width="548" height="108"/>
+					<box>
+						<topPen lineWidth="0.5" lineStyle="Solid"/>
+						<leftPen lineWidth="0.5" lineStyle="Solid"/>
+						<bottomPen lineWidth="0.5" lineStyle="Solid"/>
+						<rightPen lineWidth="0.5" lineStyle="Solid"/>
+					</box>
+				</frame>
+				<frame>
+					<reportElement mode="Transparent" x="0" y="475" width="548" height="191"/>
+					<box>
+						<topPen lineWidth="0.5" lineStyle="Solid"/>
+						<leftPen lineWidth="0.5" lineStyle="Solid"/>
+						<bottomPen lineWidth="0.5" lineStyle="Solid"/>
+						<rightPen lineWidth="0.5" lineStyle="Solid"/>
+					</box>
+				</frame>
+			</band>
+		</groupFooter>
+	</group>
+</jasperReport>

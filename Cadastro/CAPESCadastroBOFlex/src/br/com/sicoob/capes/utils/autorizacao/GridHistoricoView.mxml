@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<CanvasBancoob xmlns="br.com.bancoob.componentes.containers.*" 
+	xmlns:mx="http://www.adobe.com/2006/mxml" 
+	xmlns:grid="br.com.bancoob.componentes.grid.*">
+	
+	<mx:Script>
+		<![CDATA[import br.com.bancoob.componentes.tabelapaginada.TabelaPaginadaUtils;]]>
+	</mx:Script>	 			 		
+	<grid:Grid width="100%" height="100%" id="grid" selectable="false"
+		sortableColumns="false" resizableColumns="true" variableRowHeight="true"
+		verticalScrollPolicy="auto" horizontalScrollPolicy="off">
+		<grid:columns>
+			<grid:ColunaGrid headerText="Data" dataField="data" 
+				labelFunction="{TabelaPaginadaUtils.defaultDatetimeLabelFunction}" width="85" />
+			<grid:ColunaGrid headerText="Usuário" dataField="idUsuario" 
+				labelFunction="{TabelaPaginadaUtils.defaultLabelFunction}" width="120" />
+			<grid:ColunaGrid headerText="Procedimento" dataField="nomeProcedimento" 
+				labelFunction="{TabelaPaginadaUtils.defaultLabelFunction}" width="135" />
+			<grid:ColunaGrid headerText="Justificativa" dataField="justificativa" wordWrap="true"
+				labelFunction="{TabelaPaginadaUtils.defaultLabelFunction}" width="240" />
+		</grid:columns>
+	</grid:Grid>
+	
+</CanvasBancoob>

@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ListaCadastroView xmlns="br.com.bancoob.componentes.cadastro.*"
+		xmlns:mx="http://www.adobe.com/2006/mxml"
+		xmlns:tipoAnotacao="br.com.sicoob.capes.cadastrarTipoAnotacao.*"
+		xmlns:servico="br.com.bancoob.util.servico.*"
+		width="800" height="570"
+		backgroundAlpha="0.0"
+		borderStyle="solid"	borderThickness="0" 
+		fecharFormularioAoIncluir="true" 
+		deveLimparPesquisa="false">
+	
+	<painelLista>
+		<tipoAnotacao:PainelListaTipoAnotacaoView width="100%" height="100%" />
+	</painelLista>
+	
+	<servicoExclusao>
+		<servico:ServicoJava 
+			source="br.com.sicoob.capes.cadastro.fachada.TipoAnotacaoFachada"
+			bloquearOperacao="true" 
+			mensagemEspera="Inativando..." />
+	</servicoExclusao>	
+
+	<servicoRecuperacaoInformacoes>
+		<servico:ServicoJava
+			source="br.com.sicoob.capes.cadastro.fachada.TipoAnotacaoFachada"
+			bloquearOperacao="true" 
+			mensagemEspera="Recuperando dados..." />
+	</servicoRecuperacaoInformacoes>
+	
+	<formularioCadastro>
+		<tipoAnotacao:TipoAnotacaoEdicao width="100%" height="100%"/>
+	</formularioCadastro>
+	
+</ListaCadastroView>

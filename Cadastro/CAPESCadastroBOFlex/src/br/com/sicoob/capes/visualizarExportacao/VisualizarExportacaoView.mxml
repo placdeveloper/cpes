@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<validaveis:ModuloValidavel xmlns:namespace="http://namespace"
+					xmlns:mx="http://www.adobe.com/2006/mxml"
+					xmlns:componentes="br.com.bancoob.componentes.*"
+					xmlns:validaveis="br.com.bancoob.componentes.containers.validaveis.*"
+					xmlns:input="br.com.bancoob.componentes.input.*"
+					xmlns:containersCAPES="br.com.sicoob.capes.comum.componentes.containers.*"
+					width="600" height="150" layout="absolute">
+	
+	<containersCAPES:Fieldset id="fieldsetDados" label="Dados da pesquisa" left="10" right="10" height="100" y="10">
+	
+		<componentes:Rotulo x="10" y="17" text="Exportação: " />
+		<input:Combo id="comboExportacao" x="120" y="15" width="420" labelField="descricao" conteudoMaiusculo="true" inserirItemOpcional="true" labelItemOpcional="---" validarObrigatorio="true" tabIndex="1" />
+		
+		<componentes:Rotulo x="10" y="47" text="Data de movimento: " />
+		<input:Data id="campoDataMovimento" x="120" y="45" validarObrigatorio="true" tabIndex="2" />
+		
+	</containersCAPES:Fieldset>
+	
+	<mx:HBox id="barraBotoes" left="10" right="10" bottom="5" horizontalAlign="right" horizontalGap="5">
+		<componentes:Botao width="105" label="OK" id="botaoGerar" nomeEvento="ok" height="22" />
+		<componentes:Botao width="105" label="Limpar" id="botaoLimpar" nomeEvento="limpar" height="22" />
+		<componentes:Botao width="105" label="Fechar" id="botaoFechar" nomeEvento="fechar" height="22" />
+	</mx:HBox>
+	
+</validaveis:ModuloValidavel>

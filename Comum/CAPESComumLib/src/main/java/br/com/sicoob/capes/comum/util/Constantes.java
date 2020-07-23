@@ -1,0 +1,288 @@
+/*
+ * SICOOB
+ * 
+ * Constantes.java(br.com.sicoob.capes.comum.util.Constantes)
+ */
+package br.com.sicoob.capes.comum.util;
+
+/**
+ * Interface contendo as constantes usadas no sistema
+ * 
+ * 09/11/2010
+ * 
+ * @author rodrigo.chaves
+ * 
+ */
+public interface Constantes {
+
+	/**
+	 * A Interface Persistencia.
+	 */
+	interface Persistencia {
+		
+		/** O atributo DATASOURCE_CAPES. */
+		String DATASOURCE_CAPES = "jdbc/BancoobCadastroUnicoClientesDS";
+		
+		/** O atributo FILTRO_COMPARTILHAMENTO_CADASTRO. */
+		String FILTRO_COMPARTILHAMENTO_CADASTRO = "compartilhamentoCadastro";
+	}
+
+	/**
+	 * A Interface Negocio.
+	 */
+	interface Negocio {
+
+		/** Código do controle do GFT que identifica a ação de aprovação */
+		Integer GFT_CODIGO_CONTROLE_APROVAR_ALTERACOES = 102;
+
+		/** Código do controle do GFT que identifica a ação de rejeição */
+		Integer GFT_CODIGO_CONTROLE_REJEITAR_ALTERACOES = 103;
+
+		/** Código do controle do GFT que identifica a ação de devolução */
+		Integer GFT_CODIGO_CONTROLE_DEVOLVER_ALTERACOES = 107;
+
+		/** Código do controle do GFT que identifica a ação de encaminhar para a validação */
+		Integer GFT_CODIGO_CONTROLE_CORRIGIR_ALTERACOES = 108;
+		
+		/** A constante CTA_SIGLA_SISTEMA. */
+		String CTA_SIGLA_SISTEMA = "PLATAFORMAATENDIMENTO";
+		
+		/** A constante CTA_ID_MODULO. */
+		Integer CTA_ID_MODULO = 1;
+		
+		/** A constante CTA_ID_SISTEMA. */
+		Integer CTA_ID_SISTEMA = 2;
+		
+		/** A constante CTA_NOME_MODULO. */
+		String CTA_NOME_MODULO = "PLATAFORMA DE ATENDIMENTO";
+		
+		
+		/** A constante CTA_TIPO_SISTEMA. */		
+		String CTA_TIPO_SISTEMA = "SISBR 2.0";
+		
+
+		/** A constante CTA_SIGLA_SISTEMA_CLIENTE. */
+		String CTA_SIGLA_SISTEMA_CLIENTE = "CLIENTE";
+		/** A constante CTA_NOME_MODULO_CLIENTE. */
+		String CTA_NOME_MODULO_CLIENTE = "CLIENTES";
+		
+
+			
+		/** Constantes para integração com o GED. */
+
+		// Siglas de assunto
+		String GED_SIGLA_ASSUNTO_PF = "CADPFCOM";
+
+		/** A constante GED_SIGLA_ASSUNTO_PJ. */
+		String GED_SIGLA_ASSUNTO_PJ = "CADPJCOM";
+
+		// Siglas das classes de documento.
+		/** A constante GED_SIGLA_CLASSE_DOCUMENTO_BEM. */
+		String GED_SIGLA_CLASSE_DOCUMENTO_BEM = "BEM";
+
+		/** A constante GED_SIGLA_CLASSE_DOCUMENTO_CERTIDAO. */
+		String GED_SIGLA_CLASSE_DOCUMENTO_CERTIDAO = "CERTIDAO";
+
+		/** A constante GED_SIGLA_CLASSE_DOCUMENTO_ENDERECO. */
+		String GED_SIGLA_CLASSE_DOCUMENTO_ENDERECO = "ENDERECO";
+
+		/** A constante GED_SIGLA_CLASSE_DOCUMENTO_PESSOA_FISICA. */
+		String GED_SIGLA_CLASSE_DOCUMENTO_PESSOA_FISICA = "PF";
+
+		/** A constante GED_SIGLA_CLASSE_DOCUMENTO_PESSOA_JURIDICA. */
+		String GED_SIGLA_CLASSE_DOCUMENTO_PESSOA_JURIDICA = "PJ";
+
+		/** A constante GED_SIGLA_CLASSE_DOCUMENTO_PRODUTOR. */
+		String GED_SIGLA_CLASSE_DOCUMENTO_PRODUTOR = "PRODUTOR";
+
+		/** A constante GED_SIGLA_CLASSE_DOCUMENTO_RELACIONAMENTO. */
+		String GED_SIGLA_CLASSE_DOCUMENTO_RELACIONAMENTO = "RELAC";
+
+		/** A constante GED_SIGLA_CLASSE_DOCUMENTO_RENDA. */
+		String GED_SIGLA_CLASSE_DOCUMENTO_RENDA = "RENDA";
+
+		// Siglas de Tipo de documento.
+		/** A constante GED_SIGLA_TIPO_DOCUMENTO_CERTIDAO. */
+		String GED_SIGLA_TIPO_DOCUMENTO_CERTIDAO = "CERTIDÃO";
+
+		/** A constante GED_SIGLA_TIPO_DOCUMENTO_IDENTIFICACAO. */
+		String GED_SIGLA_TIPO_DOCUMENTO_IDENTIFICACAO = "9";
+
+		/** A constante GED_SIGLA_TIPO_DOCUMENTO_DECLARACAO_EMANCIPACAO. */
+		String GED_SIGLA_TIPO_DOCUMENTO_DECLARACAO_EMANCIPACAO = "DECLAÇÃO";
+
+		/** A constante GED_SIGLA_TIPO_DOCUMENTO_DECLARACAO_PROPOSITO_PF. */
+		String GED_SIGLA_TIPO_DOCUMENTO_DECLARACAO_PROPOSITO_PF = "DECLA - PF";
+
+		/** A constante GED_SIGLA_TIPO_DOCUMENTO_DECLARACAO_PROPOSITO_PJ. */
+		String GED_SIGLA_TIPO_DOCUMENTO_DECLARACAO_PROPOSITO_PJ = "DECLA - PJ";
+
+		/** A constante GED_SIGLA_TIPO_DOCUMENTO_FICHA_CADASTRAL_PF. */
+		String GED_SIGLA_TIPO_DOCUMENTO_FICHA_CADASTRAL_PF = "FICHACADASTRALPF";
+
+		/** A constante GED_SIGLA_TIPO_DOCUMENTO_FICHA_CADASTRAL_PJ. */
+		String GED_SIGLA_TIPO_DOCUMENTO_FICHA_CADASTRAL_PJ = "FICHACADASTRALPJ";
+
+		/** A constante GED_SIGLA_TIPO_DOCUMENTO_RELACIONAMENTO_PODERES. */
+		String GED_SIGLA_TIPO_DOCUMENTO_RELACIONAMENTO_PODERES = "RELAPODER";
+
+		/** A constante GED_SIGLA_TIPO_DOCUMENTO_COMPROVANTE_ENDERECO. */
+		String GED_SIGLA_TIPO_DOCUMENTO_COMPROVANTE_ENDERECO = "COMEND";
+
+		/** A constante GED_SIGLA_TIPO_DOCUMENTO_COMPROVANTE_PROPRIEDADE. */
+		String GED_SIGLA_TIPO_DOCUMENTO_COMPROVANTE_PROPRIEDADE = "COMBEM";
+
+		/** A constante GED_SIGLA_TIPO_DOCUMENTO_CONTRATO_ARRENDAMENTO. */
+		String GED_SIGLA_TIPO_DOCUMENTO_CONTRATO_ARRENDAMENTO = "CARRENDAME";
+
+		/** A constante GED_SIGLA_TIPO_DOCUMENTO_LAUDO_AVALIACAO. */
+		String GED_SIGLA_TIPO_DOCUMENTO_LAUDO_AVALIACAO = "LAUBENS";
+		
+		/** A constante GED_SIGLA_TIPO_DOCUMENTO_CERTIFICADO_CADASTRO_IMOVEL_RURAL. */
+		String GED_SIGLA_TIPO_DOCUMENTO_CERTIFICADO_CADASTRO_IMOVEL_RURAL = "CERT.CAD.IMOV.RURAL";
+		
+		/** A constante GED_SIGLA_TIPO_DOCUMENTO_PROPRIEDADE_TERRITORIAL_RURAL. */
+		String GED_SIGLA_TIPO_DOCUMENTO_PROPRIEDADE_TERRITORIAL_RURAL = "IMP.PROP.TERR.RURAL";
+		
+		/** A constante GED_SIGLA_TIPO_DOCUMENTO_COMPROVANTE_RENDA_PF. */
+		String GED_SIGLA_TIPO_DOCUMENTO_COMPROVANTE_RENDA_PF = "10";
+
+		/** A constante GED_SIGLA_TIPO_DOCUMENTO_COMPROVANTE_RENDA_PJ. */
+		String GED_SIGLA_TIPO_DOCUMENTO_COMPROVANTE_RENDA_PJ = "COMPRCEIRA";
+
+		/** A constante GED_SIGLA_TIPO_DOCUMENTO_COMPROVACAO_EXERCICIO_ATIVIDADE_RURAL. */
+		String GED_SIGLA_TIPO_DOCUMENTO_COMPROVACAO_EXERCICIO_ATIVIDADE_RURAL = "COEARURAL";
+
+		/** A constante GED_SIGLA_TIPO_DOCUMENTO_DECLARACAO_APTIDAO_PRONAF. */
+		String GED_SIGLA_TIPO_DOCUMENTO_DECLARACAO_APTIDAO_PRONAF = "DECLARONAF";
+
+		/** A constante GED_SIGLA_TIPO_DOCUMENTO_INSCRICAO_ESTADUAL. */
+		String GED_SIGLA_TIPO_DOCUMENTO_INSCRICAO_ESTADUAL = "COMPRADUAL";
+
+		/** A constante GED_SIGLA_TIPO_DOCUMENTO_COMPROVANTE_DECLARACAO_ISENCAO_TRIBUTARIA. */
+		String GED_SIGLA_TIPO_DOCUMENTO_COMPROVANTE_DECLARACAO_ISENCAO_TRIBUTARIA = "COMPRÁRIA";
+
+		/** A constante GED_SIGLA_TIPO_DOCUMENTO_COMPROVANTE_REGIME_TRIBUTARIO. */
+		String GED_SIGLA_TIPO_DOCUMENTO_COMPROVANTE_REGIME_TRIBUTARIO = "COMPRÁRIO";
+		
+		/** A constante GED_SIGLA_TIPO_DOCUMENTO_QUESTIONARIO_RISCO_SOCIO_AMBIENTAL_PF. */
+		String GED_SIGLA_TIPO_DOCUMENTO_QUESTIONARIO_RISCO_SOCIO_AMBIENTAL_PF = "QESTSOCIAMB";
+		
+		/** A constante GED_SIGLA_TIPO_DOCUMENTO_QUESTIONARIO_RISCO_SOCIO_AMBIENTAL_PJ. */
+		String GED_SIGLA_TIPO_DOCUMENTO_QUESTIONARIO_RISCO_SOCIO_AMBIENTAL_PJ = "QUESTSOCIAMB";
+		
+		/** A constante GED_SIGLA_COMPROVANTE_ESTADO_CIVIL. */
+		String GED_SIGLA_COMPROVANTE_ESTADO_CIVIL = "CESTCIVIL";
+		
+		/** A constante GED_SIGLA_COMPROVANTE_OPCAO_SIMPLES_NACIONAL. */
+		String GED_SIGLA_COMPROVANTE_OPCAO_SIMPLES_NACIONAL = "COSIMNACI";
+
+		// Siglas de Chave de Documento.
+		/** A constante GED_SIGLA_CHAVE_DOCUMENTO_PF. */
+		String GED_SIGLA_CHAVE_DOCUMENTO_PF = "1";
+
+		/** A constante GED_SIGLA_CHAVE_DOCUMENTO_PJ. */
+		String GED_SIGLA_CHAVE_DOCUMENTO_PJ = "2";
+
+		/** A constante GED_SIGLA_CHAVE_DOCUMENTO_CEP. */
+		String GED_SIGLA_CHAVE_DOCUMENTO_CEP = "CEP";
+
+		/** A constante GED_SIGLA_CHAVE_DOCUMENTO_GRUPO_COMPARTILHAMENTO. */
+		String GED_SIGLA_CHAVE_DOCUMENTO_GRUPO_COMPARTILHAMENTO = "GRUCOMP";
+
+		/** A constante GED_SIGLA_CHAVE_DOCUMENTO_NUMERO_DOCUMENTO. */
+		String GED_SIGLA_CHAVE_DOCUMENTO_NUMERO_DOCUMENTO = "6";
+
+		/** A constante GED_SIGLA_CHAVE_DOCUMENTO_TIPO_BEM. */
+		String GED_SIGLA_CHAVE_DOCUMENTO_TIPO_BEM = "TIPBEM";
+
+		/** A constante GED_SIGLA_CHAVE_DOCUMENTO_TIPO_CERTIDAO. */
+		String GED_SIGLA_CHAVE_DOCUMENTO_TIPO_CERTIDAO = "TIPOCERT";
+
+		/** A constante GED_SIGLA_CHAVE_DOCUMENTO_TIPO_DOC_IDENTIFICACAO. */
+		String GED_SIGLA_CHAVE_DOCUMENTO_TIPO_DOC_IDENTIFICACAO = "TIPDOCID";
+
+		/** A constante GED_SIGLA_CHAVE_DOCUMENTO_TIPO_ENDERECO. */
+		String GED_SIGLA_CHAVE_DOCUMENTO_TIPO_ENDERECO = "TIPEND";
+
+		/** A constante GED_SIGLA_CHAVE_DOCUMENTO_TIPO_RENDIMENTO. */
+		String GED_SIGLA_CHAVE_DOCUMENTO_TIPO_RENDIMENTO = "TIPRENDIMENTO";
+
+		/** A constante GED_SIGLA_CHAVE_DOCUMENTO_TIPO_VINCULO. */
+		String GED_SIGLA_CHAVE_DOCUMENTO_TIPO_VINCULO = "TIPVINCULO";
+
+		/** A constante GED_SIGLA_CHAVE_DOCUMENTO_CONSTITUICAO. */
+		String GED_SIGLA_CHAVE_DOCUMENTO_CONSTITUICAO = "DCONSTITUI";
+
+		// Siglas de chaves de negocio
+		/** A constante GED_SIGLA_CHAVE_NEGOCIO_CPF. */
+		String GED_SIGLA_CHAVE_NEGOCIO_CPF = "CPF";
+
+		/** A constante GED_SIGLA_CHAVE_NEGOCIO_CNPJ. */
+		String GED_SIGLA_CHAVE_NEGOCIO_CNPJ = "CNPJ";
+
+		/** A constante GED_SIGLA_CHAVE_NEGOCIO_GRUPO_COMPARTILHAMENTO. */
+		String GED_SIGLA_CHAVE_NEGOCIO_GRUPO_COMPARTILHAMENTO = "GRUCOMP";
+		
+		// BEM NOVO
+		String GED_SIGLA_TIPO_DOCUMENTO_BEM = "COMP.PROP";
+		String GED_SIGLA_LAUDO_AVALIACAO_BEM = "LAUBENS";
+		String GED_SIGLA_CERTIFICADO_CADASTRO_IMOVEL_RURAL = "CERT.CAD.IMOV.RURAL";
+		String GED_SIGLA_IMPOSTO_SOBRE_PROPRIEDADE_TERRITORIAL = "IMP.PROP.TERR.RURAL";
+		String GED_SIGLA_CONTRATO_POSSE_USO_IMOVEL_BENEFICIADO = "CARRENDAME";
+		
+		String GED_CHAVE_TIPO_CLASSIFICACAO_BEM = "TIP.CLASS.BEM";
+		String GED_CHAVE_TIPO_BEM = "TIPO.BEM";
+
+		/** O atributo NOME_ARQUIVO_EXPORTACAO_PATTERN. */
+		String NOME_ARQUIVO_EXPORTACAO_PATTERN = "SICOOB_CAPES_{0,number,000}_{1,date,yyyyMMddHHmmss}.txt";
+		
+		String MENSAGEM_ERRO_NEGOCIAL = "Não é possível excluir o dado cadastral, gentileza, atualize-o";
+		
+		String MENSAGEM_FACHADA_VALIDACAO_DADOS_NULL = "Ocorreu um erro interno%s.\nCaso o erro persista, favor abrir um GRI detalhando o problema.";
+		
+		String MENSAGEM_FACHADA_COULD_NOT_EXECUTE_QUERY = "Não foi possível consultar dados com os parametros informados%s.\nCaso o erro persista, favor abrir um GRI detalhando o problema.";
+		
+		String MENSAGEM_FACHADA_QUERY_TIMEOUT = "Não foi possível consultar dados com os parametros informados%s.\nCaso o erro persista, favor abrir um GRI detalhando o problema.";
+		
+		String MENSAGEM_FACHADA_SQLSERVER = "Não foi possível consultar dados com os parametros informados%s.\nCaso o erro persista, favor abrir um GRI detalhando o problema.";
+		
+		String MENSAGEM_FACHADA_GENERICA = "Não foi possível executar a operação%s.\nCaso o erro persista, favor abrir um GRI detalhando o problema.";
+
+		String MENSAGEM_FACHADA_VIOLACAO_INTEGRIDADE = "Não foi possível gravar os dados com os valores informados%s.\nCaso o erro persista, favor abrir um GRI detalhando o problema.";
+
+		String MENSAGEM_FACHADA_TRANSACTION_ROLLEDBACK = "Não foi possível consultar dados com os parametros informados%s.\nCaso o erro persista, favor abrir um GRI detalhando o problema.";
+
+		String MENSAGEM_FACHADA_ENTITY_NOTFOUND = "Não foi possível consultar dados com os parametros informados%s.\nCaso o erro persista, favor abrir um GRI detalhando o problema.";;
+	}
+
+	/**
+	 * A Interface Comum.
+	 */
+	interface Comum {
+
+		/** A constante ID_INSTITUICAO_BANCOOB. */
+		Integer ID_INSTITUICAO_BANCOOB = 1;
+		
+		/** A constante ID_INSTITUICAO_0300. */
+		Integer ID_INSTITUICAO_0300 = 2;
+
+		/** A constante ID_COOPERATIVA_PRODLAB. */
+		Integer ID_COOPERATIVA_PRODLAB = 9162;
+
+		/** A constante ID_UNIDADEINST_AGENCIA_SEDE. */
+		Integer ID_UNIDADEINST_AGENCIA_SEDE = 1;
+		
+		/** A constante ID_UNIDADEINST_ZERO. */
+		Integer ID_UNIDADEINST_ZERO = 0;
+		
+		/** A constante ID_UNIDADEINST_02. */
+		Integer ID_UNIDADEINST_02 = 2;
+
+		/** A constante ID_UNIDADEINST_PAB_AGENCIA_BSB. */
+		Integer ID_UNIDADEINST_PAB_AGENCIA_BSB = 11;
+		
+		/** A constante COD_GRUPO_SICOOB. */
+		Integer COD_GRUPO_SICOOB = 1;
+	}
+}

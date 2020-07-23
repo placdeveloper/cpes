@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="utf-8"?>
+<bancoobValidaveis:ModuloValidavel xmlns:mx="http://www.adobe.com/2006/mxml"
+			xmlns:bancoobInput="br.com.bancoob.componentes.input.*"
+			xmlns:cucInput="br.com.sicoob.capes.comum.componentes.input.*"
+			xmlns:bancoob="br.com.bancoob.componentes.*"
+			xmlns:procurarPessoa="br.com.sicoob.capes.corporativo.componentes.procurarPessoa.*"
+			xmlns:selecaoGeral="br.com.bancoob.sisbr.componentes.selecaoGeral.*"
+			xmlns:campos="br.com.bancoob.componentes.campos.*"
+			xmlns:bancoobValidaveis="br.com.bancoob.componentes.containers.validaveis.*"
+			xmlns:containers="br.com.bancoob.componentes.containers.*"
+	 		width="100%"  height="100%" layout="absolute" styleName="ModuloSemEstilo" verticalScrollPolicy="auto" xmlns:grid="br.com.bancoob.componentes.grid.*">		
+	
+	<containers:VBoxBancoob y="5">
+		
+		<containers:HBoxBancoob>
+			<mx:Image source="br/com/bancoob/imagens/icos/apps_16.png" alpha=".5"/>			
+			<mx:Label text="DADOS DE REFERÊNCIA" fontWeight="bold" fontFamily="ArialEmbedded" alpha=".8"/>
+			<mx:Image source="br/com/bancoob/imagens/imgsTelas/linha.swf" scaleContent="false" left="153" right="10"/>	
+		</containers:HBoxBancoob>
+		
+		<containers:HBoxBancoob>
+			<bancoob:Rotulo text="Data da última alteração:" width="145" id="rotuloDataHoraInicio" height="22"/>
+			<campos:CampoData id="dataCadastro" validarObrigatorio="true" x="133" y="32" width="100" enabled="false" toolTip="Data de cadastramento da referência, informada automaticamente pelo sistema." tabIndex="1" height="22"/>
+		</containers:HBoxBancoob>
+		
+		<containers:HBoxBancoob>
+			<bancoob:Rotulo text="Usuário da última alteração:" width="145" id="rotuloUsuarioAlteracao" height="22"/>
+			<bancoob:Rotulo id="usuarioAlteracao" height="22"/>
+		</containers:HBoxBancoob>
+		
+		<containers:HBoxBancoob>
+			<bancoob:Rotulo text="Tipo de Referência:" width="145" height="22"/>
+			<bancoobInput:Combo id="cmbTipoReferencia" width="262" toolTip="Selecione o tipo de referência." validarObrigatorio="true" tabIndex="2" labelField="descricao" inserirItemOpcional="true" height="22"/>
+		</containers:HBoxBancoob>
+		
+		<containers:HBoxBancoob>
+			<bancoob:Rotulo text="Banco:" width="145" height="22"/>
+			<selecaoGeral:ProcurarGeralV2 id="procurarBanco" width="364" tabIndex="3" tipoProcura="9003" titulo="Procurar Banco" campoCodigo="NUMBANCO" campoDescricao="DESCBANCO" height="22"/>
+		</containers:HBoxBancoob>
+		
+		<containers:HBoxBancoob>
+			<bancoob:Rotulo text="Agência:" width="145" height="22"/>
+			<selecaoGeral:ProcurarGeralV2 id="procurarAgencia" width="364" tabIndex="4" tipoProcura="9004" titulo="Procurar Agência" campoCodigo="NUMAGENCIA" campoDescricao="DESCAGENCIA" height="22"/>
+		</containers:HBoxBancoob>
+		
+		<containers:HBoxBancoob>
+			<bancoob:Rotulo text="Conta:" width="145" height="22"/>
+			<campos:CampoNumerico id="conta" width="65" restrict="0-9" maxChars="10" tabIndex="5" agruparDigitos="false" height="22"/>
+		</containers:HBoxBancoob>
+		
+		<containers:HBoxBancoob>
+			<bancoob:Rotulo text="Pessoa de Referência:" width="145" height="22"/>
+			<procurarPessoa:ProcurarPessoaCAPES id="procurarPessoa" toolTip="CPF/CNPJ de identificação da Pessoa e respectivo nome." tabIndex="6" height="22"/>
+		</containers:HBoxBancoob>
+		
+		<containers:HBoxBancoob>
+			<bancoob:Rotulo text="Descrição:" width="145" height="22"/>
+			<bancoobInput:TextoArea id="observacao" width="364" height="73" toolTip="Registro da descrição da referência, ou seja, quem deu a referência." tabIndex="7" maxChars="200"/>
+		</containers:HBoxBancoob>
+		
+		<containers:HBoxBancoob>
+			<mx:Image source="br/com/bancoob/imagens/icos/phone.png" alpha=".5"/>
+			<mx:Label text="TELEFONE" fontWeight="bold" fontFamily="ArialEmbedded" alpha=".8"/>
+			<mx:Image source="br/com/bancoob/imagens/imgsTelas/linha.swf" scaleContent="false" left="96" right="10"/>
+		</containers:HBoxBancoob>
+		
+		<containers:HBoxBancoob id="grupoDDDTel">
+			<bancoob:Rotulo width="145" text="DDD:"/>
+			<cucInput:ComboDDD id="ddd" inserirItemOpcional="true" tabIndex="8"/>
+			<bancoob:Rotulo width="65" text="Telefone:"/>
+			<bancoobInput:Texto width="75" id="numTelefone" restrict="0-9" textAlign="right" maxChars="12" tabIndex="9" toolTip="Registro do número do telefone da referência, informado pelo sistema caso tenha sido cadastrado no ato do cadastro da pessoa." />
+		</containers:HBoxBancoob>
+		
+		<containers:HBoxBancoob>
+			<bancoob:Rotulo width="145" text=" "/>
+			<grid:Grid id="gridTelefones" tabEnabled="true" tabIndex="1" visible="false" height="100" selectable="false">
+				<grid:columns>
+					<grid:ColunaGrid headerText="Tipo" dataField="descricaoTipoTelefone" textAlign="left" width="150"/>
+					<grid:ColunaGrid headerText="DDD" dataField="ddd" textAlign="left" width="60"/>
+					<grid:ColunaGrid headerText="Número" dataField="telefone" textAlign="left" width="100" />
+					<grid:ColunaGrid headerText="Ramal" dataField="ramal" textAlign="left" width="50" />
+				</grid:columns>
+			</grid:Grid>
+		</containers:HBoxBancoob>
+	</containers:VBoxBancoob>	
+	
+</bancoobValidaveis:ModuloValidavel>

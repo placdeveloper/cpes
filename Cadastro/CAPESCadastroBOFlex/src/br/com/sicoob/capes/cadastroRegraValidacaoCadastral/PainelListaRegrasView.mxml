@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PainelListaBanco xmlns="br.com.bancoob.componentes.painellista.*"
+                  xmlns:mx="http://www.adobe.com/2006/mxml"
+                  xmlns:regras="br.com.sicoob.capes.cadastroRegraValidacaoCadastral.*"
+                  xmlns:tabelaPaginada="br.com.bancoob.componentes.tabelapaginada.*"
+                  xmlns:servico="br.com.bancoob.util.servico.*"
+                  xmlns:grid="br.com.bancoob.componentes.grid.*"
+				  metodoPesquisa="obterDadosSelecao"
+                  deveExibirMensagemNenhumRegistro="true" selecaoMultipla="false">
+    <mx:Script>
+        <![CDATA[
+            import br.com.bancoob.componentes.tabelapaginada.TabelaPaginadaUtils;
+            import br.com.bancoob.tipos.Booleano;
+            import br.com.bancoob.util.reflexao.ReflectionUtils;
+            
+            import mx.controls.dataGridClasses.DataGridColumn;
+
+            
+            public function defaultBooleanAtivoLabelFunction(objeto:Object, coluna:DataGridColumn):String {     
+                
+                var obj:Object = ReflectionUtils.recuperarPropriedade(objeto, 
+                    TabelaPaginadaUtils.recuperarNomePropriedade(coluna));
+                var retorno:String = "";
+                if (obj != null){
+                    var valor:Boolean = (obj is Booleano) ? obj.valor : obj;
+                    retorno = (String(valor) == "true")? "Ativa": "Inativa";
+                }
+                return retorno; 
+            } 
+
+            public function criarDefaultBooleanAtivoSortFunction(coluna:DataGridColumn) : Function {
+                return function (objeto1:Object, objeto2:Object) : int{
+                    var nomePropriedade:String = TabelaPaginadaUtils.recuperarNomePropriedade(coluna);
+                    var valor1:String = defaultBooleanAtivoLabelFunction(objeto1, coluna);
+                    var valor2:String = defaultBooleanAtivoLabelFunction(objeto2, coluna);
+                    
+                    valor1 = valor1 == null ? "" : valor1; 
+                    valor2 = valor2 == null ? "" : valor2;
+                    
+                    return valor1 > valor2 ? 1 : valor1 < valor2 ? -1 : 0;
+                }
+            }
+			
+			public function defaultBooleanExecutarLabelFunction(objeto:Object, coluna:DataGridColumn):String {     
+				var obj:Object = ReflectionUtils.recuperarPropriedade(objeto, 
+					TabelaPaginadaUtils.recuperarNomePropriedade(coluna));
+				var retorno:String = "";
+				if (obj != null){
+					var valor:Boolean = (obj is Booleano) ? obj.valor : obj;
+					retorno = (String(valor) == "true")? "Executar": "Não";
+				}
+				return retorno; 
+			} 
+			
+			public function criarDefaultBooleanExecutarSortFunction(coluna:DataGridColumn) : Function {
+				return function (objeto1:Object, objeto2:Object) : int{
+					var nomePropriedade:String = TabelaPaginadaUtils.recuperarNomePropriedade(coluna);
+					var valor1:String = defaultBooleanExecutarLabelFunction(objeto1, coluna);
+					var valor2:String = defaultBooleanExecutarLabelFunction(objeto2, coluna);
+					
+					valor1 = valor1 == null ? "" : valor1; 
+					valor2 = valor2 == null ? "" : valor2;
+					
+					return valor1 > valor2 ? 1 : valor1 < valor2 ? -1 : 0;
+				}
+			}
+
+        ]]>
+    </mx:Script>
+	
+	<servicoPesquisa>
+		<servico:ServicoJava bloquearOperacao="true" mensagemEspera="Pesquisando dados..." source="br.com.sicoob.capes.cadastro.fachada.ValidacaoCadastralRegraFachada"/>
+	</servicoPesquisa>
+    <painelFiltro>
+        <regras:PainelFiltroRegrasView width="100%" height="108" horizontalScrollPolicy="off" verticalScrollPolicy="off"/>
+    </painelFiltro>
+    <tabelaPaginada>
+        <tabelaPaginada:TabelaPaginadaBanco id="grid" width="100%" height="100%" titulo="REGRAS"
+                                            tamanhoPagina="15"	selecaoMultipla="false">
+            <tabelaPaginada:MetadadosTabela id="metadados">
+                <grid:ColunaGrid width="50" headerText="Código" sortCompareFunction="{TabelaPaginadaUtils.criarDefaultValorNumericoSortFunction(colCodigo)}"
+                                 propriedade="codigoRegra" id="colCodigo" labelFunction="{TabelaPaginadaUtils.defaultLabelFunction}"/>
+                <grid:ColunaGrid width="90" headerText="Funcionalidade" sortCompareFunction="{TabelaPaginadaUtils.criarDefaultSortFunction(colFuncionalidade)}"
+                                 propriedade="funcionalidade.descricao" id="colFuncionalidade" labelFunction="{TabelaPaginadaUtils.defaultLabelFunction}"/>
+                <grid:ColunaGrid headerText="Descrição" sortCompareFunction="{TabelaPaginadaUtils.criarDefaultSortFunction(colDescricao)}"
+                                 propriedade="descricao" id="colDescricao" labelFunction="{TabelaPaginadaUtils.defaultLabelFunction}"/>
+				<grid:ColunaGrid width="60" headerText="Tipo" sortCompareFunction="{TabelaPaginadaUtils.criarDefaultSortFunction(colTipo)}"
+								 propriedade="tipoRegra.descricao" id="colTipo" labelFunction="{TabelaPaginadaUtils.defaultLabelFunction}" />
+				<grid:ColunaGrid width="80" headerText="Categoria" sortCompareFunction="{TabelaPaginadaUtils.criarDefaultSortFunction(colTipo)}"
+								 propriedade="perfilCadastro.descricao" id="colPerfilCadastro" labelFunction="{TabelaPaginadaUtils.defaultLabelFunction}"/>
+                <grid:ColunaGrid width="60" headerText="Situação" sortCompareFunction="{criarDefaultBooleanAtivoSortFunction(colAtivo)}"
+                                 propriedade="ativo" id="colAtivo" labelFunction="{defaultBooleanAtivoLabelFunction}"/>
+				
+				<grid:ColunaGrid width="60" headerText="Agendado" sortCompareFunction="{criarDefaultBooleanAtivoSortFunction(colExecutar)}"
+								 propriedade="executarRegra" id="colExecutar" labelFunction="{defaultBooleanExecutarLabelFunction}"/>
+				
+            </tabelaPaginada:MetadadosTabela>
+        </tabelaPaginada:TabelaPaginadaBanco>
+    </tabelaPaginada>
+</PainelListaBanco>

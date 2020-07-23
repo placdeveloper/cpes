@@ -1,0 +1,201 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="TipoAnotacao" pageWidth="802" pageHeight="555" orientation="Landscape" columnWidth="802" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0">
+	<import value="br.com.sicoob.capes.cadastro.negocio.enums.TipoAplicacaoEnum"/>
+	<parameter name="SUBRELATORIOS" class="java.util.List">
+		<parameterDescription><![CDATA[]]></parameterDescription>
+	</parameter>
+	<queryString>
+		<![CDATA[]]>
+	</queryString>
+	<field name="ativo" class="java.lang.Boolean">
+		<fieldDescription><![CDATA[ativo]]></fieldDescription>
+	</field>
+	<field name="categoriaAnotacao" class="br.com.sicoob.capes.negocio.entidades.CategoriaAnotacao">
+		<fieldDescription><![CDATA[categoriaAnotacao]]></fieldDescription>
+	</field>
+	<field name="codTipoAnotacao" class="java.lang.Integer">
+		<fieldDescription><![CDATA[codTipoAnotacao]]></fieldDescription>
+	</field>
+	<field name="descTipoAnotacao" class="java.lang.String">
+		<fieldDescription><![CDATA[descTipoAnotacao]]></fieldDescription>
+	</field>
+	<field name="idTipoAplicacao" class="java.lang.Short">
+		<fieldDescription><![CDATA[idTipoAplicacao]]></fieldDescription>
+	</field>
+	<field name="periodicidadeAnotacao" class="br.com.sicoob.capes.negocio.entidades.PeriodicidadeAnotacao">
+		<fieldDescription><![CDATA[periodicidadeAnotacao]]></fieldDescription>
+	</field>
+	<field name="registraQuantidade" class="java.lang.Boolean"/>
+	<field name="registraValor" class="java.lang.Boolean">
+		<fieldDescription><![CDATA[registraValor]]></fieldDescription>
+	</field>
+	<field name="tipoCaptura" class="br.com.sicoob.capes.negocio.entidades.TipoCaptura">
+		<fieldDescription><![CDATA[tipoCaptura]]></fieldDescription>
+	</field>
+	<field name="usuarioInclusao" class="java.lang.String">
+		<fieldDescription><![CDATA[usuarioInclusao]]></fieldDescription>
+	</field>
+	<field name="mapasTipoAnotacao" class="java.util.Collection"/>
+	<variable name="codTipoAnotacao_SUM" class="java.lang.Integer" calculation="Sum">
+		<variableExpression><![CDATA[$F{codTipoAnotacao}]]></variableExpression>
+	</variable>
+	<variable name="orgaosExternos" class="net.sf.jasperreports.engine.JRDataSource">
+		<variableExpression><![CDATA[new net.sf.jasperreports.engine.data.JRBeanCollectionDataSource($F{mapasTipoAnotacao})]]></variableExpression>
+	</variable>
+	<columnHeader>
+		<band height="36">
+			<rectangle>
+				<reportElement x="0" y="0" width="802" height="30" backcolor="#999999"/>
+				<graphicElement>
+					<pen lineWidth="0.0" lineStyle="Solid"/>
+				</graphicElement>
+			</rectangle>
+			<staticText>
+				<reportElement mode="Transparent" x="0" y="2" width="46" height="26"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font fontName="Arial" size="11" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Código]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Transparent" x="51" y="2" width="192" height="26"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font fontName="Arial" size="11" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Descrição]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Transparent" x="248" y="2" width="97" height="26"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Arial" size="11" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Categoria]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Transparent" x="350" y="2" width="90" height="26"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Arial" size="11" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Tipo de Captura]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Transparent" x="445" y="2" width="77" height="26"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Arial" size="11" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Periodicidade]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Transparent" x="527" y="2" width="100" height="26"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Arial" size="11" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Tipo de Aplicação]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="632" y="2" width="67" height="26"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Arial" size="11" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Registra Quantidade]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Transparent" x="704" y="2" width="51" height="26"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Arial" size="11" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Registra Valor]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Transparent" x="760" y="2" width="42" height="26"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Arial" size="11" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Status]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="15" splitType="Prevent">
+			<rectangle>
+				<reportElement stretchType="RelativeToBandHeight" x="0" y="0" width="802" height="15" backcolor="#CCCCCC">
+					<printWhenExpression><![CDATA[new Boolean(($V{REPORT_COUNT}.intValue() % 2) != 0)]]></printWhenExpression>
+				</reportElement>
+				<graphicElement>
+					<pen lineWidth="0.0"/>
+				</graphicElement>
+			</rectangle>
+			<textField pattern="#000" isBlankWhenNull="true">
+				<reportElement stretchType="RelativeToTallestObject" mode="Transparent" x="0" y="1" width="46" height="13"/>
+				<textElement verticalAlignment="Top">
+					<font fontName="Arial" size="11"/>
+				</textElement>
+				<textFieldExpression class="java.lang.Integer"><![CDATA[$F{codTipoAnotacao}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" pattern="" isBlankWhenNull="true">
+				<reportElement stretchType="RelativeToTallestObject" x="51" y="1" width="192" height="13"/>
+				<textElement verticalAlignment="Top">
+					<font fontName="Arial" size="11"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{descTipoAnotacao}]]></textFieldExpression>
+			</textField>
+			<textField pattern="" isBlankWhenNull="true">
+				<reportElement stretchType="RelativeToTallestObject" x="248" y="1" width="97" height="13"/>
+				<textElement verticalAlignment="Top">
+					<font fontName="Arial" size="11"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{categoriaAnotacao}.getDescCategoriaAnotacao()]]></textFieldExpression>
+			</textField>
+			<textField pattern="" isBlankWhenNull="true">
+				<reportElement stretchType="RelativeToTallestObject" x="350" y="1" width="90" height="13"/>
+				<textElement verticalAlignment="Top">
+					<font fontName="Arial" size="11"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{tipoCaptura}.getDescTipoCaptura()]]></textFieldExpression>
+			</textField>
+			<textField pattern="" isBlankWhenNull="true">
+				<reportElement stretchType="RelativeToTallestObject" x="445" y="1" width="77" height="13"/>
+				<textElement verticalAlignment="Top">
+					<font fontName="Arial" size="11"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{periodicidadeAnotacao}.getDescPeriodicidadeAnotacao()]]></textFieldExpression>
+			</textField>
+			<textField pattern="" isBlankWhenNull="true">
+				<reportElement stretchType="RelativeToTallestObject" x="527" y="1" width="100" height="13"/>
+				<textElement verticalAlignment="Top">
+					<font fontName="Arial" size="11"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[TipoAplicacaoEnum.valueOf($F{idTipoAplicacao}).getDescricao()]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement stretchType="RelativeToTallestObject" x="632" y="1" width="67" height="13"/>
+				<textElement textAlignment="Center" verticalAlignment="Top">
+					<font fontName="Arial" size="11"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{registraQuantidade}.booleanValue() ? "Sim" : "Não"]]></textFieldExpression>
+			</textField>
+			<textField pattern="" isBlankWhenNull="true">
+				<reportElement stretchType="RelativeToTallestObject" x="704" y="1" width="51" height="13"/>
+				<textElement textAlignment="Center" verticalAlignment="Top">
+					<font fontName="Arial" size="11"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{registraValor}.booleanValue() ? "Sim" : "Não"]]></textFieldExpression>
+			</textField>
+			<textField pattern="" isBlankWhenNull="true">
+				<reportElement stretchType="RelativeToTallestObject" x="760" y="1" width="42" height="13"/>
+				<textElement verticalAlignment="Top">
+					<font fontName="Arial" size="11"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{ativo}.booleanValue() ? "Ativo" : "Inativo"]]></textFieldExpression>
+			</textField>
+			<subreport>
+				<reportElement stretchType="RelativeToBandHeight" x="0" y="14" width="802" height="0" isPrintWhenDetailOverflows="true"/>
+				<subreportParameter name="LINHA_MASTER">
+					<subreportParameterExpression><![CDATA[$V{REPORT_COUNT}]]></subreportParameterExpression>
+				</subreportParameter>
+				<dataSourceExpression><![CDATA[$V{orgaosExternos}]]></dataSourceExpression>
+				<subreportExpression class="net.sf.jasperreports.engine.JasperReport"><![CDATA[$P{SUBRELATORIOS}.get(0)]]></subreportExpression>
+			</subreport>
+		</band>
+	</detail>
+</jasperReport>

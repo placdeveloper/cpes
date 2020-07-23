@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+
+	<artifactId>capes-relatorio-fachada</artifactId>
+	<name>CAPES - Relatorio - CAPESRelatorioFachada</name>
+
+	<parent>
+		<groupId>br.com.sicoob.capes</groupId>
+		<artifactId>capes-modulo-relatorio</artifactId>
+		<version>2.0.8.1</version>
+		<relativePath>..</relativePath>
+	</parent>
+
+	<scm>
+		<connection>scm:svn:http://svn.sicoob.com.br/fontesbancoob/SISBR/Aplicativos/JAVA/trunk/CAPES/tags/capes-2.0.8.1/Relatorio/CAPESRelatorioFachada</connection>
+		<developerConnection>scm:svn:http://svn.sicoob.com.br/fontesbancoob/SISBR/Aplicativos/JAVA/trunk/CAPES/tags/capes-2.0.8.1/Relatorio/CAPESRelatorioFachada</developerConnection>
+		<url>http://svn.sicoob.com.br/fontesbancoob/SISBR/Aplicativos/JAVA/trunk/CAPES/tags/capes-2.0.8.1/Relatorio/CAPESRelatorioFachada</url>
+	</scm>
+
+	<dependencies>
+		<!-- CAPES -->
+		<dependency>
+			<groupId>${project.groupId}</groupId>
+			<artifactId>capes-comum-lib</artifactId>
+			<version>${project.version}</version>
+			<scope>provided</scope>
+		</dependency>
+		<dependency>
+			<groupId>${project.groupId}</groupId>
+			<artifactId>capes-entidades</artifactId>
+			<version>${project.version}</version>
+			<scope>provided</scope>
+			<exclusions>
+				<exclusion>
+					<groupId>${project.groupId}</groupId>
+					<artifactId>capes-comum-lib</artifactId>
+				</exclusion>
+			</exclusions>
+		</dependency>
+		<dependency>
+			<groupId>${project.groupId}</groupId>
+			<artifactId>capes-relatorio-ejb</artifactId>
+			<version>${project.version}</version>
+			<type>ejb</type>
+			<scope>provided</scope>
+			<exclusions>
+				<exclusion>
+					<groupId>${project.groupId}</groupId>
+					<artifactId>capes-comum-lib</artifactId>
+				</exclusion>
+				<exclusion>
+					<groupId>${project.groupId}</groupId>
+					<artifactId>capes-entidades</artifactId>
+				</exclusion>
+				<exclusion>
+					<groupId>${project.groupId}</groupId>
+					<artifactId>capes-cadastro-ejb</artifactId>
+				</exclusion>
+			</exclusions>
+		</dependency>
+		<dependency>
+			<groupId>${project.groupId}</groupId>
+			<artifactId>capes-cadastro-ejb</artifactId>
+			<version>${project.version}</version>
+			<scope>provided</scope>
+			<exclusions>
+				<exclusion>
+					<groupId>${project.groupId}</groupId>
+					<artifactId>capes-comum-lib</artifactId>
+				</exclusion>
+				<exclusion>
+					<groupId>${project.groupId}</groupId>
+					<artifactId>capes-entidades</artifactId>
+				</exclusion>
+				<exclusion>
+					<groupId>${project.groupId}</groupId>
+					<artifactId>capes-entidades-legado</artifactId>
+				</exclusion>
+				<exclusion>
+					<groupId>${project.groupId}</groupId>
+					<artifactId>capes-replicacao-comum-ejb</artifactId>
+				</exclusion>
+			</exclusions>
+		</dependency>
+		<dependency>
+			<groupId>${project.groupId}</groupId>
+			<artifactId>capes-integracao</artifactId>
+			<version>${project.version}</version>
+			<scope>provided</scope>
+		</dependency>
+		<!-- CAPES -->
+
+		<!-- Internas -->
+		<dependency>
+			<groupId>br.com.sicoob.framework</groupId>
+			<artifactId>sicoob-java</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>br.com.sicoob.framework.portal</groupId>
+			<artifactId>prt-base-sisbr-java</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>br.com.sicoob.framework.relatorio</groupId>
+			<artifactId>relatorio-api</artifactId>
+		</dependency>
+		<!-- Internas -->
+
+		<!-- Externas -->
+		<dependency>
+			<groupId>commons-lang</groupId>
+			<artifactId>commons-lang</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.logging.log4j</groupId>
+			<artifactId>log4j-api</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.logging.log4j</groupId>
+			<artifactId>log4j-core</artifactId>
+		</dependency>		
+		<!-- Externas -->
+	</dependencies>
+</project>

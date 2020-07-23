@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<componentes:Modulo xmlns:mx="http://www.adobe.com/2006/mxml"
+					xmlns:grid="br.com.bancoob.componentes.grid.*"
+					xmlns:componentes="br.com.bancoob.componentes.*"
+					xmlns:containers="br.com.bancoob.componentes.containers.*"
+					width="750" height="425" layout="absolute">
+	
+	<componentes:Rotulo x="10" y="10" text="CPF / CNPJ: " />
+	<componentes:Rotulo x="75" y="10" id="labelCpfCnpj" width="100" fontWeight="bold" />
+	
+	<componentes:Rotulo x="200" y="10" text="DATA DA ÚLTIMA ATUALIZAÇÃO: " />
+	<componentes:Rotulo x="363" y="10" id="labelDataUltimaAtualizacao" fontWeight="bold" />
+	
+	<componentes:Rotulo x="480" y="10" text="DATA DA ÚLTIMA VALIDAÇÃO: " />
+	<componentes:Rotulo x="633" y="10" id="labelDataUltimaValidacao" fontWeight="bold" />
+	
+	<grid:Grid x="10" y="35" id="tabela" width="730" height="350">
+		<grid:columns>
+			<grid:ColunaGrid dataField="codigo" headerText="Código" width="50" textAlign="center" />
+			<grid:ColunaGrid dataField="funcionalidade" headerText="Funcionalidade" width="100" textAlign="center" />
+			<grid:ColunaGrid dataField="mensagem" headerText="Mensagem" />
+			<grid:ColunaGrid dataField="perfilCadastro" headerText="Categoria" width="80" textAlign="center" />
+			<grid:ColunaGrid dataField="tipo" headerText="Tipo" width="80" textAlign="center" />
+		</grid:columns>
+	</grid:Grid>
+	
+	<containers:HBoxBancoob horizontalAlign="center" verticalAlign="middle" width="100%" bottom="5" paddingTop="10">
+		<componentes:Botao width="100" id="botaoRevalidar" label="Revalidar" icon="@Embed('br/com/bancoob/imagens/icos/apply.png')" />
+		<componentes:Botao width="100" id="botaoImprimir" label="Imprimir" icon="@Embed('br/com/bancoob/imagens/icoImpressora.png')" visible="false" includeInLayout="false" />
+		<componentes:Botao width="100" id="botaoFechar" label="Fechar" />
+	</containers:HBoxBancoob>
+	
+</componentes:Modulo>

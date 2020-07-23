@@ -1,0 +1,188 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="FichaCadastral_Endereco" pageWidth="555" pageHeight="105" whenNoDataType="AllSectionsNoDetail" columnWidth="555" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0">
+	<style name="Linha Zebrada" isDefault="true" mode="Opaque">
+		<box leftPadding="3">
+			<topPen lineWidth="0.25"/>
+			<leftPen lineWidth="0.25"/>
+			<bottomPen lineWidth="0.25"/>
+			<rightPen lineWidth="0.25"/>
+		</box>
+		<conditionalStyle>
+			<conditionExpression><![CDATA[new Boolean(($V{REPORT_COUNT_ZEBRA}.intValue() % 2) == 0)]]></conditionExpression>
+			<style isDefault="false" style="Linha Zebrada" mode="Opaque" backcolor="#DDDDDE"/>
+		</conditionalStyle>
+	</style>
+	<style name="campo" isDefault="false" hAlign="Left" vAlign="Middle" fontSize="8" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false">
+		<box leftPadding="6"/>
+	</style>
+	<parameter name="REPORT_COUNT_ZEBRA" class="java.lang.Integer"/>
+	<queryString>
+		<![CDATA[]]>
+	</queryString>
+	<field name="descricao" class="java.lang.String"/>
+	<field name="tipoEndereco.descricao" class="java.lang.String"/>
+	<field name="numero" class="java.lang.String"/>
+	<field name="complemento" class="java.lang.String"/>
+	<field name="bairro" class="java.lang.String"/>
+	<field name="localidade" class="br.com.sicoob.capes.negocio.entidades.Localidade"/>
+	<field name="localidade.nome" class="java.lang.String"/>
+	<field name="localidade.uf.siglaUF" class="java.lang.String"/>
+	<field name="cep" class="java.lang.String"/>
+	<field name="vigenciaRegistro" class="java.lang.String"/>
+	<field name="tipoLogradouro" class="br.com.sicoob.capes.negocio.entidades.TipoLogradouro"/>
+	<field name="tipoLogradouro.nome" class="java.lang.String"/>
+	<variable name="variable1" class="java.lang.String"/>
+	<variable name="REPORT_COUNT_ZEBRA" class="java.lang.Integer" calculation="Count">
+		<variableExpression><![CDATA[new Integer( $V{REPORT_COUNT_ZEBRA}.intValue() + 1)]]></variableExpression>
+		<initialValueExpression><![CDATA[$P{REPORT_COUNT_ZEBRA}]]></initialValueExpression>
+	</variable>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band splitType="Stretch"/>
+	</title>
+	<pageHeader>
+		<band/>
+	</pageHeader>
+	<columnHeader>
+		<band splitType="Stretch"/>
+	</columnHeader>
+	<detail>
+		<band height="90" splitType="Prevent">
+			<staticText>
+				<reportElement style="Linha Zebrada" mode="Opaque" x="112" y="0" width="339" height="30"/>
+				<box leftPadding="3"/>
+				<textElement>
+					<font size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Endereço]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="Linha Zebrada" mode="Opaque" x="372" y="30" width="183" height="30"/>
+				<box leftPadding="3"/>
+				<textElement>
+					<font size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Bairro]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="Linha Zebrada" mode="Opaque" x="0" y="30" width="53" height="30"/>
+				<box leftPadding="3"/>
+				<textElement>
+					<font size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Número]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="Linha Zebrada" mode="Opaque" x="53" y="60" width="460" height="30"/>
+				<box leftPadding="3"/>
+				<textElement>
+					<font size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Cidade]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="Linha Zebrada" mode="Opaque" x="513" y="60" width="42" height="30"/>
+				<box leftPadding="3"/>
+				<textElement>
+					<font size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[UF]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="Linha Zebrada" mode="Opaque" x="0" y="60" width="53" height="30"/>
+				<box leftPadding="3"/>
+				<textElement>
+					<font size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[CEP]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="Linha Zebrada" mode="Opaque" x="0" y="0" width="112" height="30"/>
+				<box leftPadding="3"/>
+				<textElement>
+					<font size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Tipo]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="Linha Zebrada" mode="Opaque" x="53" y="30" width="319" height="30"/>
+				<box leftPadding="3"/>
+				<textElement>
+					<font size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Complemento]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="Linha Zebrada" mode="Opaque" x="451" y="0" width="104" height="30"/>
+				<box leftPadding="3"/>
+				<textElement>
+					<font size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Período]]></text>
+			</staticText>
+			<textField isBlankWhenNull="true">
+				<reportElement style="campo" x="0" y="10" width="112" height="20"/>
+				<textElement/>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{tipoEndereco.descricao}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement style="campo" x="112" y="10" width="339" height="20"/>
+				<textElement/>
+				<textFieldExpression class="java.lang.String"><![CDATA[($F{tipoLogradouro} == null) || ($F{tipoLogradouro}.getIdTipoLogradouro().intValue() == 99) ? $F{descricao}
+       : $F{tipoLogradouro}.getNome().toUpperCase() + " " + $F{descricao}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement style="campo" x="0" y="40" width="53" height="20"/>
+				<textElement/>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{numero}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement style="campo" x="53" y="40" width="319" height="20"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{complemento}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement style="campo" x="372" y="40" width="183" height="20"/>
+				<textElement/>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{bairro}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement style="campo" x="53" y="70" width="460" height="20">
+					<printWhenExpression><![CDATA[new Boolean($F{localidade} != null)]]></printWhenExpression>
+				</reportElement>
+				<textElement/>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{localidade.nome}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement style="campo" x="513" y="70" width="42" height="20">
+					<printWhenExpression><![CDATA[new Boolean(($F{localidade} != null) && ($F{localidade}.getUf() != null))]]></printWhenExpression>
+				</reportElement>
+				<textElement/>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{localidade.uf.siglaUF}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement style="campo" x="0" y="70" width="53" height="20"/>
+				<textElement/>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{cep}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement style="campo" x="451" y="10" width="104" height="20"/>
+				<textElement/>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{vigenciaRegistro}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band splitType="Stretch"/>
+	</pageFooter>
+	<summary>
+		<band splitType="Stretch"/>
+	</summary>
+</jasperReport>

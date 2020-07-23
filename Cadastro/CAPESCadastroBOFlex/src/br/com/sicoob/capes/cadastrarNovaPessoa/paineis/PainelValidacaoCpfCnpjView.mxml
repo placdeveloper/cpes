@@ -1,0 +1,16 @@
+<validaveis:CanvasValidavel
+	xmlns:mx="http://www.adobe.com/2006/mxml"
+	xmlns:bancoobInput="br.com.bancoob.componentes.input.*"
+	xmlns:bancoob="br.com.bancoob.componentes.*"
+	xmlns:validaveis="br.com.bancoob.componentes.containers.validaveis.*"
+	width="586" height="244" styleName="ModuloSemEstilo">
+	
+	<bancoob:Rotulo x="27" y="39" text="Tipo Pessoa:" />
+	<bancoobInput:Combo x="145" y="37" width="160" id="cboTipoPessoa" labelField="descTipoPessoa" tabIndex="1" validarObrigatorio="true" /> 
+	
+	<bancoob:Rotulo x="27" y="67" id="lblCpfCnpj" />
+	<bancoobInput:Mascara x="145" y="65" width="160" id="txtCpfCnpj" tabIndex="2" somenteMaiusculas="true" validarObrigatorio="true" />
+	
+	<bancoob:Botao x="340" y="65" width="91" id="btValidar" label="Validar"  tabIndex="3"/>
+		
+</validaveis:CanvasValidavel>

@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<bancoobValidaveis:CanvasValidavel 
+	xmlns:mx="http://www.adobe.com/2006/mxml" 
+	xmlns="br.com.bancoob.componentes.containers.*"
+	xmlns:bancoobValidaveis="br.com.bancoob.componentes.containers.validaveis.*"
+	xmlns:componentes="br.com.bancoob.componentes.*" 
+	xmlns:containers="br.com.bancoob.componentes.containers.*"
+	xmlns:input="br.com.bancoob.componentes.input.*"
+	xmlns:campos="br.com.bancoob.componentes.campos.*"
+	xmlns:titulo="br.com.bancoob.componentes.titulo.*"
+	xmlns:procurarPessoa="br.com.sicoob.capes.corporativo.componentes.procurarPessoa.*"
+	xmlns:componentesCapes="br.com.sicoob.capes.comum.componentes.input.*"
+	verticalScrollPolicy="auto" styleName="ModuloSemEstilo" width="100%" height="100%" >
+	
+	<mx:Script>
+		<![CDATA[
+			import br.com.sicoob.capes.comum.enums.TipoPessoaEnum;
+		]]>
+	</mx:Script>
+	
+	<!-- ÁREA DE DADOS AVANÇADOS -->
+	<titulo:SubtituloView id="rotuloTitulo" x="5" y="0" />
+	
+	<componentes:Rotulo x="10" y="27" text="Cartório: " textAlign="left" />
+	<procurarPessoa:ProcurarPessoaCAPES x="120" y="25" id="componenteProcurarPessoa" validarObrigatorio="false" toolTip="CNPJ de identificação do representante cartorário." tabIndex="1" tipoPessoa="{TipoPessoaEnum.PESSOA_JURIDICA.codigo}" />
+	
+	<componentes:Rotulo text="Matrícula: " x="10" y="52" textAlign="left" />
+	<input:Texto id="campoMatricula" x="120" y="50" width="200" maxChars="6" restrict="0-9" validarObrigatorio="false" tabIndex="2" />
+	
+	<!-- ÁREA DE DADOS RURAIS -->
+	<containers:CanvasBancoob id="canvasAvancadoRural" y="75" width="100%" height="125" visible="false" includeInLayout="false">
+		<componentes:Rotulo text="NIRF: " x="10" y="2" textAlign="left" />
+		<input:Texto id="campoNirf" x="120" y="0" width="200" maxChars="8" restrict="0-9" tabIndex="3" />
+		
+		<componentes:Rotulo text="Incra: " x="10" y="27" textAlign="left" />
+		<input:Texto id="campoIncra" x="120" y="25" width="200" maxChars="13" restrict="0-9" tabIndex="4" />
+		
+		<componentes:Rotulo text="Roteiro de acesso: " x="10" y="52" textAlign="left" />
+		<input:Texto id="campoRoteiroAcesso" left="120" y="50" right="10" maxChars="250" validarObrigatorio="false" somenteMaiusculas="true" tabIndex="5" />
+		
+		<componentes:Rotulo text="Latitude: " x="10" y="77" textAlign="left" />
+		<componentesCapes:CampoNumerico id="campoLatitude" x="120" y="75" width="100" valorMinimo="-99.99999999" valorMaximo="99.99999999" casasDecimais="8" agruparDigitos="true" maxChars="11" tabIndex="6" />
+		
+		<componentes:Rotulo text="Longitude: " x="10" y="102" textAlign="left" />
+		<componentesCapes:CampoNumerico id="campoLongitude" x="120" y="100" width="100" valorMinimo="-99.99999999" valorMaximo="99.99999999" casasDecimais="8" agruparDigitos="true" maxChars="12" tabIndex="7" />		
+	</containers:CanvasBancoob>
+	
+</bancoobValidaveis:CanvasValidavel>

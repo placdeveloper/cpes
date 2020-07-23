@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="CAPESCabecalhoPaisagem" pageWidth="802" pageHeight="75" orientation="Landscape" whenNoDataType="AllSectionsNoDetail" columnWidth="802" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0">
+	<parameter name="URL_LOGO" class="java.net.URL" isForPrompting="false"/>
+	<parameter name="USUARIO" class="br.com.bancoob.negocio.contexto.InformacoesUsuario"/>
+	<parameter name="TITULO" class="java.lang.String"/>
+	<parameter name="TEXTO_COMPLEMENTAR" class="java.lang.String"/>
+	<variable name="DATA_EMISSAO" class="java.util.Date">
+		<initialValueExpression><![CDATA[new java.util.Date()]]></initialValueExpression>
+	</variable>
+	<title>
+		<band height="75">
+			<rectangle>
+				<reportElement mode="Transparent" x="0" y="0" width="802" height="75"/>
+			</rectangle>
+			<image>
+				<reportElement isPrintRepeatedValues="false" x="11" y="11" width="104" height="30"/>
+				<imageExpression class="java.net.URL"><![CDATA[$P{URL_LOGO}]]></imageExpression>
+			</image>
+			<textField>
+				<reportElement x="11" y="53" width="104" height="11">
+					<printWhenExpression><![CDATA[new Boolean(($P{USUARIO}.getCooperativa() != null) && ($P{USUARIO}.getCooperativa().trim().length() > 0))]]></printWhenExpression>
+				</reportElement>
+				<textElement textAlignment="Center" verticalAlignment="Bottom">
+					<font fontName="Arial" size="9" isBold="false"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA["Cooperativa: " + $P{USUARIO}.getCooperativa()]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="257" y="11" width="289" height="15"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Arial" size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[SISBR 2.0 - Cadastro de Pessoas do SICOOB]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="136" y="30" width="530" height="15"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Arial" size="12" isBold="true"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$P{TITULO}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="136" y="49" width="530" height="15">
+					<printWhenExpression><![CDATA[new Boolean(($P{TEXTO_COMPLEMENTAR} != null) && ($P{TEXTO_COMPLEMENTAR}.trim().length() > 0))]]></printWhenExpression>
+				</reportElement>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Arial" size="12" isBold="true"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$P{TEXTO_COMPLEMENTAR}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="720" y="11" width="71" height="11"/>
+				<textElement verticalAlignment="Bottom">
+					<font fontName="Arial" size="9"/>
+				</textElement>
+				<text><![CDATA[Data de emissão:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="720" y="40" width="71" height="11"/>
+				<textElement verticalAlignment="Bottom">
+					<font fontName="Arial" size="9"/>
+				</textElement>
+				<text><![CDATA[Hora de emissão:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="720" y="53" width="71" height="11"/>
+				<textElement>
+					<font fontName="Arial" size="9"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[new java.text.SimpleDateFormat("HH:mm:ss").format($V{DATA_EMISSAO})]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="720" y="24" width="71" height="11"/>
+				<textElement>
+					<font fontName="Arial" size="9"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[new java.text.SimpleDateFormat("dd/MM/yyyy").format($V{DATA_EMISSAO})]]></textFieldExpression>
+			</textField>
+		</band>
+	</title>
+</jasperReport>

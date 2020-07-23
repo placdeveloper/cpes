@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<bancoobValidaveis:CanvasValidavel 
+	xmlns="br.com.bancoob.componentes.containers.*" 
+	xmlns:mx="http://www.adobe.com/2006/mxml" 
+	xmlns:bancoobValidaveis="br.com.bancoob.componentes.containers.validaveis.*"
+	xmlns:componentes="br.com.bancoob.componentes.*" 
+	xmlns:containers="br.com.bancoob.componentes.containers.*"
+	xmlns:grid="br.com.bancoob.componentes.grid.*"
+	xmlns:campos="br.com.bancoob.componentes.campos.*"
+	xmlns:titulo="br.com.bancoob.componentes.titulo.*"
+	width="100%" height="100%" styleName="ModuloSemEstilo" verticalScrollPolicy="auto">
+	
+	<mx:Script>
+		<![CDATA[
+			import br.com.bancoob.componentes.tabelapaginada.TabelaPaginadaUtils;
+		]]>
+	</mx:Script>
+	
+	<!-- ÁREA DE ASSOCIAÇÃO DE PARCEIROS -->
+		<titulo:SubtituloView texto="Associar parceiros" x="5" y="0" />
+		
+		<grid:Grid id="gridParceiros" left="5" width="100%" height="95%" right="25" bottom="0" allowMultipleSelection="false" tabIndex="8">
+			<grid:columns>
+				<grid:ColunaGrid id="colunaCpfCnpj" headerText="CPF/CNPJ" dataField="pessoaCompartilhamento.pessoa.cpfCnpj" width="120" sortable="false" labelFunction="{TabelaPaginadaUtils.defaultCNPJLabelFunction}" sortCompareFunction="{TabelaPaginadaUtils.criarDefaultSortFunction(colunaCpfCnpj)}" />
+				<grid:ColunaGrid id="colunaNome" headerText="Nome" dataField="pessoaCompartilhamento.nomePessoa" minWidth="200" sortable="false" labelFunction="{TabelaPaginadaUtils.defaultLabelFunction}" sortCompareFunction="{TabelaPaginadaUtils.criarDefaultSortFunction(colunaNome)}" />
+				<grid:ColunaGrid id="colunaTipoRelacionamento" headerText="Tipo relacionamento" dataField="tipoRelacionamento.descricao" minWidth="100" sortable="false" labelFunction="{TabelaPaginadaUtils.defaultLabelFunction}" sortCompareFunction="{TabelaPaginadaUtils.criarDefaultSortFunction(colunaNome)}" />
+				<grid:ColunaGrid id="colunaDataInicio" headerText="Data início" dataField="dataInicioRelacionamento" width="70" labelFunction="{TabelaPaginadaUtils.defaultDateLabelFunction}" textAlign="center" />
+				<grid:ColunaGrid id="colunaDataFim" headerText="Data fim" dataField="dataFimRelacionamento" width="70" labelFunction="{TabelaPaginadaUtils.defaultDateLabelFunction}" textAlign="center" />
+				<grid:ColunaGrid id="colunaAreaPosse" headerText="Área Posse" dataField="areaPosse" width="70" labelFunction="{TabelaPaginadaUtils.defaultValorNumericoLabelFunction}" textAlign="right" />
+			</grid:columns>
+		</grid:Grid>
+		
+		<containers:VBoxBancoob bottom="5" right="0" width="20" id="barraBotoesParticipantes" >
+			<componentes:Botao id="botaoAdicionar" toolTip="Incluir" styleName="botaoCrudAdicionarPeq" tabIndex="9" />
+			<componentes:Botao id="botaoEditar" toolTip="Editar" styleName="botaoCrudAlterarPeq" tabIndex="10" />
+			<componentes:Botao id="botaoExcluir" toolTip="Excluir" styleName="botaoCrudRemoverPeq" tabIndex="11" />				
+		</containers:VBoxBancoob>
+	
+</bancoobValidaveis:CanvasValidavel >

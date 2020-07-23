@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mx:Canvas xmlns:mx="http://www.adobe.com/2006/mxml"
+	       xmlns:bancoobInput="br.com.bancoob.componentes.input.*" 
+	       xmlns:bancoob="br.com.bancoob.componentes.*"
+	       implements="br.com.bancoob.componentes.IPermissaoIgnorar"
+	       creationComplete="init()"
+		   width="100" height="22" clipContent="false">
+	<bancoob:Botao id="botAnotacoes" x="0" y="0" width="100%" height="21" 
+		toolTip="CLIQUE PARA VISUALIZAR AS ANOTAÇÕES" label="Anotações" />
+	<mx:Script>
+		<![CDATA[
+			import br.com.bancoob.componentes.MostraCursor;
+			import br.com.sicoob.capes.corporativo.componentes.plataformaatendimento.ConfiguracoesCAPES;
+			import br.com.bancoob.componentes.containers.Janela;
+			import br.com.bancoob.negocio.vo.AplicacaoVO;
+			import br.com.bancoob.sisbr.portal.PortalModel;
+			import br.com.bancoob.vo.DestinoVO;
+			import br.com.sicoob.capes.corporativo.componentes.listarAnotacoes.dto.AnotacaoPessoaDTO;
+			
+			import mx.core.Application;
+			
+			private var painelAnotacoes:PainelListaAnotacoes;
+			private var janela:Janela;
+			
+			private var _idInstituicao:int = 0;
+			private var _idPessoa:int = 0;
+			private static const DESTINO_CAPES:String = "servicosJavaCapes";
+			
+			public function get idPessoa():int {
+				return _idPessoa;
+			}
+			public function set idPessoa(vlr:int):void {
+				_idPessoa = vlr;
+			}
+
+			public function get idInstituicao():int {
+				return _idInstituicao;
+			}
+			public function set idInstituicao(vlr:int):void {
+				_idInstituicao = vlr;
+			}
+
+			private function init():void {
+				
+				registerClassAlias("br.com.sicoob.sisbr.capes.integracao.negocio.dtos.AnotacaoPessoaDTO",
+					AnotacaoPessoaDTO);
+				
+				painelAnotacoes = new PainelListaAnotacoes();
+				botAnotacoes.addEventListener(MouseEvent.CLICK, listar);
+				
+				inicializarServicos();
+			}
+			
+			private function inicializarServicos():void {
+				if(ConfiguracoesCAPES.destinoCAPES == null) {
+					PortalModel.portal.obterDefinicoesDestino(DESTINO_CAPES, configurarDestino);
+				} else {
+					configurarDestino(ConfiguracoesCAPES.destinoCAPES);
+				}
+			}
+			
+			public function configurarDestino(destino:DestinoVO = null):void {
+				painelAnotacoes.configurarDestino(destino);
+			}
+
+			private function listar(evt:MouseEvent):void {
+				
+				if(janela == null){
+					janela = new Janela();
+					janela.addChild(painelAnotacoes);
+					janela.title = "Anotações";
+					janela.icone = "br/com/bancoob/imagens/icos/modulos/edit_16.png";				
+				}
+				
+				painelAnotacoes.listar(idPessoa, idInstituicao);
+	 			janela.abrir(Sprite(Application.application),true,true);			
+			}
+				
+			private function onDestinoCapesRecuperado(destino:DestinoVO):void {
+				MostraCursor.removeBusyCursor();
+				configurarDestino(destino);
+			}
+			
+		]]>
+	</mx:Script>
+		
+</mx:Canvas>

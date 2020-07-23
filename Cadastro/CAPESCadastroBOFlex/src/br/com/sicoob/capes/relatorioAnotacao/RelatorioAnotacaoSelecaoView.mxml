@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ModuloValidavel
+	xmlns="br.com.bancoob.componentes.containers.validaveis.*" 
+	xmlns:mx="http://www.adobe.com/2006/mxml" 
+	xmlns:titulo="br.com.bancoob.componentes.titulo.*" 
+	xmlns:componente="br.com.bancoob.componentes.*"
+   	xmlns:input="br.com.bancoob.componentes.input.*"
+	xmlns:servico="br.com.bancoob.util.servico.*"
+	xmlns:containers="br.com.bancoob.componentes.containers.*" 
+	xmlns:botoes="br.com.bancoob.componentes.botoes.*" 
+	xmlns:cadastro="br.com.bancoob.componentes.cadastro.*"
+	xmlns:validadores="br.com.bancoob.util.validadores.*" 
+	layout="absolute"
+	width="400" 
+	height="218">
+	
+	<mx:Script>
+		<![CDATA[
+			import br.com.sicoob.capes.comum.util.FormatadorUtil;
+		]]>
+	</mx:Script>
+	
+	<titulo:SubtituloView texto="Filtro" left="10" right="10" top="10"/>
+	
+	<componente:Rotulo text="Tipo de Pessoa:" left="10" top="46"/>
+	<input:Combo name="cmbTipoPessoa" id="cmbTipoPessoa" labelField="descTipoPessoa"
+		identificadorItem="codTipoPessoa" inserirItemOpcional="true" width="150" top="44" x="100" />
+
+	<componente:Rotulo text="CPF/CNPJ:" left="10" top="72"/> 
+	<input:InputCPFCNPJ id="cpfCnpj" x="100" top="70" width="150" />
+
+	<componente:Rotulo text="Tipo de Anotação:" textAlign="left" top="98" left="10" right="534"/>
+	<input:Combo id="cmbTipoAnotacao" top="96" width="200" x="100" labelField="descTipoAnotacao" 
+		inserirItemOpcional="true" />
+			
+	<componente:Rotulo text="Situação:" left="10" top="124" />
+	<input:ComboBooleana id="cmbSituacao" x="100" top="122" width="150" inserirItemOpcional="true" 
+		labelItemOpcional="Todas" labelFalso="{FormatadorUtil.SITUACAO_ANOTACAO_VIGENTES}" 
+		labelVerdadeiro="{FormatadorUtil.SITUACAO_ANOTACAO_BAIXADAS}" enabled="false" />
+	
+	<componente:Rotulo text="Período:" left="10" top="150"/>
+	<input:Data id="dataInicio" top="148" x="100"/>
+	<componente:Rotulo text="a" x="220" top="150" width="10"/>
+	<input:Data id="dataFim" top="148" x="240"/>
+	
+	<titulo:LinhaView id="linha" height="5" width="100%" y="180"/>
+	<mx:HBox id="botoes" width="100%" horizontalAlign="right" horizontalGap="5" top="190">
+		<componente:Botao label="Gerar Relatório" id="btnGerar" height="22" />
+		<componente:Botao label="Limpar" id="btnLimpar" height="22" />
+	</mx:HBox>
+</ModuloValidavel>

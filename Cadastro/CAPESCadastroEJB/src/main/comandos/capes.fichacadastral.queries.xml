@@ -1,0 +1,407 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE queries [
+	<!ELEMENT queries (query*)>
+	<!ELEMENT query (use-case+,description,paginacao?,command+,projecao?,ordenacoes?)>
+	<!ELEMENT use-case    (#PCDATA)>
+	<!ELEMENT description (#PCDATA)>
+	<!ELEMENT command     (#PCDATA)>
+	<!ELEMENT parametros  (#PCDATA)>
+	<!ELEMENT projecao  (#PCDATA)>
+	<!ELEMENT paginar  (#PCDATA)>
+	<!ELEMENT paginacao (#PCDATA)>
+	<!ELEMENT colunaCodigo    (#PCDATA)>
+	<!ELEMENT colunaDescricao    (#PCDATA)>
+	<!ELEMENT numeroOcorrenciasPorPagina    (#PCDATA)>
+	<!ELEMENT primeiraCondicao    (#PCDATA)>
+	<!ELEMENT ascendente    (#PCDATA)>
+	<!ELEMENT ordenacoes (ordenacao+)>
+	<!ELEMENT ordenacao (#PCDATA)>
+	<!ELEMENT sql  (#PCDATA)>
+	<!ATTLIST ordenacao chave CDATA    #REQUIRED>
+	<!ATTLIST ordenacao default CDATA    #IMPLIED>
+	<!ATTLIST command parametros CDATA    #IMPLIED>
+	<!ATTLIST command paginar CDATA    #IMPLIED>
+	<!ATTLIST use-case name CDATA    #REQUIRED>
+	<!ATTLIST query name CDATA    #REQUIRED>
+	<!ATTLIST paginacao colunaCodigo CDATA    #REQUIRED>
+	<!ATTLIST paginacao colunaDescricao CDATA    #REQUIRED>
+	<!ATTLIST paginacao numeroOcorrenciasPorPagina CDATA    #REQUIRED>
+	<!ATTLIST paginacao primeiraCondicao CDATA    #REQUIRED>
+	<!ATTLIST paginacao ascendente CDATA    #REQUIRED>
+	<!ATTLIST paginacao hint CDATA    #REQUIRED>
+	<!ATTLIST paginacao hintAuxiliar CDATA   #IMPLIED>
+]>
+
+<queries>
+
+	<query name="TRIBUTACAO_POR_PESSOA">
+		<use-case name="Manter Referencia" />
+		<description>Recupera as tributacoes</description>
+		<command>
+			<![CDATA[
+			FROM ${criterios.classeConsulta} tributacao
+			  WHERE 1 = 1
+			<j:if test="${criterios.filtro != null}">
+				and tributacao.idPessoaCompartilhamento = <bancoob:valorOql valor="${criterios.filtro.pessoaCompartilhamento.idPessoaCompartilhamento}" tipo="Long" />
+			</j:if>
+			]]>
+		</command>
+	</query>
+	
+	<query name="DEPENDENCIA_POR_BEM">
+		<use-case name="Manter BEM" />
+		<description>Recupera as dependencia do bem</description>
+		<command>
+			<![CDATA[
+			FROM ${criterios.classeConsulta} dependencia
+			  WHERE 1 = 1
+			<j:if test="${criterios.filtro != null}">
+				and dependencia.bem.id = <bancoob:valorOql valor="${criterios.filtro.idBem}" tipo="Long" />
+			</j:if>
+			]]>
+		</command>
+	</query>
+	
+	<query name="CONSULTA_HISTORICO_PESSOA">
+		<use-case name="Pesquisar pessoa"></use-case>
+		<description>Pesquisa de pessoa por documento</description>
+		<command>
+			<![CDATA[
+            <j:choose>
+              <j:when test="${criterios.filtro.pessoa.tipoPessoa.codTipoPessoa != null and criterios.filtro.pessoa.tipoPessoa.codTipoPessoa == 0}">
+                FROM br.com.sicoob.capes.negocio.entidades.historico.HistoricoPessoaFisica pessoa
+              </j:when>
+              <j:otherwise>
+                FROM br.com.sicoob.capes.negocio.entidades.historico.HistoricoPessoaJuridica pessoa
+              </j:otherwise>
+            </j:choose>
+      
+   			WHERE pessoa.pessoaCompartilhamento.idPessoaCompartilhamento = <bancoob:valorOql valor="${criterios.filtro.idPessoaCompartilhamento}" tipo="Long" />
+			]]>
+		</command>
+		<ordenacoes>
+			<ordenacao chave="dataHoraInicio" default="true">
+				<![CDATA[ORDER BY pessoa.dataHoraInicio]]>
+			</ordenacao>
+		</ordenacoes>
+	</query>
+	
+	<query name="PESQUISA_REFERENCIA_POR_PESSOA">
+		<use-case name="Manter Referencia" />
+		<description>Recupera as referencias da pessoa</description>
+		<command>
+			<![CDATA[
+			FROM ${criterios.classeConsulta} referencia
+			  WHERE 1 = 1
+			<j:if test="${criterios.filtro != null}">
+				and referencia.pessoa.idPessoaCompartilhamento = <bancoob:valorOql valor="${criterios.filtro.idPessoaCompartilhamento}" tipo="Long" />
+			</j:if>
+			]]>
+		</command>
+	</query>
+	
+	<query name="PESQUISA_FONTE_RENDA_POR_PESSOA_COMPARTILHAMENTO">
+		<use-case name="Manter fonte de renda."></use-case>
+		<description>Pesquisa as fonte de rendas</description>
+		<command>
+			<![CDATA[
+			FROM ${criterios.classeConsulta}  fonte
+			WHERE fonte.pessoaCompartilhamento.idPessoaCompartilhamento = <bancoob:valorOql valor="${criterios.filtro.pessoaCompartilhamento.idPessoaCompartilhamento}" tipo="Long" />
+			]]>
+		</command>
+		<ordenacoes>
+			<ordenacao chave="idFonteRenda" default="true">
+				<![CDATA[order by idFonteRenda]]>
+			</ordenacao>
+		</ordenacoes>		
+	</query>	
+  
+	<query name="PESQUISA_BEM_POR_PESSOA">
+		<use-case name="Manter bem" />
+		<description>Recupera os bens da pessoa</description>
+		<command>
+			<![CDATA[
+			<j:if test="${criterios.procurarPor == 'POR BEM IMOVEL'}">
+				FROM ${criterios.classeConsulta}  bem
+			</j:if>
+			<j:if test="${criterios.procurarPor == 'POR BEM'}">
+				FROM ${criterios.classeConsulta} bem
+			</j:if>
+
+			WHERE 1 = 1 
+			<j:if test="${criterios.filtro != null}">
+				and bem.pessoaCompartilhamento.id = <bancoob:valorOql valor="${criterios.filtro.pessoaCompartilhamento.idPessoaCompartilhamento}" tipo="Long" />
+			</j:if>
+			<j:if test="${criterios.filtro.codLocalizacao != null}">
+				and bem.codLocalizacao = <bancoob:valorOql valor="${criterios.filtro.codLocalizacao}" tipo="String" />
+			</j:if>
+			]]>
+		</command>
+		<ordenacoes>
+			<ordenacao chave="dataHoraInicio" default="true">
+				<![CDATA[order by bem.dataHoraInicio]]>
+			</ordenacao>
+		</ordenacoes>	
+	</query>	
+
+	<query name="PESQUISA_HISTORICO_BEM_IMOVEL_POR_PESSOA">
+		<use-case name="Manter bem" />
+		<description>Recupera os bens da pessoa</description>
+		<command>
+			<![CDATA[
+				FROM br.com.sicoob.capes.negocio.entidades.bemantigo.HistoricoBemImovel bem
+			WHERE 1 = 1 
+			<j:if test="${criterios.filtro != null}">
+				and bem.pessoaCompartilhamento.id = <bancoob:valorOql valor="${criterios.filtro.pessoaCompartilhamento.idPessoaCompartilhamento}" tipo="Long" />
+			</j:if>
+			<j:if test="${criterios.filtro.codLocalizacao != null}">
+				and bem.codLocalizacao = <bancoob:valorOql valor="${criterios.filtro.codLocalizacao}" tipo="String" />
+			</j:if>
+			]]>
+		</command>
+		<ordenacoes>
+			<ordenacao chave="dataHoraInicio" default="true">
+				<![CDATA[order by bem.dataHoraInicio]]>
+			</ordenacao>
+		</ordenacoes>	
+	</query>
+	
+	
+	
+	
+	
+	<query name="PESQUISA_HISTORICO_BEM_IMOVEL_NOVO_POR_PESSOA">
+		<use-case name="Manter bem" />
+		<description>Recupera os bens da pessoa</description>
+		<command>
+			<![CDATA[
+				FROM br.com.sicoob.capes.negocio.entidades.bem.historico.HistoricoBemPessoaCompartilhamento bem
+			WHERE 1 = 1 
+			<j:if test="${criterios.filtro != null}">
+				and bem.pessoaCompartilhamento.id = <bancoob:valorOql valor="${criterios.filtro.pessoaCompartilhamento.idPessoaCompartilhamento}" tipo="Long" />
+			</j:if>
+			<j:if test="${criterios.filtro.codLocalizacao != null}">
+				and bem.codLocalizacao = <bancoob:valorOql valor="${criterios.filtro.codLocalizacao}" tipo="String" />
+			</j:if>
+				and bem.idUsuarioExclusao is not null	
+	 			and  (bem.dataHoraInicio  >=  <bancoob:valorOql valor="${criterios.data}" tipo="DateTimeDB" /> or bem.dataHoraFim >= <bancoob:valorOql valor="${criterios.data}" tipo="Date" />) 
+				
+			]]>
+		</command>
+		<ordenacoes>
+			<ordenacao chave="dataHoraInicio" default="true">
+				<![CDATA[order by bem.dataHoraInicio]]>
+			</ordenacao>
+		</ordenacoes>	
+	</query>
+	
+
+	<query name="PESQUISA_BEM_DIFERENTE_DE_IMOVEL_POR_PESSOA">
+		<use-case name="Manter bem" />
+		<description>Recupera os bens da pessoa</description>
+		<command>
+			<![CDATA[
+				FROM ${criterios.classeConsulta} bem
+				WHERE 1 = 1 
+			<j:if test="${criterios.filtro != null}">
+				and bem.pessoaCompartilhamento.id = <bancoob:valorOql valor="${criterios.filtro.pessoaCompartilhamento.idPessoaCompartilhamento}" tipo="Long" />
+			</j:if>
+				and bem.subTipo.tipoBem.id != 1
+			]]>
+		</command>
+		<ordenacoes>
+			<ordenacao chave="dataHoraInicio" default="true">
+				<![CDATA[order by bem.dataHoraInicio]]>
+			</ordenacao>
+		</ordenacoes>	
+	</query>
+
+	<query name="PESQUISA_CERTIDAO_POR_PESSOA">
+		<use-case name="Manter Certidao" />
+		<description>Recupera as certidoes da pessoa</description>
+		<command>
+			<![CDATA[
+			SELECT certidao
+			FROM ${criterios.classeConsulta} certidao
+			WHERE 1 = 1 
+			<j:if test="${criterios.filtro != null and criterios.filtro.pessoa != null}">
+				and certidao.pessoa.idPessoaCompartilhamento = <bancoob:valorOql valor="${criterios.filtro.pessoa.idPessoaCompartilhamento}" tipo="Long" />
+			</j:if>
+			]]>
+		</command>
+		<ordenacoes>
+			<ordenacao chave="dataHoraInicio" default="true">
+				<![CDATA[order by certidao.dataHoraInicio]]>
+			</ordenacao>
+		</ordenacoes>	
+	</query>		
+	
+	<query name="PESQUISA_ENDERECO_POR_PESSOA_COMPARTILHAMENTO">
+		<use-case name="Manter Endereço" />
+		<description>Recupera os enderecos da pessoa</description>
+		<command>
+			<![CDATA[
+			FROM ${criterios.classeConsulta} endereco
+			WHERE endereco.pessoaCompartilhamento.idPessoaCompartilhamento = <bancoob:valorOql valor="${criterios.filtro.pessoaCompartilhamento.idPessoaCompartilhamento}" tipo="Long" />
+			]]>
+		</command>
+	</query>
+		
+	<query name="PESQUISA_TELEFONE_POR_PESSOA_COMPARTILHAMENTO">
+		<use-case name="Manter Telefone" />
+		<description>Recupera os telefones da pessoa</description>
+		<command>
+			<![CDATA[
+			FROM ${criterios.classeConsulta} telefone
+			WHERE telefone.pessoaCompartilhamento.idPessoaCompartilhamento = <bancoob:valorOql valor="${criterios.filtro.pessoaCompartilhamento.idPessoaCompartilhamento}" tipo="Long" />
+			]]>
+		</command>
+	</query>		
+	
+	<query name="PESQUISA_EMAIL_POR_PESSOA_COMPARTILHAMENTO">
+		<use-case name="Manter Email" />
+		<description>Recupera os emails da pessoa</description>
+		<command>
+			<![CDATA[
+			FROM ${criterios.classeConsulta} email
+			WHERE email.pessoaCompartilhamento.idPessoaCompartilhamento = <bancoob:valorOql valor="${criterios.filtro.pessoaCompartilhamento.idPessoaCompartilhamento}" tipo="Long" />
+			]]>
+		</command>
+	</query>	
+	
+	<query name="PESQUISAR_RELACIONAMENTOS_CEDIDOS">
+		<use-case name="Manter Relacionamento" />
+		<description>Pesquisa os relacionamentos cedidos por pessoa</description>
+		<command>
+			<![CDATA[
+				SELECT 
+					rel
+				FROM 
+					${criterios.classeConsulta} rel
+					INNER JOIN FETCH rel.pessoa pessoa
+					INNER JOIN FETCH pessoa.compartilhamentos pessoaCompartilhamento
+					INNER JOIN FETCH pessoaCompartilhamento.transicoes transicao
+					INNER JOIN FETCH rel.pessoaRelacionada pessoaRelacionada
+					INNER JOIN FETCH pessoaRelacionada.compartilhamentos pessoaRelCompartilhamento
+					INNER JOIN FETCH pessoaRelCompartilhamento.transicoes transicaoRel
+				WHERE 
+					transicao.instituicao.idInstituicao = rel.idInstituicao
+					AND transicaoRel.instituicao.idInstituicao = rel.idInstituicao
+					AND rel.pessoa.idPessoa = <bancoob:valorOql valor="${criterios.filtro.pessoa.idPessoa}" tipo="Integer" /> 
+					AND rel.idInstituicao = <bancoob:valorOql valor="${criterios.filtro.idInstituicao}" tipo="Integer" />
+			]]>
+		</command>
+		<ordenacoes>
+			<ordenacao chave="nomePessoa" default="true">
+				<![CDATA[ORDER BY pessoaCompartilhamento.nomePessoa]]>
+			</ordenacao>
+			<ordenacao chave="dataHoraInicio">
+				<![CDATA[order by rel.dataHoraInicio]]>
+			</ordenacao>
+		</ordenacoes>
+	</query>
+	
+	<query name="PESQUISA_TRIBUTACAO_POR_PESSOA">
+		<use-case name="Manter Certidao" />
+		<description>Recupera a tributacao da pessoa</description>
+		<command>
+			<![CDATA[
+			FROM ${criterios.classeConsulta} tributacao
+			WHERE 1 = 1 
+			and tributacao.pessoaCompartilhamento.id = <bancoob:valorOql valor="${idPessoa}" tipo="Integer" />
+			]]>
+		</command>
+	</query>	
+
+	<query name="PRODUTOR_POR_PESSOA">
+		<use-case name="Produtor" />
+		<description>Recupera os produtores da pessoa</description>
+		<command>
+			<![CDATA[
+			FROM ${criterios.classeConsulta} produtor
+			WHERE 1 = 1 
+			<j:if test="${criterios.filtro != null and criterios.filtro.pessoaCompartilhamento != null}">
+				and produtor.pessoaCompartilhamento.idPessoaCompartilhamento = <bancoob:valorOql valor="${criterios.filtro.pessoaCompartilhamento.idPessoaCompartilhamento}" tipo="Long" />
+			</j:if>
+			]]>
+		</command>
+	</query>	
+
+	<query name="PESQUISA_PESSOA_INSTITUICAO_POR_PESSOA">
+		<use-case name="Manter dados do cliente" />
+		<description>Recupera a pessoa instiuicao</description>
+		<command>
+			<![CDATA[
+			FROM ${criterios.classeConsulta} pi
+			WHERE 1 = 1 
+			and pi.pessoa.id = <bancoob:valorOql valor="${criterios.filtro.pessoa.idPessoa}" tipo="Integer" />
+			and pi.idInstituicao = <bancoob:valorOql valor="${criterios.filtro.idInstituicao}" tipo="Integer" />
+			]]>
+		</command>
+	</query>
+
+	<query name="PESQUISA_GRUPO_ECONOMICO_POR_PESSOA">
+		<use-case name="Manter dados do cliente" />
+		<description>Recupera os grupos da pessoa</description>
+		<command>
+			<![CDATA[
+			FROM ${criterios.classeConsulta} ge
+			JOIN ge.pessoasInstituicao p
+			WHERE ge.idInstituicao = <bancoob:valorOql valor="${criterios.filtro.instituicao.idInstituicao}" tipo="Integer" />
+			<j:if test="${criterios.filtro.pessoa.idPessoa != null}">
+				and p.pessoa.idPessoa = <bancoob:valorOql valor="${criterios.filtro.pessoa.idPessoa}" tipo="Integer" />
+			</j:if>
+			]]>
+		</command>
+	</query>
+	
+	<query name="CONSULTAR_ENDERECO_CORRESPONDENCIA_PESSOA">
+		<use-case name="Consultar endereço de correspondencia da pessoa"></use-case>
+		<description>Pesquisa de endereco de correspondencia</description>
+		<command>
+			<![CDATA[
+			FROM ${criterios.classeConsulta} endereco
+   			WHERE endereco.idInstituicao = <bancoob:valorOql valor="${instituicao.idInstituicao}" tipo="Integer" />
+ 			AND	endereco.pessoaCompartilhamento.idPessoaCompartilhamento = <bancoob:valorOql valor="${pessoaCompartilhamento.idPessoaCompartilhamento}" tipo="Long" />
+			]]>
+		</command>
+	</query>	
+	
+	<query name="PESQUISAR_PRODUTIVIDADE">
+		<use-case name="Manter Produtor"></use-case>
+		<description>Pesquisa as produtividades</description>
+		<command>
+			<![CDATA[
+			FROM ${criterios.classeConsulta} produtividade 
+			WHERE produtividade.pessoaCompartilhamento.idPessoaCompartilhamento = <bancoob:valorOql valor="${criterios.filtro.pessoaCompartilhamento.idPessoaCompartilhamento}" tipo="Long" />
+			<j:if test="${criterios.tipoConsulta.name == 'ATUAL'}">
+				and produtividade.situacao = 1
+			</j:if>
+			]]>
+		</command>
+		<ordenacoes>
+			<ordenacao chave="dataHoraInicio" default="true">
+				<![CDATA[order by dataHoraInicio]]>
+			</ordenacao>
+		</ordenacoes>		
+	</query>
+	
+	<query name="PESQUISAR_ENTIDADE_EM_AUTORIZACAO">
+		<use-case name="Ficha cadastral em autorização"></use-case>
+		<description>
+			Pesquisa se a entidade está em autorização e se a coluna de descrição da
+			tabela Autorização tem algum valor. Essa coluna só será preenchida no caso
+			das seguintes entidades PESSOA, PRODUTOR, TRIBUTACAO e RESPONSAVEL		
+		</description>
+		<command>
+			<![CDATA[
+			FROM br.com.sicoob.capes.negocio.entidades.Autorizacao a			
+			WHERE a.tipoOperacao not in('E')
+			AND a.alteracao is not null
+			AND a.tipoAutorizacao = <bancoob:valorOql valor="${criterios.tipoAutorizacao.tipoAutorizacao}" tipo="String" />			
+			AND a.pessoa.idPessoa = <bancoob:valorOql valor="${criterios.idPessoaSelecionada}" tipo="Integer" />			
+			]]>
+		</command>			
+	</query>	
+</queries>

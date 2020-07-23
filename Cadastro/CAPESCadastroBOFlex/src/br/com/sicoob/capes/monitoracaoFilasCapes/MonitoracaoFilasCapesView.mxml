@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<bancoob:Modulo xmlns:mx="http://www.adobe.com/2006/mxml" layout="absolute" 
+	xmlns:bancoob="br.com.bancoob.componentes.*" 
+	xmlns:input="br.com.bancoob.componentes.input.*" 
+	xmlns:containers="br.com.bancoob.componentes.containers.*"
+	xmlns:bancoobGrid="br.com.bancoob.componentes.grid.*" 
+	xmlns:campos="br.com.bancoob.componentes.campos.*"
+	xmlns:validaveis="br.com.bancoob.componentes.containers.validaveis.*"
+	xmlns:janelas="br.com.sicoob.capes.monitoracaoFilasCapes.janelas.*"
+	height="100%" width="100%" verticalScrollPolicy="auto">
+
+	<containers:VBoxBancoob width="100%" height="100%" left="5" right="15" top="10" bottom="10" verticalScrollPolicy="off">
+		<containers:HBoxBancoob width="100%" height="100%" verticalScrollPolicy="off" horizontalGap="-1">
+			<containers:CanvasBancoob width="100%" borderStyle="solid" borderThickness="1" borderColor="#C0C0C0">		
+				<bancoob:Rotulo text="Mensagens de Replicação" top="5" fontWeight="bold" fontSize="16" left="10"/>
+				<containers:VBoxBancoob id="boxMensagens" top="30" width="100%" height="100%" paddingLeft="0" paddingRight="0" 
+						left="2" right="2" bottom="2">
+					<janelas:CanvasIndicador id="canvasNaoEnviadas" width="100%" height="100%" />
+					<janelas:CanvasIndicador id="canvasNaoProcessadas"  width="100%" height="100%" />
+				</containers:VBoxBancoob>
+			</containers:CanvasBancoob>
+			
+			<containers:CanvasBancoob width="100%" borderStyle="solid" borderThickness="1" borderColor="#C0C0C0">		
+				<bancoob:Rotulo text="Fila de Atualização Cadastral" top="5" fontWeight="bold" fontSize="16" left="10"/>
+				<containers:VBoxBancoob id="boxReplicacao" top="30" width="100%" height="100%" paddingLeft="0" paddingRight="0" 
+						left="2" right="2" bottom="2">
+					<janelas:CanvasIndicador id="canvasFilaAtualizacaoCadastral" width="100%" height="100%" />
+					<janelas:CanvasIndicador id="canvasDlqAtualizacaoCadastral"  width="100%" height="100%" />
+				</containers:VBoxBancoob>
+			</containers:CanvasBancoob>	
+			
+			<containers:CanvasBancoob width="100%" borderStyle="solid" borderThickness="1" borderColor="#C0C0C0">
+				<bancoob:Rotulo text="Fila de Consultas Externas/Anotações" top="5" fontWeight="bold" fontSize="16" left="10"/>
+				<containers:VBoxBancoob id="boxConsultas" top="30" width="100%" height="100%" paddingLeft="0" paddingRight="0" 
+						left="2" right="2" bottom="2">
+					<janelas:CanvasIndicador id="canvasFilaConsultasExternas" width="100%" height="100%" />
+					<janelas:CanvasIndicador id="canvasDlqConsultasExternas"  width="100%" height="100%" />
+				</containers:VBoxBancoob>			
+			</containers:CanvasBancoob>
+	
+		</containers:HBoxBancoob>
+
+		<containers:CanvasBancoob height="45" width="100%" >
+			<bancoob:Rotulo text="Ultima atualização: " x="15"  fontFamily="ArialEmbedded" fontWeight="bold" fontSize="20" verticalCenter="0"/>
+			<bancoob:Rotulo text="" id="lbDataConsulta" x="230" fontFamily="ArialEmbedded" fontWeight="bold" fontSize="20" verticalCenter="0"/>
+			<bancoob:Botao label="Atualizar" id="btAtualizar" verticalCenter="0" right="20"/>
+		</containers:CanvasBancoob>				
+	</containers:VBoxBancoob>
+
+</bancoob:Modulo>

@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="CabecalhoFichaCadastral_NOVO" pageWidth="575" pageHeight="80" whenNoDataType="AllSectionsNoDetail" columnWidth="575" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0" uuid="2f475442-919d-47b9-b1d3-8d161d268a74">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="TITULO" class="java.lang.String"/>
+	<parameter name="URL_LOGO" class="java.net.URL"/>
+	<parameter name="LABEL_FILTRO_DATA" class="java.lang.String"/>
+	<parameter name="ID_UNIDADE_INST" class="java.lang.Integer"/>
+	<parameter name="ID_INSTITUICAO" class="java.lang.Integer"/>
+	<parameter name="NUM_COOPERATIVA" class="java.lang.Integer"/>
+	<parameter name="DATA_ULTIMA_ATUALIZACAO" class="java.util.Date"/>
+	<variable name="DATA_EMISSAO" class="java.lang.String"/>
+	<title>
+		<band height="80" splitType="Stretch">
+			<staticText>
+				<reportElement uuid="f305b80b-8a1f-4c72-83f8-e0fb14fe9a86" x="0" y="0" width="575" height="80"/>
+				<box>
+					<topPen lineWidth="0.5" lineStyle="Solid"/>
+					<leftPen lineWidth="0.5" lineStyle="Solid"/>
+					<bottomPen lineWidth="0.5" lineStyle="Solid"/>
+					<rightPen lineWidth="0.5" lineStyle="Solid"/>
+				</box>
+				<textElement/>
+				<text><![CDATA[]]></text>
+			</staticText>
+			<image vAlign="Middle">
+				<reportElement uuid="fe91c677-6cae-4381-933a-ab0c004594d0" x="17" y="11" width="122" height="38"/>
+				<imageExpression><![CDATA[$P{URL_LOGO}]]></imageExpression>
+			</image>
+			<staticText>
+				<reportElement uuid="b1140f19-916d-46c4-8413-d64e24f9e766" x="263" y="6" width="117" height="18"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Times New Roman" size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[FICHA CADASTRAL]]></text>
+			</staticText>
+			<textField pattern="###0" isBlankWhenNull="true">
+				<reportElement uuid="21b84417-08b6-449a-8575-929d788f73eb" x="262" y="25" width="301" height="17"/>
+				<box topPadding="2" leftPadding="2" bottomPadding="2" rightPadding="2"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Times New Roman" size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{LABEL_FILTRO_DATA}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement uuid="b775c346-5f71-43d6-ba14-b0c076904c95" x="263" y="43" width="77" height="12"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Times New Roman" size="8"/>
+				</textElement>
+				<text><![CDATA[COOPERATIVA/PA:]]></text>
+			</staticText>
+			<textField isBlankWhenNull="true">
+				<reportElement uuid="16372439-5f8e-4036-aba9-13f151e4938f" x="340" y="43" width="73" height="12"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Times New Roman" size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{NUM_COOPERATIVA} + " / " + $P{ID_UNIDADE_INST}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement uuid="017e8f80-c248-4d3f-b74f-1f6ba222b582" x="263" y="57" width="145" height="14"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Times New Roman" size="8"/>
+				</textElement>
+				<text><![CDATA[ÚLTIMA RENOVAÇÃO CADASTRAL:]]></text>
+			</staticText>
+			<textField pattern="dd/MM/yyyy" isBlankWhenNull="true">
+				<reportElement uuid="78dfa106-7093-4d48-9316-9eff412bdf6c" x="408" y="57" width="49" height="14"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Times New Roman" size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{DATA_ULTIMA_ATUALIZACAO}]]></textFieldExpression>
+			</textField>
+		</band>
+	</title>
+</jasperReport>

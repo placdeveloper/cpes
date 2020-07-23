@@ -1,0 +1,364 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="RelatorioTributacao" pageWidth="842" pageHeight="595" orientation="Landscape" whenNoDataType="AllSectionsNoDetail" columnWidth="802" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="9292d634-3070-4a8c-a8c6-2783de23d2e0">
+	<parameter name="URL_LOGO" class="java.net.URL">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<parameter name="FILTRO" class="br.com.sicoob.capes.relatorio.negocio.dto.RelatorioTributacaoDTO"/>
+	<parameter name="TITULO_RELATORIO" class="java.lang.String"/>
+	<parameter name="CODIGO_RELATORIO" class="java.lang.String"/>
+	<field name="numeroCentral" class="java.lang.String"/>
+	<field name="numeroCooperativa" class="java.lang.String"/>
+	<field name="idUnidadeInst" class="java.lang.Integer"/>
+	<field name="nomePessoa" class="java.lang.String"/>
+	<field name="cpfCnpj" class="java.lang.String"/>
+	<field name="cobraIR" class="java.lang.Boolean"/>
+	<field name="cobraIOF" class="java.lang.Boolean"/>
+	<field name="codigoOcupacao" class="java.lang.String"/>
+	<field name="descOcupacao" class="java.lang.String"/>
+	<field name="agrupador" class="java.lang.String"/>
+	<variable name="dataAtual" class="java.util.Date">
+		<variableExpression><![CDATA[new java.util.Date()]]></variableExpression>
+	</variable>
+	<group name="centralSingularUnidade">
+		<groupExpression><![CDATA[$F{agrupador}]]></groupExpression>
+		<groupHeader>
+			<band height="19">
+				<textField>
+					<reportElement uuid="15d54b13-2e4b-4a5a-ba89-a8809498ce11" x="0" y="5" width="802" height="10" printWhenGroupChanges="centralSingularUnidade">
+						<printWhenExpression><![CDATA[new Boolean(($F{numeroCentral} != null) && ($F{numeroCooperativa} != null) && ($F{idUnidadeInst} != null))]]></printWhenExpression>
+					</reportElement>
+					<textElement verticalAlignment="Bottom">
+						<font fontName="Times New Roman" size="8" isBold="true" pdfFontName=""/>
+					</textElement>
+					<textFieldExpression><![CDATA["Central: " + $F{numeroCentral}
+    + " / Instituição: " + $F{numeroCooperativa}
+    + " / Unidade: " + $F{idUnidadeInst}]]></textFieldExpression>
+				</textField>
+				<line>
+					<reportElement uuid="c42d0dc6-10c8-4f15-a6d5-2cc77e66d5ca" x="0" y="16" width="802" height="1" printWhenGroupChanges="centralSingularUnidade">
+						<printWhenExpression><![CDATA[new Boolean(($F{numeroCentral} != null) && ($F{numeroCooperativa} != null) && ($F{idUnidadeInst} != null))]]></printWhenExpression>
+					</reportElement>
+					<graphicElement>
+						<pen lineWidth="0.5" lineStyle="Dashed" lineColor="#999999"/>
+					</graphicElement>
+				</line>
+			</band>
+		</groupHeader>
+	</group>
+	<title>
+		<band height="66" splitType="Stretch">
+			<rectangle>
+				<reportElement uuid="7c106a71-27a1-4083-8cd1-048ab1cbb9f4" x="0" y="0" width="802" height="60"/>
+			</rectangle>
+			<textField evaluationTime="Report" pattern="dd/MM/yyyy" isBlankWhenNull="true">
+				<reportElement uuid="b528dfa0-a04b-4c0b-973e-3ec0602ec80a" x="749" y="7" width="42" height="15"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Times New Roman" size="7"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{dataAtual}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement uuid="067128b3-8392-41de-9daa-14854e469b3b" x="688" y="22" width="61" height="15"/>
+				<textElement verticalAlignment="Middle" markup="none">
+					<font fontName="Times New Roman" size="7"/>
+				</textElement>
+				<text><![CDATA[Data Emissão:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="51275eb1-19a9-43ef-97e1-eb8568323fca" x="688" y="37" width="61" height="15"/>
+				<textElement verticalAlignment="Middle" markup="none">
+					<font fontName="Times New Roman" size="7"/>
+				</textElement>
+				<text><![CDATA[Hora Emissão:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="4493d223-a8eb-4145-b3eb-5f3835572ad2" x="280" y="10" width="242" height="15"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Times New Roman" isBold="true"/>
+				</textElement>
+				<text><![CDATA[SICOOB]]></text>
+			</staticText>
+			<image onErrorType="Blank">
+				<reportElement uuid="df9c0aaf-ac7e-44cc-9c7d-b8f920c755b9" x="12" y="7" width="132" height="47"/>
+				<imageExpression><![CDATA[$P{URL_LOGO}]]></imageExpression>
+			</image>
+			<textField evaluationTime="Report" pattern="HH:mm:ss" isBlankWhenNull="true">
+				<reportElement uuid="29c9bac8-6b40-40d2-b9e0-5f799978ad05" x="749" y="37" width="42" height="15"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Times New Roman" size="7"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{dataAtual}]]></textFieldExpression>
+			</textField>
+			<textField evaluationTime="Report" pattern="dd/MM/yyyy" isBlankWhenNull="true">
+				<reportElement uuid="0114dae9-acef-4a38-9ec1-8da2c7f49b29" x="749" y="22" width="42" height="15"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Times New Roman" size="7"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{dataAtual}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="846ad764-4a46-47d6-b8ff-959a078c3245" x="280" y="25" width="242" height="15"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle" markup="none">
+					<font fontName="Times New Roman" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{TITULO_RELATORIO}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement uuid="e983dadc-9e1d-4ce6-b895-53d9b64f9442" x="688" y="7" width="61" height="15"/>
+				<textElement verticalAlignment="Middle" markup="none">
+					<font fontName="Times New Roman" size="7"/>
+				</textElement>
+				<text><![CDATA[Data Processamento:]]></text>
+			</staticText>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="53">
+			<printWhenExpression><![CDATA[new Boolean($V{PAGE_NUMBER}.intValue() == 1)]]></printWhenExpression>
+			<rectangle>
+				<reportElement uuid="149d1b25-f0a3-45e8-867d-f1e022376dd4" stretchType="RelativeToBandHeight" x="0" y="8" width="802" height="42"/>
+			</rectangle>
+			<staticText>
+				<reportElement uuid="e6ec0835-4ab1-4417-ac6e-6d9a762eb9d3" mode="Opaque" x="10" y="0" width="46" height="15"/>
+				<box>
+					<pen lineWidth="1.0"/>
+					<topPen lineWidth="0.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="0.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Times New Roman" size="8" isBold="true" pdfFontName=""/>
+				</textElement>
+				<text><![CDATA[FILTROS]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="aceaeec9-358c-488e-ab8e-c991ef2ce37b" x="10" y="25" width="35" height="10"/>
+				<textElement>
+					<font fontName="Times New Roman" size="8" isBold="true" pdfFontName=""/>
+				</textElement>
+				<text><![CDATA[Central:]]></text>
+			</staticText>
+			<textField pattern="0000" isBlankWhenNull="true">
+				<reportElement uuid="91e6db04-bce6-42e9-b74b-a086e2d44e8f" x="50" y="25" width="25" height="10"/>
+				<textElement>
+					<font fontName="Times New Roman" size="8" isItalic="true" pdfFontName=""/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{FILTRO}.getCentral().getNumeroCooperativa()]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement uuid="6232ee8a-a510-4699-b33f-0fe5f64eb009" x="85" y="25" width="45" height="10"/>
+				<textElement>
+					<font fontName="Times New Roman" size="8" isBold="true" pdfFontName=""/>
+				</textElement>
+				<text><![CDATA[Instituição:]]></text>
+			</staticText>
+			<textField pattern="0000" isBlankWhenNull="true">
+				<reportElement uuid="8ec06267-dea9-4bd9-9897-ea8ae3ea88e9" x="135" y="25" width="25" height="10"/>
+				<textElement>
+					<font fontName="Times New Roman" size="8" isItalic="true" pdfFontName=""/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{FILTRO}.getSingular().getNumeroCooperativa()]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement uuid="02222892-84da-4d94-a7ac-a770f52ec2d7" x="170" y="25" width="35" height="10"/>
+				<textElement>
+					<font fontName="Times New Roman" size="8" isBold="true" pdfFontName=""/>
+				</textElement>
+				<text><![CDATA[Unidade:]]></text>
+			</staticText>
+			<textField pattern="" isBlankWhenNull="false">
+				<reportElement uuid="72404038-895c-4292-b4e0-5155c86a3809" x="210" y="25" width="30" height="10"/>
+				<textElement>
+					<font fontName="Times New Roman" size="8" isItalic="true" pdfFontName=""/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{FILTRO}.getIdUnidadeInst() == null ? "TODAS" : ($P{FILTRO}.getIdUnidadeInst().intValue() < 10 ? "0" : "") + $P{FILTRO}.getIdUnidadeInst()]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement uuid="354ebbaf-a5b1-420e-b366-3f6c53a2b4bc" x="10" y="37" width="20" height="10"/>
+				<textElement>
+					<font fontName="Times New Roman" size="8" isBold="true" pdfFontName=""/>
+				</textElement>
+				<text><![CDATA[IOF:]]></text>
+			</staticText>
+			<textField isBlankWhenNull="false">
+				<reportElement uuid="5cd5628a-d3a3-4775-b164-0e8e476f44f3" x="35" y="37" width="40" height="10"/>
+				<textElement markup="none">
+					<font fontName="Times New Roman" size="8" isItalic="true" pdfFontName=""/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{FILTRO}.getCobraIOF() == null ? "TODOS" : $P{FILTRO}.getCobraIOF().booleanValue() ? "SIM" : "NÃO"]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement uuid="47648cad-b5e0-41ef-b8cc-39255d333e1d" x="85" y="37" width="15" height="10"/>
+				<textElement>
+					<font fontName="Times New Roman" size="8" isBold="true" pdfFontName=""/>
+				</textElement>
+				<text><![CDATA[IR:]]></text>
+			</staticText>
+			<textField isBlankWhenNull="false">
+				<reportElement uuid="e9850d0f-cdb7-4e86-8a8b-4d76bf7f87ed" x="105" y="37" width="42" height="10"/>
+				<textElement markup="none">
+					<font fontName="Times New Roman" size="8" isItalic="true" pdfFontName=""/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{FILTRO}.getCobraIR() == null ? "TODOS" : $P{FILTRO}.getCobraIR().booleanValue() ? "SIM" : "NÃO"]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement uuid="ee83cece-6ec5-4b4d-9b26-2bdcdb89c305" x="250" y="25" width="30" height="10"/>
+				<textElement>
+					<font fontName="Times New Roman" size="8" isBold="true" pdfFontName=""/>
+				</textElement>
+				<text><![CDATA[Núcleo:]]></text>
+			</staticText>
+			<textField isBlankWhenNull="false">
+				<reportElement uuid="def18a3c-9cc5-4ac7-8c3e-20cd9b82baa7" x="285" y="25" width="506" height="10"/>
+				<textElement>
+					<font fontName="Times New Roman" size="8" isItalic="true" pdfFontName=""/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{FILTRO}.getNucleo() == null ? "TODOS" : $P{FILTRO}.getNucleo().getDescricao()]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement uuid="30c23aeb-da50-43e5-8d58-a86740b71f2e" x="157" y="37" width="35" height="10"/>
+				<textElement>
+					<font fontName="Times New Roman" size="8" isBold="true" pdfFontName=""/>
+				</textElement>
+				<text><![CDATA[Gerente:]]></text>
+			</staticText>
+			<textField isBlankWhenNull="true">
+				<reportElement uuid="448ba941-d45c-490e-87fd-6f8604187e19" x="197" y="37" width="594" height="10"/>
+				<textElement>
+					<font fontName="Times New Roman" size="8" isItalic="true" pdfFontName=""/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{FILTRO}.getFuncionario() == null ? "TODOS" : $P{FILTRO}.getFuncionario().getPessoaCompartilhamento().getNomePessoa()]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageHeader>
+	<columnHeader>
+		<band height="19" splitType="Stretch">
+			<staticText>
+				<reportElement uuid="ffa66e25-bb29-4491-8f63-7799449c9be8" x="0" y="5" width="70" height="10"/>
+				<textElement verticalAlignment="Bottom">
+					<font fontName="Times New Roman" size="8" isBold="true" pdfFontName=""/>
+				</textElement>
+				<text><![CDATA[CPF/CNPJ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="8fa9dca1-8223-4cff-a72d-cc3228d511d8" x="75" y="5" width="235" height="10"/>
+				<textElement verticalAlignment="Bottom">
+					<font fontName="Times New Roman" size="8" isBold="true" pdfFontName=""/>
+				</textElement>
+				<text><![CDATA[NOME/RAZÃO SOCIAL]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="b0270aab-f387-4541-aea3-610400d83580" x="315" y="5" width="414" height="10"/>
+				<textElement verticalAlignment="Bottom">
+					<font fontName="Times New Roman" size="8" isBold="true" pdfFontName=""/>
+				</textElement>
+				<text><![CDATA[OCUPAÇÃO/ATIVIDADE ECONÔMICA]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="a658bfb7-5b71-4f0b-b450-030eb75f5f49" x="734" y="5" width="26" height="10"/>
+				<textElement verticalAlignment="Bottom">
+					<font fontName="Times New Roman" size="8" isBold="true" pdfFontName=""/>
+				</textElement>
+				<text><![CDATA[IOF]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="96eba799-f32c-4717-bd08-094945c9ca81" x="765" y="5" width="26" height="10"/>
+				<textElement verticalAlignment="Bottom">
+					<font fontName="Times New Roman" size="8" isBold="true" pdfFontName=""/>
+				</textElement>
+				<text><![CDATA[IR]]></text>
+			</staticText>
+			<line>
+				<reportElement uuid="6561576a-7902-4442-919d-a064cc92e555" x="0" y="16" width="802" height="1"/>
+				<graphicElement>
+					<pen lineWidth="1.5"/>
+				</graphicElement>
+			</line>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="10" splitType="Prevent">
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement uuid="3c93e4a0-92d2-44c2-babb-6244503426f2" x="315" y="0" width="414" height="10"/>
+				<textElement verticalAlignment="Top">
+					<font fontName="Times New Roman" size="8" pdfFontName=""/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{codigoOcupacao}.toUpperCase() + " - " + $F{descOcupacao}.toUpperCase()]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement uuid="ad2d536c-119d-44ae-a7db-7eef7622e5d2" x="734" y="0" width="26" height="10"/>
+				<textElement verticalAlignment="Top" markup="none">
+					<font fontName="Times New Roman" size="8" pdfFontName=""/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{cobraIOF}.booleanValue() ? "SIM" : "NÃO"]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="227b9920-3f9a-4c82-9675-96a57de6e815" x="0" y="0" width="70" height="10"/>
+				<textElement verticalAlignment="Top">
+					<font fontName="Times New Roman" size="8" pdfFontName=""/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{cpfCnpj}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement uuid="b80f8b5c-7c79-4ec8-a94a-0faf3ec78660" x="765" y="0" width="26" height="10"/>
+				<textElement verticalAlignment="Top" markup="none">
+					<font fontName="Times New Roman" size="8" pdfFontName=""/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{cobraIR}.booleanValue() ? "SIM" : "NÃO"]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement uuid="b56843eb-79cf-42c3-8bc4-213ede9cd31b" x="75" y="0" width="235" height="10"/>
+				<textElement verticalAlignment="Top">
+					<font fontName="Times New Roman" size="8" pdfFontName=""/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{nomePessoa}.toUpperCase()]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<pageFooter>
+		<band height="15" splitType="Stretch">
+			<textField>
+				<reportElement uuid="b47a8a0e-338f-4223-85e5-13bc8bf55bb6" x="70" y="0" width="61" height="15"/>
+				<box>
+					<leftPen lineWidth="1.0" lineStyle="Solid"/>
+					<rightPen lineWidth="1.0" lineStyle="Solid"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle" markup="none">
+					<font fontName="Times New Roman" size="7" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{CODIGO_RELATORIO}]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement uuid="7e7cffc8-ed89-427c-8b55-752093d3e4a4" x="732" y="7" width="70" height="1"/>
+			</line>
+			<textField>
+				<reportElement uuid="8c1f41e2-3cba-4c50-910b-088222baf150" x="655" y="0" width="47" height="15"/>
+				<box>
+					<leftPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font fontName="Times New Roman" size="7" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Pág. "+$V{PAGE_NUMBER}+" de"]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement uuid="b3535d02-f171-46e2-b6a3-77bc3703b65e" x="0" y="7" width="70" height="1"/>
+			</line>
+			<line>
+				<reportElement uuid="3989d97a-bf5c-49d1-a2b5-6b0fcfa402eb" x="131" y="7" width="524" height="1"/>
+			</line>
+			<textField evaluationTime="Report">
+				<reportElement uuid="56b5dbe8-1c0a-4c84-be53-7e416ee8077e" x="702" y="0" width="30" height="15"/>
+				<box>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Times New Roman" size="7" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[" " + $V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageFooter>
+</jasperReport>

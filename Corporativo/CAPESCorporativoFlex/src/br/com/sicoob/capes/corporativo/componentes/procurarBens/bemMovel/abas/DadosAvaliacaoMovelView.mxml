@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<bancoobValidaveis:CanvasValidavel xmlns="br.com.bancoob.componentes.containers.*"
+								   xmlns:mx="http://www.adobe.com/2006/mxml"
+								   xmlns:componentes="br.com.bancoob.componentes.*" 
+								   xmlns:input="br.com.bancoob.componentes.input.*" 
+								   xmlns:titulo="br.com.bancoob.componentes.titulo.*"
+								   xmlns:campos="br.com.bancoob.componentes.campos.*"
+								   xmlns:listaSelecao="br.com.sicoob.capes.comum.componentes.listaSelecao.*"
+								   xmlns:bancoobValidaveis="br.com.bancoob.componentes.containers.validaveis.*"
+								   xmlns:procurarPessoa="br.com.sicoob.capes.corporativo.componentes.procurarPessoa.*"
+								   xmlns:componentesCapes="br.com.sicoob.capes.comum.componentes.input.*"
+								   width="100%" height="100%" styleName="ModuloSemEstilo">
+	
+	<titulo:SubtituloView id="rotuloTitulo" x="5" y="0" />
+	
+	<!-- AREA DE ESPECIFICACAO -->
+	<componentes:Rotulo x="10" y="27" text="Estado de conservação: " textAlign="left" />
+	<input:Combo id="comboEstadoConservacao" left="140" y="25" right="10" labelField="descricao" somenteMaiusculas="true" inserirItemOpcional="true" labelItemOpcional="SELECIONE" enabled="false" tabIndex="1" />
+	
+	<componentes:Rotulo x="10" y="52" text="Em processo de aquisição: " textAlign="left" />
+	<input:Check id="checkProcessoAquisicao" x="140" y="50" tabIndex="2" />
+	
+	<!-- AREA DE COMPRA E VENDA -->
+	<titulo:SubtituloView texto="Compra/Venda" x="5" y="75" />
+	
+	<componentes:Rotulo x="10" y="102" text="Valor de compra e venda: " textAlign="left" />
+	<componentesCapes:CampoMoeda id="campoValorCompraVenda" x="140" y="100" width="150" permitirValoreNegativos="false" valorMinimo="0.01" valorMaximo="99999999999.99" casasDecimais="2" maxChars="14" tabIndex="3" />
+	
+	<componentes:Rotulo x="10" y="127" text="Data de compra e venda: " textAlign="left" />
+	<input:Data id="campoDataCompraVenda" x="140" y="125" dataDefault="{null}" tabIndex="4" />
+	
+	<!-- AREA DE AVALIADOR -->
+	<titulo:SubtituloView texto="Avaliador" x="5" y="150" />
+	
+	<componentes:Rotulo x="10" y="177" text="Valor avaliação: " textAlign="left" />
+	<componentesCapes:CampoMoeda id="campoValorAvaliacao" x="140" y="175" width="150" permitirValoreNegativos="false" valorMinimo="0.01" valorMaximo="99999999999.99" casasDecimais="2" maxChars="14" tabIndex="5" />
+	
+	<componentes:Rotulo x="10" y="202" text="Data da avaliação: " textAlign="left" />
+	<input:Data id="campoDataAvaliacao" x="140" y="200" dataDefault="{null}" tabIndex="6" />
+	
+	<!--<componentes:Rotulo x="10" y="202" text="Valor total: " textAlign="left" />
+	<componentesCapes:CampoMoeda id="campoValorTotal" x="140" y="200" width="100" permitirValoreNegativos="false" valorMinimo="0" valorMaximo="99999999999.99" maxChars="14" tabIndex="10" />-->
+	
+	<componentes:Rotulo x="10" y="227" text="CPF/CNPJ Avaliador: " textAlign="left" />
+	<procurarPessoa:ProcurarPessoaCAPES x="140" y="225" id="componenteProcurarPessoa" validarObrigatorio="false" toolTip="CPF de identificação do avaliador." tabIndex="7" />
+	
+	<!-- AREA DE TIPO DE ONUS -->
+	<titulo:SubtituloView texto="Tipos de ônus" x="5" y="250" />
+	
+	<listaSelecao:ListaSelecao id="componenteSelecaoTipoOnus" left="10" top="275" bottom="0" right="10" tamanhoLista="345" alturaLista="200" labelField="descricao" tabIndex="8"/>
+	
+</bancoobValidaveis:CanvasValidavel>

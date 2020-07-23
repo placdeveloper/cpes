@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<bancoobValidaveis:ModuloValidavel xmlns:mx="http://www.adobe.com/2006/mxml"
+								   xmlns:bancoob="br.com.bancoob.componentes.*" 
+								   xmlns:bancoobContainers="br.com.bancoob.componentes.containers.*"
+								   xmlns:bancoobValidaveis="br.com.bancoob.componentes.containers.validaveis.*"
+								   xmlns:bancoobGrid="br.com.bancoob.componentes.grid.*"
+								   width="100%" height="418" layout="absolute" styleName="ModuloSemEstilo" 
+								   verticalScrollPolicy="auto" label="Cidadanias" >
+	
+	<mx:Style>
+		.styleBotaoPesquisar{
+			downSkin:		Embed(source='br/com/bancoob/imagens/icos/srch_16.png');
+			disabledSkin:	Embed(source='br/com/bancoob/imagens/icos/srch_16.png');
+			upSkin:			Embed(source='br/com/bancoob/imagens/icos/srch_16.png');
+			overSkin:		Embed(source='br/com/bancoob/imagens/icos/srch_16.png');
+		}
+	</mx:Style>
+	
+	<mx:Image x="17" y="6" source="br/com/bancoob/imagens/icos/sinfo_16.png" alpha=".5"/>
+	<mx:Label x="39" y="6" text="CIDADÃO" fontWeight="bold" fontFamily="ArialEmbedded" alpha=".8"/>
+	<mx:Image y="12" source="br/com/bancoob/imagens/imgsTelas/linha.swf" scaleContent="false" left="100" right="20"/>
+	
+	<bancoobValidaveis:CanvasValidavel width="100%" height="50%" id="canvasCidadania">
+		<bancoobGrid:Grid left="25" top="35" right="25" bottom="5" id="listaCidadania">
+			<bancoobGrid:columns>
+				<bancoobGrid:ColunaGrid headerText="Descrição" dataField="nacionalidade.descricao" textAlign="left"/>
+			</bancoobGrid:columns>
+		</bancoobGrid:Grid>
+		
+		<bancoobContainers:VBoxBancoob bottom="5" right="0" width="20" id="barraBotoesNacionalidade" >
+			<bancoob:Botao id="btnSelecaoNacionalidade" toolTip="Pesquisar nacionalidade" styleName="styleBotaoPesquisar"/>
+			<bancoob:Botao id="btnRemoverNacionalidade" toolTip="Excluir nacionalidade" styleName="botaoCrudRemoverPeq"/>
+		</bancoobContainers:VBoxBancoob>
+	</bancoobValidaveis:CanvasValidavel>
+	
+	<mx:Image x="17" y="211" source="br/com/bancoob/imagens/icos/sinfo_16.png" alpha=".5"/>
+	<mx:Label x="39" y="211" text="ENDEREÇOS FISCAIS" fontWeight="bold" fontFamily="ArialEmbedded" alpha=".8"/>
+	<mx:Image y="217" source="br/com/bancoob/imagens/imgsTelas/linha.swf" scaleContent="false" left="155" right="20"/>
+	
+	<bancoobValidaveis:CanvasValidavel y="220" width="100%" height="50%" id="canvasEndFiscais">
+		<bancoobGrid:Grid left="25" top="25" right="25" bottom="5" id="listaEndFiscais">
+			<bancoobGrid:columns>
+				<bancoobGrid:ColunaGrid headerText="Descrição" dataField="nacionalidade.descricao" textAlign="left"/>
+				<bancoobGrid:ColunaGrid headerText="Documento Fiscal" dataField="codigoFiscal" textAlign="left"/>
+			</bancoobGrid:columns>
+		</bancoobGrid:Grid>
+		
+		<bancoobContainers:VBoxBancoob bottom="5" right="0" width="20" id="barraBotoesEndFiscais">
+			<bancoob:Botao id="btnSelecaoEnderecoFiscal" toolTip="Pesquisar endereço fiscal" styleName="styleBotaoPesquisar"/>
+			<bancoob:Botao id="btnRemoverEnderecoFiscal" toolTip="Excluir endereco fiscal" styleName="botaoCrudRemoverPeq"/>
+		</bancoobContainers:VBoxBancoob>
+	</bancoobValidaveis:CanvasValidavel>
+	
+</bancoobValidaveis:ModuloValidavel>

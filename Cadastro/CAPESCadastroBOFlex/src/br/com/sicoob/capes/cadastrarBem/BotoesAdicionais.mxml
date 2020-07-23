@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mx:Canvas xmlns:mx="http://www.adobe.com/2006/mxml"
+		   xmlns:bancoob="br.com.bancoob.componentes.*"
+		   xmlns:botoes="br.com.bancoob.componentes.botoes.*"
+		   width="100%" height="100%" borderStyle="none" clipContent="false"
+		   horizontalScrollPolicy="off" verticalScrollPolicy="off">
+	
+	<botoes:BotaoPlataforma id="btSemPatrimonio" x="19" y="0" buttonMode="true"
+							imagem="br\com\bancoob\imagens\pad\icones\icoAdicionar.png"
+							rotulo="NÃO POSSUI PATRIMÔNIO" tabIndex="401" useHandCursor="true"
+							enabled="false" />
+
+</mx:Canvas>

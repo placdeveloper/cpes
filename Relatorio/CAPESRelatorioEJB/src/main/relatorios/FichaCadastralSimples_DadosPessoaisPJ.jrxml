@@ -1,0 +1,309 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="FichaCadastralSimples_DadosPessoaisPJ" pageWidth="575" pageHeight="104" whenNoDataType="AllSectionsNoDetail" columnWidth="575" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0" uuid="ea237515-45ee-4df2-ab66-fa49502ec957">
+	<property name="ireport.zoom" value="2.8531167061100255"/>
+	<property name="ireport.x" value="656"/>
+	<property name="ireport.y" value="0"/>
+	<style name="campo" hAlign="Left" vAlign="Middle" fontSize="8" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false">
+		<box leftPadding="6"/>
+	</style>
+	<style name="Linha" isDefault="true" mode="Opaque">
+		<box leftPadding="3">
+			<topPen lineWidth="0.25"/>
+			<leftPen lineWidth="0.25"/>
+			<bottomPen lineWidth="0.25"/>
+			<rightPen lineWidth="0.25"/>
+		</box>
+	</style>
+	<parameter name="pessoa" class="br.com.sicoob.capes.negocio.entidades.vigente.PessoaJuridica"/>
+	<field name="nomeCompleto" class="java.lang.String"/>
+	<field name="cnae.codigo" class="java.lang.String"/>
+	<field name="cnae.descricao" class="java.lang.String"/>
+	<field name="pessoa.cpfCnpj" class="java.lang.String"/>
+	<field name="cnae" class="java.lang.Object"/>
+	<field name="inscricaoEstadual" class="java.lang.String"/>
+	<field name="idPessoaCompartilhamento" class="java.lang.Long"/>
+	<field name="valorCapitalSocial" class="java.math.BigDecimal"/>
+	<field name="formaConstituicao.descricao" class="java.lang.String"/>
+	<field name="nomeApelido" class="java.lang.String"/>
+	<field name="numeroRegistroJuntaComercial" class="java.lang.String"/>
+	<field name="dataRegistroJuntaComercial" class="java.util.Date"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band splitType="Stretch"/>
+	</title>
+	<pageHeader>
+		<band height="15" splitType="Stretch">
+			<staticText>
+				<reportElement uuid="a09d1d91-1f25-4cc8-ab15-5219593dfa89" mode="Transparent" x="0" y="0" width="575" height="15" backcolor="#CCCCCC"/>
+				<box>
+					<topPen lineWidth="0.5" lineStyle="Solid"/>
+					<leftPen lineWidth="0.5" lineStyle="Solid"/>
+					<bottomPen lineWidth="0.5" lineStyle="Solid"/>
+					<rightPen lineWidth="0.5" lineStyle="Solid"/>
+				</box>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Arial" size="11" isBold="true"/>
+				</textElement>
+				<text><![CDATA[ DADOS CADASTRAIS]]></text>
+			</staticText>
+		</band>
+	</pageHeader>
+	<columnHeader>
+		<band splitType="Stretch"/>
+	</columnHeader>
+	<detail>
+		<band height="22" splitType="Stretch">
+			<staticText>
+				<reportElement uuid="70952552-f88f-44a5-9354-83532f48e1e7" style="Linha" x="0" y="0" width="465" height="20"/>
+				<box leftPadding="3">
+					<topPen lineWidth="0.5" lineStyle="Solid"/>
+					<leftPen lineWidth="0.0" lineStyle="Solid"/>
+					<bottomPen lineWidth="0.0" lineStyle="Solid"/>
+					<rightPen lineWidth="0.0" lineStyle="Solid"/>
+				</box>
+				<textElement>
+					<font fontName="Arial" size="7" isBold="true"/>
+				</textElement>
+				<text><![CDATA[ Razão social completa]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="b9042fb1-29a1-438f-b1a8-9c2b71856e5b" style="Linha" x="465" y="0" width="110" height="20"/>
+				<box leftPadding="2">
+					<topPen lineWidth="0.5" lineStyle="Solid"/>
+					<leftPen lineWidth="0.5" lineStyle="Solid"/>
+					<bottomPen lineWidth="0.0" lineStyle="Solid"/>
+					<rightPen lineWidth="0.0" lineStyle="Solid"/>
+				</box>
+				<textElement>
+					<font fontName="Arial" size="7" isBold="true"/>
+				</textElement>
+				<text><![CDATA[ CNPJ]]></text>
+			</staticText>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement uuid="f4e52219-1df9-45e3-9c8e-0c441d619185" stretchType="RelativeToTallestObject" mode="Transparent" x="4" y="8" width="461" height="12"/>
+				<box topPadding="2" leftPadding="0" bottomPadding="2" rightPadding="2">
+					<topPen lineWidth="0.0"/>
+					<leftPen lineWidth="0.0"/>
+					<bottomPen lineWidth="0.0"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Justified" verticalAlignment="Middle" markup="none">
+					<font fontName="Arial" size="10"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{nomeCompleto}]]></textFieldExpression>
+			</textField>
+		</band>
+		<band height="69">
+			<staticText>
+				<reportElement uuid="c0d8b25e-e9c2-41bf-8eda-2601865d4573" style="Linha" x="0" y="-1" width="401" height="20"/>
+				<box leftPadding="3">
+					<topPen lineWidth="0.5" lineStyle="Solid"/>
+					<leftPen lineWidth="0.0" lineStyle="Solid"/>
+					<bottomPen lineWidth="0.5" lineStyle="Solid"/>
+					<rightPen lineWidth="0.5" lineStyle="Solid"/>
+				</box>
+				<textElement>
+					<font fontName="Arial" size="7" isBold="true"/>
+				</textElement>
+				<text><![CDATA[ Nome fantasia]]></text>
+			</staticText>
+			<textField isBlankWhenNull="true">
+				<reportElement uuid="67f74032-7c29-48c6-affc-a08637005561" mode="Transparent" x="3" y="7" width="398" height="12"/>
+				<box leftPadding="3">
+					<topPen lineWidth="0.0"/>
+					<leftPen lineWidth="0.0"/>
+					<bottomPen lineWidth="0.0"/>
+					<rightPen lineWidth="0.0"/>
+				</box>
+				<textElement>
+					<font fontName="Arial" size="10"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{nomeApelido}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement uuid="34e88da2-b238-4098-9ec2-36a02c1d9cfe" style="Linha" x="401" y="-1" width="174" height="20"/>
+				<box leftPadding="3">
+					<topPen lineWidth="0.5" lineStyle="Solid"/>
+					<leftPen lineWidth="0.5" lineStyle="Solid"/>
+					<bottomPen lineWidth="0.5" lineStyle="Solid"/>
+					<rightPen lineWidth="0.0" lineStyle="Solid"/>
+				</box>
+				<textElement>
+					<font fontName="Arial" size="7" isBold="true"/>
+				</textElement>
+				<text><![CDATA[ Inscrição estadual]]></text>
+			</staticText>
+			<textField isBlankWhenNull="true">
+				<reportElement uuid="16e32568-14a9-4081-aa8e-c2dce5e1ad59" mode="Transparent" x="403" y="7" width="169" height="12"/>
+				<box leftPadding="3">
+					<topPen lineWidth="0.0"/>
+					<leftPen lineWidth="0.0"/>
+					<bottomPen lineWidth="0.0"/>
+					<rightPen lineWidth="0.0"/>
+				</box>
+				<textElement>
+					<font fontName="Arial" size="10"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{inscricaoEstadual}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement uuid="20727834-2a65-409d-8b33-e0b9c8f16822" style="Linha" x="0" y="19" width="575" height="25"/>
+				<box leftPadding="3">
+					<topPen lineWidth="0.5" lineStyle="Solid"/>
+					<leftPen lineWidth="0.0" lineStyle="Solid"/>
+					<bottomPen lineWidth="0.5" lineStyle="Solid"/>
+					<rightPen lineWidth="0.0" lineStyle="Solid"/>
+				</box>
+				<textElement>
+					<font fontName="Arial" size="7" isBold="true"/>
+				</textElement>
+				<text><![CDATA[ Cod. CNAE]]></text>
+			</staticText>
+			<textField isBlankWhenNull="true">
+				<reportElement uuid="b6a9942b-a7b9-4ba4-b2bf-2e5edd938c4d" mode="Transparent" x="4" y="29" width="570" height="12"/>
+				<box leftPadding="3">
+					<topPen lineWidth="0.0"/>
+					<leftPen lineWidth="0.0"/>
+					<bottomPen lineWidth="0.0"/>
+					<rightPen lineWidth="0.0"/>
+				</box>
+				<textElement>
+					<font fontName="Arial" size="10"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{cnae} == null? "" : $F{cnae.codigo}.toString() + " - " + $F{cnae.descricao}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement uuid="9c617943-919a-4148-bb74-72121a22c84c" style="Linha" x="0" y="43" width="279" height="25"/>
+				<box leftPadding="3">
+					<topPen lineWidth="0.5" lineStyle="Solid"/>
+					<leftPen lineWidth="0.0" lineStyle="Solid"/>
+					<bottomPen lineWidth="0.5" lineStyle="Solid"/>
+					<rightPen lineWidth="0.5" lineStyle="Solid"/>
+				</box>
+				<textElement>
+					<font fontName="Arial" size="7" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Natureza jurídica]]></text>
+			</staticText>
+			<textField isBlankWhenNull="true">
+				<reportElement uuid="43735d8d-6036-47ce-8e43-05d24c7e7380" mode="Transparent" x="3" y="53" width="275" height="12"/>
+				<box leftPadding="3">
+					<topPen lineWidth="0.0"/>
+					<leftPen lineWidth="0.0"/>
+					<bottomPen lineWidth="0.0"/>
+					<rightPen lineWidth="0.0"/>
+				</box>
+				<textElement>
+					<font fontName="Arial" size="10"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{formaConstituicao.descricao}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement uuid="fde31d70-8170-431a-bcc6-a46a21ddc5cb" style="Linha" x="279" y="43" width="111" height="25"/>
+				<box>
+					<topPen lineWidth="0.5" lineStyle="Solid"/>
+					<leftPen lineWidth="0.5" lineStyle="Solid"/>
+					<bottomPen lineWidth="0.5" lineStyle="Solid"/>
+					<rightPen lineWidth="0.5" lineStyle="Solid"/>
+				</box>
+				<textElement>
+					<font fontName="Arial" size="7" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Nº Registro Orgão Competente]]></text>
+			</staticText>
+			<textField isBlankWhenNull="true">
+				<reportElement uuid="c8a02df0-248f-4638-b882-b3d6c72d85f6" mode="Transparent" x="279" y="54" width="111" height="12">
+					<printWhenExpression><![CDATA[new Boolean(($F{numeroRegistroJuntaComercial} != null)
+    && ($F{numeroRegistroJuntaComercial}.trim().length() > 0))]]></printWhenExpression>
+				</reportElement>
+				<box leftPadding="3">
+					<topPen lineWidth="0.0"/>
+					<leftPen lineWidth="0.0"/>
+					<bottomPen lineWidth="0.0"/>
+					<rightPen lineWidth="0.0"/>
+				</box>
+				<textElement verticalAlignment="Bottom">
+					<font fontName="Arial" size="10"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{numeroRegistroJuntaComercial}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement uuid="cd12792a-c90f-428d-9349-7dedd8d3f44b" style="Linha" x="390" y="43" width="63" height="25"/>
+				<box>
+					<topPen lineWidth="0.5" lineStyle="Solid"/>
+					<leftPen lineWidth="0.5" lineStyle="Solid"/>
+					<bottomPen lineWidth="0.5" lineStyle="Solid"/>
+					<rightPen lineWidth="0.5" lineStyle="Solid"/>
+				</box>
+				<textElement>
+					<font fontName="Arial" size="7" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Data do Registro]]></text>
+			</staticText>
+			<textField pattern="dd/MM/yyyy" isBlankWhenNull="true">
+				<reportElement uuid="6ff0cbf5-2c6c-4d2c-8d4c-b4288363b8af" mode="Transparent" x="393" y="54" width="60" height="12" forecolor="#000000" backcolor="#FFFFFF"/>
+				<box leftPadding="3">
+					<topPen lineWidth="0.0"/>
+					<leftPen lineWidth="0.0"/>
+					<bottomPen lineWidth="0.0"/>
+					<rightPen lineWidth="0.0"/>
+				</box>
+				<textElement verticalAlignment="Middle" rotation="None" markup="none">
+					<font fontName="Arial" size="10" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="Helvetica" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{dataRegistroJuntaComercial}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement uuid="51129875-3053-41a7-be65-cbc31f37e57e" style="Linha" x="453" y="43" width="122" height="25"/>
+				<box leftPadding="3">
+					<topPen lineWidth="0.5" lineStyle="Solid"/>
+					<leftPen lineWidth="0.5" lineStyle="Solid"/>
+					<bottomPen lineWidth="0.5" lineStyle="Solid"/>
+					<rightPen lineWidth="0.0" lineStyle="Solid"/>
+				</box>
+				<textElement>
+					<font fontName="Arial" size="7" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Capital Social (R$)]]></text>
+			</staticText>
+			<textField pattern="¤ #,##0.00" isBlankWhenNull="true">
+				<reportElement uuid="63ce183e-5197-48fe-b703-1c52d50e5a1c" mode="Transparent" x="453" y="54" width="122" height="12"/>
+				<box leftPadding="3">
+					<topPen lineWidth="0.0"/>
+					<leftPen lineWidth="0.0"/>
+					<bottomPen lineWidth="0.0"/>
+					<rightPen lineWidth="0.0"/>
+				</box>
+				<textElement>
+					<font fontName="Arial" size="10"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{idPessoaCompartilhamento} != null ? $F{valorCapitalSocial} : null]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement uuid="7ab783ea-4e9f-4702-8de6-f9b6478306ff" stretchType="RelativeToTallestObject" mode="Transparent" x="467" y="-14" width="104" height="12"/>
+				<box leftPadding="2">
+					<topPen lineWidth="0.0"/>
+					<leftPen lineWidth="0.0"/>
+					<bottomPen lineWidth="0.0"/>
+					<rightPen lineWidth="0.0"/>
+				</box>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Arial" size="10"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{pessoa.cpfCnpj} != null ? java.util.regex.Pattern.compile("(\\d{2})(\\d{3})(\\d{3})(\\d{4})(\\d{2})").matcher($F{pessoa.cpfCnpj}).replaceAll("$1.$2.$3/$4-$5") : ""]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band splitType="Stretch"/>
+	</pageFooter>
+	<summary>
+		<band splitType="Stretch"/>
+	</summary>
+</jasperReport>

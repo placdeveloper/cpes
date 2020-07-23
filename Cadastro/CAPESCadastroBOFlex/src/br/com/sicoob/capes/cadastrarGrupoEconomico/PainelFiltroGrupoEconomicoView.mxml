@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<CanvasValidavel 
+	xmlns="br.com.bancoob.componentes.containers.validaveis.*" 
+	xmlns:mx="http://www.adobe.com/2006/mxml" 
+	xmlns:titulo="br.com.bancoob.componentes.titulo.*" 
+	xmlns:componentes="br.com.bancoob.componentes.*" 
+	xmlns:input="br.com.bancoob.componentes.input.*" 
+	xmlns:painellista="br.com.bancoob.componentes.painellista.*"
+	defaultButton="{btnProcurar}"
+	width="100%" height="100">
+	
+	<mx:Script>
+		<![CDATA[
+			import br.com.bancoob.componentes.campos.CampoNumerico;
+			
+			import mx.collections.ArrayCollection;
+		  	
+            public var tipoProcura:ArrayCollection = new ArrayCollection(
+                [ {label:"CÓDIGO", data:1}, 
+                  {label:"DESCRIÇÃO", data:2}]);
+		]]>
+	</mx:Script>
+
+	<titulo:SubtituloView  y="0" texto="PROCURAR" left="0" right="0" width="100%" />
+
+	<componentes:Rotulo x="10" y="36" text="Nome:"/>
+	<input:Texto id="nome" x="10" y="56" width="670" />
+
+	<painellista:BotaoProcurarView id="btnProcurar" label="Procurar" right="0" y="56"/>
+</CanvasValidavel>

@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	
+	<artifactId>capes-war-processamento</artifactId>
+	<packaging>war</packaging>
+
+	<name>CAPES - WAR - Processamento</name>
+
+	<parent>
+		<groupId>br.com.sicoob.capes</groupId>
+		<artifactId>capes-modulo-war</artifactId>
+		<version>2.0.8.1</version>
+		<relativePath>..</relativePath>
+	</parent>
+	
+	<scm>
+		<url>http://svn.sicoob.com.br/fontesbancoob/SISBR/Aplicativos/JAVA/trunk/CAPES/tags/capes-2.0.8.1/WAR/Processamento</url>
+		<connection>scm:svn:http://svn.sicoob.com.br/fontesbancoob/SISBR/Aplicativos/JAVA/trunk/CAPES/tags/capes-2.0.8.1/WAR/Processamento</connection>
+		<developerConnection>scm:svn:http://svn.sicoob.com.br/fontesbancoob/SISBR/Aplicativos/JAVA/trunk/CAPES/tags/capes-2.0.8.1/WAR/Processamento</developerConnection>
+	</scm>
+	
+	<properties>
+		<timestamp>${maven.build.timestamp}</timestamp>
+		<maven.build.timestamp.format>dd/MM/yyyy - HH:mm</maven.build.timestamp.format>
+	</properties>
+	
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-war-plugin</artifactId>
+				<executions>
+					<execution>
+						<id>war-work</id>
+						<phase>compile</phase>
+						<goals>
+							<goal>exploded</goal>
+						</goals>
+					</execution>
+				</executions>
+				<configuration>
+					<stripModuleArtifactInfo>true</stripModuleArtifactInfo>
+					<stripVersion>true</stripVersion>
+					<useFinalName>true</useFinalName>
+					<failOnMissingWebXml>false</failOnMissingWebXml>
+					<webResources>
+						<resource>
+							<directory>${webapp-dir}</directory>
+							<filtering>true</filtering>
+							<includes>
+								<include>index.html</include>
+							</includes>
+						</resource>
+						<resource>
+							<directory>${webapp-dir}</directory>
+							<filtering>false</filtering>
+							<excludes>
+								<exclude>index.html</exclude>
+								<exclude>sisbr*.xml</exclude>
+							</excludes>
+						</resource>
+					</webResources>
+				</configuration>
+			</plugin>
+		</plugins>
+	</build>
+	
+</project>

@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8"?>
+<containers:HBoxBancoob xmlns:mx="http://www.adobe.com/2006/mxml"
+						xmlns:componentes="br.com.bancoob.componentes.*"
+						xmlns:containers="br.com.bancoob.componentes.containers.*"
+						width="100%" height="100%" creationComplete="init()"
+						horizontalAlign="center" horizontalScrollPolicy="off"
+						implements="mx.controls.listClasses.IDropInListItemRenderer"
+						verticalScrollPolicy="off">
+	
+	<mx:Script>
+		<![CDATA[
+			import br.com.bancoob.componentes.util.IVisualizadorDocumento;
+			import br.com.bancoob.componentes.util.VisualizadorDocumentoFactory;
+			import br.com.bancoob.sisbr.portal.PortalModel;
+			import br.com.sicoob.sisbr.componentes.container.externo.SicoobNativeWindowConteudo;
+			
+			import mx.controls.listClasses.BaseListData;
+			import mx.core.UIComponent;
+			import mx.events.FlexEvent;
+			
+			[Bindable("dataChange")]
+			private var _listData:BaseListData;
+			
+			[Bindable]
+			private var exibir:Boolean = true;
+			
+			private var visualizadorDocumento:IVisualizadorDocumento;
+			private var janela:SicoobNativeWindowConteudo;
+			
+			private static const TITULO_JANELA:String = "Visualização de documentos GED";
+			private static const HINT_BOTAO:String = "Visualizar";
+			
+			public function get listData():BaseListData {
+				return _listData;
+			}
+			
+			public function set listData(value:BaseListData):void {
+				_listData = value;
+			}
+			
+			public function init():void {
+				btnVisualizar.addEventListener(MouseEvent.CLICK, onClickAbrir);
+			}
+			
+			private function onClickAbrir(event:MouseEvent):void {
+				if(janela == null) {
+					janela = new SicoobNativeWindowConteudo();
+					janela.funcaoFechar(aoFecharJanela);
+				}
+				
+				if(visualizadorDocumento == null) {
+					visualizadorDocumento = VisualizadorDocumentoFactory.getInstance().createComponent();
+				} 
+				
+				configurarJanela();
+				janela.alwaysInFront = true;
+				janela.setFocus();
+			}
+			
+			private function configurarJanela():void {
+				janela.idAplicativo = PortalModel.getInstance().obterDadosAplicativoAberto().id;
+				janela.title = TITULO_JANELA;
+				janela.width = 800;
+				janela.height = 600;
+				janela.removeAllChildren();
+				janela.abrir(UIComponent(visualizadorDocumento), TITULO_JANELA, false);
+				janela.addEventListener(FlexEvent.CREATION_COMPLETE, janelaOnCreateComplete);
+			}
+			
+			private function janelaOnCreateComplete(event:FlexEvent):void {
+				if(visualizadorDocumento != null) {
+					visualizadorDocumento.visualizarDocumento(data.idDocumento);				
+				}
+			}
+			
+			public override function set data(value:Object):void {
+				super.data = value;
+			}
+			
+			private function aoFecharJanela():void {
+				janela = null;
+				visualizadorDocumento = null;
+			}
+			
+		]]>
+	</mx:Script>
+	
+	<componentes:Botao id="btnVisualizar" styleName="botaoCrudProcurarPeq" toolTip="{HINT_BOTAO}" paddingBottom="0" paddingLeft="0" paddingRight="0" paddingTop="0" includeInLayout="{exibir}" visible="{exibir}" />
+	
+</containers:HBoxBancoob>

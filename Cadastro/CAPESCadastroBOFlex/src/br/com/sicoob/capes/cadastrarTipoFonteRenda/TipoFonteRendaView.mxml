@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ListaCadastroView 
+	xmlns="br.com.bancoob.componentes.cadastro.*" 
+	xmlns:mx="http://www.adobe.com/2006/mxml" 
+	xmlns:dominio="br.com.sicoob.capes.cadastrarTipoFonteRenda.*"
+	xmlns:servico="br.com.bancoob.util.servico.*"
+	backgroundAlpha="0.0"
+	borderStyle="solid"
+	borderThickness="0"
+	fecharFormularioAoIncluir="false"
+	deveLimparPesquisa="false"
+	width="800" 
+	height="600">
+	<painelLista>
+		<dominio:PainelTipoFonteRendaView width="100%" height="100%" />
+	</painelLista>
+</ListaCadastroView>

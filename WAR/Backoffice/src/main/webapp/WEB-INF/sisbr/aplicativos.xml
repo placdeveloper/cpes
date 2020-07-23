@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<sisbrweb>
+
+	<aplicativo id="MDICLIENTES" visivel="1" ativo="1">
+		<nome>CLIENTES</nome>
+		<icone>br/com/bancoob/imagens/icos/ListaAplicativos/atendimento_</icone>
+		<descricao>SICOOB - CLIENTES</descricao>
+		<destino>servicosJavaCapes</destino>
+		<atributos>
+			<destinoCAPES>servicosJavaCapes</destinoCAPES>
+		</atributos>
+	</aplicativo>
+
+	<aplicativo id="MDIPLATAFORMACUC" visivel="1" ativo="1" tipo="1" swf="./PlataformaAtendimento/TelaModuloPlataformaAtendimento.swf">
+		<nome>PLATAFORMA DE ATENDIMENTO</nome>
+		<icone>br/com/bancoob/imagens/icos/ListaAplicativos/plataforma_</icone>
+		<descricao>SICOOB - PLATAFORMA DE ATENDIMENTO (CAPES)</descricao>
+		<destino>servicosAtendimento</destino>
+		<atributos>
+			<swfTelasPessoa>./capes/swf/cadastropessoa.swf</swfTelasPessoa>
+			<swfIncluirPessoa>./capes/swf/cadastronovapessoa.swf</swfIncluirPessoa>
+			<cuc>1</cuc>
+			<destinoCAPES>servicosJavaCapes</destinoCAPES>
+			<destinoCUC>servicosJavaCapes</destinoCUC>
+		</atributos>
+	</aplicativo>
+
+	<aplicativo id="MDIPLATAFORMAMONITOR" visivel="1" ativo="1" tipo="1" swf="./PlataformaMonitoracao/TelaModuloPlataformaMonitor.swf">
+		<nome>PLATAFORMA DE MONITORAÇÃO</nome>
+		<icone>br/com/bancoob/imagens/icos/ListaAplicativos/plataformaMonitor_</icone>
+		<descricao>SICOOB - PLATAFORMA DE MONITORAÇÃO</descricao>
+		<atributos>
+			<destinoCAPES>servicosJavaCapes</destinoCAPES>
+		</atributos>
+	</aplicativo>
+	
+</sisbrweb>

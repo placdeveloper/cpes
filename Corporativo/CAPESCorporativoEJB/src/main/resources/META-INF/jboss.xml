@@ -1,0 +1,12 @@
+<?xml version="1.0"?>
+<jboss>
+	<enterprise-beans>
+
+		<session>
+			<ejb-name>AnotacaoServicoEJB</ejb-name>
+			<jndi-name>capes/corporativo/AnotacaoServicoRemote</jndi-name>
+			<local-jndi-name>capes/corporativo/AnotacaoServico</local-jndi-name>
+		</session>
+		
+	</enterprise-beans>
+</jboss>

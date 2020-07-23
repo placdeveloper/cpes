@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<bancoob:Modulo xmlns:bancoob="br.com.bancoob.componentes.*" 
+				xmlns:mx="http://www.adobe.com/2006/mxml" 
+				width="100%" 	
+				height="100%">	
+	<mx:Box width="100%" height="100%" direction="horizontal" x="0" y="0" cornerRadius="10">
+		<mx:VBox label="Assinatura" height="100%" width="100%" id="boxAssinatura" borderStyle="solid" letterSpacing="0" paddingBottom="0" paddingLeft="0" paddingRight="0" paddingTop="0" horizontalAlign="center">		
+			<mx:Canvas width="98%" height="30">
+				<mx:Label text="ASSINATURA" fontFamily="ArialEmbedded" fontWeight="bold" textAlign="right" x="26" y="6"/>
+				<mx:Image x="4" y="5">
+					<mx:source>br/com/bancoob/imagens/icos/edit_16.png</mx:source>
+				</mx:Image>
+				<mx:Image source="br/com/bancoob/imagens/imgsTelas/linha.swf" scaleContent="false" width="98%" y="24"/>
+			</mx:Canvas>
+			<mx:Image id="imagAssinutura" autoLoad="false" scaleContent="true" horizontalAlign="center" verticalAlign="middle" maintainAspectRatio="true" bottom="0" top="0" left="0" right="0" width="100%" height="100%">
+			</mx:Image>
+			<mx:Image source="br/com/bancoob/imagens/imgsTelas/linha.swf" scaleContent="false" width="98%"/>
+			<mx:HBox width="96%" height="27">
+				<bancoob:UploadArquivo id="btSelecionarAssinatura" width="100%" height="25"/>				
+				<bancoob:Botao id="btLimparAssinatura" label="Limpar" width="78" cornerRadius="0" height="21" toolTip="Limpar imagem selecionada"/>
+			</mx:HBox>
+		</mx:VBox>
+
+		<mx:VBox label="Foto"  id="boxFoto" width="100%" height="100%" borderStyle="solid" paddingBottom="0" letterSpacing="0" paddingLeft="0" paddingRight="0" paddingTop="0" horizontalAlign="center"> 
+			<mx:Canvas width="98%" height="30">
+				<mx:Label text="FOTO" fontFamily="ArialEmbedded" fontWeight="bold" textAlign="right" x="26" y="6"/>
+				<mx:Image x="4" y="5">
+					<mx:source>br/com/bancoob/imagens/icos/pictures.png</mx:source>
+				</mx:Image>
+				<mx:Image source="br/com/bancoob/imagens/imgsTelas/linha.swf" scaleContent="false" width="98%" y="24"/>
+			</mx:Canvas>
+			<mx:Image id="imagFoto" autoLoad="false" scaleContent="true" height="100%" width="100%" horizontalAlign="center" verticalAlign="middle" maintainAspectRatio="true"> 
+			</mx:Image>
+			<mx:Image source="br/com/bancoob/imagens/imgsTelas/linha.swf" scaleContent="false" width="98%"/>
+			
+			<mx:HBox width="96%" height="27">
+				<bancoob:UploadArquivo id="btSelecionarFoto" width="100%" height="25"/>
+				<bancoob:Botao id="btLimparFoto" label="Limpar" width="78" cornerRadius="0" height="21" toolTip="Limpar imagem selecionada"/>				
+			</mx:HBox>
+		</mx:VBox>			
+		
+		<!--Novo - Adicionado Para  funcionamento na Plat CUC-->
+		<mx:VBox id="boxAcao" width="86" height="100%" borderStyle="solid" paddingBottom="0" letterSpacing="0" paddingLeft="0" paddingRight="0" paddingTop="0" horizontalAlign="center" verticalScrollPolicy="off" horizontalScrollPolicy="off" verticalGap="6">
+			<mx:Spacer height="5"/>			
+			<mx:Image  source="br/com/bancoob/imagens/icos/opts_24.png"/>
+			<mx:Label  text="OPÇÕES" width="85" fontSize="13" fontWeight="bold" alpha=".7" fontFamily="ArialEmbedded" textAlign="center"/>
+			<mx:Image source="br/com/bancoob/imagens/imgsTelas/linha.swf" scaleContent="false" width="98%"/>					
+			<bancoob:Botao id="btGravar" visible="true" name="btGravar"  toolTip="Gravar imagem selecionada"  styleName="botaoOKPlataforma" />
+			<bancoob:Botao id="btCancelar" visible="true" name="btCancelar"  toolTip="Cancelar gravação" styleName="botaoCancelarPlataforma" />			
+			<bancoob:Botao id="btVoltar" visible="true" name="btVoltar"  toolTip="Voltar para o cadastro" styleName="botaoVoltarPlataforma"/>								 
+		</mx:VBox>
+	</mx:Box>
+</bancoob:Modulo>

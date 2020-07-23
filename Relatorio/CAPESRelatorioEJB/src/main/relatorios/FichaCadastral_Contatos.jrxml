@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="FichaCadastral_Contatos" pageWidth="555" pageHeight="842" whenNoDataType="AllSectionsNoDetail" columnWidth="555" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0">
+	<parameter name="SUB_ENDERECOS" class="net.sf.jasperreports.engine.JasperReport"/>
+	<parameter name="DS_SUB_ENDERECOS" class="net.sf.jasperreports.engine.JRDataSource"/>
+	<parameter name="SUB_TELEFONES" class="net.sf.jasperreports.engine.JasperReport"/>
+	<parameter name="SUB_EMAILS" class="net.sf.jasperreports.engine.JasperReport"/>
+	<parameter name="DS_SUB_TELEFONES" class="net.sf.jasperreports.engine.JRDataSource"/>
+	<parameter name="DS_SUB_EMAILS" class="net.sf.jasperreports.engine.JRDataSource"/>
+	<parameter name="DS_SUB_CONTATOS" class="net.sf.jasperreports.engine.JRDataSource"/>
+	<queryString>
+		<![CDATA[]]>
+	</queryString>
+	<field name="emails" class="java.util.Collection"/>
+	<field name="enderecos" class="java.util.Collection"/>
+	<field name="telefones" class="java.util.Collection"/>
+	<variable name="REPORT_COUNT_ZEBRA" class="java.lang.Integer" calculation="Count">
+		<variableExpression><![CDATA[new Integer( $V{REPORT_COUNT_ZEBRA}.intValue() + 1)]]></variableExpression>
+		<initialValueExpression><![CDATA[new Integer(1)]]></initialValueExpression>
+	</variable>
+	<group name="ENDERECOS">
+		<groupHeader>
+			<band height="91" splitType="Immediate">
+				<subreport>
+					<reportElement x="0" y="0" width="555" height="90" isRemoveLineWhenBlank="true"/>
+					<subreportParameter name="REPORT_COUNT_ZEBRA">
+						<subreportParameterExpression><![CDATA[$V{REPORT_COUNT_ZEBRA}]]></subreportParameterExpression>
+					</subreportParameter>
+					<subreportParameter name="DS_ENDERECOS">
+						<subreportParameterExpression><![CDATA[$F{enderecos}]]></subreportParameterExpression>
+					</subreportParameter>
+					<dataSourceExpression><![CDATA[new br.com.sicoob.capes.relatorio.negocio.relatorios.EntidadeCadastroCollectionDataSource($F{enderecos})]]></dataSourceExpression>
+					<returnValue subreportVariable="REPORT_COUNT_ZEBRA" toVariable="REPORT_COUNT_ZEBRA" calculation="Sum"/>
+					<subreportExpression class="net.sf.jasperreports.engine.JasperReport"><![CDATA[$P{SUB_ENDERECOS}]]></subreportExpression>
+				</subreport>
+			</band>
+		</groupHeader>
+	</group>
+	<group name="TELEFONES">
+		<groupHeader>
+			<band height="31" splitType="Immediate">
+				<subreport>
+					<reportElement x="0" y="0" width="555" height="30" isRemoveLineWhenBlank="true"/>
+					<subreportParameter name="DS_TELEFONES">
+						<subreportParameterExpression><![CDATA[$F{telefones}]]></subreportParameterExpression>
+					</subreportParameter>
+					<subreportParameter name="REPORT_COUNT_ZEBRA">
+						<subreportParameterExpression><![CDATA[$V{REPORT_COUNT_ZEBRA}]]></subreportParameterExpression>
+					</subreportParameter>
+					<dataSourceExpression><![CDATA[new br.com.sicoob.capes.relatorio.negocio.relatorios.EntidadeCadastroCollectionDataSource($F{telefones})]]></dataSourceExpression>
+					<returnValue subreportVariable="REPORT_COUNT_ZEBRA" toVariable="REPORT_COUNT_ZEBRA" calculation="Sum"/>
+					<subreportExpression class="net.sf.jasperreports.engine.JasperReport"><![CDATA[$P{SUB_TELEFONES}]]></subreportExpression>
+				</subreport>
+			</band>
+		</groupHeader>
+	</group>
+	<group name="EMAILS">
+		<groupHeader>
+			<band height="31" splitType="Immediate">
+				<subreport>
+					<reportElement x="0" y="0" width="555" height="30" isRemoveLineWhenBlank="true"/>
+					<subreportParameter name="DS_EMAILS">
+						<subreportParameterExpression><![CDATA[$F{emails}]]></subreportParameterExpression>
+					</subreportParameter>
+					<subreportParameter name="REPORT_COUNT_ZEBRA">
+						<subreportParameterExpression><![CDATA[$V{REPORT_COUNT_ZEBRA}]]></subreportParameterExpression>
+					</subreportParameter>
+					<dataSourceExpression><![CDATA[new br.com.sicoob.capes.relatorio.negocio.relatorios.EntidadeCadastroCollectionDataSource($F{emails})]]></dataSourceExpression>
+					<subreportExpression class="net.sf.jasperreports.engine.JasperReport"><![CDATA[$P{SUB_EMAILS}]]></subreportExpression>
+				</subreport>
+			</band>
+		</groupHeader>
+	</group>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band/>
+	</title>
+	<pageHeader>
+		<band height="16" splitType="Stretch">
+			<staticText>
+				<reportElement mode="Opaque" x="0" y="1" width="555" height="15" backcolor="#CCCCCC"/>
+				<box leftPadding="4">
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[2. CONTATOS]]></text>
+			</staticText>
+		</band>
+	</pageHeader>
+	<columnHeader>
+		<band splitType="Prevent"/>
+	</columnHeader>
+	<columnFooter>
+		<band/>
+	</columnFooter>
+	<pageFooter>
+		<band/>
+	</pageFooter>
+	<summary>
+		<band/>
+	</summary>
+</jasperReport>

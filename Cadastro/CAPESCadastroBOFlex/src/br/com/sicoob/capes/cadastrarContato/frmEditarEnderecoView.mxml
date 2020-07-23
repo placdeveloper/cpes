@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<bancoobValidaveis:ModuloValidavel xmlns:mx="http://www.adobe.com/2006/mxml"
+								   xmlns:campos="br.com.bancoob.componentes.campos.*"
+								   xmlns:bancoobValidaveis="br.com.bancoob.componentes.containers.validaveis.*"
+								   xmlns:bancoobInput="br.com.bancoob.componentes.input.*"
+								   xmlns:bancoob="br.com.bancoob.componentes.*"
+								   xmlns:validaveis="br.com.bancoob.componentes.containers.validaveis.*"
+								   xmlns:titulo="br.com.bancoob.componentes.titulo.*" 
+								   xmlns:selecaoGeral="br.com.bancoob.sisbr.componentes.selecaoGeral.*"
+								   xmlns:navegacao="br.com.bancoob.componentes.navegacao.*"
+								   xmlns:abas="br.com.sicoob.capes.utils.autorizacao.abas.*" 
+								   xmlns:containers="br.com.bancoob.componentes.containers.*"
+								   xmlns:componentepesquisaendereco="br.com.sicoob.capes.comum.componentes.pesquisaendereco.*"
+								   width="100%" height="100%" layout="absolute" styleName="ModuloSemEstilo">
+	<mx:Script>
+		<![CDATA[
+			import br.com.sicoob.capes.comum.enums.TipoAutorizacaoEnum;
+			import br.com.sicoob.capes.utils.UploadDocGedUtil;
+		]]>
+	</mx:Script>
+	
+	<navegacao:Tab x="0" y="0" width="100%" height="100%" id="navegacao">
+		<mx:Canvas width="100%" height="100%" label="Informações">
+			<validaveis:CanvasValidavel id="tela" height="100%" width="100%">
+				<titulo:SubtituloView texto="Endereço" left="10" right="10"  top="10"  />
+				<containers:HBoxBancoob top="50" x="40" y="35">
+					<containers:VBoxBancoob width="45%" y="3">
+						<bancoob:Rotulo text="Data da última alteração:" id="rotuloDataHoraInicio" height="22"/>
+						<bancoob:Rotulo text="Usuário da última alteração:" id="rotuloUsuarioAlteracao" height="22"/>
+						<bancoob:Rotulo text="Tipo de Endereço:" textAlign="left" height="22"/>
+						<bancoob:Rotulo text="CEP:" textAlign="left" height="22"/>
+						<bancoob:Rotulo text="Tipo Logradouro:" textAlign="left" height="22"/>
+						<bancoob:Rotulo text="Logradouro:" textAlign="left" height="22"/>
+						<bancoob:Rotulo text="Endereço:" textAlign="left" height="22"/>
+						<bancoob:Rotulo text="Número:" textAlign="left" height="22"/>
+						<bancoob:Rotulo text="Complemento:" textAlign="left" height="22"/>
+						<bancoob:Rotulo text="Bairro:" 	textAlign="left" height="22"/>
+						<bancoob:Rotulo text="Município:" textAlign="left" height="22"/>
+					</containers:VBoxBancoob>
+					
+					<containers:VBoxBancoob width="55%" y="0" >
+						<bancoob:Rotulo id="dataHoraInicio" height="22"/>
+						<bancoob:Rotulo id="usuarioAlteracao" height="22"/>
+						<bancoobInput:Combo id="cmbTipoEndereco" width="389" validarObrigatorio="true" labelField="descricao" inserirItemOpcional="true" somenteMaiusculas="true" height="22"/>
+						<containers:HBoxBancoob>
+							<componentepesquisaendereco:PesquisaEndereco id="componentePesquisaEndereco" validarObrigatorio="true" />
+						</containers:HBoxBancoob>
+						<bancoobInput:Combo id="cmbTipoLogradouro" width="389" editable="false" validarObrigatorio="true" labelField="nome" inserirItemOpcional="true" somenteMaiusculas="true" height="22"/>
+						<bancoobInput:Texto id="logradouro" width="389" maxChars="40" editable="false" validarObrigatorio="true" somenteMaiusculas="true" height="22"/>
+						<bancoob:Rotulo id="endereco" width="389" height="22"/>
+						<containers:HBoxBancoob>
+							<bancoobInput:Texto id="numero" width="100" maxChars="6" validarObrigatorio="true" somenteMaiusculas="true" height="22"/>
+							<bancoobInput:Check id="checkNumero" label="Sem número" height="22"/>
+						</containers:HBoxBancoob>
+						<bancoobInput:Texto id="complemento" width="100" maxChars="20" validarObrigatorio="false" somenteMaiusculas="true" height="22"/>
+						<bancoobInput:Texto id="bairro" width="150"  maxChars="30" editable="false" validarObrigatorio="true" somenteMaiusculas="true" height="22"/>
+						<selecaoGeral:ProcurarGeralV2 id="cmpPesquisaMunicipio"
+													  tipoProcura="9005"
+													  height="22"
+													  titulo="Procurar Município"
+													  campoCodigo="IDLOCALIDADE"
+													  campoDescricao="NOMELIMPOLOCALIDADE" validarObrigatorio="true"
+													  filtroAdicional="90051"/>
+					</containers:VBoxBancoob>
+				</containers:HBoxBancoob>
+			</validaveis:CanvasValidavel>
+		</mx:Canvas>
+		<abas:abaUploadGed id="abaDocumentos" label="Documentos" _siglaClasseDocumento="{TipoAutorizacaoEnum.ENDERECO.name}" />
+	</navegacao:Tab>
+	
+</bancoobValidaveis:ModuloValidavel>

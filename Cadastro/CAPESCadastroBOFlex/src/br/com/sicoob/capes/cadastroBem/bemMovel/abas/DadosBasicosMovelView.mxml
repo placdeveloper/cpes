@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<bancoobValidaveis:CanvasValidavel 
+	xmlns="br.com.bancoob.componentes.containers.*" 
+	xmlns:mx="http://www.adobe.com/2006/mxml" 
+	xmlns:bancoobValidaveis="br.com.bancoob.componentes.containers.validaveis.*"
+	xmlns:titulo="br.com.bancoob.componentes.titulo.*" 
+	xmlns:componentes="br.com.bancoob.componentes.*" 
+	xmlns:containers="br.com.bancoob.componentes.containers.*"
+	xmlns:input="br.com.bancoob.componentes.input.*"
+	xmlns:campos="br.com.bancoob.componentes.campos.*"
+	xmlns:grid="br.com.bancoob.componentes.grid.*"
+	xmlns:selecaoGeral="br.com.bancoob.sisbr.componentes.selecaoGeral.*"
+	xmlns:procurarPessoa="br.com.sicoob.capes.corporativo.componentes.procurarPessoa.*"
+	xmlns:componentesCapes="br.com.sicoob.capes.comum.componentes.input.*"
+	width="100%" height="100%" styleName="ModuloSemEstilo">
+	
+	<mx:Script>
+		<![CDATA[
+			import br.com.bancoob.componentes.tabelapaginada.TabelaPaginadaUtils;
+		]]>
+	</mx:Script>
+	
+	<!--ÁREA DE DADOS BÁSICOS -->
+	<titulo:SubtituloView texto="Simples" x="5" y="0" />
+	
+	<componentes:Rotulo text="Tipo bem: " x="10" y="27" textAlign="left" />
+	<input:Combo id="comboTipoBem" left="120" y="25" right="10" labelField="descricao" conteudoMaiusculo="true" inserirItemOpcional="true" labelItemOpcional="SELECIONE" validarObrigatorio="true" tabIndex="1" />
+
+	<componentes:Rotulo text="Descrição: " x="10" y="52" textAlign="left" />
+	<input:TextoArea id="campoDescricao" left="120" y="50" height="100" right="10" maxChars="1000" validarObrigatorio="true" tabIndex="2" />
+	
+	<componentes:Rotulo text="Valor do bem: " x="10" y="157" textAlign="left" />
+	<componentesCapes:CampoMoeda id="campoValorBem" x="120" y="155" width="150" permitirValoreNegativos="false" valorMinimo="0" valorMaximo="99999999999.99" casasDecimais="2" maxChars="14" validarObrigatorio="true" tabIndex="3" />
+	<input:Check id="checkValorBem" x="290" y="155" label="Não informado/Desconhecido" tabIndex="4" />
+	
+	<componentes:Rotulo text="Mês renovação seguro: " x="10" y="182" textAlign="left" />
+	<componentesCapes:CampoNumerico id="campoMesRenovacaoSeguro" x="120" y="180" agruparDigitos="false" permitirValoreNegativos="false" valorMinimo="0" valorMaximo="12" width="40" maxChars="2" tabIndex="5" />
+	
+</bancoobValidaveis:CanvasValidavel >

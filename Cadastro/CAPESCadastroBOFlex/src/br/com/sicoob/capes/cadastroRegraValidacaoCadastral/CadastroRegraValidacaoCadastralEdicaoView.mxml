@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FormularioCadastroView xmlns="br.com.bancoob.componentes.cadastro.*"
+                        xmlns:mx="http://www.adobe.com/2006/mxml"
+						xmlns:abas="br.com.sicoob.capes.cadastroRegraValidacaoCadastral.abas.*"
+                        xmlns:navegacao="br.com.bancoob.componentes.navegacao.*"
+                        xmlns:componentesCapes="br.com.sicoob.capes.utils.autorizacao.*"
+                        xmlns:autorizar="br.com.sicoob.capes.autorizarAlteracoes.*"
+                        xmlns:servico="br.com.bancoob.util.servico.*"
+                        xmlns:componentes="br.com.bancoob.componentes.*"
+                        xmlns:containers="br.com.bancoob.componentes.containers.*"
+                        xmlns:input="br.com.bancoob.componentes.input.*"
+                        xmlns:campos="br.com.bancoob.componentes.campos.*"
+                        xmlns:validaveis="br.com.bancoob.componentes.containers.validaveis.*"
+                        xmlns:titulo="br.com.bancoob.componentes.titulo.*"
+                        visible="true" left="0" top="0"
+                        horizontalScrollPolicy="off" layout="vertical" verticalScrollPolicy="auto">
+	
+	<mx:Script>
+		<![CDATA[
+		]]>
+	</mx:Script>
+	
+	<navegacao:Tab width="100%" height="100%" id="navegacao">
+		<abas:AbaDadosBasicos label="DADOS BÁSICOS" id="abaDadosBasicos" /> 
+		<validaveis:CanvasValidavel width="100%" height="100%" label="DETALHAMENTO" id="abaDetalhamento">
+			<titulo:SubtituloView texto="QUERY" top="10" right="10" left="10" width="100%" />
+			<input:TextoArea id="query" top="46" right="10" bottom="10" left="10" maxChars="10000" />
+		</validaveis:CanvasValidavel>
+	</navegacao:Tab>
+	<BarraBotoesFormularioCadastroView id="barraBotoes" width="100%" />
+	<servicoEdicao>
+		<servico:ServicoJava 
+			source="br.com.sicoob.capes.cadastro.fachada.ValidacaoCadastralRegraFachada"
+			bloquearOperacao="true"
+			mensagemEspera="Realizando operação..."/>
+	</servicoEdicao>
+	<servicoInclusao>
+		<servico:ServicoJava 
+			source="br.com.sicoob.capes.cadastro.fachada.ValidacaoCadastralRegraFachada"
+			bloquearOperacao="true"
+			mensagemEspera="Realizando operação..."/>
+	</servicoInclusao>
+</FormularioCadastroView>

@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="CabecalhoFormularioVisita" pageWidth="550" pageHeight="75" whenNoDataType="AllSectionsNoDetail" columnWidth="550" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0">
+	<parameter name="URL_LOGO" class="java.net.URL" isForPrompting="false">
+		<defaultValueExpression><![CDATA[new java.net.URI("file:///C:/SisbrIDE-4.5/new_workspace/capes/Relatorio/CAPESRelatorioEJB/src/br/com/sicoob/capes/relatorio/sicoob.jpg").toURL()]]></defaultValueExpression>
+	</parameter>
+	<parameter name="TITULO" class="java.lang.String"/>
+	<title>
+		<band height="75" splitType="Prevent">
+			<image>
+				<reportElement x="13" y="19" width="128" height="30"/>
+				<imageExpression class="java.net.URL"><![CDATA[$P{URL_LOGO}]]></imageExpression>
+			</image>
+			<textField>
+				<reportElement x="167" y="14" width="378" height="47"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Arial" size="12" isBold="true"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$P{TITULO}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement mode="Transparent" x="0" y="0" width="550" height="73"/>
+				<box>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement/>
+				<text><![CDATA[]]></text>
+			</staticText>
+		</band>
+	</title>
+</jasperReport>

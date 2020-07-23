@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<CanvasValidavel xmlns="br.com.bancoob.componentes.containers.validaveis.*"
+				 xmlns:mx="http://www.adobe.com/2006/mxml"
+				 xmlns:ns1="br.com.bancoob.componentes.titulo.*"
+				 xmlns:ns3="br.com.bancoob.componentes.*"
+				 xmlns:ns4="br.com.bancoob.componentes.input.*"
+				 xmlns:ns5="br.com.bancoob.componentes.campos.*"
+				 xmlns:ns6="br.com.bancoob.componentes.painellista.*"
+				 width="100%" height="182"
+				 defaultButton="{botaoPesquisar}">
+	
+	<ns1:SubtituloView texto="Critérios de pesquisa" booTituloPesquisa="true" x="0" y="0" />
+	
+	<ns3:Rotulo text="Código:" x="10" y="27" textAlign="left" />
+	<ns5:CampoInteiroView id="campoCodigo" x="130" y="25" width="95" height="22" valorMinimo="1" valorMaximo="999" maxChars="3" />
+	
+	<ns3:Rotulo text="Descrição:" x="10" y="52" textAlign="left" />
+	<ns4:Texto id="campoDescricao" x="130" y="50" width="650" maxChars="100" />
+	
+	<ns3:Rotulo text="Categoria:" x="10" y="77" textAlign="left" />
+	<ns4:Combo id="comboCategoria" x="130" y="75" width="650" conteudoMaiusculo="true" labelField="descCategoriaAnotacao" inserirItemOpcional="true" labelItemOpcional="SELECIONE" />
+	
+	<ns3:Rotulo text="Tipo de captura:" x="10" y="102" textAlign="left" />
+	<ns4:Combo id="comboTipoCaptura" x="130" y="100" width="650" conteudoMaiusculo="true" labelField="descTipoCaptura" inserirItemOpcional="true" labelItemOpcional="SELECIONE"  />
+	
+	<ns3:Rotulo text="Tipo de pessoa:" x="10" y="127" textAlign="left" />
+	<ns4:Combo id="comboTipoPessoa" x="130" y="125" width="650" conteudoMaiusculo="true" labelField="descricao" inserirItemOpcional="true" labelItemOpcional="SELECIONE"  />
+	
+	<ns6:BotaoProcurarView width="100" id="botaoPesquisar" right="5" y="160" label="PESQUISAR" />
+	<!--<ns3:Botao width="100" id="botaoLimpar" right="0" y="92" label="LIMPAR" />-->
+	
+</CanvasValidavel>

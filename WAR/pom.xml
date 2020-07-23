@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+
+	<artifactId>capes-modulo-war</artifactId>
+	<packaging>pom</packaging>
+
+	<name>CAPES - WAR</name>
+
+	<parent>
+		<groupId>br.com.sicoob.capes</groupId>
+		<artifactId>capes</artifactId>
+		<version>2.0.8.1</version>
+		<relativePath>..</relativePath>
+	</parent>
+
+	<scm>
+		<url>http://svn.sicoob.com.br/fontesbancoob/SISBR/Aplicativos/JAVA/trunk/CAPES/tags/capes-2.0.8.1/WAR</url>
+		<connection>scm:svn:http://svn.sicoob.com.br/fontesbancoob/SISBR/Aplicativos/JAVA/trunk/CAPES/tags/capes-2.0.8.1/WAR</connection>
+		<developerConnection>scm:svn:http://svn.sicoob.com.br/fontesbancoob/SISBR/Aplicativos/JAVA/trunk/CAPES/tags/capes-2.0.8.1/WAR</developerConnection>
+	</scm>
+
+	<properties>
+		<webapp-dir>src/main/webapp</webapp-dir>
+	</properties>
+
+	<build>
+		<finalName>capes</finalName>
+<!-- 		<resources> -->
+<!-- 			<resource> -->
+<!-- 				<directory>${webapp-dir}</directory> -->
+<!-- 			</resource> -->
+<!-- 		</resources> -->
+	</build>
+
+	<modules>
+		<module>Backoffice</module>
+		<module>Processamento</module>
+	</modules>
+	
+</project>

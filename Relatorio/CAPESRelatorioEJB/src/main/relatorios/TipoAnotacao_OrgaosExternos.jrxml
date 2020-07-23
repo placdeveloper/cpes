@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="TipoAnotacao_OrgaosExternos" pageWidth="772" pageHeight="48" orientation="Landscape" columnWidth="772" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0">
+	<parameter name="LINHA_MASTER" class="java.lang.Integer"/>
+	<queryString>
+		<![CDATA[]]>
+	</queryString>
+	<field name="codigoTipoOrigemInformacao" class="java.lang.String"/>
+	<field name="tipoConsultaOrigem" class="br.com.sicoob.capes.negocio.entidades.TipoConsultaOrigem"/>
+	<pageHeader>
+		<band height="2"/>
+	</pageHeader>
+	<columnHeader>
+		<band height="12">
+			<rectangle>
+				<reportElement x="30" y="0" width="742" height="12" backcolor="#999999"/>
+				<graphicElement>
+					<pen lineWidth="0.0" lineStyle="Solid"/>
+				</graphicElement>
+			</rectangle>
+			<line>
+				<reportElement x="8" y="0" width="1" height="12"/>
+				<graphicElement>
+					<pen lineWidth="1.0"/>
+				</graphicElement>
+			</line>
+			<staticText>
+				<reportElement x="30" y="0" width="96" height="12"/>
+				<textElement>
+					<font fontName="Arial" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Órgão Externo]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="131" y="0" width="144" height="12"/>
+				<textElement>
+					<font fontName="Arial" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Tipo de Consulta]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="280" y="0" width="130" height="12"/>
+				<textElement>
+					<font fontName="Arial" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Código no Órgão Externo]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="12" splitType="Prevent">
+			<rectangle>
+				<reportElement x="30" y="0" width="742" height="12" backcolor="#DCDCDC">
+					<printWhenExpression><![CDATA[new Boolean(($V{REPORT_COUNT}.intValue() % 2) == 0)]]></printWhenExpression>
+				</reportElement>
+				<graphicElement>
+					<pen lineWidth="0.0"/>
+				</graphicElement>
+			</rectangle>
+			<rectangle>
+				<reportElement x="30" y="0" width="742" height="12" backcolor="#F5F5F5">
+					<printWhenExpression><![CDATA[new Boolean(($V{REPORT_COUNT}.intValue() % 2) != 0)]]></printWhenExpression>
+				</reportElement>
+				<graphicElement>
+					<pen lineWidth="0.0"/>
+				</graphicElement>
+			</rectangle>
+			<line>
+				<reportElement x="8" y="-5" width="1" height="12"/>
+				<graphicElement>
+					<pen lineWidth="1.0"/>
+				</graphicElement>
+			</line>
+			<line>
+				<reportElement x="9" y="6" width="18" height="1"/>
+				<graphicElement>
+					<pen lineWidth="1.0"/>
+				</graphicElement>
+			</line>
+			<textField>
+				<reportElement x="30" y="0" width="96" height="12"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Arial"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{tipoConsultaOrigem}.getOrigemInformacao().getDescOrigemInfo()]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="131" y="0" width="144" height="12"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Arial"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{tipoConsultaOrigem}.getDescricaoTipoConsultaOrigem()]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="280" y="0" width="130" height="12"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Arial"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{codigoTipoOrigemInformacao}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<pageFooter>
+		<band height="5"/>
+	</pageFooter>
+</jasperReport>

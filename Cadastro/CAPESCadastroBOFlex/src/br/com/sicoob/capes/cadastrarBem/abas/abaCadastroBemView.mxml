@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="utf-8"?>
+<CanvasValidavel xmlns="br.com.bancoob.componentes.containers.validaveis.*" 
+	xmlns:mx="http://www.adobe.com/2006/mxml" 
+	xmlns:grid="br.com.bancoob.componentes.grid.*"
+	xmlns:bancoobInput="br.com.bancoob.componentes.input.*"
+	xmlns:bancoob="br.com.bancoob.componentes.*"
+	xmlns:campos="br.com.bancoob.componentes.campos.*"
+	xmlns:bancoobValidaveis="br.com.bancoob.componentes.containers.validaveis.*"
+	width="100%" height="100%" xmlns:titulo="br.com.bancoob.componentes.titulo.*" styleName="ModuloSemEstilo" xmlns:containers="br.com.bancoob.componentes.containers.*" > 
+	
+	<mx:Script>
+		<![CDATA[
+			import br.com.bancoob.util.servico.ServicoJava;
+
+			public var servicoSubTiposBem:ServicoJava;
+			public var servicoDependenciasSubTipoBem:ServicoJava;
+
+			public function set setServicoSubTiposBem(servicoSubTiposBem:ServicoJava):void {
+				this.servicoSubTiposBem = servicoSubTiposBem;		
+			}
+
+			public function set setServicoDependenciasSubTipoBem(servicoDependenciasSubTipoBem:ServicoJava):void {
+				this.servicoDependenciasSubTipoBem = servicoDependenciasSubTipoBem;		
+			}
+
+			public function validarCampos():Boolean {
+				return true;
+			}
+		]]>
+	</mx:Script>
+
+	<containers:VBoxBancoob y="5">
+		
+		<containers:HBoxBancoob>
+			<bancoob:Rotulo text="Data da última alteração:" width="145" id="rotuloDataHoraInicio" height="22"/>
+			<bancoob:Rotulo id="dataHoraInicio" height="22"/>
+		</containers:HBoxBancoob>
+		
+		<containers:HBoxBancoob>
+			<bancoob:Rotulo text="Usuário da última alteração:" width="145" id="rotuloUsuarioAlteracao" height="22"/>
+			<bancoob:Rotulo id="usuarioAlteracao" height="22"/>
+		</containers:HBoxBancoob>
+		
+		<containers:HBoxBancoob>
+			<bancoob:Rotulo text="Tipo do Bem:" width="145"/>
+			<bancoobInput:Combo width="262" id="cmbTipoBem" toolTip="Selecione o tipo do bem." validarObrigatorio="true" tabIndex="1" labelField="descricao" inserirItemOpcional="true" />
+		</containers:HBoxBancoob>
+		
+		<containers:HBoxBancoob>
+			<bancoob:Rotulo text="Subtipo do Bem:" width="145"/>
+			<bancoobInput:Combo width="262" id="cmbSubTipoBem" toolTip="Selecione o subtipo do bem." validarObrigatorio="true" tabIndex="2" labelField="descricao" inserirItemOpcional="true" />	
+		</containers:HBoxBancoob>
+		
+		<containers:HBoxBancoob>
+			<bancoob:Rotulo text="Descrição:" width="145"/>
+			<bancoobInput:TextoArea width="262" id="taDescricao" toolTip="Descrição do bem." tabIndex="3" maxChars="2000"/>
+		</containers:HBoxBancoob>
+		
+		<containers:HBoxBancoob>
+			<bancoob:Rotulo text="Situação do Bem:" width="145"/>
+			<bancoobInput:Combo width="262" id="cmbSituacaoBem" toolTip="Selecione a situação do bem." validarObrigatorio="true" tabIndex="4" labelField="descricao" inserirItemOpcional="true" />			
+		</containers:HBoxBancoob>
+		
+		<containers:HBoxBancoob>
+			<bancoob:Rotulo text="Valor do Bem:" width="145"/>
+			<campos:CampoMoedaView width="150" id="valor" tabIndex="5" valorMinimo="0" valorMaximo="9999999999999.99"  validarObrigatorio="true" maxChars="16" />
+			<bancoob:Rotulo text="Percentual de Propriedade:" width="145"/>
+			<campos:CampoMoedaView width="70" id="percentual" tabIndex="6" valorMinimo="0" valorMaximo="100" validarObrigatorio="true" maxChars="6" />
+			<bancoob:Rotulo text="Valor da Participação:" width="145"/>
+			<campos:CampoMoedaView width="150" id="valorPropriedade" tabIndex="7" valorMinimo="0" valorMaximo="9999999999999.99" enabled="false" />
+		</containers:HBoxBancoob>
+						
+		<containers:HBoxBancoob>
+			<mx:Image source="br/com/bancoob/imagens/icos/apps_16.png" alpha=".5"/>
+			<mx:Label text="Seguro" fontWeight="bold" fontFamily="ArialEmbedded" alpha=".8"/>
+			<mx:Image source="br/com/bancoob/imagens/imgsTelas/linha.swf" scaleContent="false" left="90" right="10"/>
+		</containers:HBoxBancoob>
+		
+		<containers:HBoxBancoob>
+			<bancoob:Rotulo text="Seguradora:" width="145"/>
+			<bancoobInput:Texto width="350" id="seguradora" maxChars="50" tabIndex="8"/>
+		</containers:HBoxBancoob>
+		
+		<containers:HBoxBancoob>
+			<bancoob:Rotulo text="Valor segurado:" width="145"/>
+			<campos:CampoMoedaView width="150" id="valorSegurado" valorMinimo="0" valorMaximo="9999999999999.99" tabIndex="9" maxChars="20" />	
+			<bancoob:Rotulo text="Vencimento:" width="145"/>
+			<bancoobInput:Data id="vencimento" tabIndex="10" />
+		</containers:HBoxBancoob>
+		
+	</containers:VBoxBancoob>
+
+</CanvasValidavel>

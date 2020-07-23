@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="capes-relatorio-ejb" basedir=".">
+	<property name="jboss-rel-dir" value="C:\SisbrIDE-4.5\apps\JBoss\server\default\deploy\relatorios"/>
+
+	<target name="deploy-relatorios">
+		<copy todir="${jboss-rel-dir}" overwrite="true" verbose="true">
+			<fileset dir="${basedir}/src/main/relatorios" id="relatorios">
+				<include name="*.jasper" />
+				<exclude name="*.jrxml" />
+			</fileset>
+		</copy>
+	</target>
+</project>

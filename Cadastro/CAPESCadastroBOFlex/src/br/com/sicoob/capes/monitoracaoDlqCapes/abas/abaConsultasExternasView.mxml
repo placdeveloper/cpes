@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<bancoob:Modulo xmlns:mx="http://www.adobe.com/2006/mxml"
+		xmlns:bancoob="br.com.bancoob.componentes.*" 
+		xmlns:bancoobContainers="br.com.bancoob.componentes.containers.*"
+		xmlns:bancoobGrid="br.com.bancoob.componentes.grid.*" 
+		width="100%" height="100%" layout="absolute" styleName="ModuloSemEstilo" xmlns:renderes="br.com.bancoob.componentes.renderes.*">
+		<mx:Script>
+			<![CDATA[
+				import br.com.bancoob.componentes.tabelapaginada.TabelaPaginadaUtils;
+			]]>
+		</mx:Script>	 	
+
+		<bancoobContainers:CanvasBancoob height="30" width="100%" top="5" >
+			<bancoob:Rotulo id="lblNomeFila" x="20" y="5" fontFamily="ArialEmbedded" fontWeight="bold" fontSize="15" />		
+		</bancoobContainers:CanvasBancoob>	
+
+		<bancoobContainers:CanvasBancoob left="15" right="15" top="40" width="100%" height="80%">					
+			<bancoobGrid:Grid id="gridDados" width="100%" height="90%">
+				<bancoobGrid:columns>
+					<bancoobGrid:ColunaGrid headerText="Data da Mensagem" dataField="dataHora" textAlign="center"  
+						width="70" labelFunction="{TabelaPaginadaUtils.defaultDatetimeLabelFunction}" />
+					<bancoobGrid:ColunaGrid headerText="Mensagem" dataField="conteudo" textAlign="left" wordWrap="true" minWidth="500" />
+				</bancoobGrid:columns>
+			</bancoobGrid:Grid>
+		</bancoobContainers:CanvasBancoob>				
+		
+		<bancoobContainers:CanvasBancoob height="40" width="100%" bottom="5" >
+			<bancoob:Rotulo id="lblExibicao" x="45"  fontFamily="ArialEmbedded" fontWeight="bold" fontSize="15" />
+			<bancoob:Botao label="Limpar fila" id="btReprocessar" verticalCenter="0" right="20"/>
+		</bancoobContainers:CanvasBancoob>				
+</bancoob:Modulo>

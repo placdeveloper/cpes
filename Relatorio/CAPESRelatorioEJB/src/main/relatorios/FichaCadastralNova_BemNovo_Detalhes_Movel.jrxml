@@ -1,0 +1,618 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="FichaCadastralNova_BemNovo_Detalhes_Movel" pageWidth="575" pageHeight="842" columnWidth="575" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0" uuid="e76fb58d-867b-4146-be68-d13c444eb349">
+	<property name="ireport.zoom" value="1.2722928551174593"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<style name="Linha Zebrada" isDefault="true" mode="Opaque">
+		<box leftPadding="3">
+			<topPen lineWidth="0.25"/>
+			<leftPen lineWidth="0.25"/>
+			<bottomPen lineWidth="0.25"/>
+			<rightPen lineWidth="0.25"/>
+		</box>
+		<conditionalStyle>
+			<conditionExpression><![CDATA[new Boolean($V{COLUMN_COUNT}.intValue()%2==0)]]></conditionExpression>
+			<style mode="Opaque" backcolor="#DDDDDE"/>
+		</conditionalStyle>
+	</style>
+	<parameter name="SUBREPORT_DIR" class="java.lang.String" isForPrompting="false">
+		<defaultValueExpression><![CDATA["C:\\SisbrIDE-4.5\\workspace\\capes-ficha-cadastral\\capes\\Relatorio\\CAPESRelatorioEJB\\relatorios\\"]]></defaultValueExpression>
+	</parameter>
+	<parameter name="SUB_BENS_NOVO_DETALHE_AVALIACAO_MOVEL" class="net.sf.jasperreports.engine.JasperReport"/>
+	<parameter name="DS_SUB_BENS_NOVO" class="net.sf.jasperreports.engine.JRDataSource"/>
+	<field name="bemMovel.tipoBem.descricao" class="java.lang.String"/>
+	<field name="bemMovel.descricao" class="java.lang.String"/>
+	<field name="bemMovel.valor" class="java.math.BigDecimal"/>
+	<field name="bemMovel.mesRenovacaoSeguro" class="java.lang.Short"/>
+	<field name="bemMovel.valorNaoInformado" class="java.lang.Boolean"/>
+	<field name="bemMovel.tipoClassificacaoBem.codigo" class="java.lang.Short"/>
+	<field name="bemMovel.matriculaAeronave" class="java.lang.String"/>
+	<field name="bemMovel.numeroChassi" class="java.lang.String"/>
+	<field name="bemMovel.renavam" class="java.lang.String"/>
+	<field name="bemMovel.placa" class="java.lang.String"/>
+	<field name="bemMovel.uf" class="java.lang.String"/>
+	<field name="bemMovel.anoFabricacaoAutomovel" class="java.lang.Short"/>
+	<field name="bemMovel.anoModeloAutomovel" class="java.lang.Short"/>
+	<field name="bemMovel.anoConstrucaoAeronave" class="java.lang.Short"/>
+	<field name="bemMovel.tipoCorAutomovel.descricao" class="java.lang.String"/>
+	<field name="bemMovel.tipoChassi.descricao" class="java.lang.String"/>
+	<field name="bemMovel.inscricaoEmbarcacao" class="java.lang.String"/>
+	<field name="bemMovel.anoConstrucaoEmbarcacao" class="java.lang.Short"/>
+	<field name="bemMovelAvaliacao" class="java.lang.Object"/>
+	<field name="tipoOnus" class="java.lang.String"/>
+	<field name="bemMovel.idUsuarioEnvio" class="java.lang.String"/>
+	<field name="bemMovel.idUsuarioAprovacao" class="java.lang.String"/>
+	<variable name="REPORT_COUNT_ZEBRA" class="java.lang.Integer" calculation="Count">
+		<variableExpression><![CDATA[new Integer( $V{REPORT_COUNT_ZEBRA}.intValue() + 1)]]></variableExpression>
+		<initialValueExpression><![CDATA[new Integer(1)]]></initialValueExpression>
+	</variable>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<detail>
+		<band height="114" splitType="Stretch">
+			<staticText>
+				<reportElement uuid="48d6f5d3-da4d-46cc-aa63-66bc6dab85fc" positionType="Float" x="411" y="82" width="164" height="30"/>
+				<box leftPadding="3">
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.0"/>
+					<leftPen lineWidth="0.0"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.0"/>
+				</box>
+				<textElement>
+					<font size="9" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Mês renovação seguro]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="2152f810-8415-4edc-ad15-df43b021c787" positionType="Float" x="275" y="82" width="136" height="30"/>
+				<box leftPadding="3">
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.0"/>
+					<leftPen lineWidth="0.0"/>
+					<bottomPen lineWidth="0.5"/>
+				</box>
+				<textElement>
+					<font size="9" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Não informado/Desconhecido]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="836864dc-ccb9-401f-a01d-3c56ca4a692f" positionType="Float" x="0" y="82" width="275" height="30"/>
+				<box leftPadding="3">
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.0"/>
+					<leftPen lineWidth="0.0"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement>
+					<font size="9" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Valor do bem]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="df035219-38fb-40a5-a818-92c04524e270" positionType="Float" x="275" y="52" width="300" height="30"/>
+				<box leftPadding="3">
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.0"/>
+					<leftPen lineWidth="0.0"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.0"/>
+				</box>
+				<textElement>
+					<font size="9" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Demoninação]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="97defebe-4452-463b-9d5e-e7a5c2f04bc7" positionType="Float" x="0" y="52" width="275" height="30"/>
+				<box leftPadding="3">
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.0"/>
+					<leftPen lineWidth="0.0"/>
+					<bottomPen lineWidth="0.5"/>
+				</box>
+				<textElement>
+					<font size="9" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Tipo bem]]></text>
+			</staticText>
+			<textField isBlankWhenNull="true">
+				<reportElement uuid="a37d7377-68b3-4bdc-8bf2-38ad39d147c0" x="0" y="63" width="274" height="15"/>
+				<box leftPadding="6">
+					<topPen lineWidth="0.0"/>
+					<leftPen lineWidth="0.0"/>
+					<bottomPen lineWidth="0.0"/>
+					<rightPen lineWidth="0.0"/>
+				</box>
+				<textElement verticalAlignment="Middle">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{bemMovel.tipoBem.descricao}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement uuid="eb6a6aba-155a-441a-a7de-427f97ddb90e" x="277" y="62" width="298" height="15"/>
+				<box leftPadding="6">
+					<topPen lineWidth="0.0"/>
+					<leftPen lineWidth="0.0"/>
+					<bottomPen lineWidth="0.0"/>
+					<rightPen lineWidth="0.0"/>
+				</box>
+				<textElement verticalAlignment="Middle">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{bemMovel.descricao}]]></textFieldExpression>
+			</textField>
+			<textField pattern="¤ #,##0.00" isBlankWhenNull="true">
+				<reportElement uuid="3ddba214-e698-4ee1-ab50-6a83ac73167e" x="0" y="96" width="259" height="15"/>
+				<box leftPadding="6">
+					<topPen lineWidth="0.0"/>
+					<leftPen lineWidth="0.0"/>
+					<bottomPen lineWidth="0.0"/>
+					<rightPen lineWidth="0.0"/>
+				</box>
+				<textElement verticalAlignment="Middle">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{bemMovel.valor}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement uuid="9e07f0ab-ec6e-45e4-8878-45eb5bfd3367" x="286" y="94" width="16" height="15"/>
+				<box leftPadding="3">
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{bemMovel.valorNaoInformado} != null && $F{bemMovel.valorNaoInformado}.booleanValue() ? "V" : ""]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement uuid="752950bd-94c4-465f-8c2e-24b34a91bce2" x="417" y="96" width="36" height="15"/>
+				<box leftPadding="6">
+					<topPen lineWidth="0.0"/>
+					<leftPen lineWidth="0.0"/>
+					<bottomPen lineWidth="0.0"/>
+					<rightPen lineWidth="0.0"/>
+				</box>
+				<textElement verticalAlignment="Middle">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{bemMovel.mesRenovacaoSeguro}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement uuid="361e0dff-dddb-4cae-8f1f-927625c30c84" x="0" y="0" width="575" height="15" backcolor="#CCCCCC"/>
+				<box leftPadding="1">
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement>
+					<font fontName="Arial" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Bem Móvel - Simples]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="048fb743-c8f0-416b-94cb-a191efdfd0e0" style="Linha Zebrada" x="0" y="16" width="575" height="36"/>
+				<box leftPadding="3">
+					<topPen lineWidth="0.0"/>
+					<leftPen lineWidth="0.0"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.0"/>
+				</box>
+				<textElement>
+					<font size="8" isBold="true"/>
+					<paragraph spacingBefore="5"/>
+				</textElement>
+				<text><![CDATA[Usuários]]></text>
+			</staticText>
+			<textField isBlankWhenNull="true">
+				<reportElement uuid="8abf1ec4-bd3e-4408-adc4-0986ceda0c13" style="Linha Zebrada" x="275" y="35" width="300" height="15"/>
+				<box leftPadding="3">
+					<topPen lineWidth="0.0"/>
+					<leftPen lineWidth="0.0"/>
+					<bottomPen lineWidth="0.0"/>
+					<rightPen lineWidth="0.0"/>
+				</box>
+				<textElement verticalAlignment="Middle">
+					<font size="8" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[new String("Aprovação: "+($F{bemMovel.idUsuarioAprovacao} != null ? $F{bemMovel.idUsuarioAprovacao} : ""))]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement uuid="e1ac4953-1911-44ee-affc-fbbb6891af74" style="Linha Zebrada" x="0" y="35" width="274" height="15"/>
+				<box leftPadding="3">
+					<topPen lineWidth="0.0"/>
+					<leftPen lineWidth="0.0"/>
+					<bottomPen lineWidth="0.0"/>
+					<rightPen lineWidth="0.0"/>
+				</box>
+				<textElement verticalAlignment="Middle">
+					<font size="8" isBold="true"/>
+					<paragraph leftIndent="2"/>
+				</textElement>
+				<textFieldExpression><![CDATA[new String("Atualização: "+($F{bemMovel.idUsuarioEnvio} != null ? $F{bemMovel.idUsuarioEnvio} : ""))]]></textFieldExpression>
+			</textField>
+		</band>
+		<band height="107">
+			<printWhenExpression><![CDATA[new Boolean($F{bemMovel.tipoChassi.descricao} != null && !$F{bemMovel.tipoChassi.descricao}.equals(""))]]></printWhenExpression>
+			<staticText>
+				<reportElement uuid="cdc8f5a6-8594-4f20-bf83-5898bccc103e" positionType="Float" x="416" y="75" width="159" height="30"/>
+				<box leftPadding="3">
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.0"/>
+					<leftPen lineWidth="0.0"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.0"/>
+				</box>
+				<textElement>
+					<font size="9" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Cor]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="668f3c17-4cf8-4d84-a349-ec199c9048f7" positionType="Float" x="277" y="75" width="139" height="30"/>
+				<box leftPadding="3">
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.0"/>
+					<leftPen lineWidth="0.0"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement>
+					<font size="9" isBold="true"/>
+				</textElement>
+				<text><![CDATA[UF]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="e7b295bc-918a-492e-bb87-f2cc6b7824b9" positionType="Float" x="0" y="75" width="277" height="30"/>
+				<box leftPadding="3">
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.0"/>
+					<leftPen lineWidth="0.0"/>
+					<bottomPen lineWidth="0.5"/>
+				</box>
+				<textElement>
+					<font size="9" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Placa]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="40d72967-6cd0-4673-aaa2-a29cadb3ce8e" positionType="Float" x="416" y="45" width="159" height="30"/>
+				<box leftPadding="3">
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.0"/>
+					<leftPen lineWidth="0.0"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.0"/>
+				</box>
+				<textElement>
+					<font size="9" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Ano do modelo]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="6080b379-8be7-44f7-a0c0-0ac611471bf1" positionType="Float" x="277" y="45" width="139" height="30"/>
+				<box leftPadding="3">
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.0"/>
+					<leftPen lineWidth="0.0"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement>
+					<font size="9" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Ano de fabricação]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="567e8a31-2188-4c72-8ca7-afb19a8dd7f7" positionType="Float" x="0" y="45" width="277" height="30"/>
+				<box leftPadding="3">
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.0"/>
+					<leftPen lineWidth="0.0"/>
+					<bottomPen lineWidth="0.5"/>
+				</box>
+				<textElement>
+					<font size="9" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Renavam]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="62a1b647-d3f4-4f40-847e-ba01947d5fe5" positionType="Float" x="277" y="15" width="298" height="30"/>
+				<box leftPadding="3">
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.0"/>
+					<leftPen lineWidth="0.0"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.0"/>
+				</box>
+				<textElement>
+					<font size="9" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Número chassi]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="cab17572-f4bc-470e-a6cb-cd4d12f0d2a4" positionType="Float" x="0" y="15" width="277" height="30"/>
+				<box leftPadding="3">
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.0"/>
+					<leftPen lineWidth="0.0"/>
+					<bottomPen lineWidth="0.5"/>
+				</box>
+				<textElement>
+					<font size="9" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Tipo chassi]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="871c6375-6d00-42b0-aea0-b8307bcc2ff2" x="0" y="1" width="575" height="15" backcolor="#CCCCCC"/>
+				<box leftPadding="1">
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement>
+					<font fontName="Arial" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Bem Móvel - Avançado Veículo]]></text>
+			</staticText>
+			<textField isBlankWhenNull="true">
+				<reportElement uuid="890ea380-9d01-41b3-9a98-056b5d3871b4" x="0" y="27" width="274" height="15"/>
+				<box leftPadding="6">
+					<topPen lineWidth="0.0"/>
+					<leftPen lineWidth="0.0"/>
+					<bottomPen lineWidth="0.0"/>
+					<rightPen lineWidth="0.0"/>
+				</box>
+				<textElement verticalAlignment="Middle">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{bemMovel.tipoChassi.descricao}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement uuid="724cf534-a2c3-4721-9c53-19d865e11f94" x="280" y="27" width="295" height="15"/>
+				<box leftPadding="6">
+					<topPen lineWidth="0.0"/>
+					<leftPen lineWidth="0.0"/>
+					<bottomPen lineWidth="0.0"/>
+					<rightPen lineWidth="0.0"/>
+				</box>
+				<textElement verticalAlignment="Middle">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{bemMovel.numeroChassi}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement uuid="92f48d13-fc8e-4ac2-b667-5b0f29c2c3f5" x="0" y="58" width="259" height="15"/>
+				<box leftPadding="6">
+					<topPen lineWidth="0.0"/>
+					<leftPen lineWidth="0.0"/>
+					<bottomPen lineWidth="0.0"/>
+					<rightPen lineWidth="0.0"/>
+				</box>
+				<textElement verticalAlignment="Middle">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{bemMovel.renavam}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement uuid="dec85c55-7a76-4f76-a3bf-518a383cf869" x="278" y="58" width="126" height="15"/>
+				<box leftPadding="6">
+					<topPen lineWidth="0.0"/>
+					<leftPen lineWidth="0.0"/>
+					<bottomPen lineWidth="0.0"/>
+					<rightPen lineWidth="0.0"/>
+				</box>
+				<textElement verticalAlignment="Middle">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{bemMovel.anoFabricacaoAutomovel}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement uuid="ffca1045-0ea7-42f1-b6a9-d8cd758ddd51" x="417" y="58" width="142" height="15"/>
+				<box leftPadding="6">
+					<topPen lineWidth="0.0"/>
+					<leftPen lineWidth="0.0"/>
+					<bottomPen lineWidth="0.0"/>
+					<rightPen lineWidth="0.0"/>
+				</box>
+				<textElement verticalAlignment="Middle">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{bemMovel.anoModeloAutomovel}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement uuid="bd5c8b5f-95a1-4aa2-94ac-b5a126c409e5" x="0" y="88" width="274" height="15"/>
+				<box leftPadding="6">
+					<topPen lineWidth="0.0"/>
+					<leftPen lineWidth="0.0"/>
+					<bottomPen lineWidth="0.0"/>
+					<rightPen lineWidth="0.0"/>
+				</box>
+				<textElement verticalAlignment="Middle">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{bemMovel.placa}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement uuid="8dec9c74-6fd3-429b-b86e-282b0db94c86" x="419" y="86" width="143" height="15"/>
+				<box leftPadding="6">
+					<topPen lineWidth="0.0"/>
+					<leftPen lineWidth="0.0"/>
+					<bottomPen lineWidth="0.0"/>
+					<rightPen lineWidth="0.0"/>
+				</box>
+				<textElement verticalAlignment="Middle">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{bemMovel.tipoCorAutomovel.descricao}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement uuid="7f11b736-5a1b-4dd5-a57a-2aafb90b0cd2" x="280" y="85" width="132" height="15"/>
+				<box leftPadding="6">
+					<topPen lineWidth="0.0"/>
+					<leftPen lineWidth="0.0"/>
+					<bottomPen lineWidth="0.0"/>
+					<rightPen lineWidth="0.0"/>
+				</box>
+				<textElement verticalAlignment="Middle">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{bemMovel.uf}]]></textFieldExpression>
+			</textField>
+		</band>
+		<band height="47">
+			<printWhenExpression><![CDATA[new Boolean($F{bemMovel.inscricaoEmbarcacao} != null && !$F{bemMovel.inscricaoEmbarcacao}.equals(""))]]></printWhenExpression>
+			<staticText>
+				<reportElement uuid="142bd215-8d81-456b-82d6-02b5df52c1ee" positionType="Float" x="277" y="15" width="298" height="30"/>
+				<box leftPadding="3">
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.0"/>
+					<leftPen lineWidth="0.0"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.0"/>
+				</box>
+				<textElement>
+					<font size="9" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Ano de construção]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="6c65dcb2-cc27-47c4-a9a2-c7c73bbb36ba" positionType="Float" x="0" y="15" width="277" height="30"/>
+				<box leftPadding="3">
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.0"/>
+					<leftPen lineWidth="0.0"/>
+					<bottomPen lineWidth="0.5"/>
+				</box>
+				<textElement>
+					<font size="9" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Tipo chassi]]></text>
+			</staticText>
+			<textField isBlankWhenNull="true">
+				<reportElement uuid="7ddea981-0b53-43e1-b762-a37b5593efdf" x="278" y="28" width="277" height="15"/>
+				<box leftPadding="6">
+					<topPen lineWidth="0.0"/>
+					<leftPen lineWidth="0.0"/>
+					<bottomPen lineWidth="0.0"/>
+					<rightPen lineWidth="0.0"/>
+				</box>
+				<textElement verticalAlignment="Middle">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{bemMovel.anoConstrucaoEmbarcacao}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement uuid="c58ec1ab-04e2-4c30-a72f-69f3bee57e9b" x="0" y="28" width="275" height="15"/>
+				<box leftPadding="6">
+					<topPen lineWidth="0.0"/>
+					<leftPen lineWidth="0.0"/>
+					<bottomPen lineWidth="0.0"/>
+					<rightPen lineWidth="0.0"/>
+				</box>
+				<textElement verticalAlignment="Middle">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{bemMovel.inscricaoEmbarcacao}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement uuid="5254e3b7-14cb-4b34-b32f-2d3f8cb41e02" x="0" y="0" width="575" height="15" backcolor="#CCCCCC"/>
+				<box leftPadding="1">
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement>
+					<font fontName="Arial" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Bem Móvel - Avançado Embarcação]]></text>
+			</staticText>
+		</band>
+		<band height="46">
+			<printWhenExpression><![CDATA[new Boolean($F{bemMovel.matriculaAeronave} != null && !$F{bemMovel.matriculaAeronave}.equals(""))]]></printWhenExpression>
+			<staticText>
+				<reportElement uuid="522f5a8f-0d6d-439e-9922-b2826a08c930" positionType="Float" x="277" y="15" width="298" height="30"/>
+				<box leftPadding="3">
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.0"/>
+					<leftPen lineWidth="0.0"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.0"/>
+				</box>
+				<textElement>
+					<font size="9" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Ano de construção]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="ca62e55d-6dde-4ecc-ae74-8333d72cf4be" positionType="Float" x="0" y="15" width="277" height="30"/>
+				<box leftPadding="3">
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.0"/>
+					<leftPen lineWidth="0.0"/>
+					<bottomPen lineWidth="0.5"/>
+				</box>
+				<textElement>
+					<font size="9" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Matrícula]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="a1b6a74a-d9a2-48f0-873b-5f592b32820b" x="0" y="0" width="575" height="15" backcolor="#CCCCCC"/>
+				<box leftPadding="1">
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement>
+					<font fontName="Arial" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Bem Móvel - Avançado Aeronave]]></text>
+			</staticText>
+			<textField isBlankWhenNull="true">
+				<reportElement uuid="a2604955-6714-4962-9637-448fa781ed25" x="280" y="28" width="277" height="15"/>
+				<box leftPadding="6">
+					<topPen lineWidth="0.0"/>
+					<leftPen lineWidth="0.0"/>
+					<bottomPen lineWidth="0.0"/>
+					<rightPen lineWidth="0.0"/>
+				</box>
+				<textElement verticalAlignment="Middle">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{bemMovel.anoConstrucaoAeronave}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement uuid="a7842131-69a9-4061-aca3-80f3e6b9cd13" x="0" y="28" width="276" height="15"/>
+				<box leftPadding="6">
+					<topPen lineWidth="0.0"/>
+					<leftPen lineWidth="0.0"/>
+					<bottomPen lineWidth="0.0"/>
+					<rightPen lineWidth="0.0"/>
+				</box>
+				<textElement verticalAlignment="Middle">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{bemMovel.matriculaAeronave}]]></textFieldExpression>
+			</textField>
+		</band>
+		<band height="41">
+			<printWhenExpression><![CDATA[new Boolean($F{bemMovelAvaliacao} != null)]]></printWhenExpression>
+			<subreport>
+				<reportElement uuid="30390926-2ab7-452b-82a8-dd6e70943238" x="0" y="0" width="575" height="38">
+					<printWhenExpression><![CDATA[new Boolean($F{bemMovelAvaliacao} != null)]]></printWhenExpression>
+				</reportElement>
+				<dataSourceExpression><![CDATA[$P{REPORT_DATA_SOURCE}]]></dataSourceExpression>
+				<subreportExpression><![CDATA[$P{SUB_BENS_NOVO_DETALHE_AVALIACAO_MOVEL}]]></subreportExpression>
+			</subreport>
+		</band>
+	</detail>
+</jasperReport>

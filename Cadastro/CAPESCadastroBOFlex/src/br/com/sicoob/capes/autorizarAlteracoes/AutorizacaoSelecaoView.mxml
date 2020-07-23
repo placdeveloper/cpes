@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Modulo xmlns="br.com.bancoob.componentes.*"
+		xmlns:mx="http://www.adobe.com/2006/mxml"
+		xmlns:navegacao="br.com.bancoob.componentes.navegacao.*"
+		xmlns:aba="br.com.sicoob.capes.autorizarAlteracoes.abas.*"
+		width="950" height="600" backgroundAlpha="0.0" paddingBottom="10" paddingLeft="10"
+		paddingRight="10" paddingTop="10">
+
+	<navegacao:Tab id="navegacaoTab" width="100%" height="100%" paddingLeft="10">
+		<aba:AbaAutorizar id="abaAutorizar" label="AUTORIZAR" 
+						  labelCooperativa="Cooperativa de Origem"
+						  propriedadeCooperativaGrid="instituicaoOrigem.numero" />
+		<aba:AbaDevolvidas id="abaDevolvidas" label="DEVOLVIDAS"
+						   labelCooperativa="Cooperativa de Destino"
+						   propriedadeCooperativaGrid="instituicaoDestino.numero" />
+		<aba:AbaEncaminhadas id="abaEncaminhadas" label="PENDENTES DE AUTORIZAÇÃO"
+							 labelCooperativa="Cooperativa de Destino"
+							 propriedadeCooperativaGrid="instituicaoDestino.numero" />
+		<aba:AbaNaoEncaminhadas id="abaNaoEncaminhadas" label="PENDENTES DE ENCAMINHAMENTO"/>
+		<aba:AbaAutoAtendimento id="abaAutoAtendimento" label="AUTOATENDIMENTO"
+								labelCooperativa="Cooperativa de Origem" 
+								propriedadeCooperativaGrid="instituicaoOrigem.numero" /> 
+	</navegacao:Tab>
+</Modulo>

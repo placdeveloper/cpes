@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mx:TitleWindow xmlns:mx="http://www.adobe.com/2006/mxml"
+				xmlns:componentes="br.com.bancoob.componentes.*"
+				xmlns:componente="br.com.bancoob.componentes.*"
+				xmlns:grid="br.com.bancoob.componentes.grid.*"
+				xmlns:containers="br.com.bancoob.componentes.containers.*"
+				xmlns:titulo="br.com.bancoob.componentes.titulo.*"
+				xmlns:bancoobInput="br.com.bancoob.componentes.input.*"
+				xmlns:bancoobContainers="br.com.bancoob.componentes.containers.*"
+				xmlns:bancoob="br.com.bancoob.componentes.*"
+				xmlns:namespace="http://namespace"
+				width="597" height="300" alpha="1" backgroundAlpha="1.0" backgroundColor="#FFFFFF"
+				borderColor="#445C46" borderStyle="solid" borderThickness="3" cornerRadius="10"
+				creationComplete="init()" 
+				title="Instituições Selecionadas"
+				horizontalScrollPolicy="off" layout="vertical"
+				showCloseButton="false"
+				titleIcon="@Embed(source='br/com/bancoob/imagens/icos/aviso.png')">
+<mx:Script>
+	<![CDATA[
+		import mx.managers.PopUpManager;
+				
+		import mx.core.IFlexDisplayObject;
+		import mx.controls.Text;
+		import mx.collections.ArrayCollection;
+		
+		public var funcSim:Function = function():void{};
+		public var funcNao:Function = function():void{};
+
+		public function init():void{
+			PopUpManager.centerPopUp(this);			
+		}
+		private function fechar():void{
+			PopUpManager.removePopUp(this);
+		}
+	]]>
+</mx:Script>
+	<grid:Grid id="gridListar" width="100%" height="100%">
+		<grid:columns>
+			<grid:ColunaGrid dataField="numero" headerText="Nº Instituição" width="80" textAlign="left" editable="false"/>
+			<grid:ColunaGrid dataField="nomeInstituicao" headerText="Nome Instituição"  editable="false"/>
+		</grid:columns>
+	</grid:Grid>
+	
+	<mx:ControlBar horizontalAlign="right" paddingBottom="10" paddingLeft="10" paddingRight="10" paddingTop="0">		
+		
+		<mx:Spacer width="100%"/>
+		<mx:Label text="Deseja Continuar?" id="labelBotoes" fontWeight="bold" fontSize="12" />
+		<bancoob:Botao label="Sim" id="btSim" click="funcSim(event);fechar()" tabIndex="2"/>
+		<bancoob:Botao label="Não" id="btNao" click="funcNao(event);fechar()" tabIndex="3"/>
+	</mx:ControlBar>
+	
+	
+
+</mx:TitleWindow>

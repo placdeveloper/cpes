@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FormularioCadastroView width="950" height="600" layout="vertical" 
+		left="0" top="0" visible="true"
+		xmlns="br.com.bancoob.componentes.cadastro.*"
+		xmlns:mx="http://www.adobe.com/2006/mxml"
+		xmlns:navegacao="br.com.bancoob.componentes.navegacao.*"
+		xmlns:componentesCapes="br.com.sicoob.capes.utils.autorizacao.*"
+		xmlns:servico="br.com.bancoob.util.servico.*"
+		verticalScrollPolicy="auto"
+		horizontalScrollPolicy="off" xmlns:componentes="br.com.bancoob.componentes.*" xmlns:containers="br.com.bancoob.componentes.containers.*" xmlns:input="br.com.bancoob.componentes.input.*" xmlns:campos="br.com.bancoob.componentes.campos.*" xmlns:validaveis="br.com.bancoob.componentes.containers.validaveis.*" xmlns:titulo="br.com.bancoob.componentes.titulo.*">
+	<mx:Script>
+		<![CDATA[
+			
+			protected static const LARGURA_PADRAO_CAMPOS:int = 355;
+			protected static const LARGURA_PADRAO_LABEL:int = 150;
+			
+			private var _labelCooperativa : String;
+			private var _propriedadeCooperativaGrid:String;
+			
+			public function set labelCooperativa(valor : String) : void {
+				this._labelCooperativa = valor;
+			}
+			public function get labelCooperativa() : String {
+				return this._labelCooperativa;
+			}
+			
+			public function set propriedadeCooperativaGrid(valor : String) : void {
+				this._propriedadeCooperativaGrid = valor;
+			}
+			public function get propriedadeCooperativaGrid() : String {
+				return this._propriedadeCooperativaGrid;
+			}
+			
+		]]>
+	</mx:Script>
+	
+	<containers:HBoxBancoob x="0" y="10" width="100%">
+		<containers:VBoxBancoob>
+			<componentes:Rotulo text="Data da Operação" height="29" />
+			<campos:CampoData enabled="false" id="dataOperacao" />
+		</containers:VBoxBancoob>
+		<containers:VBoxBancoob>
+			<componentes:RotuloMultLine text="Código de Autorização" width="70" />
+			<campos:CampoInteiroView id="codigoAutorizacao" width="70" editable="false" />
+		</containers:VBoxBancoob>
+		<containers:VBoxBancoob>
+			<componentes:Rotulo text="CPF/CNPJ" height="29" />
+			<input:InputCPFCNPJ id="cpfCnpj" width="130" editable="false" />
+		</containers:VBoxBancoob>
+		<containers:VBoxBancoob>
+			<componentes:RotuloMultLine text="{labelCooperativa}" width="70" />
+			<input:Texto id="numeroCooperativa" width="70" editable="false" />
+		</containers:VBoxBancoob>
+		<containers:VBoxBancoob>
+			<componentes:RotuloMultLine text="Unidade de Destino" width="70" />
+			<campos:CampoInteiroView id="unidadeDestino" width="70" editable="false" />
+		</containers:VBoxBancoob>
+		<containers:VBoxBancoob>
+			<componentes:Rotulo text="Tipo de Autorização" height="29" />
+			<input:Texto id="tipoAutorizacao" width="250" editable="false" />
+		</containers:VBoxBancoob>
+		<containers:VBoxBancoob>
+			<componentes:Rotulo text="Tipo de Operação" width="100" height="29" />
+			<input:Texto id="tipoOperacao" width="100" editable="false" />
+		</containers:VBoxBancoob>
+	</containers:HBoxBancoob>
+	
+	<navegacao:Tab width="100%" height="100%" id="painelAbas" paddingBottom="10" paddingLeft="10" paddingRight="10" paddingTop="10" y="30">
+		<containers:VBoxBancoob id="containerPrincipal" width="100%" height="285" label="Atualização Solicitada" horizontalScrollPolicy="off" verticalScrollPolicy="off">
+			
+			<mx:HBox width="100%">
+				<titulo:SubtituloView texto="CAMPO" enabled="true" width="{LARGURA_PADRAO_LABEL}">
+					<titulo:caminhoIcone>@Embed(source='br/com/bancoob/imagens/icos/ico_info.png')</titulo:caminhoIcone>
+				</titulo:SubtituloView>
+				<titulo:SubtituloView texto="VIGENTE" enabled="true" width="{LARGURA_PADRAO_CAMPOS}">
+					<titulo:caminhoIcone>@Embed(source='br/com/bancoob/imagens/document-accept.png')</titulo:caminhoIcone>
+				</titulo:SubtituloView>
+				<titulo:SubtituloView texto="NOVO" enabled="true" width="{LARGURA_PADRAO_CAMPOS}">
+					<titulo:caminhoIcone>@Embed(source='br/com/bancoob/imagens/documentEdit_16.png')</titulo:caminhoIcone>
+				</titulo:SubtituloView>
+			</mx:HBox>
+			
+			<containers:VBoxBancoob id="container" width="100%" height="250" horizontalScrollPolicy="off" verticalScrollPolicy="on">
+				
+			</containers:VBoxBancoob>
+			
+		</containers:VBoxBancoob>
+		
+		<containers:CanvasBancoob label="Documentos Associados" id="abaDocumentos">
+			<componentesCapes:GridDocumentosView id="gridVigente" tipo="{GridDocumentosView.TIPO_VIGENTE}" 
+										   width="49%" height="100%" left="0" bottom="0" />
+			<componentesCapes:GridDocumentosView id="gridNovo" tipo="{GridDocumentosView.TIPO_NOVO}" 
+										   width="49%" height="100%" right="0" bottom="0" />
+		</containers:CanvasBancoob>
+		
+		<componentesCapes:GridHistoricoView label="Histórico do Fluxo" id="abaHistorico"
+											height="100%" width="100%" verticalScrollPolicy="auto" horizontalScrollPolicy="auto"/>
+	</navegacao:Tab>
+	
+	<titulo:SubtituloView id="subTituloInfoFluxo" texto="INFORMAÇÕES ADICIONAIS PARA O FLUXO DE TRABALHO" />
+	
+	<validaveis:HBoxValidavel left="0" bottom="0">
+		<validaveis:VBoxValidavel>
+			<componentes:Rotulo text="Justificativa" />
+			<input:TextoArea id="justificativa" height="50" width="600" maxChars="1000" />
+		</validaveis:VBoxValidavel>
+		<!--<validaveis:VBoxValidavel>
+			<componentes:Rotulo text="Atividade" />
+			<input:Combo id="atividade" validarObrigatorio="true" inserirItemOpcional="false" 
+						 labelField="nome" minWidth="250" />
+		</validaveis:VBoxValidavel>-->
+		<validaveis:VBoxValidavel>
+			<componentes:Rotulo text="Procedimento" />
+			<input:Combo id="procedimento" validarObrigatorio="true" inserirItemOpcional="false" 
+						 labelField="nomeProcedimento" minWidth="310" identificadorItem="id" />
+		</validaveis:VBoxValidavel>
+	</validaveis:HBoxValidavel>
+
+	<BarraBotoesFormularioCadastroView id="barraBotoes" width="100%" />
+	
+	<servicoEdicao>
+		<servico:ServicoJava 
+			source="br.com.sicoob.capes.cadastro.fachada.AutorizarFachada"
+			bloquearOperacao="true"
+			mensagemEspera="Efetuando operação..."/>
+	</servicoEdicao>
+</FormularioCadastroView>

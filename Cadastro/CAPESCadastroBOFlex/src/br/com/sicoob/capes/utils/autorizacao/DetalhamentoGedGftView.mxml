@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<CanvasBancoob xmlns="br.com.bancoob.componentes.containers.*"
+			   xmlns:mx="http://www.adobe.com/2006/mxml"
+			   xmlns:bancoobGrid="br.com.bancoob.componentes.grid.*"
+			   xmlns:bancoob="br.com.bancoob.componentes.*"
+			   xmlns:gridgedgft="br.com.sicoob.capes.utils.autorizacao.*"
+			   width="850" height="450">
+	
+	<mx:Label x="10" y="6" fontSize="12" fontWeight="bold" text="Usuário da última atualização: "/>
+	<mx:Label x="215" y="6" fontSize="12" fontWeight="bold" id="lblUsuario" name="lblUsuario" />
+	
+	<mx:Label x="10" y="32" fontSize="12" fontWeight="bold" text="GFT - Gestão de Fluxo de Trabalho"/>
+	<gridgedgft:GridHistoricoView id="gridInfo" x="10" y="55" width="830" height="201"/>
+	
+	<mx:Label x="10" y="275" width="269" fontSize="12" fontWeight="bold" text="GED - Gestão Eletrônica de Documentos"/>
+	<gridgedgft:GridDocumentosView id="gridDocs" x="10" y="300" width="830" height="175"/>
+	
+</CanvasBancoob>

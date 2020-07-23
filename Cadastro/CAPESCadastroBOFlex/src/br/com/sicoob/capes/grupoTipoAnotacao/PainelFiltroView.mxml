@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<CanvasValidavel xmlns="br.com.bancoob.componentes.containers.validaveis.*" 
+                 xmlns:mx="http://www.adobe.com/2006/mxml"
+                 xmlns:ns1="br.com.bancoob.componentes.titulo.*" 
+                 xmlns:ns2="br.com.bancoob.componentes.*" 
+                 xmlns:ns3="br.com.bancoob.componentes.input.*" 
+                 xmlns:ns4="br.com.bancoob.componentes.painellista.*"
+                 defaultButton="{btPesquisar}">
+	
+	<ns1:SubtituloView texto="Dados da pesquisa" booTituloPesquisa="true" x="0" y="0" />
+	
+	<ns2:Rotulo text="Nome: " textAlign="left" x="10" y="32" />
+	<ns3:Texto id="campoNome" x="70" y="30" left="70" right="10" width="100%" maxChars="50" tipoEntrada="{0}" />
+	
+	<ns4:BotaoProcurarView id="btPesquisar" width="100" right="10" y="65" label="PESQUISAR" toolTip="REALIZA A PESQUISA UTILIZANDO OS FILTROS SELECIONADOS" />
+	
+</CanvasValidavel>

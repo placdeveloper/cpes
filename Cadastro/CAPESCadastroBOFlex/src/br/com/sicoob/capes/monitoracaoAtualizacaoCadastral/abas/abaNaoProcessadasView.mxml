@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Modulo 
+	xmlns="br.com.bancoob.componentes.*" 
+	xmlns:mx="http://www.adobe.com/2006/mxml"
+	width="100%" height="100%" 
+	verticalScrollPolicy="auto"
+	layout="vertical"
+	paddingLeft="10" paddingRight="10"
+	xmlns:containers="br.com.bancoob.componentes.containers.*" 
+	xmlns:grid="br.com.bancoob.componentes.grid.*" 
+	xmlns:tabelapaginada="br.com.bancoob.componentes.tabelapaginada.*" xmlns:tabelaordenacao="br.com.bancoob.componentes.tabelaordenacao.*" xmlns:titulo="br.com.bancoob.componentes.titulo.*">
+	
+	<mx:Script>
+		<![CDATA[
+			import mx.collections.IViewCursor;
+			import mx.collections.HierarchicalCollectionView;
+			import br.com.sicoob.capes.monitoracaoAtualizacaoCadastral.GridUtils;
+			import br.com.bancoob.tipos.IDateTime;
+			import br.com.bancoob.util.FormataData;
+			import br.com.bancoob.util.reflexao.ReflectionUtils;
+			import mx.events.FlexEvent;
+		]]>
+	</mx:Script>
+	<titulo:SubtituloView texto="ATUALIZAÇÕES CADASTRAIS" width="100%" /> 
+	<containers:CanvasBancoob left="15" right="15" top="40" width="100%" height="100%">	
+		<grid:AdvancedDataGridBancoob id="gridDados" width="100%" height="100%" variableRowHeight="true"
+			allowDragSelection="false" initialize="{gc.refresh()}" displayItemsExpanded="false" 
+			itemClick="{GridUtils.adg_itemClick(event)}">
+
+			<grid:dataProvider>
+	        	<mx:GroupingCollection id="gc">
+	            	<mx:grouping>
+	                	<mx:Grouping label="agrupador">
+	                    	<mx:GroupingField name="identificadorOperacao"/>
+	                    </mx:Grouping>
+	                </mx:grouping>
+	            </mx:GroupingCollection>
+	        </grid:dataProvider> 
+	        
+			<grid:columns>
+				<mx:AdvancedDataGridColumn headerText="Identificador / Instituição" dataField="idInstituicao" width="75" sortable="false" />
+				<mx:AdvancedDataGridColumn headerText="ID" dataField="idMensagemReplicacao" width="10" sortable="false" textAlign="center" />
+				<mx:AdvancedDataGridColumn headerText="Pessoa" dataField="idPessoaLegado" sortable="false"
+					labelFunction="{GridUtils.defaultLabelFunction}" textAlign="center" width="30" />
+				<mx:AdvancedDataGridColumn headerText="Tipo de Operação" dataField="tipoOperacao" wordWrap="true" 
+					sortable="false" id="colTipo" textAlign="left" width="90"
+					labelFunction="{GridUtils.defaultLabelFunction}"  />
+				<mx:AdvancedDataGridColumn headerText="Cadastro" dataField="dataCadastro" 
+					sortable="false" id="colDataCadastro" textAlign="center" width="35"
+					labelFunction="{GridUtils.defaultDatetimeLabelFunction}" />
+				<mx:AdvancedDataGridColumn headerText="Envio" dataField="dataEnvio"
+					sortable="false" id="colDataEnvio" textAlign="center" width="35"
+					labelFunction="{GridUtils.defaultDatetimeLabelFunction}" />
+				<mx:AdvancedDataGridColumn width="25" sortable="false" headerText="Ação" />
+			</grid:columns>
+			<grid:rendererProviders>
+				<mx:AdvancedDataGridRendererProvider 
+		            columnIndex="6"
+		            depth="2"
+		            renderer="br.com.sicoob.capes.monitoracaoAtualizacaoCadastral.renderer.VisualizarRenderer" />
+		    </grid:rendererProviders>
+		</grid:AdvancedDataGridBancoob>
+	</containers:CanvasBancoob>					
+	
+	<containers:CanvasBancoob height="40" width="100%" bottom="0" >
+		<Rotulo text="Quantidade de atualizações:" verticalCenter="0" left="0" fontFamily="ArialEmbedded" fontSize="15" />
+		<Rotulo id="lblQuantidade" text="?" verticalCenter="0" left="200" fontFamily="ArialEmbedded" fontWeight="bold" fontSize="15" />
+		<Botao label="Reenviar Atualizações" id="btReenviar" verticalCenter="0" right="0"/>
+	</containers:CanvasBancoob>				
+</Modulo>

@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="FichaCadastral_BemPosse" pageWidth="555" pageHeight="900" whenNoDataType="BlankPage" columnWidth="555" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0" uuid="9450b807-b99e-4302-8ad6-156c8bd3468b">
+	<property name="ireport.zoom" value="1.610510000000002"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<style name="Linha Zebrada" isDefault="true" mode="Opaque">
+		<box leftPadding="3">
+			<topPen lineWidth="0.25"/>
+			<leftPen lineWidth="0.25"/>
+			<bottomPen lineWidth="0.25"/>
+			<rightPen lineWidth="0.25"/>
+		</box>
+		<conditionalStyle>
+			<conditionExpression><![CDATA[new Boolean(($V{REPORT_COUNT_ZEBRA}.intValue() % 2) != 0)]]></conditionExpression>
+			<style mode="Opaque" backcolor="#DDDDDE"/>
+		</conditionalStyle>
+	</style>
+	<style name="campo" hAlign="Left" vAlign="Middle" fontSize="8" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false">
+		<box leftPadding="6"/>
+	</style>
+	<parameter name="REPORT_COUNT_ZEBRA" class="java.lang.Integer"/>
+	<queryString>
+		<![CDATA[]]>
+	</queryString>
+	<field name="vigenciaRegistro" class="java.lang.String"/>
+	<field name="area" class="java.math.BigDecimal"/>
+	<field name="tipoPosseBem.descricao" class="java.lang.String"/>
+	<variable name="REPORT_COUNT_ZEBRA" class="java.lang.Integer">
+		<variableExpression><![CDATA[new Integer($V{REPORT_COUNT_ZEBRA}.intValue() + 1)]]></variableExpression>
+		<initialValueExpression><![CDATA[$P{REPORT_COUNT_ZEBRA}]]></initialValueExpression>
+	</variable>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<detail>
+		<band height="30" splitType="Prevent">
+			<staticText>
+				<reportElement uuid="37582182-e5bf-4f00-9c60-3f494b68f247" mode="Opaque" x="420" y="0" width="135" height="30"/>
+				<box leftPadding="3"/>
+				<textElement>
+					<font size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Período]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="97eea03f-900d-47a3-a927-094b1d20d2b9" style="Linha Zebrada" mode="Opaque" x="334" y="0" width="86" height="30"/>
+				<textElement>
+					<font size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Área]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="5ceb8752-a1ba-4435-96e2-b9e256f002eb" style="Linha Zebrada" mode="Opaque" x="0" y="0" width="334" height="30"/>
+				<textElement>
+					<font size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Tipo de Posse]]></text>
+			</staticText>
+			<textField isBlankWhenNull="true">
+				<reportElement uuid="e703857a-1759-4e7f-a6f1-e630760728cc" style="campo" x="420" y="10" width="118" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{vigenciaRegistro}]]></textFieldExpression>
+			</textField>
+			<textField pattern="###0.00" isBlankWhenNull="true">
+				<reportElement uuid="8f97c168-182e-4e4f-847f-229dba5380d1" style="campo" x="334" y="10" width="86" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{area}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement uuid="1d64cef1-26e4-45de-85bc-9cace3381a2f" style="campo" x="0" y="10" width="334" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{tipoPosseBem.descricao}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+</jasperReport>

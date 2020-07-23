@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<bancoob:Modulo xmlns:mx="http://www.adobe.com/2006/mxml"
+				xmlns:bancoob="br.com.bancoob.componentes.*"
+				xmlns:bancoobContainers="br.com.bancoob.componentes.containers.*"
+				xmlns:bancoobGrid="br.com.bancoob.componentes.grid.*"
+				xmlns:renderes="br.com.bancoob.componentes.renderes.*"
+				width="100%" height="100%" layout="absolute" styleName="ModuloSemEstilo">
+
+		<mx:Script>
+			<![CDATA[
+				import br.com.bancoob.componentes.tabelapaginada.TabelaPaginadaUtils;
+				import br.com.sicoob.capes.comum.util.FormatadorUtil;
+			]]>
+		</mx:Script>
+
+		<mx:Canvas y="2" left="0" right="0" height="27" backgroundAlpha=".4" backgroundColor="#ffffff" borderStyle="solid" borderThickness="0" cornerRadius="10" horizontalScrollPolicy="off" verticalScrollPolicy="off">
+			<mx:Label id="labelSelecione" x="37" y="5" width="568" alpha=".7" fontFamily="ArialEmbedded" fontSize="11" fontWeight="bold" text="SELECIONE UM REGISTRO OU CLIQUE EM NOVO PARA CADASTRAR UM NOVO REGISTRO."/>
+			<mx:Image id="imagemSelecione" x="10" y="5" alpha=".5" source="br/com/bancoob/imagens/icos/paste_16.png"/>
+		</mx:Canvas>
+	
+		<bancoobGrid:Grid id="gridDados" x="0" top="36" bottom="10" width="100%" tabEnabled="true" tabIndex="1" >
+			<bancoobGrid:columns>
+				<bancoobGrid:ColunaGrid width="15" headerText="St" itemRenderer="br.com.sicoob.capes.utils.autorizacao.renderer.StatusRenderer" sortable="false" />
+				<bancoobGrid:ColunaGrid width="40" dataField="descricaoTipoEndereco" headerText="Tipo" textAlign="left" />
+				<bancoobGrid:ColunaGrid dataField="descricaoEndereco" headerText="Endereço" textAlign="left" showDataTips="true" dataTipField="descricaoEndereco" />
+				<bancoobGrid:ColunaGrid width="20" dataField="numero" headerText="Nº" textAlign="left" />
+				<bancoobGrid:ColunaGrid width="35" dataField="complemento" headerText="Complemento" textAlign="left" showDataTips="true" dataTipField="complemento" />
+				<bancoobGrid:ColunaGrid width="55" dataField="bairro" headerText="Bairro" textAlign="left" showDataTips="true" dataTipField="bairro" />
+				<bancoobGrid:ColunaGrid width="45" dataField="nomeCidade" headerText="Cidade" textAlign="left" showDataTips="true" dataTipField="nomeCidade" />
+				<bancoobGrid:ColunaGrid width="15" dataField="siglaUF" headerText="UF" textAlign="center" />
+				<bancoobGrid:ColunaGrid width="42" dataField="cooperativasCorrespondencia" headerText="Correspondência" />
+				<bancoobGrid:ColunaGrid width="60" dataField="dataHoraInicio" headerText="Data da Última Alteração" labelFunction="{TabelaPaginadaUtils.defaultDateLabelFunction}" textAlign="center" />
+				<bancoobGrid:ColunaGrid width="60" dataField="idUsuarioAprovacao" headerText="Último Usuário Alteração" textAlign="left" />
+				<bancoobGrid:ColunaGrid width="25" headerText="GED/GFT" itemRenderer="br.com.sicoob.capes.utils.autorizacao.renderer.GedGftRenderer" sortable="false" />
+			</bancoobGrid:columns>
+		</bancoobGrid:Grid>
+
+</bancoob:Modulo>

@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mx:Canvas xmlns:mx="http://www.adobe.com/2006/mxml" 
+	borderStyle="none" verticalScrollPolicy="off" horizontalScrollPolicy="off" width="100%" height="100%" clipContent="false"
+	xmlns:botoes="br.com.bancoob.componentes.botoes.*">
+	
+	<botoes:BotaoPlataforma x="19" y="0" id="btEncaminharAutorizacao" rotulo="Encaminhar p/ autorização" imagem="br\com\bancoob\imagens\icos\PNG\opts_32.png" 
+							buttonMode="true" enabled="true" tabIndex="401" useHandCursor="true" />
+	
+	<botoes:BotaoPlataforma x="19" y="60" id="btExcluirAutorizacao" rotulo="Excluir Autorização" imagem="br\com\bancoob\imagens\icos\PNG\remov_32.png" 
+							buttonMode="true" enabled="true" tabIndex="402" useHandCursor="true" />
+	
+	<botoes:BotaoPlataforma x="19" y="120" id="btImprimirFicha" rotulo="Imprimir Ficha" imagem="br\com\bancoob\imagens\icos\PNG\print_32.png" 
+							buttonMode="true" enabled="true" tabIndex="403" useHandCursor="true" />
+	
+</mx:Canvas>

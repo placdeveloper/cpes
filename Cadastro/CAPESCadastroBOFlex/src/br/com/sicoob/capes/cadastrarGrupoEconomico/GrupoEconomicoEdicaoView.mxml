@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FormularioCadastro 
+	xmlns="br.com.bancoob.componentes.cadastro.*" 
+	xmlns:mx="http://www.adobe.com/2006/mxml"
+	xmlns:servico="br.com.bancoob.util.servico.*" 
+	xmlns:validaveis="br.com.bancoob.componentes.containers.validaveis.*" 
+	xmlns:titulo="br.com.bancoob.componentes.titulo.*" 
+	xmlns:componentes="br.com.bancoob.componentes.*" 
+	xmlns:input="br.com.bancoob.componentes.input.*" 
+	xmlns:grid="br.com.bancoob.componentes.grid.*"
+	xmlns:containers="br.com.bancoob.componentes.containers.*"
+	verticalScrollPolicy="auto"
+	layout="vertical" 
+	>
+
+	<servicoInclusao>
+		<servico:ServicoJava
+			source="br.com.sicoob.capes.cadastro.fachada.GrupoEconomicoFachada"
+			bloquearOperacao="true"
+			mensagemEspera="Salvando dados..." />
+	</servicoInclusao>
+	
+	<servicoEdicao>
+		<servico:ServicoJava
+			source="br.com.sicoob.capes.cadastro.fachada.GrupoEconomicoFachada"
+			bloquearOperacao="true"
+			mensagemEspera="Salvando dados..." />
+	</servicoEdicao>
+	<mx:Script>
+		<![CDATA[
+			import br.com.bancoob.componentes.tabelapaginada.TabelaPaginadaUtils;
+		]]>
+	</mx:Script>
+	
+	<validaveis:CanvasValidavel width="100%" height="100%">
+		<titulo:SubtituloView texto="GRUPO ECONÔMICO" top="10" left="10" />
+		<componentes:Rotulo text="Nome *:" textAlign="left" top="46" left="10" width="50" />
+		<input:Texto id="descricao" validarObrigatorio="true" top="44" right="25" width="680" maxChars="100" height="22" />
+
+		<titulo:SubtituloView texto="INTEGRANTES" top="85" left="10" />	
+		
+		<grid:Grid left="10" right="25" bottom="5" top="121" id="gridPessoas" 
+			allowMultipleSelection="true">
+			<grid:columns>
+				<grid:ColunaGrid labelFunction="{TabelaPaginadaUtils.defaultLabelFunction}" 
+					propriedade="pessoaInstituicao.pessoa.pessoaCompartilhamento.nomePessoa" headerText="Nome" id="colunaNome" sortable="true"
+					sortCompareFunction="{TabelaPaginadaUtils.criarDefaultSortFunction(colunaNome)}" />
+				<grid:ColunaGrid labelFunction="{TabelaPaginadaUtils.defaultCNPJLabelFunction}" width="120"
+					propriedade="pessoaInstituicao.pessoa.cpfCnpj" headerText="CPF/CNPJ" id="colunaCpfCnpj" sortable="true"
+					sortCompareFunction="{TabelaPaginadaUtils.criarDefaultSortFunction(colunaCpfCnpj)}" />
+			</grid:columns>
+		</grid:Grid>
+	
+		<containers:VBoxBancoob bottom="5" right="0" width="20" id="barraBotoesClientes" >
+			<componentes:Botao id="btSelecionar" toolTip="Incluir" styleName="botaoCrudAdicionarPeq"/>
+			<componentes:Botao id="btExcluir" toolTip="Excluir" styleName="botaoCrudRemoverPeq" />				
+		</containers:VBoxBancoob>
+	</validaveis:CanvasValidavel>
+	
+	<BarraBotoesFormularioCadastroView id="barraBotoes" width="100%" />		
+</FormularioCadastro>

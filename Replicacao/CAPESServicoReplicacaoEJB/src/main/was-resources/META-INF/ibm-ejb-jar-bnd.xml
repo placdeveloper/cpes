@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ejb-jar-bnd xmlns="http://websphere.ibm.com/xml/ns/javaee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://websphere.ibm.com/xml/ns/javaee http://websphere.ibm.com/xml/ns/javaee/ibm-ejb-jar-bnd_1_1.xsd" version="1.1">
+  
+  <session name="BancoServidorServicoEJB">
+		<interface class="br.com.sicoob.capes.replicacao.negocio.servicos.interfaces.BancoServidorServicoLocal" binding-name="ejblocal:capes/replicacao/BancoServidorServico"/>
+		<interface class="br.com.sicoob.capes.replicacao.negocio.servicos.interfaces.BancoServidorServicoRemote" binding-name="capes/replicacao/BancoServidorServicoRemote"/>
+	</session>
+	<session name="CentralizacaoDadosJobEJB">
+		<interface class="br.com.sicoob.sws.job.ISicoobContextualJob" binding-name="capes/replicacao/CentralizacaoDadosJobRemote"/>
+	</session>
+	<session name="CentralizacaoDadosStepEJB">
+		<interface class="br.com.sicoob.sws.step.ISicoobContextualStep" binding-name="capes/replicacao/CentralizacaoDadosStepRemote"/>
+	</session>
+	<session name="ExpurgoJobEJB">
+		<interface class="br.com.sicoob.sws.job.ISicoobContextualJob" binding-name="capes/replicacao/ExpurgoJobRemote"/>
+	</session>
+	<session name="ExpurgoStepEJB">
+		<interface class="br.com.sicoob.sws.step.ISicoobContextualStep" binding-name="capes/replicacao/ExpurgoStepRemote"/>
+	</session>
+	<session name="ReplicacaoDadosJobEJB">
+		<interface class="br.com.sicoob.sws.job.ISicoobContextualJob" binding-name="capes/replicacao/ReplicacaoDadosJobRemote"/>
+	</session>
+	<session name="ReplicacaoDadosStepEJB">
+		<interface class="br.com.sicoob.sws.step.ISicoobContextualStep" binding-name="capes/replicacao/ReplicacaoDadosStepRemote"/>
+	</session>
+	<session name="ReplicacaoDominiosServicoEJB">
+		<interface class="br.com.sicoob.capes.replicacao.negocio.servicos.interfaces.ReplicacaoDominiosServicoLocal" binding-name="ejblocal:capes/replicacao/ReplicacaoDominiosServico"/>
+		<interface class="br.com.sicoob.capes.replicacao.negocio.servicos.interfaces.ReplicacaoDominiosServicoRemote" binding-name="capes/replicacao/ReplicacaoDominiosServicoRemote"/>
+	</session>
+	<session name="ReplicarCadastroClientesServicoEJB">
+		<interface class="br.com.sicoob.capes.replicacao.negocio.servicos.interfaces.ReplicarCadastroClientesServicoLocal" binding-name="ejblocal:capes/replicacao/ReplicarCadastroClientesServico"/>
+		<interface class="br.com.sicoob.capes.replicacao.negocio.servicos.interfaces.ReplicarCadastroClientesServicoRemote" binding-name="capes/replicacao/ReplicarCadastroClientesServicoRemote"/>
+	</session>
+	<session name="TransicaoReplicacaoServicoEJB">
+		<interface class="br.com.sicoob.capes.replicacao.negocio.servicos.interfaces.TransicaoReplicacaoServicoLocal" binding-name="ejblocal:capes/replicacao/TransicaoReplicacaoServico"/>
+		<interface class="br.com.sicoob.capes.replicacao.negocio.servicos.interfaces.TransicaoReplicacaoServicoRemote" binding-name="capes/replicacao/TransicaoReplicacaoServicoRemote"/>
+	</session>
+	<session name="VerificarDLQReplicacaoCadastroJobEJB">
+		<interface class="br.com.sicoob.sws.job.ISicoobContextualJob" binding-name="capes/replicacao/VerificarDLQReplicacaoCadastroJobRemote"/>
+	</session>
+	<session name="VerificarDLQReplicacaoCadastroServicoEJB">
+		<interface class="br.com.sicoob.capes.replicacao.negocio.servicos.interfaces.VerificarDLQReplicacaoCadastroServicoLocal" binding-name="ejblocal:capes/replicacao/VerificarDLQReplicacaoCadastroServico"/>
+		<interface class="br.com.sicoob.capes.replicacao.negocio.servicos.interfaces.VerificarDLQReplicacaoCadastroServicoRemote" binding-name="capes/replicacao/VerificarDLQReplicacaoCadastroServicoRemote"/>
+		
+		<resource-ref name="br.com.sicoob.capes.replicacao.negocio.servicos.ejb.VerificarDLQReplicacaoCadastroServicoEJB/fabricaConexoes" binding-name="WSMQCAPESQueueConnectionFactory" />
+    	<message-destination-ref name="br.com.sicoob.capes.replicacao.negocio.servicos.ejb.VerificarDLQReplicacaoCadastroServicoEJB/dlqAtualizaCadastro" binding-name="queue/QL.CONT.EXEC.ATUALIZA.CADASTRO.DLQ" />
+	</session>
+	<session name="VerificarDLQReplicacaoCadastroStepEJB">
+		<interface class="br.com.sicoob.sws.step.ISicoobContextualStep" binding-name="capes/replicacao/VerificarDLQReplicacaoCadastroStepRemote"/>
+	</session>
+ 
+</ejb-jar-bnd>

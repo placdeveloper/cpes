@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<persistence xmlns="http://java.sun.com/xml/ns/persistence"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://java.sun.com/xml/ns/persistence 
+	http://java.sun.com/xml/ns/persistence/persistence_1_0.xsd"
+  version="1.0">
+
+  <persistence-unit name="emCapesLegado">
+    <provider>org.hibernate.ejb.HibernatePersistence</provider>
+    <jta-data-source>java:/jdbc/BancoobDS</jta-data-source>
+    
+    <!-- ENTIDADES -->
+    <class>br.com.sicoob.capes.negocio.entidades.legado.AvaliacaoFinanceira</class>
+    <class>br.com.sicoob.capes.negocio.entidades.legado.BancoServidor</class>
+    <class>br.com.sicoob.capes.negocio.entidades.legado.Bem</class>
+    <class>br.com.sicoob.capes.negocio.entidades.legado.BemImovel</class>
+    <class>br.com.sicoob.capes.negocio.entidades.legado.BemOnus</class>
+    <class>br.com.sicoob.capes.negocio.entidades.legado.BemPosse</class>
+    <class>br.com.sicoob.capes.negocio.entidades.legado.BemRegistro</class>
+    <class>br.com.sicoob.capes.negocio.entidades.legado.CategoriaProdutor</class>
+    <class>br.com.sicoob.capes.negocio.entidades.legado.Certidao</class>
+    <class>br.com.sicoob.capes.negocio.entidades.legado.Cliente</class>
+    <class>br.com.sicoob.capes.negocio.entidades.legado.Conglomerado</class>
+    <class>br.com.sicoob.capes.negocio.entidades.legado.Cooperativa</class>
+    <class>br.com.sicoob.capes.negocio.entidades.legado.CooperativaPessoa</class>
+    <class>br.com.sicoob.capes.negocio.entidades.legado.Empreendimento</class>
+    <class>br.com.sicoob.capes.negocio.entidades.legado.Endereco</class>
+    <class>br.com.sicoob.capes.negocio.entidades.legado.FonteRenda</class>
+    <class>br.com.sicoob.capes.negocio.entidades.legado.Funcionario</class>
+    <class>br.com.sicoob.capes.negocio.entidades.legado.historico.HistoricoConglomerado</class>
+    <class>br.com.sicoob.capes.negocio.entidades.legado.historico.HistoricoAlteracaoCnpjCpf</class>
+    <class>br.com.sicoob.capes.negocio.entidades.legado.InformacaoProfissional</class>
+    <class>br.com.sicoob.capes.negocio.entidades.legado.Lista</class>
+    <class>br.com.sicoob.capes.negocio.entidades.legado.ListaItem</class>
+    <class>br.com.sicoob.capes.negocio.entidades.legado.Mensagem</class>
+    <class>br.com.sicoob.capes.negocio.entidades.legado.Nucleo</class>
+    <class>br.com.sicoob.capes.negocio.entidades.legado.Pessoa</class>
+    <class>br.com.sicoob.capes.negocio.entidades.legado.PessoaFisica</class>
+    <class>br.com.sicoob.capes.negocio.entidades.legado.PessoaJuridica</class>
+    <class>br.com.sicoob.capes.negocio.entidades.legado.Produtividade</class>
+    <class>br.com.sicoob.capes.negocio.entidades.legado.Produto</class>
+    <class>br.com.sicoob.capes.negocio.entidades.legado.Produtor</class>
+    <class>br.com.sicoob.capes.negocio.entidades.legado.Referencia</class>
+    <class>br.com.sicoob.capes.negocio.entidades.legado.RelacionamentoPessoa</class>
+    <class>br.com.sicoob.capes.negocio.entidades.legado.Telefone</class>
+    <class>br.com.sicoob.capes.negocio.entidades.legado.TipoBem</class>
+    <class>br.com.sicoob.capes.negocio.entidades.legado.TipoEmpresa</class>
+    <class>br.com.sicoob.capes.negocio.entidades.legado.TransicaoReplicacao</class>
+    <class>br.com.sicoob.capes.negocio.entidades.legado.UnidadeMedida</class>
+    <!-- ENTIDADES -->
+    
+    <!-- PK -->
+    <class>br.com.sicoob.capes.negocio.entidades.legado.pk.BemOnusPK</class>
+    <class>br.com.sicoob.capes.negocio.entidades.legado.pk.BemPossePK</class>
+    <class>br.com.sicoob.capes.negocio.entidades.legado.pk.BemRegistroPK</class>
+    <class>br.com.sicoob.capes.negocio.entidades.legado.pk.CertidaoPK</class>
+    <class>br.com.sicoob.capes.negocio.entidades.legado.pk.CooperativaPessoaPK</class>
+    <class>br.com.sicoob.capes.negocio.entidades.legado.pk.CooperativaPK</class>
+    <class>br.com.sicoob.capes.negocio.entidades.legado.pk.HistoricoAlteracaoCnpjCpfPK</class>
+    <class>br.com.sicoob.capes.negocio.entidades.legado.pk.HistoricoConglomeradoPK</class>
+    <class>br.com.sicoob.capes.negocio.entidades.legado.pk.ListaItemPK</class>
+    <class>br.com.sicoob.capes.negocio.entidades.legado.pk.TransicaoReplicacaoPK</class>
+    <!-- PK -->
+
+    <exclude-unlisted-classes />
+
+    <properties>
+      <property name="hibernate.connection.provider_class" value="br.com.sicoob.capes.persistencia.provider.CAPESEntidadesLegadoConnectionProvider" />
+      <property name="br.com.bancoob.infraestrutura.conexao.data_source" value="jdbc/BancoobDS" />
+      <property name="hibernate.dialect" value="org.hibernate.dialect.SQLServerDialect" />
+      <property name="jboss.entity.manager.jndi.name" value="java:/emCapesLegado" />
+      <property name="jboss.entity.manager.factory.jndi.name" value="java:/emfCapesLegado" />
+      <property name="hibernate.show_sql" value="true" />
+      <property name="hibernate.format_sql" value="true" />
+      <property name="hibernate.default_schema" value="dbo" />
+      <property name="jboss.no.implicit.datasource.dependency" value="true" />
+      <property name="hibernate.ejb.discard_pc_on_close" value="true" />
+    </properties>
+
+  </persistence-unit>
+  
+  <persistence-unit name="emCapesLegadoReplicacaoClientes">
+    <provider>org.hibernate.ejb.HibernatePersistence</provider>
+    <jta-data-source>java:/jdbc/CUCServicoReplicacaoDS</jta-data-source>
+
+    <class>br.com.sicoob.capes.negocio.entidades.legado.BancoServidor</class>
+    <class>br.com.sicoob.capes.negocio.entidades.legado.Cooperativa</class>
+    <class>br.com.sicoob.capes.negocio.entidades.legado.TransicaoReplicacao</class>
+
+    <exclude-unlisted-classes />
+
+    <properties>
+      <property name="jboss.entity.manager.jndi.name" value="java:/emfCapesLegado" />
+      <property name="jboss.entity.manager.factory.jndi.name" value="java:/emfCapesLegado" />
+      <property name="br.com.bancoob.infraestrutura.conexao.data_source" value="jdbc/CUCServicoReplicacaoDS" /> 
+      <property name="hibernate.dialect" value="org.hibernate.dialect.SQLServerDialect" />      
+      <property name="hibernate.show_sql" value="true" />
+      <property name="hibernate.default_schema" value="dbo" />
+      <property name="jboss.no.implicit.datasource.dependency" value="true" />
+    </properties>
+  </persistence-unit>
+</persistence>

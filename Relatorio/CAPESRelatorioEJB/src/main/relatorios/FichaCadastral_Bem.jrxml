@@ -1,0 +1,175 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="FichaCadastral_Bem" pageWidth="555" pageHeight="842" whenNoDataType="BlankPage" columnWidth="555" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0" uuid="a609651d-a0c2-427e-a378-cdb8db12f645">
+	<property name="ireport.zoom" value="2.357947691000003"/>
+	<property name="ireport.x" value="226"/>
+	<property name="ireport.y" value="0"/>
+	<style name="campo" hAlign="Left" vAlign="Middle" fontSize="8" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false">
+		<box leftPadding="6"/>
+	</style>
+	<parameter name="SUB_BENS_ONUS" class="net.sf.jasperreports.engine.JasperReport"/>
+	<parameter name="SUB_BENS_REGISTROS" class="net.sf.jasperreports.engine.JasperReport"/>
+	<parameter name="SUB_BENS_POSSES" class="net.sf.jasperreports.engine.JasperReport"/>
+	<parameter name="SUB_BENS_DEPENDENCIAS" class="net.sf.jasperreports.engine.JasperReport"/>
+	<parameter name="SUB_BEM_DETALHE" class="net.sf.jasperreports.engine.JasperReport"/>
+	<parameter name="SUB_BEM_DETALHE_IMOVEL" class="net.sf.jasperreports.engine.JasperReport"/>
+	<queryString>
+		<![CDATA[]]>
+	</queryString>
+	<field name="bensOnus" class="java.util.Collection"/>
+	<field name="bensRegistro" class="java.util.Collection"/>
+	<field name="bensPosse" class="java.util.Collection"/>
+	<field name="bens" class="java.util.Collection"/>
+	<variable name="total" class="java.math.BigDecimal" resetType="None" calculation="System">
+		<variableExpression><![CDATA[$V{total}]]></variableExpression>
+		<initialValueExpression><![CDATA[java.math.BigDecimal.ZERO]]></initialValueExpression>
+	</variable>
+	<variable name="totalParticipacao" class="java.math.BigDecimal" resetType="None" calculation="System">
+		<variableExpression><![CDATA[$V{totalParticipacao}]]></variableExpression>
+		<initialValueExpression><![CDATA[java.math.BigDecimal.ZERO]]></initialValueExpression>
+	</variable>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band/>
+	</title>
+	<pageHeader>
+		<band splitType="Prevent"/>
+	</pageHeader>
+	<columnHeader>
+		<band height="15" splitType="Prevent">
+			<staticText>
+				<reportElement uuid="108bc915-d294-4f84-bc15-422288c69c0c" mode="Opaque" x="0" y="0" width="555" height="15" backcolor="#CCCCCC"/>
+				<box leftPadding="4">
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement>
+					<font size="10" isBold="false"/>
+				</textElement>
+				<text><![CDATA[8. BENS]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="1" splitType="Immediate">
+			<subreport>
+				<reportElement uuid="34b722c6-7e4c-4a7e-a0fc-01cf172f0389" x="0" y="0" width="575" height="0"/>
+				<subreportParameter name="DS_BENS">
+					<subreportParameterExpression><![CDATA[$F{bens}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="SUB_BEM_DETALHE_IMOVEL">
+					<subreportParameterExpression><![CDATA[$P{SUB_BEM_DETALHE_IMOVEL}]]></subreportParameterExpression>
+				</subreportParameter>
+				<dataSourceExpression><![CDATA[new br.com.sicoob.capes.relatorio.negocio.relatorios.EntidadeCadastroCollectionDataSource($F{bens})]]></dataSourceExpression>
+				<returnValue subreportVariable="valorAtualTotal" toVariable="total" calculation="Sum"/>
+				<returnValue subreportVariable="valorTotalParticipacao" toVariable="totalParticipacao" calculation="Sum"/>
+				<subreportExpression><![CDATA[$P{SUB_BEM_DETALHE}]]></subreportExpression>
+			</subreport>
+			<subreport>
+				<reportElement uuid="65240e29-e007-4c68-8659-7e7b85be7667" positionType="Float" x="0" y="0" width="575" height="0">
+					<printWhenExpression><![CDATA[new Boolean(!$F{bensOnus}.isEmpty() || !$F{bensRegistro}.isEmpty() || !$F{bensPosse}.isEmpty())]]></printWhenExpression>
+				</reportElement>
+				<subreportParameter name="SUB_BENS_REGISTROS">
+					<subreportParameterExpression><![CDATA[$P{SUB_BENS_REGISTROS}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="DS_BENS_REGISTROS">
+					<subreportParameterExpression><![CDATA[new br.com.sicoob.capes.relatorio.negocio.relatorios.EntidadeCadastroCollectionDataSource($F{bensRegistro})]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="DS_BENS_ONUS">
+					<subreportParameterExpression><![CDATA[new br.com.sicoob.capes.relatorio.negocio.relatorios.EntidadeCadastroCollectionDataSource($F{bensOnus})]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="SUB_BENS_POSSES">
+					<subreportParameterExpression><![CDATA[$P{SUB_BENS_POSSES}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="SUB_BENS_ONUS">
+					<subreportParameterExpression><![CDATA[$P{SUB_BENS_ONUS}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="DS_BENS_POSSES">
+					<subreportParameterExpression><![CDATA[new br.com.sicoob.capes.relatorio.negocio.relatorios.EntidadeCadastroCollectionDataSource($F{bensPosse})]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportExpression><![CDATA[$P{SUB_BENS_DEPENDENCIAS}]]></subreportExpression>
+			</subreport>
+		</band>
+	</detail>
+	<columnFooter>
+		<band splitType="Prevent"/>
+	</columnFooter>
+	<pageFooter>
+		<band splitType="Prevent"/>
+	</pageFooter>
+	<summary>
+		<band height="30" splitType="Prevent">
+			<staticText>
+				<reportElement uuid="d141572c-8c87-4da9-8af1-8daa4228f9d4" x="0" y="0" width="199" height="30"/>
+				<box rightPadding="3">
+					<topPen lineWidth="1.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font size="10" isBold="true"/>
+				</textElement>
+				<text><![CDATA[TOTAL]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="0fb2a17a-254f-4e36-9ade-f2fa7749f049" positionType="Float" mode="Opaque" x="366" y="-1" width="189" height="31" backcolor="#CCCCCC"/>
+				<box leftPadding="3">
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement>
+					<font size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Total das participações]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="e32616b7-3bc5-4725-beda-6bc8bc30f726" positionType="Float" mode="Opaque" x="199" y="-1" width="167" height="31" backcolor="#CCCCCC"/>
+				<box leftPadding="3">
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement>
+					<font size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Total dos bens]]></text>
+			</staticText>
+			<textField pattern="¤ #,##0.00" isBlankWhenNull="true">
+				<reportElement uuid="97da254c-2582-4670-a68e-b3a15697ac94" mode="Opaque" x="366" y="14" width="189" height="16" backcolor="#CCCCCC"/>
+				<box rightPadding="3">
+					<topPen lineWidth="1.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Right" verticalAlignment="Bottom">
+					<font size="8" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{totalParticipacao}]]></textFieldExpression>
+			</textField>
+			<textField pattern="¤ #,##0.00" isBlankWhenNull="true">
+				<reportElement uuid="323061f0-42be-4d70-82ee-f9d497ceaa4a" mode="Opaque" x="199" y="14" width="167" height="16" backcolor="#CCCCCC"/>
+				<box rightPadding="3">
+					<topPen lineWidth="1.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Right" verticalAlignment="Bottom">
+					<font size="8" isBold="true"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{total}]]></textFieldExpression>
+			</textField>
+		</band>
+	</summary>
+</jasperReport>

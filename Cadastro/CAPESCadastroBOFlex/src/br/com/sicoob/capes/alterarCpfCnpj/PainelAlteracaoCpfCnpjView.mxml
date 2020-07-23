@@ -1,0 +1,26 @@
+<validaveis:CanvasValidavel
+	xmlns:mx="http://www.adobe.com/2006/mxml"
+	xmlns:validaveis="br.com.bancoob.componentes.containers.validaveis.*"
+	xmlns:componentes="br.com.bancoob.componentes.*" 
+	xmlns:titulo="br.com.bancoob.componentes.titulo.*"
+	xmlns:input="br.com.bancoob.componentes.input.*"
+	width="650" height="550" styleName="ModuloSemEstilo">
+	
+		<componentes:Rotulo text="Tipo Pessoa:" x="10" y="259"/>
+		<input:RadioGrupoBancoob id="rdbTipoCliente" />
+		<input:Radio groupName="rdbTipoCliente" label="Física"  value="0" x="105" y="258" enabled="false" />
+		<input:Radio groupName="rdbTipoCliente" label="Jurídica" value="1" x="162" y="258" enabled="false" />
+		
+		<componentes:Rotulo text="CPF/CNPJ Novo:" x="10" y="285"/>
+		<input:InputCPF id="cpfNovo" width="110" x="105" y="283" visible="false" validarObrigatorio="true"/>
+		<input:InputCNPJ id="cnpjNovo" width="140" x="105" y="283" visible="false" validarObrigatorio="true"/>
+		
+		<componentes:Rotulo text="Solicitante:" x="10" y="311"/>		
+		<input:Texto id="solicitante" width="455" x="105" y="309" validarObrigatorio="true" maxChars="100"/>
+		
+		<componentes:Rotulo text="Motivo:" x="10" y="337"/>
+		<input:TextoArea id="motivo" width="455" x="105" y="335" validarObrigatorio="true" maxChars="600"/>
+		<componentes:Botao id="btAlterar" label="Alterar" x="267" y="397"/>
+		<titulo:LinhaView width="100%" x="0" y="385" height="9" />
+		
+</validaveis:CanvasValidavel>

@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<bancoob:Modulo xmlns:mx="http://www.adobe.com/2006/mxml"
+			xmlns:bancoobInput="br.com.bancoob.componentes.input.*"
+			xmlns:bancoobGrid="br.com.bancoob.componentes.grid.*"
+			xmlns:bancoob="br.com.bancoob.componentes.*"
+			xmlns:bancoobNavegacao="br.com.bancoob.componentes.navegacao.*"
+	 		width="100%" height="100%" xmlns:bancoobInput1="http://www.bancoob.com/2007/mxml">
+   <mx:Script>
+   	<![CDATA[
+   		import br.com.bancoob.componentes.tabelapaginada.TabelaPaginadaUtils;
+   	]]>
+   </mx:Script>
+   <mx:Canvas y="2" height="27" cornerRadius="10" borderStyle="solid" left="0" right="0" borderThickness="0" backgroundColor="#ffffff" backgroundAlpha=".4" horizontalScrollPolicy="off" verticalScrollPolicy="off">
+   	<bancoob:Rotulo x="37" y="5" text="SELECIONE UM REGISTRO OU CLIQUE EM NOVO PARA CADASTRAR UM NOVO REGISTRO." width="568" fontSize="11" fontWeight="bold" alpha=".7" fontFamily="ArialEmbedded"/>
+   	<mx:Image x="10" y="5" source="br/com/bancoob/imagens/icos/paste_16.png" alpha=".5"/>	
+   </mx:Canvas>
+	
+	<bancoobGrid:Grid id="gridCertidao" width="100%" x="0" top="36" bottom="10" tabIndex="1">
+	<bancoobGrid:columns>
+		
+		<bancoobGrid:ColunaGrid headerText="St" width="25" sortable="false" itemRenderer="br.com.sicoob.capes.utils.autorizacao.renderer.StatusRenderer" />
+		<bancoobGrid:ColunaGrid headerText="Tipo da Certidão" id="TipoCertidao" dataField="nomeTipoCertidao" width="500" labelFunction="{TabelaPaginadaUtils.defaultLabelFunction}" />
+		<bancoobGrid:ColunaGrid headerText="Data de Emissão" id="DataEmissao" dataField="dataEmissao" width="120" labelFunction="{TabelaPaginadaUtils.defaultDateLabelFunction}" />
+		<bancoobGrid:ColunaGrid headerText="Data de Vencimento" id="DataVencimento" dataField="dataVencimento" width="120" labelFunction="{TabelaPaginadaUtils.defaultDateLabelFunction}"  />
+		<bancoobGrid:ColunaGrid headerText="Data da Última Alteração" id="DataCadastro" dataField="dataHoraInicio" width="120" labelFunction="{TabelaPaginadaUtils.defaultDateLabelFunction}" />
+		<bancoobGrid:ColunaGrid headerText="Último Usuário Alteração" dataField="idUsuarioAprovacao" width="120" textAlign="left"/>
+		<bancoobGrid:ColunaGrid headerText="GED/GFT" width="60" sortable="false" itemRenderer="br.com.sicoob.capes.utils.autorizacao.renderer.GedGftRenderer" />
+		
+	</bancoobGrid:columns>
+	</bancoobGrid:Grid>
+</bancoob:Modulo>

@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="FichaCadastralNova_BemNovo" pageWidth="575" pageHeight="842" columnWidth="575" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0" uuid="845e394d-08f5-4371-be94-f7d712821aa6">
+	<property name="ireport.zoom" value="1.6105100000000014"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="SUBREPORT_DIR" class="java.lang.String" isForPrompting="false">
+		<defaultValueExpression><![CDATA["C:\\SisbrIDE-4.5\\workspace\\capes-ficha-cadastral\\capes\\Relatorio\\CAPESRelatorioEJB\\relatorios\\"]]></defaultValueExpression>
+	</parameter>
+	<parameter name="SUB_BENS_NOVO_DETALHE_MOVEL" class="net.sf.jasperreports.engine.JasperReport"/>
+	<parameter name="SUB_BENS_NOVO_DETALHE_IMOVEL" class="net.sf.jasperreports.engine.JasperReport"/>
+	<parameter name="SUB_BENS_NOVO_DETALHE_AVALIACAO_MOVEL" class="net.sf.jasperreports.engine.JasperReport"/>
+	<parameter name="SUB_BENS_NOVO_DETALHE_AVALIACAO_IMOVEL_PARCEIRO" class="net.sf.jasperreports.engine.JasperReport"/>
+	<parameter name="DS_SUB_BENS_NOVO" class="net.sf.jasperreports.engine.JRDataSource"/>
+	<parameter name="SUB_BENS_NOVO_OUTRO" class="net.sf.jasperreports.engine.JasperReport"/>
+	<parameter name="SUB_BENS_NOVO_OUTRO_DETALHE" class="net.sf.jasperreports.engine.JasperReport"/>
+	<field name="bensImoveis" class="java.util.List"/>
+	<field name="bensMoveis" class="java.util.List"/>
+	<field name="bensDTO" class="java.util.List"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<detail>
+		<band height="41" splitType="Stretch">
+			<printWhenExpression><![CDATA[($F{bensMoveis} != null && !$F{bensMoveis}.isEmpty())]]></printWhenExpression>
+			<subreport>
+				<reportElement uuid="23ebbc7b-e9c5-45f7-b446-9168d4ee1622" stretchType="RelativeToTallestObject" x="0" y="1" width="575" height="39"/>
+				<subreportParameter name="DS_SUB_BENS_NOVO">
+					<subreportParameterExpression><![CDATA[$P{DS_SUB_BENS_NOVO}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="SUB_BENS_NOVO_DETALHE_AVALIACAO_MOVEL">
+					<subreportParameterExpression><![CDATA[$P{SUB_BENS_NOVO_DETALHE_AVALIACAO_MOVEL}]]></subreportParameterExpression>
+				</subreportParameter>
+				<dataSourceExpression><![CDATA[new br.com.sicoob.capes.relatorio.negocio.relatorios.EntidadeCadastroCollectionDataSource($F{bensMoveis})]]></dataSourceExpression>
+				<subreportExpression><![CDATA[$P{SUB_BENS_NOVO_DETALHE_MOVEL}]]></subreportExpression>
+			</subreport>
+		</band>
+		<band height="40" splitType="Stretch">
+			<printWhenExpression><![CDATA[($F{bensImoveis} != null && !$F{bensImoveis}.isEmpty())]]></printWhenExpression>
+			<subreport>
+				<reportElement uuid="c3714e1d-2265-414e-8287-7de069aae6f9" stretchType="RelativeToTallestObject" x="0" y="0" width="575" height="39"/>
+				<subreportParameter name="DS_SUB_BENS_NOVO">
+					<subreportParameterExpression><![CDATA[$P{DS_SUB_BENS_NOVO}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="SUB_BENS_NOVO_DETALHE_AVALIACAO_IMOVEL_PARCEIRO">
+					<subreportParameterExpression><![CDATA[$P{SUB_BENS_NOVO_DETALHE_AVALIACAO_IMOVEL_PARCEIRO}]]></subreportParameterExpression>
+				</subreportParameter>
+				<dataSourceExpression><![CDATA[new br.com.sicoob.capes.relatorio.negocio.relatorios.EntidadeCadastroCollectionDataSource($F{bensImoveis})]]></dataSourceExpression>
+				<subreportExpression><![CDATA[$P{SUB_BENS_NOVO_DETALHE_IMOVEL}]]></subreportExpression>
+			</subreport>
+		</band>
+		<band height="50">
+			<printWhenExpression><![CDATA[($F{bensDTO} != null && !$F{bensDTO}.isEmpty())]]></printWhenExpression>
+			<subreport>
+				<reportElement uuid="0287b3ae-c7f0-4bb5-bff1-9e4f11be440f" stretchType="RelativeToTallestObject" x="0" y="0" width="575" height="50"/>
+				<subreportParameter name="DS_SUB_BENS_NOVO">
+					<subreportParameterExpression><![CDATA[$P{DS_SUB_BENS_NOVO}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="SUB_BENS_NOVO_OUTRO_DETALHE">
+					<subreportParameterExpression><![CDATA[$P{SUB_BENS_NOVO_OUTRO_DETALHE}]]></subreportParameterExpression>
+				</subreportParameter>
+				<dataSourceExpression><![CDATA[new br.com.sicoob.capes.relatorio.negocio.relatorios.EntidadeCadastroCollectionDataSource($F{bensDTO})]]></dataSourceExpression>
+				<subreportExpression><![CDATA[$P{SUB_BENS_NOVO_OUTRO}]]></subreportExpression>
+			</subreport>
+		</band>
+	</detail>
+</jasperReport>

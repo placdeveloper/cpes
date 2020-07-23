@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<bancoob:Modulo xmlns:mx="http://www.adobe.com/2006/mxml"
+			xmlns:tabelapaginada="br.com.bancoob.componentes.tabelapaginada.*"
+			xmlns:bancoobInput="br.com.bancoob.componentes.input.*"
+			xmlns:bancoobGrid="br.com.bancoob.componentes.grid.*"
+			xmlns:bancoob="br.com.bancoob.componentes.*"
+			xmlns:bancoobNavegacao="br.com.bancoob.componentes.navegacao.*"
+	 		width="720" height="400" layout="absolute">
+	 		
+	<mx:Script>
+		<![CDATA[
+			import br.com.bancoob.componentes.tabelapaginada.TabelaPaginadaUtils;
+			
+			private var _baixadas:Boolean = false;
+			public function get baixadas():Boolean {
+				return _baixadas;
+			}
+			public function set baixadas(valor:Boolean):void {
+				this._baixadas = valor;
+			}
+		]]>
+	</mx:Script>	 			 		
+
+	<mx:ViewStack id="vsTelas" creationPolicy="all" width="100%" height="100%">
+        <mx:Canvas id="lista" width="100%" height="100%" >
+        	<bancoobGrid:Grid id="listaAnotacoes" width="100%" top="10" bottom="10" tabIndex="1" right="5" left="5">
+				<bancoobGrid:columns>
+					<bancoobGrid:ColunaGrid headerText="Código" labelFunction="{TabelaPaginadaUtils.defaultLabelFunction}"  
+		                dataField="codigoTipoAnotacao" width="60" textAlign="center"/>
+					<bancoobGrid:ColunaGrid headerText="Origem" labelFunction="{TabelaPaginadaUtils.defaultLabelFunction}" 
+						dataField="descricaoOrigemInfo" width="70"/>
+					<bancoobGrid:ColunaGrid headerText="Descrição" labelFunction="{TabelaPaginadaUtils.defaultLabelFunction}"
+						dataField="descricaoTipoAnotacao" width="200"/>
+					<bancoobGrid:ColunaGrid headerText="Categoria" labelFunction="{TabelaPaginadaUtils.defaultLabelFunction}" 
+						dataField="descricaoCategoriaAnotacao" width="110"/>
+					<bancoobGrid:ColunaGrid headerText="Dt. Anotação" labelFunction="{TabelaPaginadaUtils.defaultDateLabelFunction}" 
+						dataField="dataHoraAnotacao" textAlign="center" width="85"/>
+					<bancoobGrid:ColunaGrid headerText="Dt. Ocorrência" labelFunction="{TabelaPaginadaUtils.defaultDateLabelFunction}"
+						dataField="dataHoraOcorrencia" textAlign="center" width="90"/>
+					<bancoobGrid:ColunaGrid headerText="Qtd." labelFunction="{TabelaPaginadaUtils.defaultLabelFunction}"
+						dataField="quantidade" textAlign="right" width="30"/>
+					<bancoobGrid:ColunaGrid headerText="Valor" labelFunction="{TabelaPaginadaUtils.defaultValorNumericoLabelFunction}"
+						dataField="valor" textAlign="right" width="90"/>
+					<bancoobGrid:ColunaGrid headerText="Data da baixa" labelFunction="{TabelaPaginadaUtils.defaultDateLabelFunction}"
+						dataField="dataHoraBaixa" width="100" visible="{baixadas}" />
+				</bancoobGrid:columns>
+			</bancoobGrid:Grid>			
+        </mx:Canvas>		
+		<mx:Canvas id="detalhe" width="100%" height="100%">
+			<bancoobGrid:Grid id="gridDetalhes" width="100%" top="10" bottom="40" tabIndex="1" right="5" left="5"
+				horizontalScrollPolicy="auto"  sortableColumns="false" resizableColumns="true">
+			</bancoobGrid:Grid>
+			<bancoob:Botao id="btVoltar" label="Voltar" right="10" bottom="5"/>
+		</mx:Canvas>		
+	</mx:ViewStack>
+</bancoob:Modulo>

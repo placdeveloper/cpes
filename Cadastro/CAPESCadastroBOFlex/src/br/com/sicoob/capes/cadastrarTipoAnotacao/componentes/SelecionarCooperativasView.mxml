@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<componentes:Modulo xmlns:mx="http://www.adobe.com/2006/mxml"
+					xmlns:componentes="br.com.bancoob.componentes.*"
+					xmlns:bancoobGrid="br.com.bancoob.componentes.grid.*"
+					xmlns:titulo="br.com.bancoob.componentes.titulo.*"
+					width="670" height="300" layout="absolute" xmlns:input="br.com.bancoob.componentes.input.*">
+	
+	<titulo:SubtituloView  y="10" x="10" texto="Selecione as instituições" left="0" right="10" width="100%" />
+	
+	<componentes:Rotulo x="10" y="42" text="Número da instituição: " />
+	<input:Texto x="115" y="40" id="campoNumeroCooperativa" width="130" maxChars="4" restrict="0123456789" />
+	<componentes:Botao id="botaoProcurar" x="250" y="40" width="35" height="22"
+					   disabledIcon="@Embed('br/com/bancoob/imagens/icos/srch_mini_desab.png')"
+					   downIcon="@Embed('br/com/bancoob/imagens/icos/srch_mini_desab.png')"
+					   icon="@Embed('br/com/bancoob/imagens/icos/srch_mini.png')"
+					   toolTip="CLIQUE PARA ABRIR A PESQUISA"/>
+	
+	<bancoobGrid:Grid x="10" y="70" width="650" height="190" id="listaInstituicoes">
+		<bancoobGrid:columns>
+			<bancoobGrid:ColunaGrid id="numero" headerText="Número" dataField="numero" textAlign="center" width="50"/>
+			<bancoobGrid:ColunaGrid id="nome" headerText="Nome" dataField="nome" textAlign="left"/>
+			<bancoobGrid:ColunaGrid id="excluir" headerText="Excluir" width="50" sortable="false" itemRenderer="br.com.sicoob.capes.cadastrarTipoAnotacao.componentes.ExcluirInstituicaoRenderer" />
+		</bancoobGrid:columns>
+	</bancoobGrid:Grid>
+	
+	<componentes:Botao id="botaoFechar" bottom="5" right="10" width="100" label="Fechar"/>		
+	
+</componentes:Modulo>

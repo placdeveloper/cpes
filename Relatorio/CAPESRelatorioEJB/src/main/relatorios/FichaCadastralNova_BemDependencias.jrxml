@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="FichaCadastral_Bem_Dependencias" pageWidth="575" pageHeight="842" whenNoDataType="AllSectionsNoDetail" columnWidth="575" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0">
+	<parameter name="SUB_BENS_ONUS" class="net.sf.jasperreports.engine.JasperReport"/>
+	<parameter name="SUB_BENS_REGISTROS" class="net.sf.jasperreports.engine.JasperReport"/>
+	<parameter name="SUB_BENS_POSSES" class="net.sf.jasperreports.engine.JasperReport"/>
+	<parameter name="DS_BENS_ONUS" class="net.sf.jasperreports.engine.JRDataSource"/>
+	<parameter name="DS_BENS_REGISTROS" class="net.sf.jasperreports.engine.JRDataSource"/>
+	<parameter name="DS_BENS_POSSES" class="net.sf.jasperreports.engine.JRDataSource"/>
+	<queryString>
+		<![CDATA[]]>
+	</queryString>
+	<variable name="REPORT_COUNT_ZEBRA" class="java.lang.Integer" calculation="Count">
+		<variableExpression><![CDATA[new Integer( $V{REPORT_COUNT_ZEBRA}.intValue() + 1)]]></variableExpression>
+		<initialValueExpression><![CDATA[new Integer(1)]]></initialValueExpression>
+	</variable>
+	<group name="ONUS">
+		<groupHeader>
+			<band height="60" splitType="Immediate">
+				<printWhenExpression><![CDATA[new Boolean(((net.sf.jasperreports.engine.data.JRBeanCollectionDataSource) $P{DS_BENS_ONUS}).getRecordCount() > 0)]]></printWhenExpression>
+				<subreport>
+					<reportElement x="0" y="0" width="575" height="60"/>
+					<subreportParameter name="REPORT_COUNT_ZEBRA">
+						<subreportParameterExpression><![CDATA[$V{REPORT_COUNT_ZEBRA}]]></subreportParameterExpression>
+					</subreportParameter>
+					<dataSourceExpression><![CDATA[$P{DS_BENS_ONUS}]]></dataSourceExpression>
+					<returnValue subreportVariable="REPORT_COUNT_ZEBRA" toVariable="REPORT_COUNT_ZEBRA" calculation="Sum"/>
+					<subreportExpression class="net.sf.jasperreports.engine.JasperReport"><![CDATA[$P{SUB_BENS_ONUS}]]></subreportExpression>
+				</subreport>
+			</band>
+		</groupHeader>
+	</group>
+	<group name="POSSES">
+		<groupHeader>
+			<band height="30" splitType="Immediate">
+				<printWhenExpression><![CDATA[new Boolean(((net.sf.jasperreports.engine.data.JRBeanCollectionDataSource) $P{DS_BENS_POSSES}).getRecordCount() > 0)]]></printWhenExpression>
+				<subreport>
+					<reportElement x="0" y="0" width="575" height="30"/>
+					<subreportParameter name="REPORT_COUNT_ZEBRA">
+						<subreportParameterExpression><![CDATA[$V{REPORT_COUNT_ZEBRA}]]></subreportParameterExpression>
+					</subreportParameter>
+					<dataSourceExpression><![CDATA[$P{DS_BENS_POSSES}]]></dataSourceExpression>
+					<returnValue subreportVariable="REPORT_COUNT_ZEBRA" toVariable="REPORT_COUNT_ZEBRA" calculation="Sum"/>
+					<subreportExpression class="net.sf.jasperreports.engine.JasperReport"><![CDATA[$P{SUB_BENS_POSSES}]]></subreportExpression>
+				</subreport>
+			</band>
+		</groupHeader>
+	</group>
+	<group name="REGISTROS">
+		<groupHeader>
+			<band height="90" splitType="Immediate">
+				<printWhenExpression><![CDATA[new Boolean(((net.sf.jasperreports.engine.data.JRBeanCollectionDataSource) $P{DS_BENS_REGISTROS}).getRecordCount() > 0)]]></printWhenExpression>
+				<subreport>
+					<reportElement x="0" y="0" width="575" height="90"/>
+					<subreportParameter name="REPORT_COUNT_ZEBRA">
+						<subreportParameterExpression><![CDATA[$V{REPORT_COUNT_ZEBRA}]]></subreportParameterExpression>
+					</subreportParameter>
+					<dataSourceExpression><![CDATA[$P{DS_BENS_REGISTROS}]]></dataSourceExpression>
+					<returnValue subreportVariable="REPORT_COUNT_ZEBRA" toVariable="REPORT_COUNT_ZEBRA" calculation="Sum"/>
+					<subreportExpression class="net.sf.jasperreports.engine.JasperReport"><![CDATA[$P{SUB_BENS_REGISTROS}]]></subreportExpression>
+				</subreport>
+			</band>
+		</groupHeader>
+	</group>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+</jasperReport>

@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<componentes:Modulo xmlns:mx="http://www.adobe.com/2006/mxml"
+					xmlns:input="br.com.bancoob.componentes.input.*"
+					xmlns:grid="br.com.bancoob.componentes.grid.*"
+					xmlns:componentes="br.com.bancoob.componentes.*"
+					xmlns:navegacao="br.com.bancoob.componentes.navegacao.*"
+					xmlns:paginacao="br.com.bancoob.componentes.paginacao.*"
+					width="830" height="460" layout="absolute">
+	
+	<mx:Script>
+		<![CDATA[
+			import br.com.bancoob.componentes.tabelapaginada.TabelaPaginadaUtils;
+			import br.com.sicoob.capes.corporativo.componentes.procurarPessoaExterno.util.ConstantesProcurarPessoaExternoCAPES;
+		]]>
+	</mx:Script>
+	
+	<componentes:Rotulo x="10" y="10" text="Tipo de Pessoa"/>
+	<input:Combo x="10" y="25" width="175" id="comboTipo" labelField="descricao" inserirItemOpcional="true" labelItemOpcional="TODOS" editable="false" />
+	
+	<componentes:Rotulo x="193" y="10" text="CPF / CNPJ"/>
+	<input:InputCPFCNPJ x="193" y="25" width="128" id="campoCpfCnpj" enabled="false" />
+	
+	<componentes:Rotulo x="329" y="10" text="Nome / Razão Social"/>
+	<input:Texto x="329" y="25" width="190" id="campoNome" maxChars="50" />
+	
+	<componentes:Rotulo x="527" y="10" text="Apelido / Nome Fantasia"/>
+	<input:Texto x="527" y="25" width="190" id="campoApelido" maxChars="30" />
+	
+	<componentes:Botao x="725" y="25" width="90.5" label="Procurar" id="botaoProcurar" />
+	<componentes:Botao x="725" y="55" width="90.5" label="Limpar" id="botaoLimpar" />
+	
+	<componentes:Rotulo x="10" y="58" text="Pessoa / Cliente: " />
+	<input:RadioGrupoBancoob id="grupoCliente" />
+	<input:Radio x="100" y="55" label="Todos" groupName="grupoCliente" value="{ConstantesProcurarPessoaExternoCAPES.PESQUISAR_TODOS}" />
+	<input:Radio x="170" y="55" label="Somente Pessoas" groupName="grupoCliente" value="{ConstantesProcurarPessoaExternoCAPES.TIPO_CLIENTE_SOMENTE_PESSOAS}" />
+	<input:Radio x="300" y="55" label="Somente Clientes" groupName="grupoCliente" value="{ConstantesProcurarPessoaExternoCAPES.TIPO_CLIENTE_SOMENTE_CLIENTES}" />
+	
+	<input:Check x="540" y="55" label="Compartilhadas com o Bancoob" id="checkBancoob"/>
+	
+	<mx:Image x="10" y="85" source="br/com/bancoob/imagens/icos/row.png" alpha=".3"/>
+	<mx:Label x="30" y="85" text="Resultado"/>
+	<mx:Image x="90" y="92" width="730" height="8" source="br/com/bancoob/imagens/imgsTelas/linha.swf" scaleContent="false" />
+	
+	<grid:Grid x="10" y="110" height="270" id="tabela" left="10" right="10">
+		<grid:columns>
+			<grid:ColunaGrid headerText="NOME / RAZÃO SOCIAL" dataField="nome" width="300" />
+			<grid:ColunaGrid headerText="APELIDO / NOME FANTASIA" dataField="apelido" />
+			<grid:ColunaGrid headerText="CPF / CNPJ" dataField="cpfCnpj" width="120" textAlign="center" labelFunction="{TabelaPaginadaUtils.defaultCNPJLabelFunction}" />
+		</grid:columns>
+	</grid:Grid>
+	
+	<paginacao:BarraPaginacao id="barraPaginacao" y="390" left="10" right="10" x="10"/>
+	
+	<mx:Image x="10" y="420" height="8" right="10" left="10" source="br/com/bancoob/imagens/imgsTelas/linha.swf" scaleContent="false" />
+	
+	<componentes:Botao x="637" y="435" width="100" id="botaoSelecionar" label="Selecionar" enabled="false"/>
+	<componentes:Botao x="745" y="435" width="77" id="botaoFechar" label="Fechar"/>
+	
+</componentes:Modulo>

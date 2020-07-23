@@ -1,0 +1,148 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="FichaCadastral_BemImovel" pageWidth="555" pageHeight="900" whenNoDataType="BlankPage" columnWidth="555" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0" uuid="45dab157-92a9-4277-b9e1-1a2d6db6c391">
+	<property name="ireport.zoom" value="1.4641000000000028"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<style name="Linha Zebrada" isDefault="true" mode="Opaque">
+		<box leftPadding="3">
+			<topPen lineWidth="0.25"/>
+			<leftPen lineWidth="0.25"/>
+			<bottomPen lineWidth="0.25"/>
+			<rightPen lineWidth="0.25"/>
+		</box>
+		<conditionalStyle>
+			<conditionExpression><![CDATA[new Boolean(($V{REPORT_COUNT_ZEBRA}.intValue() % 2) != 0)]]></conditionExpression>
+			<style mode="Opaque" backcolor="#DDDDDE"/>
+		</conditionalStyle>
+	</style>
+	<style name="campo" hAlign="Left" vAlign="Middle" fontSize="8" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false">
+		<box leftPadding="6"/>
+	</style>
+	<style name="Linha" isDefault="true" mode="Opaque">
+		<box leftPadding="3">
+			<topPen lineWidth="0.25"/>
+			<leftPen lineWidth="0.25"/>
+			<bottomPen lineWidth="0.25"/>
+			<rightPen lineWidth="0.25"/>
+		</box>
+	</style>
+	<parameter name="REPORT_COUNT_ZEBRA" class="java.lang.Integer"/>
+	<queryString>
+		<![CDATA[]]>
+	</queryString>
+	<field name="matriculaRegistro" class="java.lang.String"/>
+	<field name="livro" class="java.lang.String"/>
+	<field name="folha" class="java.lang.String"/>
+	<field name="ipr" class="java.lang.String"/>
+	<field name="incra" class="java.lang.String"/>
+	<field name="areaMatricula" class="java.math.BigDecimal"/>
+	<field name="observacaoMatricula" class="java.lang.String"/>
+	<field name="dataUltimaMatricula" class="java.util.Date"/>
+	<variable name="REPORT_COUNT_ZEBRA" class="java.lang.Integer">
+		<variableExpression><![CDATA[new Integer($V{REPORT_COUNT_ZEBRA}.intValue() + 1)]]></variableExpression>
+		<initialValueExpression><![CDATA[$P{REPORT_COUNT_ZEBRA}]]></initialValueExpression>
+	</variable>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<detail>
+		<band height="90" splitType="Prevent">
+			<staticText>
+				<reportElement uuid="3dd9e580-83ce-48b2-9a71-df15cb5cc2b0" style="Linha Zebrada" x="406" y="30" width="149" height="30"/>
+				<textElement>
+					<font size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Data de Posse da Matrícula]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="bbba7768-7de1-4a93-9a49-28c28209c50e" style="Linha Zebrada" x="0" y="30" width="126" height="30"/>
+				<textElement>
+					<font size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[ITR]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="ce79ebfb-dba7-4955-af99-1080e4472310" style="Linha Zebrada" x="407" y="0" width="67" height="30"/>
+				<textElement>
+					<font size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Livro]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="f78e0f8d-bf3a-4a48-a2a3-ddd8bb7042b9" style="Linha Zebrada" x="474" y="0" width="81" height="30"/>
+				<textElement>
+					<font size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Folha]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="66349e6a-5734-4e82-a894-47069a3c49e0" style="Linha Zebrada" x="126" y="30" width="155" height="30"/>
+				<textElement>
+					<font size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[INCRA]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="79b6d421-e2ce-4d46-9c08-8a43354e05eb" style="Linha Zebrada" x="281" y="30" width="125" height="30"/>
+				<textElement>
+					<font size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Área da Matrícula]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="1cd119d0-6362-4c58-8bf5-91a2cef65f2b" style="Linha Zebrada" stretchType="RelativeToBandHeight" x="0" y="60" width="555" height="30"/>
+				<textElement>
+					<font size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Observações da Matrícula/Registro]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="a52cc77b-d6b6-42f1-af39-be66b3933d8b" style="Linha Zebrada" x="0" y="0" width="407" height="30"/>
+				<textElement>
+					<font size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Matrícula/Registro]]></text>
+			</staticText>
+			<textField isBlankWhenNull="true">
+				<reportElement uuid="1c9be89d-a4d9-4c89-a4d7-9a62dae69ad0" style="campo" x="0" y="10" width="407" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{matriculaRegistro}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement uuid="d6e5363f-e08a-42d5-be0b-6409b8818b4b" style="campo" x="474" y="10" width="61" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{folha}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement uuid="958dd002-0a64-4299-8837-2f9be21525d8" style="campo" x="407" y="10" width="67" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{livro}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement uuid="78ab7933-ef3d-4201-85dd-779a3b2128e5" style="campo" x="0" y="40" width="126" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{ipr}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement uuid="37fff6b8-570a-466b-b04b-be97241c4fb1" style="campo" x="126" y="40" width="155" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{incra}]]></textFieldExpression>
+			</textField>
+			<textField pattern="###0.00" isBlankWhenNull="true">
+				<reportElement uuid="e1238f83-dacf-4e80-b388-30ee7fcc5244" style="campo" x="281" y="40" width="125" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{areaMatricula}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement uuid="56f947c4-6b83-4007-8d83-d6dcaf956a64" style="campo" stretchType="RelativeToBandHeight" x="0" y="70" width="535" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{observacaoMatricula}]]></textFieldExpression>
+			</textField>
+			<textField pattern="dd/MM/yyyy" isBlankWhenNull="true">
+				<reportElement uuid="59c8babe-e7c2-4553-854b-0c547816ad85" style="campo" x="406" y="40" width="129" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{dataUltimaMatricula}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+</jasperReport>

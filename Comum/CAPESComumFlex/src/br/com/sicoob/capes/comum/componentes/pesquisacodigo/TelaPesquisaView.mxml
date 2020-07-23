@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8"?>
+<componentes:Modulo creationPolicy="all"
+					xmlns:mx="http://www.adobe.com/2006/mxml"
+					xmlns:componentes="br.com.bancoob.componentes.*"
+					xmlns:containers="br.com.bancoob.componentes.containers.*"
+					xmlns:titulo="br.com.bancoob.componentes.titulo.*"
+					xmlns:botoes="br.com.bancoob.componentes.botoes.*"
+					xmlns:input="br.com.bancoob.componentes.input.*"
+					xmlns:painellista="br.com.bancoob.componentes.painellista.*"
+					xmlns:tabelapaginada="br.com.bancoob.componentes.tabelapaginada.*"
+					xmlns:grid="br.com.bancoob.componentes.grid.*"
+					xmlns:paginacao="br.com.bancoob.componentes.paginacao.*"
+					layout="vertical" width="100%" height="100%" horizontalAlign="center">
+	<mx:Script>
+		<![CDATA[
+			import br.com.bancoob.componentes.tabelapaginada.TabelaPaginadaUtils;
+			
+			private var _campoCodigo:String;
+			private var _campoDescricao:String;
+			
+			private var _tituloCampoCodigo:String;
+			private var _tituloCampoDescricao:String;
+			
+			public function get campoCodigo():String {
+				return _campoCodigo;
+			}
+			
+			public function set campoCodigo(valor:String):void {
+				_campoCodigo = valor;
+			}
+			
+			public function get campoDescricao():String {
+				return _campoDescricao;
+			}
+			
+			public function set campoDescricao(valor:String):void {
+				_campoDescricao = valor;
+			}
+			
+			public function get tituloCampoCodigo():String {
+				return _tituloCampoCodigo;
+			}
+			
+			public function set tituloCampoCodigo(valor:String):void {
+				_tituloCampoCodigo = valor;
+			}
+			
+			public function get tituloCampoDescricao():String {
+				return _tituloCampoDescricao;
+			}
+			
+			public function set tituloCampoDescricao(valor:String):void {
+				_tituloCampoDescricao = valor;
+			}
+		]]>
+	</mx:Script>
+	
+	<containers:CanvasBancoob width="100%" height="20%" x="10" right="10" >
+		<titulo:SubtituloView texto="Filtros" booTituloPesquisa="true" x="0" y="0" />
+		
+		<componentes:Rotulo text="Tipo de procura: " textAlign="left" x="10" y="25" />
+		<input:Combo id="comboTipo" x="10" y="45" width="150" conteudoMaiusculo="true" labelField="nome" editable="false" />
+		
+		<componentes:Rotulo text="Procurar por: " textAlign="left" x="170" y="25" />
+		<input:Texto id="campoValor" x="170" y="45" width="280" />
+		
+		<painellista:BotaoProcurarView id="botaoPesquisar" width="100" right="10" y="45" label="PESQUISAR" toolTip="REALIZA A PESQUISA UTILIZANDO OS FILTROS SELECIONADOS"/>			
+	</containers:CanvasBancoob>
+	
+	<containers:CanvasBancoob width="98%" height="72%" x="0" right="10">
+		<titulo:SubtituloView texto="Resultados" x="0" y="0" />
+		<grid:Grid width="100%" height="75%" id="tabela" x="0" y="30">
+			<grid:columns>
+				<grid:ColunaGrid width="80" headerText="{tituloCampoCodigo}" sortCompareFunction="{TabelaPaginadaUtils.criarDefaultValorNumericoSortFunction(colCodigo)}"
+								 propriedade="{campoCodigo}" id="colCodigo" labelFunction="{TabelaPaginadaUtils.defaultLabelFunction}" />
+				<grid:ColunaGrid headerText="{tituloCampoDescricao}" sortCompareFunction="{TabelaPaginadaUtils.criarDefaultSortFunction(colDescricao)}"
+								 propriedade="{campoDescricao}" id="colDescricao" labelFunction="{TabelaPaginadaUtils.defaultLabelFunction}" />
+			</grid:columns>
+		</grid:Grid>
+		<paginacao:BarraPaginacao id="barraPaginacao" bottom="2" />
+	</containers:CanvasBancoob>
+	
+	<containers:CanvasBancoob width="100%" height="8%" x="10" right="10" bottom="0">
+		<botoes:BarraBotoes id="barraBotoes" width="100%" height="95%">
+			<componentes:Botao id="botaoOk" label="SELECIONAR" width="100" nomeEvento="ok" right="110" enabled="false" />
+			<componentes:Botao id="botaoFechar" label="FECHAR" width="100" nomeEvento="fechar" right="0" />
+		</botoes:BarraBotoes>
+	</containers:CanvasBancoob>
+	
+</componentes:Modulo>

@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<validaveis:CanvasValidavel
+	xmlns:mx="http://www.adobe.com/2006/mxml"
+	xmlns:validaveis="br.com.bancoob.componentes.containers.validaveis.*"
+	xmlns:bancoob="br.com.bancoob.componentes.*"
+	xmlns:input="br.com.bancoob.componentes.input.*"
+	xmlns:painellista="br.com.bancoob.componentes.painellista.*"
+	width="100%" height="24">
+	
+	<mx:Script>
+		<![CDATA[
+			private var _validarObrigatorio:Boolean = false;
+			private var _tabIndex:int;
+			
+			public function get validarObrigatorio():Boolean {
+				return _validarObrigatorio;
+			}
+			
+			public function set validarObrigatorio(valor:Boolean):void {
+				_validarObrigatorio = valor;
+			}
+			
+			public override function get tabIndex():int {
+				return _tabIndex;
+			}
+			
+			public override function set tabIndex(valor:int):void {
+				this._tabIndex = valor;
+			}
+		]]>
+	</mx:Script>
+	
+	<validaveis:HBoxValidavel width="100%" height="100%" verticalAlign="middle">
+		<input:Mascara id="campoCEP" width="85" height="22" inputMask="#####-###" restrict="0-9" textAlign="right" tabEnabled="true" validarObrigatorio="{validarObrigatorio}" tabIndex="{tabIndex}" />
+		<bancoob:LinkButtonBancoob id="botaoPesquisaCep" width="100" height="22" useHandCursor="true" enabled="true" label="Não sei o CEP" tabIndex="{!isNaN(tabIndex) ? tabIndex + 1 : NaN}" />
+	</validaveis:HBoxValidavel>
+	
+</validaveis:CanvasValidavel>

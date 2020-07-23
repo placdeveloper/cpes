@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FormularioCadastroView 
+	xmlns="br.com.bancoob.componentes.cadastro.*" 
+	xmlns:mx="http://www.adobe.com/2006/mxml"
+    xmlns:campo="br.com.bancoob.componentes.campos.*"
+	xmlns:componente="br.com.bancoob.componentes.*"
+   	xmlns:input="br.com.bancoob.componentes.input.*"
+	xmlns:servico="br.com.bancoob.util.servico.*"
+	xmlns:titulo="br.com.bancoob.componentes.titulo.*" 
+	xmlns:validavel="br.com.bancoob.componentes.containers.validaveis.*"
+	layout="vertical"
+	width="1000"
+	height="515">
+
+	<mx:Script>
+		<![CDATA[
+			import br.com.bancoob.componentes.campos.CampoNumerico;
+		]]>
+	</mx:Script>
+	
+	<validavel:CanvasValidavel width="100%" height="90%">
+		<titulo:SubtituloView texto="Tipo de Certidão" left="10" top="10" />
+		
+		<componente:Rotulo text="Código *:" textAlign="left" top="46" left="10"  width="138"/>
+		<campo:CampoNumerico id="codigo" validarObrigatorio="true" valorMinimo="1" 
+			valorMaximo="32766" top="44" x="150" width="80" maxChars="5" 
+			validarTipo="{CampoNumerico.SHORT_POSITIVO}" />
+		<componente:Rotulo text="Sigla *:" textAlign="left" top="72" left="10"  width="138"/>
+		<input:Texto id="sigla" validarObrigatorio="true" top="70" x="150" width="80" maxChars="6" />
+		
+		<componente:Rotulo text="Nome *:" textAlign="left" top="98" left="10"  width="138"/>
+		<input:Texto id="nome" validarObrigatorio="true" top="96" x="150" width="840" maxChars="200" />
+		
+		<componente:Rotulo text="Finalidade:" textAlign="left" top="124" left="10"  width="138"/>
+		<input:TextoArea id="finalidade" validarObrigatorio="false" top="123" x="150" width="840"
+			height="100" maxChars="2000" />
+		
+		<componente:Rotulo text="Subtipo de Certidão *:" textAlign="left" top="228" left="10"  width="138"/>
+		<input:Combo id="subTipo" validarObrigatorio="true" top="226" x="150" width="270"
+			inserirItemOpcional="true" labelField="descricao" identificadorItem="codigo" />
+		
+		<componente:Rotulo text="Tipo Objeto Certidão *:" textAlign="left" top="254" left="10"  width="138"/>
+		<input:Combo id="tipoObjeto" validarObrigatorio="true" top="252" x="150" width="160"
+			inserirItemOpcional="true" labelField="descricao" identificadorItem="codigo" />
+		
+		<componente:Rotulo text="Tipo de Prazo *:" textAlign="left" top="280" left="10"  width="138"/>
+		<input:Combo id="tipoPrazo" validarObrigatorio="true" top="278" x="150" width="160" 
+			inserirItemOpcional="true" labelField="descricao" identificadorItem="codigo" /> 
+		
+		<componente:Rotulo text="Prazo Validade *:" textAlign="left" top="306" left="10"  width="138"/>
+		<campo:CampoNumerico id="prazoValidade" valorMaximo="999" top="304" x="150" width="80" 
+			maxChars="3" validarObrigatorio="true" validarTipo="{CampoNumerico.SHORT}" />		
+		
+		<componente:Rotulo text="Data de Cancelamento:" textAlign="left" top="332" left="10"  width="138"/>
+		<input:Data id="dataCancelamento" validarObrigatorio="false" top="330" x="150" 
+			dataDefault="{null}" />
+		
+		<componente:Rotulo text="Abrangência *:" textAlign="left" top="358" left="10"  width="138"/>
+		<input:Combo id="tipoAbrangencia" validarObrigatorio="true" top="356" x="150" width="115"
+			inserirItemOpcional="true" labelField="descricao" identificadorItem="codigo" />
+		
+		<componente:Rotulo text="Órgão Emissor *:" textAlign="left" top="384" left="10"  width="138"/>
+		<input:Combo id="orgaoEmissor" validarObrigatorio="true" top="382" x="150" width="650"
+			inserirItemOpcional="true" labelField="descricao" identificadorItem="codigo" />
+	</validavel:CanvasValidavel>
+	<BarraBotoesFormularioCadastroView id="barraBotoes" width="100%"/>
+	<servicoInclusao>
+		<servico:ServicoJava id="incluirCertidao"
+			source="br.com.sicoob.capes.cadastro.fachada.TipoCertidaoFachada"
+			bloquearOperacao="true"
+			mensagemEspera="Salvando dados..." />
+	</servicoInclusao>
+
+	<servicoEdicao>
+		<servico:ServicoJava id="alterarCertidao"
+			source="br.com.sicoob.capes.cadastro.fachada.TipoCertidaoFachada"
+			bloquearOperacao="true"
+			mensagemEspera="Salvando dados..." />
+	</servicoEdicao>
+</FormularioCadastroView>

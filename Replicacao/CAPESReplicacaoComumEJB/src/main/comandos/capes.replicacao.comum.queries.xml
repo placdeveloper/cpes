@@ -1,0 +1,700 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE queries [
+	<!ELEMENT queries (query*)>
+	<!ELEMENT query (use-case+, description,paginacao?,command+, ordenacoes?)>
+	<!ELEMENT use-case    (#PCDATA)>
+	<!ELEMENT description (#PCDATA)>
+	<!ELEMENT command     (#PCDATA)>
+	<!ELEMENT parametros  (#PCDATA)>
+	<!ELEMENT paginar  (#PCDATA)>
+	<!ELEMENT paginacao (#PCDATA)>
+	<!ELEMENT colunaCodigo    (#PCDATA)>
+	<!ELEMENT colunaDescricao    (#PCDATA)>
+	<!ELEMENT numeroOcorrenciasPorPagina    (#PCDATA)>
+	<!ELEMENT primeiraCondicao    (#PCDATA)>
+	<!ELEMENT ascendente    (#PCDATA)>
+	<!ELEMENT ordenacoes (ordenacao+)>
+	<!ELEMENT ordenacao (#PCDATA)>
+	<!ELEMENT sql  (#PCDATA)>
+	<!ATTLIST ordenacao chave CDATA    #REQUIRED>
+	<!ATTLIST ordenacao default CDATA    #IMPLIED>
+	<!ATTLIST command parametros CDATA    #IMPLIED>
+	<!ATTLIST command paginar CDATA    #IMPLIED>
+	<!ATTLIST use-case name CDATA    #REQUIRED>
+	<!ATTLIST query name CDATA    #REQUIRED>
+	<!ATTLIST paginacao colunaCodigo CDATA    #REQUIRED>
+	<!ATTLIST paginacao colunaDescricao CDATA    #REQUIRED>
+	<!ATTLIST paginacao numeroOcorrenciasPorPagina CDATA    #REQUIRED>
+	<!ATTLIST paginacao primeiraCondicao CDATA    #REQUIRED>
+	<!ATTLIST paginacao ascendente CDATA    #REQUIRED>
+	<!ATTLIST paginacao hint CDATA    #REQUIRED>
+	<!ATTLIST paginacao hintAuxiliar CDATA   #IMPLIED>
+]>
+
+<queries>
+	
+	<query name="PESQUISA_REFERENCIA_PESSOA">
+		<use-case name="Replicação de Referências"></use-case>
+		<description>Pesquisa as referencias da pessoa</description>
+		<command>
+			<![CDATA[
+			FROM br.com.sicoob.capes.negocio.entidades.legado.Referencia r
+			]]>
+		</command>
+	</query>
+
+	<query name="CONSULTA_REFERENCIA_POR_ID_DB2">
+		<use-case name="Replicação de Referências"></use-case>
+		<description>Consulta de referencia por idDB2</description>
+		<command>
+			<![CDATA[
+			FROM br.com.sicoob.capes.negocio.entidades.legado.Referencia r
+   			WHERE r.idReferenciaPessoaDB2 = ${idDB2}
+			]]>
+		</command>
+	</query>
+	
+	<query name="PESQUISA_FONTE_RENDA">
+		<use-case name="Replicação de Referências"></use-case>
+		<description>Pesquisa as fontes de renda da pessoa</description>
+		<command>
+			<![CDATA[
+			FROM br.com.sicoob.capes.negocio.entidades.legado.FonteRenda fonte
+			]]>
+		</command>
+	</query>
+
+	<query name="CONSULTA_FONTE_RENDA_POR_ID_DB2">
+		<use-case name="Replicação de Referências"></use-case>
+		<description>Consulta de referencia por idDB2</description>
+		<command>
+			<![CDATA[
+			FROM br.com.sicoob.capes.negocio.entidades.legado.FonteRenda fonte
+   			WHERE fonte.idFonteRendaDB2 =  <bancoob:valorOql valor="${idDB2}" tipo="Long" />
+			]]>
+		</command>
+	</query>
+	
+	<query name="PESQUISA_BEM_PESSOA">
+		<use-case name="Replicação de bens"></use-case>
+		<description>Pesquisa os bens por filtro</description>
+		<command>
+			<![CDATA[
+			FROM br.com.sicoob.capes.negocio.entidades.legado.Bem bem
+			]]>
+		</command>
+	</query>
+
+	<query name="CONSULTA_BEM_POR_ID_DB2">
+		<use-case name="Replicação de bens"></use-case>
+		<description>Consulta de bens por idDB2</description>
+		<command>
+			<![CDATA[
+			FROM br.com.sicoob.capes.negocio.entidades.legado.Bem bem
+   			WHERE bem.idBemDB2 = ${idDB2}
+			]]>
+		</command>
+	</query>	
+
+	<query name="PESQUISA_PRODUTOR">
+		<use-case name="Replicação de produtores"></use-case>
+		<description>Pesquisa os produtores por filtro</description>
+		<command>
+			<![CDATA[
+			br.com.sicoob.capes.negocio.entidades.legado.Produtor produtor
+			]]>
+		</command>
+	</query>
+
+	<query name="CONSULTA_PRODUTOR_POR_ID_DB2">
+		<use-case name="Replicação de produtores"></use-case>
+		<description>Consulta de produtores por idDB2</description>
+		<command>
+			<![CDATA[
+			br.com.sicoob.capes.negocio.entidades.legado.Produtor produtor
+   			WHERE produtor.idProdutorDB2 = ${idDB2}
+			]]>
+		</command>
+	</query>	
+	<query name="CONSULTAR_BEM_ONUS_IDDB2">
+		<use-case name="Consulta o bem onus"></use-case>
+		<description>Consulta o bem onus</description>
+		<command>
+			<![CDATA[
+			FROM br.com.sicoob.capes.negocio.entidades.legado.BemOnus bemOnus WHERE bemOnus.idOnusDb2 = ${idDB2}
+			]]>
+		</command>
+	</query>	
+		<query name="CONSULTAR_BEM_POSSE_IDDB2">
+		<use-case name="Consulta o bem posse"></use-case>
+		<description>Consulta o bem posse</description>
+		<command>
+			<![CDATA[
+			FROM br.com.sicoob.capes.negocio.entidades.legado.BemPosse bemPosse WHERE bemPosse.idPosseDb2 = ${idDB2}
+			]]>
+		</command>
+	</query>
+	<query name="CONSULTAR_BEM_REGISTRO_IDDB2">
+		<use-case name="Consulta o bem registro"></use-case>
+		<description>Consulta o bem registro</description>
+		<command>
+			<![CDATA[
+			FROM br.com.sicoob.capes.negocio.entidades.legado.BemRegistro bemRegistro WHERE bemRegistro.idRegistroDb2 = ${idDB2}
+			]]>
+		</command>
+	</query>
+
+	<query name="CONSULTA_BEM_ONUS_POR_ID">
+		<use-case name="Replicação de bem"></use-case>
+		<description>Consulta o bem onus</description>
+		<command>
+			<![CDATA[
+			from br.com.sicoob.capes.negocio.entidades.legado.BemOnus bemOnus
+   			WHERE bemOnus.bemOnusPK.seqBemOnus = ${seqBemOnus}
+   			and bemOnus.bemOnusPK.bem.id = ${idBem}
+			]]>
+		</command>
+	</query>
+
+	<query name="CONSULTA_BEM_POSSE_POR_ID">
+		<use-case name="Replicação de bem"></use-case>
+		<description>Consulta o bem posse</description>
+		<command>
+			<![CDATA[
+			from br.com.sicoob.capes.negocio.entidades.legado.BemPosse bemPosse
+   			WHERE bemPosse.bemPossePK.seqBemPosse = <bancoob:valorOql valor="${seqBemPosse}" tipo="Short" />
+   			and bemPosse.bemPossePK.bem.id = <bancoob:valorOql valor="${idBem}" tipo="String" />   
+			]]>
+		</command>
+	</query>
+
+	<query name="CONSULTA_BEM_REGISTRO_POR_ID">
+		<use-case name="Replicação de bem"></use-case>
+		<description>Consulta o bem registro</description>
+		<command>
+			<![CDATA[
+			from br.com.sicoob.capes.negocio.entidades.legado.BemRegistro bemRegistro
+   			WHERE bemRegistro.bemRegistroPK.seqBemRegistro = <bancoob:valorOql valor="${seqBemRegistro}" tipo="Short" /> 
+   			and bemRegistro.bemRegistroPK.bem.id = <bancoob:valorOql valor="${idBem}" tipo="String" />   			
+			]]>
+		</command>
+	</query>
+	
+	<query name="PESQUISA_ENDERECO">
+		<use-case name="Replicação de Endereços"></use-case>
+		<description>Pesquisa os endereços</description>
+		<command>
+			<![CDATA[
+			FROM br.com.sicoob.capes.negocio.entidades.legado.Endereco endereco
+			WHERE endereco.pessoa.id = <bancoob:valorOql valor="${criterios.filtro.pessoa.id}" tipo="Integer" />
+			]]>
+		</command>
+	</query>
+
+	<query name="CONSULTA_ENDERECO_POR_ID_DB2">
+		<use-case name="Replicação de Endereços"></use-case>
+		<description>Consulta de endereço por idDB2</description>
+		<command>
+			<![CDATA[
+			FROM br.com.sicoob.capes.negocio.entidades.legado.Endereco e
+   			WHERE e.idEnderecoPessoaDB2 = <bancoob:valorOql valor="${idDB2}" tipo="Long" />
+			]]>
+		</command>
+	</query>		
+
+	<query name="CONSULTAR_MENSAGEM_IDDB2">
+		<use-case name="Consulta o bem registro"></use-case>
+		<description>Consulta a mensagem</description>
+		<command>
+			<![CDATA[
+			FROM br.com.sicoob.capes.negocio.entidades.legado.Mensagem mensagem WHERE mensagem.idMensagemDB2 = ${idDB2}
+			]]>
+		</command>
+	</query>
+	
+	<query name="PESQUISA_TELEFONE">
+		<use-case name="Replicação de telefone"></use-case>
+		<description>Pesquisa os telefones</description>
+		<command>
+			<![CDATA[
+			FROM br.com.sicoob.capes.negocio.entidades.legado.Telefone t
+			]]>
+		</command>
+	</query>
+
+	<query name="CONSULTA_TELEFONE_POR_ID_DB2">
+		<use-case name="Replicação de telefones"></use-case>
+		<description>Consulta de telefone por idDB2</description>
+		<command>
+			<![CDATA[
+			FROM br.com.sicoob.capes.negocio.entidades.legado.Telefone t
+   			WHERE t.idTelefonePessoaDB2 = <bancoob:valorOql valor="${idDB2}" tipo="Long" />
+			]]>
+		</command>
+	</query>			
+
+	<query name="CONSULTA_CERTIDAO_POR_ID_DB2">
+		<use-case name="Replicação de certidoes"></use-case>
+		<description>Consulta de certidao por idDB2</description>
+		<command>
+			<![CDATA[
+			FROM br.com.sicoob.capes.negocio.entidades.legado.Certidao c
+   			WHERE c.idCertidaoDB2 = <bancoob:valorOql valor="${idDB2}" tipo="Long" />
+			]]>
+		</command>
+	</query>	
+
+	<query name="CONSULTA_MAX_SEQ_CERTIDAO">
+		<use-case name="Replicação de certidoes"></use-case>
+		<description>Consulta de certidao por idDB2</description>
+		<command>
+			<![CDATA[
+			select max(c.seqCertidao) FROM br.com.sicoob.capes.negocio.entidades.legado.Certidao c
+   			WHERE c.certidaoPK.pessoa.id = <bancoob:valorOql valor="${pessoa.id}"  tipo="Integer" />
+			]]>
+		</command>
+	</query>
+	
+	<query name="CONSULTA_MAX_SEQ_POSSE">
+		<use-case name="Replicação de certidoes"></use-case>
+		<description>Consulta de certidao por idDB2</description>
+		<command>
+			<![CDATA[
+			select max(bp.seqBemPosse) FROM br.com.sicoob.capes.negocio.entidades.legado.BemPosse bp
+   			WHERE bp.bemPossePK.bem.id = <bancoob:valorOql valor="${bem.id}"  tipo="String" />
+			]]>
+		</command>
+	</query>
+	
+	<query name="CONSULTA_MAX_SEQ_REGISTRO">
+		<use-case name="Replicação de certidoes"></use-case>
+		<description>Consulta de certidao por idDB2</description>
+		<command>
+			<![CDATA[
+			select max(br.seqBemRegistro) FROM br.com.sicoob.capes.negocio.entidades.legado.BemRegistro br
+   			WHERE br.bemRegistroPK.bem.id = <bancoob:valorOql valor="${bem.id}"  tipo="String" />
+			]]>
+		</command>
+	</query>
+	
+	<query name="CONSULTA_MAX_SEQ_ONUS">
+		<use-case name="Replicação de certidoes"></use-case>
+		<description>Consulta de certidao por idDB2</description>
+		<command>
+			<![CDATA[
+			select max(bo.seqBemOnus) FROM br.com.sicoob.capes.negocio.entidades.legado.BemOnus bo
+   			WHERE bo.bemOnusPK.bem.id = <bancoob:valorOql valor="${bem.id}"  tipo="String" />
+			]]>
+		</command>
+	</query>
+	
+	<query name="CONSULTA_CERTIDAO_POR_ID">
+		<use-case name="Replicação de certidao"></use-case>
+		<description>Consulta o bem posse</description>
+		<command>
+			<![CDATA[
+			from br.com.sicoob.capes.negocio.entidades.legado.Certidao certidao
+   			WHERE certidao.certidaoPK.seqCertidao = ${seqCertidao}
+   			and certidao.certidaoPK.pessoa.id = ${idPessoa}
+			]]>
+		</command>
+	</query>
+
+	<query name="PESQUISA_RELACIONAMENTO">
+		<use-case name="Replicação de Relacionamentos"></use-case>
+		<description>Pesquisa os relacionamentos</description>
+		<command>
+			<![CDATA[
+			FROM br.com.sicoob.capes.negocio.entidades.legado.RelacionamentoPessoa r
+			]]>
+		</command>
+	</query>
+
+	<query name="CONSULTA_RELACIONAMENTO_POR_ID_DB2">
+		<use-case name="Replicação de Relacionamentos"></use-case>
+		<description>Consulta de relacionamentos por idDB2</description>
+		<command>
+			<![CDATA[
+			FROM br.com.sicoob.capes.negocio.entidades.legado.RelacionamentoPessoa r
+   			WHERE r.idRelacionamentoDB2 = <bancoob:valorOql valor="${idDB2}" tipo="Long" />
+			]]>
+		</command>
+	</query>		
+	
+	<query name="PESQUISA_PRODUTIVIDADE">
+		<use-case name="Replicação de Produtividade"></use-case>
+		<description>Pesquisa as fontes de renda da pessoa</description>
+		<command>
+			<![CDATA[
+			FROM br.com.sicoob.capes.negocio.entidades.legado.FonteRenda fonte
+			]]>
+		</command>
+	</query>
+
+	<query name="CONSULTA_PRODUTIVIDADE_POR_ID_DB2">
+		<use-case name="Replicação de Produtividade"></use-case>
+		<description>Consulta de referencia por idDB2</description>
+		<command>
+			<![CDATA[
+			FROM br.com.sicoob.capes.negocio.entidades.legado.Produtividade produtividade
+   			WHERE produtividade.idProdutividadePessoaDB2 = <bancoob:valorOql valor="${idDB2}" tipo="Long" />
+			]]>
+		</command>
+	</query>	
+	
+	<query name="SPU_REPLICACAO_PESSOA">
+		<use-case name="Conciliar Agendamentos"></use-case>
+		<description>Pesquisa as cooperativas singulares ativas</description>
+		<command>
+			<![CDATA[
+				exec spu_ReplicaPessoa 
+				<bancoob:valor valor="${numPessoaOrigem}" />,
+				<bancoob:valor valor="${numCooperativaOrigem}" />
+			]]>
+		</command>
+	</query>
+	
+	<query name="SPU_REPLICACAO_PESSOA_ASSINCRONA">
+		<use-case name="Conciliar Agendamentos"></use-case>
+		<description>Replicação de pessoa.</description>
+		<command>
+			<![CDATA[
+				exec spu_ReplicaPessoaAssinc 
+				<bancoob:valor valor="${numPessoaOrigem}" />,
+				<bancoob:valor valor="${numCooperativaOrigem}" />
+			]]>
+		</command>
+	</query>
+	
+	<query name="CONSULTA_CLIENTES_POR_ID">
+		<use-case name="Replicação de grupo econômico"></use-case>
+		<description>Recupera clientes por uma lista de IDs</description>
+		<command>
+			<![CDATA[
+				FROM br.com.sicoob.capes.negocio.entidades.legado.Cliente cliente
+				WHERE cliente.idCliente in (<bancoob:valor valor="${ids}"/>)
+			]]>
+		</command>
+	</query>
+	
+	<query name="PESQUISAR_COOPERATIVA_POR_FILTRO">
+		<use-case name="Replicação de cliente" />
+		<description>Recupera cooperativa por filtro</description>
+		<command>
+			<![CDATA[
+				FROM br.com.sicoob.capes.negocio.entidades.legado.Cooperativa c
+				WHERE 1 = 1
+			<j:if test="${criterios.filtro != null and criterios.filtro.idInstituicao != null}">
+				AND c.idInstituicao = <bancoob:valorOql valor="${criterios.filtro.idInstituicao}" tipo="Integer" />
+			</j:if>
+			<j:if test="${criterios.filtro != null and criterios.filtro.idUnidadeInst != null}">
+				AND c.idUnidadeInst = <bancoob:valorOql valor="${criterios.filtro.idUnidadeInst}" tipo="Integer" />
+			</j:if>
+			]]>
+		</command>
+	</query>
+
+	<query name="PESQUISAR_FUNCIONARIO_POR_FILTRO">
+		<use-case name="Replicação de Funcionario" />
+		<description>Recupera funcionario por filtro</description>
+		<command>
+			<![CDATA[
+				FROM br.com.sicoob.capes.negocio.entidades.legado.Funcionario c
+				WHERE 1 = 1
+			<j:if test="${criterios.filtro != null and criterios.filtro.matricula != null}">
+				AND c.matricula = <bancoob:valorOql valor="${criterios.filtro.matricula}" tipo="String" />
+			</j:if>
+			]]>
+		</command>
+	</query>
+
+	<query name="PESQUISAR_ASSINATURA_FOTO_PESSOA">
+		<use-case name="Atualizar assinatura/foto pessoa" />
+		<description>Atualizar assiantura/foto pessoa</description>
+		<command>
+			<![CDATA[
+				SELECT NumCGC_CPF, FotoPessoa, AssinaturaPessoa
+				FROM Pessoa
+				WHERE 
+				NumPessoa = ${NumPessoa}
+			]]>
+		</command>
+	</query>
+
+	<query name="ATUALIZAR_ASSINATURA_FOTO_PESSOA">
+		<use-case name="Atualizar assinatura/foto pessoa" />
+		<description>Atualizar assiantura/foto pessoa</description>
+		<command>
+			<![CDATA[
+				UPDATE Pessoa SET 
+				FotoPessoa = 
+					<j:if test="${FotoPessoa != null}">
+						<bancoob:valor valor="${FotoPessoa}"/>,
+					</j:if>
+					<j:if test="${FotoPessoa == null}">
+						null,
+					</j:if>
+				AssinaturaPessoa = 
+					<j:if test="${AssinaturaPessoa != null}">
+						<bancoob:valor valor="${AssinaturaPessoa}"/>,
+					</j:if>
+					<j:if test="${AssinaturaPessoa == null}">
+						null,
+					</j:if>
+				CodHashAssinatura = null,
+				CodHashFoto = null,
+				DataUltimaAtualizacao = GETDATE()
+				WHERE 
+				NumCGC_CPF = <bancoob:valor valor="${NumCGC_CPF}"/>
+			]]>
+		</command>
+	</query>
+	
+	<query name="SPU_HISTORICO_CEDENTE">
+		<use-case name="Incluir histórico do cedente"></use-case>
+		<description>Inclui o histórico do cedente</description>
+		<command>
+			<![CDATA[
+				exec SPU_COB_INCLUIR_HIST_CEDENTE 
+					<bancoob:valor valor="${numCooperativa}" />,
+					<bancoob:valor valor="${numPac}" />,
+					<bancoob:valor valor="${identNegocio}" />,
+					<bancoob:valor valor="${tipoRegistro}" />,
+					<bancoob:valor valor="${tipoOperacao}" />,
+					<bancoob:valor valor="${numCliente}" />
+			]]>
+		</command>
+	</query>		
+	
+	
+	<query name="LISTA_PESSOA_POR_CPF_CONJUGE">
+		<use-case name="Alterar Pessoa"></use-case>
+		<description>Pesquisa as pessoa que possuem o cpf informado como conjuge</description>
+		<command>
+			<![CDATA[
+			FROM br.com.sicoob.capes.negocio.entidades.legado.PessoaFisica pf
+			where pf.cpfConjuge = <bancoob:valorOql valor="${cpfConjuge}" tipo="String" />
+			]]>
+		</command>
+	</query>
+	
+	<query name="SPU_ATUALIZAR_PESSOA">
+		<use-case name="Alteração de Grupo de Compartilhamento" />
+		<description>Atualiza a pessoa com os dados da instituição de origem</description>
+		<command>
+			<![CDATA[
+				EXEC spu_AtualizarPessoa 
+					<bancoob:valor valor="${numPessoaOrigem}" tipo="Integer" />,
+					<bancoob:valor valor="${numeroCoopOrigem}" tipo="Integer" />,
+					<bancoob:valor valor="${numPessoaDestino}" tipo="Integer" />
+			]]>
+		</command>
+	</query>
+	
+	<query name="CONSULTAR_INFORMACAO_PROFISSIONAL_POR_IDDB2">
+		<use-case name="Replicação de Informação Profissional"></use-case>
+		<description>Consulta de informacao profissional por idDB2</description>
+		<command>
+			<![CDATA[
+			FROM br.com.sicoob.capes.negocio.entidades.legado.InformacaoProfissional info
+   			WHERE info.idInformacaoProfissionalDB2 = ${idDB2}
+			]]>
+		</command>
+	</query>
+	
+	<query name="INCLUIR_HISTORICO_RISCO_CLIENTE">
+		<use-case name="Serviço de atulização de risco para o CRL" />
+		<description>Inclui um registro de histórico do risco do cliente</description>
+		<command>
+			<![CDATA[
+				INSERT INTO HistoricoRiscoCliente (NumCliente,IDNivelRisco,DataHistorico,DescMotivo)
+				    (
+				        SELECT
+				            NumCliente,
+				            IDNivelRisco,
+				            DataRisco,
+				            MotivoRisco
+				        FROM
+				            Cliente a
+				        WHERE
+				            a.NumCliente = <bancoob:valor valor="${numCliente}" tipo="Integer" />
+                        AND NOT EXISTS (SELECT NULL
+                                          FROM HistoricoRiscoCliente h
+                                         WHERE h.numcliente = a.numcliente
+                                           AND h.IDNivelRisco = a.IDNivelRisco
+                                           AND h.DataHistorico = a.DataRisco)
+				    );
+			]]>
+		</command>
+	</query>
+  
+    <query name="ATUALIZAR_HISTORICO_AVALIACAO_FINANCEIRA">
+      <use-case name="Serviço para atualização do histórico da avaliação financeira" />
+      <description>Atualiza a classificação de risco do cliente</description>
+      <command>
+        <![CDATA[
+        
+          MERGE cli_histrenovacaocadastro AS Hist
+          USING (select numPessoa, 
+                 convert(date,dataultimarenovacao,111) dataultimarenovacao
+                 from avalFinanceira 
+                 where numPessoa           = <bancoob:valor valor="${numPessoa}" tipo="Integer" />
+                   and dataultimarenovacao is not null) as Aval
+          ON (Aval.numPessoa           = Hist.numPessoa and 
+              Aval.dataultimarenovacao = Hist.DataRenovacao)
+            WHEN NOT MATCHED THEN   
+                INSERT (numPessoa, DataRenovacao)
+                VALUES (Aval.numPessoa, Aval.dataultimarenovacao);
+        
+        ]]>
+      </command>
+    </query>
+	
+	<query name="ATUALIZAR_RISCO_CLIENTE">
+		<use-case name="Serviço de atulização de risco para o CRL" />
+		<description>Atualiza a classificação de risco do cliente</description>
+		<command>
+			<![CDATA[
+				UPDATE
+				    Cliente
+				SET
+				    DataRisco = GETDATE(),
+				    IDNivelRisco = <bancoob:valor valor="${idNivelRisco}" tipo="String" />,
+				    MotivoRisco = <bancoob:valor valor="${motivoRisco}" tipo="String" />,
+				    DataUltimaAtualizacao = GETDATE()
+				WHERE
+				    NumCliente = <bancoob:valor valor="${numCliente}" tipo="Integer" />
+			]]>
+		</command>
+	</query>
+  
+    <query name="ATUALIZAR_CONJUGE">
+      <use-case name="Relacionamento pessoa" />
+      <description>Atualiza as informações de conjuge na tabela de pessoa física.</description>
+      <command>
+        <![CDATA[
+          UPDATE
+              PessoaFisica
+          SET
+              DescNomeConjuge = <bancoob:valor valor="${nomeConjuge}" tipo="String" />,
+              NumCPFConjuge = <bancoob:valor valor="${cpfConjuge}" tipo="String" />,
+              CodProfissaoConjuge = <bancoob:valor valor="${codProfissaoConjuge}" tipo="Integer" />
+          WHERE
+              NumPessoa = <bancoob:valor valor="${numPessoa}" tipo="Integer" />
+        ]]>
+      </command>
+    </query>
+    
+    <query name="ALTERAR_EMAIL">
+      <use-case name="Pessoa" />
+      <description>Altera o e-mail da pessoa.</description>
+      <command>
+        <![CDATA[
+          UPDATE
+              Pessoa
+          SET
+              DescEndInternet = <bancoob:valor valor="${email}" tipo="String" />,
+              DataUltimaAtualizacao = GETDATE()
+          WHERE
+              NumPessoa = <bancoob:valor valor="${numPessoa}" tipo="Integer" />
+        ]]>
+      </command>
+    </query>
+    
+    <query name="PESQUISAR_TIPO_EMPRESA_POR_FAIXA_DE_RENDA_ANUAL">
+    <use-case name="Manter Tipo Empresa"></use-case>
+    <description>Pesquisa os tipos de empresa por renda anual</description>
+    <command>
+      <![CDATA[
+		SELECT * FROM DBO.TIPOEMPRESA TE
+		WHERE 
+			1=1
+			AND TE.BOLATIVO = 1
+		<j:if test="${rendaAnual != null}">
+			AND <bancoob:valor valor="${rendaAnual}" tipo="BigDecimal" /> BETWEEN TE.VALORLIMITEINFERIORFATURAMENTO AND TE.VALORLIMITESUPERIORFATURAMENTO
+		</j:if>
+		<j:if test="${isSimplesNacional != null}">
+			AND TE.BOLHABILITASIMPLESNACIONAL = <bancoob:valor valor="${isSimplesNacional}" tipo="Boolean" />
+		</j:if>
+      ]]>
+    </command>
+    <projecao>SELECT tipoEmpresa</projecao>
+    <ordenacoes>
+      <ordenacao chave="padrao" default="true">
+        <![CDATA[order by tipoEmpresa.codigo]]>
+      </ordenacao>
+    </ordenacoes>
+  </query>
+  
+  <query name="ATUALIZA_COD_TIPO_EMPRESA_POR_PESSOA_LEGADO">
+    <use-case name="Atualiza o código do Tipo Empresa"></use-case>
+    <description>Atualiza o código do Tipo Empresa</description>
+    <command>
+      <![CDATA[
+		UPDATE DBO.PESSOAJURIDICA
+		SET CodTipoEmpresa = <bancoob:valor valor="${codTipoEmpresa}" tipo="Short" />
+		WHERE NumPessoa = <bancoob:valor valor="${idPessoaLegado}" tipo="Integer" />
+      ]]>
+    </command>    
+  </query>
+  <query name="ALTERAR_CLIENTES_LOTE">
+    <use-case name="ALTERAR_CLIENTES_LOTE"></use-case>
+    <description>Altera clientes em lote</description>
+    <command>
+      <![CDATA[
+			UPDATE  dbo.Cliente
+   			SET 
+	   		    NumCliente = ?,
+				DescParecer = ?,
+	            BolEmiteAvisoLancto = ?,
+				DataUltimaAtualizacao = ?,
+				NumCooperativa = ?,
+				NumPac = ?,
+				NumNucleo = ?,
+				NumPessoaFuncGer = ?,
+				IDPerfilTarifario = ?,
+				DataCadastramentoSFN = ?,
+				BolAutorizaConsulta = ?
+			 WHERE 
+				NumCliente = ?
+      ]]>
+    </command>    
+  </query>
+  <query name="INCLUIR_CLIENTES_LOTE">
+    <use-case name="INCLUIR_CLIENTES_LOTE"></use-case>
+    <description>Inclui clientes em lote</description>
+    <command>
+      <![CDATA[
+			INSERT INTO dbo.Cliente
+           (
+		    NumCliente,
+			DescParecer,
+            BolEmiteAvisoLancto,
+			DataUltimaAtualizacao,
+			NumCooperativa,
+			NumPac,
+			NumNucleo,
+			NumPessoaFuncGer,
+			IDPerfilTarifario,
+			DataCadastramentoSFN,
+			BolAutorizaConsulta
+			)
+			VALUES
+		           (
+				   ?,
+				   ?,
+				   ?,
+				   ?,
+				   ?,
+				   ?,
+				   ?,
+				   ?,
+				   ?,
+				   ?,
+				   ?
+				   )
+      ]]>
+    </command>    
+  </query>
+</queries>

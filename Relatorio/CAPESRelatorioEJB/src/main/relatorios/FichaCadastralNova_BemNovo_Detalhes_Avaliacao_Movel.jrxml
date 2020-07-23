@@ -1,0 +1,213 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="FichaCadastralNova_BemNovo_Detalhes_Avaliacao" pageWidth="575" pageHeight="802" columnWidth="575" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0" uuid="89df8153-1803-4e3d-b878-db882b7875c4">
+	<property name="ireport.zoom" value="2.1435888100000025"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<field name="bemMovelAvaliacao.dataCompraVenda" class="java.util.Date"/>
+	<field name="bemMovelAvaliacao.valorAvaliacao" class="java.math.BigDecimal"/>
+	<field name="bemMovelAvaliacao.dataAvaliacao" class="java.util.Date"/>
+	<field name="bemMovelAvaliacao.processoAquisicao" class="java.lang.Boolean"/>
+	<field name="bemMovelAvaliacao.tipoEstadoConservacao.descricao" class="java.lang.String"/>
+	<field name="tipoOnus" class="java.lang.String"/>
+	<field name="bemMovelAvaliacao.valorCompraVenda" class="java.math.BigDecimal"/>
+	<field name="pessoaAvaliador.nomeCompleto" class="java.lang.String"/>
+	<field name="pessoaAvaliador.pessoa.cpfCnpj" class="java.lang.String"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<detail>
+		<band height="107" splitType="Stretch">
+			<staticText>
+				<reportElement uuid="c323a6a2-6328-4536-b313-8a10cc2e92b9" positionType="Float" x="278" y="16" width="297" height="30"/>
+				<box leftPadding="3">
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.0"/>
+					<leftPen lineWidth="0.0"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.0"/>
+				</box>
+				<textElement>
+					<font size="9" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Em processo de aquisição]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="61999fe4-d0f4-4189-aa73-1e9637437b72" positionType="Float" x="278" y="46" width="138" height="30"/>
+				<box leftPadding="3">
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.0"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.0"/>
+				</box>
+				<textElement>
+					<font size="9" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Valor avaliação]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="d6cac7ec-e8b0-42e5-9d4e-57f6227a7454" mode="Opaque" x="0" y="1" width="575" height="15" backcolor="#CCCCCC"/>
+				<box leftPadding="1">
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement>
+					<font fontName="Arial" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Bem Móvel - Avaliação]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="2af92398-578f-430d-a477-83ba80c1ff21" positionType="Float" x="131" y="46" width="147" height="30"/>
+				<box leftPadding="3">
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.0"/>
+					<leftPen lineWidth="0.0"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement>
+					<font size="9" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Data da compra e venda]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="cfd15c3e-428f-40a7-883b-bef372ab8a05" positionType="Float" x="0" y="76" width="278" height="30"/>
+				<box leftPadding="3">
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.0"/>
+					<leftPen lineWidth="0.0"/>
+					<bottomPen lineWidth="0.5"/>
+				</box>
+				<textElement>
+					<font size="9" isBold="true"/>
+				</textElement>
+				<text><![CDATA[CPF/CNPJ - Nome/Razão Social do Avaliador]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="b5e43fe8-696e-43ac-85c7-cc98535a84c2" positionType="Float" x="278" y="76" width="297" height="30"/>
+				<box leftPadding="3">
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.0"/>
+					<leftPen lineWidth="0.0"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.0"/>
+				</box>
+				<textElement>
+					<font size="9" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Tipos de ônus]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="294f7a5b-d86e-4856-827e-acca445bbf25" positionType="Float" x="0" y="16" width="278" height="30"/>
+				<box leftPadding="3">
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.0"/>
+					<leftPen lineWidth="0.0"/>
+					<bottomPen lineWidth="0.5"/>
+				</box>
+				<textElement>
+					<font size="9" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Estado de conservação]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="9350547c-8920-45a7-92b1-c87091954c79" positionType="Float" x="416" y="46" width="159" height="30"/>
+				<box leftPadding="3">
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.0"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.0"/>
+				</box>
+				<textElement>
+					<font size="9" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Data da avalição]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="e718d3e2-0bd9-4e77-b13f-904a4711565d" positionType="Float" x="0" y="46" width="131" height="30"/>
+				<box leftPadding="3">
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.0"/>
+					<leftPen lineWidth="0.0"/>
+					<bottomPen lineWidth="0.5"/>
+				</box>
+				<textElement>
+					<font size="9" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Valor de compra e venda	]]></text>
+			</staticText>
+			<textField pattern="" isBlankWhenNull="true">
+				<reportElement uuid="96ea29d1-a3ac-4976-94f9-d5bb1ddcdd2e" x="0" y="26" width="277" height="20"/>
+				<box leftPadding="6"/>
+				<textElement verticalAlignment="Middle">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{bemMovelAvaliacao.tipoEstadoConservacao.descricao}]]></textFieldExpression>
+			</textField>
+			<textField pattern="" isBlankWhenNull="true">
+				<reportElement uuid="2d1a32a6-1e71-40bc-a456-a417dd4fa492" x="286" y="28" width="15" height="15"/>
+				<box leftPadding="3">
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{bemMovelAvaliacao.processoAquisicao} ? ' ' : 'X']]></textFieldExpression>
+			</textField>
+			<textField pattern="¤ #,##0.00" isBlankWhenNull="true">
+				<reportElement uuid="876c86c2-1a07-411d-adea-8c8c48cb86f2" x="278" y="56" width="138" height="20"/>
+				<box leftPadding="6"/>
+				<textElement verticalAlignment="Middle">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{bemMovelAvaliacao.valorAvaliacao}]]></textFieldExpression>
+			</textField>
+			<textField pattern="dd/MM/yyyy" isBlankWhenNull="true">
+				<reportElement uuid="de975a4f-8a38-48e7-8779-a45662ff13ca" x="416" y="56" width="159" height="20"/>
+				<box leftPadding="6"/>
+				<textElement verticalAlignment="Middle">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{bemMovelAvaliacao.dataAvaliacao}]]></textFieldExpression>
+			</textField>
+			<textField pattern="¤ #,##0.00" isBlankWhenNull="true">
+				<reportElement uuid="72a01718-d3e3-4c2a-a550-ab0ba21db605" x="1" y="56" width="130" height="20"/>
+				<box leftPadding="6"/>
+				<textElement verticalAlignment="Middle">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{bemMovelAvaliacao.valorCompraVenda}]]></textFieldExpression>
+			</textField>
+			<textField pattern="dd/MM/yyyy" isBlankWhenNull="true">
+				<reportElement uuid="10c55b51-78e2-401a-8d0a-9392e187e4f5" x="131" y="56" width="147" height="20"/>
+				<box leftPadding="6"/>
+				<textElement verticalAlignment="Middle">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{bemMovelAvaliacao.dataCompraVenda}]]></textFieldExpression>
+			</textField>
+			<textField pattern="" isBlankWhenNull="true">
+				<reportElement uuid="090d4ec8-ad0a-4aa6-aa60-080f77f00950" x="1" y="86" width="276" height="20"/>
+				<box leftPadding="1"/>
+				<textElement verticalAlignment="Middle">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[new String($F{pessoaAvaliador.pessoa.cpfCnpj} != null ? $F{pessoaAvaliador.pessoa.cpfCnpj} : ""
+    + " - " + $F{pessoaAvaliador.nomeCompleto} != null ?
+$F{pessoaAvaliador.nomeCompleto} : "")]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" pattern="" isBlankWhenNull="true">
+				<reportElement uuid="76bcfdbe-7427-4033-900e-7e366f991318" x="277" y="86" width="297" height="20"/>
+				<box leftPadding="6"/>
+				<textElement verticalAlignment="Middle">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{tipoOnus}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+</jasperReport>

@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
+<validaveis:CanvasValidavel xmlns:mx="http://www.adobe.com/2006/mxml"
+		xmlns:bancoobInput="br.com.bancoob.componentes.input.*"
+		xmlns:bancoobGrid="br.com.bancoob.componentes.grid.*"
+		xmlns:bancoob="br.com.bancoob.componentes.*"
+		xmlns:bancoobNavegacao="br.com.bancoob.componentes.navegacao.*"
+		xmlns:campos="br.com.bancoob.componentes.campos.*"
+		xmlns:validaveis="br.com.bancoob.componentes.containers.validaveis.*"
+		xmlns:incluir="br.com.sicoob.capes.cadastrarProdutor.abas.*"
+		xmlns:abas="br.com.sicoob.capes.utils.autorizacao.abas.*" 
+		xmlns:pesquisacodigo="br.com.sicoob.capes.comum.componentes.pesquisacodigo.*"
+		width="100%" height="100%" styleName="ModuloSemEstilo">
+	<mx:Script>
+		<![CDATA[
+			import br.com.sicoob.capes.comum.enums.TipoAutorizacaoEnum;
+		]]>
+	</mx:Script>
+	
+	<bancoobNavegacao:Tab x="0" y="0" width="100%" height="100%" id="navegacao">
+		
+		<mx:Canvas width="100%" height="100%" label="Informações">
+			<validaveis:CanvasValidavel y="2" height="100%" cornerRadius="10" borderStyle="solid" left="0" right="0" borderThickness="0" 
+				backgroundColor="#ffffff" backgroundAlpha=".4" horizontalScrollPolicy="off" verticalScrollPolicy="off" tabEnabled="false">
+		
+				<mx:Image x="15" y="11" source="br/com/bancoob/imagens/icos/produtor_16.png" alpha=".5"/>
+				<mx:Label x="39" y="11" text="DADOS DO PRODUTOR" fontWeight="bold" fontFamily="ArialEmbedded" alpha=".8"/>
+				<mx:Image y="17" source="br/com/bancoob/imagens/imgsTelas/linha.swf" scaleContent="false" left="155" right="20"/>
+				
+				<bancoob:Rotulo x="10" y="37" text="Código de Inscrição:"/>
+				<bancoobInput:Texto x="140" y="35" maxChars="13" id="txtInscricao" tabIndex="1" tabEnabled="true" validarObrigatorio="true" width="140"/>
+				
+				<bancoob:Rotulo x="10" y="63" text="Categoria:"/>
+				<bancoobInput:Combo x="140" y="61" width="314" id="cboCategoriaProdutor" labelField="descricao" tabIndex="2" tabEnabled="true" validarObrigatorio="true" />
+				<bancoob:Botao x="465" y="61" width="73" id="btnSugerirCategoria" label="Sugerir" tabEnabled="true" tabIndex="3"/>
+				
+				<bancoob:Rotulo x="10" y="88" text="Tipo beneficiário SICOR:" />
+				<pesquisacodigo:PesquisaCodigo id="componenteProcurarTipoBeneficiarioSicor" x="140" y="86" width="100%" tabIndex="4"
+											   tituloJanelaPesquisa="Procurar Tipo Beneficiário SICOR"
+											   quantidadeMaximaCaracteresCampoCodigo="10"
+											   classeServico="br.com.sicoob.capes.cadastro.fachada.TipoBeneficiarioSicorFachada"/>
+				
+				<bancoobInput:Texto x="10" y="113" id="txtEmpregadosPermanentes" tabIndex="5" tabEnabled="true" width="60" restrict="0-9" maxChars="8"/>
+				<bancoob:Rotulo x="75" y="115" text="Empregados permanentes em"/>
+				<bancoobInput:Mascara x="215" y="113" id="txtMesAnoPermanente" tabIndex="6" tabEnabled="true" width="50" inputMask="##/####" restrict="0-9" maxChars="6"/>
+		
+				<bancoobInput:Texto x="10" y="138" id="txtEmpregadosTemporarios" tabIndex="7" tabEnabled="true" width="60" restrict="0-9" maxChars="8"/>
+				<bancoob:Rotulo x="75" y="140" text="Empregados temporários em"/>
+				<bancoobInput:Mascara x="215" y="138" id="txtMesAnoTemporario" tabIndex="8" tabEnabled="true" width="50" inputMask="##/####" restrict="0-9" maxChars="6"/>
+				
+				<bancoob:Botao x="280" y="163" width="175" id="btnAlterarProdutor" label="Alterar dados do produtor" tabEnabled="true" tabIndex="9" /> 
+				<bancoob:Botao x="462" y="163" width="175" id="btnExcluirProdutor" label="Excluir dados do produtor" tabEnabled="true" tabIndex="10" enabled="false"/>
+				
+				<mx:Image x="15" y="182" source="br/com/bancoob/imagens/icos/smicn_16.png" alpha=".5"/>
+				<mx:Label x="39" y="182" text="DADOS DA PRODUÇÂO" fontWeight="bold" fontFamily="ArialEmbedded" alpha=".8"/>
+				<mx:Image y="189" source="br/com/bancoob/imagens/imgsTelas/linha.swf" scaleContent="false" left="155" right="20"/>
+				
+				<bancoobNavegacao:Tab x="0" y="200" width="100%" height="100%" id="navegacaoTab">
+					<incluir:AbaExploracoesAtuais id="abaAtuais" label="Explorações Atuais"/>
+					<incluir:AbaExploracoesAnteriores id="abaAnteriores" label="Explorações Anteriores"/>
+				</bancoobNavegacao:Tab>	
+						
+			</validaveis:CanvasValidavel>
+		</mx:Canvas>
+			
+	<abas:abaUploadGed id="abaDocumentos" label="Documentos" _siglaClasseDocumento="{TipoAutorizacaoEnum.PRODUTOR.name}" />
+			
+	</bancoobNavegacao:Tab>
+
+</validaveis:CanvasValidavel>

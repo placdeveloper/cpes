@@ -1,0 +1,146 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE queries [
+	<!ELEMENT queries (query*)>
+	<!ELEMENT query (use-case+, description,paginacao?,command+, ordenacoes?)>
+	<!ELEMENT use-case    (#PCDATA)>
+	<!ELEMENT description (#PCDATA)>
+	<!ELEMENT command     (#PCDATA)>
+	<!ELEMENT parametros  (#PCDATA)>
+	<!ELEMENT paginar  (#PCDATA)>
+	<!ELEMENT paginacao (#PCDATA)>
+	<!ELEMENT colunaCodigo    (#PCDATA)>
+	<!ELEMENT colunaDescricao    (#PCDATA)>
+	<!ELEMENT numeroOcorrenciasPorPagina    (#PCDATA)>
+	<!ELEMENT primeiraCondicao    (#PCDATA)>
+	<!ELEMENT ascendente    (#PCDATA)>
+	<!ELEMENT ordenacoes (ordenacao+)>
+	<!ELEMENT ordenacao (#PCDATA)>
+	<!ELEMENT sql  (#PCDATA)>
+	<!ATTLIST ordenacao chave CDATA    #REQUIRED>
+	<!ATTLIST ordenacao default CDATA    #IMPLIED>
+	<!ATTLIST command parametros CDATA    #IMPLIED>
+	<!ATTLIST command paginar CDATA    #IMPLIED>
+	<!ATTLIST use-case name CDATA    #REQUIRED>
+	<!ATTLIST query name CDATA    #REQUIRED>
+	<!ATTLIST paginacao colunaCodigo CDATA    #REQUIRED>
+	<!ATTLIST paginacao colunaDescricao CDATA    #REQUIRED>
+	<!ATTLIST paginacao numeroOcorrenciasPorPagina CDATA    #REQUIRED>
+	<!ATTLIST paginacao primeiraCondicao CDATA    #REQUIRED>
+	<!ATTLIST paginacao ascendente CDATA    #REQUIRED>
+	<!ATTLIST paginacao hint CDATA    #REQUIRED>
+	<!ATTLIST paginacao hintAuxiliar CDATA   #IMPLIED>
+]>
+
+<queries>
+  <query name="PESQUISA_EXEMPLO">
+    <use-case name="Exemplo"></use-case>
+    <description>Exemplo</description>
+    <command>
+			<![CDATA[
+			]]>
+    </command>
+  </query>
+
+  <query name="PESQUISAR_ANOTACOES_VIGENTES_PESSOA">
+    <use-case name="Pesquisar Anotações Pessoa"></use-case>
+    <description>Pesquisa as anotações vigentes da pessoa</description>
+    <command>
+      <![CDATA[
+        SELECT
+            a.IDANOTACAO            AS idAnotacao,
+            a.QTDANOTACAO           AS quantidade,
+            a.VALORANOTACAO         AS valor,
+            a.DESCOBSERVACAO        AS observacao,
+            a.BOLFLEXIBILIDADE      AS flexibilidade,
+            b.CODTIPOANOTACAO       AS codigoTipoAnotacao,
+            b.DESCTIPOANOTACAO      AS descricaoTipoAnotacao,
+            c.IDCATEGORIAANOTACAO   AS codigoCategoriaAnotacao,
+            c.DESCCATEGORIAANOTACAO AS descricaoCategoriaAnotacao,
+            d.IDORIGEMINFO          AS codigoOrigemInfo,
+            d.DESCORIGEMINFO        AS descricaoOrigemInfo,
+            a.DATAHORAANOTACAO      AS dataHoraAnotacao,
+            a.DATAHORAOCORRENCIA    AS dataHoraOcorrencia
+        FROM
+            CLI.ANOTACAO a
+        INNER JOIN
+            CLI.PESSOACOMPARTILHAMENTO pc
+        ON
+            a.IDPESSOACOMPARTILHAMENTO = pc.IDPESSOACOMPARTILHAMENTO
+        INNER JOIN
+            CLI.PESSOA p
+        ON
+            p.IDPESSOA = pc.IDPESSOA
+        INNER JOIN
+            CLI.GRUPOCOMPARTILHAMENTO gc
+        ON
+            pc.CODCOMPARTILHAMENTOCADASTRO = gc.CODCOMPARTILHAMENTOCADASTRO
+        INNER JOIN
+            CLI.tipoAnotacao b
+        ON
+            b.CODTIPOANOTACAO = a.IDTIPOANOTACAO
+        INNER JOIN
+            CLI.ORIGEMINFO d
+        ON
+            d.IDORIGEMINFO = a.IDORIGEMINFO
+        INNER JOIN
+            CLI.categoriaAnotacao c
+        ON
+            c.IDCATEGORIAANOTACAO = b.IDCATEGORIAANOTACAO
+        WHERE
+            a.DATAHORABAIXA IS NULL
+        AND gc.IDINSTITUICAO = <bancoob:valor valor="${idInstituicao}" tipo="Integer" />
+      <j:if test="${idPessoa != null}">
+        AND p.IDPESSOA = <bancoob:valor valor="${idPessoa}" tipo="Integer" /> 
+      </j:if>
+      <j:if test="${cpfCnpj != null}">
+        AND p.NUMCPFCNPJ = <bancoob:valor valor="${cpfCnpj}" tipo="String" /> 
+      </j:if>
+      <j:if test="${idTipoAnotacao != null}">
+        AND b.CODTIPOANOTACAO = <bancoob:valor valor="${idTipoAnotacao}" tipo="Integer" />
+      </j:if>
+      ]]>
+    </command>
+  </query>
+  
+  <query name="PESQUISAR_CLIENTE">
+    <use-case name="Pesquisar clientes"></use-case>
+    <description>Pesquisar clientes</description>
+    <command>
+		<![CDATA[
+			SELECT
+			p.IDPESSOA                     AS idPessoa,
+	           p.NUMCPFCNPJ                   AS cpfCnpj,
+	           p.CODTIPOPESSOA                AS codTipoPessoa,
+	           pc.CODCOMPARTILHAMENTOCADASTRO AS codigoCompartilhamentoCadastro,
+	           pc.NOMEPESSOA                  AS nomePessoa,
+	           pc.NOMECOMPLETO                AS nomeCompleto,
+	           pc.NOMEAPELIDO                 AS nomeApelido,
+	           pc.DESCOBSERVACAOPESSOA        AS descricaoObservacaoPessoa,
+	           pc.CODATIVIDADEECONOMICA       AS codigoAtividadeEconomica,
+	           pc.CODCNAE                     AS codigoCnaeFiscal,
+	           pc.DATAINCLUSAOSISTEMA         AS dataInclusaoSistema,
+	           pc.BOLAUTORIZACONSULTABACEN    AS autorizaConsultaBacen,
+	           tp.IDPESSOALEGADO              AS idPessoaLegado,
+	           tp.IDINSTITUICAO               AS idInstituicao,
+	           pc.DATAINCLUSAOSFN             AS dataInclusaoSFN
+			FROM CLI.PESSOA p
+			INNER JOIN CLI.PESSOACOMPARTILHAMENTO pc on pc.IDPESSOA = p.IDPESSOA
+			INNER JOIN CLI.TRANSICAOPESSOA tp on tp.IDPESSOACOMPARTILHAMENTO = pc.IDPESSOACOMPARTILHAMENTO
+			INNER JOIN CLI.PESSOAINSTITUICAO pi on pi.IDPESSOA = p.IDPESSOA
+			WHERE 1 = 1
+			<j:if test="${idPessoa != null}">
+				AND pi.IDPESSOA = <bancoob:valor valor="${idPessoa}" tipo="Integer" />
+			</j:if>
+			<j:if test="${idInstituicao != null}">
+				AND pi.IDINSTITUICAO = <bancoob:valor valor="${idInstituicao}" tipo="Integer" />
+			</j:if>
+			<j:if test="${cpfCnpj != null}">
+				AND p.NUMCPFCNPJ = <bancoob:valor valor="${cpfCnpj}" tipo="String" />
+				AND tp.IDINSTITUICAO = pi.IDINSTITUICAO
+			</j:if>
+		]]>
+    </command>
+  </query>
+  
+</queries>

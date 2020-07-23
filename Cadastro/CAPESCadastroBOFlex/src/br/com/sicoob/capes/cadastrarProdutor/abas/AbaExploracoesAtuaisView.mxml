@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<bancoob:Modulo xmlns:mx="http://www.adobe.com/2006/mxml"
+		xmlns:bancoob="br.com.bancoob.componentes.*" 
+		xmlns:bancoobContainers="br.com.bancoob.componentes.containers.*"
+		xmlns:bancoobGrid="br.com.bancoob.componentes.grid.*" 
+		width="100%" height="100%" layout="absolute" styleName="ModuloSemEstilo" xmlns:renderes="br.com.bancoob.componentes.renderes.*">
+		<mx:Script>
+			<![CDATA[
+				import br.com.bancoob.componentes.tabelapaginada.TabelaPaginadaUtils;
+				import br.com.sicoob.capes.cadastrarProdutor.ProdutorUtil;
+			]]>
+		</mx:Script>
+
+		<bancoobGrid:Grid id="gridDados" width="100%" height="100%" tabEnabled="true">
+			<bancoobGrid:columns>
+				
+				<bancoobGrid:ColunaGrid headerText="St" width="5" sortable="false" itemRenderer="br.com.sicoob.capes.utils.autorizacao.renderer.StatusRenderer" />
+				
+				<bancoobGrid:ColunaGrid headerText="Ano Safra" dataField="anoInicioSafra" labelFunction="{ProdutorUtil.defaultAnoSafra}" 
+					textAlign="center" 	width="30"/>
+				<bancoobGrid:ColunaGrid headerText="Denominação do Imóvel" dataField="denominacaoImovel" 		
+					textAlign="left" 	width="80"/>		
+				<bancoobGrid:ColunaGrid headerText="Empreendimento" dataField="descEmpreendimento"
+					textAlign="left" 	width="70"/>		
+				<bancoobGrid:ColunaGrid headerText="Área/Qtd" dataField="quantidadeOuArea" labelFunction="{TabelaPaginadaUtils.defaultValorNumericoLabelFunction}" 
+					textAlign="right" 	width="30"/>		
+				<bancoobGrid:ColunaGrid headerText="Produção" dataField="producao" labelFunction="{TabelaPaginadaUtils.defaultValorNumericoLabelFunction}"
+					textAlign="right" 	width="40"/>
+				<bancoobGrid:ColunaGrid headerText="Preço Médio" dataField="valorPrecoMedio" labelFunction="{TabelaPaginadaUtils.defaultValorNumericoLabelFunction}"
+					textAlign="right" 	width="45"/>
+				<bancoobGrid:ColunaGrid headerText="Renda Bruta" dataField="valorRendaBruta" labelFunction="{TabelaPaginadaUtils.defaultValorNumericoLabelFunction}"
+					textAlign="right" 	width="45"/>
+				<bancoobGrid:ColunaGrid headerText="Situação" dataField="descSituacao" 
+					textAlign="right" 	width="30"/>
+				
+				<bancoobGrid:ColunaGrid headerText="GED/GFT" width="20" sortable="false" itemRenderer="br.com.sicoob.capes.utils.autorizacao.renderer.GedGftRenderer" />
+				
+			</bancoobGrid:columns>
+		</bancoobGrid:Grid>	
+	
+</bancoob:Modulo>

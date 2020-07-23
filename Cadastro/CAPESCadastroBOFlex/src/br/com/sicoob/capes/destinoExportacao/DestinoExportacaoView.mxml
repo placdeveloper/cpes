@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ListaCadastroView xmlns="br.com.bancoob.componentes.cadastro.*"
+				   xmlns:mx="http://www.adobe.com/2006/mxml"
+				   xmlns:telas="br.com.sicoob.capes.destinoExportacao.*"
+				   width="800" height="600" backgroundAlpha="0" borderStyle="solid"
+				   borderThickness="0" deveLimparPesquisa="false">
+	
+	<painelLista>
+		<telas:PainelListaView width="100%" height="100%" />
+	</painelLista>
+	
+	<formularioCadastro>
+		<telas:DestinoExportacaoEdicao width="700" height="470" />
+	</formularioCadastro>
+	
+</ListaCadastroView>

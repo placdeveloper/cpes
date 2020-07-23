@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<componentes:Modulo xmlns:mx="http://www.adobe.com/2006/mxml" 
+		   xmlns:componentes="br.com.bancoob.componentes.*"
+		   xmlns:componente="br.com.bancoob.componentes.*"
+		   xmlns:grid="br.com.bancoob.componentes.grid.*"
+		   xmlns:containers="br.com.bancoob.componentes.containers.*"
+		   xmlns:titulo="br.com.bancoob.componentes.titulo.*"
+		   xmlns:toolTipUtil="br.com.bancoob.sisbr.toolTipUtil.*"
+		   xmlns:ns="http://namespace" layout="absolute" width="778" height="456">
+	
+	<titulo:SubtituloView texto="Vincular Instituições ao Grupo Compartilhamento Sicoob" left="10" right="10" top="10" id="labelTitulo"/>
+	
+	<grid:Grid id="gridListar" x="10" top="82" bottom="63" width="758" editable="true">
+		<grid:columns>
+			<grid:ColunaGrid dataField="numero" headerText="Nº Instituição" width="65" textAlign="right" editable="false"/>			
+			<grid:ColunaGrid dataField="nomeInstituicao" headerText="Instituição" editable="false"/>
+			<grid:ColunaGrid dataField="numCNPJ" headerText="Nº CNPJ" width="100" textAlign="right" id="columnNumCnpj" editable="false"/>
+			<grid:ColunaGrid headerText="Selecionar" dataField="selecionado" rendererIsEditor="true" width="65" textAlign="center" editorDataField="selected">
+				<grid:itemRenderer>
+					<mx:Component>
+						<mx:CheckBox selected="{data.selecionado}" label="" height="20" labelPlacement="bottom"/>
+					</mx:Component>
+				</grid:itemRenderer>
+			</grid:ColunaGrid>
+		</grid:columns>
+	</grid:Grid>
+	
+	<titulo:LinhaView x="10" bottom="43" width="442"/>
+	<containers:HBoxBancoob left="10" right="10" bottom="5" horizontalAlign="right">
+		<componente:Botao label="SALVAR" id="btnSalvar" />
+		<componente:Botao label="CANCELAR" id="btnCancelar"/>
+		<componente:Botao label="FECHAR" id="btnFechar"/>
+	</containers:HBoxBancoob>
+	<componente:Rotulo id="labelSubTitulo" x="10" y="52" width="100%"
+										  fontSize="12" fontWeight="bold"
+										  text="Selecione uma ou várias Instituições para serem vinculadas ao Grupo Sicoob"/>
+	<titulo:LinhaView left="10" right="10" bottom="372" height="12"/>
+	<toolTipUtil:ToolTipUtil id="toolTipUtil"/>
+</componentes:Modulo>

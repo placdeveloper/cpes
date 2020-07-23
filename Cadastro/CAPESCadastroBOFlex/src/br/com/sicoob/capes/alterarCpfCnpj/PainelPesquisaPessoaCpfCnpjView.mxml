@@ -1,0 +1,28 @@
+<validaveis:CanvasValidavel
+	xmlns:mx="http://www.adobe.com/2006/mxml"
+	xmlns:validaveis="br.com.bancoob.componentes.containers.validaveis.*"
+	xmlns:bancoobGrid="br.com.bancoob.componentes.grid.*"
+	xmlns:componentes="br.com.bancoob.componentes.*" 
+	xmlns:titulo="br.com.bancoob.componentes.titulo.*"
+	xmlns:input="br.com.bancoob.componentes.input.*"
+	width="650" height="550" styleName="ModuloSemEstilo">
+	
+		<titulo:TituloView booTituloPesquisa="true" texto="Alteração de CPF/CNPJ" y="1" x="0" height="38"/>
+		<componentes:Rotulo text="CPF/CNPJ Atual:" x="10" y="47"/>
+		<input:Texto id="cpfCnpjAtual" restrict="0-9" width="110" maxChars="14" x="105" y="45" 
+				validarObrigatorio="true"/>
+		<componentes:Botao id="btConsultar" label="Consultar" x="224" y="45"/>
+		<componentes:Botao id="btCancelar" label="Cancelar" x="322" y="45"/>
+
+		<bancoobGrid:Grid id="gridVinculos" width="100%" x="0" y="73" height="144" >
+			<bancoobGrid:columns>
+				<bancoobGrid:ColunaGrid headerText="Número da Instituição" id="numeroInstituicao" dataField="numeroInstituicao" width="120" textAlign="center"/>
+				<bancoobGrid:ColunaGrid headerText="Grupo de Compartilhamento" id="descricaoCompartilhamento" dataField="descricaoCompartilhamento" width="140" />						
+				<bancoobGrid:ColunaGrid headerText="Nome da Pessoa" id="nomePessoaLegado" dataField="nomePessoaLegado" />			
+			</bancoobGrid:columns>
+		</bancoobGrid:Grid>
+		
+		<titulo:LinhaView width="100%"  x="0" y="228" height="6"/>
+	
+</validaveis:CanvasValidavel>
+	

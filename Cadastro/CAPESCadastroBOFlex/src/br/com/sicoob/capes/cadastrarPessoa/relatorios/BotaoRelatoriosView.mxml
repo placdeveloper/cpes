@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<componentes:Modulo xmlns:mx="http://www.adobe.com/2006/mxml"
+					xmlns:componentes="br.com.bancoob.componentes.*"
+					xmlns:botoes="br.com.bancoob.componentes.botoes.*"
+					width="488" height="56" layout="absolute"> <!--width: 653-->
+	
+	<botoes:BotaoPlataforma x="0" y="4" id="botFichaCadastral" rotulo="Ficha Cadastral" visible="true" buttonMode="true" useHandCursor="true" enabled="true" tabIndex="401" imagem="br\com\bancoob\imagens\icos\PNG\foldr_32.png" />
+	<botoes:BotaoPlataforma x="165" y="4" id="botFichaCadastralNova" rotulo="F. Cadastral Nova" visible="true" buttonMode="true" useHandCursor="true" enabled="true" tabIndex="402" imagem="br\com\bancoob\imagens\icos\PNG\foldr_32.png" />
+	<botoes:BotaoPlataforma x="330" y="4" id="btnImprimirCartaoAssinatura" rotulo="Cartão Assinatura" imagem="br\com\bancoob\imagens\imgRelatorios.png" useHandCursor="true" enabled="true" tabIndex="403" visible="true" />
+	<!--<botoes:BotaoPlataforma x="495" y="4" id="btnRelatorioDeclaracaoProposito" rotulo="Declaração de propósito" imagem="br\com\bancoob\imagens\imgRelatorios.png" useHandCursor="true" enabled="true" tabIndex="403" visible="false" />
+	<botoes:BotaoPlataforma x="660" y="4" id="btnFormDeVisita" rotulo="Formulário de Visita" imagem="br\com\bancoob\imagens\imgRelatorios.png" buttonMode="true" useHandCursor="true" enabled="true" tabIndex="404" visible="false" />-->
+</componentes:Modulo>

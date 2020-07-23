@@ -1,0 +1,209 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mx:TitleWindow xmlns:mx="http://www.adobe.com/2006/mxml"
+				xmlns:bancoob="br.com.bancoob.*"
+				xmlns:bancoobComp="br.com.bancoob.componentes.*"
+				width="100%" height="100%" borderColor="#004000" borderThicknessLeft="0"
+				borderThicknessRight="0" cornerRadius="0" creationComplete="init()"
+				creationPolicy="all" doubleClickEnabled="true" horizontalAlign="center"
+				horizontalScrollPolicy="off" layout="vertical" showCloseButton="true"
+				title="Obter uma visualização aproximada da Imagem" verticalAlign="top"
+				verticalScrollPolicy="off">
+	<mx:Script>
+		<![CDATA[
+		import mx.managers.CursorManager;		
+		import mx.events.EffectEvent;
+		import mx.effects.Parallel;
+		import mx.effects.Resize;
+		import mx.effects.Move;
+
+		private var imgWidth:Number=0;
+        private var imgHeight:Number=0;   
+        private var rect:Rectangle;	
+
+		[Embed(source="imagens/cursorGrab.png")]
+        private var cursorGrab:Class;
+        
+        [Embed(source="imagens/cursorGrabbing.png")]
+        private var cursorGrabbing:Class;        
+
+        private var cursorID:Number = 1;
+		
+		private function init():void{
+			
+		}
+		private function imgOnLoad():void{
+			
+			img.x = (width/2)-img.content.width/2;
+			img.y = (height/2)-img.content.height/2;
+			
+			imgWidth = img.content.width;
+			imgHeight = img.content.height;
+			
+			rect = new Rectangle();
+			rect.x = 0;
+			rect.y = 0;
+			
+			rect.width = width-imgWidth-5;
+			rect.height = height-imgHeight-70;
+			
+			img.doubleClickEnabled = true;
+			
+			img.addEventListener(MouseEvent.MOUSE_DOWN,initDragging);
+			img.addEventListener(MouseEvent.MOUSE_UP,stopDraging);
+			
+			img.addEventListener(MouseEvent.DOUBLE_CLICK,imgDoubleClick);
+			
+			img.addEventListener(MouseEvent.MOUSE_OVER,setCursorGrab);
+			img.addEventListener(MouseEvent.MOUSE_OUT,removeCursorGrab);
+			
+			stage.addEventListener(MouseEvent.MOUSE_WHEEL,onMouseWheel);
+			
+			parallel.addEventListener(EffectEvent.EFFECT_END,verificaSliderTamanho);
+		}
+		
+		public function initDragging(event:MouseEvent):void{
+			img.startDrag(false,rect);
+			
+			img.removeEventListener(MouseEvent.MOUSE_OVER,setCursorGrab);
+			img.removeEventListener(MouseEvent.MOUSE_OUT,removeCursorGrab);
+			removeCursorGrab();
+			cursorID = CursorManager.setCursor(cursorGrabbing);
+		}
+		public function stopDraging(event:MouseEvent=null):void{
+			img.stopDrag();
+			removeCursorGrab();
+			setCursorGrab();
+			img.addEventListener(MouseEvent.MOUSE_OVER,setCursorGrab);
+			img.addEventListener(MouseEvent.MOUSE_OUT,removeCursorGrab);
+		}
+		private function changeSize(event:Event=null):void{
+        	//Verificar se esta diminuindo
+        	//if(img.width>imgWidth*sliderImg.value/100)
+
+        	var _widthToImage:uint = uint(imgWidth*sliderImg.value/100);
+			var _heightToImage:uint = uint(imgHeight*sliderImg.value/100); 		
+			
+			rect.x = boxImagens.width-_widthToImage;
+			rect.y = boxImagens.height-_heightToImage;						
+			rect.width = _widthToImage-boxImagens.width;
+			rect.height = _heightToImage-boxImagens.height;
+			
+			resize.widthTo = uint(imgWidth*sliderImg.value/100);
+			resize.heightTo = uint(imgHeight*sliderImg.value/100);
+			
+			moveTo.xTo = rect.x+(rect.width/2);
+			moveTo.yTo = rect.y+(rect.height/2);
+
+			parallel.addChild(moveTo);
+			parallel.addChild(resize);
+			
+			if(!parallel.isPlaying){
+				parallel.play([img]);
+			}
+
+        }
+	    public function tipFormatter(value:Number):String {
+	    	return   Math.abs(value)+"%"; 
+	    }
+	    
+	    public function onMouseWheel(event:MouseEvent):void{
+	    	if(event.delta>0){
+	    		if(sliderImg.value<sliderImg.maximum){
+	    			if(sliderImg.value+50>sliderImg.maximum){
+	    				sliderImg.value = sliderImg.maximum;
+	    			}else{
+			    		sliderImg.value +=50;
+			    	}
+			    	changeSize();
+			    }
+	    	}else{//Diminuir
+	    		if(sliderImg.value>sliderImg.minimum){
+			    	if(sliderImg.value-50<sliderImg.minimum){
+	    				sliderImg.value = sliderImg.minimum;
+	    			}else{
+			    		sliderImg.value -=50;
+			    	}
+			    	changeSize();
+			    }
+	    	}	    	
+	    }
+	    
+	    public function imgDoubleClick(event:Event):void{
+	    	if(sliderImg.value<sliderImg.maximum){
+	    		if(sliderImg.value+50>sliderImg.maximum){
+	    			sliderImg.value = sliderImg.maximum;
+	    		}else{
+			    	sliderImg.value +=50;
+			    }
+			    changeSize();
+			}
+	    }  
+		
+		private function setCursorGrab(event:MouseEvent=null):void{
+			cursorID = CursorManager.setCursor(cursorGrab);
+		}
+		private function removeCursorGrab(event:Event=null):void{
+			CursorManager.removeCursor(cursorID);
+		}
+		
+		//Verifica se após o termino da animação de redimensionar e mover, a imagem esta de acordo com o valor seleciado no slide;
+		private function verificaSliderTamanho(event:Event):void{
+			var _widthToImage:uint = uint(imgWidth*sliderImg.value/100);
+			trace('verificaSliderTamanho');
+			trace('_widthToImage: '+_widthToImage);
+			trace('img.width :'+img.width);
+			trace('!parallel.isPlaying: '+parallel.isPlaying);			
+			
+			if(!parallel.isPlaying && _widthToImage != uint(img.width)){
+				resize.widthTo = uint(imgWidth*sliderImg.value/100);
+				resize.heightTo = uint(imgHeight*sliderImg.value/100);
+				
+				moveTo.xTo = rect.x+(rect.width/2);
+				moveTo.yTo = rect.y+(rect.height/2);
+	
+				parallel.addChild(moveTo);
+				parallel.addChild(resize);
+				parallel.play([img]);
+			}
+		}
+
+		]]>
+	</mx:Script>
+	<mx:Style>
+.fseVerticalScrollBar {
+    downArrowUpSkin: Embed(source="br/com/bancoob/imagens/icos/downArrow.png");
+    downArrowOverSkin: Embed(source="br/com/bancoob/imagens/icos/downArrow.png");
+    downArrowDownSkin: Embed(source="br/com/bancoob/imagens/icos/downArrow.png");
+    upArrowUpSkin: Embed(source="br/com/bancoob/imagens/icos/upArrow.png");
+    upArrowOverSkin: Embed(source="br/com/bancoob/imagens/icos/upArrow.png");
+    upArrowDownSkin: Embed(source="br/com/bancoob/imagens/icos/upArrow.png");
+    thumbDownSkin: Embed(source="br/com/bancoob/imagens/icos/thumb.png",
+        scaleGridLeft="7", scaleGridTop="5", scaleGridRight="8", scaleGridBottom="7");
+    thumbUpSkin: Embed(source="br/com/bancoob/imagens/icos/thumb.png",
+        scaleGridLeft="7", scaleGridTop="5", scaleGridRight="8", scaleGridBottom="7");
+    thumbOverSkin: Embed(source="br/com/bancoob/imagens/icos/thumb.png",
+        scaleGridLeft="7", scaleGridTop="5", scaleGridRight="8", scaleGridBottom="7");
+    trackSkin: Embed(source="br/com/bancoob/imagens/icos/scrolltrack_verde.png",
+        scaleGridLeft="7", scaleGridTop="4", scaleGridRight="8", scaleGridBottom="6" );    
+}
+</mx:Style>
+
+<mx:Resize id="resize"/>
+<mx:Move id="moveTo"/>
+<mx:Parallel id="parallel"/>
+
+	<mx:Canvas id="boxImagens" width="100%" height="100%"
+			   horizontalScrollBarStyleName="fseVerticalScrollBar" horizontalScrollPolicy="off"
+			   verticalScrollBarStyleName="fseVerticalScrollBar" verticalScrollPolicy="off">
+		<mx:Image id="img" creationComplete="imgOnLoad()" maintainAspectRatio="true"
+				  scaleContent="true"/>
+	</mx:Canvas>
+
+<bancoobComp:HSliderBancoob id="sliderImg" width="100%" height="40" allowTrackClick="true"
+							buttonMode="true" change="changeSize()"
+							dataTipFormatFunction="tipFormatter"
+							labels="[100%,,,,,150%,,,,,200%,,,,,250%,,,,,300%,,,,,350%,,,,,400%,,,,,450%,,,,,500%]"
+							liveDragging="false" maximum="500" minimum="100" showDataTip="true"
+							snapInterval="10" tickInterval="10" useHandCursor="true" value="100"/>
+	    
+</mx:TitleWindow>

@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FormularioCadastroView 
+	xmlns="br.com.bancoob.componentes.cadastro.*" 
+	xmlns:mx="http://www.adobe.com/2006/mxml" 
+    xmlns:campo="br.com.bancoob.componentes.campos.*"
+	xmlns:componente="br.com.bancoob.componentes.*"
+   	xmlns:input="br.com.bancoob.componentes.input.*"
+	xmlns:servico="br.com.bancoob.util.servico.*"
+	xmlns:titulo="br.com.bancoob.componentes.titulo.*" 
+	xmlns:validavel="br.com.bancoob.componentes.containers.validaveis.*"
+	layout="vertical"
+	width="550" 
+	height="200">
+	<validavel:CanvasValidavel width="100%" height="100%">
+		<titulo:SubtituloView left="10" right="10" top="10" id="subtitulo"/>
+		
+		<componente:Rotulo text="Código *:" textAlign="left" top="46" left="10" />
+		<campo:CampoNumerico id="codigo" validarObrigatorio="true" valorMinimo="0" 
+			top="46" width="80" x="137" validarTipo="{CampoNumerico.SHORT_POSITIVO}" />
+			
+		<componente:Rotulo text="Descrição *:" textAlign="left" top="72" left="10" />
+		<input:Texto id="descricao" x="137" y="72" width="420" maxChars="60"
+			validarObrigatorio="true" />
+	</validavel:CanvasValidavel>
+	<BarraBotoesFormularioCadastroView id="barraBotoes" />
+</FormularioCadastroView>

@@ -1,0 +1,742 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="FichaCadastral_SimplesPF" pageWidth="595" pageHeight="1130" whenNoDataType="AllSectionsNoDetail" columnWidth="575" leftMargin="10" rightMargin="10" topMargin="10" bottomMargin="10" uuid="a9a83061-5cbc-4a22-b9b2-ecff64fef2d5">
+	<property name="ireport.zoom" value="1.3310000000000008"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="322"/>
+	<parameter name="SUB_HEADER" class="net.sf.jasperreports.engine.JasperReport"/>
+	<parameter name="URL_LOGO" class="java.net.URL"/>
+	<parameter name="LABEL_FILTRO_DATA" class="java.lang.String"/>
+	<parameter name="NUM_COOPERATIVA" class="java.lang.Integer"/>
+	<parameter name="ID_INSTITUICAO" class="java.lang.Integer"/>
+	<parameter name="ID_UNIDADE_INST" class="java.lang.Integer"/>
+	<group name="FichaCadastralSimples">
+		<groupExpression><![CDATA[$V{PAGE_NUMBER}]]></groupExpression>
+		<groupHeader>
+			<band height="693">
+				<staticText>
+					<reportElement uuid="2437f147-4a08-4835-8cab-f157feeff865" x="0" y="15" width="441" height="25"/>
+					<box>
+						<topPen lineWidth="0.5" lineStyle="Solid"/>
+						<leftPen lineWidth="0.0" lineStyle="Solid"/>
+						<bottomPen lineWidth="0.5" lineStyle="Solid"/>
+						<rightPen lineWidth="0.5" lineStyle="Solid"/>
+					</box>
+					<textElement>
+						<font size="8" isBold="false"/>
+					</textElement>
+					<text><![CDATA[ Nome Completo]]></text>
+				</staticText>
+				<staticText>
+					<reportElement uuid="7f7d2b01-1139-43a0-88ba-b06e944707a0" mode="Transparent" x="0" y="0" width="575" height="15" backcolor="#CCCCCC"/>
+					<box leftPadding="4">
+						<pen lineWidth="0.75"/>
+						<topPen lineWidth="0.75"/>
+						<leftPen lineWidth="0.75"/>
+						<bottomPen lineWidth="0.75"/>
+						<rightPen lineWidth="0.75"/>
+					</box>
+					<textElement verticalAlignment="Middle">
+						<font fontName="Arial" size="11" isBold="true"/>
+					</textElement>
+					<text><![CDATA[DADOS CADASTRAIS]]></text>
+				</staticText>
+				<staticText>
+					<reportElement uuid="52e71faf-751b-46c7-bce0-b3b3420f667b" x="441" y="15" width="134" height="25"/>
+					<box>
+						<topPen lineWidth="0.5" lineStyle="Solid"/>
+						<leftPen lineWidth="0.5" lineStyle="Solid"/>
+						<bottomPen lineWidth="0.5" lineStyle="Solid"/>
+						<rightPen lineWidth="0.0" lineStyle="Solid"/>
+					</box>
+					<textElement>
+						<font size="8" isBold="false"/>
+					</textElement>
+					<text><![CDATA[ CPF]]></text>
+				</staticText>
+				<staticText>
+					<reportElement uuid="83ac3a4f-5f48-46ec-95f1-a6eea30af0a6" x="0" y="40" width="215" height="25"/>
+					<box>
+						<topPen lineWidth="0.5" lineStyle="Solid"/>
+						<leftPen lineWidth="0.0" lineStyle="Solid"/>
+						<bottomPen lineWidth="0.5" lineStyle="Solid"/>
+						<rightPen lineWidth="0.5" lineStyle="Solid"/>
+					</box>
+					<textElement>
+						<font size="8" isBold="false"/>
+					</textElement>
+					<text><![CDATA[ Documento]]></text>
+				</staticText>
+				<staticText>
+					<reportElement uuid="1bb1f90c-f9a4-4940-9c79-c9c1cd9e9cd9" x="521" y="40" width="54" height="25"/>
+					<box>
+						<topPen lineWidth="0.5" lineStyle="Solid"/>
+						<leftPen lineWidth="0.5" lineStyle="Solid"/>
+						<bottomPen lineWidth="0.5" lineStyle="Solid"/>
+						<rightPen lineWidth="0.0" lineStyle="Solid"/>
+					</box>
+					<textElement>
+						<font size="8" isBold="false"/>
+					</textElement>
+					<text><![CDATA[ UF]]></text>
+				</staticText>
+				<staticText>
+					<reportElement uuid="694dca2d-917a-47cf-8449-dade7b9767bf" x="422" y="40" width="99" height="25"/>
+					<box>
+						<topPen lineWidth="0.5" lineStyle="Solid"/>
+						<leftPen lineWidth="0.5" lineStyle="Solid"/>
+						<bottomPen lineWidth="0.5" lineStyle="Solid"/>
+						<rightPen lineWidth="0.5" lineStyle="Solid"/>
+					</box>
+					<textElement>
+						<font size="8" isBold="false"/>
+					</textElement>
+					<text><![CDATA[ Órgão]]></text>
+				</staticText>
+				<staticText>
+					<reportElement uuid="942c6628-7705-47f8-9b67-5c0a76921530" x="320" y="40" width="102" height="25"/>
+					<box>
+						<topPen lineWidth="0.5" lineStyle="Solid"/>
+						<leftPen lineWidth="0.5" lineStyle="Solid"/>
+						<bottomPen lineWidth="0.5" lineStyle="Solid"/>
+						<rightPen lineWidth="0.5" lineStyle="Solid"/>
+					</box>
+					<textElement>
+						<font size="8" isBold="false"/>
+					</textElement>
+					<text><![CDATA[ Emissão]]></text>
+				</staticText>
+				<staticText>
+					<reportElement uuid="330c5538-2337-449b-a5e3-99e74584d483" mode="Opaque" x="215" y="40" width="105" height="25"/>
+					<box>
+						<topPen lineWidth="0.5" lineStyle="Solid"/>
+						<leftPen lineWidth="0.5" lineStyle="Solid"/>
+						<bottomPen lineWidth="0.5" lineStyle="Solid"/>
+						<rightPen lineWidth="0.5" lineStyle="Solid"/>
+					</box>
+					<textElement>
+						<font size="8" isBold="false"/>
+					</textElement>
+					<text><![CDATA[ Número]]></text>
+				</staticText>
+				<staticText>
+					<reportElement uuid="7c82f3f7-e869-4956-b5bc-dc5466b0a260" x="0" y="65" width="575" height="25"/>
+					<box>
+						<topPen lineWidth="0.5" lineStyle="Solid"/>
+						<leftPen lineWidth="0.0" lineStyle="Solid"/>
+						<bottomPen lineWidth="0.5" lineStyle="Solid"/>
+						<rightPen lineWidth="0.0" lineStyle="Solid"/>
+					</box>
+					<textElement>
+						<font size="8" isBold="false"/>
+					</textElement>
+					<text><![CDATA[ Filiação]]></text>
+				</staticText>
+				<staticText>
+					<reportElement uuid="c29955f9-2cc3-4bca-8331-e2d2692b5cca" x="300" y="90" width="35" height="25"/>
+					<box>
+						<topPen lineWidth="0.25"/>
+						<leftPen lineWidth="0.25"/>
+						<bottomPen lineWidth="0.25"/>
+						<rightPen lineWidth="0.25"/>
+					</box>
+					<textElement>
+						<font size="8" isBold="false"/>
+					</textElement>
+					<text><![CDATA[ Sexo]]></text>
+				</staticText>
+				<staticText>
+					<reportElement uuid="d9b343e4-a088-47c0-8e44-e1c006850dfe" x="0" y="90" width="100" height="25"/>
+					<box>
+						<topPen lineWidth="0.5" lineStyle="Solid"/>
+						<leftPen lineWidth="0.0" lineStyle="Solid"/>
+						<bottomPen lineWidth="0.5" lineStyle="Solid"/>
+						<rightPen lineWidth="0.5" lineStyle="Solid"/>
+					</box>
+					<textElement>
+						<font size="8" isBold="false"/>
+					</textElement>
+					<text><![CDATA[ Nacionalidade]]></text>
+				</staticText>
+				<staticText>
+					<reportElement uuid="bb605f2e-d91d-4d52-ba51-6581e5ef5840" x="100" y="90" width="119" height="25"/>
+					<box>
+						<topPen lineWidth="0.25"/>
+						<leftPen lineWidth="0.25"/>
+						<bottomPen lineWidth="0.25"/>
+						<rightPen lineWidth="0.25"/>
+					</box>
+					<textElement>
+						<font size="8" isBold="false"/>
+					</textElement>
+					<text><![CDATA[ Naturalidade]]></text>
+				</staticText>
+				<staticText>
+					<reportElement uuid="05d2becf-992d-4824-b4b2-8c051dc0a57b" x="219" y="90" width="81" height="25"/>
+					<box>
+						<topPen lineWidth="0.25"/>
+						<leftPen lineWidth="0.25"/>
+						<bottomPen lineWidth="0.25"/>
+						<rightPen lineWidth="0.25"/>
+					</box>
+					<textElement>
+						<font size="8" isBold="false"/>
+					</textElement>
+					<text><![CDATA[ Nascimento]]></text>
+				</staticText>
+				<staticText>
+					<reportElement uuid="13986ebc-4536-4394-b629-aa5204c2ddc2" x="335" y="90" width="240" height="25"/>
+					<box>
+						<topPen lineWidth="0.25"/>
+						<leftPen lineWidth="0.25"/>
+						<bottomPen lineWidth="0.25"/>
+						<rightPen lineWidth="0.0"/>
+					</box>
+					<textElement>
+						<font size="8" isBold="false"/>
+					</textElement>
+					<text><![CDATA[ Profissão]]></text>
+				</staticText>
+				<staticText>
+					<reportElement uuid="1d3f31bf-8114-43ca-b9e3-4ff6e8268352" x="0" y="115" width="156" height="25"/>
+					<box>
+						<topPen lineWidth="0.5"/>
+						<rightPen lineWidth="0.0"/>
+					</box>
+					<textElement>
+						<font size="8" isBold="false"/>
+					</textElement>
+					<text><![CDATA[ Estado Civil]]></text>
+				</staticText>
+				<staticText>
+					<reportElement uuid="b88e5199-64eb-4a61-a828-629f487033b9" x="0" y="140" width="441" height="25"/>
+					<box>
+						<topPen lineWidth="0.5" lineStyle="Solid"/>
+						<leftPen lineWidth="0.0" lineStyle="Solid"/>
+						<bottomPen lineWidth="0.5" lineStyle="Solid"/>
+						<rightPen lineWidth="0.5" lineStyle="Solid"/>
+					</box>
+					<textElement>
+						<font size="8" isBold="false"/>
+					</textElement>
+					<text><![CDATA[ Responsável Legal]]></text>
+				</staticText>
+				<staticText>
+					<reportElement uuid="16b2bb17-0465-4313-aff6-f620e76dcbbd" x="441" y="140" width="134" height="25"/>
+					<box>
+						<topPen lineWidth="0.5" lineStyle="Solid"/>
+						<leftPen lineWidth="0.5" lineStyle="Solid"/>
+						<bottomPen lineWidth="0.5" lineStyle="Solid"/>
+						<rightPen lineWidth="0.0" lineStyle="Solid"/>
+					</box>
+					<textElement>
+						<font size="8" isBold="false"/>
+					</textElement>
+					<text><![CDATA[ CPF]]></text>
+				</staticText>
+				<staticText>
+					<reportElement uuid="28e7aaaa-a1be-4e22-9f5a-563a598d1fe1" x="0" y="165" width="326" height="25"/>
+					<box>
+						<topPen lineWidth="0.5" lineStyle="Solid"/>
+						<leftPen lineWidth="0.0" lineStyle="Solid"/>
+						<bottomPen lineWidth="0.5" lineStyle="Solid"/>
+						<rightPen lineWidth="0.5" lineStyle="Solid"/>
+					</box>
+					<textElement>
+						<font size="8" isBold="false"/>
+					</textElement>
+					<text><![CDATA[ Endereço Residencial]]></text>
+				</staticText>
+				<staticText>
+					<reportElement uuid="d7ce786a-da72-409f-bf20-54be289f578e" x="326" y="165" width="41" height="25"/>
+					<box>
+						<topPen lineWidth="0.5" lineStyle="Solid"/>
+						<leftPen lineWidth="0.5" lineStyle="Solid"/>
+						<bottomPen lineWidth="0.5" lineStyle="Solid"/>
+						<rightPen lineWidth="0.5" lineStyle="Solid"/>
+					</box>
+					<textElement>
+						<font size="8" isBold="false"/>
+					</textElement>
+					<text><![CDATA[ Número]]></text>
+				</staticText>
+				<staticText>
+					<reportElement uuid="ef3e0266-a216-48c1-886a-b9e7e0ffa338" x="0" y="190" width="134" height="25"/>
+					<box>
+						<topPen lineWidth="0.5"/>
+						<rightPen lineWidth="0.0"/>
+					</box>
+					<textElement>
+						<font size="8" isBold="false"/>
+					</textElement>
+					<text><![CDATA[ Bairro]]></text>
+				</staticText>
+				<staticText>
+					<reportElement uuid="4d42b2a1-9f40-4bc0-a317-8ce7e6847857" x="367" y="165" width="208" height="25"/>
+					<box>
+						<topPen lineWidth="0.5" lineStyle="Solid"/>
+						<leftPen lineWidth="0.5" lineStyle="Solid"/>
+						<bottomPen lineWidth="0.5" lineStyle="Solid"/>
+						<rightPen lineWidth="0.0" lineStyle="Solid"/>
+					</box>
+					<textElement>
+						<font size="8" isBold="false"/>
+					</textElement>
+					<text><![CDATA[ Complemento]]></text>
+				</staticText>
+				<staticText>
+					<reportElement uuid="ff29ec25-d417-45f2-86f7-03b22868ec0f" x="318" y="190" width="41" height="25"/>
+					<box>
+						<topPen lineWidth="0.5" lineStyle="Solid"/>
+						<leftPen lineWidth="0.5" lineStyle="Solid"/>
+						<bottomPen lineWidth="0.5" lineStyle="Solid"/>
+						<rightPen lineWidth="0.5" lineStyle="Solid"/>
+					</box>
+					<textElement>
+						<font size="8" isBold="false"/>
+					</textElement>
+					<text><![CDATA[ UF]]></text>
+				</staticText>
+				<staticText>
+					<reportElement uuid="2db96eab-b6f1-4e02-be46-292929365000" x="247" y="215" width="41" height="25"/>
+					<box>
+						<topPen lineWidth="0.5" lineStyle="Solid"/>
+						<leftPen lineWidth="0.5" lineStyle="Solid"/>
+						<bottomPen lineWidth="0.5" lineStyle="Solid"/>
+						<rightPen lineWidth="0.5" lineStyle="Solid"/>
+					</box>
+					<textElement>
+						<font size="8" isBold="false"/>
+					</textElement>
+					<text><![CDATA[ Número]]></text>
+				</staticText>
+				<staticText>
+					<reportElement uuid="8d39382b-0ae8-41ce-ac3f-7b2b220bb45c" x="288" y="215" width="287" height="25"/>
+					<box>
+						<topPen lineWidth="0.5" lineStyle="Solid"/>
+						<leftPen lineWidth="0.5" lineStyle="Solid"/>
+						<bottomPen lineWidth="0.5" lineStyle="Solid"/>
+						<rightPen lineWidth="0.0" lineStyle="Solid"/>
+					</box>
+					<textElement>
+						<font size="8" isBold="false"/>
+					</textElement>
+					<text><![CDATA[ Complemento]]></text>
+				</staticText>
+				<staticText>
+					<reportElement uuid="cc870279-d7b0-4189-b916-3857361b3d9b" x="0" y="240" width="134" height="25"/>
+					<box>
+						<rightPen lineWidth="0.0"/>
+					</box>
+					<textElement>
+						<font size="8" isBold="false"/>
+					</textElement>
+					<text><![CDATA[ Bairro]]></text>
+				</staticText>
+				<staticText>
+					<reportElement uuid="ad156f2f-51a5-4d4e-9a9f-f1b760ddc9a9" x="135" y="190" width="182" height="25"/>
+					<box>
+						<topPen lineWidth="0.5" lineStyle="Solid"/>
+						<leftPen lineWidth="0.5" lineStyle="Solid"/>
+						<bottomPen lineWidth="0.5" lineStyle="Solid"/>
+						<rightPen lineWidth="0.0" lineStyle="Solid"/>
+					</box>
+					<textElement>
+						<font size="8" isBold="false"/>
+					</textElement>
+					<text><![CDATA[ Município]]></text>
+				</staticText>
+				<staticText>
+					<reportElement uuid="3e3cdbc9-6263-4890-b0cb-6c18e5f8c329" x="359" y="190" width="100" height="25"/>
+					<box>
+						<topPen lineWidth="0.5" lineStyle="Solid"/>
+						<leftPen lineWidth="0.5" lineStyle="Solid"/>
+						<bottomPen lineWidth="0.5" lineStyle="Solid"/>
+						<rightPen lineWidth="0.5" lineStyle="Solid"/>
+					</box>
+					<textElement>
+						<font size="8" isBold="false"/>
+					</textElement>
+					<text><![CDATA[ CEP]]></text>
+				</staticText>
+				<staticText>
+					<reportElement uuid="05562114-17ad-4f47-8a50-349e8a9e5114" x="459" y="190" width="116" height="25"/>
+					<box>
+						<topPen lineWidth="0.5" lineStyle="Solid"/>
+						<leftPen lineWidth="0.5" lineStyle="Solid"/>
+						<bottomPen lineWidth="0.5" lineStyle="Solid"/>
+						<rightPen lineWidth="0.0" lineStyle="Solid"/>
+					</box>
+					<textElement>
+						<font size="8" isBold="false"/>
+					</textElement>
+					<text><![CDATA[ Telefone Residencial]]></text>
+				</staticText>
+				<staticText>
+					<reportElement uuid="9924f2d1-cbbb-4a8f-8bc2-f376270d45bc" x="0" y="215" width="247" height="25"/>
+					<box>
+						<topPen lineWidth="0.5" lineStyle="Solid"/>
+						<leftPen lineWidth="0.0" lineStyle="Solid"/>
+						<bottomPen lineWidth="0.5" lineStyle="Solid"/>
+						<rightPen lineWidth="0.5" lineStyle="Solid"/>
+					</box>
+					<textElement>
+						<font size="8" isBold="false"/>
+					</textElement>
+					<text><![CDATA[ Endereço Comercial]]></text>
+				</staticText>
+				<staticText>
+					<reportElement uuid="c2ce6650-3660-4d60-a11e-a4e6784b545f" x="334" y="240" width="41" height="25"/>
+					<box>
+						<topPen lineWidth="0.5" lineStyle="Solid"/>
+						<leftPen lineWidth="0.5" lineStyle="Solid"/>
+						<bottomPen lineWidth="0.5" lineStyle="Solid"/>
+						<rightPen lineWidth="0.5" lineStyle="Solid"/>
+					</box>
+					<textElement>
+						<font size="8" isBold="false"/>
+					</textElement>
+					<text><![CDATA[ UF]]></text>
+				</staticText>
+				<staticText>
+					<reportElement uuid="8f8ac20f-682a-4113-ad17-3d22496a733b" x="375" y="240" width="100" height="25"/>
+					<box>
+						<topPen lineWidth="0.5" lineStyle="Solid"/>
+						<leftPen lineWidth="0.5" lineStyle="Solid"/>
+						<bottomPen lineWidth="0.5" lineStyle="Solid"/>
+						<rightPen lineWidth="0.5" lineStyle="Solid"/>
+					</box>
+					<textElement>
+						<font size="8" isBold="false"/>
+					</textElement>
+					<text><![CDATA[ CEP]]></text>
+				</staticText>
+				<staticText>
+					<reportElement uuid="456864eb-34dc-476c-8d68-187bba73d52d" x="134" y="240" width="200" height="25"/>
+					<box>
+						<topPen lineWidth="0.5" lineStyle="Solid"/>
+						<leftPen lineWidth="0.5" lineStyle="Solid"/>
+						<bottomPen lineWidth="0.5" lineStyle="Solid"/>
+						<rightPen lineWidth="0.0" lineStyle="Solid"/>
+					</box>
+					<textElement>
+						<font size="8" isBold="false"/>
+					</textElement>
+					<text><![CDATA[ Município]]></text>
+				</staticText>
+				<staticText>
+					<reportElement uuid="7000d121-1514-4ba2-b09a-1e29055b74ac" x="475" y="240" width="100" height="25"/>
+					<box>
+						<topPen lineWidth="0.5" lineStyle="Solid"/>
+						<leftPen lineWidth="0.5" lineStyle="Solid"/>
+						<bottomPen lineWidth="0.5" lineStyle="Solid"/>
+						<rightPen lineWidth="0.0" lineStyle="Solid"/>
+					</box>
+					<textElement>
+						<font size="8" isBold="false"/>
+					</textElement>
+					<text><![CDATA[ Telefone Comercial]]></text>
+				</staticText>
+				<staticText>
+					<reportElement uuid="649b37c6-3411-4e23-af93-14f4717ef401" x="316" y="265" width="259" height="25"/>
+					<box>
+						<topPen lineWidth="0.5" lineStyle="Solid"/>
+						<leftPen lineWidth="0.5" lineStyle="Solid"/>
+						<bottomPen lineWidth="0.5" lineStyle="Solid"/>
+						<rightPen lineWidth="0.0" lineStyle="Solid"/>
+					</box>
+					<textElement>
+						<font size="8" isBold="false"/>
+					</textElement>
+					<text><![CDATA[ Valor do Patrimônio (R$)]]></text>
+				</staticText>
+				<staticText>
+					<reportElement uuid="ed65516b-36de-4f41-9151-becb5ea66a0d" x="0" y="290" width="195" height="35"/>
+					<box>
+						<topPen lineWidth="0.5" lineStyle="Solid"/>
+						<leftPen lineWidth="0.0" lineStyle="Solid"/>
+						<bottomPen lineWidth="0.5" lineStyle="Solid"/>
+						<rightPen lineWidth="0.5" lineStyle="Solid"/>
+					</box>
+					<textElement>
+						<font size="8" isBold="false"/>
+					</textElement>
+					<text><![CDATA[ Tipo de Referência Consultada]]></text>
+				</staticText>
+				<staticText>
+					<reportElement uuid="c61193b8-457c-4a9a-a110-ea6ef24ed8fc" x="388" y="290" width="187" height="35"/>
+					<box>
+						<topPen lineWidth="0.5" lineStyle="Solid"/>
+						<leftPen lineWidth="0.5" lineStyle="Solid"/>
+						<bottomPen lineWidth="0.5" lineStyle="Solid"/>
+						<rightPen lineWidth="0.0" lineStyle="Solid"/>
+					</box>
+					<textElement>
+						<font size="8" isBold="false"/>
+					</textElement>
+					<text><![CDATA[ Telefone]]></text>
+				</staticText>
+				<staticText>
+					<reportElement uuid="12aa45cf-295f-472a-8b8b-034482d1fc75" x="195" y="290" width="193" height="35"/>
+					<box>
+						<topPen lineWidth="0.5" lineStyle="Solid"/>
+						<leftPen lineWidth="0.5" lineStyle="Solid"/>
+						<bottomPen lineWidth="0.5" lineStyle="Solid"/>
+						<rightPen lineWidth="0.5" lineStyle="Solid"/>
+					</box>
+					<textElement>
+						<font size="8" isBold="false"/>
+					</textElement>
+					<text><![CDATA[ Nome/Razão Social]]></text>
+				</staticText>
+				<staticText>
+					<reportElement uuid="eb992901-a461-4b08-8484-2b3ea32d9ded" x="0" y="265" width="316" height="25"/>
+					<box>
+						<topPen lineWidth="0.5" lineStyle="Solid"/>
+						<leftPen lineWidth="0.0" lineStyle="Solid"/>
+						<bottomPen lineWidth="0.5" lineStyle="Solid"/>
+						<rightPen lineWidth="0.5" lineStyle="Solid"/>
+					</box>
+					<textElement>
+						<font size="8" isBold="false"/>
+					</textElement>
+					<text><![CDATA[ Renda Mensal (R$)]]></text>
+				</staticText>
+				<staticText>
+					<reportElement uuid="28f867dd-a9de-41e8-863d-5465751d30b2" x="0" y="325" width="575" height="15"/>
+					<box>
+						<topPen lineWidth="0.5" lineStyle="Solid"/>
+						<leftPen lineWidth="0.5" lineStyle="Solid"/>
+						<bottomPen lineWidth="0.5" lineStyle="Solid"/>
+						<rightPen lineWidth="0.5" lineStyle="Solid"/>
+					</box>
+					<textElement verticalAlignment="Middle">
+						<font fontName="Arial" size="11" isBold="true"/>
+					</textElement>
+					<text><![CDATA[ DECLARAÇÕES]]></text>
+				</staticText>
+				<staticText>
+					<reportElement uuid="1a533ec9-0546-45d9-aa0f-437b7f14cdcb" x="0" y="340" width="575" height="287"/>
+					<textElement textAlignment="Justified"/>
+					<text><![CDATA[Declaro que as informações prestadas são verdadeiras, responsabilizando-me civil e criminalmente por sua autenticidade. Estou ciente de que deverei comunicar toda e qualquer alteração em tais informações, inclusive, sem limitação, em relação a seus dados cadastrais e aos seus documentos comprobatórios, bem como sobre a revogação de mandatos, procurações e instruções, no prazo de dez dias. Se não houver comunicação por escrito sobre qualquer mudança, serão considerados como recebidos, para todos os fins, os avisos e as cartas enviados para o último endereço registrado.
+
+Declaro que a minha relação de negócios tem como propósito e natureza a realização de: movimentações financeiras em conta corrente e/ou conta de investimento e/ou conta de poupança; e/ou aplicações financeiras (ex.: RDC, fundos de investimento); e/ou empréstimos e financiamentos; e/ou utilização de cartão de crédito e/ou cartão pré-pago; e/ou operações com moeda estrangeira; e/ou contratação de seguros e/ou previdência e/ou títulos de capitalização.
+
+Declaro, ainda, que estou ciente de que:
+    a)o Sistema de Informações de Crédito (SCR), gerido pelo Banco Central do Brasil (BCB), tem por finalidades fornecer informações ao BCB para fins de supervisão do risco de crédito a que estão expostas as instituições financeiras e propiciar o intercâmbio de informações entre essas instituições com o objetivo de subsidiar decisões de crédito e de negócios;
+    b)poderei ter acesso aos dados constantes em meu nome no SCR por meio da Central de Atendimento ao Público do Banco Central do Brasil (CAP);
+    c)pedidos de correções, de exclusões e de manifestações de discordância quanto às informações constantes do SCR deverão ser dirigidas ao BCB ou à instituição responsável pela remessa das informações, por meio de requerimento escrito e fundamentado, ou, quando for o caso, pela respectiva decisão judicial;
+    d)a consulta sobre qualquer informação ao SCR depende de minha prévia autorização.
+
+
+]]></text>
+				</staticText>
+				<break>
+					<reportElement uuid="355252a8-ffd9-4fca-bef5-433400757d4c" x="0" y="632" width="571" height="1"/>
+				</break>
+				<staticText>
+					<reportElement uuid="465be63f-9b5b-4f1d-a44b-7ad5e5268449" x="156" y="115" width="285" height="25"/>
+					<box>
+						<topPen lineWidth="0.5" lineStyle="Solid"/>
+						<leftPen lineWidth="0.5" lineStyle="Solid"/>
+						<bottomPen lineWidth="0.5" lineStyle="Solid"/>
+						<rightPen lineWidth="0.0" lineStyle="Solid"/>
+					</box>
+					<textElement>
+						<font size="8" isBold="false"/>
+					</textElement>
+					<text><![CDATA[Cônjuge/Companheiro]]></text>
+				</staticText>
+				<staticText>
+					<reportElement uuid="47caab30-16c9-4f56-b317-e2c73e978e18" x="441" y="115" width="134" height="25"/>
+					<box>
+						<topPen lineWidth="0.5" lineStyle="Solid"/>
+						<leftPen lineWidth="0.5" lineStyle="Solid"/>
+						<bottomPen lineWidth="0.5" lineStyle="Solid"/>
+						<rightPen lineWidth="0.0" lineStyle="Solid"/>
+					</box>
+					<textElement>
+						<font size="8" isBold="false"/>
+					</textElement>
+					<text><![CDATA[ CPF]]></text>
+				</staticText>
+			</band>
+		</groupHeader>
+		<groupFooter>
+			<band height="425">
+				<staticText>
+					<reportElement uuid="660d6d12-8080-4469-aaee-b9d30b87930e" positionType="Float" x="0" y="0" width="575" height="15"/>
+					<box leftPadding="3">
+						<topPen lineWidth="0.5"/>
+						<leftPen lineWidth="0.5"/>
+						<bottomPen lineWidth="0.5"/>
+						<rightPen lineWidth="0.5"/>
+					</box>
+					<textElement>
+						<font fontName="Arial" size="11" isBold="true"/>
+					</textElement>
+					<text><![CDATA[ AUTORIZAÇÕES]]></text>
+				</staticText>
+				<staticText>
+					<reportElement uuid="9d69e5d1-9c4d-4453-b4e3-c04efb89f4f9" x="0" y="15" width="575" height="46"/>
+					<box leftPadding="3">
+						<topPen lineWidth="0.0"/>
+						<leftPen lineWidth="0.0"/>
+						<bottomPen lineWidth="0.0"/>
+						<rightPen lineWidth="0.0"/>
+					</box>
+					<textElement textAlignment="Justified" markup="none">
+						<font fontName="Arial"/>
+					</textElement>
+					<text><![CDATA[Autorizo que os meus dados cadastrais, patrimoniais e financeiros informados a qualquer das entidades do Sicoob - Sistema de Cooperativas de Crédito do Brasil possam ser compartilhados entre todas as entidades desse Sistema, inclusive Fundação Sicoob de Previdência Privada, Bancoob DTVM Ltda e outras empresas com participação direta ou indireta de qualquer entidade Sicoob.
+
+
+]]></text>
+				</staticText>
+				<staticText>
+					<reportElement uuid="61adf12e-3002-4aa4-b773-0efd11f5a27b" x="0" y="63" width="573" height="49"/>
+					<box leftPadding="3">
+						<topPen lineWidth="0.0"/>
+						<leftPen lineWidth="0.0"/>
+						<bottomPen lineWidth="0.0"/>
+						<rightPen lineWidth="0.0"/>
+					</box>
+					<textElement textAlignment="Justified">
+						<font fontName="Arial"/>
+					</textElement>
+					<text><![CDATA[Autorizo tais entidades a consultar e registrar no SCR ou em qualquer sistema de proteção ao crédito eventuais informações existentes a seu respeito, inclusive sobre operações de crédito e aquelas realizadas no mercado de câmbio.   ]]></text>
+				</staticText>
+				<staticText>
+					<reportElement uuid="d9305d15-c0c0-4106-9935-7da44b4a6285" x="0" y="123" width="200" height="20"/>
+					<box>
+						<leftPen lineWidth="0.5" lineStyle="Solid"/>
+						<bottomPen lineWidth="0.5" lineStyle="Solid"/>
+					</box>
+					<textElement/>
+					<text><![CDATA[ Local]]></text>
+				</staticText>
+				<staticText>
+					<reportElement uuid="bd38b754-3328-498e-afc8-9bdcd162a99b" x="200" y="123" width="100" height="20"/>
+					<box>
+						<leftPen lineWidth="0.5" lineStyle="Solid"/>
+						<bottomPen lineWidth="0.5" lineStyle="Solid"/>
+					</box>
+					<textElement/>
+					<text><![CDATA[ Data]]></text>
+				</staticText>
+				<line>
+					<reportElement uuid="c3638634-8658-44ef-899a-e7d6a6d093b2" x="142" y="194" width="269" height="1"/>
+				</line>
+				<staticText>
+					<reportElement uuid="f53020d5-94eb-4efa-820a-bb1a584694ad" x="0" y="225" width="575" height="15"/>
+					<box>
+						<topPen lineWidth="0.5" lineStyle="Solid"/>
+						<leftPen lineWidth="0.5" lineStyle="Solid"/>
+						<bottomPen lineWidth="0.5" lineStyle="Solid"/>
+						<rightPen lineWidth="0.5" lineStyle="Solid"/>
+					</box>
+					<textElement verticalAlignment="Middle">
+						<font fontName="Arial" size="11" isBold="true"/>
+					</textElement>
+					<text><![CDATA[ USO DA(O) COOPERATIVA/BANCOOB]]></text>
+				</staticText>
+				<staticText>
+					<reportElement uuid="c42993aa-8816-4de7-b8b9-37da79d25f9b" x="0" y="240" width="575" height="54"/>
+					<textElement/>
+					<text><![CDATA[RESPONZABILIZAMO-NOS, NOS TERMOS DA LEI, PELA EXATIDÃO DAS INFORMAÇÕES PRESTADAS, À VISTA DOS ORIGINAIS DOS DOCUMENTOS DE IDENTIFICAÇÃO E COMPROBATÓRIOS DOS DEMAIS ELEMENTOS DE INFORMAÇÕES APRESENTADOS.]]></text>
+				</staticText>
+				<staticText>
+					<reportElement uuid="41ba0b66-d31f-46a4-9939-c7f1f95fc84c" x="200" y="294" width="116" height="20"/>
+					<box>
+						<leftPen lineWidth="0.5" lineStyle="Solid"/>
+						<bottomPen lineWidth="0.5" lineStyle="Solid"/>
+					</box>
+					<textElement/>
+					<text><![CDATA[ Data]]></text>
+				</staticText>
+				<staticText>
+					<reportElement uuid="0b0f593c-e46f-4ebb-974f-ac16d9adc9ab" x="0" y="294" width="200" height="20"/>
+					<box>
+						<leftPen lineWidth="0.5" lineStyle="Solid"/>
+						<bottomPen lineWidth="0.5" lineStyle="Solid"/>
+					</box>
+					<textElement/>
+					<text><![CDATA[ Local]]></text>
+				</staticText>
+				<staticText>
+					<reportElement uuid="d3c1a970-9dd8-4f70-8bac-fced2a2bc035" x="0" y="328" width="268" height="37"/>
+					<box>
+						<leftPen lineWidth="0.5" lineStyle="Solid"/>
+						<bottomPen lineWidth="0.5" lineStyle="Solid"/>
+					</box>
+					<textElement>
+						<font size="8"/>
+					</textElement>
+					<text><![CDATA[ Funcionário responsável pelo atendimento (carimbo e assinatura)]]></text>
+				</staticText>
+				<staticText>
+					<reportElement uuid="9bfb3e01-317b-4625-ad80-9cbe1a5afc57" x="288" y="328" width="287" height="37"/>
+					<box>
+						<leftPen lineWidth="0.5" lineStyle="Solid"/>
+						<bottomPen lineWidth="0.5" lineStyle="Solid"/>
+					</box>
+					<textElement>
+						<font size="8"/>
+					</textElement>
+					<text><![CDATA[ Gerente responsável (carimbo e assinatura)]]></text>
+				</staticText>
+			</band>
+		</groupFooter>
+	</group>
+	<title>
+		<band height="84" splitType="Stretch">
+			<subreport>
+				<reportElement uuid="6aa273cc-5ec9-4efe-9440-259ab7b910e0" x="0" y="0" width="575" height="80"/>
+				<subreportParameter name="ID_INSTITUICAO">
+					<subreportParameterExpression><![CDATA[$P{ID_INSTITUICAO}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="NUM_COOPERATIVA">
+					<subreportParameterExpression><![CDATA[$P{NUM_COOPERATIVA}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="SUB_HEADER">
+					<subreportParameterExpression><![CDATA[$P{SUB_HEADER}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="LABEL_FILTRO_DATA">
+					<subreportParameterExpression><![CDATA[$P{LABEL_FILTRO_DATA}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="URL_LOGO">
+					<subreportParameterExpression><![CDATA[$P{URL_LOGO}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="ID_UNIDADE_INST">
+					<subreportParameterExpression><![CDATA[$P{ID_UNIDADE_INST}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportExpression><![CDATA[$P{SUB_HEADER}]]></subreportExpression>
+			</subreport>
+		</band>
+	</title>
+	<pageFooter>
+		<band height="18" splitType="Stretch">
+			<textField>
+				<reportElement uuid="551b02d7-4bbd-4f92-9856-7a838f5275d9" x="496" y="0" width="36" height="17"/>
+				<box>
+					<topPen lineWidth="0.0"/>
+					<leftPen lineWidth="0.0"/>
+					<bottomPen lineWidth="0.0"/>
+					<rightPen lineWidth="0.0"/>
+				</box>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression><![CDATA[$V{PAGE_NUMBER}+" /"]]></textFieldExpression>
+			</textField>
+			<textField evaluationTime="Report">
+				<reportElement uuid="818b6914-a4ab-4890-89a1-257aa25b7466" x="535" y="0" width="40" height="17"/>
+				<box>
+					<topPen lineWidth="0.0"/>
+					<leftPen lineWidth="0.0"/>
+					<bottomPen lineWidth="0.0"/>
+					<rightPen lineWidth="0.0"/>
+				</box>
+				<textElement/>
+				<textFieldExpression><![CDATA[" " + $V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageFooter>
+</jasperReport>

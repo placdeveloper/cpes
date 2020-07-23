@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="utf-8"?>
+<containers:HBoxBancoob xmlns:mx="http://www.adobe.com/2006/mxml" width="100%"
+	implements="mx.controls.listClasses.IDropInListItemRenderer"
+   	height="100%" horizontalAlign="center" creationComplete="init()" 
+	xmlns:componentes="br.com.bancoob.componentes.*" 
+	verticalScrollPolicy="off" horizontalScrollPolicy="off"
+	xmlns:containers="br.com.bancoob.componentes.containers.*">
+		
+	<mx:Script>
+		<![CDATA[
+			import br.com.sicoob.capes.monitoracaoAtualizacaoCadastral.abas.abaProcessadasComErro;
+			import mx.controls.listClasses.BaseListData;
+			import mx.controls.AdvancedDataGrid;
+			import mx.controls.advancedDataGridClasses.AdvancedDataGridListData;
+			import br.com.bancoob.sisbr.componentes.pti.ObjetoEvent;
+			import br.com.sicoob.capes.monitoracaoAtualizacaoCadastral.eventos.ReprocessarEvent;
+			import mx.events.FlexEvent;
+			import br.com.bancoob.componentes.Alerta;
+			import mx.core.Application;
+			import br.com.sicoob.capes.monitoracaoAtualizacaoCadastral.PainelDetalhe;
+			import br.com.bancoob.componentes.eventos.EventJanela;
+			import br.com.bancoob.componentes.containers.Janela;
+			import br.com.sicoob.capes.monitoracaoAtualizacaoCadastral.vo.MensagemReplicacaoVO;
+			   
+			private var janela:Janela;
+			private var painelDetalhe : PainelDetalhe;
+   	
+		    [Bindable("dataChange")]
+		    private var _listData:BaseListData;
+		    
+		    public function get listData():BaseListData {
+		      return _listData;
+		    }
+		    public function set listData(value:BaseListData):void {
+		      _listData = value;
+		    }
+		
+			public function init():void{
+				btnVisualizar.addEventListener(MouseEvent.CLICK, exibirDetalhes);
+				btnReprocessar.addEventListener(MouseEvent.CLICK, onClickReprocessar);
+			}
+			
+			private function onClickReprocessar(event : MouseEvent = null):void{
+		   		var myListData:AdvancedDataGridListData = AdvancedDataGridListData(this.listData);
+				var adg:AdvancedDataGrid = AdvancedDataGrid(myListData.owner);
+				adg.dispatchEvent(new ReprocessarEvent(this.data as MensagemReplicacaoVO));
+			}
+			
+			private  function exibirDetalhes(evt:MouseEvent):void{
+ 				if (this.janela == null) {
+ 					this.painelDetalhe = new PainelDetalhe();
+					this.janela = new Janela();
+					this.janela.title = "VISUALIZAÇÃO";
+					this.janela.addEventListener(KeyboardEvent.KEY_DOWN, janelaOnKeyDown);
+					this.janela.addEventListener(Janela.FECHAR_JANELA, fecharJanela);
+					this.janela.addChild(this.painelDetalhe);
+				}
+				this.painelDetalhe.conteudo.text = data.conteudoMensagem;
+				this.painelDetalhe.erro.text = data.erro;
+				this.painelDetalhe.entidadeCadastro.text = data.entidadeCadastro;
+				this.painelDetalhe.btCopiarErro.enabled = (data.erro != null);
+				this.janela.abrir(DisplayObject(Application.application),true);
+			}
+						
+			private function janelaOnKeyDown(event : KeyboardEvent):void{
+				switch(event.keyCode){
+					case Keyboard.ESCAPE:
+						event.currentTarget.fecharJanela();					
+					break;
+				}
+			}
+
+			protected function fecharJanela(event : EventJanela) : void {
+				this.painelDetalhe.conteudo.text = null;
+				this.painelDetalhe.erro.text = null;
+				this.painelDetalhe.entidadeCadastro.text = null;
+			}
+			
+			public override function set data(value:Object):void {
+				super.data = value;
+			}
+		]]>
+	</mx:Script>
+	
+ 	<componentes:Botao id="btnVisualizar" toolTip="Detalhes" styleName="botaoCrudProcurarPeq" 
+ 		paddingBottom="0" paddingLeft="0" paddingRight="0" paddingTop="0" />
+ 	<componentes:Botao id="btnReprocessar" toolTip="Reprocessar" styleName="botaoReprocessarPeq" 
+ 		paddingBottom="0" paddingLeft="0" paddingRight="0" paddingTop="0" />
+</containers:HBoxBancoob>

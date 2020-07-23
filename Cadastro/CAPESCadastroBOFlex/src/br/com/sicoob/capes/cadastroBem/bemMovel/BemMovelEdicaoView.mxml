@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FormularioCadastroView xmlns="br.com.bancoob.componentes.cadastro.*"
+						xmlns:mx="http://www.adobe.com/2006/mxml"
+						xmlns:validaveis="br.com.bancoob.componentes.containers.validaveis.*"
+						xmlns:navegacao="br.com.bancoob.componentes.navegacao.*"
+						xmlns:servico="br.com.bancoob.util.servico.*" 
+						xmlns:aba="br.com.sicoob.capes.cadastroBem.bemMovel.abas.*"
+						xmlns:abaInterna="br.com.sicoob.capes.cadastroBem.*"
+						width="780" height="650" layout="vertical" >
+	
+	<navegacao:Tab id="navegacao" width="100%" height="100%">
+		<aba:DadosBasicosMovel id="abaDadosBasicos" name="abaDadosBasicos" label="Simples" />
+		<aba:DadosAvancadosMovel id="abaDadosAvancados" name="abaDadosAvancados" label="Avançado" enabled="false" />
+		<aba:DadosAvaliacaoMovel id="abaDadosAvaliacao" name="abaDadosAvaliacao" label="Avaliação" enabled="false" />
+		<abaInterna:AbaProprietarios id="abaProprietarios" name="abaProprietarios" label="Proprietários" />
+		<abaInterna:AbaDocumentos id="abaDocumentos" name="abaDocumentos" label="Documentos" />
+	</navegacao:Tab>
+	
+	<BarraBotoesFormularioCadastroView id="barraBotoes" bottom="0" right="10" width="100%" />
+	
+	<servicoInclusao>
+		<servico:ServicoJava id="incluirBemMovel" source="br.com.sicoob.capes.cadastro.fachada.bem.BemMovelFachada" bloquearOperacao="true" mensagemEspera="Salvando dados..." />
+	</servicoInclusao>
+	
+	<servicoEdicao>
+		<servico:ServicoJava id="alterarBemMovel" source="br.com.sicoob.capes.cadastro.fachada.bem.BemMovelFachada" bloquearOperacao="true" mensagemEspera="Salvando dados..." />
+	</servicoEdicao>
+
+</FormularioCadastroView>

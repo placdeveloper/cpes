@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<bancoobValidaveis:ModuloValidavel xmlns:mx="http://www.adobe.com/2006/mxml"
+			xmlns:bancoobInput="br.com.bancoob.componentes.input.*"
+			xmlns:bancoob="br.com.bancoob.componentes.*"
+			xmlns:procurarPessoa="br.com.sicoob.capes.corporativo.componentes.procurarPessoa.*"
+			xmlns:barra="br.com.sicoob.capes.cadastrarBem.abas.*"
+			xmlns:campos="br.com.bancoob.componentes.campos.*"
+			xmlns:navegacao="br.com.bancoob.componentes.navegacao.*"
+			xmlns:aba="br.com.sicoob.capes.cadastrarBem.abas.*"
+			xmlns:bancoobValidaveis="br.com.bancoob.componentes.containers.validaveis.*"
+	 		width="500" height="310" layout="absolute" styleName="ModuloSemEstilo">
+
+	<bancoob:Rotulo x="10" y="7" text="Matrícula/Registro:"/>
+	<bancoobInput:Texto x="133" y="2" width="350" id="matricula" validarObrigatorio="true" tabIndex="1" maxChars="80"/>
+
+	<bancoob:Rotulo x="10" y="37" text="Livro:"/>
+	<bancoobInput:Texto x="133" y="32" width="350" id="livro" validarObrigatorio="true" tabIndex="2" maxChars="40"/>
+
+	<bancoob:Rotulo x="10" y="67" text="Folha:"/>
+	<bancoobInput:Texto x="133" y="62" width="100" id="folha" validarObrigatorio="true" tabIndex="3" maxChars="40"/>
+
+	<bancoob:Rotulo x="10" y="97" text="ITR:"/>
+	<bancoobInput:Texto x="133" y="92" id="itr" tabIndex="4" maxChars="18"/>
+
+	<bancoob:Rotulo x="10" y="127" text="Incra:"/>
+	<bancoobInput:Texto x="133" y="122" width="350" id="incra" tabIndex="5" maxChars="20"/>
+
+	<bancoob:Rotulo x="10" y="157" text="Qtd. Área:"/>
+	<campos:CampoNumerico id="qtdArea" x="133" y="152" width="350" valorMinimo="0.000001" valorMaximo="9999999.999999" casasDecimais="6" permitirValoreNegativos="false" maxChars="13" validarObrigatorio="true" tabIndex="6" />
+
+	<bancoob:Rotulo x="10" y="187" text="Data Posse na Matrícula:"/>
+	<campos:CampoData x="133" y="182" id="dataPosse" tabIndex="7" dataDefault="{null}" />
+	
+	<bancoob:Rotulo x="10" y="217" text="Observação:"/>
+	<bancoobInput:TextoArea x="133" y="212" width="262" id="observacao" toolTip="Observação do Registro." 
+		tabIndex="8" maxChars="1000"/>	
+
+	<barra:barraBotoesPopUpView id="barraBotoesPopup" x="133" y="277"/>
+	
+</bancoobValidaveis:ModuloValidavel>

@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<bancoobValidaveis:ModuloValidavel xmlns:mx="http://www.adobe.com/2006/mxml"
+								   xmlns:bancoobValidaveis="br.com.bancoob.componentes.containers.validaveis.*"
+								   xmlns:navegacao="br.com.bancoob.componentes.navegacao.*"
+								   xmlns:namespace="http://namespace"
+								   width="100%" height="100%" layout="absolute"
+								   xmlns:abas="br.com.sicoob.capes.utils.autorizacao.abas.*" 
+								   styleName="ModuloSemEstilo" verticalScrollPolicy="auto">
+	<mx:Script>
+		<![CDATA[
+			import br.com.sicoob.capes.comum.enums.TipoAutorizacaoEnum;
+		]]>
+	</mx:Script>
+	
+	<navegacao:Tab x="0" y="0" width="100%" height="100%" id="navegacao">
+		<mx:Canvas width="100%" height="100%" label="Informações">
+
+			<bancoobValidaveis:ModuloValidavel xmlns:mx="http://www.adobe.com/2006/mxml"
+						xmlns:bancoobInput="br.com.bancoob.componentes.input.*"
+						xmlns:bancoob="br.com.bancoob.componentes.*"
+						xmlns:bancoobValidaveis="br.com.bancoob.componentes.containers.validaveis.*"
+				 		width="100%" height="100%" layout="absolute" styleName="ModuloSemEstilo" verticalScrollPolicy="auto">
+			
+						<mx:Label x="27" y="6" text="PERFIL TRIBUTÁRIO" fontWeight="bold" fontFamily="ArialEmbedded" alpha=".8"/>
+						<mx:Image y="12" source="br/com/bancoob/imagens/imgsTelas/linha.swf" scaleContent="false" left="153" right="10"/>
+						<mx:Image x="7" y="5" source="br/com/bancoob/imagens/icos/apps_16.png" alpha=".5"/>
+					
+						<bancoob:Rotulo x="10" y="37" text="Data Cadastro:"/>	
+						<bancoobInput:Data x="133" y="34" width="100" id="dataCadastro" tabIndex="1" enabled="false" />
+					
+						<bancoob:Rotulo x="10" y="67" text="IRRF:"/>
+						
+						<bancoobInput:RadioGrupoBancoob id="grupoIrrf" />
+						<bancoobInput:Radio  x="133" y="64" id="irrfSim" label="Sim" groupName="grupoIrrf" tabIndex="2"/>
+						<bancoobInput:Radio  x="200" y="64" id="irrfNao" label="Não" groupName="grupoIrrf" tabIndex="3"/>
+					
+						<bancoob:Rotulo x="10" y="97" text="IOF:"/>
+						
+						<bancoobInput:RadioGrupoBancoob id="grupoIof" />
+						<bancoobInput:Radio  x="133" y="94" id="iofSim" label="Sim" groupName="grupoIof" tabIndex="4"/>
+						<bancoobInput:Radio  x="200" y="94" id="iofNao" label="Não" groupName="grupoIof" tabIndex="5"/>
+<!--					
+						<bancoob:Rotulo x="10" y="127" text="CPMF:"/>
+						
+						<bancoobInput:RadioGrupoBancoob id="grupoCpmf" />
+						<bancoobInput:Radio  x="133" y="124" id="cpmfSim" label="Sim" groupName="grupoCpmf" tabIndex="6"/>
+						<bancoobInput:Radio  x="200" y="124" id="cpmfNao" label="Não" groupName="grupoCpmf" tabIndex="7"/>
+-->				
+			</bancoobValidaveis:ModuloValidavel>
+		</mx:Canvas>
+		
+		<abas:abaUploadGed id="abaDocumentos" label="Documentos" _siglaClasseDocumento="{TipoAutorizacaoEnum.TRIBUTACAO.name}" />
+		
+	</navegacao:Tab>
+
+</bancoobValidaveis:ModuloValidavel>

@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ModuloValidavel xmlns="br.com.bancoob.componentes.containers.validaveis.*"																								
+				 xmlns:centraisSingulares="br.com.sicoob.capes.comum.componentes.instituicao.*"	
+				 xmlns:componentes="br.com.bancoob.componentes.*"	
+				 xmlns:containers="br.com.bancoob.componentes.containers.*"	
+				 xmlns:input="br.com.bancoob.componentes.input.*"	
+				 xmlns:mx="http://www.adobe.com/2006/mxml"	
+				 xmlns:procurarPessoa="br.com.sicoob.capes.corporativo.componentes.procurarPessoa.*"	
+				 xmlns:titulo="br.com.bancoob.componentes.titulo.*"	
+				 width="480" height="410" layout="absolute">
+	<mx:Script>
+		<![CDATA[
+			import br.com.sicoob.capes.corporativo.componentes.validacaoCadastral.ValidacaoCadastral;
+		]]>
+	</mx:Script>
+	
+	<componentes:Rotulo x="10" y="10" text="Tipo relatório: "/>
+	<input:RadioGrupoBancoob id="grupoTipo" selectedValue="Analitico" />
+	<input:Radio x="90" y="10" label="Analítico" groupName="grupoTipo" value="{ValidacaoCadastral.TIPO_RELATORIO_ANALITICO}" selected="true" />
+	<input:Radio x="170" y="10" label="Sintético" groupName="grupoTipo" value="{ValidacaoCadastral.TIPO_RELATORIO_SINTETICO}" />
+	
+	<mx:Canvas id="containerInstituicao" visible="true" height="170" width="480" verticalScrollPolicy="off" horizontalScrollPolicy="off" x="0" y="40">
+		<titulo:SubtituloView x="0" y="0" width="480" texto="INSTITUIÇÃO" />	
+		<centraisSingulares:CentraisSingulares id="componenteCentraisSingulares" x="10" y="25" tamanhoCombos="380" utilizarGerentes="true" utilizarNucleos="true" utilizarUnidades="true" />
+	</mx:Canvas>
+	
+	<mx:Canvas id="containerFiltro" visible="true" height="170" width="480" verticalScrollPolicy="off" horizontalScrollPolicy="off" x="0" y="210">
+		<titulo:SubtituloView x="0" y="0" width="480" texto="FILTROS" />
+		
+		<componentes:Rotulo x="10" y="25" text="CPF / CNPJ: "/>
+		<procurarPessoa:ProcurarPessoaCAPES x="90" y="23" id="campoCpfCnpj" toolTip="CPF/CNPJ de identificação da Pessoa e respectivo nome." selecaoAutomaticaDestino="false" />
+		
+		<componentes:Rotulo x="10" y="53" text="Funcionalidade: "/>
+		<input:Combo id="comboFuncionalidade" x="90" y="51" width="380" labelField="descricao" inserirItemOpcional="true" labelItemOpcional="TODOS" editable="false" />
+		
+		<componentes:Rotulo x="10" y="81" text="Mensagem: "/>
+		<input:Combo x="90" y="79" width="380" id="comboTipoErro" labelField="mensagemErro" inserirItemOpcional="true" labelItemOpcional="TODOS" editable="false" />
+		
+		<componentes:Rotulo x="10" y="109" text="Tipo restrição: "/>
+		<input:Combo x="90" y="107" width="380" id="comboRestricao"  labelField="descricao" inserirItemOpcional="true" labelItemOpcional="TODOS" editable="false" />
+	</mx:Canvas>
+	
+	<titulo:LinhaView id="linha" y="355" width="100%"/>
+	
+	<containers:HBoxBancoob height="36" width="480" bottom="10" horizontalAlign="right" horizontalGap="8" verticalAlign="middle" right="0">
+		<componentes:Botao id="botaoPesquisar" label="Ok" width="86"/>
+		<componentes:Botao id="botaoLimpar" label="Limpar" width="86"/>
+		<componentes:Botao id="botaoFechar" label="Fechar" width="86"/>
+	</containers:HBoxBancoob>
+	
+</ModuloValidavel>

@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="utf-8"?>
+<bancoobValidaveis:ModuloValidavel 
+	xmlns:mx="http://www.adobe.com/2006/mxml"
+	xmlns:bancoobInput="br.com.bancoob.componentes.input.*"
+	xmlns:bancoob="br.com.bancoob.componentes.*"
+	xmlns:campos="br.com.bancoob.componentes.campos.*"
+	xmlns:bancoobValidaveis="br.com.bancoob.componentes.containers.validaveis.*"
+	xmlns:containers="br.com.bancoob.componentes.containers.*"
+	xmlns:titulo="br.com.bancoob.componentes.titulo.*"
+ 	width="100%"  
+ 	height="100%" 
+ 	layout="vertical" 
+ 	styleName="ModuloSemEstilo" 
+ 	verticalScrollPolicy="auto">
+	
+	<mx:Script>
+		<![CDATA[
+			[Bindable]
+			[Embed ("br/com/bancoob/imagens/icos/apps_16.png")]
+			private var caminhoIcone_apps_16:Class;
+		]]>
+	</mx:Script>
+
+	<titulo:SubtituloView width="100%" caminhoIcone="{caminhoIcone_apps_16}" texto="DADOS DO CLIENTE" />
+	
+	<containers:HBoxBancoob width="100%">
+		<containers:VBoxBancoob>
+			<bancoob:Rotulo text="Categoria do Cadastro:" height="22" />
+			<bancoob:Rotulo text="Data do Cadastro:" height="22" />
+			<bancoob:Rotulo id="rotuloDataHoraInicio" text="Data da última alteração:" height="22" />
+			<bancoob:Rotulo id="rotuloUsuarioAlteracao" text="Usuário da última alteração:" height="22" />
+			<bancoob:Rotulo text="Unidade:" height="22" />
+			<bancoob:Rotulo text="Núcleo:" height="22" />
+			<bancoob:Rotulo text="Gerente Responsável:" height="22" />
+			<bancoob:Rotulo text="Perfil Tarifário:" height="22" />
+			<bancoob:Rotulo text="Emite Aviso de Lançamento:" height="22" />
+			<bancoob:Rotulo text="Contrapartes Conectadas:" height="22" />
+			<bancoob:Rotulo text="Parecer Gerência/Diretoria:" height="22" />
+		</containers:VBoxBancoob>
+		
+		<containers:VBoxBancoob width="55%" y="0">
+			<bancoob:Rotulo id="categoriaCadastro" height="22" />
+			<campos:CampoData id="dataCadastro" enabled="false" visible="false" height="22" />
+			<campos:CampoData id="dataHoraInicio" enabled="false" visible="false" height="22" />
+			<bancoob:Rotulo id="usuarioAlteracao" height="22" />
+			
+			<bancoobInput:Combo id="unidadeIntitucional" width="400" height="22" labelField="codigoDescricao" inserirItemOpcional="true" labelItemOpcional="SELECIONE" validarObrigatorio="true"/>
+			<bancoobInput:Combo id="nucleo" width="400" height="22" labelField="descricao" inserirItemOpcional="true" labelItemOpcional="SELECIONE" validarObrigatorio="true"/>
+			<bancoobInput:Combo id="responsavel" width="400" height="22" inserirItemOpcional="true" labelItemOpcional="SELECIONE" validarObrigatorio="true"/>
+			<bancoobInput:Combo id="perfilTarifario" width="400" height="22" labelField="codigoDescricao" inserirItemOpcional="true" labelItemOpcional="SELECIONE" validarObrigatorio="true"/>
+			
+			<bancoobInput:Check id="emiteAviso" height="22" />
+			<bancoob:Rotulo id="rotuloGrupoEconomico" height="22" />
+			<bancoobInput:TextoArea id="parecer" height="50" width="400" maxChars="200"/>
+		</containers:VBoxBancoob>
+	</containers:HBoxBancoob>
+	
+	<titulo:SubtituloView width="100%" caminhoIcone="{caminhoIcone_apps_16}" texto="TRIBUTAÇÃO" />
+	
+	<containers:HBoxBancoob width="100%">
+		<containers:VBoxBancoob >
+			<bancoob:Rotulo height="22" text="Cobrar IRRF:"/>
+			<bancoob:Rotulo height="22" text="Cobrar IOF:"/>
+		</containers:VBoxBancoob>
+		
+		<containers:VBoxBancoob width="45%">
+			<bancoob:Rotulo height="22" id="rotuloIRRF" />
+			<bancoob:Rotulo height="22" id="rotuloIOF" />
+		</containers:VBoxBancoob>
+	</containers:HBoxBancoob>
+	
+	<bancoobValidaveis:ModuloValidavel id="moduloRisco" width="100%" height="200" layout="absolute" styleName="ModuloSemEstilo" visible="false">
+		<titulo:SubtituloView x="0" y="0" texto="RISCO" caminhoIcone="{null}" />
+
+		<bancoob:Rotulo x="10" y="30" text="Data enquadramento: "/>
+		<campos:CampoData id="dataEnquadramento" validarObrigatorio="true" x="133" y="25" width="100" enabled="false" toolTip="Data de enquadramento, informada automaticamente pelo sistema." tabIndex="1" />
+
+		<bancoob:Rotulo x="250" y="30" text="Nível de Risco: "/>
+		<bancoobInput:Combo x="340" y="25" id="nivelRisco" width="100" labelField="descricao" inserirItemOpcional="true" validarObrigatorio="true"/>
+
+		<bancoob:Rotulo x="10" y="60" text="Motivo: "/>
+		<bancoobInput:TextoArea x="133" y="60" id="motivo" height="50" width="375" maxChars="200" validarObrigatorio="true"/>
+	</bancoobValidaveis:ModuloValidavel>
+	
+</bancoobValidaveis:ModuloValidavel>

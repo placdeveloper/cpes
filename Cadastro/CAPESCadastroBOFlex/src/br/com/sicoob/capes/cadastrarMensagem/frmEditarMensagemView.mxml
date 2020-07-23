@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<bancoobValidaveis:ModuloValidavel xmlns:mx="http://www.adobe.com/2006/mxml"
+			xmlns:bancoobInput="br.com.bancoob.componentes.input.*"
+			xmlns:bancoob="br.com.bancoob.componentes.*"
+			xmlns:campos="br.com.bancoob.componentes.campos.*"
+			xmlns:bancoobValidaveis="br.com.bancoob.componentes.containers.validaveis.*"
+			xmlns:containers="br.com.bancoob.componentes.containers.*"
+	 		width="100%" height="304" layout="absolute" styleName="ModuloSemEstilo" verticalScrollPolicy="auto">
+		
+	<mx:Label x="27" y="6" text="DADOS DA MENSAGEM INDIVIDUAL" fontWeight="bold" fontFamily="ArialEmbedded" alpha=".8"/>
+	<mx:Image y="12" source="br/com/bancoob/imagens/imgsTelas/linha.swf" scaleContent="false" left="153" right="10"/>
+	<mx:Image x="7" y="5" source="br/com/bancoob/imagens/icos/apps_16.png" alpha=".5"/>
+	
+	<containers:HBoxBancoob top="50" x="40" y="35">
+		<containers:VBoxBancoob width="45%" y="3">
+			<bancoob:Rotulo text="Data da última alteração:"  id="rotuloDataHoraInicio" height="22"/>
+			<bancoob:Rotulo text="Usuário da última alteração:" id="rotuloUsuarioAlteracao" height="22"/>
+			<bancoob:Rotulo text="Exibir:" height="22"/>
+			<bancoob:Rotulo text="Tipo de Mensagem:" height="22"/>
+			<bancoob:Rotulo text="Prazo (em dias):" height="22"/>
+			<bancoob:Rotulo text="Data de Validade:" height="22"/>
+			<bancoob:Rotulo text="Descrição:" height="22"/>
+		</containers:VBoxBancoob>
+		
+		<containers:VBoxBancoob width="55%" y="0" >
+			<bancoobInput:Data id="dataHoraInicio" height="22" width="100" tabIndex="3" validarObrigatorio="true"/>
+			<bancoob:Rotulo id="usuarioAlteracao" height="22"/>
+			<bancoobInput:Combo id="cmbTipoDestinoExibicao" height="22" validarObrigatorio="true" inserirItemOpcional="true" labelItemOpcional="SELECIONE" labelField="descTipoDestinoExibicao" width="384" tabIndex="1" conteudoMaiusculo="true" />
+			<bancoobInput:Combo id="cmbTipoMensagem" height="22" validarObrigatorio="true" inserirItemOpcional="true" labelItemOpcional="SELECIONE" labelField="descTipoMensagem" enabled="false" width="384" tabIndex="2" conteudoMaiusculo="true"/>
+			<campos:CampoInteiroView id="prazo" height="22" width="100" valorMinimo="1" valorMaximo="1825" tabIndex="4" maxChars="4" />
+			<bancoobInput:Data id="validade" height="22" tabIndex="5" validarObrigatorio="true"/>
+			<bancoobInput:TextoArea width="384" id="descricao" height="86" toolTip="Registro da descrição da mensagem." tabIndex="6" maxChars="200" validarObrigatorio="true"/>
+		</containers:VBoxBancoob>
+	</containers:HBoxBancoob>
+	
+</bancoobValidaveis:ModuloValidavel>

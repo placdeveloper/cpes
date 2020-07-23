@@ -1,0 +1,219 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<persistence xmlns="http://java.sun.com/xml/ns/persistence" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://java.sun.com/xml/ns/persistence http://java.sun.com/xml/ns/persistence/persistence_1_0.xsd" version="1.0">
+	<persistence-unit name="emCapes" transaction-type="JTA">
+		<provider>org.hibernate.ejb.HibernatePersistence</provider>
+		<jta-data-source>java:/jdbc/BancoobCadastroUnicoClientesDS</jta-data-source>
+
+		<!-- ENTIDADES -->
+		<class>br.com.sicoob.capes.negocio.entidades.EntidadeCadastroBase</class>
+		<class>br.com.sicoob.capes.negocio.entidades.Anotacao</class>
+		<class>br.com.sicoob.capes.negocio.entidades.AnotacaoSisbr</class>
+		<class>br.com.sicoob.capes.negocio.entidades.AtividadeEconomica</class>
+		<class>br.com.sicoob.capes.negocio.entidades.Autorizacao</class>
+		<class>br.com.sicoob.capes.negocio.entidades.AutorizacaoDocumento</class>
+		<class>br.com.sicoob.capes.negocio.entidades.CategoriaAnotacao</class>
+		<class>br.com.sicoob.capes.negocio.entidades.CategoriaProdutor</class>
+		<class>br.com.sicoob.capes.negocio.entidades.Cidadania</class>
+		<class>br.com.sicoob.capes.negocio.entidades.CnaeFiscal</class>
+		<class>br.com.sicoob.capes.negocio.entidades.CompartilhamentoCadastro</class>
+		<class>br.com.sicoob.capes.negocio.entidades.ConselhoRegional</class>
+		<class>br.com.sicoob.capes.negocio.entidades.CooperativaAnotacao</class>
+		<class>br.com.sicoob.capes.negocio.entidades.DadosArquivoExportacao</class>
+		<class>br.com.sicoob.capes.negocio.entidades.DadosConfiguracaoFluxo</class>
+		<class>br.com.sicoob.capes.negocio.entidades.DestinoExportacao</class>
+		<class>br.com.sicoob.capes.negocio.entidades.Empreendimento</class>
+		<class>br.com.sicoob.capes.negocio.entidades.EnderecoCorrespondencia</class>
+		<class>br.com.sicoob.capes.negocio.entidades.EnderecoFiscal</class>
+		<class>br.com.sicoob.capes.negocio.entidades.EstadoCivil</class>
+		<class>br.com.sicoob.capes.negocio.entidades.Exportacao</class>
+		<class>br.com.sicoob.capes.negocio.entidades.FinalidadeEmpreendimento</class>
+		<class>br.com.sicoob.capes.negocio.entidades.Funcao</class>
+		<class>br.com.sicoob.capes.negocio.entidades.Funcionario</class>
+		<class>br.com.sicoob.capes.negocio.entidades.GrauInstrucao</class>
+		<class>br.com.sicoob.capes.negocio.entidades.GrupoEconomico</class>
+		<class>br.com.sicoob.capes.negocio.entidades.GrupoEconomicoPessoaBase</class>
+		<class>br.com.sicoob.capes.negocio.entidades.GrupoTipoAnotacao</class>
+		<class>br.com.sicoob.capes.negocio.entidades.HistoricoAlteracaoCpfCnpj</class>
+		<class>br.com.sicoob.capes.negocio.entidades.InformacaoUtilizada</class>
+		<class>br.com.sicoob.capes.negocio.entidades.Instituicao</class>
+		<class>br.com.sicoob.capes.negocio.entidades.Localidade</class>
+		<class>br.com.sicoob.capes.negocio.entidades.LogCompartilhamentoCadastro</class>
+		<class>br.com.sicoob.capes.negocio.entidades.MapaTipoAnotacao</class>
+		<class>br.com.sicoob.capes.negocio.entidades.Mensagem</class>
+		<class>br.com.sicoob.capes.negocio.entidades.MensagemReplicacao</class>
+		<class>br.com.sicoob.capes.negocio.entidades.Nacionalidade</class>
+		<class>br.com.sicoob.capes.negocio.entidades.Nucleo</class>
+		<class>br.com.sicoob.capes.negocio.entidades.ObservacaoAnotacao</class>
+		<class>br.com.sicoob.capes.negocio.entidades.OcupacaoProfissional</class>
+		<class>br.com.sicoob.capes.negocio.entidades.OrgaoEmissorCertidao</class>
+		<class>br.com.sicoob.capes.negocio.entidades.OrigemInformacao</class>
+		<class>br.com.sicoob.capes.negocio.entidades.PerfilCadastro</class>
+		<class>br.com.sicoob.capes.negocio.entidades.PerfilTarifario</class>
+		<class>br.com.sicoob.capes.negocio.entidades.PeriodicidadeAnotacao</class>
+		<class>br.com.sicoob.capes.negocio.entidades.Pessoa</class>
+		<class>br.com.sicoob.capes.negocio.entidades.ProdutividadeBase</class>
+		<class>br.com.sicoob.capes.negocio.entidades.ProdutorBase</class>
+		<class>br.com.sicoob.capes.negocio.entidades.ReferenciaBancaria</class>
+		<class>br.com.sicoob.capes.negocio.entidades.ReferenciaBase</class>
+		<class>br.com.sicoob.capes.negocio.entidades.RegimeCasamento</class>
+		<class>br.com.sicoob.capes.negocio.entidades.SubTipoCertidao</class>
+		<class>br.com.sicoob.capes.negocio.entidades.TipoAbrangenciaCertidao</class>
+		<class>br.com.sicoob.capes.negocio.entidades.TipoAfastamento</class>
+		<class>br.com.sicoob.capes.negocio.entidades.TipoAnotacao</class>
+		<class>br.com.sicoob.capes.negocio.entidades.TipoAtualizacaoRenovacao</class>
+		<class>br.com.sicoob.capes.negocio.entidades.TipoBaixa</class>
+		<class>br.com.sicoob.capes.negocio.entidades.TipoBeneficiarioSicor</class>
+		<class>br.com.sicoob.capes.negocio.entidades.TipoCaptura</class>
+		<class>br.com.sicoob.capes.negocio.entidades.TipoCertidao</class>
+		<class>br.com.sicoob.capes.negocio.entidades.TipoConsultaOrigem</class>
+		<class>br.com.sicoob.capes.negocio.entidades.TipoDestinoExibicao</class>
+		<class>br.com.sicoob.capes.negocio.entidades.TipoDestinoExibicaoTipoMensagem</class>
+		<class>br.com.sicoob.capes.negocio.entidades.TipoDocumentoIdentificacao</class>
+		<class>br.com.sicoob.capes.negocio.entidades.TipoEmail</class>
+		<class>br.com.sicoob.capes.negocio.entidades.TipoEmpresa</class>
+		<class>br.com.sicoob.capes.negocio.entidades.TipoEndereco</class>
+		<class>br.com.sicoob.capes.negocio.entidades.TipoFonteRenda</class>
+		<class>br.com.sicoob.capes.negocio.entidades.TipoFormaConstituicao</class>
+		<class>br.com.sicoob.capes.negocio.entidades.TipoFormaConstituicaoEsferaAdministrativa</class>
+		<class>br.com.sicoob.capes.negocio.entidades.TipoFuncionario</class>
+		<class>br.com.sicoob.capes.negocio.entidades.TipoInformacao</class>
+		<class>br.com.sicoob.capes.negocio.entidades.TipoLogradouro</class>
+		<class>br.com.sicoob.capes.negocio.entidades.TipoMensagem</class>
+		<class>br.com.sicoob.capes.negocio.entidades.TipoObjetoCertidao</class>
+		<class>br.com.sicoob.capes.negocio.entidades.TipoObservacaoAnotacao</class>
+		<class>br.com.sicoob.capes.negocio.entidades.TipoPessoa</class>
+		<class>br.com.sicoob.capes.negocio.entidades.TipoPessoaContato</class>
+		<class>br.com.sicoob.capes.negocio.entidades.TipoPoderRelacionamento</class>
+		<class>br.com.sicoob.capes.negocio.entidades.TipoPrazoCertidao</class>
+		<class>br.com.sicoob.capes.negocio.entidades.TipoReferencia</class>
+		<class>br.com.sicoob.capes.negocio.entidades.TipoRegraValidacaoCadastral</class>
+		<class>br.com.sicoob.capes.negocio.entidades.TipoRelacionamentoPessoa</class>
+		<class>br.com.sicoob.capes.negocio.entidades.TipoTelefone</class>
+		<class>br.com.sicoob.capes.negocio.entidades.TransicaoPessoa</class>
+		<class>br.com.sicoob.capes.negocio.entidades.UF</class>
+		<class>br.com.sicoob.capes.negocio.entidades.UnidadeMedida</class>
+		<class>br.com.sicoob.capes.negocio.entidades.UtilizaInformacao</class>
+		<class>br.com.sicoob.capes.negocio.entidades.ValidacaoCadastral</class>
+		<class>br.com.sicoob.capes.negocio.entidades.ValidacaoCadastralErro</class>
+		<class>br.com.sicoob.capes.negocio.entidades.ValidacaoCadastralRegra</class>
+		<class>br.com.sicoob.capes.negocio.entidades.VinculoEmpregaticio</class>
+		<!-- ENTIDADES -->
+
+		<!-- HISTÓRICO -->
+		<class>br.com.sicoob.capes.negocio.entidades.historico.HistoricoCertidao</class>
+		<class>br.com.sicoob.capes.negocio.entidades.historico.HistoricoEmail</class>
+		<class>br.com.sicoob.capes.negocio.entidades.historico.HistoricoEndereco</class>
+		<class>br.com.sicoob.capes.negocio.entidades.historico.HistoricoFonteRenda</class>
+		<class>br.com.sicoob.capes.negocio.entidades.historico.HistoricoGrupoCompartilhamento</class>
+		<class>br.com.sicoob.capes.negocio.entidades.historico.HistoricoGrupoEconomicoPessoa</class>
+		<class>br.com.sicoob.capes.negocio.entidades.historico.HistoricoInformacaoProfissional</class>
+		<class>br.com.sicoob.capes.negocio.entidades.historico.HistoricoMensagemPessoa</class>
+		<class>br.com.sicoob.capes.negocio.entidades.historico.HistoricoProdutor</class>
+		<class>br.com.sicoob.capes.negocio.entidades.historico.HistoricoProdutividade</class>
+		<class>br.com.sicoob.capes.negocio.entidades.historico.HistoricoPessoaInstituicao</class>
+		<class>br.com.sicoob.capes.negocio.entidades.historico.HistoricoPessoaCompartilhamento</class>
+		<class>br.com.sicoob.capes.negocio.entidades.historico.HistoricoPessoaFisica</class>
+		<class>br.com.sicoob.capes.negocio.entidades.historico.HistoricoPessoaJuridica</class>
+		<class>br.com.sicoob.capes.negocio.entidades.historico.HistoricoReferencia</class>
+		<class>br.com.sicoob.capes.negocio.entidades.historico.HistoricoResponsavelCadastro</class>
+		<class>br.com.sicoob.capes.negocio.entidades.historico.HistoricoReferenciaBancaria</class>
+		<class>br.com.sicoob.capes.negocio.entidades.historico.HistoricoRegistroRelacionamento</class>
+		<class>br.com.sicoob.capes.negocio.entidades.historico.HistoricoRelacionamentoPessoa</class>
+		<class>br.com.sicoob.capes.negocio.entidades.historico.HistoricoTelefone</class>
+		<class>br.com.sicoob.capes.negocio.entidades.historico.HistoricoTributacao</class>
+		<!-- HISTÓRICO -->
+
+		<!-- VIGENTE -->
+		<class>br.com.sicoob.capes.negocio.entidades.vigente.Certidao</class>
+		<class>br.com.sicoob.capes.negocio.entidades.vigente.Email</class>
+		<class>br.com.sicoob.capes.negocio.entidades.vigente.Endereco</class>
+		<class>br.com.sicoob.capes.negocio.entidades.vigente.FonteRenda</class>
+		<class>br.com.sicoob.capes.negocio.entidades.vigente.GrupoCompartilhamento</class>
+		<class>br.com.sicoob.capes.negocio.entidades.vigente.GrupoEconomicoPessoa</class>
+		<class>br.com.sicoob.capes.negocio.entidades.vigente.InformacaoProfissional</class>
+		<class>br.com.sicoob.capes.negocio.entidades.vigente.PessoaCompartilhamento</class>
+		<class>br.com.sicoob.capes.negocio.entidades.vigente.PessoaFisica</class>
+		<class>br.com.sicoob.capes.negocio.entidades.vigente.PessoaInstituicao</class>
+		<class>br.com.sicoob.capes.negocio.entidades.vigente.PessoaJuridica</class>
+		<class>br.com.sicoob.capes.negocio.entidades.vigente.Produtividade</class>
+		<class>br.com.sicoob.capes.negocio.entidades.vigente.Produtor</class>
+		<class>br.com.sicoob.capes.negocio.entidades.vigente.Referencia</class>
+		<class>br.com.sicoob.capes.negocio.entidades.vigente.RegistroRelacionamento</class>
+		<class>br.com.sicoob.capes.negocio.entidades.vigente.RelacionamentoPessoa</class>
+		<class>br.com.sicoob.capes.negocio.entidades.vigente.ResponsavelCadastro</class>
+		<class>br.com.sicoob.capes.negocio.entidades.vigente.Telefone</class>
+		<class>br.com.sicoob.capes.negocio.entidades.vigente.Tributacao</class>
+		<!-- VIGENTE -->
+
+		<!-- BEM -->
+		<class>br.com.sicoob.capes.negocio.entidades.bem.Bem</class>
+		<class>br.com.sicoob.capes.negocio.entidades.bem.BemImovel</class>
+		<class>br.com.sicoob.capes.negocio.entidades.bem.BemImovelAvaliacao</class>
+		<class>br.com.sicoob.capes.negocio.entidades.bem.BemImovelAvaliacaoRural</class>
+		<class>br.com.sicoob.capes.negocio.entidades.bem.BemImovelAvaliacaoUrbano</class>
+		<class>br.com.sicoob.capes.negocio.entidades.bem.BemImovelTipoRelacionamentoPessoa</class>
+		<class>br.com.sicoob.capes.negocio.entidades.bem.BemMovel</class>
+		<class>br.com.sicoob.capes.negocio.entidades.bem.BemMovelAvaliacao</class>
+		<class>br.com.sicoob.capes.negocio.entidades.bem.BemPessoaCompartilhamento</class>
+		<class>br.com.sicoob.capes.negocio.entidades.bem.TipoBemImovel</class>
+		<class>br.com.sicoob.capes.negocio.entidades.bem.TipoBemMovel</class>
+		<class>br.com.sicoob.capes.negocio.entidades.bem.TipoChassiBem</class>
+		<class>br.com.sicoob.capes.negocio.entidades.bem.TipoClassificacaoBem</class>
+		<class>br.com.sicoob.capes.negocio.entidades.bem.TipoCorAutomovelBem</class>
+		<class>br.com.sicoob.capes.negocio.entidades.bem.TipoEstadoConservacaoBem</class>
+		<class>br.com.sicoob.capes.negocio.entidades.bem.TipoImplantacaoBemImovel</class>
+		<class>br.com.sicoob.capes.negocio.entidades.bem.TipoLocalizacaoBem</class>
+		<class>br.com.sicoob.capes.negocio.entidades.bem.TipoOnusBem</class>
+		<class>br.com.sicoob.capes.negocio.entidades.bem.TipoPadraoAcabamentoBemImovel</class>
+		<class>br.com.sicoob.capes.negocio.entidades.bem.TipoRelacionamentoBemImovel</class>
+		<class>br.com.sicoob.capes.negocio.entidades.bem.TipoServicoCondominialBemImovel</class>
+		<class>br.com.sicoob.capes.negocio.entidades.bem.TipoUsoBemImovel</class>
+		
+		<class>br.com.sicoob.capes.negocio.entidades.bem.historico.HistoricoBem</class>
+		<class>br.com.sicoob.capes.negocio.entidades.bem.historico.HistoricoBemImovel</class>
+		<class>br.com.sicoob.capes.negocio.entidades.bem.historico.HistoricoBemImovelAvaliacao</class>
+		<class>br.com.sicoob.capes.negocio.entidades.bem.historico.HistoricoBemImovelAvaliacaoRural</class>
+		<class>br.com.sicoob.capes.negocio.entidades.bem.historico.HistoricoBemImovelAvaliacaoUrbano</class>
+		<class>br.com.sicoob.capes.negocio.entidades.bem.historico.HistoricoBemImovelTipoRelacionamentoPessoa</class>
+		<class>br.com.sicoob.capes.negocio.entidades.bem.historico.HistoricoBemMovel</class>
+		<class>br.com.sicoob.capes.negocio.entidades.bem.historico.HistoricoBemMovelAvaliacao</class>
+		<class>br.com.sicoob.capes.negocio.entidades.bem.historico.HistoricoBemPessoaCompartilhamento</class>
+		
+		<!-- BEM ANTIGO -->
+		<class>br.com.sicoob.capes.negocio.entidades.bemantigo.Bem</class>
+		<class>br.com.sicoob.capes.negocio.entidades.bemantigo.BemImovel</class>
+		<class>br.com.sicoob.capes.negocio.entidades.bemantigo.BemOnus</class>
+		<class>br.com.sicoob.capes.negocio.entidades.bemantigo.BemPosse</class>
+		<class>br.com.sicoob.capes.negocio.entidades.bemantigo.BemRegistro</class>
+		<class>br.com.sicoob.capes.negocio.entidades.bemantigo.SituacaoBem</class>
+		<class>br.com.sicoob.capes.negocio.entidades.bemantigo.SubTipoBem</class>
+		<class>br.com.sicoob.capes.negocio.entidades.bemantigo.TipoBem</class>
+		<class>br.com.sicoob.capes.negocio.entidades.bemantigo.TipoPosseBem</class>
+		<class>br.com.sicoob.capes.negocio.entidades.bemantigo.HistoricoBem</class>
+		<class>br.com.sicoob.capes.negocio.entidades.bemantigo.HistoricoBemImovel</class>
+		<class>br.com.sicoob.capes.negocio.entidades.bemantigo.HistoricoBemOnus</class>
+		<class>br.com.sicoob.capes.negocio.entidades.bemantigo.HistoricoBemPosse</class>
+		<class>br.com.sicoob.capes.negocio.entidades.bemantigo.HistoricoBemRegistro</class>
+
+		<exclude-unlisted-classes />
+
+		<properties>
+			<property name="jboss.entity.manager.jndi.name" value="java:/emCapes" />
+			<property name="jboss.entity.manager.factory.jndi.name" value="java:/emfCapes" />
+			<property name="br.com.bancoob.infraestrutura.conexao.data_source" value="jdbc/BancoobCadastroUnicoClientesDS" />
+			<property name="hibernate.dialect" value="org.hibernate.dialect.DB2Dialect" />
+			<property name="hibernate.show_sql" value="true" />
+			<property name="hibernate.format_sql" value="true" />
+			<property name="hibernate.default_schema" value="cli" />
+			<property name="jboss.no.implicit.datasource.dependency" value="true" />
+			<property name="hibernate.ejb.event.pre-update" value="br.com.sicoob.capes.negocio.entidades.listener.HistoricoListener" />
+			<property name="hibernate.ejb.event.pre-delete" value="br.com.sicoob.capes.negocio.entidades.listener.HistoricoListener" />
+
+			<!-- https://hibernate.atlassian.net/browse/HHH-3879 -->
+			<property name="hibernate.ejb.event.post-insert" value="org.hibernate.ejb.event.EJB3PostInsertEventListener, br.com.sicoob.capes.negocio.entidades.listener.ValidacaoCadastralListener" />
+			<property name="hibernate.ejb.event.post-update" value="org.hibernate.ejb.event.EJB3PostUpdateEventListener, br.com.sicoob.capes.negocio.entidades.listener.ValidacaoCadastralListener" />
+			<property name="hibernate.ejb.event.post-delete" value="org.hibernate.ejb.event.EJB3PostDeleteEventListener, br.com.sicoob.capes.negocio.entidades.listener.ValidacaoCadastralListener" />
+			<property name="hibernate.ejb.interceptor" value="br.com.sicoob.capes.negocio.entidades.interceptors.VigenteInterceptor" />
+		</properties>
+	</persistence-unit>
+</persistence>

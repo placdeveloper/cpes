@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<Modulo 
+	width="100%" 
+	height="100%" 
+	label="Relacionamentos Exercidos"
+	xmlns="br.com.bancoob.componentes.*"
+	xmlns:containers="br.com.bancoob.componentes.containers.*" 
+	xmlns:bancoobGrid="br.com.bancoob.componentes.grid.*" 
+	xmlns:mx="http://www.adobe.com/2006/mxml" 
+	xmlns:grid="br.com.bancoob.componentes.grid.*">
+	<mx:Script>
+		<![CDATA[
+			import br.com.bancoob.componentes.tabelapaginada.TabelaPaginadaUtils;
+		]]>
+	</mx:Script>
+
+	<grid:Grid id="gridRelacionamento" width="100%" x="0" top="0" bottom="10" tabIndex="1">
+		<grid:columns>
+			
+			<grid:ColunaGrid headerText="É" propriedade="tipoRelacionamento.descricao" 
+				labelFunction="{TabelaPaginadaUtils.defaultLabelFunction}" width="340" />
+			<grid:ColunaGrid headerText="De" propriedade="nomePessoa" 
+				labelFunction="{TabelaPaginadaUtils.defaultLabelFunction}" width="480" />
+			<grid:ColunaGrid headerText="Percentual do Capital Social:" propriedade="percentualCapitalEmpresa" 
+				labelFunction="{TabelaPaginadaUtils.defaultValorNumericoLabelFunction}" width="110" textAlign="right"/>
+			<grid:ColunaGrid headerText="Início do Mandato" propriedade="dataInicioMandato" 
+				labelFunction="{TabelaPaginadaUtils.defaultDateLabelFunction}" width="90" />
+			<grid:ColunaGrid headerText="Fim do Mandato" propriedade="dataFimMandato" 
+				labelFunction="{TabelaPaginadaUtils.defaultDateLabelFunction}" width="90" />
+			
+		</grid:columns>
+	</grid:Grid>
+</Modulo>

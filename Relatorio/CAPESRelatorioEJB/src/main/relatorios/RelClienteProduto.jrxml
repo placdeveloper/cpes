@@ -1,0 +1,531 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="RelClienteProduto" printOrder="Horizontal" pageWidth="842" pageHeight="595" orientation="Landscape" columnWidth="822" leftMargin="0" rightMargin="20" topMargin="20" bottomMargin="20" uuid="fc911836-8b82-4dfa-a06b-9d1beab87c57">
+	<property name="ireport.zoom" value="1.5"/>
+	<property name="ireport.x" value="441"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="pDataAtualMovimento" class="java.util.Date"/>
+	<parameter name="pCodRelatorio" class="java.lang.String"/>
+	<parameter name="pNomeNucleo" class="java.lang.String"/>
+	<parameter name="pNomeGrupoEconomico" class="java.lang.String"/>
+	<parameter name="pNomeGerente" class="java.lang.String"/>
+	<parameter name="pNumCooperativa" class="java.lang.String" isForPrompting="false"/>
+	<parameter name="pTipoPessoa" class="java.lang.Integer"/>
+	<parameter name="pNomeCoopPac" class="java.lang.String"/>
+	<parameter name="pContaCapital" class="java.lang.Boolean"/>
+	<parameter name="pContaCorrente" class="java.lang.Boolean"/>
+	<parameter name="pAplicacao" class="java.lang.Boolean"/>
+	<parameter name="pPoupanca" class="java.lang.Boolean"/>
+	<parameter name="pOpCredito" class="java.lang.Boolean"/>
+	<parameter name="pCartaoCredito" class="java.lang.Boolean"/>
+	<parameter name="pDebitoAutomatico" class="java.lang.Boolean"/>
+	<parameter name="pDependente" class="java.lang.Integer"/>
+	<parameter name="pSexo" class="java.lang.Integer"/>
+	<parameter name="pRendaMin" class="java.lang.Double"/>
+	<parameter name="pRendaMax" class="java.lang.Double"/>
+	<parameter name="pRelDtNascInicio" class="java.lang.String"/>
+	<parameter name="pRelDtNascFim" class="java.lang.String"/>
+	<parameter name="pNomeMunicipio" class="java.lang.String"/>
+	<parameter name="pNomeCategoriaProdutor" class="java.lang.String"/>
+	<parameter name="FILTRO" class="br.com.sicoob.capes.relatorio.negocio.dto.RelClienteProdutoVO" isForPrompting="false"/>
+	<queryString>
+		<![CDATA[]]>
+	</queryString>
+	<field name="nomeRazao" class="java.lang.String">
+		<fieldDescription><![CDATA[nomeRazao]]></fieldDescription>
+	</field>
+	<field name="tipoPessoa" class="java.lang.String">
+		<fieldDescription><![CDATA[tipoPessoa]]></fieldDescription>
+	</field>
+	<field name="codCliente" class="java.lang.Integer">
+		<fieldDescription><![CDATA[codCliente]]></fieldDescription>
+	</field>
+	<field name="contaCapital" class="java.lang.String">
+		<fieldDescription><![CDATA[contaCapital]]></fieldDescription>
+	</field>
+	<field name="contaCorrente" class="java.lang.String">
+		<fieldDescription><![CDATA[contaCorrente]]></fieldDescription>
+	</field>
+	<field name="aplicação" class="java.lang.String">
+		<fieldDescription><![CDATA[aplicação]]></fieldDescription>
+	</field>
+	<field name="poupanca" class="java.lang.String">
+		<fieldDescription><![CDATA[poupanca]]></fieldDescription>
+	</field>
+	<field name="operacaoCredito" class="java.lang.String">
+		<fieldDescription><![CDATA[operacaoCredito]]></fieldDescription>
+	</field>
+	<field name="cartaoCredito" class="java.lang.String">
+		<fieldDescription><![CDATA[cartaoCredito]]></fieldDescription>
+	</field>
+	<field name="debitoAutomatico" class="java.lang.String">
+		<fieldDescription><![CDATA[debitoAutomatico]]></fieldDescription>
+	</field>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<pageHeader>
+		<band height="97" splitType="Stretch">
+			<staticText>
+				<reportElement x="0" y="0" width="47" height="14" uuid="834996c9-c0ac-49cb-b54a-4142dfed83f6"/>
+				<textElement>
+					<font fontName="Times New Roman" size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Cooperativa:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="42" width="67" height="14" uuid="9deac94f-c8c6-407b-9524-48e8b86a4fc2"/>
+				<textElement>
+					<font fontName="Times New Roman" size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Grupo Econômico:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="56" width="82" height="14" uuid="03b285ec-c33d-4dc1-a111-5f533e9d7f1e"/>
+				<textElement>
+					<font fontName="Times New Roman" size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Gerente Responsável:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="82" width="54" height="14" uuid="46953fd1-2747-4b6d-a390-9c72896c6248"/>
+				<textElement textAlignment="Right">
+					<font fontName="Times New Roman" size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Cód. Cliente]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="63" y="82" width="157" height="14" uuid="a6561e87-32c6-4f2d-910c-598c00360404"/>
+				<textElement>
+					<font fontName="Times New Roman" size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Nome/Razão Social]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="229" y="82" width="55" height="14" uuid="7b66097d-471a-40f3-9bcf-d73db4b32eca"/>
+				<textElement textAlignment="Center">
+					<font fontName="Times New Roman" size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Tipo Pessoa]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="291" y="82" width="53" height="14" uuid="888c5243-2ec7-4b64-b1dc-06fe8975389d"/>
+				<textElement textAlignment="Center">
+					<font fontName="Times New Roman" size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Conta Capital]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="359" y="82" width="60" height="14" uuid="f5b717ba-2952-44f4-993e-d82fa8078571"/>
+				<textElement textAlignment="Center">
+					<font fontName="Times New Roman" size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Conta Corrente]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="432" y="82" width="41" height="14" uuid="d11b1e7a-af42-4739-8ba5-a521d33a7b2a"/>
+				<textElement textAlignment="Center">
+					<font fontName="Times New Roman" size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Aplicações]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="487" y="82" width="42" height="14" uuid="6bb7158f-7f4f-4453-afaf-2980d283bedf"/>
+				<textElement textAlignment="Center">
+					<font fontName="Times New Roman" size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Poupança]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="541" y="82" width="67" height="14" uuid="e2c992fb-c59e-4402-a0a2-dd9ccbd6c8f9"/>
+				<textElement textAlignment="Center">
+					<font fontName="Times New Roman" size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Oper. de Crédito]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="620" y="82" width="75" height="14" uuid="8aa72c76-b923-4b6d-b664-ece9892344ce"/>
+				<textElement textAlignment="Center">
+					<font fontName="Times New Roman" size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Cartão de Crédito]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="709" y="82" width="70" height="14" uuid="f170e113-d207-4863-b6a6-d4189db6af88"/>
+				<textElement textAlignment="Center">
+					<font fontName="Times New Roman" size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Débito Automático]]></text>
+			</staticText>
+			<line>
+				<reportElement x="0" y="78" width="801" height="1" uuid="27c9e782-a273-4b56-a738-b4aaacf7f093"/>
+				<graphicElement>
+					<pen lineWidth="1.0"/>
+				</graphicElement>
+			</line>
+			<line>
+				<reportElement x="0" y="96" width="801" height="1" uuid="03cda1a8-ecda-44be-8a47-3f9448d9ab51"/>
+				<graphicElement>
+					<pen lineWidth="1.0"/>
+				</graphicElement>
+			</line>
+			<textField>
+				<reportElement x="47" y="0" width="225" height="14" uuid="4d175086-7a8d-4a6b-87ac-bc5dde841a8f"/>
+				<textElement>
+					<font fontName="Times New Roman" size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{FILTRO}.getCooperativa()]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="67" y="42" width="205" height="14" uuid="808d1290-60c7-40c3-8b33-e9ec8d4a2c15"/>
+				<textElement>
+					<font fontName="Times New Roman" size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{FILTRO}.getNomeGrupoEconomico()]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="82" y="56" width="190" height="14" uuid="9f9d1d23-052a-470d-bef9-fba44eee9a35"/>
+				<textElement>
+					<font fontName="Times New Roman" size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{FILTRO}.getNomeGerente()]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="279" y="14" width="60" height="14" uuid="ce3d2e49-cd28-4d53-adcf-a25e62f3b62a"/>
+				<textElement>
+					<font fontName="Times New Roman" size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Conta Corrente:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="279" y="28" width="42" height="14" uuid="18010b88-5b86-4719-8923-2b80a2c4363b"/>
+				<textElement>
+					<font fontName="Times New Roman" size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Aplicações:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="22" y="14" width="250" height="14" uuid="34f9223f-ff41-4d2c-9215-fd6ba3bba217"/>
+				<textElement>
+					<font fontName="Times New Roman" size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{FILTRO}.getNomeCoopPac()]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="0" y="14" width="22" height="14" uuid="d9f59dd0-064a-4e19-867f-96c0f55cbff4"/>
+				<textElement>
+					<font fontName="Times New Roman" size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[PAC:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="28" width="30" height="14" uuid="6c932201-df4e-4aeb-b870-39bf71ab6dd6"/>
+				<textElement>
+					<font fontName="Times New Roman" size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Núcleo:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="30" y="28" width="242" height="14" uuid="642ef88b-34da-4c14-bb21-a2a479161f74"/>
+				<textElement>
+					<font fontName="Times New Roman" size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{FILTRO}.getNomeNucleo()]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="279" y="0" width="55" height="14" uuid="6605e7e4-1a46-464a-bb74-19de0001b73c"/>
+				<textElement>
+					<font fontName="Times New Roman" size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Conta Capital:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="279" y="42" width="40" height="14" uuid="b4477c54-3a62-4d85-97e7-16ecb6ce1d42"/>
+				<textElement>
+					<font fontName="Times New Roman" size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Poupança:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="279" y="56" width="55" height="14" uuid="5bd165a9-8bda-4f55-bad3-9026a455c4a0"/>
+				<textElement>
+					<font fontName="Times New Roman" size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Op. de Crédito:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="364" y="0" width="70" height="14" uuid="363f13ec-3c99-46ac-8cca-26aba041cd34"/>
+				<textElement>
+					<font fontName="Times New Roman" size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Cartão de Crédito:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="364" y="14" width="70" height="14" uuid="b3f5a5eb-281d-413e-aa09-b8eb0ad40e0d"/>
+				<textElement>
+					<font fontName="Times New Roman" size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Débito Automático:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="364" y="28" width="47" height="14" uuid="a37de0ce-f009-40ed-aa73-2cbfce80d63e"/>
+				<textElement>
+					<font fontName="Times New Roman" size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Renda Min.:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="486" y="0" width="66" height="14" uuid="610cc072-ecf4-431b-87e5-69e5f64ad2e2"/>
+				<textElement>
+					<font fontName="Times New Roman" size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Data Nasc. Início:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="486" y="28" width="50" height="14" uuid="27c5b393-2966-41fc-a35e-09e3aee9bbc7"/>
+				<textElement>
+					<font fontName="Times New Roman" size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Dependente:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="486" y="42" width="25" height="14" uuid="f8a99517-8a27-4463-a211-3998d8d1735b"/>
+				<textElement>
+					<font fontName="Times New Roman" size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Sexo:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="334" y="0" width="20" height="14" uuid="9cd6cc3c-b82c-41a1-a1ce-4f020e44a00b"/>
+				<textElement>
+					<font fontName="Times New Roman" size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[($P{FILTRO}.getContaCapital() == true ? "SIM" : "")]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="339" y="14" width="20" height="14" uuid="567f4384-8aef-4e43-a21e-25d873a855f9"/>
+				<textElement>
+					<font fontName="Times New Roman" size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[($P{FILTRO}.getContaCorrente() == true ? "SIM" : "")]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="321" y="28" width="20" height="14" uuid="87e3af02-da81-497f-931e-0fe3e15e9560"/>
+				<textElement>
+					<font fontName="Times New Roman" size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[($P{FILTRO}.getAplicacoes() == true ? "SIM" : "")]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="319" y="42" width="20" height="14" uuid="ce89bac6-9c45-4948-a75c-5d423edddbb6"/>
+				<textElement>
+					<font fontName="Times New Roman" size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[($P{FILTRO}.getPoupanca() == true ? "SIM" : "")]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="334" y="56" width="20" height="14" uuid="078064b5-e553-4c1a-85ab-35f67b73e5d1"/>
+				<textElement>
+					<font fontName="Times New Roman" size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[($P{FILTRO}.getOpCredito() == true ? "SIM" : "")]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="434" y="0" width="20" height="14" uuid="1f48d213-ac07-477f-a447-9b97014b547d"/>
+				<textElement>
+					<font fontName="Times New Roman" size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[($P{FILTRO}.getCartaoCredito() == true ? "SIM" : "")]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="434" y="14" width="20" height="14" uuid="9930b5c0-7ed5-4268-8fe5-71b84ff59a82"/>
+				<textElement>
+					<font fontName="Times New Roman" size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[($P{FILTRO}.getDebitoAutomatico() == true ? "SIM" : "")]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="536" y="28" width="35" height="14" uuid="2d58ee12-b256-45f0-847c-82a39b5caec7"/>
+				<textElement>
+					<font fontName="Times New Roman" size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[($P{FILTRO}.getDependente().equals("0")?"Não": ($P{FILTRO}.getDependente().equals("1")?"Sim":""))]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00">
+				<reportElement x="411" y="28" width="47" height="14" uuid="57b42455-edc6-4420-8ae8-983e1ff460b2"/>
+				<textElement textAlignment="Right">
+					<font fontName="Times New Roman" size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{FILTRO}.getRendaMin()]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00">
+				<reportElement x="411" y="42" width="47" height="14" uuid="5927b9bf-a723-4845-a630-c307fa782027"/>
+				<textElement textAlignment="Right">
+					<font fontName="Times New Roman" size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{FILTRO}.getRendaMax()]]></textFieldExpression>
+			</textField>
+			<textField pattern="dd/MM/yyyy" isBlankWhenNull="true">
+				<reportElement x="552" y="0" width="42" height="14" uuid="79d781f3-8fa2-4876-8fc5-29f5588b7eee"/>
+				<textElement>
+					<font fontName="Times New Roman" size="8" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{FILTRO}.getDtNascInicio()]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="364" y="42" width="47" height="14" uuid="5cc1339d-5d03-49fa-97dd-9949f82c9e52"/>
+				<textElement>
+					<font fontName="Times New Roman" size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Renda Max.:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="364" y="56" width="32" height="14" uuid="6255a6d0-8c2a-40f3-a436-f6a659fa5fc7"/>
+				<textElement>
+					<font fontName="Times New Roman" size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Pessoa:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="396" y="56" width="77" height="14" uuid="3ce6e24a-b4fa-4814-a33c-b49a5035d0b2"/>
+				<textElement>
+					<font fontName="Times New Roman" size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[(Integer.valueOf("0").equals($P{FILTRO}.getTipoPessoa()) ? "Física" :
+    (Integer.valueOf("1").equals($P{FILTRO}.getTipoPessoa()) ? "Jurídica" : "Física e Jurídica"))]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="486" y="14" width="66" height="14" uuid="57742560-7b52-4369-91e9-1eebd120c06f"/>
+				<textElement>
+					<font fontName="Times New Roman" size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Data Nasc. Fim:]]></text>
+			</staticText>
+			<textField pattern="dd/MM/yyyy" isBlankWhenNull="true">
+				<reportElement x="552" y="14" width="42" height="14" uuid="3b0040e4-b32a-4ca1-8b36-2962ea864225"/>
+				<textElement>
+					<font fontName="Times New Roman" size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{FILTRO}.getDtNascFim()]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="528" y="56" width="127" height="14" uuid="7d9532bc-9cf9-40dc-9fb8-7c602bfebdc1"/>
+				<textElement>
+					<font fontName="Times New Roman" size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{FILTRO}.getNomeMunicipio()]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="486" y="56" width="42" height="14" uuid="5edca140-b764-41fc-95fb-fbad59413175"/>
+				<textElement>
+					<font fontName="Times New Roman" size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Município:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="604" y="0" width="51" height="14" uuid="0e262db1-1643-4e2a-9ea4-84abaebfb64e"/>
+				<textElement>
+					<font fontName="Times New Roman" size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Cat. Produtor:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="655" y="0" width="146" height="14" uuid="7dad8272-f1d6-4ae5-87b5-57bad5add722"/>
+				<textElement>
+					<font fontName="Times New Roman" size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{FILTRO}.getNomeCategoriaProdutor()]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="511" y="42" width="60" height="14" uuid="ad68a243-c66a-456f-998c-47f6af4a21f5"/>
+				<textElement>
+					<font fontName="Times New Roman" size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[(Integer.valueOf("0").equals($P{FILTRO}.getSexo()) ? "Feminino":
+    (Integer.valueOf("1").equals($P{FILTRO}.getSexo()) ?"Masculino":""))]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageHeader>
+	<columnHeader>
+		<band splitType="Stretch"/>
+	</columnHeader>
+	<detail>
+		<band height="16" splitType="Stretch">
+			<textField>
+				<reportElement x="63" y="0" width="157" height="14" uuid="4a28791b-e5ea-496e-9c8c-068f6c8c0837"/>
+				<textElement>
+					<font fontName="Times New Roman" size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{nomeRazao}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="0" y="0" width="54" height="14" uuid="18e7cc95-1b7b-45c7-b500-d80d625a6b74"/>
+				<textElement textAlignment="Right">
+					<font fontName="Times New Roman" size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{codCliente}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="229" y="0" width="55" height="14" uuid="e92645bb-ac00-485f-ac4a-2602b49e8665"/>
+				<textElement textAlignment="Center">
+					<font fontName="Times New Roman" size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[($F{tipoPessoa}.equals("0")?"FÍSICA":($F{tipoPessoa}.equals("1")?"JURÍDICA":"ND"))]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="291" y="0" width="53" height="14" uuid="896f3b57-a522-4c8e-8b20-74e5a7f8521b"/>
+				<textElement textAlignment="Center">
+					<font fontName="Times New Roman" size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[($F{contaCapital}.equals("0")?"NÃO":"SIM")]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="359" y="0" width="60" height="14" uuid="0124e67b-f69b-4c9e-8a07-3cd4e1dcb55e"/>
+				<textElement textAlignment="Center">
+					<font fontName="Times New Roman" size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[($F{contaCorrente}.equals("0")?"NÃO":"SIM")]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="432" y="0" width="41" height="14" uuid="ad3e5169-276a-4bb3-8c18-7d2d071ba5fe"/>
+				<textElement textAlignment="Center">
+					<font fontName="Times New Roman" size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[($F{aplicação}.equals("0")?"NÃO":"SIM")]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="487" y="0" width="42" height="14" uuid="3e800d03-66e0-4779-aa6a-6b1419db3b69"/>
+				<textElement textAlignment="Center">
+					<font fontName="Times New Roman" size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[($F{poupanca}.equals("0")?"NÃO":"SIM")]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="541" y="0" width="67" height="14" uuid="7f4fa585-7aac-472e-b020-543dd2a3cfb4"/>
+				<textElement textAlignment="Center">
+					<font fontName="Times New Roman" size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[($F{operacaoCredito}.equals("0")?"NÃO":"SIM")]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="620" y="0" width="75" height="14" uuid="ea6774e9-96c6-406d-852c-3c0f2d23f1d4"/>
+				<textElement textAlignment="Center">
+					<font fontName="Times New Roman" size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[($F{cartaoCredito}.equals("0")?"NÃO":"SIM")]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="709" y="0" width="70" height="14" uuid="743f6e9d-7261-4a8d-8e9f-5767ac524e0d"/>
+				<textElement textAlignment="Center">
+					<font fontName="Times New Roman" size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[($F{debitoAutomatico}.equals("0")?"NÃO":"SIM")]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band splitType="Stretch"/>
+	</columnFooter>
+	<summary>
+		<band height="11" splitType="Stretch"/>
+	</summary>
+</jasperReport>

@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<bancoobValidaveis:ModuloValidavel xmlns:mx="http://www.adobe.com/2006/mxml"
+				xmlns:componentes="br.com.bancoob.componentes.*"
+				xmlns:titulo="br.com.bancoob.componentes.titulo.*"
+				xmlns:campos="br.com.bancoob.componentes.campos.*"
+				xmlns:cadastro="br.com.bancoob.componentes.cadastro.*"
+				xmlns:containers="br.com.bancoob.componentes.containers.*"
+				xmlns:bancoobValidaveis="br.com.bancoob.componentes.containers.validaveis.*"
+				xmlns:procurarPessoa="br.com.sicoob.capes.corporativo.componentes.procurarPessoa.*" 
+				xmlns:componentesCapes="br.com.sicoob.capes.comum.componentes.input.*"
+				xmlns:input="br.com.bancoob.componentes.input.*"
+				width="100%" height="100%" >
+	
+	<titulo:SubtituloView texto="Associar Proprietário" left="5" right="10" top="10" />
+	
+	<componentes:Rotulo x="10" y="42" text="Pessoa: " textAlign="left" />
+	<procurarPessoa:ProcurarPessoaCAPES id="componenteProcurarPessoa" x="90" y="40" habilitaCadastroPessoa="true" validarObrigatorio="true" toolTip="CPF/CNPJ da pessoa." tabIndex="1" />
+	
+	<componentes:Rotulo x="10" y="72" text="Porcentagem: " textAlign="left" />
+	<componentesCapes:CampoMoeda id="campoPorcentagem" x="90" y="70" agruparDigitos="false" permitirValoreNegativos="false" validarObrigatorio="true" valorMinimo="0.01" valorMaximo="100.00" casasDecimais="2" maxChars="6" tabIndex="2" />
+	
+	<containers:CanvasBancoob id="canvasImovel" x="0" y="102" visible="false" includeInLayout="false">
+		<componentes:Rotulo x="10" y="2" text="Área total: " textAlign="left" />
+		<input:Texto id="campoAreaTotal" x="90" y="0" casasDecimais="4" maxChars="12" enabled="false" />
+		
+		<componentes:Rotulo x="10" y="32" text="Área de posse: " textAlign="left" />
+		<componentesCapes:CampoNumerico id="campoAreaPosse" x="90" y="30" permitirValoreNegativos="false" validarObrigatorio="false" valorMinimo="0" valorMaximo="9999999.9999" casasDecimais="4" maxChars="12" tabIndex="3" />
+	</containers:CanvasBancoob>
+	
+	<cadastro:BarraBotoesFormularioCadastroView id="barraBotoes" bottom="0" right="10" width="100%"/>
+	
+</bancoobValidaveis:ModuloValidavel>

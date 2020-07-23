@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ModuloValidavel xmlns="br.com.bancoob.componentes.containers.validaveis.*"
+				 xmlns:mx="http://www.adobe.com/2006/mxml"
+				 xmlns:input="br.com.bancoob.componentes.input.*"
+				 xmlns:componentes="br.com.bancoob.componentes.*"
+				 xmlns:centraisSingulares="br.com.sicoob.capes.comum.componentes.instituicao.*"
+				 width="450" height="350" layout="absolute" xmlns:titulo="br.com.bancoob.componentes.titulo.*" xmlns:containers="br.com.bancoob.componentes.containers.*">
+	
+	<titulo:SubtituloView texto="Filtro" left="10" right="10" top="10"/>
+
+	<centraisSingulares:CentraisSingulares id="componenteCentraisSingulares" x="10" top="46" 
+										   tamanhoCombos="350"
+										   centralObrigatoria="true"
+										   singularObrigatoria="true"
+										   utilizarUnidades="true"
+										   utilizarNucleos="true"
+										   utilizarGerentes="true"/>
+	
+	<componentes:Rotulo text="IOF:" left="10" top="196"/>
+	<input:RadioGrupoBancoob id="radioGrupoIOF" />
+	<input:Radio groupName="radioGrupoIOF" label="Todos" x="90" top="194" selected="true" />
+	<input:Radio groupName="radioGrupoIOF" label="Cobra" value="{true}" x="170" top="194" />
+	<input:Radio groupName="radioGrupoIOF" label="Não cobra" value="{false}" x="250" top="194" />
+
+	<componentes:Rotulo text="IR:" left="10" top="226"/>
+	<input:RadioGrupoBancoob id="radioGrupoIR" />
+	<input:Radio groupName="radioGrupoIR" label="Todos" x="90" top="224" selected="true" />
+	<input:Radio groupName="radioGrupoIR" label="Cobra" value="{true}" x="170" top="224" />
+	<input:Radio groupName="radioGrupoIR" label="Não cobra" value="{false}" x="250" top="224" />
+
+	<componentes:Rotulo text="Ordenação:" left="10" top="256"/>
+	<input:RadioGrupoBancoob id="radioGrupoOrdenacao" />
+	<input:Radio groupName="radioGrupoOrdenacao" label="Nome" value="nome" x="90" top="254" selected="true" />
+	<input:Radio groupName="radioGrupoOrdenacao" label="Unidade" value="unidade" x="170" top="254" />
+	
+	<titulo:LinhaView id="linha" width="100%" top="300"/>	
+	<containers:HBoxBancoob left="10" right="10" top="316" horizontalAlign="center">
+		<componentes:Botao width="120" id="btGerar" label="Gerar Relatório" />
+		<componentes:Botao width="120" id="btLimpar" label="Limpar" />
+		<componentes:Botao width="120" id="btFechar" label="Fechar"/>
+	</containers:HBoxBancoob>
+</ModuloValidavel>

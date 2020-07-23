@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<CanvasBancoob xmlns="br.com.bancoob.componentes.containers.*" 
+	xmlns:mx="http://www.adobe.com/2006/mxml" 
+	xmlns:bancoobInput="br.com.bancoob.componentes.input.*"
+	xmlns:bancoob="br.com.bancoob.componentes.*"
+	xmlns:selecaoGeral="br.com.bancoob.sisbr.componentes.selecaoGeral.*"
+	xmlns:campos="br.com.bancoob.componentes.campos.*"
+	width="800" height="450" xmlns:titulo="br.com.bancoob.componentes.titulo.*" styleName="ModuloSemEstilo" > 
+	<mx:Script>
+		<![CDATA[
+			import br.com.bancoob.util.servico.ServicoJava;
+			
+			public var servicoMunicipios:ServicoJava;
+			public var servicoComarcas:ServicoJava;
+			
+			public function set setServicoMunicipios(servicoMunicipios:ServicoJava):void {
+				this.servicoMunicipios = servicoMunicipios;		
+			}
+			
+			public function set setServicoComarcas(servicoComarcas:ServicoJava):void {
+				this.servicoComarcas = servicoComarcas;		
+			}
+		]]>
+	</mx:Script>
+	
+	<bancoob:Rotulo x="10" y="7" text="Denominação:"/>
+	<bancoobInput:Texto x="133" y="2" width="350" id="denominacao" validarObrigatorio="true" tabIndex="1" maxChars="50"/>
+
+	<bancoob:Rotulo x="10" y="37" text="Localização:"/>
+	<bancoobInput:Combo x="133" y="32" width="262" id="localizacao" toolTip="Selecione a localizacao do bem." 
+		validarObrigatorio="true" tabIndex="2" labelField="descricao" inserirItemOpcional="true"/>	
+
+	<bancoob:Rotulo x="10" y="67" text="Benfeitorias:"/>
+	<bancoobInput:TextoArea x="133" y="62" width="262" id="benfeitorias" toolTip="Benfeitoria do bem." tabIndex="3" maxChars="200"/>	
+
+	<bancoob:Rotulo x="10" y="127" text="Valor das benfeitorias:"/>
+	<campos:CampoMoedaView  x="133" y="122" width="100" id="valorBenfeitorias" valorMinimo="0" 
+		valorMaximo="9999999999.99" tabIndex="4" maxChars="13"/>
+
+	<bancoob:Rotulo x="10" y="157" text="Área total:"/>
+	<campos:CampoNumerico  x="133" y="152" width="100" id="areaTotal" valorMinimo="0.000001" casasDecimais="6" 
+		valorMaximo="9999999.999999" agruparDigitos="true" permitirValoreNegativos="false" tabIndex="5" maxChars="14" />
+
+	<bancoob:Rotulo x="260" y="157" text="Unidade de medida:"/>
+	<bancoobInput:Combo x="385" y="152" width="262" id="unidadeMedida" toolTip="Selecione a unidade de medida." 
+		validarObrigatorio="true" tabIndex="6" labelField="descricao" inserirItemOpcional="true" />
+
+	<bancoob:Rotulo x="10" y="207" text="Município:"/>
+	<selecaoGeral:ProcurarGeralV2 id="procuraMunicipio" x="133" y="202"
+		tipoProcura="9005"
+		titulo="Procurar Município"
+		campoCodigo="IDLOCALIDADE"
+		campoDescricao="NOMELIMPOLOCALIDADE" validarObrigatorio="true" tabIndex="7"/>
+
+	<bancoob:Rotulo x="10" y="237" text="Comarca:"/>
+	<selecaoGeral:ProcurarGeralV2 id="procuraComarca" x="133" y="232"
+		tipoProcura="9005"
+		titulo="Procurar Município"
+		campoCodigo="IDLOCALIDADE"
+		campoDescricao="NOMELIMPOLOCALIDADE" validarObrigatorio="true" tabIndex="8"/>
+
+</CanvasBancoob>

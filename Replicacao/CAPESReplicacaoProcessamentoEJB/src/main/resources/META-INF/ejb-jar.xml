@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ejb-jar id="EJBModule_CAPESReplicacaoProcessamentoEJB" version="3.2" xmlns="http://xmlns.jcp.org/xml/ns/javaee"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/ejb-jar_3_2.xsd">
+  <display-name>CAPESReplicacaoProcessamentoEJB</display-name>
+  <enterprise-beans>
+    <message-driven>
+      <ejb-name>AtualizarCadastroClientesMDB</ejb-name>
+      <ejb-class>br.com.sicoob.capes.replicacao.negocio.mdb.AtualizarCadastroClientesMDB</ejb-class>
+      <messaging-type>javax.jms.MessageListener</messaging-type>
+      <transaction-type>Container</transaction-type>
+      <message-destination-type>javax.jms.Queue</message-destination-type>
+      <activation-config>
+        <activation-config-property>
+          <activation-config-property-name>destination</activation-config-property-name>
+          <activation-config-property-value>queue/QL.CONT.EXEC.ATUALIZA.CADASTRO</activation-config-property-value>
+        </activation-config-property>
+        <activation-config-property>
+          <activation-config-property-name>useDLQ</activation-config-property-name>
+          <activation-config-property-value>true</activation-config-property-value>
+        </activation-config-property>
+        <activation-config-property>
+          <activation-config-property-name>DLQHandler</activation-config-property-name>
+          <activation-config-property-value>org.jboss.resource.adapter.jms.inflow.dlq.GenericDLQHandler</activation-config-property-value>
+        </activation-config-property>
+        <activation-config-property>
+          <activation-config-property-name>DLQJNDIName</activation-config-property-name>
+          <activation-config-property-value>queue/QL.CONT.EXEC.ATUALIZA.CADASTRO.DLQ</activation-config-property-value>
+        </activation-config-property>
+        <activation-config-property>
+          <activation-config-property-name>transactionTimeout</activation-config-property-name>
+          <activation-config-property-value>120</activation-config-property-value>
+        </activation-config-property>
+        <activation-config-property>
+          <activation-config-property-name>providerAdapterJNDI</activation-config-property-name>
+          <activation-config-property-value>java:/WSMQCAPESJMSProvider</activation-config-property-value>
+        </activation-config-property>
+      </activation-config>
+      <!-- configuração para desenvolvimento -->
+      <!-- <activation-config> <activation-config-property> <activation-config-property-name>destination</activation-config-property-name> 
+        <activation-config-property-value>queue/QL.CONT.EXEC.ATUALIZA.CADASTRO</activation-config-property-value> </activation-config-property> 
+        <activation-config-property> <activation-config-property-name>useDLQ</activation-config-property-name> <activation-config-property-value>true</activation-config-property-value> 
+        </activation-config-property> <activation-config-property> <activation-config-property-name>DLQHandler</activation-config-property-name> 
+        <activation-config-property-value>org.jboss.resource.adapter.jms.inflow.dlq.GenericDLQHandler</activation-config-property-value> 
+        </activation-config-property> <activation-config-property> <activation-config-property-name>DLQJNDIName</activation-config-property-name> 
+        <activation-config-property-value>queue/QL.CONT.EXEC.ATUALIZA.CADASTRO.DLQ</activation-config-property-value> </activation-config-property> 
+        <activation-config-property> <activation-config-property-name>transactionTimeout</activation-config-property-name> <activation-config-property-value>120</activation-config-property-value> 
+        </activation-config-property> </activation-config> -->
+    </message-driven>
+  </enterprise-beans>
+  <interceptors>
+    <interceptor>
+      <interceptor-class>br.com.bancoob.negocio.servicos.interceptors.UsuarioInterceptor</interceptor-class>
+      <around-invoke>
+        <method-name>intercept</method-name>
+      </around-invoke>
+    </interceptor>
+    <interceptor>
+      <interceptor-class>br.com.bancoob.negocio.servicos.interceptors.TransacaoBancariaInterceptor</interceptor-class>
+      <around-invoke>
+        <method-name>intercept</method-name>
+      </around-invoke>
+    </interceptor>
+    <interceptor>
+      <interceptor-class>br.com.bancoob.negocio.servicos.interceptors.CacheInterceptor</interceptor-class>
+      <around-invoke>
+        <method-name>intercept</method-name>
+      </around-invoke>
+    </interceptor>
+    <interceptor>
+      <interceptor-class>br.com.sicoob.capes.replicacao.negocio.servicos.interceptors.CAPESReplicacaoProcessamentoInternacionalizacaoInterceptor</interceptor-class>
+      <around-invoke>
+        <method-name>intercept</method-name>
+      </around-invoke>
+    </interceptor>
+    <interceptor>
+      <interceptor-class>br.com.bancoob.negocio.servicos.interceptors.TempoExecucaoInterceptor</interceptor-class>
+      <around-invoke>
+        <method-name>intercept</method-name>
+      </around-invoke>
+    </interceptor>
+  </interceptors>
+  <assembly-descriptor>
+    <interceptor-binding>
+      <ejb-name>*</ejb-name>
+      <interceptor-class>br.com.bancoob.negocio.servicos.interceptors.UsuarioInterceptor</interceptor-class>
+      <interceptor-class>br.com.bancoob.negocio.servicos.interceptors.TransacaoBancariaInterceptor</interceptor-class>
+      <interceptor-class>br.com.bancoob.negocio.servicos.interceptors.CacheInterceptor</interceptor-class>
+      <interceptor-class>br.com.sicoob.capes.replicacao.negocio.servicos.interceptors.CAPESReplicacaoProcessamentoInternacionalizacaoInterceptor</interceptor-class>
+      <interceptor-class>br.com.bancoob.negocio.servicos.interceptors.TempoExecucaoInterceptor</interceptor-class>
+    </interceptor-binding>
+  </assembly-descriptor>
+</ejb-jar>

@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mx:Canvas xmlns:mx="http://www.adobe.com/2006/mxml"
+		   xmlns:autorizacao="br.com.sicoob.capes.utils.autorizacao.botoes.*"
+		   width="100%" height="100%" borderStyle="none" clipContent="false"
+		   horizontalScrollPolicy="off" verticalScrollPolicy="off">
+	
+	<autorizacao:BotoesAutorizacao x="19" y="0" id="botoesAutorizacao" />
+	
+</mx:Canvas>

@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Modulo 
+	width="100%" 
+	height="100%"
+	label="Relacionamentos Cedidos  "
+	xmlns="br.com.bancoob.componentes.*"
+	xmlns:containers="br.com.bancoob.componentes.containers.*" 
+	xmlns:mx="http://www.adobe.com/2006/mxml"
+	xmlns:grid="br.com.bancoob.componentes.grid.*"
+	xmlns:bancoobGrid="br.com.bancoob.componentes.grid.*" 
+	xmlns:componentes="br.com.bancoob.componentes.*">
+	<mx:Script>
+		<![CDATA[
+			import br.com.bancoob.componentes.tabelapaginada.TabelaPaginadaUtils;
+		]]>
+	</mx:Script>
+	<mx:Canvas y="2" height="27" cornerRadius="10" borderStyle="solid" left="0" right="0" borderThickness="0" backgroundColor="#ffffff" backgroundAlpha=".4" horizontalScrollPolicy="off" verticalScrollPolicy="off">
+		<componentes:Rotulo x="37" y="5" text="SELECIONE UM REGISTRO OU CLIQUE EM NOVO PARA CADASTRAR UM NOVO REGISTRO." width="568" fontSize="11" fontWeight="bold" alpha=".7" fontFamily="ArialEmbedded"/>
+		<mx:Image x="10" y="5" source="br/com/bancoob/imagens/icos/paste_16.png" alpha=".5"/>		
+	</mx:Canvas>
+
+	<grid:Grid id="gridRelacionamento" width="100%" x="0" top="36" bottom="10" tabIndex="1">
+		<grid:columns>
+			<!-- GED/GFT -->
+			<bancoobGrid:ColunaGrid headerText="St" width="10" sortable="false" itemRenderer="br.com.sicoob.capes.utils.autorizacao.renderer.StatusRenderer" />
+						
+			<grid:ColunaGrid headerText="Tem" propriedade="nomePessoaRelacionada" 
+				labelFunction="{TabelaPaginadaUtils.defaultLabelFunction}" width="310" />
+			<grid:ColunaGrid headerText="Como" propriedade="tipoRelacionamento.descricao" 
+				labelFunction="{TabelaPaginadaUtils.defaultLabelFunction}" width="200" />
+			<grid:ColunaGrid headerText="Compartilhado" propriedade="tipoRelacionamento.permiteCompartilhamento.valor" 
+							 labelFunction="{TabelaPaginadaUtils.defaultBooleanLabelFunction}" width="150" />
+			<grid:ColunaGrid headerText="Percentual do Capital Social" propriedade="percentualCapitalEmpresa" 
+				labelFunction="{TabelaPaginadaUtils.defaultValorNumericoLabelFunction}" width="135" textAlign="right"/>
+			<grid:ColunaGrid headerText="Início do Mandato" propriedade="dataInicioMandato" 
+				labelFunction="{TabelaPaginadaUtils.defaultDateLabelFunction}" width="90" />
+			<grid:ColunaGrid headerText="Fim do Mandato" propriedade="dataFimMandato" 
+				labelFunction="{TabelaPaginadaUtils.defaultDateLabelFunction}" width="90" />
+			
+			<!-- GED/GFT -->
+			<bancoobGrid:ColunaGrid headerText="GED/GFT" width="65" sortable="false" itemRenderer="br.com.sicoob.capes.utils.autorizacao.renderer.GedGftRenderer" />
+		</grid:columns>
+	</grid:Grid>
+</Modulo>

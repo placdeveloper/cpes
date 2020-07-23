@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mx:Canvas xmlns:mx="http://www.adobe.com/2006/mxml" 
+	borderStyle="none" verticalScrollPolicy="off" horizontalScrollPolicy="off" width="100%" height="284" clipContent="false" xmlns:componentes="br.com.bancoob.componentes.*">
+		<componentes:Botao id="btAlterarGestor" x="19" y="0" buttonMode="true" useHandCursor="true" enabled="true" visible="true" tabIndex="400">
+			<componentes:downSkin>@Embed(source='br/com/bancoob/imagens/imgsTelas/botoesPlataforma2.swf', symbol='conteudoBtAlterarGestorNormal')</componentes:downSkin>
+			<componentes:overSkin>@Embed(source='br/com/bancoob/imagens/imgsTelas/botoesPlataforma2.swf', symbol='conteudoBtAlterarGestorOver')</componentes:overSkin>
+			<componentes:upSkin>      @Embed(source='br/com/bancoob/imagens/imgsTelas/botoesPlataforma2.swf', symbol='conteudoBtAlterarGestorNormal')</componentes:upSkin>
+			<componentes:disabledSkin>@Embed(source='br/com/bancoob/imagens/imgsTelas/botoesPlataforma2.swf', symbol='conteudoBtAlterarGestorDesab')</componentes:disabledSkin>
+		</componentes:Botao>
+		<componentes:Botao id="btEnviarBancoob" x="19" y="60" buttonMode="true" useHandCursor="true" enabled="true" visible="true" tabIndex="400">
+			<componentes:downSkin>@Embed(source='br/com/bancoob/imagens/imgsTelas/botoesPlataforma2.swf', symbol='conteudoBtEnviarbancoobNormal')</componentes:downSkin>
+			<componentes:overSkin>@Embed(source='br/com/bancoob/imagens/imgsTelas/botoesPlataforma2.swf', symbol='conteudoBtEnviarbancoobOver')</componentes:overSkin>
+			<componentes:upSkin>@Embed(source='br/com/bancoob/imagens/imgsTelas/botoesPlataforma2.swf', symbol='conteudoBtEnviarbancoobNormal')</componentes:upSkin>
+			<componentes:disabledSkin>@Embed(source='br/com/bancoob/imagens/imgsTelas/botoesPlataforma2.swf', symbol='conteudoBtEnviarbancoobDesab')</componentes:disabledSkin>
+		</componentes:Botao>
+		<componentes:Botao id="btAtualizarAssFotoBancoob" x="19" y="120" buttonMode="true" useHandCursor="false" enabled="false" visible="false" tabIndex="400" includeInLayout="false">
+			<componentes:downSkin>@Embed(source='br/com/bancoob/imagens/imgsTelas/botoesPlataforma2.swf', symbol='conteudoBtAtualizarAssFotoBancoobNormal')</componentes:downSkin>
+			<componentes:overSkin>@Embed(source='br/com/bancoob/imagens/imgsTelas/botoesPlataforma2.swf', symbol='conteudoBtAtualizarAssFotoBancoobOver')</componentes:overSkin>
+			<componentes:upSkin>@Embed(source='br/com/bancoob/imagens/imgsTelas/botoesPlataforma2.swf', symbol='conteudoBtAtualizarAssFotoBancoobNormal')</componentes:upSkin>
+			<componentes:disabledSkin>@Embed(source='br/com/bancoob/imagens/imgsTelas/botoesPlataforma2.swf', symbol='conteudoBtAtualizarAssFotoBancoobDesab')</componentes:disabledSkin>
+		</componentes:Botao>		
+</mx:Canvas>

@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Janela xmlns="br.com.bancoob.componentes.containers.*"
+		xmlns:componentes="br.com.bancoob.componentes.*"
+		xmlns:mx="http://www.adobe.com/2006/mxml"
+		xmlns:input="br.com.bancoob.componentes.input.*"
+		width="450" height="190" horizontalAlign="center" layout="vertical" title="{textoTitulo}">
+	
+	<mx:String id="textoTitulo"/>
+	<mx:String id="motivoExclusao"/>
+	<mx:Binding destination="motivoExclusao" source="txtCampoJustificativa.text"/>
+	
+	<HBoxBancoob width="100%" height="100">
+		<componentes:Rotulo text="Justificativa:"/>
+		<input:TextoArea id="txtCampoJustificativa" width="100%" height="100" maxChars="200"
+						 text="{motivoExclusao}"
+						 validarMensagem="O campo Justificativa é obrigatório"
+						 validarObrigatorio="true"/>
+	</HBoxBancoob>
+	<HBoxBancoob horizontalGap="15">
+		<componentes:Botao id="btnConfirmar" label="Confirmar"/>
+		<componentes:Botao id="btnCancelar" label="Cancelar"/>
+	</HBoxBancoob>
+	
+</Janela>

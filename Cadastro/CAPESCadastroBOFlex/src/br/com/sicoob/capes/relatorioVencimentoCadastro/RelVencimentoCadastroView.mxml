@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ModuloValidavel xmlns="br.com.bancoob.componentes.containers.validaveis.*"
+				 xmlns:mx="http://www.adobe.com/2006/mxml"
+				 xmlns:titulo="br.com.bancoob.componentes.titulo.*"
+				 xmlns:componente="br.com.bancoob.componentes.*"
+				 xmlns:input="br.com.bancoob.componentes.input.*"
+				 xmlns:containers="br.com.bancoob.componentes.containers.*"
+				 xmlns:namespace="http://namespace"
+				 xmlns:centraisSingulares="br.com.sicoob.capes.comum.componentes.instituicao.*"
+				 width="462" height="360" layout="absolute">
+	
+	<mx:Canvas id="containerInstituicao" visible="true" height="170" width="462" verticalScrollPolicy="off" horizontalScrollPolicy="off" x="0" y="0">
+		<titulo:SubtituloView x="0" y="0" width="462" texto="INSTITUIÇÃO" />
+		<centraisSingulares:CentraisSingulares id="componenteCentraisSingulares" x="10" y="25" tamanhoCombos="362" utilizarGerentes="true" utilizarNucleos="true" utilizarUnidades="true" />
+	</mx:Canvas>
+	
+	<mx:Canvas id="containerFiltro" visible="true" height="120" width="462" verticalScrollPolicy="off" horizontalScrollPolicy="off" x="0" y="180">
+		<titulo:SubtituloView x="0" y="0" width="462" texto="FILTROS" />
+		
+		<componente:Rotulo x="20" y="34" text="Vencimento:" />
+		<input:Data id="dataInicio" x="90" y="30" width="90" mascara="DD/MM/YYYY" name="dataInicio"/>
+		<componente:Rotulo x="193" y="34" width="10" text="a"/>
+		<input:Data id="dataFim" x="213" y="30" width="90" mascara="DD/MM/YYYY" name="dataFim"/>
+		
+		<input:Check id="checkSomenteResponsavel" x="22" y="60" label="Somente responsável" textAlign="right"/>
+		
+		<componente:Rotulo x="0" y="92" width="77" fontSize="10" text="Ordenação:" textAlign="right"/>
+		<input:RadioGrupoBancoob id="rdGrupoOrdem" />
+		<input:Radio x="80" y="90" width="130" height="15" label="Unidade + Data" groupName="rdGrupoOrdem" id="rdOrdemData" selected="true" value="0"/>
+		<input:Radio x="220" y="90" width="300" height="15" label="Unidade + Alfabética" groupName="rdGrupoOrdem" value="1"/>
+	</mx:Canvas>
+	
+	<titulo:LinhaView id="linha" y="305" width="100%"/>
+	
+	<containers:HBoxBancoob height="36" width="462" bottom="0" horizontalAlign="right" horizontalGap="8" verticalAlign="middle" right="0">
+		<componente:Botao id="btOk" label="Ok" width="86"/>
+		<componente:Botao id="btCancelar" label="Limpar" width="86"/>
+		<componente:Botao id="btFechar" label="Fechar" width="86"/>
+	</containers:HBoxBancoob>
+	
+</ModuloValidavel>

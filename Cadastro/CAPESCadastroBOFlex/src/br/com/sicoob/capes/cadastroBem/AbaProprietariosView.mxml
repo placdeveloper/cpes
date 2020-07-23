@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<bancoobValidaveis:CanvasValidavel 
+	xmlns="br.com.bancoob.componentes.containers.*" 
+	xmlns:mx="http://www.adobe.com/2006/mxml" 
+	xmlns:bancoobValidaveis="br.com.bancoob.componentes.containers.validaveis.*"
+	xmlns:grid="br.com.bancoob.componentes.grid.*"
+	xmlns:containers="br.com.bancoob.componentes.containers.*"
+	xmlns:componentes="br.com.bancoob.componentes.*" 
+	xmlns:titulo="br.com.bancoob.componentes.titulo.*"
+	xmlns:abas="br.com.sicoob.capes.utils.autorizacao.abas.*"
+	width="100%" height="100%" styleName="ModuloSemEstilo" verticalScrollPolicy="auto">
+	
+	<mx:Script>
+		<![CDATA[
+			import br.com.bancoob.componentes.tabelapaginada.TabelaPaginadaUtils;
+		]]>
+	</mx:Script>
+	
+	<mx:Style>
+		.botaoAdicionarPessoaAtualPeq{
+			downSkin:		Embed(source='br/com/bancoob/imagens/icos/Cliente.png');
+			disabledSkin:	Embed(source='br/com/bancoob/imagens/icos/Cliente.png');
+			upSkin:			Embed(source='br/com/bancoob/imagens/icos/Cliente.png');
+			overSkin:		Embed(source='br/com/bancoob/imagens/icos/Cliente.png');
+		}
+	</mx:Style>
+
+	<titulo:SubtituloView x="5" y="0" texto="Adicionar proprietários" />
+	
+	<grid:Grid id="gridProprietarios" left="5" width="100%" height="95%" right="25" bottom="0" allowMultipleSelection="false">
+		<grid:columns>
+			<grid:ColunaGrid id="colunaCpfCnpj" dataField="pessoaCompartilhamento.pessoa.cpfCnpj" headerText="CPF/CNPJ" width="70" sortable="true" labelFunction="{TabelaPaginadaUtils.defaultCNPJLabelFunction}" sortCompareFunction="{TabelaPaginadaUtils.criarDefaultSortFunction(colunaCpfCnpj)}" />
+			<grid:ColunaGrid id="colunaNome" dataField="pessoaCompartilhamento.nomePessoa" headerText="Nome" minWidth="200" sortable="true" labelFunction="{TabelaPaginadaUtils.defaultLabelFunction}" sortCompareFunction="{TabelaPaginadaUtils.criarDefaultSortFunction(colunaNome)}" />
+			<grid:ColunaGrid id="colunaPorcentagem" dataField="percentualProprietario" headerText="Porcentagem" width="50" labelFunction="{TabelaPaginadaUtils.defaultValorNumericoLabelFunction}" textAlign="right" />
+			<grid:ColunaGrid id="colunaAreaPosse" dataField="areaPosse" headerText="Área posse" width="70" labelFunction="{TabelaPaginadaUtils.defaultValorNumericoLabelFunction}" textAlign="right" />
+			<grid:ColunaGrid id="colunaMarcadoExclusao" dataField="marcadoExclusao" headerText="Marcado exclusão" width="50" labelFunction="{TabelaPaginadaUtils.defaultBooleanLabelFunction}" />
+		</grid:columns>
+	</grid:Grid>
+	
+	<containers:VBoxBancoob id="barraBotoesProprietarios" bottom="5" right="0" width="20" >
+		<componentes:Botao id="botaoAdicionarPessoaAtual" toolTip="Adicionar a pessoa atual" styleName="botaoAdicionarPessoaAtualPeq" />
+		<componentes:Botao id="botaoAdicionar" toolTip="Incluir" styleName="botaoCrudAdicionarPeq"/>
+		<componentes:Botao id="botaoEditar" toolTip="Editar" styleName="botaoCrudAlterarPeq"/>
+		<componentes:Botao id="botaoExcluir" toolTip="Excluir" styleName="botaoCrudRemoverPeq" />
+	</containers:VBoxBancoob>
+	
+</bancoobValidaveis:CanvasValidavel >

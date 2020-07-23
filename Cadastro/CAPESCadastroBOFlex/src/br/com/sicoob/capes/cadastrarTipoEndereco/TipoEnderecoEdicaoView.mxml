@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FormularioCadastroView xmlns="br.com.bancoob.componentes.cadastro.*"
+						xmlns:mx="http://www.adobe.com/2006/mxml"
+						xmlns:campo="br.com.bancoob.componentes.campos.*"
+						xmlns:componente="br.com.bancoob.componentes.*"
+						xmlns:input="br.com.bancoob.componentes.input.*"
+						xmlns:servico="br.com.bancoob.util.servico.*"
+						xmlns:titulo="br.com.bancoob.componentes.titulo.*"
+						xmlns:validavel="br.com.bancoob.componentes.containers.validaveis.*"
+						width="550" height="250" layout="vertical">
+	
+	<validavel:CanvasValidavel width="100%" height="100%">
+		<titulo:SubtituloView id="subtitulo" left="10" right="10" top="10"/>
+		
+		<componente:Rotulo left="10" top="46" text="Código *:" textAlign="left"/>
+		<campo:CampoNumerico id="codigo" x="137" top="46" width="80" validarObrigatorio="true"
+							 validarTipo="{CampoNumerico.SHORT_POSITIVO}" valorMinimo="0"/>
+			
+		<componente:Rotulo left="10" top="72" text="Descrição *:" textAlign="left"/>
+		<input:Texto id="descricao" x="137" y="72" width="420" maxChars="60"
+					 validarObrigatorio="true"/>
+		
+		<componente:Rotulo left="10" top="98" text="Tipo Pessoa Contato *:" textAlign="left"/>
+		<input:Combo id="cmbPessoaContato" validarObrigatorio="true"  
+				   inserirItemOpcional="true" labelField="descricao" width="300" x="137" y="98"
+				   identificadorItem="codigo" />
+		
+	</validavel:CanvasValidavel>
+	<BarraBotoesFormularioCadastroView id="barraBotoes"/>
+	
+</FormularioCadastroView>

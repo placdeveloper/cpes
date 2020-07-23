@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PainelListaBanco 
+	xmlns="br.com.bancoob.componentes.painellista.*" 
+	xmlns:mx="http://www.adobe.com/2006/mxml" 
+	xmlns:servico="br.com.bancoob.util.servico.*"
+	xmlns:tabelaPaginada="br.com.bancoob.componentes.tabelapaginada.*"
+	xmlns:grid="br.com.bancoob.componentes.grid.*"
+	xmlns:cadastrarGrupoEconomico="br.com.sicoob.capes.cadastrarGrupoEconomico.*"
+	metodoPesquisa="obterDadosSelecao"
+	deveExibirMensagemNenhumRegistro="true" >
+	<mx:Script>
+		<![CDATA[
+			import br.com.bancoob.componentes.tabelapaginada.TabelaPaginadaUtils;
+		]]>
+	</mx:Script>
+	<servicoPesquisa>
+		<servico:ServicoJava
+			source="br.com.sicoob.capes.cadastro.fachada.GrupoEconomicoFachada"
+			bloquearOperacao="true"
+			mensagemEspera="Pesquisando dados..." />
+	</servicoPesquisa>
+	<painelFiltro>
+		<cadastrarGrupoEconomico:PainelFiltroGrupoEconomicoView id="painelFiltroGrupoEconomico" width="100%" height="100%" />
+	</painelFiltro>
+	<tabelaPaginada>
+		<tabelaPaginada:TabelaPaginadaBanco
+			id="grid"
+			tamanhoPagina="15"
+			width="100%" height="100%">
+			<tabelaPaginada:MetadadosTabela>
+				<grid:ColunaGrid labelFunction="{TabelaPaginadaUtils.defaultLabelFunction}"
+					propriedade="descricao" headerText="Nome" sortable="true" id="colunaNomeGrupo"
+					sortCompareFunction="{TabelaPaginadaUtils.criarDefaultSortFunction(colunaNomeGrupo)}" />
+			</tabelaPaginada:MetadadosTabela>
+		</tabelaPaginada:TabelaPaginadaBanco>
+	</tabelaPaginada>
+</PainelListaBanco>

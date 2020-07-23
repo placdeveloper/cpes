@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="FichaCadastral_Header" pageWidth="555" pageHeight="95" whenNoDataType="AllSectionsNoDetail" columnWidth="555" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0">
+	<parameter name="TITULO_RELATORIO" class="java.lang.String"/>
+	<parameter name="URL_LOGO" class="java.net.URL"/>
+	<parameter name="pessoa" class="br.com.sicoob.capes.negocio.entidades.vigente.PessoaCompartilhamento"/>
+	<parameter name="ID_UNIDADE_INST" class="java.lang.Integer"/>
+	<parameter name="ID_INSTITUICAO" class="java.lang.Integer"/>
+	<parameter name="LABEL_FILTRO_DATA" class="java.lang.String"/>
+	<parameter name="NUM_COOPERATIVA" class="java.lang.Integer"/>
+	<parameter name="DATA_ULTIMA_ATUALIZACAO" class="java.util.Date"/>
+	<title>
+		<band height="90" splitType="Stretch">
+			<image vAlign="Middle">
+				<reportElement x="0" y="0" width="113" height="90"/>
+				<box topPadding="10" leftPadding="10" bottomPadding="12" rightPadding="10">
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<imageExpression class="java.net.URL"><![CDATA[$P{URL_LOGO}]]></imageExpression>
+			</image>
+			<textField>
+				<reportElement x="113" y="0" width="295" height="90"/>
+				<box leftPadding="0" bottomPadding="12">
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle" markup="none"/>
+				<textFieldExpression class="java.lang.String"><![CDATA[$P{TITULO_RELATORIO}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="408" y="0" width="147" height="30"/>
+				<box leftPadding="3">
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement>
+					<font size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Data de Inclusão no Sistema]]></text>
+			</staticText>
+			<textField pattern="dd/MM/yyyy" isBlankWhenNull="true">
+				<reportElement x="408" y="10" width="147" height="20"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression class="java.util.Date"><![CDATA[$P{pessoa}.getDataInclusaoSistema()]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="408" y="60" width="147" height="30"/>
+				<box leftPadding="3">
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement markup="none">
+					<font size="8" isBold="true"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$P{ID_INSTITUICAO}.intValue() == 1 ? "Agência / PAB" : "Cooperativa / PAC"]]></textFieldExpression>
+			</textField>
+			<textField pattern="###0" isBlankWhenNull="true">
+				<reportElement x="408" y="70" width="147" height="20"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression class="java.lang.String"><![CDATA[$P{NUM_COOPERATIVA} + " / " + $P{ID_UNIDADE_INST}]]></textFieldExpression>
+			</textField>
+			<textField pattern="###0" isBlankWhenNull="true">
+				<reportElement x="113" y="50" width="295" height="40"/>
+				<box topPadding="2" leftPadding="2" bottomPadding="2" rightPadding="2"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression class="java.lang.String"><![CDATA[$P{LABEL_FILTRO_DATA}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="408" y="30" width="147" height="30"/>
+				<box leftPadding="3">
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement>
+					<font size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Data da Última Renovação ]]></text>
+			</staticText>
+			<textField pattern="dd/MM/yyyy" isBlankWhenNull="true">
+				<reportElement x="408" y="40" width="147" height="20"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression class="java.util.Date"><![CDATA[$P{DATA_ULTIMA_ATUALIZACAO}]]></textFieldExpression>
+			</textField>
+		</band>
+	</title>
+</jasperReport>

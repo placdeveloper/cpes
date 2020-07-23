@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FormularioCadastroView 
+	xmlns="br.com.bancoob.componentes.cadastro.*" 
+	xmlns:mx="http://www.adobe.com/2006/mxml" 
+    xmlns:campo="br.com.bancoob.componentes.campos.*"
+	xmlns:componente="br.com.bancoob.componentes.*"
+   	xmlns:input="br.com.bancoob.componentes.input.*"
+	xmlns:servico="br.com.bancoob.util.servico.*"
+	xmlns:titulo="br.com.bancoob.componentes.titulo.*" 
+	xmlns:grid="br.com.bancoob.componentes.grid.*"
+	xmlns:validavel="br.com.bancoob.componentes.containers.validaveis.*"
+	xmlns:procurarPessoa="br.com.sicoob.capes.corporativo.componentes.procurarPessoa.*"
+	layout="vertical"
+	width="620" height="270" >
+	
+	<validavel:CanvasValidavel width="100%" height="100%">
+		<titulo:SubtituloView left="10" right="10" top="0" id="subtitulo" texto="Dados do Funcionário"/>
+		
+		<componente:Rotulo text="CPF *:" textAlign="left" top="32" left="10" />
+		<procurarPessoa:ProcurarPessoaCAPES x="120" y="30" id="procurarPessoa" tipoPessoa="0"
+			toolTip="CPF de identificação da Pessoa e respectivo nome." validarObrigatorio="true"/>
+		
+		<componente:Rotulo text="Matrícula *:" textAlign="left" top="62" left="10" />
+		<input:Texto id="matricula" top="60" width="500" x="120" restrict="0123456789" maxChars="10" validarObrigatorio="true" />
+			
+		<componente:Rotulo text="Função *:" textAlign="left" top="92" left="10" />
+		<input:Combo x="120" y="90" width="500" id="funcao" labelField="descricao"
+			validarObrigatorio="true" identificadorItem="idFuncao" inserirItemOpcional="true"/>
+
+		<componente:Rotulo text="Unidade *:" textAlign="left" top="122" left="10" />
+		<input:Combo x="120" y="120" width="500" id="lotacao" labelField="nomeUnidade"
+			validarObrigatorio="true" identificadorItem="idUnidadeInst" inserirItemOpcional="true"/>
+		
+		<componente:Rotulo text="Núcleo de Origem *:" textAlign="left" top="152" left="10" />
+		<input:Combo x="120" y="150" width="500" id="nucleo" labelField="descricao"
+			validarObrigatorio="true" identificadorItem="idNucleo" inserirItemOpcional="true"/>
+		
+		<componente:Rotulo text="Data de Admissão *:" textAlign="left" top="182" left="10" />
+		<input:Data x="120" y="180" id="dataAdmissao" width="96" validarObrigatorio="true" autoValidacao="false"/>
+
+		<componente:Rotulo text="Data de Desligamento :" textAlign="left" top="182" left="230" />
+		<input:Data x="340" y="180" id="dataDesligamento" width="96" autoValidacao="false" />
+	</validavel:CanvasValidavel>
+	
+	<BarraBotoesFormularioCadastroView id="barraBotoes" />
+	
+</FormularioCadastroView>

@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ListaCadastroView xmlns:mx="http://www.adobe.com/2006/mxml"
+				   xmlns="br.com.bancoob.componentes.cadastro.*"
+				   xmlns:painellista="br.com.bancoob.componentes.painellista.*"
+				   xmlns:servico="br.com.bancoob.util.servico.*"
+				   xmlns:tabelapaginada="br.com.bancoob.componentes.tabelapaginada.*"
+				   xmlns:grid="br.com.bancoob.componentes.grid.*"
+				   width="100%" height="100%">
+	<mx:Script>
+		<![CDATA[
+			import br.com.bancoob.componentes.tabelapaginada.TabelaPaginadaUtils;
+		]]>
+	</mx:Script>
+	<painelLista>
+		<painellista:PainelListaBanco width="100%" height="100%"
+									  deveExibirMensagemNenhumRegistro="true"
+									  selecaoMultipla="false">
+			<painellista:servicoPesquisa>
+				<servico:ServicoJava bloquearOperacao="true" mensagemEspera="Pesquisando dados..."
+									 source="br.com.sicoob.capes.cadastro.fachada.AutorizarFachada"/>
+			</painellista:servicoPesquisa>
+			<painellista:tabelaPaginada>
+				<tabelapaginada:TabelaPaginadaBanco id="grid" width="100%" height="100%"
+													selecaoMultipla="false" tamanhoPagina="15"
+													titulo="OPERAÇÕES">
+					<tabelapaginada:MetadadosTabela id="metadados">
+						<grid:ColunaGrid headerText="Nome" sortCompareFunction="{TabelaPaginadaUtils.criarDefaultSortFunction}"
+										 labelFunction="{TabelaPaginadaUtils.defaultLabelFunction}"
+										 propriedade="nomePessoa" />
+						<grid:ColunaGrid headerText="CPF/CNPJ" sortCompareFunction="{TabelaPaginadaUtils.criarDefaultSortFunction}"
+										 labelFunction="{TabelaPaginadaUtils.defaultCNPJLabelFunction}"
+										 propriedade="pessoa.cpfCnpj" width="150"/>
+						<grid:ColunaGrid headerText="Data da Operação" sortCompareFunction="{TabelaPaginadaUtils.criarDefaultDateSortFunction}"
+										 labelFunction="{TabelaPaginadaUtils.defaultDatetimeLabelFunction}"
+										 propriedade="dataHoraCadastro" width="120"/>
+						<grid:ColunaGrid width="50" headerText="Ação"
+										 itemRenderer="br.com.sicoob.capes.autorizarAlteracoes.renderer.AcoesRenderer"
+										 textAlign="center"/>
+					</tabelapaginada:MetadadosTabela>
+				</tabelapaginada:TabelaPaginadaBanco>
+			</painellista:tabelaPaginada>
+		</painellista:PainelListaBanco>
+	</painelLista>
+	
+	<servicoRecuperacaoInformacoes>
+		<servico:ServicoJava bloquearOperacao="true" mensagemEspera="Pesquisando dados..."
+							 source="br.com.sicoob.capes.cadastro.fachada.AutorizarFachada"/>
+	</servicoRecuperacaoInformacoes>
+
+	<barraBotoesListaCadastro>
+		<BarraBotoesListaCadastroView habilitarBotaoAlterar="false" habilitarBotaoExcluir="false"
+									  habilitarBotaoIncluir="false" habilitarBotaoLimpar="false"
+									  habilitarBotaoVisualizar="false"/>
+	</barraBotoesListaCadastro>
+</ListaCadastroView>

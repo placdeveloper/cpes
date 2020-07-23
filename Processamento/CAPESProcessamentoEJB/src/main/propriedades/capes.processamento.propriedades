@@ -1,0 +1,5 @@
+tamanho.pagina.informacoesvencidas=500
+tamanho.pagina.fechamentoAnotacoesVencidas=500
+tamanho.pagina.fechamentoAutorizacoes=500
+tamanho.pagina.carga.consultasexternas=500
+arquivo.carga.consultasexternas=/mnt/CAPES/anotacoesconsultasexternas.txt

@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="utf-8"?>
+<bancoobValidaveis:ModuloValidavel xmlns:bancoob="br.com.bancoob.componentes.*" 
+				xmlns:bancoobInput="br.com.bancoob.componentes.input.*"
+				xmlns:campos="br.com.bancoob.componentes.campos.*"
+				xmlns:selecaoGeral="br.com.bancoob.sisbr.componentes.selecaoGeral.*"
+				xmlns:pesquisacodigo="br.com.sicoob.capes.comum.componentes.pesquisacodigo.*"
+				xmlns:bancoobValidaveis="br.com.bancoob.componentes.containers.validaveis.*"
+				xmlns:mx="http://www.adobe.com/2006/mxml"
+				xmlns:procurarPessoa="br.com.sicoob.capes.corporativo.componentes.procurarPessoa.*"
+				width="100%" height="500" layout="absolute" styleName="ModuloSemEstilo"
+				label="Pessoa Física" verticalScrollPolicy="auto">
+
+		<mx:Image x="17" y="6" source="br/com/bancoob/imagens/icos/contacts_16.png" alpha=".5"/>		
+		<mx:Label x="39" y="6" text="IDENTIFICAÇÃO" fontWeight="bold" fontFamily="ArialEmbedded" alpha=".8" width="90" height="16"/>
+		<mx:Image y="12" source="br/com/bancoob/imagens/imgsTelas/linha.swf" scaleContent="false" left="132" right="20"/>
+		
+		<bancoob:Rotulo x="25" y="42" text="Tipo de Documento:" textAlign="right" width="140"/>
+		<bancoobInput:Combo x="168" y="40" width="292" id="cboTipoDocumento" labelField="descricao" tabIndex="1" inserirItemOpcional="true" conteudoMaiusculo="true"/>
+
+		<bancoob:Rotulo x="460" y="42" text="Nº do Documento:" width="120" textAlign="right"/>
+		<bancoobInput:Texto x="583" y="40" id="txtNumeroDocumento" width="108" maxChars="35"/>
+
+		<bancoob:Rotulo x="25" y="70" text="Orgão Expedidor:" width="140" textAlign="right"/>
+		<bancoobInput:Texto x="168" y="68" id="txtOrgaoExpedidor" width="138" maxChars="10"/>
+
+		<bancoob:Rotulo x="360" y="70" text="UF:" width="30" textAlign="right"/>
+		<bancoobInput:Combo x="397" y="68" width="60" id="cboUFOrgaoExpedidor" labelField="siglaUF" inserirItemOpcional="true" conteudoMaiusculo="true"/>
+
+		<bancoob:Rotulo x="460" y="70" text="Data de Emissão:" textAlign="right" width="120"/>
+		<campos:CampoData x="583" y="68" id="txtDataEmissaoDocumento"/>
+		
+		<mx:Image x="17" y="106" source="br/com/bancoob/imagens/icos/vCard.png" alpha=".5"/>
+		<mx:Label x="39" y="106" text="INFORMAÇÕES GERAIS" fontWeight="bold" fontFamily="ArialEmbedded" alpha=".8"/>
+		<mx:Image y="112" source="br/com/bancoob/imagens/imgsTelas/linha.swf" scaleContent="false" left="162" right="20"/>
+
+		<bancoob:Rotulo x="25" y="142" height="20" text="Data de Nascimento:" width="140" textAlign="right"/>
+		<campos:CampoData x="168" y="140" id="txtDataNascimento"/>
+
+		<bancoobInput:Check x="330" y="140" id="chkEmancipado" label="Emancipado" enabled="false"/>
+		
+		<bancoob:Rotulo x="452" y="142" height="20" text="Sexo:" textAlign="right" width="40"/>
+		<bancoobInput:RadioGrupoBancoob id="rdbSexo" />
+		<bancoobInput:Radio x="495" y="140" label="Masculino" tabEnabled="true" value="M"  groupName="rdbSexo"  />
+		<bancoobInput:Radio x="580" y="140" label="Feminino"  tabEnabled="true" value="F" groupName="rdbSexo" />		
+		
+		<bancoob:Rotulo x="25" y="170" id="lblNacionalidade" textAlign="right" text="País de nascimento:"  width="140"/>
+		<pesquisacodigo:PesquisaCodigo id="procurarNacionalidade" x="168" y="168" width="500" 
+					tituloJanelaPesquisa="Procurar Nacionalidade" quantidadeMaximaCaracteresCampoCodigo="5"
+					classeServico="br.com.sicoob.capes.cadastro.fachada.NacionalidadeFachada"/>
+		
+	 	<bancoob:Rotulo x="25" y="198" id="lblNaturalidade" textAlign="right" text="Naturalidade:"  width="140"/>
+		<selecaoGeral:ProcurarGeralV2 id="procurarNaturalidade" width="500"
+					tipoProcura="9005" titulo="Procurar Naturalidade"
+					campoCodigo="IDLOCALIDADE" 
+					campoDescricao="NOMELIMPOLOCALIDADE" x="168" y="196"
+					filtroAdicional="90051"/>		
+		<bancoobInput:Texto x="495" y="196" id="txtNaturalidade" width="228" maxChars="40" />
+
+		<bancoob:Rotulo x="25" y="226" height="20" text="Escolaridade:" width="140" textAlign="right"/>
+		<bancoobInput:Combo x="168" y="224" id="cboGrauInstrucao" labelField="descricao" width="320" inserirItemOpcional="true" conteudoMaiusculo="true"/>
+		
+		<bancoob:Rotulo x="25" y="254" height="20" text="Profissão:" width="140" textAlign="right"/>
+		<pesquisacodigo:PesquisaCodigo id="procurarProfissao" x="168" y="252" width="500"
+					campoCodigo="idOcupacaoProfissional" tituloJanelaPesquisa="Procurar Profissão"
+					classeServico="br.com.sicoob.capes.cadastro.fachada.OcupacaoProfissionalFachada" />
+				
+		<bancoob:Rotulo x="25" y="282" height="20" text="Natureza da Ocupação:" textAlign="right" width="140"/>
+		<bancoobInput:Combo x="168" y="280" width="320" id="cboVinculoEmpregaticio" labelField="descricao" inserirItemOpcional="true" conteudoMaiusculo="true"/>
+	    <mx:Label x="510" y="282" text="test" id="lblValorMinimoRenda" fontWeight="bold" fontFamily="ArialEmbedded" alpha=".8"/>	
+	
+		<mx:Image x="17" y="318" source="br/com/bancoob/imagens/icos/info_16.png" alpha=".5"/>
+		<mx:Label x="39" y="318" text="INFORMAÇÃO FAMILIAR" fontWeight="bold" fontFamily="ArialEmbedded" alpha=".8"/>
+		<mx:Image y="324" source="br/com/bancoob/imagens/imgsTelas/linha.swf" scaleContent="false" left="168" right="20"/>
+		
+		<bancoobInput:Check x="168" y="354" label="Nome do pai não informado no documento de identificação"  id="checkNomePaiNaoInformado"/>
+		<bancoob:Rotulo x="25" y="384" height="20" text="Pai:" textAlign="right" width="140"/>
+		<bancoobInput:Texto x="168" y="382" id="txtNomePai" width="245" maxChars="50"/>
+		
+		<bancoobInput:Check x="478" y="354" label="Nome da mãe não informado no documento de identificação" id="checkNomeMaeNaoInformado" />
+		<bancoob:Rotulo x="478" y="384" height="20" text="Mãe:" textAlign="left" width="35"/>
+		<bancoobInput:Texto x="516" y="382" id="txtNomeMae" width="245" maxChars="50" />
+		
+		<bancoob:Rotulo x="25" y="412" height="20" text="Estado Civil:" width="140" textAlign="right"/>
+		<bancoobInput:Combo x="168" y="410" width="245" id="cboEstadoCivil" labelField="descricao" inserirItemOpcional="true" conteudoMaiusculo="true"/>
+		
+		<bancoob:Rotulo x="25" y="440" height="20" text="Regime de Casamento:"  width="140" textAlign="right"/>
+		<bancoobInput:Combo x="168" y="438" width="320" id="cboRegimeCasamento" labelField="descricao" 
+							inserirItemOpcional="true" conteudoMaiusculo="true"/>
+	
+		<bancoob:Rotulo x="25" y="468" text="Cônjuge/Companheiro(a):" width="140" textAlign="right" />
+		<procurarPessoa:ProcurarPessoaCAPES x="168" y="466" id="procurarPessoa" tipoPessoa="0" toolTip="CPF/CNPJ de identificação da Pessoa e respectivo nome." />
+		
+		<bancoob:Rotulo x="488" y="440" height="20" text="Dependentes:" textAlign="right" width="92"/>
+		<campos:CampoInteiroView x="583" y="438" width="32" id="txtQuantidadeDependentes" valorMaximo="99" maxChars="2" valorMinimo="0" 
+								 validarObrigatorio="true"/>
+	
+</bancoobValidaveis:ModuloValidavel>

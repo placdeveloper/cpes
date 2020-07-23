@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8"?>
+<bancoobValidaveis:CanvasValidavel 
+	xmlns="br.com.bancoob.componentes.containers.*" 
+	xmlns:mx="http://www.adobe.com/2006/mxml" 
+	xmlns:bancoobValidaveis="br.com.bancoob.componentes.containers.validaveis.*"
+	xmlns:titulo="br.com.bancoob.componentes.titulo.*" 
+	xmlns:componentes="br.com.bancoob.componentes.*" 
+	xmlns:input="br.com.bancoob.componentes.input.*"
+	xmlns:campos="br.com.bancoob.componentes.campos.*"
+	xmlns:selecaoGeral="br.com.bancoob.sisbr.componentes.selecaoGeral.*"
+	xmlns:componentepesquisaendereco="br.com.sicoob.capes.comum.componentes.pesquisaendereco.*"
+	xmlns:componentesCapes="br.com.sicoob.capes.comum.componentes.input.*"
+	width="100%" height="100%" styleName="ModuloSemEstilo" verticalScrollPolicy="auto">
+	
+	<mx:Script>
+		<![CDATA[
+			import br.com.bancoob.componentes.tabelapaginada.TabelaPaginadaUtils;
+		]]>
+	</mx:Script>
+	
+	<!-- ÁREA DADOS BÁSICOS-->
+	<titulo:SubtituloView texto="Simples" x="5" y="0" />
+	
+	<componentes:Rotulo text="Tipo localização: " x="10" y="27" textAlign="left" />
+	<input:Combo id="comboTipoLocalizacao" left="120" y="25" right="15" labelField="descricao" conteudoMaiusculo="true" validarObrigatorio="true" inserirItemOpcional="true" labelItemOpcional="SELECIONE" tabIndex="1" />
+	
+	<componentes:Rotulo text="Tipo uso: " x="10" y="52" textAlign="left" />
+	<input:Combo id="comboTipoUso" left="120" y="50" right="15" labelField="descricao" conteudoMaiusculo="true" validarObrigatorio="true" inserirItemOpcional="true" labelItemOpcional="SELECIONE" tabIndex="2" />
+	
+	<componentes:Rotulo text="Tipo bem: " x="10" y="77" textAlign="left" />
+	<input:Combo id="comboTipoBem" left="120" y="75" right="15" labelField="descricao" conteudoMaiusculo="true" validarObrigatorio="true" inserirItemOpcional="true" labelItemOpcional="SELECIONE" tabIndex="3" />
+
+	<componentes:Rotulo text="Descrição: " x="10" y="102" textAlign="left" />
+	<input:TextoArea id="campoDescricao" left="120" y="100" right="15" height="100" maxChars="1000" validarObrigatorio="true" tabIndex="4" />
+
+	<componentes:RotuloMultLine x="10" y="207" width="100" text="Informações Gerais do Imóvel: " textAlign="left" />
+	<input:TextoArea id="campoInformacoesGerais" left="120" y="205" right="15" height="100" maxChars="1000" tabIndex="4" />
+	
+	<componentes:Rotulo text="Denominação: " x="10" y="312" textAlign="left" />
+	<input:Texto id="campoDenominacao" left="120" y="310" right="15" maxChars="50" validarObrigatorio="true" tabIndex="5" />
+	
+	<componentes:Rotulo text="Valor do bem: " x="10" y="337" textAlign="left" />
+	<componentesCapes:CampoMoeda id="campoValorBem" x="120" y="335" width="150" permitirValoreNegativos="false" valorMinimo="0" valorMaximo="99999999999.99" casasDecimais="2" maxChars="14" validarObrigatorio="true" tabIndex="6" />
+	<input:Check id="checkValorBem" x="290" y="335" label="Não informado/Desconhecido" tabIndex="7" />
+	
+	<componentes:Rotulo text="Área total: " x="10" y="362" textAlign="left" />
+	<componentesCapes:CampoNumerico id="campoAreaTotal" x="120" y="360" width="100" permitirValoreNegativos="false" valorMinimo="0" valorMaximo="9999999.9999" casasDecimais="4" maxChars="12" validarObrigatorio="true" tabIndex="8" />
+	<componentes:Rotulo text="Unidade de medida: " x="240" y="362" textAlign="left" />
+	<input:Combo id="comboUnidadeMedida" left="350" y="360" right="15" labelField="descricao" conteudoMaiusculo="true" inserirItemOpcional="true" labelItemOpcional="SELECIONE" validarObrigatorio="true" tabIndex="9" />
+
+	<componentes:Rotulo text="Mês renovação seguro: " x="10" y="387" textAlign="left" />
+	<componentesCapes:CampoNumerico id="campoMesRenovacao" x="120" y="385" agruparDigitos="false" permitirValoreNegativos="false" valorMinimo="1" valorMaximo="12" width="40" maxChars="2" tabIndex="10" />
+	
+	<!-- AREA DE LOCALIZAÇÃO -->
+	<titulo:SubtituloView texto="Localização" x="5" y="410" />
+	
+	<componentes:Rotulo text="CEP: " x="10" y="437" textAlign="left" />
+	<componentepesquisaendereco:PesquisaEndereco id="componentePesquisaEndereco" x="120" y="435" validarObrigatorio="false" tabIndex="11" />
+	
+	<componentes:Rotulo x="10" y="462" text="Tipo Logradouro: " textAlign="left" />
+	<input:Combo id="comboTipoLogradouro" left="120" y="460" right="15" labelField="nome" enabled="false" somenteMaiusculas="true" inserirItemOpcional="true" labelItemOpcional="SELECIONE" tabIndex="13" />
+	
+	<componentes:Rotulo x="10" y="487" text="Logradouro: " textAlign="left" />
+	<input:Texto id="campoLogradouro" left="120" y="485" right="15" maxChars="40" editable="false" validarObrigatorio="false" somenteMaiusculas="true" tabIndex="14" />
+	
+	<componentes:Rotulo x="10" y="512" text="Número: " textAlign="left" />
+	<input:Texto id="campoNumero" x="120" y="510" width="100" maxChars="6" somenteMaiusculas="true" tabIndex="15" />
+	<input:Check x="230" y="512" id="checkNumero" label="Sem número" />
+	
+	<componentes:Rotulo x="10" y="537" text="Complemento: " textAlign="left" />
+	<input:Texto id="campoComplemento" x="120" y="535" width="100" maxChars="25" validarObrigatorio="false" somenteMaiusculas="true" tabIndex="16" />
+	
+	<componentes:Rotulo x="10" y="562" text="Bairro: " textAlign="left" />
+	<input:Texto id="campoBairro" x="120" y="560" width="150" maxChars="30" editable="false" validarObrigatorio="false" somenteMaiusculas="true" tabIndex="17" />
+	
+	<componentes:Rotulo x="10" y="587" text="Município: " textAlign="left" />
+	<selecaoGeral:ProcurarGeralV2 id="componentePesquisaMunicipio" x="120" y="585" tabIndex="18"
+								  tipoProcura="9005" filtroAdicional="90051"
+								  validarObrigatorio="true"
+								  titulo="Procurar Município" campoCodigo="IDLOCALIDADE"
+								  campoDescricao="NOMELIMPOLOCALIDADE" />
+	
+</bancoobValidaveis:CanvasValidavel >

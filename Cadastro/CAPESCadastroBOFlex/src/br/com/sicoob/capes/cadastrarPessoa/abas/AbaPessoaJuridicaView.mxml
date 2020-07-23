@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<bancoobValidaveis:ModuloValidavel xmlns:bancoob="br.com.bancoob.componentes.*" 
+								   xmlns:bancoobInput="br.com.bancoob.componentes.input.*"
+								   xmlns:campos="br.com.bancoob.componentes.campos.*"
+								   xmlns:pesquisacodigo="br.com.sicoob.capes.comum.componentes.pesquisacodigo.*"
+								   xmlns:bancoobValidaveis="br.com.bancoob.componentes.containers.validaveis.*"
+								   xmlns:mx="http://www.adobe.com/2006/mxml"
+								   width="911.0606" height="537.9545" layout="absolute" styleName="ModuloSemEstilo"
+								   label="Pessoa Jurídica" verticalScrollPolicy="auto">
+	
+	<mx:Image x="17" y="6" source="br/com/bancoob/imagens/icos/sinfo_16.png" alpha=".5"/>		
+	<mx:Label x="39" y="6" text="DADOS DA EMPRESA" fontWeight="bold" fontFamily="ArialEmbedded" alpha=".8" width="118" height="16"/>
+	<mx:Image y="12" source="br/com/bancoob/imagens/imgsTelas/linha.swf" scaleContent="false" left="149" right="20"/>
+	
+	<bancoob:Rotulo x="0" y="28" text="Natureza Jurídica:" width="150" textAlign="right"/>
+	<bancoobInput:Combo x="155" y="28" width="500" id="cboFormaConstituicao" tabIndex="1" 
+						inserirItemOpcional="true" labelField="descricao" conteudoMaiusculo="true" labelItemOpcional="SELECIONE" validarObrigatorio="true"/>
+	
+	<bancoob:Rotulo x="15" y="55" text="Esfera Administrativa:" width="135" textAlign="right"/>
+	<bancoobInput:Combo x="155" y="55" width="320" id="cboEsferaAdministrativa"  
+						inserirItemOpcional="true" labelField="descricao" conteudoMaiusculo="true" labelItemOpcional="SELECIONE" validarObrigatorio="true"/>
+	
+	<bancoob:Rotulo x="0" y="83" text="Porte:" width="150" textAlign="right"/>
+	<bancoobInput:Texto x="155" y="83" id="tipoPorte" width="320" textAlign="left" height="22" editable="false" enabled="false"/>
+	<bancoob:Rotulo x="488" y="85" text="" id="lblLimitesTipoEmpresa" />
+	
+	<bancoob:Rotulo x="80" y="111" text="Capital Social:" textAlign="right" />
+	<campos:CampoMoedaView x="155" y="110" id="txtCapitalSocial" width="100"  
+						   valorMinimo="0" valorMaximo="999999999999" maxChars="12" validarObrigatorio="true"/>
+	
+	<bancoob:Rotulo x="59" y="137" text="Inscrição Estadual:" textAlign="right"/>
+	<bancoobInput:Texto x="155" y="137" id="txtInscricaoEstadual" width="108"  maxChars="15" restrict="{0-9}"/>
+	
+	<bancoob:Rotulo x="56" y="164" text="Inscrição Municipal:" textAlign="right"/>
+	<bancoobInput:Texto x="155" y="164" id="txtInscricaoMunicipal" width="108" maxChars="15" />
+	
+	<bancoob:Rotulo x="0" y="191" text="Data da Constituição:" textAlign="right" width="150"/>
+	<campos:CampoData x="155" y="188" id="txtDataConstituicao" width="100"/>
+	
+	<bancoob:Rotulo x="0" y="218" id="lblNacionalidade" textAlign="right" text="País de Constituição:"  width="150"/>
+	<pesquisacodigo:PesquisaCodigo x="155" y="216" id="procurarNacionalidade" width="500" validarObrigatorio="true"
+								   tituloJanelaPesquisa="Procurar Nacionalidade" quantidadeMaximaCaracteresCampoCodigo="5"
+								   classeServico="br.com.sicoob.capes.cadastro.fachada.NacionalidadeFachada"/>
+	
+	<mx:Image x="17" y="258" source="br/com/bancoob/imagens/icos/Import.png" alpha=".5"/>
+	<mx:Label x="39" y="258" text="REGISTRO NO ÓRGÃO COMPETENTE" fontWeight="bold" fontFamily="ArialEmbedded" alpha=".8" width="193" height="18"/>
+	<mx:Image y="265" source="br/com/bancoob/imagens/imgsTelas/linha.swf" scaleContent="false" left="223" right="20"/>
+	
+	<bancoob:Rotulo x="0" y="280"  textAlign="right" text="Nº do Registro no Órgão:"  width="228"/>
+	<bancoobInput:Texto x="236" y="278" id="txtNumeroRegistroOrgao" width="120" maxChars="12" restrict="{0-9}"/>
+	
+	<bancoob:Rotulo x="438" y="277" textAlign="right" text="Data do Registro:"  width="135"/>
+	<campos:CampoData x="575" y="275" id="txtDataRegistroJunta" width="100"/>
+	
+	<mx:Image x="17" y="312" source="br/com/bancoob/imagens/icos/Text.png" alpha=".5"/>
+	<mx:Label x="39" y="312" text="ALTERAÇÃO DE REGISTRO NO ÓRGÃO COMPETENTE" fontWeight="bold" fontFamily="ArialEmbedded" alpha=".8" width="270" height="16"/>
+	<mx:Image y="319" source="br/com/bancoob/imagens/imgsTelas/linha.swf" scaleContent="false" left="250.25" right="20.210632" height="16.05"/>
+	
+	<bancoob:Rotulo x="0" y="345" height="20" text="Nº da Última Alteração:" width="228" textAlign="right"/>
+	<bancoobInput:Texto x="236" y="343" id="txtNumeroUltimaAlteracao" width="120" maxChars="12" restrict="{0-9}"/>
+	
+	<bancoob:Rotulo x="438" y="345" height="20" text="Data de Alteração:" width="135" textAlign="right"/>
+	<campos:CampoData x="575" y="343" id="txtDataUltimaAlteracao" width="100"/>
+	
+	<mx:Image x="17" y="376" source="br/com/bancoob/imagens/icos/remov_16.png" alpha=".5" visible="true"/>
+	<mx:Label x="39" y="376" text="REPRESENTAÇÃO" fontWeight="bold" fontFamily="ArialEmbedded" alpha=".8" visible="true"/>
+	<mx:Image y="382" source="br/com/bancoob/imagens/imgsTelas/linha.swf" scaleContent="false" left="137" right="20.060608" height="16" visible="true"/>
+	
+	<bancoob:Rotulo x="0" y="406" height="20" text="Nº do Registro de Representação:" width="228" textAlign="right" visible="true"/>		
+	<bancoobInput:Texto x="236" y="404" id="txtNumeroRegistroRepresentacao" width="120" maxChars="12" restrict="{0-9}" visible="true"/>
+	
+	<bancoob:Rotulo x="420" y="406" height="20" text="Data de Registro da ATA:" width="154" textAlign="right" visible="true"/>
+	<campos:CampoData x="575" y="404" id="txtDataRegistroAta" width="100" visible="true"/>
+	
+</bancoobValidaveis:ModuloValidavel>

@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<componentes:Modulo xmlns:mx="http://www.adobe.com/2006/mxml"
+					xmlns:componentes="br.com.bancoob.componentes.*"
+					xmlns:grid="br.com.bancoob.componentes.grid.*"					
+					xmlns:namespace="http://namespace"
+					xmlns:titulo="br.com.bancoob.componentes.titulo.*"
+					xmlns:comp="br.com.bancoob.componentes.*" 
+					xmlns:comb="br.com.bancoob.componentes.input.*" 
+					xmlns:camp="br.com.bancoob.componentes.campos.*"
+					xmlns:filtro="br.com.bancoob.componentes.painellista.*"
+					xmlns:tabelaPaginada="br.com.bancoob.componentes.tabelapaginada.*" 
+					xmlns:bancoobGrid="br.com.bancoob.componentes.grid.*"
+					xmlns:bancoobPaginacao="br.com.bancoob.componentes.paginacao.*"
+					xmlns:listaSelecao="br.com.bancoob.componentes.listaSelecao.*"		
+					width="950" height="514" layout="absolute">
+	
+	<mx:Label x="10" y="10" text="Esfera Administrativa"/>
+	<comb:Combo id="cmbEsferaAdm" x="140" y="8" width="197" labelField="descricao" inserirItemOpcional="true" ></comb:Combo>
+	
+	<componentes:Botao id="btnPesquisar" x="345" y="8" label="Pesquisar"/>
+	<componentes:Botao id="btnLimpar" x="435" y="8" label="Limpar"/>
+	
+	<listaSelecao:ListaSelecaoView id="listaConstituicao" labelField="codigoDescricao" x="10" y="80"
+								   nomeLista="listaTipoFormaConstituicoesDisponiveis"	nomeListaNaoSelecionado="listaTipoFormaConstituicoesVinculadas" 
+								   tamanhoList="430" alturaList="350" height="400" tituloListaSelecao="Forma de Constituição disponíveis" tituloListaSelecionados="Forma de Constituição vinculadas" >
+	</listaSelecao:ListaSelecaoView>
+	
+	<componentes:Botao id="btnGravar" x="394" y="480" label="Gravar"/>
+	<componentes:Botao id="btnCancelar" x="487" y="480" label="Cancelar"/>
+	
+	
+	
+</componentes:Modulo>

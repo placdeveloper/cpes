@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sisbrweb>
+
+<sisbrweb>
+	<MDIPLATAFORMACUC>
+	
+		<menu id="MNUGRUPOPARCEIRO" label="Parceiro de Negócio" icone="br/com/bancoob/imagens/icos/Pessoa.png">
+			<item id="MNUINCPARCEIRO" label="Inclusão de Parceiro" swf="/capes/swf/cadastronovapessoa" condicoes="MNUINCPARCEIRO" />
+			<item id="MNUPESSOAFISICA" label="Pessoa Física" swf="/capes/swf/cadastropessoa" condicoes="tipoPF" />
+			<item id="MNUPESSOAJURIDICA" label="Pessoa Jurídica" swf="/capes/swf/cadastropessoa" condicoes="tipoPJ" />
+			<item id="MNUINSTITUICAORELACIONA" label="Instituições de Relacionamento" swf="/capes/swf/relacionamentoinstituicaoselecao" />
+			<item id="MNUINFORMACAOPROFISSIONAL" label="Informações Profissionais (Novo)" swf="/capes/swf/informacaoprofissionalselecao" condicoes="tipoPF" />
+			<item id="MNURELACIONAMENTO" label="Relacionamentos e Poderes" swf="/capes/swf/relacionamentopessoaselecao" />
+			<item id="MNUCONTATO" label="Contatos" swf="/capes/swf/contatopessoaselecao" />
+			<item id="MNUCERTIDOES" label="Certidões" swf="/capes/swf/certidaoselecao" />
+			<item id="MNUCLIENTESELECAO" label="Dados do Cliente" swf="/capes/swf/pessoainstituicaoselecao" />
+			<item id="MNUPERFILTRIBUTARIO" label="Perfil Tributário" swf="/capes/swf/tributacaoselecao" condicoes="tipoPJ" />
+			<item id="MNUCMENSAGENSCLIENTE" label="Mensagem Individual" swf="/capes/swf/mensagemselecao" />
+			<item id="MNUENCAMINHARAUTORIZACAO" label="Encaminhar para Autorização" swf="/capes/swf/encaminharautorizacao" />
+		</menu>
+
+		<menu id="MNUGRUPOAVALFINANCEIRA" label="AVALIACAO FINANCEIRA" icone="br/com/bancoob/imagens/icos/Pessoa.png">
+			<item id="MNUREFERENCIAPESSOA" label="Referências" swf="/capes/swf/referenciapessoaselecao" />
+			<item id="MNUBEMPESSOA" label="Bens" swf="/capes/swf/bemselecao" />
+			<item id="MNUBEM" label="Bens (NOVO)" swf="/capes/swf/cadastrobem" />
+			<item id="MNUFONTERENDA" label="Rendas" swf="/capes/swf/fonterendaselecao" condicoes="tipoPF" />
+			<item id="MNUFONTERENDA" label="Faturamento" swf="/capes/swf/fonterendaselecao" condicoes="tipoPJ" />
+			<item id="MNUPRODUTOR" label="Produtor" swf="/capes/swf/produtorselecao" />
+			<item id="MNUANOTACAO" label="Anotações" swf="/capes/swf/anotacaosumarioselecao" />
+		</menu>
+
+		<menu id="MNUPRODUTOSBANCOOB" label="PRODUTOS BANCOOB" icone="br/com/bancoob/imagens/icos/sicoob16.png">
+			<item id="MNUENDERECOBANCOOB" label="Endereço de Correspondência" swf="/capes/swf/enderecobancoobselecao" parametros="produtosBancoob" />
+			<item id="MNUCLIENTEBANCOOB" label="Dados do Cliente" swf="/capes/swf/pessoainstituicaoselecao" parametros="produtosBancoob" />
+			<item id="MNURELACIONAMENTOBANCOOB" label="Relacionamentos e Poderes" swf="/capes/swf/relacionamentopessoaselecao" parametros="produtosBancoob" />
+			<item id="MNUINFORMACAOPROFISSIONALBANCOOB" label="Informações Profissionais (Novo)" swf="/capes/swf/informacaoprofissionalselecao" parametros="produtosBancoob" />
+		</menu>
+		
+	</MDIPLATAFORMACUC>
+</sisbrweb>

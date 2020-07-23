@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<bancoobValidaveis:ModuloValidavel xmlns:mx="http://www.adobe.com/2006/mxml"
+			xmlns:bancoobValidaveis="br.com.bancoob.componentes.containers.validaveis.*"
+			xmlns:bancoobInput="br.com.bancoob.componentes.input.*"
+			xmlns:bancoob="br.com.bancoob.componentes.*"
+			xmlns:validaveis="br.com.bancoob.componentes.containers.validaveis.*"
+			xmlns:titulo="br.com.bancoob.componentes.titulo.*" 
+			xmlns:inputCadastroUnico="br.com.sicoob.capes.comum.componentes.input.*"
+			xmlns:containers="br.com.bancoob.componentes.containers.*"
+			width="100%" height="100%" layout="absolute" styleName="ModuloSemEstilo">
+			
+	<validaveis:CanvasValidavel id="tela" height="307" width="100%">
+		
+		<titulo:SubtituloView texto="Telefone" left="10" right="10"  top="10" />
+		<containers:HBoxBancoob top="50" x="40" y="35">
+			<containers:VBoxBancoob width="45%" y="3">
+				<bancoob:Rotulo text="Data da última alteração:" id="rotuloDataHoraInicio" height="22"/>
+				<bancoob:Rotulo text="Usuário da última alteração:" id="rotuloUsuarioAlteracao" height="22"/>
+				<bancoob:Rotulo text="Tipo de Telefone:" textAlign="left" height="22"/>
+				<bancoob:Rotulo text="DDD:" textAlign="left" height="22"/>
+				<bancoob:Rotulo text="Número:" textAlign="left" height="22"/>
+				<bancoob:Rotulo text="Ramal:" textAlign="left" height="22"/>
+				<bancoob:Rotulo text="Observação:" textAlign="left" height="22"/>
+			</containers:VBoxBancoob>
+			
+			<containers:VBoxBancoob width="55%" y="0" >
+				<bancoob:Rotulo id="dataHoraInicio" height="22"/>
+				<bancoob:Rotulo id="usuarioAlteracao" height="22"/>
+				<bancoobInput:Combo id="cmbTipoTelefone"  labelField="descricao" inserirItemOpcional="true" width="400" validarObrigatorio="true" height="22"/>
+				<inputCadastroUnico:ComboDDD id="cmbDdd" width="85" inserirItemOpcional="true" height="22"/>
+				<bancoobInput:Texto id="numero" width="85" maxChars="12" restrict="0-9" textAlign="right" validarObrigatorio="true" height="22"/>
+				<bancoobInput:Texto id="ramal" width="85" restrict="0-9" maxChars="4" textAlign="right" height="22"/>
+				<bancoobInput:Texto id="observacao" width="400" maxChars="50" textAlign="left" toolTip="Observação do Registro." height="22"/>
+			</containers:VBoxBancoob>
+		</containers:HBoxBancoob>
+		
+	</validaveis:CanvasValidavel>
+	
+</bancoobValidaveis:ModuloValidavel>

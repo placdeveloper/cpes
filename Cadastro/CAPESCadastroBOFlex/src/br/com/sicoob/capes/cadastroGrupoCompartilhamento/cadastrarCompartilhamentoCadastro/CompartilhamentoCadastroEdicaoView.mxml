@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<componente:Modulo xmlns:mx="http://www.adobe.com/2006/mxml"
+						  xmlns:titulo="br.com.bancoob.componentes.titulo.*"
+						  xmlns:componente="br.com.bancoob.componentes.*"
+						  xmlns:input="br.com.bancoob.componentes.input.*"
+						  xmlns:campo="br.com.bancoob.componentes.campos.*"
+						  xmlns:containers="br.com.bancoob.componentes.containers.*"
+						  xmlns:namespace="http://namespace"
+						  xmlns:toolTipUtil="br.com.bancoob.sisbr.toolTipUtil.*"
+						  xmlns:abas="br.com.sicoob.capes.cadastrarBem.abas.*"
+						  width="462" height="166">
+	
+	<titulo:SubtituloView texto="Cadastro de Grupo Compartilhamento" left="10" right="10" top="10" id="subtitulo">
+		
+	</titulo:SubtituloView>
+	
+	<componente:Rotulo left="10" top="46" width="78" text="Código *:" textAlign="right"/>
+	<campo:CampoNumerico id="codigo" top="44" width="89" x="96" tabIndex="1" maxChars="5" valorMinimo="1" valorMaximo="32767" />
+	
+	<componente:Rotulo left="10" top="72" width="78" text="Descrição *:" textAlign="right"/>
+	<input:Texto id="descricao" x="96" y="72" width="356" maxChars="60" tabIndex="2"/>
+	
+	<componente:Rotulo x="10" y="100" textAlign="right" text="Integração com a Receita Federal: " />
+	<input:RadioGrupoBancoob id="grupoSRF" />
+	<input:Radio x="175" y="98" id="srfManter" label="Manter" groupName="grupoSRF" tabIndex="3" selected="true"/>
+	<input:Radio x="250" y="98" id="srfSim" label="Sim" groupName="grupoSRF" value="true" tabIndex="4" />
+	<input:Radio x="320" y="98" id="srfNao" label="Não" groupName="grupoSRF" value="false" tabIndex="5"/>
+	<!--<mx:CheckBox id="chkSRF" x="175" y="98" />-->
+	
+	<titulo:LinhaView x="10" bottom="33" width="442"/>
+	
+	<containers:HBoxBancoob left="10" right="10" bottom="5" horizontalAlign="right">
+		<componente:Botao label="SALVAR" id="btnSalvar"/>
+		<componente:Botao label="CANCELAR" id="btnCancelar"/>
+		<componente:Botao label="FECHAR" id="btnFechar"/>
+	</containers:HBoxBancoob>
+	<toolTipUtil:ToolTipUtil id="toolTipUtil"/>
+</componente:Modulo>

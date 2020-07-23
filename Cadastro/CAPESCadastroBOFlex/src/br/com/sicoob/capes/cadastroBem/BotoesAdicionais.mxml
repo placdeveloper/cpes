@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mx:Canvas xmlns:mx="http://www.adobe.com/2006/mxml"
+		   xmlns:bancoob="br.com.bancoob.componentes.*"
+		   xmlns:botoes="br.com.bancoob.componentes.botoes.*"
+		   borderStyle="none" clipContent="false" horizontalScrollPolicy="off" verticalScrollPolicy="off"
+		   width="100%" height="100%">
+	
+	<botoes:BotaoPlataforma id="botaoConsultarPosse" x="19" y="0" buttonMode="true"
+							imagem="br\com\bancoob\imagens\icos\certidao.png"
+							rotulo="CONSULTAR POSSE" tabIndex="401" useHandCursor="true" enabled="false" />
+	
+	<botoes:BotaoPlataforma id="botaoSemPatrimonio" x="19" y="60" buttonMode="true"
+							imagem="br\com\bancoob\imagens\icos\PNG\docs_32.png"
+							rotulo="NÃO POSSUI PATRIMÔNIO" tabIndex="402" useHandCursor="true"/>
+	
+	<botoes:BotaoPlataforma id="botaoRecusouInformar" x="19" y="120" buttonMode="true"
+							imagem="br\com\bancoob\imagens\icos\aviso.png"
+							rotulo="RECUSOU-SE A INFORMAR" tabIndex="403" useHandCursor="true"/>
+	
+	<!--<botoes:BotaoPlataforma id="botaoDesbloquearBem" x="19" y="180" buttonMode="true"
+							imagem="br\com\bancoob\imagens\icos\PNG\ulock_32.png"
+							rotulo="DESBLOQUEAR BEM" tabIndex="403" useHandCursor="true" enabled="false" /> -->
+
+</mx:Canvas>

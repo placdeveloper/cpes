@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Modulo xmlns="br.com.bancoob.componentes.*" 
+	xmlns:mx="http://www.adobe.com/2006/mxml" 
+	xmlns:grid="br.com.bancoob.componentes.grid.*" 
+	xmlns:navegacao="br.com.bancoob.componentes.navegacao.*" 
+	xmlns:abas="br.com.sicoob.capes.cadastrarRelacionamentoPessoa.abas.*" 
+	width="100%" 
+	height="100%">
+	<mx:Script>
+		<![CDATA[
+			import br.com.bancoob.componentes.tabelapaginada.TabelaPaginadaUtils;
+		]]>
+	</mx:Script>
+	<navegacao:Tab width="100%" height="100%" id="navegacaoTab" paddingBottom="10" paddingLeft="10"
+			paddingRight="10" paddingTop="10" backgroundAlpha=".4">
+		<abas:abaRelacionamentosCedidosView id="abaCedidos" />
+		<abas:abaRelacionamentosExercidosView id="abaExercidos" />
+	</navegacao:Tab>
+</Modulo>

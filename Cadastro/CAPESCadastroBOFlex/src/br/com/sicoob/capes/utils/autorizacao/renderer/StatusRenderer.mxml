@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<containers:HBoxBancoob xmlns:mx="http://www.adobe.com/2006/mxml"
+						width="100%" height="100%" creationComplete="init()"
+						xmlns:containers="br.com.bancoob.componentes.containers.*"
+						xmlns:componentes="br.com.bancoob.componentes.*"
+						horizontalAlign="center" horizontalScrollPolicy="off"
+						implements="mx.controls.listClasses.IDropInListItemRenderer"
+						verticalScrollPolicy="off">
+	
+	<mx:Script>
+		<![CDATA[
+			import br.com.sicoob.capes.comum.enums.SituacaoRegistroEnum;
+			
+			import mx.controls.listClasses.BaseListData;
+			
+			[Bindable("dataChange")]
+			private var _listData:BaseListData;
+			
+			[Bindable]
+			private var path : String;
+			
+			[Bindable]
+			private var textoTooltip : String;
+			
+			[Bindable]
+			private var exibir : Boolean;
+			
+			private const A_ENCAMINHAR_ICONE:String 	= "br/com/bancoob/imagens/documentEdit_16.png";
+			private const BLOQUEADO_ICONE:String 		= "br/com/bancoob/imagens/documentLocked_16.png";
+			private const DEVOLVIDO_ICONE:String 		= "br/com/bancoob/imagens/documentEditBloq_16.png";
+			private const EM_AUTORIZACAO_ICONE:String 	= "br/com/bancoob/imagens/documentAlert_16.png";
+			private const VIGENTE_ICONE:String 			= "br/com/bancoob/imagens/document-accept.png";
+
+			private const A_ENCAMINHAR_INFO:String      = "Este registro não está vigente, ainda não foi encaminhado para autorização";
+			private const BLOQUEADO_INFO:String         = "Este registro está vigente porém bloqueado porque há um processo de autorização em andamento";
+			private const DEVOLVIDO_INFO:String         = "Este registro não está vigente, foi devolvido no processo de autorização";
+			private const EM_AUTORIZACAO_INFO:String    = "Este registro não está vigente, está em processo de autorização";
+			private const VIGENTE_INFO:String           = "Este registro está vigente";
+			
+			public function get listData():BaseListData {
+				return _listData;
+			}
+			
+			public function set listData(value:BaseListData):void {
+				_listData = value;
+			}
+			
+			public function init():void{
+				
+			}
+			
+			public override function set data(value:Object):void {
+				super.data = value;
+				
+				if(data != null && data.hasOwnProperty("situacaoAprovacao")){
+					icone.source = this[data.situacaoAprovacao.name + "_ICONE"];
+					icone.toolTip = this[data.situacaoAprovacao.name + "_INFO"];
+					if(SituacaoRegistroEnum.VIGENTE.name == data.situacaoAprovacao.name){
+						icone.visible = icone.includeInLayout = false;
+					}else{
+						icone.visible = icone.includeInLayout = true;
+					}
+				}
+			}
+		]]>
+	</mx:Script>
+	
+	<componentes:Imagem id="icone" />
+	
+</containers:HBoxBancoob>

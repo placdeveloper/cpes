@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<CanvasValidavel xmlns="br.com.bancoob.componentes.containers.validaveis.*"
+ 				 xmlns:mx="http://www.adobe.com/2006/mxml"
+				 xmlns:componentes="br.com.bancoob.componentes.*"
+				 xmlns:input="br.com.bancoob.componentes.input.*"
+				 xmlns:campos="br.com.bancoob.componentes.campos.*"
+				 xmlns:titulo="br.com.bancoob.componentes.titulo.*"
+				 width="100%" height="100%">
+	
+	<titulo:SubtituloView texto="DADOS" top="10" right="10" left="10" width="100%" />
+
+	<componentes:Rotulo text="Código *:" textAlign="left" x="10" y="46" height="18" />
+	<campos:CampoNumerico id="codigo" validarObrigatorio="true" valorMinimo="0" permitirValoreNegativos="false" agruparDigitos="false"
+						  width="80" x="137" y="44" validarTipo="{CampoNumerico.SHORT_POSITIVO}" casasDecimais="0" />
+	
+	<componentes:Rotulo text="Funcionalidade *:" textAlign="left" x="10" y="82" height="18" />
+	<input:Combo id="cmbFuncionalidade" x="137" y="80" width="250" conteudoMaiusculo="true"
+				 validarObrigatorio="true" labelField="descricao" inserirItemOpcional="true" />
+	
+	<componentes:Rotulo text="Tipo de Regra *:" textAlign="left" x="10" y="118" height="18" />
+	<input:Combo id="cmbTipo" x="137" y="116" width="250" conteudoMaiusculo="true"
+				 labelField="descricao" inserirItemOpcional="false" validarObrigatorio="true" />
+	
+	<componentes:Rotulo text="Categoria Cadastro :" textAlign="left" x="10" y="154"  height="18"/>
+	<input:Combo id="cmbPerfilCadastro" x="137" y="152" width="250" conteudoMaiusculo="true"
+				 labelField="descricao" inserirItemOpcional="false" validarObrigatorio="true" />
+	
+	<componentes:Rotulo text="Situação *:" textAlign="left" x="10" y="190"  height="18"/>
+	<input:RadioGrupoBancoob id="situacao" />
+	<input:Radio x="137" y="188" groupName="situacao" label="ATIVA" tabEnabled="true" value="{true}"/>
+	<input:Radio x="210" y="188" groupName="situacao" label="INATIVA" tabEnabled="true" value="{false}"/>
+	
+	<componentes:Rotulo text="Descrição da Regra *:" textAlign="left" x="10" y="226"  height="18"/>
+	<input:TextoArea id="descricao" validarObrigatorio="true" left="137" y="224" right="10"
+					 height="100" maxChars="700" somenteMaiusculas="false" />
+	
+	<componentes:Rotulo text="Mensagem de Erro *:" textAlign="left" x="10" y="349"  height="18"/>
+	<input:Texto id="msgErro" validarObrigatorio="true" left="137" y="347" right="10" maxChars="150" 
+				 somenteMaiusculas="false" />
+	
+	<componentes:Rotulo text="Agendamento :" textAlign="left" x="10" y="385"  height="18"/>
+	<input:Check id="checkExecutarRegra" label="Agendar para a próxima execução" x="137" y="383" />
+	
+	
+	
+</CanvasValidavel>

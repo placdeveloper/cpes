@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+
+	<artifactId>capes-integracao-frontoffice-impl</artifactId>
+	<name>CAPES - Integracao - CAPESIntegracaoFrontofficeImpl</name>
+
+	<parent>
+		<groupId>br.com.sicoob.capes</groupId>
+		<artifactId>capes-modulo-integracao</artifactId>
+		<version>2.0.8.1</version>
+		<relativePath>..</relativePath>
+	</parent>
+
+	<scm>
+		<connection>scm:svn:http://svn.sicoob.com.br/fontesbancoob/SISBR/Aplicativos/JAVA/trunk/CAPES/tags/capes-2.0.8.1/Integracao/CAPESIntegracaoFrontofficeImpl</connection>
+		<developerConnection>scm:svn:http://svn.sicoob.com.br/fontesbancoob/SISBR/Aplicativos/JAVA/trunk/CAPES/tags/capes-2.0.8.1/Integracao/CAPESIntegracaoFrontofficeImpl</developerConnection>
+		<url>http://svn.sicoob.com.br/fontesbancoob/SISBR/Aplicativos/JAVA/trunk/CAPES/tags/capes-2.0.8.1/Integracao/CAPESIntegracaoFrontofficeImpl</url>
+	</scm>
+
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-ejb-plugin</artifactId>
+			</plugin>
+		</plugins>
+	</build>
+
+	<dependencies>
+		<!-- CAPES -->
+		<dependency>
+			<groupId>${project.groupId}</groupId>
+			<artifactId>capes-integracao</artifactId>
+			<version>${project.version}</version>
+		</dependency>
+		<!-- CAPES -->
+
+		<!-- INTERNAS -->
+		<dependency>
+			<groupId>br.com.sicoob.framework</groupId>
+			<artifactId>sicoob-java</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>br.com.sicoob.framework</groupId>
+			<artifactId>sicoob-was9</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>br.com.sicoob.ged</groupId>
+			<artifactId>ged-mcgd-fo-ejb</artifactId>
+			<version>${versao.ged.frontoffice}</version>
+			<type>ejb-client</type>
+		</dependency>
+
+		<dependency>
+			<groupId>br.com.sicoob.ged</groupId>
+			<artifactId>ged-fluxo-trabalho-fo-ejb</artifactId>
+			<version>${versao.gft.frontoffice}</version>
+			<type>ejb-client</type>
+		</dependency>
+
+		<dependency>
+			<groupId>br.com.sicoob.crl</groupId>
+			<artifactId>crl-frontoffice-ejb</artifactId>
+			<version>${versao.crl.frontoffice}</version>
+			<type>ejb-client</type>
+			<exclusions>
+				<exclusion>
+					<artifactId>crl-comum-entidades</artifactId>
+					<groupId>br.com.sicoob.crl</groupId>
+				</exclusion>
+				<exclusion>
+					<artifactId>jakarta-regexp</artifactId>
+					<groupId>org.apache</groupId>
+				</exclusion>
+			</exclusions>
+		</dependency>
+
+		<!-- INTERNAS -->
+		<dependency>
+			<groupId>org.jboss</groupId>
+			<artifactId>jbossall-client</artifactId>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>commons-lang</groupId>
+			<artifactId>commons-lang</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>javax</groupId>
+			<artifactId>javaee-api</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>commons-collections</groupId>
+			<artifactId>commons-collections</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.apache</groupId>
+			<artifactId>commons-logging</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>junit</groupId>
+			<artifactId>junit</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.hibernate</groupId>
+			<artifactId>hibernate-core</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.antlr</groupId>
+			<artifactId>antlr</artifactId>
+		</dependency>
+		<dependency>
+		  <groupId>br.com.sicoob.ged</groupId>
+		  <artifactId>ged-api</artifactId>
+		  <version>${versao.ged.api}</version>
+		  <exclusions>
+		  	<exclusion>
+		  		<groupId>commons-lang</groupId>
+		  		<artifactId>commons-lang</artifactId>
+		  	</exclusion>
+		  </exclusions>
+		</dependency>
+	</dependencies>
+
+</project>

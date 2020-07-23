@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FormularioCadastroView xmlns="br.com.bancoob.componentes.cadastro.*"
+						xmlns:mx="http://www.adobe.com/2006/mxml"
+						xmlns:componentes="br.com.bancoob.componentes.*"
+						xmlns:containers="br.com.bancoob.componentes.containers.*"
+						xmlns:containersCAPES="br.com.sicoob.capes.comum.componentes.containers.*"
+						xmlns:listaSelecao="br.com.sicoob.capes.comum.componentes.listaSelecao.*"
+						xmlns:input="br.com.bancoob.componentes.input.*"
+						xmlns:campos="br.com.bancoob.componentes.campos.*"
+						xmlns:titulo="br.com.bancoob.componentes.titulo.*"
+						xmlns:validaveis="br.com.bancoob.componentes.containers.validaveis.*"
+						visible="true" left="0" top="0" horizontalScrollPolicy="off"
+						layout="vertical" verticalScrollPolicy="auto"  >
+	
+	<titulo:SubtituloView x="0" y="0" left="10" right="10" top="0" width="100%" texto="DADOS" />
+	
+	<validaveis:CanvasValidavel>
+		
+		<componentes:Rotulo text="Nome *:" textAlign="left" x="10" y="12" height="18" />
+		<input:Texto id="campoNome" x="80" y="10" width="620" maxChars="50" validarObrigatorio="true" tabIndex="1" />
+		
+		<titulo:SubtituloView left="10" right="10" top="35" width="100%" texto="Tipos de anotações" />
+		<listaSelecao:ListaSelecao x="10" y="60" height="330" id="componenteListaTiposAnotacao" propriedadeComparacao="codTipoAnotacao" labelField="codigoENome" tamanhoLista="315" alturaLista="290" validarObrigatorio="true" tabIndex="2" />
+		
+	</validaveis:CanvasValidavel>
+	
+	<BarraBotoesFormularioCadastroView id="barraBotoes" width="98%"/>
+</FormularioCadastroView>

@@ -1,0 +1,15 @@
+lib/capes-arquivo-${version}.jar;capes-arquivo-${version}
+
+capes-api-impl-${version}.jar;capes-api-impl-${version}
+capes-api-digitizacao-impl-${version}.jar;capes-api-digitizacao-impl-${version}
+capes-api-inclusao-impl-${version}.jar;capes-api-inclusao-impl-${version}
+capes-cadastro-ejb-${version}.jar;capes-cadastro-ejb-${version}
+capes-comum-ejb-${version}.jar;capes-comum-ejb-${version}
+capes-integracao-comum-impl-${version}.jar;capes-integracao-comum-impl-${version}
+capes-integracao-processamento-impl-${version}.jar;capes-integracao-processamento-impl-${version}
+capes-mensageria-ejb-${version}.jar;capes-mensageria-ejb-${version}
+capes-processamento-ejb-${version}.jar;capes-processamento-ejb-${version}
+capes-relatorio-ejb-${version}.jar;capes-relatorio-ejb-${version}
+capes-replicacao-comum-ejb-${version}.jar;capes-replicacao-comum-ejb-${version}
+capes-replicacao-processamento-ejb-${version}.jar;capes-replicacao-processamento-ejb-${version}
+capes-servico-replicacao-ejb-${version}.jar;capes-servico-replicacao-ejb-${version}

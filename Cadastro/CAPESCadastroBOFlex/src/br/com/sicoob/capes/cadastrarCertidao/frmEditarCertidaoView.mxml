@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<bancoobValidaveis:ModuloValidavel xmlns:mx="http://www.adobe.com/2006/mxml"
+								   xmlns:bancoobValidaveis="br.com.bancoob.componentes.containers.validaveis.*"
+								   xmlns:navegacao="br.com.bancoob.componentes.navegacao.*"
+								   xmlns:namespace="http://namespace"
+								   width="100%" height="100%" layout="absolute"
+								   xmlns:abas="br.com.sicoob.capes.utils.autorizacao.abas.*" 
+								   styleName="ModuloSemEstilo" verticalScrollPolicy="auto">
+	<mx:Script>
+		<![CDATA[
+			import br.com.sicoob.capes.comum.enums.TipoAutorizacaoEnum;
+		]]>
+	</mx:Script>
+	
+	<navegacao:Tab x="0" y="0" width="100%" height="100%" id="navegacao">
+
+		<mx:Canvas width="100%" height="100%" label="Informações">
+			<bancoobValidaveis:ModuloValidavel xmlns:mx="http://www.adobe.com/2006/mxml"
+											   xmlns:bancoobInput="br.com.bancoob.componentes.input.*"
+											   xmlns:bancoob="br.com.bancoob.componentes.*"
+											   xmlns:campos="br.com.bancoob.componentes.campos.*"
+											   xmlns:bancoobValidaveis="br.com.bancoob.componentes.containers.validaveis.*"
+											   xmlns:pesquisacodigo="br.com.sicoob.capes.comum.componentes.pesquisacodigo.*"
+											   xmlns:namespace="http://namespace"
+											   xmlns:containers="br.com.bancoob.componentes.containers.*"
+											   width="100%" height="100%" layout="absolute"
+											   styleName="ModuloSemEstilo" verticalScrollPolicy="auto">
+			
+				<mx:Label x="37" y="10" text="DADOS DA CERTIDÃO" fontWeight="bold" fontFamily="ArialEmbedded" alpha=".8"/>
+				<mx:Image y="16" source="br/com/bancoob/imagens/imgsTelas/linha.swf" scaleContent="false" left="170" right="0"/>
+				<mx:Image x="17" y="11" source="br/com/bancoob/imagens/icos/note.png" alpha=".5"/>
+				
+				<containers:HBoxBancoob top="50" x="40" y="35">
+					<containers:VBoxBancoob width="45%" y="3">
+						<bancoob:Rotulo text="Data da última alteração:" id="rotuloDataHoraInicio" height="22"/>
+						<bancoob:Rotulo text="Usuário da última alteração:" id="rotuloUsuarioAlteracao" height="22"/>
+						<bancoob:Rotulo text="Tipo de Certidão:" height="22"/>
+						<bancoob:Rotulo text="Data de Emissão:" height="22"/>
+						<bancoob:Rotulo text="Hora:" height="22"/>
+						<bancoob:Rotulo text="Número Certidão:" height="22"/>
+						<bancoob:Rotulo text="Ano Base:" height="22"/>
+						<bancoob:Rotulo text="Nº CREA:" height="22"/>
+						<bancoob:Rotulo text="Data de Vencimento:" height="22"/>
+						<bancoob:Rotulo text="Observação:" height="22"/>
+					</containers:VBoxBancoob>
+					
+					<containers:VBoxBancoob width="55%" y="0" >
+						<bancoobInput:Data id="dtDataCadastro" tabIndex="2" height="22"/>
+						<bancoob:Rotulo id="usuarioAlteracao" height="22"/>
+						<pesquisacodigo:PesquisaCodigo id="procurarGeral" height="22"
+										validarObrigatorio="true" tabIndex="1"
+										tituloJanelaPesquisa="PESQUISAR TIPO DE CERTIDÃO"
+										classeServico="br.com.sicoob.capes.cadastro.fachada.TipoCertidaoFachada"
+										campoDescricao="nome" quantidadeMaximaCaracteresCampoCodigo="8" />
+						<bancoobInput:Data id="dtDataEmissao" tabIndex="3" validarObrigatorio="true" height="22"/>
+						<bancoobInput:Hora id="txtHoraEmissao" width="64" tabIndex="4" mostrarSegundo="true" validarObrigatorio="true" height="22"/>
+						<bancoobInput:Texto id="txtNumCertidao" width="252" maxChars="30" tabIndex="5" agruparDigitos="false" height="22"/>
+						<campos:CampoNumerico id="anoBase" tabIndex="6" casasDecimais="0" agruparDigitos="false" maxChars="4" valorMinimo="1900" height="22"/>
+						<bancoobInput:Texto id="crea" tabIndex="7" maxChars="20" height="22"/>
+						<bancoobInput:Data id="dtDataVencimentoDocumento" tabIndex="8" height="22"/>
+						<bancoobInput:TextoArea id="txtDescObservacao" width="421" height="69" maxChars="600" tabIndex="9"/>
+					</containers:VBoxBancoob>
+				</containers:HBoxBancoob>
+			</bancoobValidaveis:ModuloValidavel>
+		</mx:Canvas>
+		
+		<abas:abaUploadGed id="abaDocumentos" label="Documentos" _siglaClasseDocumento="{TipoAutorizacaoEnum.CERTIDAO.name}" />
+		
+	</navegacao:Tab>
+	
+</bancoobValidaveis:ModuloValidavel>

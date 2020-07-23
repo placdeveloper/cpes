@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<bancoob:Modulo xmlns:mx="http://www.adobe.com/2006/mxml"
+			xmlns:bancoobGrid="br.com.bancoob.componentes.grid.*"
+			xmlns:bancoob="br.com.bancoob.componentes.*"
+	 		width="100%" height="100%" xmlns:bancoobInput1="http://www.bancoob.com/2007/mxml">
+   <mx:Script>
+   	<![CDATA[
+   		import br.com.bancoob.componentes.tabelapaginada.TabelaPaginadaUtils;
+   	]]>
+   </mx:Script>
+   	 		
+	<bancoobGrid:Grid id="grid" width="100%" height="100%" tabIndex="1">
+	<bancoobGrid:columns>
+
+			<bancoobGrid:ColunaGrid headerText="Instituição" id="instituicao" dataField="nomeInstituicao" 
+				width="450" labelFunction="{TabelaPaginadaUtils.defaultLabelFunction}"  >
+			</bancoobGrid:ColunaGrid>
+
+			<bancoobGrid:ColunaGrid headerText="Unidade Institucional" id="idUnidadeInst" dataField="numeroUnidadeInst" 
+				width="100" labelFunction="{TabelaPaginadaUtils.defaultLabelFunction}"  >
+			</bancoobGrid:ColunaGrid>
+			
+			<bancoobGrid:ColunaGrid headerText="Responsável pelo Cadastro" id="responsavelCadastro" dataField="responsavelCadastro" 
+				width="150" labelFunction="{TabelaPaginadaUtils.defaultBooleanLabelFunction}" >
+			</bancoobGrid:ColunaGrid>
+
+	</bancoobGrid:columns>
+	</bancoobGrid:Grid>
+</bancoob:Modulo>

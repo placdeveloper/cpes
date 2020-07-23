@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<containers:HBoxBancoob xmlns:mx="http://www.adobe.com/2006/mxml" width="100%"
+   height="100%" horizontalAlign="center" creationComplete="init()"
+   implements="mx.controls.listClasses.IDropInListItemRenderer"
+   xmlns:componentes="br.com.bancoob.componentes.*" 
+   verticalScrollPolicy="off" horizontalScrollPolicy="off"
+   xmlns:containers="br.com.bancoob.componentes.containers.*">
+		
+	<mx:Script>
+		<![CDATA[
+			import br.com.bancoob.componentes.grid.Grid;
+			import br.com.bancoob.componentes.tabelapaginada.TabelaPaginada;
+			import br.com.bancoob.sisbr.componentes.pti.ObjetoEvent;
+			
+			import mx.containers.VBox;
+			import mx.controls.dataGridClasses.DataGridListData;
+			import mx.controls.listClasses.BaseListData;
+
+			public static const EVENTO_ENCAMINHAR:String = "encaminhar";
+			
+			[Bindable("dataChange")]
+			private var _listData:BaseListData;
+			
+			public function get listData():BaseListData {
+				return _listData;
+			}
+			public function set listData(value:BaseListData):void {
+				_listData = value;
+			}
+
+			public function init():void{
+				btnCopiar.addEventListener(MouseEvent.CLICK, copiar);
+				btnEncaminhar.addEventListener(MouseEvent.CLICK, encaminhar);
+			}
+			
+			private function copiar(evt:MouseEvent):void{
+				System.setClipboard(super.data.pessoa.cpfCnpj);
+			}
+			
+			private function encaminhar(evt:MouseEvent):void{
+				var myListData:DataGridListData = DataGridListData(this.listData);
+				var grid:Grid = Grid(myListData.owner);
+				var box:VBox = VBox(grid.owner);
+				var tabela:TabelaPaginada = TabelaPaginada(box.owner);
+				tabela.dispatchEvent(new ObjetoEvent(EVENTO_ENCAMINHAR, this.data.pessoa));
+			}
+		]]>
+	</mx:Script>
+	
+	<mx:Style>
+		.botaoCrudEncaminharPeq{
+			downSkin:		Embed(source='br/com/bancoob/imagens/icos/encaminharDocumentoA4_16.png');
+			disabledSkin:	Embed(source='br/com/bancoob/imagens/icos/encaminharDocumentoA4_disabled_16.png');
+			upSkin:			Embed(source='br/com/bancoob/imagens/icos/encaminharDocumentoA4_16.png');
+			overSkin:		Embed(source='br/com/bancoob/imagens/icos/encaminharDocumentoLetter_16.png');
+		}
+	</mx:Style>
+ 	<componentes:Botao id="btnCopiar" toolTip="Copiar CPF/CNPJ" styleName="botaoCrudAdicionarCopiaPeq"
+ 		paddingBottom="0" paddingLeft="0" paddingRight="0" paddingTop="0" />
+	<componentes:Botao id="btnEncaminhar" toolTip="Encaminhar autorização" styleName="botaoCrudEncaminharPeq"
+					   paddingBottom="0" paddingLeft="0" paddingRight="0" paddingTop="0" />
+</containers:HBoxBancoob>

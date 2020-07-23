@@ -1,0 +1,117 @@
+<CanvasBancoob xmlns="br.com.bancoob.componentes.containers.*" 
+	xmlns:mx="http://www.adobe.com/2006/mxml" 
+	xmlns:bancoobInput="br.com.bancoob.componentes.input.*"
+	xmlns:bancoob="br.com.bancoob.componentes.*"	
+	xmlns:grid="br.com.bancoob.componentes.grid.*"
+	width="500" height="350" xmlns:titulo="br.com.bancoob.componentes.titulo.*" >
+	
+    <mx:Grid paddingLeft="10" height="350" width="100%">
+		
+        <mx:GridRow >
+            <mx:GridItem>
+				<bancoobInput:Radio id="rdPF" label="Pessoa Física" selected="true"/>
+			</mx:GridItem>
+			
+			<mx:GridItem>
+				<bancoobInput:Radio id="rdPJ" label="Pessoa Jurídica"/>
+			</mx:GridItem>
+        </mx:GridRow >
+		
+        <mx:GridRow >
+            <mx:GridItem>
+				<bancoob:Rotulo text="Relacionamentos e Poderes"/>
+			</mx:GridItem>
+			
+			<mx:GridItem>
+				<bancoobInput:Contador id="ctRelacionamento" value="1"/>
+			</mx:GridItem>
+        </mx:GridRow >
+        
+        <mx:GridRow >
+        	<mx:GridItem>
+				<bancoob:Rotulo text="Endereços" />
+			</mx:GridItem>
+			
+			<mx:GridItem>
+				<bancoobInput:Contador id="ctEndereco" value="1"/>
+			</mx:GridItem>
+        </mx:GridRow >
+        
+        <mx:GridRow >
+			<mx:GridItem>
+				<bancoob:Rotulo text="Telefones"/>
+			</mx:GridItem>
+			<mx:GridItem>
+				<bancoobInput:Contador id="ctTelefone" value="1"/>
+			</mx:GridItem>
+        </mx:GridRow >
+
+        <mx:GridRow >
+			<mx:GridItem>
+				<bancoob:Rotulo text="E-mails"/>
+			</mx:GridItem>
+			<mx:GridItem>
+				<bancoobInput:Contador id="ctEmails" value="1"/>
+			</mx:GridItem>
+        </mx:GridRow >
+        
+        <mx:GridRow >
+			<mx:GridItem>
+				<bancoob:Rotulo text="Referências Pessoais"/>
+			</mx:GridItem>
+			<mx:GridItem>			
+				<bancoobInput:Contador id="ctReferencias" value="1"/>
+			</mx:GridItem>
+        </mx:GridRow >
+        
+        <mx:GridRow >
+			<mx:GridItem>
+				<bancoob:Rotulo text="Certidões"/>
+			</mx:GridItem>
+			<mx:GridItem>			
+				<bancoobInput:Contador id="ctCertidoes" value="1"/>
+			</mx:GridItem>
+        </mx:GridRow >
+
+        <mx:GridRow >
+        	<mx:GridItem>
+				<bancoob:Rotulo text="Bens Imóveis"/>
+			</mx:GridItem>
+			<mx:GridItem>			
+				<bancoobInput:Contador id="ctBens" value="1"/>
+			</mx:GridItem>
+        </mx:GridRow >
+        
+        <mx:GridRow >
+        	<mx:GridItem>
+				<bancoob:Rotulo text="Bens Outros"/>
+			</mx:GridItem>
+			<mx:GridItem>			
+				<bancoobInput:Contador id="ctBensImoveis" value="1"/>
+			</mx:GridItem>
+        </mx:GridRow >
+
+        <mx:GridRow >
+        	<mx:GridItem>
+				<bancoob:Rotulo text="Fontes de Renda"/>
+			</mx:GridItem>
+			<mx:GridItem>
+				<bancoobInput:Contador id="ctFonteRenda" value="1"/>
+			</mx:GridItem>
+        </mx:GridRow >
+
+        <mx:GridRow >
+            <mx:GridItem>
+				<bancoob:Rotulo text="Produtividades"/>
+			</mx:GridItem>
+			<mx:GridItem>
+				<bancoobInput:Contador id="ctProdutividades" value="1"/>
+			</mx:GridItem>
+        </mx:GridRow >
+
+	</mx:Grid>
+
+	<bancoob:Botao y="315" x="130" label="Imprimir" id="btImprimir"/>
+	<bancoob:Botao y="315" x="264" label="Cancelar" id="btCancelar"/> 
+			
+</CanvasBancoob>

@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<bancoob:Modulo xmlns:mx="http://www.adobe.com/2006/mxml"
+		xmlns:bancoobInput="br.com.bancoob.componentes.input.*"
+		xmlns:bancoobGrid="br.com.bancoob.componentes.grid.*"
+		xmlns:bancoob="br.com.bancoob.componentes.*"
+		xmlns:bancoobNavegacao="br.com.bancoob.componentes.navegacao.*"
+		width="547" height="284" layout="absolute" >
+		
+		<mx:Script>
+			<![CDATA[
+				import br.com.bancoob.componentes.tabelapaginada.TabelaPaginadaUtils;
+				import br.com.sicoob.capes.comum.util.FormatadorUtil;
+			]]>
+		</mx:Script>
+		
+	<bancoobGrid:Grid height="158" width="527" id="grdCategorias" x="10" y="68">
+		<bancoobGrid:columns>
+			<bancoobGrid:ColunaGrid headerText="Descrição" dataField="descricao" textAlign="left" width="100"/>
+			<bancoobGrid:ColunaGrid headerText="Valor Limite" dataField="valorLimite" textAlign="right" width="100"
+				labelFunction="{TabelaPaginadaUtils.defaultValorNumericoLabelFunction}"/>
+		</bancoobGrid:columns>
+	</bancoobGrid:Grid>
+	<bancoob:Botao width="77" id="botAceitar" label="Aceitar" bottom="7" right="177" tabEnabled="true" tabIndex="1" enabled="false"/>
+	<bancoob:Botao width="77" id="botRejeitar" label="Rejeitar" bottom="7" right="92" tabEnabled="true" tabIndex="1"/>
+	<bancoob:Botao width="77" id="botFechar" label="Fechar" bottom="7" right="7" tabEnabled="true" tabIndex="1"/>
+
+	<mx:Image source="br/com/bancoob/imagens/imgsTelas/linha.swf" scaleContent="false" left="7" y="234" right="10"/>
+	<mx:Label x="30" y="38" text="CATEGORIA DO PRODUTOR" fontWeight="bold" fontFamily="ArialEmbedded" alpha=".8"/>
+	<mx:Image y="44" source="br/com/bancoob/imagens/imgsTelas/linha.swf" scaleContent="false" left="183" right="10"/>
+	<mx:Image x="10" y="36" source="br/com/bancoob/imagens/icos/administrador.png" alpha=".5"/>
+	<bancoob:Rotulo x="10" y="10" text="Renda Apurada (Explorações Atuais):"/>
+	<bancoob:Rotulo id="txtCalcRendaApurada" x="232" y="10" width="266" fontWeight="bold" textAlign="left"/>
+</bancoob:Modulo>

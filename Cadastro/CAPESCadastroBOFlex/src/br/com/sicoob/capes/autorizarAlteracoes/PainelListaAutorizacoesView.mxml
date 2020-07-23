@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PainelListaBanco 
+	xmlns="br.com.bancoob.componentes.painellista.*" 
+	xmlns:mx="http://www.adobe.com/2006/mxml" 
+	xmlns:autorizacao="br.com.sicoob.capes.autorizarAlteracoes.*"
+	xmlns:tabelaPaginada="br.com.bancoob.componentes.tabelapaginada.*" 
+	xmlns:servico="br.com.bancoob.util.servico.*" 
+	xmlns:grid="br.com.bancoob.componentes.grid.*"
+	selecaoMultipla="false"
+	deveExibirMensagemNenhumRegistro="true"
+	width="100%" height="100%">
+	
+	<mx:Script>
+		<![CDATA[
+			import br.com.bancoob.componentes.tabelapaginada.TabelaPaginadaUtils;
+			
+			private var _labelCooperativa : String;
+			private var _propriedadeCooperativa:String;
+			
+			public function set labelCooperativa(valor : String) : void {
+				this._labelCooperativa = valor;
+			}
+			public function get labelCooperativa() : String {
+				return this._labelCooperativa;
+			}
+			
+			public function set propriedadeCooperativa(value:String):void {
+				this._propriedadeCooperativa = value;
+			}
+			public function get propriedadeCooperativa():String {
+				return _propriedadeCooperativa;
+			}
+		]]>
+	</mx:Script>
+
+	<servicoPesquisa>
+		<servico:ServicoJava 
+			source="br.com.sicoob.capes.cadastro.fachada.AutorizarFachada"
+			bloquearOperacao="true"
+			mensagemEspera="Pesquisando dados..." />
+	</servicoPesquisa>
+	
+	<painelFiltro>
+		<autorizacao:PainelFiltroAutorizacaoView 
+			labelCooperativa="{labelCooperativa}"
+			horizontalScrollPolicy="off"
+			verticalScrollPolicy="off" />
+	</painelFiltro>
+	
+	<tabelaPaginada>
+		<tabelaPaginada:TabelaPaginadaBanco id="grid" width="100%" height="100%" titulo="AUTORIZAÇÕES"
+			tamanhoPagina="15"	selecaoMultipla="false">
+			<tabelaPaginada:MetadadosTabela id="metadados">
+				<grid:ColunaGrid width="35" headerText="Data Solicitação" sortCompareFunction="{TabelaPaginadaUtils.criarDefaultDateSortFunction(colDataSolicitacao)}"
+					propriedade="dataHoraSolicitacao" id="colDataSolicitacao" labelFunction="{TabelaPaginadaUtils.defaultDatetimeLabelFunction}"/>
+				
+				<grid:ColunaGrid width="30" headerText="Código de Autorização" headerWordWrap="true" textAlign="center" sortable="false"
+					propriedade="idAutorizacao" labelFunction="{TabelaPaginadaUtils.defaultLabelFunction}"/>
+				
+				<grid:ColunaGrid id="colCpfCnpj" width="40" headerText="CPF/CNPJ" sortCompareFunction="{TabelaPaginadaUtils.criarDefaultSortFunction(colCpfCnpj)}"
+					propriedade="pessoa.cpfCnpj" labelFunction="{TabelaPaginadaUtils.defaultCNPJLabelFunction}" />
+				
+				<grid:ColunaGrid width="25" headerText="Cooperativa de Origem" headerWordWrap="true" textAlign="center" sortCompareFunction="{TabelaPaginadaUtils.criarDefaultValorNumericoSortFunction(colCoopOrigem)}"
+					propriedade="cooperativaOrigem" id="colCoopOrigem" labelFunction="{TabelaPaginadaUtils.defaultLabelFunction}"/>
+				
+				<grid:ColunaGrid width="25" headerText="Cooperativa de Destino" headerWordWrap="true" textAlign="center" sortCompareFunction="{TabelaPaginadaUtils.criarDefaultValorNumericoSortFunction(colCoopDestino)}"
+					propriedade="cooperativaDestino" id="colCoopDestino" labelFunction="{TabelaPaginadaUtils.defaultLabelFunction}"/>
+
+				<grid:ColunaGrid id="colTipoAutorizacao" width="100" headerText="Tipo de Autorização" sortCompareFunction="{TabelaPaginadaUtils.criarDefaultSortFunction(colTipoAutorizacao)}"
+					propriedade="tipoAutorizacao.descricao" labelFunction="{TabelaPaginadaUtils.defaultLabelFunction}"/>
+				
+				<grid:ColunaGrid id="colTipoOperacao" width="35" headerText="Tipo de Operação" textAlign="center" sortCompareFunction="{TabelaPaginadaUtils.criarDefaultSortFunction(colTipoOperacao)}"
+					propriedade="tipoOperacao.descricao" labelFunction="{TabelaPaginadaUtils.defaultLabelFunction}"/>
+			</tabelaPaginada:MetadadosTabela>
+		</tabelaPaginada:TabelaPaginadaBanco>
+	</tabelaPaginada>
+</PainelListaBanco>

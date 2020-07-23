@@ -1,0 +1,1190 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE queries [
+  <!ELEMENT queries (query*)>
+  <!ELEMENT query (use-case+,description,paginacao?,command+,projecao?,ordenacoes?)>
+  <!ELEMENT use-case    (#PCDATA)>
+  <!ELEMENT description (#PCDATA)>
+  <!ELEMENT command     (#PCDATA)>
+  <!ELEMENT parametros  (#PCDATA)>
+  <!ELEMENT projecao  (#PCDATA)>
+  <!ELEMENT paginar  (#PCDATA)>
+  <!ELEMENT paginacao (#PCDATA)>
+  <!ELEMENT colunaCodigo    (#PCDATA)>
+  <!ELEMENT colunaDescricao    (#PCDATA)>
+  <!ELEMENT numeroOcorrenciasPorPagina    (#PCDATA)>
+  <!ELEMENT primeiraCondicao    (#PCDATA)>
+  <!ELEMENT ascendente    (#PCDATA)>
+  <!ELEMENT ordenacoes (ordenacao+)>
+  <!ELEMENT ordenacao (#PCDATA)>
+  <!ELEMENT sql  (#PCDATA)>
+  <!ATTLIST ordenacao chave CDATA    #REQUIRED>
+  <!ATTLIST ordenacao default CDATA    #IMPLIED>
+  <!ATTLIST command parametros CDATA    #IMPLIED>
+  <!ATTLIST command paginar CDATA    #IMPLIED>
+  <!ATTLIST use-case name CDATA    #REQUIRED>
+  <!ATTLIST query name CDATA    #REQUIRED>
+  <!ATTLIST paginacao colunaCodigo CDATA    #REQUIRED>
+  <!ATTLIST paginacao colunaDescricao CDATA    #REQUIRED>
+  <!ATTLIST paginacao numeroOcorrenciasPorPagina CDATA    #REQUIRED>
+  <!ATTLIST paginacao primeiraCondicao CDATA    #REQUIRED>
+  <!ATTLIST paginacao ascendente CDATA    #REQUIRED>
+  <!ATTLIST paginacao hint CDATA    #REQUIRED>
+  <!ATTLIST paginacao hintAuxiliar CDATA   #IMPLIED>
+]>
+
+<queries>
+	<query name="CONSULTA_RELATORIO_TRIBUTACAO">
+		<use-case name="Relatório de Tributação" />
+		<description>Obtém os dados para geração do relatório</description>
+		<command>
+      <![CDATA[
+        SELECT
+            INST1.NUMCOOPPAI numeroCentral,
+            CASE TP.IDINSTITUICAO
+                WHEN 1
+                THEN 1
+                ELSE COALESCE(INST1.NUMCOOPERATIVA, 0)
+            END numeroCooperativa,
+            TP.IDUNIDADEINST AS idUnidadeInst,
+            PC.NOMEPESSOA AS nomePessoa,
+            CASE
+                WHEN P.CODTIPOPESSOA = 0
+                THEN SUBSTR(NUMCPFCNPJ, 1, 3)
+                        ||'.'
+                        ||SUBSTR(NUMCPFCNPJ, 4, 3)
+                        ||'.'
+                        ||SUBSTR(NUMCPFCNPJ, 7, 3)
+                        ||'-'
+                        ||SUBSTR(NUMCPFCNPJ, 10, 2)
+                WHEN P.CODTIPOPESSOA = 1
+                THEN SUBSTR(NUMCPFCNPJ, 1, 2)
+                        ||'.'
+                        ||SUBSTR(NUMCPFCNPJ, 3, 3)
+                        ||'.'
+                        ||SUBSTR(NUMCPFCNPJ, 6, 3)
+                        ||'/'
+                        ||SUBSTR(NUMCPFCNPJ, 9, 4)
+                        ||'-'
+                        ||SUBSTR(NUMCPFCNPJ, 13, 2)
+            END cpfCnpj,
+            PT.BOLCOBRARIR AS cobraIR,
+            PT.BOLCOBRARIOF AS cobraIOF,
+            CASE
+                WHEN P.CODTIPOPESSOA = 0
+                THEN ''
+                        ||PF.IDOCUPACAOPROFISSIONAL
+                ELSE PC.CODCNAE
+            END codigoOcupacao,
+            CASE
+                WHEN P.CODTIPOPESSOA = 0
+                THEN OC.DESCOCUPACAO
+                ELSE C.DESCCNAE
+            END descOcupacao
+        FROM
+            CLI.PESSOATRIBUTACAO PT
+        INNER JOIN
+            CLI.TRANSICAOPESSOA TP
+        ON
+            TP.IDPESSOACOMPARTILHAMENTO = PT.IDPESSOACOMPARTILHAMENTO
+        INNER JOIN
+            CLI.PESSOACOMPARTILHAMENTO PC
+        ON
+            PC.IDPESSOACOMPARTILHAMENTO = PT.IDPESSOACOMPARTILHAMENTO
+        INNER JOIN
+            CLI.PESSOA P
+        ON
+            P.IDPESSOA = PC.IDPESSOA
+        INNER JOIN
+            CLI.PESSOAINSTITUICAO PIN
+        ON
+            PIN.IDPESSOA = P.IDPESSOA
+        AND PIN.IDINSTITUICAO = TP.IDINSTITUICAO
+        INNER JOIN
+            SCI.VIW_INSTITUICAO INST1
+        ON
+            INST1.IDINSTITUICAO = PIN.IDINSTITUICAO
+        AND INST1.IDUNIDADEINST = 0
+        LEFT JOIN
+            CLI.CNAEFISCAL C
+        ON
+            C.CODCNAE = PC.CODCNAE
+        LEFT JOIN
+            CLI.PESSOAFISICA PF
+        ON
+            PF.IDPESSOACOMPARTILHAMENTO = PC.IDPESSOACOMPARTILHAMENTO
+        LEFT JOIN
+            CLI.OCUPACAOPROFISSIONAL OC
+        ON
+            OC.IDOCUPACAOPROFISSIONAL = PF.IDOCUPACAOPROFISSIONAL
+        WHERE
+            1 = 1
+      <j:if test="${criterios.filtro.central != null and criterios.filtro.singular == null}">
+        AND INST1.NUMCOOPPAI = <bancoob:valor valor="${criterios.filtro.central.numeroCooperativa}" tipo="Integer" />
+      </j:if>
+      <j:if test="${criterios.filtro.singular != null}">
+        AND
+            CASE TP.IDINSTITUICAO
+                WHEN 1
+                THEN 1
+                ELSE COALESCE(INST1.NUMCOOPERATIVA, 0)
+            END = <bancoob:valor valor="${criterios.filtro.singular.numeroCooperativa}" tipo="Integer" />
+      </j:if>
+      <j:if test="${criterios.filtro.idUnidadeInst != null}">
+        AND PIN.IDUNIDADEINST = <bancoob:valor valor="${criterios.filtro.idUnidadeInst}" tipo="Integer" />
+      </j:if>
+      <j:if test="${criterios.filtro.funcionario.idFuncionario != null}">
+        AND PIN.IDFUNCIONARIORESPONSAVEL = <bancoob:valor valor="${criterios.filtro.funcionario.idFuncionario}" tipo="Integer" />
+      </j:if>
+      <j:if test="${criterios.filtro.cobraIOF != null}">
+        AND PT.BOLCOBRARIOF = <bancoob:valor valor="${criterios.filtro.cobraIOF}" tipo="Boolean" />
+      </j:if>
+      <j:if test="${criterios.filtro.cobraIR != null}">
+        AND PT.BOLCOBRARIR = <bancoob:valor valor="${criterios.filtro.cobraIR}" tipo="Boolean" />
+      </j:if>
+      <j:if test="${criterios.ordenacao == 'nome'}">
+        ORDER BY 1, 2, 4
+      </j:if>
+      <j:if test="${criterios.ordenacao == 'unidade'}">
+        ORDER BY 1, 2, 3, 4
+      </j:if>
+      ]]>
+		</command>
+	</query>
+
+	<query name="CONSULTAR_DADOS_RELATORIO_COMPARTILHAMENTO">
+		<use-case name="Relatório de Compartilhamento de Cadastro" />
+		<description>Relatório de Compartilhamento de Cadastro</description>
+		<command>
+      <![CDATA[
+        SELECT INST1.NUMCOOPPAI NUMCOOPPAIRESP,
+               CASE A.IDINSTITUICAORESPONSAVEL 
+                  WHEN 1 THEN 1
+                  ELSE COALESCE(INST1.NUMCOOPERATIVA,0)
+               END NUMCOOPERATIVARESP,
+               CASE A.IDINSTITUICAODEMANDANTE
+                  WHEN 1 THEN 1
+                  ELSE COALESCE(INST2.NUMCOOPERATIVA,0)
+               END NUMCOOPERATIVADEMANDANTE,
+               INST2.DESCNOMECOOP,
+               A.IDUSUARIOCONSULTA,
+               A.DATAHORACONSULTA,
+               A.BOLCOMPARTILHADO,
+               P.NUMCPFCNPJ,
+               CASE 
+                 WHEN P.CODTIPOPESSOA = 0 THEN SUBSTR(NUMCPFCNPJ,1,3)||'.'||SUBSTR(NUMCPFCNPJ,4,3)||'.'||SUBSTR(NUMCPFCNPJ,7,3)||'-'||SUBSTR(NUMCPFCNPJ,10,2)
+                 WHEN P.CODTIPOPESSOA = 1 THEN SUBSTR(NUMCPFCNPJ,1,2)||'.'||SUBSTR(NUMCPFCNPJ,3,3)||'.'||SUBSTR(NUMCPFCNPJ,6,3)||'/'||SUBSTR(NUMCPFCNPJ,9,4)||'-'||SUBSTR(NUMCPFCNPJ,13,2)
+               END NUMCPFCNPJFORMATADO,
+               PC.NOMEPESSOA
+        FROM CLI.LOGCOMPARTILHAMENTOPESSOA A,
+             CLI.PESSOACOMPARTILHAMENTO PC,
+             CLI.PESSOA P,
+             SCI.VIW_INSTITUICAO INST1,
+             SCI.VIW_INSTITUICAO INST2
+        WHERE A.IDPESSOACOMPARTILHAMENTO = PC.IDPESSOACOMPARTILHAMENTO
+          AND PC.IDPESSOA                = P.IDPESSOA
+          AND A.IDINSTITUICAORESPONSAVEL = INST1.IDINSTITUICAO
+          AND A.IDINSTITUICAODEMANDANTE  = INST2.IDINSTITUICAO
+          AND INST1.IDUNIDADEINST        = 0
+          AND INST2.IDUNIDADEINST        = 0 
+          
+        <j:if test="${datainicio != null and datafim != null}">
+          AND A.DATAHORACONSULTA BETWEEN <bancoob:valor valor="${datainicio}" /> AND <bancoob:valor valor="${datafim}" />
+        </j:if>
+          
+        <j:if test="${numsingular == null}">        
+             AND INST1.NUMCOOPPAI = <bancoob:valor valor="${numcentral}" /> 
+        </j:if>  
+        <j:if test="${numsingular != null}">
+             AND CASE A.IDINSTITUICAORESPONSAVEL 
+                  WHEN 1 THEN 1
+                  ELSE COALESCE(INST1.NUMCOOPERATIVA,0)
+               END = <bancoob:valor valor="${numsingular}" /> 
+        </j:if> 
+        <j:if test="${compartilhamento == 1}"> 
+             AND A.BOLCOMPARTILHADO = 1 
+        </j:if>     
+        <j:if test="${compartilhamento == 0}"> 
+             AND A.BOLCOMPARTILHADO = 0 
+        </j:if>    
+        ORDER BY 2, 10
+      ]]>
+		</command>
+	</query>
+	<query name="CONSULTAR_DADOS_RELATORIO_CADASTRO_COMPARTILHADO">
+		<use-case name="Relatorio de Cadastros Compartilhados" />
+		<description>Relatorio de Cadastros Compartilhados</description>
+		<command>
+      <![CDATA[
+		SELECT
+		CASE TP.IDINSTITUICAO
+			WHEN 1 THEN 1
+			ELSE COALESCE(INST.NUMCOOPERATIVA, 0)
+		END NUMCOOPERATIVA,
+		INST.NUMCOOPPAI,
+		INST.DESCSIGLACOOP,
+		PC.NOMEPESSOA,
+		CASE
+			WHEN P.CODTIPOPESSOA = 0 THEN SUBSTR(NUMCPFCNPJ, 1, 3) || '.' || SUBSTR(NUMCPFCNPJ, 4, 3) || '.' || SUBSTR(NUMCPFCNPJ, 7, 3) || '-' || SUBSTR(NUMCPFCNPJ, 10, 2)
+			WHEN P.CODTIPOPESSOA = 1 THEN SUBSTR(NUMCPFCNPJ, 1, 2) || '.' || SUBSTR(NUMCPFCNPJ, 3, 3) || '.' || SUBSTR(NUMCPFCNPJ, 6, 3) || '/' || SUBSTR(NUMCPFCNPJ, 9, 4) || '-' || SUBSTR(NUMCPFCNPJ, 13, 2)
+		END NUMCPFCNPJFORMATADO,
+		PC.DATAINCLUSAOSISTEMA,
+		TP.DATAHORAINTEGRACAO,
+		CASE
+			WHEN TP.IDINSTITUICAO = IRC.IDINSTITUICAO THEN 'SIM'
+			ELSE 'NÃO'
+		END ISRESPONSAVEL
+		FROM CLI.PESSOA AS P
+				INNER JOIN CLI.PESSOACOMPARTILHAMENTO AS PC             ON  PC.IDPESSOA                  =       P.IDPESSOA
+				INNER JOIN CLI.TRANSICAOPESSOA AS TP                    ON  TP.IDPESSOACOMPARTILHAMENTO  =       PC.IDPESSOACOMPARTILHAMENTO
+				INNER JOIN CLI.INSTITUICAORESPONSAVELCADASTRO IRC       ON  IRC.IDPESSOACOMPARTILHAMENTO =       PC.IDPESSOACOMPARTILHAMENTO
+				INNER JOIN SCI.VIW_INSTITUICAO AS INST                  ON  INST.IDINSTITUICAO           =       TP.IDINSTITUICAO
+		                                                                AND INST.IDUNIDADEINST           = 0
+		WHERE
+			1 = 1
+		<j:if test="${objParametros.idInstituicao != null}">
+			AND TP.IDINSTITUICAO = <bancoob:valor valor="${objParametros.idInstituicao}" />
+		</j:if>
+		<j:if test="${objParametros.cpfCnpj != ''}">
+			AND P.NUMCPFCNPJ = <bancoob:valor valor="${objParametros.cpfCnpj}" />
+		</j:if>
+      ]]>
+		</command>
+	</query>
+	<query name="CONSULTAR_DADOS_RELATORIO_VENCIMENTO_CADASTRO">
+		<use-case name="Relatório de Vencimento de Cadastro" />
+		<description>Relatório de Vencimento de Cadastro</description>
+		<command>
+      <![CDATA[
+		SELECT CASE IR.IDINSTITUICAO
+               WHEN 1 THEN 1
+               ELSE COALESCE(INST.NUMCOOPERATIVA, 0)
+		END NUMCOOPERATIVARESP,
+		PC.IDPESSOACOMPARTILHAMENTO,
+		PC.NOMEPESSOA,
+		(COALESCE(PC.DATARENOVACAOCADASTRAL, PC.DATAINCLUSAOSISTEMA) + 36 MONTH) DATARENOVACAOCADASTRAL,
+		CASE
+          WHEN P.CODTIPOPESSOA = 0 THEN SUBSTR(NUMCPFCNPJ, 1, 3) || '.' || SUBSTR(NUMCPFCNPJ, 4, 3) || '.' || SUBSTR(NUMCPFCNPJ, 7, 3) || '-' || SUBSTR(NUMCPFCNPJ, 10, 2)
+          WHEN P.CODTIPOPESSOA = 1 THEN SUBSTR(NUMCPFCNPJ, 1, 2) || '.' || SUBSTR(NUMCPFCNPJ, 3, 3) || '.' || SUBSTR(NUMCPFCNPJ, 6, 3) || '/' || SUBSTR(NUMCPFCNPJ, 9, 4) || '-' || SUBSTR(NUMCPFCNPJ, 13, 2)
+		END NUMCPFCNPJFORMATADO,
+		COALESCE(PIN.IDUNIDADEINST, TP.IDUNIDADEINST) IDUNIDADEINST,
+		INST2.DESCNOMECOOP
+		FROM CLI.PESSOA P
+			INNER JOIN CLI.PESSOACOMPARTILHAMENTO PC                                ON      PC.IDPESSOA                     = P.IDPESSOA
+			INNER JOIN CLI.TRANSICAOPESSOA TP                                       ON      TP.IDPESSOACOMPARTILHAMENTO     = PC.IDPESSOACOMPARTILHAMENTO
+			INNER JOIN CLI.PESSOAINSTITUICAO PIN                                    ON      PIN.IDPESSOA                    = PC.IDPESSOA
+																					AND     PIN.IDINSTITUICAO               = TP.IDINSTITUICAO
+			INNER JOIN CLI.INSTITUICAORESPONSAVELCADASTRO IR                        ON      IR.IDPESSOACOMPARTILHAMENTO     = PC.IDPESSOACOMPARTILHAMENTO
+			INNER JOIN SCI.VIW_INSTITUICAO INST                                     ON      INST.IDINSTITUICAO              = IR.IDINSTITUICAO
+																					AND     INST.IDUNIDADEINST              = 0
+			INNER JOIN SCI.VIW_INSTITUICAO INST2                                    ON      INST2.IDINSTITUICAO             = TP.IDINSTITUICAO
+																					AND     INST2.IDUNIDADEINST             = COALESCE(PIN.IDUNIDADEINST, TP.IDUNIDADEINST)
+			LEFT JOIN CLI.ANOTACAO A												ON		A.IDPESSOACOMPARTILHAMENTO 		= PC.IDPESSOACOMPARTILHAMENTO
+																					AND		A.IDTIPOANOTACAO 				= 505
+																					AND 	A.DATAHORABAIXA 				IS NULL
+		WHERE
+				A.IDPESSOACOMPARTILHAMENTO IS NULL
+				
+		<j:if test="${objParametros.idInstituicao != null}">
+		        AND TP.IDINSTITUICAO =  <bancoob:valor valor="${objParametros.idInstituicao}" />
+		</j:if>
+		
+		<j:if test="${objParametros.unidade != null}">
+		        AND COALESCE(PIN.IDUNIDADEINST, TP.IDUNIDADEINST) = <bancoob:valor valor="${objParametros.unidade}" />
+		</j:if>
+		
+		<j:if test="${objParametros.dataInicio != null and objParametros.dataFim != null}">
+		        AND (DATE(COALESCE(PC.DATARENOVACAOCADASTRAL, PC.DATAINCLUSAOSISTEMA)) + 36 MONTH) BETWEEN <bancoob:valor valor="${objParametros.dataInicio}" /> AND <bancoob:valor valor="${objParametros.dataFim}" />
+		</j:if>
+		
+		<j:if test="${objParametros.nucleo != null}">       
+				AND PIN.IDNUCLEO = <bancoob:valor valor="${objParametros.nucleo}" />
+		</j:if>
+		
+		<j:if test="${objParametros.gerente != null}">       
+				AND PIN.IDFUNCIONARIORESPONSAVEL = <bancoob:valor valor="${objParametros.gerente}" />
+		</j:if>
+		
+		<j:if test="${objParametros.somenteResponsavel != null and objParametros.somenteResponsavel}">       
+				AND IR.IDINSTITUICAO = TP.IDINSTITUICAO
+		</j:if>
+		
+		<j:if test="${objParametros.ordenacao == 0}">
+				ORDER BY 6,4
+		</j:if>
+		
+		<j:if test="${objParametros.ordenacao == 1}">
+				ORDER BY 6,3
+		</j:if>
+
+      ]]>
+		</command>
+	</query>
+	<query name="CONSULTA_RELATORIO_GRUPO_ECONOMICO">
+		<use-case name="Consulta do relatório de grupo econômico" />
+		<description>Obtém o status da transferência de grupo econômico
+		</description>
+		<command>
+         <![CDATA[
+          SELECT INST1.NUMCOOPPAI NUMCOOPPAI,
+               CASE TP.IDINSTITUICAO
+                  WHEN 1 THEN 1
+                  ELSE COALESCE(INST1.NUMCOOPERATIVA,0)
+               END NUMCOOPERATIVA,
+               GE.DESCGRUPOECONOMICO,
+               GE.DATAHORACADASTRO,
+               P.NUMCPFCNPJ,
+               CASE 
+                 WHEN P.CODTIPOPESSOA = 0 THEN SUBSTR(NUMCPFCNPJ,1,3)||'.'||SUBSTR(NUMCPFCNPJ,4,3)||'.'||SUBSTR(NUMCPFCNPJ,7,3)||'-'||SUBSTR(NUMCPFCNPJ,10,2)
+                 WHEN P.CODTIPOPESSOA = 1 THEN SUBSTR(NUMCPFCNPJ,1,2)||'.'||SUBSTR(NUMCPFCNPJ,3,3)||'.'||SUBSTR(NUMCPFCNPJ,6,3)||'/'||SUBSTR(NUMCPFCNPJ,9,4)||'-'||SUBSTR(NUMCPFCNPJ,13,2)
+               END NUMCPFCNPJFORMATADO,
+               PC.NOMEPESSOA,
+               GEP.DATAHORAINICIO,
+               GEP.IDUSUARIOAPROV
+        FROM CLI.GRUPOECONOMICO GE,
+             CLI.GRUPOECONOMICOPESSOA GEP,
+             CLI.PESSOAINSTITUICAO PIN,
+             CLI.PESSOA P,
+             CLI.PESSOACOMPARTILHAMENTO PC,
+             CLI.TRANSICAOPESSOA TP,
+             SCI.VIW_INSTITUICAO INST1
+        WHERE GE.IDINSTITUICAO            = TP.IDINSTITUICAO
+          AND GE.DATAHORAEXCLUSAO         IS NULL
+          AND GE.IDGRUPOECONOMICO         = GEP.IDGRUPOECONOMICO
+          AND GEP.IDPESSOAINSTITUICAO     = PIN.IDPESSOAINSTITUICAO
+          AND PIN.IDPESSOA                = P.IDPESSOA
+          AND P.IDPESSOA                  = PC.IDPESSOA
+          AND PC.IDPESSOACOMPARTILHAMENTO = TP.IDPESSOACOMPARTILHAMENTO
+          AND PIN.IDINSTITUICAO           = TP.IDINSTITUICAO
+          AND TP.IDINSTITUICAO            = INST1.IDINSTITUICAO
+          AND INST1.IDUNIDADEINST        = 0
+        
+        <j:if test="${dto.numCentral != '' and dto.numSingular == ''}">       
+             AND INST1.NUMCOOPPAI = <bancoob:valor valor="${dto.numCentral}" />
+        </j:if>  
+        
+        <j:if test="${dto.numSingular != ''}">       
+             AND CASE TP.IDINSTITUICAO
+                  WHEN 1 THEN 1
+                  ELSE COALESCE(INST1.NUMCOOPERATIVA,0)
+               END = <bancoob:valor valor="${dto.numSingular}" />
+        </j:if> 
+        
+        <j:if test="${dto.numTipoRegistro == 2}">       
+             AND GEP.IDUSUARIOAPROV = 'CAPES'
+        </j:if> 
+        
+        <j:if test="${dto.numTipoRegistro == 3}">       
+             AND (GEP.IDUSUARIOAPROV IS NULL OR GEP.IDUSUARIOAPROV &lt;&gt; 'CAPES')
+        </j:if>
+        
+        <j:if test="${dto.dataInicio != null}">       
+             AND DATE(GEP.DATAHORAINICIO) &gt;= <bancoob:valor valor="${dto.dataInicio}" tipo="Date" />
+        </j:if>
+        
+        <j:if test="${dto.dataFim != null}">       
+             AND DATE(GEP.DATAHORAINICIO) &lt; <bancoob:valor valor="${dto.dataFimMaisUm}" tipo="Date" />
+        </j:if>
+        
+         <j:if test="${dto.cpfCnpj != null and dto.cpfCnpj != ''}">       
+             AND P.NUMCPFCNPJ = <bancoob:valor valor="${dto.cpfCnpj}" /> 
+        </j:if>
+        
+        <j:if test="${dto.unidade != null}">       
+             AND PIN.IDUNIDADEINST = <bancoob:valor valor="${dto.unidade}" /> 
+        </j:if>
+        
+        <j:if test="${dto.nucleo != null}">       
+             AND PIN.IDNUCLEO = <bancoob:valor valor="${dto.nucleo}" />
+        </j:if>
+        
+         <j:if test="${dto.gerente != null}">       
+             AND PIN.IDFUNCIONARIORESPONSAVEL = <bancoob:valor valor="${dto.gerente}" />
+        </j:if>
+        
+        ORDER BY 1,2,3,7
+        ]]>
+		</command>
+	</query>
+	
+	
+	<query name="CONSULTA_RELATORIO_GRUPO_ECONOMICO_NOVO">
+		<use-case name="Consulta do relatório de grupo econômico" />
+		<description>Obtém o status da transferência de grupo econômico
+		</description>
+		<command>
+         <![CDATA[
+<j:if test="${filtro.numTipoVigencia == 1 or filtro.numTipoVigencia == 2}">
+WITH GRUPOVIGENTE as (
+-- Somente Manuais
+        SELECT
+                GE.IDGRUPOECONOMICOCENTRALIZADO   AS IDGRUPOECONOMICOCENTRALIZADO,
+                GE.NOMEGRUPOECONOMICOCENTRALIZADO AS DESCGRUPOECONOMICO,
+                P.NUMCPFCNPJ                      AS NUMCPFCNPJ,
+                PC.NOMEPESSOA                     AS NOMEPESSOA,
+                GE.DATAHORACADASTRO               AS DATAHORACADASTRO,
+                GMP.DATAHORAINICIO                AS DATAHORAINICIO,
+                GMP.IDUSUARIOCADASTRO             AS IDUSUARIOAPROV,
+                TG.DESCTIPOGRUPOECONOMICO         AS DESCORIGEM,
+                GI.IDINSTITUICAO                  AS IDINSTITUICAO,
+                GMP.IDGRUPOECONOMICOMANUALPESSOA  AS IDGRUPOPESSOA,
+                null                              AS DATAHORAFIM
+        FROM CLI.GRUPOECONOMICOCENTRALIZADO AS GE
+        INNER JOIN CLI.TIPOGRUPOECONOMICO         AS TG  ON  GE.CODTIPOGRUPOECONOMICO        = TG.CODTIPOGRUPOECONOMICO
+        INNER JOIN CLI.GRUPOECONOMICOMANUALPESSOA AS GMP ON  GE.IDGRUPOECONOMICOCENTRALIZADO = GMP.IDGRUPOECONOMICOCENTRALIZADO
+        INNER JOIN CLI.GRUPOECONOMICOINSTITUICAO  AS GI  ON  GI.IDGRUPOECONOMICOCENTRALIZADO = GE.IDGRUPOECONOMICOCENTRALIZADO
+        INNER JOIN SCI.VIW_INSTITUICAO            AS I   ON  I.IDINSTITUICAO                 = GI.IDINSTITUICAO
+                                                         AND I.IDUNIDADEINST                 = 0
+        INNER JOIN CLI.PESSOACOMPARTILHAMENTO     AS PC  ON  GMP.IDPESSOACOMPARTILHAMENTO    = PC.IDPESSOACOMPARTILHAMENTO
+        INNER JOIN CLI.PESSOA                     AS P   ON  PC.IDPESSOA                     = P.IDPESSOA
+        LEFT  JOIN CLI.PESSOAINSTITUICAO          AS PI  ON  P.IDPESSOA                      = PI.IDPESSOA
+                                                         AND GI.IDINSTITUICAO                = PI.IDINSTITUICAO
+        WHERE GMP.IDGRUPOECONOMICOAUTOMATICO IS NULL
+		AND CASE GI.IDINSTITUICAO
+            WHEN 1 THEN 1
+            ELSE COALESCE(I.NUMCOOPERATIVA,0)
+        END = <bancoob:valor valor="${filtro.numSingular}" />
+                <j:if test="${filtro.unidade != null}">
+			AND pi.IDUNIDADEINST = <bancoob:valor valor="${filtro.unidade}" /> 
+		</j:if>
+		<j:if test="${filtro.nucleo != null}">
+			AND pi.IDNUCLEO = <bancoob:valor valor="${filtro.nucleo}" />
+		</j:if>
+		<j:if test="${filtro.gerente != null}">
+			AND pi.IDFUNCIONARIORESPONSAVEL = <bancoob:valor valor="${filtro.gerente}" />
+		</j:if>
+		<j:if test="${filtro.dataInicio != null}">
+			AND DATE(ge.DATAHORACADASTRO) &gt;= <bancoob:valor valor="${filtro.dataInicio}" tipo="Date" />
+		</j:if>
+		<j:if test="${filtro.dataFim != null}">
+			AND DATE(ge.DATAHORACADASTRO) &lt; <bancoob:valor valor="${filtro.dataFimMaisUm}" tipo="Date" />
+		</j:if>
+		<j:if test="${filtro.numTipoOrigemRegistro != 0}">
+			AND ge.CODTIPOGRUPOECONOMICO = <bancoob:valor valor="${filtro.numTipoOrigemRegistro}" /> 
+		</j:if>
+		<j:if test="${filtro.cpfCnpj != null and filtro.cpfCnpj != ''}">       
+                    AND p.NUMCPFCNPJ = <bancoob:valor valor="${filtro.cpfCnpj}" /> 
+                </j:if>                
+        UNION ALL
+-- Somente Automáticos
+        SELECT
+                GE.IDGRUPOECONOMICOCENTRALIZADO      AS IDGRUPOECONOMICOCENTRALIZADO,
+                GE.NOMEGRUPOECONOMICOCENTRALIZADO    AS DESCGRUPOECONOMICO,
+                P.NUMCPFCNPJ                         AS NUMCPFCNPJ,
+                PC.NOMEPESSOA                        AS NOMEPESSOA,
+                GE.DATAHORACADASTRO                  AS DATAHORACADASTRO,
+                GAP.DATAHORAINICIO                   AS DATAHORAINICIO,
+                GAP.IDUSUARIOCADASTRO                AS IDUSUARIOAPROV,
+                TG.DESCTIPOGRUPOECONOMICO            AS DESCORIGEM,
+                GI.IDINSTITUICAO                     AS IDINSTITUICAO,
+                GAP.IDGRUPOECONOMICOAUTOMATICOPESSOA AS IDGRUPOPESSOA,
+                null                                 AS DATAHORAFIM
+        FROM CLI.GRUPOECONOMICOCENTRALIZADO AS GE
+        INNER JOIN CLI.TIPOGRUPOECONOMICO             AS TG  ON  GE.CODTIPOGRUPOECONOMICO        = TG.CODTIPOGRUPOECONOMICO
+        INNER JOIN CLI.GRUPOECONOMICOAUTOMATICOPESSOA AS GAP ON  GE.IDGRUPOECONOMICOCENTRALIZADO = GAP.IDGRUPOECONOMICOCENTRALIZADO 
+        INNER JOIN CLI.GRUPOECONOMICOINSTITUICAO      AS GI  ON  GI.IDGRUPOECONOMICOCENTRALIZADO = GE.IDGRUPOECONOMICOCENTRALIZADO
+        INNER JOIN SCI.VIW_INSTITUICAO                AS I   ON  I.IDINSTITUICAO                 = GI.IDINSTITUICAO
+                                                             AND I.IDUNIDADEINST                 = 0
+        INNER JOIN CLI.PESSOACOMPARTILHAMENTO         AS PC  ON  GAP.IDPESSOACOMPARTILHAMENTO    = PC.IDPESSOACOMPARTILHAMENTO
+        INNER JOIN CLI.PESSOA                         AS P   ON  PC.IDPESSOA                     = P.IDPESSOA
+        LEFT  JOIN CLI.PESSOAINSTITUICAO              AS PI  ON  P.IDPESSOA                      = PI.IDPESSOA
+                                                             AND GI.IDINSTITUICAO                = PI.IDINSTITUICAO
+        WHERE 1 = 1
+        and NOT EXISTS (SELECT 1
+                        FROM CLI.GRUPOECONOMICOMANUALPESSOA GMP
+                        INNER JOIN CLI.GRUPOECONOMICOINSTITUICAO      AS GI2  ON  GMP.IDGRUPOECONOMICOCENTRALIZADO = GI2.IDGRUPOECONOMICOCENTRALIZADO
+                        WHERE GE.IDGRUPOECONOMICOCENTRALIZADO = GMP.IDGRUPOECONOMICOAUTOMATICO  and GI.IDINSTITUICAO = GI2.IDINSTITUICAO)
+        AND GAP.IDGRUPOECONOMICOAUTOMATICOPESSOA = (SELECT MAX(GAP2.IDGRUPOECONOMICOAUTOMATICOPESSOA)
+                                                        FROM CLI.GRUPOECONOMICOAUTOMATICOPESSOA GAP2
+                                                        WHERE GAP.IDPESSOACOMPARTILHAMENTO = GAP2.IDPESSOACOMPARTILHAMENTO)
+		AND CASE GI.IDINSTITUICAO
+            WHEN 1 THEN 1
+            ELSE COALESCE(I.NUMCOOPERATIVA,0)
+        END = <bancoob:valor valor="${filtro.numSingular}" />
+                <j:if test="${filtro.unidade != null}">
+			AND pi.IDUNIDADEINST = <bancoob:valor valor="${filtro.unidade}" /> 
+		</j:if>
+		<j:if test="${filtro.nucleo != null}">
+			AND pi.IDNUCLEO = <bancoob:valor valor="${filtro.nucleo}" />
+		</j:if>
+		<j:if test="${filtro.gerente != null}">
+			AND pi.IDFUNCIONARIORESPONSAVEL = <bancoob:valor valor="${filtro.gerente}" />
+		</j:if>
+		<j:if test="${filtro.dataInicio != null}">
+			AND DATE(ge.DATAHORACADASTRO) &gt;= <bancoob:valor valor="${filtro.dataInicio}" tipo="Date" />
+		</j:if>
+		<j:if test="${filtro.dataFim != null}">
+			AND DATE(ge.DATAHORACADASTRO) &lt; <bancoob:valor valor="${filtro.dataFimMaisUm}" tipo="Date" />
+		</j:if>
+		<j:if test="${filtro.numTipoOrigemRegistro != 0}">
+			AND ge.CODTIPOGRUPOECONOMICO = <bancoob:valor valor="${filtro.numTipoOrigemRegistro}" /> 
+		</j:if>
+		<j:if test="${filtro.cpfCnpj != null and filtro.cpfCnpj != ''}">       
+                    AND p.NUMCPFCNPJ = <bancoob:valor valor="${filtro.cpfCnpj}" /> 
+                </j:if>                                
+        UNION ALL
+-- Grupos Mistos
+        SELECT
+                GAP.IDGRUPOECONOMICOCENTRALIZADO     AS IDGRUPOECONOMICOCENTRALIZADO,
+                GE.NOMEGRUPOECONOMICOCENTRALIZADO    AS DESCGRUPOECONOMICO,
+                P.NUMCPFCNPJ                         AS NUMCPFCNPJ,
+                PC.NOMEPESSOA                        AS NOMEPESSOA,
+                GE.DATAHORACADASTRO                  AS DATAHORACADASTRO,
+                GAP.DATAHORAINICIO                   AS DATAHORAINICIO,
+                GAP.IDUSUARIOCADASTRO                AS IDUSUARIOAPROV,
+                TG.DESCTIPOGRUPOECONOMICO            AS DESCORIGEM,
+                GI.IDINSTITUICAO                     AS IDINSTITUICAO,
+                GAP.IDGRUPOECONOMICOAUTOMATICOPESSOA AS IDGRUPOPESSOA,
+                null                              AS DATAHORAFIM
+        FROM CLI.GRUPOECONOMICOMANUALPESSOA AS GMP
+        INNER JOIN CLI.GRUPOECONOMICOAUTOMATICOPESSOA AS GAP ON  GAP.IDGRUPOECONOMICOCENTRALIZADO = GMP.IDGRUPOECONOMICOAUTOMATICO
+        INNER JOIN CLI.GRUPOECONOMICOCENTRALIZADO     AS GE  ON  GE.IDGRUPOECONOMICOCENTRALIZADO  = GMP.IDGRUPOECONOMICOCENTRALIZADO
+        INNER JOIN CLI.TIPOGRUPOECONOMICO             AS TG  ON  GE.CODTIPOGRUPOECONOMICO         = TG.CODTIPOGRUPOECONOMICO
+        INNER JOIN CLI.GRUPOECONOMICOINSTITUICAO      AS GI  ON  GI.IDGRUPOECONOMICOCENTRALIZADO  = GE.IDGRUPOECONOMICOCENTRALIZADO
+        INNER JOIN SCI.VIW_INSTITUICAO                AS I   ON  I.IDINSTITUICAO                  = GI.IDINSTITUICAO
+                                                             AND I.IDUNIDADEINST                  = 0
+        INNER JOIN CLI.PESSOACOMPARTILHAMENTO         AS PC  ON  GAP.IDPESSOACOMPARTILHAMENTO     = PC.IDPESSOACOMPARTILHAMENTO
+        INNER JOIN CLI.PESSOA                         AS P   ON  PC.IDPESSOA                      = P.IDPESSOA
+        LEFT  JOIN CLI.PESSOAINSTITUICAO              AS PI  ON  P.IDPESSOA                       = PI.IDPESSOA
+                                                             AND GI.IDINSTITUICAO                 = PI.IDINSTITUICAO
+        WHERE 1 = 1
+        and GAP.IDGRUPOECONOMICOAUTOMATICOPESSOA = (SELECT MAX(GAP2.IDGRUPOECONOMICOAUTOMATICOPESSOA)
+                                                        FROM CLI.GRUPOECONOMICOAUTOMATICOPESSOA GAP2
+                                                        WHERE GAP.IDPESSOACOMPARTILHAMENTO = GAP2.IDPESSOACOMPARTILHAMENTO)
+        AND GMP.IDGRUPOECONOMICOMANUALPESSOA = (SELECT MAX(GMP2.IDGRUPOECONOMICOMANUALPESSOA)
+                                                FROM CLI.GRUPOECONOMICOMANUALPESSOA GMP2
+                                                WHERE GMP.IDGRUPOECONOMICOCENTRALIZADO = GMP2.IDGRUPOECONOMICOCENTRALIZADO
+                                                AND   GMP.IDGRUPOECONOMICOAUTOMATICO = GMP2.IDGRUPOECONOMICOAUTOMATICO)
+		AND CASE GI.IDINSTITUICAO
+            WHEN 1 THEN 1
+            ELSE COALESCE(I.NUMCOOPERATIVA,0)
+        END = <bancoob:valor valor="${filtro.numSingular}" />
+                <j:if test="${filtro.unidade != null}">
+			AND pi.IDUNIDADEINST = <bancoob:valor valor="${filtro.unidade}" /> 
+		</j:if>
+		<j:if test="${filtro.nucleo != null}">
+			AND pi.IDNUCLEO = <bancoob:valor valor="${filtro.nucleo}" />
+		</j:if>
+		<j:if test="${filtro.gerente != null}">
+			AND pi.IDFUNCIONARIORESPONSAVEL = <bancoob:valor valor="${filtro.gerente}" />
+		</j:if>
+		<j:if test="${filtro.dataInicio != null}">
+			AND DATE(ge.DATAHORACADASTRO) &gt;= <bancoob:valor valor="${filtro.dataInicio}" tipo="Date" />
+		</j:if>
+		<j:if test="${filtro.dataFim != null}">
+			AND DATE(ge.DATAHORACADASTRO) &lt; <bancoob:valor valor="${filtro.dataFimMaisUm}" tipo="Date" />
+		</j:if>
+		<j:if test="${filtro.numTipoOrigemRegistro != 0}">
+			AND ge.CODTIPOGRUPOECONOMICO = <bancoob:valor valor="${filtro.numTipoOrigemRegistro}" /> 
+		</j:if>
+		<j:if test="${filtro.cpfCnpj != null and filtro.cpfCnpj != ''}">       
+                    AND p.NUMCPFCNPJ = <bancoob:valor valor="${filtro.cpfCnpj}" /> 
+                </j:if>
+</j:if>
+<j:if test="${filtro.numTipoVigencia == 1}">
+), GRUPOHISTORICO as (
+-- Históricos Automatico
+        select 
+                g.DESCGRUPOECONOMICO   AS DESCGRUPOECONOMICO,
+                p.NUMCPFCNPJ           AS NUMCPFCNPJ,
+                pc.NOMEPESSOA          AS NOMEPESSOA,
+                g.DATAHORACADASTRO     AS DATAHORACADASTRO,
+                hgap.DATAHORAINICIO    AS DATAHORAINICIO,
+                hgap.IDUSUARIOCADASTRO AS IDUSUARIOAPROV,
+                g.DESCORIGEM           AS DESCORIGEM,
+                hgap.DATAHORAFIM       AS DATAHORAFIM
+        from GRUPOVIGENTE as g
+        INNER JOIN cli.HISTGRUPOECONOMICOAUTOMATICOPESSOA AS hgap ON  g.IDGRUPOECONOMICOCENTRALIZADO = hgap.IDGRUPOECONOMICOCENTRALIZADO
+        INNER JOIN cli.PESSOACOMPARTILHAMENTO             AS pc   ON  hgap.IDPESSOACOMPARTILHAMENTO  = pc.IDPESSOACOMPARTILHAMENTO
+        INNER JOIN cli.PESSOA                             AS p    ON  pc.IDPESSOA                    = p.IDPESSOA
+        LEFT  JOIN CLI.PESSOAINSTITUICAO                  AS pi   ON  p.IDPESSOA                     = pi.IDPESSOA
+                                                                  AND g.IDINSTITUICAO                = pi.IDINSTITUICAO
+        where g.IDGRUPOPESSOA &lt;&gt; hgap.IDGRUPOECONOMICOAUTOMATICOPESSOA
+        AND hgap.IDGRUPOECONOMICOAUTOMATICOPESSOA = (SELECT MAX(hgap2.IDGRUPOECONOMICOAUTOMATICOPESSOA)
+                                                        FROM CLI.HISTGRUPOECONOMICOAUTOMATICOPESSOA hgap2
+                                                        WHERE hgap.IDPESSOACOMPARTILHAMENTO = hgap2.IDPESSOACOMPARTILHAMENTO and hgap.DATAHORAINICIO = hgap2.DATAHORAINICIO)
+        <j:if test="${filtro.unidade != null}">
+			AND pi.IDUNIDADEINST = <bancoob:valor valor="${filtro.unidade}" /> 
+		</j:if>
+		<j:if test="${filtro.nucleo != null}">
+			AND pi.IDNUCLEO = <bancoob:valor valor="${filtro.nucleo}" />
+		</j:if>
+		<j:if test="${filtro.gerente != null}">
+			AND pi.IDFUNCIONARIORESPONSAVEL = <bancoob:valor valor="${filtro.gerente}" />
+		</j:if>
+		<j:if test="${filtro.cpfCnpj != null and filtro.cpfCnpj != ''}">       
+            AND p.NUMCPFCNPJ = <bancoob:valor valor="${filtro.cpfCnpj}" /> 
+        </j:if>
+        UNION ALL
+-- Históricos Manual
+        select 
+                g.DESCGRUPOECONOMICO   AS DESCGRUPOECONOMICO,
+                p.NUMCPFCNPJ           AS NUMCPFCNPJ,
+                pc.NOMEPESSOA          AS NOMEPESSOA,
+                g.DATAHORACADASTRO     AS DATAHORACADASTRO,
+                hgmp.DATAHORAINICIO    AS DATAHORAINICIO,
+                hgmp.IDUSUARIOCADASTRO AS IDUSUARIOAPROV,
+                g.DESCORIGEM           AS DESCORIGEM,
+                hgmp.DATAHORAFIM       AS DATAHORAFIM
+        from GRUPOVIGENTE as g
+        INNER JOIN cli.HISTGRUPOECONOMICOMANUALPESSOA AS hgmp ON  g.IDGRUPOECONOMICOCENTRALIZADO = hgmp.IDGRUPOECONOMICOCENTRALIZADO
+        INNER JOIN cli.PESSOACOMPARTILHAMENTO         AS pc   ON  hgmp.IDPESSOACOMPARTILHAMENTO  = pc.IDPESSOACOMPARTILHAMENTO
+        INNER JOIN cli.PESSOA                         AS p    ON  pc.IDPESSOA                    = p.IDPESSOA
+        LEFT  JOIN CLI.PESSOAINSTITUICAO              AS pi   ON  p.IDPESSOA                     = pi.IDPESSOA
+                                                              AND g.IDINSTITUICAO                = pi.IDINSTITUICAO
+        where g.IDGRUPOPESSOA &lt;&gt; hgmp.IDGRUPOECONOMICOMANUALPESSOA
+        AND hgmp.IDGRUPOECONOMICOMANUALPESSOA = (SELECT MAX(hgmp2.IDGRUPOECONOMICOMANUALPESSOA)
+                                                        FROM CLI.HISTGRUPOECONOMICOMANUALPESSOA hgmp2
+                                                        WHERE hgmp.IDPESSOACOMPARTILHAMENTO = hgmp2.IDPESSOACOMPARTILHAMENTO and hgmp.DATAHORAINICIO = hgmp2.DATAHORAINICIO)
+        <j:if test="${filtro.unidade != null}">
+			AND pi.IDUNIDADEINST = <bancoob:valor valor="${filtro.unidade}" /> 
+		</j:if>
+		<j:if test="${filtro.nucleo != null}">
+			AND pi.IDNUCLEO = <bancoob:valor valor="${filtro.nucleo}" />
+		</j:if>
+		<j:if test="${filtro.gerente != null}">
+			AND pi.IDFUNCIONARIORESPONSAVEL = <bancoob:valor valor="${filtro.gerente}" />
+		</j:if>
+		<j:if test="${filtro.cpfCnpj != null and filtro.cpfCnpj != ''}">       
+            AND p.NUMCPFCNPJ = <bancoob:valor valor="${filtro.cpfCnpj}" /> 
+        </j:if>
+</j:if>
+<j:if test="${filtro.numTipoVigencia == 3}">
+WITH GRUPOHISTORICO as (
+SELECT 
+                ge.IDGRUPOECONOMICOCENTRALIZADO                        AS IDGRUPOECONOMICOCENTRALIZADO,
+                ge.NOMEGRUPOECONOMICOCENTRALIZADO                      AS DESCGRUPOECONOMICO,
+                ge.DATAHORACADASTRO                                    AS DATAHORACADASTRO,
+                coalesce(gap.DATAHORAINICIO, gmp.DATAHORAINICIO)       AS DATAHORAINICIO,
+                coalesce(gap.DATAHORAFIM, gmp.DATAHORAFIM)             AS DATAHORAFIM,
+                coalesce(gap.IDUSUARIOCADASTRO, gmp.IDUSUARIOCADASTRO) AS IDUSUARIOAPROV,
+                tg.DESCTIPOGRUPOECONOMICO                              AS DESCORIGEM,
+                p.IDPESSOA                                             AS IDPESSOA,
+                p.NUMCPFCNPJ                                           AS NUMCPFCNPJ,
+                pc.NOMEPESSOA                                          AS NOMEPESSOA,
+                gi.IDINSTITUICAO                                       AS IDINSTITUICAO
+    FROM  cli.HISTGRUPOECONOMICOCENTRALIZADO          AS ge
+    INNER JOIN cli.HISTGRUPOECONOMICOINSTITUICAO      AS gi  ON  ge.IDGRUPOECONOMICOCENTRALIZADO = gi.IDGRUPOECONOMICOCENTRALIZADO
+    INNER JOIN cli.tipogrupoeconomico                 AS tg  ON  ge.CODTIPOGRUPOECONOMICO        = tg.CODTIPOGRUPOECONOMICO
+    INNER JOIN SCI.VIW_INSTITUICAO                    AS i   ON  i.IDINSTITUICAO                 = gi.IDINSTITUICAO
+                                                             AND i.IDUNIDADEINST                 = 0
+    LEFT  JOIN cli.HISTGRUPOECONOMICOMANUALPESSOA     AS gmp ON  ge.IDGRUPOECONOMICOCENTRALIZADO = gmp.IDGRUPOECONOMICOCENTRALIZADO
+    INNER JOIN cli.PESSOACOMPARTILHAMENTO             AS pc  ON  gmp.IDPESSOACOMPARTILHAMENTO    = pc.IDPESSOACOMPARTILHAMENTO
+    LEFT  JOIN cli.HISTGRUPOECONOMICOAUTOMATICOPESSOA AS gap ON  ge.IDGRUPOECONOMICOCENTRALIZADO = gap.IDGRUPOECONOMICOCENTRALIZADO OR  gap.IDPESSOACOMPARTILHAMENTO = pc.IDPESSOACOMPARTILHAMENTO
+    INNER JOIN cli.PESSOA                             AS p   ON  pc.IDPESSOA                     = p.IDPESSOA
+    LEFT  JOIN CLI.PESSOAINSTITUICAO                  AS pi  ON  p.IDPESSOA                      = pi.IDPESSOA
+                                                             AND gi.IDINSTITUICAO                = pi.IDINSTITUICAO
+    WHERE (gap.IDGRUPOECONOMICOAUTOMATICOPESSOA = (SELECT MAX(hgap2.IDGRUPOECONOMICOAUTOMATICOPESSOA)
+                                                        FROM CLI.HISTGRUPOECONOMICOAUTOMATICOPESSOA hgap2
+                                                        WHERE gap.IDPESSOACOMPARTILHAMENTO = hgap2.IDPESSOACOMPARTILHAMENTO and gap.DATAHORAINICIO = hgap2.DATAHORAINICIO)
+           or gmp.IDGRUPOECONOMICOMANUALPESSOA = (SELECT MAX(hgmp2.IDGRUPOECONOMICOMANUALPESSOA)
+                                                        FROM CLI.HISTGRUPOECONOMICOMANUALPESSOA hgmp2
+                                                        WHERE gmp.IDPESSOACOMPARTILHAMENTO = hgmp2.IDPESSOACOMPARTILHAMENTO and gmp.DATAHORAINICIO = hgmp2.DATAHORAINICIO)
+          )
+        AND CASE gi.IDINSTITUICAO
+            WHEN 1 THEN 1
+            ELSE COALESCE(i.NUMCOOPERATIVA,0)
+        END = <bancoob:valor valor="${filtro.numSingular}" />
+		<j:if test="${filtro.unidade != null}">
+			AND pi.IDUNIDADEINST = <bancoob:valor valor="${filtro.unidade}" /> 
+		</j:if>
+		<j:if test="${filtro.nucleo != null}">
+			AND pi.IDNUCLEO = <bancoob:valor valor="${filtro.nucleo}" />
+		</j:if>
+		<j:if test="${filtro.gerente != null}">
+			AND pi.IDFUNCIONARIORESPONSAVEL = <bancoob:valor valor="${filtro.gerente}" />
+		</j:if>
+		<j:if test="${filtro.dataInicio != null}">
+			AND DATE(ge.DATAHORACADASTRO) &gt;= <bancoob:valor valor="${filtro.dataInicio}" tipo="Date" />
+		</j:if>
+		<j:if test="${filtro.dataFim != null}">
+			AND DATE(ge.DATAHORACADASTRO) &lt; <bancoob:valor valor="${filtro.dataFimMaisUm}" tipo="Date" />
+		</j:if>
+		<j:if test="${filtro.numTipoOrigemRegistro != 0}">
+			AND ge.CODTIPOGRUPOECONOMICO = <bancoob:valor valor="${filtro.numTipoOrigemRegistro}" /> 
+		</j:if>
+		<j:if test="${filtro.cpfCnpj != null and filtro.cpfCnpj != ''}">       
+            AND p.NUMCPFCNPJ = <bancoob:valor valor="${filtro.cpfCnpj}" /> 
+        </j:if>
+</j:if>
+), GRUPOFINAL as (
+	<j:if test="${filtro.numTipoVigencia == 1 or filtro.numTipoVigencia == 2}">
+        SELECT 
+                DESCGRUPOECONOMICO,
+                NUMCPFCNPJ,
+                NOMEPESSOA,
+                DATAHORACADASTRO,
+                DATAHORAINICIO,
+                IDUSUARIOAPROV,
+                DESCORIGEM,
+                DATAHORAFIM
+        FROM GRUPOVIGENTE
+	</j:if>
+	<j:if test="${filtro.numTipoVigencia == 1}">
+        UNION ALL
+	</j:if>
+	<j:if test="${filtro.numTipoVigencia == 1 or filtro.numTipoVigencia == 3}">
+        SELECT 
+                DESCGRUPOECONOMICO,
+                NUMCPFCNPJ,
+                NOMEPESSOA,
+                DATAHORACADASTRO,
+                DATAHORAINICIO,
+                IDUSUARIOAPROV,
+                DESCORIGEM,
+                DATAHORAFIM
+        FROM GRUPOHISTORICO
+	</j:if>
+)
+SELECT 
+	DESCGRUPOECONOMICO,
+	NUMCPFCNPJ,
+	NOMEPESSOA,
+	DATAHORACADASTRO,
+	DATAHORAINICIO,
+	IDUSUARIOAPROV,
+	DESCORIGEM,
+	DATAHORAFIM
+FROM GRUPOFINAL
+ORDER BY DESCGRUPOECONOMICO, NOMEPESSOA, DATAHORAINICIO
+        ]]>
+		</command>
+	</query>
+
+	<query name="RELATORIO_DECLARACAO_PROPOSITO">
+		<use-case name="Relatório de declaração de propósito" />
+		<description>Relatório de Vencimento de declaração de propósito
+		</description>
+		<command>
+      <![CDATA[
+          SELECT INST.DESCNOMECOOP,
+                 INST.DESCSIGLACOOP,
+                 PC.NOMEPESSOA,
+                 CASE 
+                   WHEN P.CODTIPOPESSOA = 0 THEN SUBSTR(NUMCPFCNPJ,1,3)||'.'||SUBSTR(NUMCPFCNPJ,4,3)||'.'||SUBSTR(NUMCPFCNPJ,7,3)||'-'||SUBSTR(NUMCPFCNPJ,10,2)
+                   WHEN P.CODTIPOPESSOA = 1 THEN SUBSTR(NUMCPFCNPJ,1,2)||'.'||SUBSTR(NUMCPFCNPJ,3,3)||'.'||SUBSTR(NUMCPFCNPJ,6,3)||'/'||SUBSTR(NUMCPFCNPJ,9,4)||'-'||SUBSTR(NUMCPFCNPJ,13,2)
+                 END NUMCPFCNPJ,
+                 CASE 
+                   WHEN P.CODTIPOPESSOA = 0 THEN PF.NUMDOCUMENTOIDENTIFICACAO||' - '||PF.DESCORGAOEXPDOCUMENTOIDENTIFICACAO||' - '||PF.SIGLAUFORGEXPDOCUMENTOIDENTIFICACAO
+                   WHEN P.CODTIPOPESSOA = 1 THEN PJ.NUMINSCRICAOESTADUAL
+                 END IDENTIFICACAO,
+                 (SELECT '('||TEL.NUMDDD||') '||TEL.NUMTELEFONE
+                  FROM CLI.TELEFONEPESSOA TEL
+                  WHERE TEL.IDPESSOACOMPARTILHAMENTO = PC.IDPESSOACOMPARTILHAMENTO
+                  ORDER BY TEL.CODTIPOTELEFONE, TEL.NUMTELEFONE FETCH FIRST 1 ROWS ONLY) TELEFONE
+          FROM CLI.PESSOA P INNER JOIN CLI.PESSOACOMPARTILHAMENTO PC ON PC.IDPESSOA = P.IDPESSOA
+                            INNER JOIN CLI.TRANSICAOPESSOA TP ON TP.IDPESSOACOMPARTILHAMENTO = PC.IDPESSOACOMPARTILHAMENTO
+                            INNER JOIN SCI.VIW_INSTITUICAO INST ON INST.IDINSTITUICAO = TP.IDINSTITUICAO AND INST.IDUNIDADEINST = 0
+                            LEFT JOIN CLI.PESSOAFISICA PF ON PF.IDPESSOACOMPARTILHAMENTO = PC.IDPESSOACOMPARTILHAMENTO
+                            LEFT JOIN CLI.PESSOAJURIDICA PJ ON PJ.IDPESSOACOMPARTILHAMENTO = PC.IDPESSOACOMPARTILHAMENTO
+          WHERE P.IDPESSOA = <bancoob:valor valor="${idPessoa}" />
+            AND TP.IDINSTITUICAO = <bancoob:valor valor="${idInstituicao}" />
+          
+      ]]>
+		</command>
+	</query>
+
+	<query name="PESQUISAR_RELATORIO_VALIDACAO_CADASTRAL_ANALITICO">
+		<use-case name="Relatório de Validação cadastral Analítico" />
+		<description>Relatório de validação cadastral - Analítico</description>
+		<command>
+	      <![CDATA[
+	        SELECT P.NUMCPFCNPJ, PC.NOMEPESSOA, VC.DATAHORAULTIMAATUALIZACAO, RVC.DESCREFERENCIA, RVC.DESCMENSAGEMERRO, TRVC.DESCTIPOREGRA
+			FROM CLI.PESSOAINSTITUICAO PI
+					INNER JOIN CLI.PESSOACOMPARTILHAMENTO PC		      ON      PC.IDPESSOA								= PI.IDPESSOA
+					INNER JOIN CLI.TRANSICAOPESSOA TP                             ON      TP.IDINSTITUICAO                  = PI.IDINSTITUICAO
+																				  AND     TP.IDPESSOACOMPARTILHAMENTO       = PC.IDPESSOACOMPARTILHAMENTO
+					INNER JOIN CLI.PESSOA P								  ON      P.IDPESSOA                        		= PC.IDPESSOA
+					INNER JOIN CLI.VALIDACAOCADASTRAL VC			      ON      VC.IDPESSOACOMPARTILHAMENTO				= PC.IDPESSOACOMPARTILHAMENTO
+					INNER JOIN CLI.VALIDACAOCADASTRALERRO VCE		      ON      VCE.IDPESSOACOMPARTILHAMENTO  			= PC.IDPESSOACOMPARTILHAMENTO
+													  					  AND    (VCE.IDINSTITUICAO 						IS NULL 		
+																		  OR      VCE.IDINSTITUICAO 						= PI.IDINSTITUICAO)
+					INNER JOIN CLI.REGRAVALIDACAOCADASTRAL RVC		      ON      RVC.CODREGRAVALIDACAOCADASTRAL			= VCE.CODREGRAVALIDACAOCADASTRAL
+					INNER JOIN CLI.TIPOREGRAVALIDACAOCADASTRAL TRVC		  ON      TRVC.CODTIPOREGRA							= RVC.CODTIPOREGRA
+			WHERE 
+					1 = 1
+					<j:if test="${objeto.idInstituicao != null}">
+						AND PI.IDINSTITUICAO = <bancoob:valor valor="${objeto.idInstituicao}"/>
+					</j:if>
+			   
+					<j:if test="${objeto.unidade != null}">
+						AND PI.IDUNIDADEINST = <bancoob:valor valor="${objeto.unidade}" />
+					</j:if>
+			   
+					<j:if test="${objeto.funcionalidade != null}">
+						AND RVC.DESCREFERENCIA = <bancoob:valor valor="${objeto.nomeFuncionalidade}" />
+					</j:if>
+			
+					<j:if test="${objeto.idTipoErro != null}">
+						AND RVC.CODREGRAVALIDACAOCADASTRAL = <bancoob:valor valor="${objeto.idTipoErro}" />
+					</j:if>
+			
+					<j:if test="${objeto.codigoTipoRegra != null}">
+						AND RVC.CODTIPOREGRA = <bancoob:valor valor="${objeto.codigoTipoRegra}" />
+					</j:if>
+			   
+					<j:if test="${objeto.cpfCnpj != null and objeto.cpfCnpj != ''}">
+						AND P.NUMCPFCNPJ = <bancoob:valor valor="${objeto.cpfCnpj}" />
+					</j:if>
+				  
+					<j:if test="${objeto.nucleo != null and objeto.nucleo != 0}">       
+						AND PI.IDNUCLEO = <bancoob:valor valor="${objeto.nucleo}" />
+					</j:if>
+			
+					<j:if test="${objeto.gerente != null and objeto.gerente != 0}">       
+						AND PI.IDFUNCIONARIORESPONSAVEL = <bancoob:valor valor="${objeto.gerente}" />
+					</j:if>
+	        
+		  ORDER BY P.NUMCPFCNPJ
+	      ]]>
+		</command>
+	</query>
+
+	<query name="PESQUISAR_RELATORIO_VALIDACAO_CADASTRAL_SINTETICO">
+		<use-case name="Relatório de Validação cadastral sintético" />
+		<description>Relatório de validação cadastral - Sintético</description>
+		<command>
+	      <![CDATA[
+	      	SELECT RVC.DESCREFERENCIA, RVC.DESCMENSAGEMERRO, TRVC.DESCTIPOREGRA, COUNT(1) QUANTIDADE
+			FROM CLI.PESSOAINSTITUICAO PI
+					INNER JOIN CLI.PESSOACOMPARTILHAMENTO PC						ON      PC.IDPESSOA				     		= PI.IDPESSOA
+					INNER JOIN CLI.TRANSICAOPESSOA TP                             	ON      TP.IDINSTITUICAO                  	= PI.IDINSTITUICAO
+																				  	AND     TP.IDPESSOACOMPARTILHAMENTO       	= PC.IDPESSOACOMPARTILHAMENTO
+					INNER JOIN CLI.VALIDACAOCADASTRALERRO VCE						ON	 	VCE.IDPESSOACOMPARTILHAMENTO  	    = PC.IDPESSOACOMPARTILHAMENTO
+																					AND     (VCE.IDINSTITUICAO 					IS NULL 		
+																					OR       VCE.IDINSTITUICAO 					= PI.IDINSTITUICAO)
+					INNER JOIN CLI.REGRAVALIDACAOCADASTRAL RVC						ON	 	RVC.CODREGRAVALIDACAOCADASTRAL	    = VCE.CODREGRAVALIDACAOCADASTRAL
+					INNER JOIN CLI.TIPOREGRAVALIDACAOCADASTRAL TRVC				    ON	 	TRVC.CODTIPOREGRA					= RVC.CODTIPOREGRA
+			WHERE 1 = 1
+					
+					<j:if test="${objeto.idInstituicao != null}">
+						AND PI.IDINSTITUICAO = <bancoob:valor valor="${objeto.idInstituicao}"/>
+					</j:if>
+			   
+					<j:if test="${objeto.unidade != null}">
+						AND PI.IDUNIDADEINST = <bancoob:valor valor="${objeto.unidade}" />
+					</j:if>
+					
+					<j:if test="${objeto.nucleo != null and objeto.nucleo != 0}">       
+						AND PI.IDNUCLEO = <bancoob:valor valor="${objeto.nucleo}" />
+					</j:if>
+			
+					<j:if test="${objeto.gerente != null and objeto.gerente != 0}">       
+						AND PI.IDFUNCIONARIORESPONSAVEL = <bancoob:valor valor="${objeto.gerente}" />
+					</j:if>
+			
+			        <j:if test="${objeto.codigoTipoRegra != null}">
+						AND RVC.CODTIPOREGRA = <bancoob:valor valor="${objeto.codigoTipoRegra}" />
+					</j:if>
+			           
+			GROUP BY TP.IDINSTITUICAO, RVC.DESCREFERENCIA, RVC.DESCMENSAGEMERRO, TRVC.DESCTIPOREGRA
+			ORDER BY TP.IDINSTITUICAO, RVC.DESCREFERENCIA, RVC.DESCMENSAGEMERRO
+	      ]]>
+		</command>
+	</query>
+
+	<query name="CONSULTA_INSTITUICAO_RELATORIO_PROVA_VIDA">
+		<use-case name="Relatório de Prova de Vida" />
+		<description>Relatório de Prova de Vida</description>
+		<command>
+	      <![CDATA[
+			SELECT DESCNOMECOMPLETOCOOP AS NOME_COOPERATIVA , 
+			CASE 
+				WHEN IDINSTITUICAO = 1 THEN 1 
+				ELSE NUMCOOPERATIVA
+			END AS NUMERO_COOPERATIVA,
+			IDUNIDADEINST AS UNIDADE_INSTITUICAO, 
+			DESCCIDADECOOP AS CIDADE
+			FROM SCI.VIW_INSTITUICAO 
+			WHERE IDINSTITUICAO = <bancoob:valor valor="${instituicao.idInstituicao}" />
+			AND IDUNIDADEINST = <bancoob:valor valor="${instituicao.idUnidadeInst}" />
+	      ]]>
+		</command>
+	</query>
+
+	<query name="CONSULTA_PESSOA_FORMULARIO_VISITA_PF">
+		<use-case name="Relatório de Formulário de visita PF" />
+		<description>Relatório de Formulário de visita PF</description>
+		<command>
+	      <![CDATA[
+			select distinct 
+       			p.numcpfcnpj AS CPF, 
+       			pc.IDPESSOACOMPARTILHAMENTO,
+       			pc.nomecompleto AS NOME, 
+       			decode(a.idtipoanotacao,102,'1','0') AS ANOTACAO,
+       			ep.desclogradouro,
+       			ep.descnumero,
+       			ep.desccomplemento,
+       			ep.nomebairro,
+       			vl.nomelocalidade,
+       			vl.siglauf,
+       			ep.codcep,
+       			op.descocupacao AS PROFISSAO,
+       			LISTAGG('(' || TP.NUMDDD || ') ' || TP.NUMTELEFONE, ', ') AS TELEFONE
+		    from cli.pessoa p
+  				inner join cli.pessoacompartilhamento pc     on pc.idpessoa = p.idpessoa
+  				inner join cli.pessoafisica pf               on pf.idpessoacompartilhamento = pc.idpessoacompartilhamento
+  				left  join cli.anotacao a                    on a.idpessoacompartilhamento = pc.idpessoacompartilhamento 
+  																and a.datahorabaixa is null
+  				left  join cli.enderecopessoa ep             on ep.idpessoacompartilhamento = pc.idpessoacompartilhamento 
+  																and ep.CODTIPOENDERECO = 0
+  				left join loc.viw_localidade vl              on vl.idlocalidade = ep.idlocalidade
+  				left join cli.ocupacaoprofissional op        on op.idocupacaoprofissional = pf.idocupacaoprofissional
+  				left join cli.telefonepessoa tp              on tp.idpessoacompartilhamento = pc.idpessoacompartilhamento 
+  																and tp.codtipotelefone in (0,1,6)
+			WHERE pc.IDPESSOACOMPARTILHAMENTO = <bancoob:valor valor = "${idPessoaCompartilhamento}"/>
+			GROUP BY p.numcpfcnpj, pc.idpessoacompartilhamento, pc.nomecompleto, a.idtipoanotacao, ep.desclogradouro, ep.descnumero, 
+					 ep.desccomplemento, ep.nomebairro, vl.nomelocalidade, vl.siglauf, ep.codcep, op.descocupacao
+	      ]]>
+		</command>
+	</query>
+
+	<query name="CONSULTA_PESSOA_FORMULARIO_VISITA_PJ">
+		<use-case name="Relatório de Formulário de visita PJ" />
+		<description>Relatório de Formulário de visita PJ</description>
+		<command>
+	      <![CDATA[
+			SELECT DISTINCT P.NUMCPFCNPJ AS CNPJ, 
+		       PC.NOMECOMPLETO AS RAZAOSOCIAL, 
+		       EP.DESCLOGRADOURO,
+		       EP.DESCNUMERO,
+		       EP.DESCCOMPLEMENTO,
+		       EP.NOMEBAIRRO,
+		       VL.NOMELOCALIDADE,
+		       VL.SIGLAUF,
+		       EP.CODCEP,
+		       PC.CODCNAE,
+		       LISTAGG('(' || TP.NUMDDD || ') ' || TP.NUMTELEFONE, ', ') AS TELEFONE		       
+			FROM CLI.PESSOA P
+				INNER JOIN CLI.PESSOACOMPARTILHAMENTO PC        ON PC.IDPESSOA = P.IDPESSOA
+				LEFT JOIN CLI.ENDERECOPESSOA EP                 ON EP.IDPESSOACOMPARTILHAMENTO = PC.IDPESSOACOMPARTILHAMENTO
+				INNER JOIN LOC.VIW_LOCALIDADE VL                ON VL.IDLOCALIDADE = EP.IDLOCALIDADE
+				LEFT JOIN CLI.TELEFONEPESSOA TP                 ON TP.IDPESSOACOMPARTILHAMENTO = PC.IDPESSOACOMPARTILHAMENTO
+																	AND TP.CODTIPOTELEFONE IN (0,1,6)
+			WHERE PC.IDPESSOACOMPARTILHAMENTO = <bancoob:valor valor="${idPessoaCompartilhamento}" />
+			GROUP BY p.numcpfcnpj, pc.nomecompleto, ep.desclogradouro, ep.descnumero, 
+					 ep.desccomplemento, ep.nomebairro, vl.nomelocalidade, vl.siglauf, ep.codcep, pc.codcnae
+	      ]]>
+		</command>
+	</query>
+
+	<query name="CONSULTA_VALIDACAO_CADASTRAL_RELATORIO_ATUAL">
+		<use-case name="Relatório de consulta usuario de envio e aprovacao para o relatorio atual" />
+		<description>Relatório de Formulário de visita PJ</description>
+		<command>
+	      <![CDATA[
+			SELECT validacaoCadastral
+				FROM br.com.sicoob.capes.negocio.entidades.ValidacaoCadastral validacaoCadastral
+				WHERE validacaoCadastral.idPessoaCompartilhamento = <bancoob:valorOql valor="${idPessoaCompartilhamento}" tipo="Long" />
+	      ]]>
+		</command>
+	</query>
+	
+	 <query name="PESQUISAR_RELACIONAMENTOS_VIGENTES_FILTRO_SEM_CONJUGE">
+    <use-case name="Manter Relacionamento" />
+    <description>Pesquisa os relacionamentos vigentes</description>
+    <command>
+			<![CDATA[
+				SELECT r
+				FROM br.com.sicoob.capes.negocio.entidades.vigente.RelacionamentoPessoa r
+				INNER JOIN r.tipoRelacionamento t
+				INNER JOIN r.pessoaCompartilhamento pc
+				INNER JOIN pc.transicoes tp
+				
+				<j:if test="${idPessoaRelacionada != null}">
+					INNER JOIN r.pessoaRelacionada pr
+				</j:if>
+				
+				WHERE r.dataHoraInicio is not null
+				AND tp.instituicao.idInstituicao = <bancoob:valorOql valor="${idInstituicao}" tipo="Integer" />
+				AND r.pessoa.idPessoa = <bancoob:valorOql valor="${idPessoa}" tipo="Integer" />
+				<j:if test="${idTipoRelacionamento != null}">
+					AND t.codigo = <bancoob:valorOql valor="${idTipoRelacionamento}" tipo="Short" />
+				</j:if>
+				AND t.codigo != 2 
+				<j:if test="${idPessoaRelacionada != null}">
+					AND pr.idPessoa = <bancoob:valorOql valor="${idPessoaRelacionada}" tipo="Integer" />
+				</j:if>
+				
+				AND (
+						(t.permiteCompartilhamento = 1) OR (r.idInstituicao = <bancoob:valorOql valor="${idInstituicao}" tipo="Integer" />
+						AND t.permiteCompartilhamento = 0)
+					)
+			]]>
+    </command>
+  </query>
+  
+  <query name="OBTER_VALORES_BEM_PESSOA">
+		<use-case name="Manter bem" />
+		<description>Pesquisa os valores totais dos bens de uma pessoa.
+		</description>
+		<command>
+			<![CDATA[
+				SELECT
+					SUM(CASE WHEN (BMA.IDBEM IS NOT NULL AND BMA.BOLEMPROCESSOAQUISICAO = 0) THEN (BMA.VALORAVALIACAO * BPC.PERCPROPRIETARIO / 100) ELSE 0 END) AS TOTAL_MOVEL_AVALIADO,
+					SUM(CASE WHEN (BIA.IDBEM IS NOT NULL AND BIA.BOLEMPROCESSOAQUISICAO = 0) THEN (BIA.VALORAVALIACAO * BPC.PERCPROPRIETARIO / 100) ELSE 0 END) AS TOTAL_IMOVEL_AVALIADO,
+					SUM(CASE WHEN (B.CODTIPOCLASSIFICACAOBEM = 2 AND (BMA.IDBEM IS NULL OR BMA.BOLEMPROCESSOAQUISICAO = 0)) THEN (B.VALORBEM * BPC.PERCPROPRIETARIO / 100) ELSE 0 END) AS TOTAL_MOVEL_DECLARADO,
+					SUM(CASE WHEN (B.CODTIPOCLASSIFICACAOBEM = 1 AND (BIA.IDBEM IS NULL OR BIA.BOLEMPROCESSOAQUISICAO = 0)) THEN (B.VALORBEM * BPC.PERCPROPRIETARIO / 100) ELSE 0 END) AS TOTAL_IMOVEL_DECLARADO,
+					SUM(CASE WHEN ((B.CODTIPOCLASSIFICACAOBEM = 2 AND BMA.IDBEM IS NULL OR BMA.BOLEMPROCESSOAQUISICAO = 0) OR (B.CODTIPOCLASSIFICACAOBEM = 1 AND BIA.IDBEM IS NULL OR BIA.BOLEMPROCESSOAQUISICAO = 0)) THEN (B.VALORBEM * BPC.PERCPROPRIETARIO / 100) ELSE 0 END) AS TOTAL_DECLARADO,
+					(SUM(CASE WHEN (BMA.IDBEM IS NOT NULL AND BMA.BOLEMPROCESSOAQUISICAO = 0) THEN (BMA.VALORAVALIACAO * BPC.PERCPROPRIETARIO / 100) ELSE 0 END) +
+					SUM(CASE WHEN (BIA.IDBEM IS NOT NULL AND BIA.BOLEMPROCESSOAQUISICAO = 0) THEN (BIA.VALORAVALIACAO * BPC.PERCPROPRIETARIO / 100) ELSE 0 END)) AS TOTAL_AVALIADO
+				FROM CLI.BEMPESSOACOMPARTILHAMENTO BPC
+				INNER JOIN CLI.BEM B ON B.IDBEM = BPC.IDBEM
+				INNER JOIN CLI.PESSOACOMPARTILHAMENTO PC ON BPC.IDPESSOACOMPARTILHAMENTO = PC.IDPESSOACOMPARTILHAMENTO
+				LEFT JOIN CLI.BEMIMOVELAVALIACAO BIA ON BIA.IDBEM = B.IDBEM
+				LEFT JOIN CLI.BEMMOVELAVALIACAO BMA ON BMA.IDBEM = B.IDBEM
+				WHERE B.BOLBEMINTERNO = 0
+				AND B.DATAHORAINICIO IS NOT NULL
+				AND B.IDINSTITUICAOATUALIZACAO IS NULL
+				AND BPC.IDPESSOACOMPARTILHAMENTO = <bancoob:valor valor="${idPessoaCompartilhamento}" tipo="Long" />
+			]]>
+		</command>
+	</query>
+
+	<query name="EXECUTAR_RELCLIENTEPRODUTO">
+		<use-case name="Retorna dados do relatorio"></use-case>
+		<description>Retorna dados do relatorio.</description>
+		<command>
+			<![CDATA[
+				SPU_REL_CLIENTE_PRODUTO
+				${objParametro.pNumCooperativa},
+				
+				<j:if test="${objParametro.pNumCoopPac != null}">
+					${objParametro.pNumCoopPac},
+				</j:if>
+				<j:if test="${objParametro.pNumCoopPac == null}">
+					NULL,
+				</j:if>
+				
+				<j:if test="${objParametro.pNumNucleo != null}">
+					${objParametro.pNumNucleo},
+				</j:if>
+				<j:if test="${objParametro.pNumNucleo == null}">
+					NULL,
+				</j:if>
+				
+				<j:if test="${objParametro.pNumGrupoEconomico != null}">
+					${objParametro.pNumGrupoEconomico},
+				</j:if>
+				<j:if test="${objParametro.pNumGrupoEconomico == null}">
+					NULL,
+				</j:if>
+				
+				<j:if test="${objParametro.pNumGerente != null}">
+					${objParametro.pNumGerente},
+				</j:if>
+				<j:if test="${objParametro.pNumGerente == null}">
+					NULL,
+				</j:if>
+				
+				<j:if test="${objParametro.pTipoPessoa != null}">
+					${objParametro.pTipoPessoa},
+				</j:if>
+				<j:if test="${objParametro.pTipoPessoa == null}">
+					NULL,
+				</j:if>
+				
+				<j:if test="${objParametro.pContaCapital != null}">
+					${objParametro.pContaCapital},
+				</j:if>
+				<j:if test="${objParametro.pContaCapital == null}">
+					NULL,
+				</j:if>
+				
+				<j:if test="${objParametro.pContaCorrente != null}">
+					${objParametro.pContaCorrente},
+				</j:if>
+				<j:if test="${objParametro.pContaCorrente == null}">
+					NULL,
+				</j:if>
+				
+				<j:if test="${objParametro.pAplicacao != null}">
+					${objParametro.pAplicacao},
+				</j:if>
+				<j:if test="${objParametro.pAplicacao == null}">
+					NULL,
+				</j:if>
+				
+				<j:if test="${objParametro.pPoupanca != null}">
+					${objParametro.pPoupanca},
+				</j:if>
+				<j:if test="${objParametro.pPoupanca == null}">
+					NULL,
+				</j:if>
+				
+				<j:if test="${objParametro.pOpCredito != null}">
+					${objParametro.pOpCredito},
+				</j:if>
+				<j:if test="${objParametro.pOpCredito == null}">
+					NULL,
+				</j:if>
+				
+				<j:if test="${objParametro.pCartaoCredito != null}">
+					${objParametro.pCartaoCredito},
+				</j:if>
+				<j:if test="${objParametro.pCartaoCredito == null}">
+					NULL,
+				</j:if>
+				
+				<j:if test="${objParametro.pDebitoAutomatico != null}">
+					${objParametro.pDebitoAutomatico},
+				</j:if>
+				<j:if test="${objParametro.pDebitoAutomatico == null}">
+					NULL,
+				</j:if>
+				
+				${objParametro.pRendaMin},
+				
+				<j:if test="${objParametro.pRendaMax != 0}">
+					${objParametro.pRendaMax},
+				</j:if>
+				<j:if test="${objParametro.pRendaMax == 0}">
+					NULL,
+				</j:if>
+				
+				<j:if test="${objParametro.pDtNascInicio != null}">
+					'${objParametro.pDtNascInicio}',
+				</j:if>
+				<j:if test="${objParametro.pDtNascInicio == null}">
+					NULL,
+				</j:if>
+				
+				<j:if test="${objParametro.pDtNascFim != null}">
+					'${objParametro.pDtNascFim}',
+				</j:if>
+				<j:if test="${objParametro.pDtNascFim == null}">
+					NULL,
+				</j:if>
+				
+				<j:if test="${objParametro.pDependente != null}">
+					${objParametro.pDependente},
+				</j:if>
+				<j:if test="${objParametro.pDependente == null}">
+					NULL,
+				</j:if>
+				
+				<j:if test="${objParametro.pSexo != null}">
+					${objParametro.pSexo},
+				</j:if>
+				<j:if test="${objParametro.pSexo == null}">
+					NULL,
+				</j:if>
+				
+				<j:if test="${objParametro.pNumMunicipio != null}">
+					${objParametro.pNumMunicipio},
+				</j:if>
+				<j:if test="${objParametro.pNumMunicipio == null}">
+					NULL,
+				</j:if>
+				<j:if test="${objParametro.pNumCategoriaProdutor != null}">
+					${objParametro.pNumCategoriaProdutor},
+				</j:if>
+				<j:if test="${objParametro.pNumCategoriaProdutor == null}">
+					NULL,
+				</j:if>
+			
+				${objParametro.pOrdenacao}
+			]]>
+		</command>
+	</query>
+</queries>

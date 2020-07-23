@@ -1,0 +1,84 @@
+<?xml version="1.0"?>
+<jboss>
+	<enterprise-beans>
+
+		<session>
+			<ejb-name>AnotacaoServicoEJB</ejb-name>
+			<jndi-name>capes/api/inclusao/AnotacaoServicoRemote</jndi-name>
+			<local-jndi-name>capes/api/inclusao/AnotacaoServico</local-jndi-name>
+		</session>
+		
+		<session>
+			<ejb-name>BemServicoEJB</ejb-name>
+			<jndi-name>capes/api/inclusao/BemServicoRemote</jndi-name>
+			<local-jndi-name>capes/api/inclusao/BemServico</local-jndi-name>
+		</session>
+		
+		<session>
+			<ejb-name>ClienteServicoEJB</ejb-name>
+			<jndi-name>capes/api/inclusao/ClienteServicoRemote</jndi-name>
+			<local-jndi-name>capes/api/inclusao/ClienteServico</local-jndi-name>
+		</session>
+
+		<session>
+			<ejb-name>EmailServicoEJB</ejb-name>
+			<jndi-name>capes/api/inclusao/EmailServicoRemote</jndi-name>
+			<local-jndi-name>capes/api/inclusao/EmailServico</local-jndi-name>
+		</session>
+
+		<session>
+			<ejb-name>EnderecoServicoEJB</ejb-name>
+			<jndi-name>capes/api/inclusao/EnderecoServicoRemote</jndi-name>
+			<local-jndi-name>capes/api/inclusao/EnderecoServico</local-jndi-name>
+		</session>
+
+		<session>
+			<ejb-name>FonteRendaServicoEJB</ejb-name>
+			<jndi-name>capes/api/inclusao/FonteRendaServicoRemote</jndi-name>
+			<local-jndi-name>capes/api/inclusao/FonteRendaServico</local-jndi-name>
+		</session>
+		
+		<session>
+			<ejb-name>InformacaoProfissionalServicoEJB</ejb-name>
+			<jndi-name>capes/api/inclusao/InformacaoProfissionalServicoRemote</jndi-name>
+			<local-jndi-name>capes/api/inclusao/InformacaoProfissionalServico</local-jndi-name>
+		</session>
+		
+		<session>
+			<ejb-name>MensagemServicoEJB</ejb-name>
+			<jndi-name>capes/api/inclusao/MensagemServicoRemote</jndi-name>
+			<local-jndi-name>capes/api/inclusao/MensagemServico</local-jndi-name>
+		</session>
+
+		<session>
+			<ejb-name>PessoaServicoEJB</ejb-name>
+			<jndi-name>capes/api/inclusao/PessoaServicoRemote</jndi-name>
+			<local-jndi-name>capes/api/inclusao/PessoaServico</local-jndi-name>
+		</session>
+		
+		<session>
+			<ejb-name>PlataformaContabilServicoEJB</ejb-name>
+			<jndi-name>capes/api/inclusao/PlataformaContabilServicoRemote</jndi-name>
+			<local-jndi-name>capes/api/inclusao/PlataformaContabilServico</local-jndi-name>
+		</session>
+
+		<session>
+			<ejb-name>ReferenciaServicoEJB</ejb-name>
+			<jndi-name>capes/api/inclusao/ReferenciaServicoRemote</jndi-name>
+			<local-jndi-name>capes/api/inclusao/ReferenciaServico</local-jndi-name>
+		</session>
+
+		<session>
+			<ejb-name>RelacionamentoServicoEJB</ejb-name>
+			<jndi-name>capes/api/inclusao/RelacionamentoServicoRemote</jndi-name>
+			<local-jndi-name>capes/api/inclusao/RelacionamentoServico</local-jndi-name>
+		</session>
+
+		<session>
+			<ejb-name>TelefoneServicoEJB</ejb-name>
+			<jndi-name>capes/api/inclusao/TelefoneServicoRemote</jndi-name>
+			<local-jndi-name>capes/api/inclusao/TelefoneServico</local-jndi-name>
+		</session>
+
+	</enterprise-beans>
+</jboss>

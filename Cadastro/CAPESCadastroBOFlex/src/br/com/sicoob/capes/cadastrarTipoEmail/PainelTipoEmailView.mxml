@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PainelListaBanco xmlns="br.com.bancoob.componentes.painellista.*"
+				  xmlns:mx="http://www.adobe.com/2006/mxml"
+				  xmlns:tabelaPaginada="br.com.bancoob.componentes.tabelapaginada.*"
+				  xmlns:servico="br.com.bancoob.util.servico.*"
+				  xmlns:grid="br.com.bancoob.componentes.grid.*"
+				  xmlns:bancoobInput="br.com.bancoob.componentes.input.*"
+				  deveExibirMensagemNenhumRegistro="true" metodoPesquisa="obterDadosSelecao" xmlns:tipoEmail="br.com.sicoob.capes.cadastrarTipoEmail.*">
+	<mx:Script>
+		<![CDATA[
+			import br.com.bancoob.componentes.input.Check;
+			import br.com.bancoob.componentes.renderes.RendererFactory;
+			import br.com.bancoob.componentes.tabelapaginada.TabelaPaginadaUtils;
+		]]>
+	</mx:Script>
+	
+	<servicoPesquisa>
+		<servico:ServicoJava id="consultarTipoEmail"
+							 source="br.com.sicoob.capes.cadastro.fachada.TipoEmailFachada"
+							 bloquearOperacao="true"
+							 mensagemEspera="Pesquisando dados..." />
+	</servicoPesquisa>
+	
+	<painelFiltro>
+		<tipoEmail:PainelFiltroTipoEmailView width="100%" height="100%" />
+	</painelFiltro>
+	
+	<tabelaPaginada>
+		<tabelaPaginada:TabelaPaginadaBanco width="100%" height="100%" tamanhoPagina="15" titulo="LISTA DE DADOS">
+			<tabelaPaginada:MetadadosTabela>
+				<grid:ColunaGrid width="100" headerText="Código" propriedade="codigo"
+								 labelFunction="{TabelaPaginadaUtils.defaultLabelFunction}" />
+				<grid:ColunaGrid minWidth="200" dataField="descricao" headerText="Descrição"
+								 labelFunction="{TabelaPaginadaUtils.defaultLabelFunction}"/>
+				<grid:ColunaGrid minWidth="100" dataField="tipoPessoaContato.descricao" headerText="Tipo pessoa contato"
+								 labelFunction="{TabelaPaginadaUtils.defaultLabelFunction}"/>
+			</tabelaPaginada:MetadadosTabela>
+		</tabelaPaginada:TabelaPaginadaBanco>
+	</tabelaPaginada>
+</PainelListaBanco>

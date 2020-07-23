@@ -1,0 +1,4223 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE queries [
+	<!ELEMENT queries (query*)>
+	<!ELEMENT query (use-case+,description,paginacao?,command+,projecao?,ordenacoes?)>
+	<!ELEMENT use-case    (#PCDATA)>
+	<!ELEMENT description (#PCDATA)>
+	<!ELEMENT command     (#PCDATA)>
+	<!ELEMENT parametros  (#PCDATA)>
+	<!ELEMENT projecao  (#PCDATA)>
+	<!ELEMENT paginar  (#PCDATA)>
+	<!ELEMENT paginacao (#PCDATA)>
+	<!ELEMENT colunaCodigo    (#PCDATA)>
+	<!ELEMENT colunaDescricao    (#PCDATA)>
+	<!ELEMENT numeroOcorrenciasPorPagina    (#PCDATA)>
+	<!ELEMENT primeiraCondicao    (#PCDATA)>
+	<!ELEMENT ascendente    (#PCDATA)>
+	<!ELEMENT ordenacoes (ordenacao+)>
+	<!ELEMENT ordenacao (#PCDATA)>
+	<!ELEMENT sql  (#PCDATA)>
+	<!ATTLIST ordenacao chave CDATA    #REQUIRED>
+	<!ATTLIST ordenacao default CDATA    #IMPLIED>
+	<!ATTLIST command parametros CDATA    #IMPLIED>
+	<!ATTLIST command paginar CDATA    #IMPLIED>
+	<!ATTLIST use-case name CDATA    #REQUIRED>
+	<!ATTLIST query name CDATA    #REQUIRED>
+	<!ATTLIST paginacao colunaCodigo CDATA    #REQUIRED>
+	<!ATTLIST paginacao colunaDescricao CDATA    #REQUIRED>
+	<!ATTLIST paginacao numeroOcorrenciasPorPagina CDATA    #REQUIRED>
+	<!ATTLIST paginacao primeiraCondicao CDATA    #REQUIRED>
+	<!ATTLIST paginacao ascendente CDATA    #REQUIRED>
+	<!ATTLIST paginacao hint CDATA    #REQUIRED>
+	<!ATTLIST paginacao hintAuxiliar CDATA   #IMPLIED>
+]>	
+<queries>
+	<query name="PESQUISAR_PESSOA">
+		<use-case name="Pesquisar Pessoa"></use-case>
+		<description>Pesquisa a pessoa</description>
+		<command>
+			<![CDATA[
+			SELECT 
+				new br.com.sicoob.capes.api.negocio.vo.PessoaVO(
+				  p.idPessoa as idPessoa,
+				  p.cpfCnpj as cpfCnpj,
+                  p.tipoPessoa.codTipoPessoa as codTipoPessoa,
+                  pc.compartilhamento.codigo as codigoCompartilhamentoCadastro,
+                  pc.nomePessoa as nomePessoa,
+                  pc.nomeCompleto as nomeCompleto,
+                  pc.nomeApelido as nomeApelido,
+                  pc.descricao as descricaoObservacaoPessoa,
+                  pc.atividadeEconomica.codigo as codigoAtividadeEconomica,
+                  pc.cnae.codigo as codigoCnaeFiscal,
+                  pc.dataInclusaoSistema as dataInclusaoSistema,
+       			  pc.autorizaConsultaBacen as autorizaConsultaBacen,
+       			  tp.idPessoaLegado as idPessoaLegado,
+       			  tp.instituicao.idInstituicao as idInstituicao,
+                  tp.instituicao.idUnidadeInst as idUnidadeInst,
+       			  pc.dataInclusaoSFN as dataInclusaoSFN,
+                  pc.dataRenovacaoCadastral as dataRenovacaoCadastral,
+                  pc.idUsuarioRenovacao as idUsuarioRenovacao,
+                  pc.idInstituicaoRenovacao as idInstituicaoRenovacao,
+                  cnaeFiscal.descricao as descricaoCnaeFiscal,
+                  atividadeEconomica.descricao as descricaoAtividadeEconomica
+			)
+			FROM br.com.sicoob.capes.negocio.entidades.Pessoa p
+				INNER JOIN p.compartilhamentos pc
+				INNER JOIN pc.transicoes tp
+				LEFT JOIN pc.cnae cnaeFiscal
+				LEFT JOIN pc.atividadeEconomica atividadeEconomica
+			WHERE
+				pc.dataHoraInicio is not null
+				
+		<j:if test="${idInstituicao != null}">
+			    AND tp.instituicao.idInstituicao  = <bancoob:valorOql valor="${idInstituicao}"  tipo="Integer" />
+		</j:if>
+				
+		<j:if test="${idPessoa != null}">
+			    AND p.idPessoa         	  	  = <bancoob:valorOql valor="${idPessoa}"  tipo="Integer" />
+		</j:if>
+		<j:if test="${idPessoaLegado != null}">
+			    AND tp.idPessoaLegado  		  = <bancoob:valorOql valor="${idPessoaLegado}"  tipo="Integer" />
+		</j:if>
+		<j:if test="${cpfCnpj != null}">
+			    AND p.cpfCnpj  				  = <bancoob:valorOql valor="${cpfCnpj}"  tipo="String" />
+		</j:if>
+		<j:if test="${nome != null}">
+			    AND pc.nomePessoa  like <bancoob:valorOql valor="${nome}"  tipo="LikeDireita" />
+		</j:if>
+		<j:if test="${nomeApelido != null}">
+			    AND pc.nomeApelido like <bancoob:valorOql valor="${nomeApelido}"  tipo="LikeDireita" />
+		</j:if>
+		<j:if test="${tipoPessoa != null}">
+			    AND p.tipoPessoa.codTipoPessoa =  <bancoob:valorOql valor="${tipoPessoa}"  tipo="Short" />
+		</j:if>
+			]]>
+		</command>
+	</query>
+  
+  <query name="OBTER_PESSOA_POR_CPFCNPJ_INSTITUICAOGRUPOCOMPARTILHAMENTO">
+    <use-case name="Pesquisar Pessoa"></use-case>
+    <description>Pesquisa a pessoa</description>
+    <command>
+      <![CDATA[
+      SELECT 
+        P.IDPESSOA      as IDPESSOA,
+        P.NUMCPFCNPJ    as NUMCPFCNPJ,
+        PC.NOMECOMPLETO as NOMECOMPLETO,
+        PC.CODCNAE      as CODCNAE,
+        CN.DESCCNAE     as DESCCNAE
+      FROM CLI.PESSOA P INNER JOIN CLI.PESSOACOMPARTILHAMENTO PC ON P.IDPESSOA = PC.IDPESSOA
+                        INNER JOIN CLI.GRUPOCOMPARTILHAMENTO GC ON PC.CODCOMPARTILHAMENTOCADASTRO = GC.CODCOMPARTILHAMENTOCADASTRO
+                        LEFT JOIN CLI.CNAEFISCAL CN ON CN.CODCNAE = PC.CODCNAE
+        WHERE P.NUMCPFCNPJ = <bancoob:valor valor="${cpfCnpj}" tipo="String" />
+        AND GC.IDINSTITUICAO = <bancoob:valor valor="${idInstituicao}" tipo="Integer" />
+        ]]>
+      </command>
+    </query>
+  
+	<query name="PESQUISAR_QTD_PESSOA">
+		<use-case name="Pesquisar Quantidade Pessoa"></use-case>
+		<description>Pesquisa quantidade de pessoas</description>
+		<command>
+			<![CDATA[
+			SELECT count(*)
+			FROM br.com.sicoob.capes.negocio.entidades.Pessoa p
+				INNER JOIN p.compartilhamentos pc
+				INNER JOIN pc.transicoes tp
+			WHERE
+				pc.dataHoraInicio is not null
+				
+		<j:if test="${idInstituicao != null}">
+			    AND tp.instituicao.idInstituicao  = <bancoob:valorOql valor="${idInstituicao}"  tipo="Integer" />
+		</j:if>
+				
+		<j:if test="${nome != null}">
+			    AND pc.nomePessoa  like <bancoob:valorOql valor="${nome}"  tipo="LikeDireita" />
+		</j:if>
+		<j:if test="${nomeApelido != null}">
+			    AND pc.nomeApelido like <bancoob:valorOql valor="${nomeApelido}"  tipo="LikeDireita" />
+		</j:if>
+			]]>
+		</command>
+	</query>
+
+	<query name="PESQUISAR_PRODUTIVIDADE_PESSOA">
+		<use-case name="Pesquisar produtividade pessoa"></use-case>
+		<description>Pesquisa as produtividade da pessoa</description>
+		<command>
+			<![CDATA[
+			SELECT 
+				new br.com.sicoob.capes.api.negocio.vo.ProdutividadePessoaVO(
+				  a.idProdutividade as idProdutividade,
+                  a.descricao as descricao,
+                  a.producao as producao,
+                  a.quantidadeOuArea as quantidadeOuArea,
+                  a.percentualRebate as percentualRebate,
+                  a.valorRendaBruta as valorRendaBruta,
+                  a.anoInicioSafra as anoInicioSafra,
+       			  a.anoFimSafra as anoFimSafra,
+                  a.valorPrecoMedio as valorPrecoMedio,
+                  a.bemImovel.idBem as idBemImovel,
+                  a.situacao as situacao,
+       			  a.dataHoraInicio as dataHoraInicio,
+                  b.codigo as idEmpreendimento,
+                  b.descricao as descricaoEmpreendimento,
+                  b.finalidade.codigo as codFinalidadeEmpreendimento,
+                  c.codigo as codUnidadeMedidaAreaEmpreendimento,
+                  c.descricao as descricaoUnidadeMedidaAreaEmpreendimento,
+                  c.sigla as siglaUnidadeMedidaAreaEmpreendimento,
+                  d.codigo as codUnidadeMedidaPrevisaoEmpreendimento,
+                  d.descricao as descricaoUnidadeMedidaPrevisaoEmpreendimento,
+                  d.sigla as siglaUnidadeMedidaPrevisaoEmpreendimento,
+                  cp.codigo as codCategoriaProdutor,
+                  cp.descricao as descCategoriaProdutor,
+                  p.codigoInscricao as codInscricaoProdutorRural,
+                  b.codigoBacen as codigoBacen,
+                  a.bemImovelAntigo.idBem as idBemAntigo
+			)
+			FROM br.com.sicoob.capes.negocio.entidades.vigente.PessoaCompartilhamento pc, 
+				 br.com.sicoob.capes.negocio.entidades.vigente.Produtividade a				 
+		<j:if test="${idInstituicao != null}">
+				INNER JOIN pc.transicoes tp
+		</j:if>
+				INNER JOIN a.empreendimento b
+				LEFT OUTER JOIN b.unidadeArea c
+				LEFT OUTER JOIN b.unidadePrevisao d
+				RIGHT JOIN a.produtor p
+				INNER JOIN p.categoria cp
+			WHERE
+			    pc.idPessoaCompartilhamento = a.pessoaCompartilhamento.idPessoaCompartilhamento
+		<j:if test="${inserirDataHoraInicio != null and inserirDataHoraInicio}">	
+				AND a.dataHoraInicio is not null
+		</j:if>
+		<j:if test="${idInstituicao != null}">
+			    AND tp.instituicao.idInstituicao = <bancoob:valorOql valor="${idInstituicao}" tipo="Integer" />
+		</j:if>
+		<j:if test="${idPessoa != null}">
+			    AND pc.pessoa.idPessoa = <bancoob:valorOql valor="${idPessoa}" tipo="Integer" />
+		</j:if>
+		<j:if test="${id != null}">
+			    AND a.idProdutividade = <bancoob:valorOql valor="${id}" tipo="Long" />
+		</j:if>
+		<j:if test="${situacoes != null}">
+			    AND a.situacao IN(<bancoob:valorOql valor="${situacoes}" />)
+		</j:if>
+			]]>
+		</command>
+		<ordenacoes>
+			<ordenacao chave="descricaoProdutividade" default="true">
+				<![CDATA[order by a.descricao asc]]>
+			</ordenacao>
+		</ordenacoes>
+	</query>
+  
+	<query name="PESQUISAR_BEM_PESSOA">
+		<use-case name="Pesquisar Bem Pessoa"></use-case>
+		<description>Pesquisa os bens da pessoa</description>
+		<command>
+			<![CDATA[
+			SELECT 
+				new br.com.sicoob.capes.api.negocio.vo.BemPessoaVO(
+                  p.idPessoa as idPessoa,
+				  a.idBem as idBem,
+       			  a.dataHoraInicio as dataHoraInicio,
+                  a.descricao as descricaoBem,
+                  a.valorAtualMercado as valorAtualMercado,
+                  a.percentual as percentual,
+                  ((a.valorAtualMercado * a.percentual)/100) as valorPropriedade,
+                  a.nomeSeguradora as nomeSeguradora,
+                  a.dataVencimentoSeguro as dataVencimentoSeguro,
+                  a.valorSeguro as valorSeguro,                  
+                  a.codLocalizacao as codLocalizacaoImovel,
+                  a.benfeitoria as benfeitoriaImovel,
+                  a.valorBenfeitoria as valorBenfeitoriaImovel,
+                  a.denominacao as denominacaoImovel,
+                  a.comarca as comarcaImovel,
+                  a.siglaUFComarca as siglaUFComarcaImovel,
+                  a.idLocalidadeComarca as idLocalidadeComarcaImovel,
+                  a.idLocalidadeImovel as idLocalidadeImovel,
+                  a.municipio as municipioImovel,
+                  a.siglaUFMunicipio as siglaUFMunicipioImovel,
+                  a.area as areaImovel,
+                  um.codigo as codigoUnidadeMedidaImovel,
+                  um.descricao as descricaoUnidadeMedidaImovel,
+                  um.sigla as siglaUnidadeMedidaImovel,                  
+                  c.codigo as codigoSituacaoBem,
+                  c.descricao as descricaoSituacaoBem,
+                  e.codigo as codigoTipoBem,
+                  e.descricao as descricaoTipoBem,
+                  d.codigo as codigoSubTipoBem,
+                  d.descricao as descricaoSubTipoBem
+			)
+			FROM br.com.sicoob.capes.negocio.entidades.bemantigo.Bem a
+				INNER JOIN a.pessoaCompartilhamento pc
+				INNER JOIN pc.pessoa p
+				INNER JOIN a.situacao c
+				INNER JOIN a.subTipo d
+				INNER JOIN d.tipoBem e
+		<j:if test="${idInstituicao != null}">
+				INNER JOIN pc.transicoes tp
+		</j:if>
+				LEFT JOIN a.unidadeMedida um
+			WHERE 1=1
+			AND a.dataHoraInicio is not null
+		<j:if test="${idInstituicao != null}">
+			    AND tp.instituicao.idInstituicao  = <bancoob:valorOql valor="${idInstituicao}"  tipo="Integer" />
+		</j:if>
+		<j:if test="${idPessoa != null}">
+				AND pc.pessoa.idPessoa         	  = <bancoob:valorOql valor="${idPessoa}"  tipo="Integer" />
+		</j:if>
+		<j:if test="${id != null}">
+			    AND a.idBem         	 		  = <bancoob:valorOql valor="${id}"  tipo="Long" />
+		</j:if>
+			]]>
+		</command>
+		<ordenacoes>
+			<ordenacao chave="descricaoBem" default="true">
+				<![CDATA[order by a.descricao asc]]>
+			</ordenacao>
+		</ordenacoes>		
+	</query>
+  
+	<query name="CONSULTAR_TELEFONE_PESSOA">
+		<use-case name="Pesquisar Telefone Pessoa"></use-case>
+		<description>Pesquisa os telefones da pessoa</description>
+		<command>
+			<![CDATA[
+			SELECT 
+			   new br.com.sicoob.capes.api.negocio.vo.TelefonePessoaVO(
+			     a.idTelefonePessoa as idTelefone,
+				 a.dataHoraInicio as dataHoraInicio,
+				 a.ddd as ddd,
+				 a.telefone as telefone,
+				 a.ramal as ramal,
+				 b.codigo as codigoTipoTelefone,
+				 b.descricao as descricaoTipoTelefone
+			   )
+			FROM br.com.sicoob.capes.negocio.entidades.vigente.Telefone a
+				INNER JOIN a.pessoaCompartilhamento pc
+				INNER JOIN a.tipoTelefone b
+		<j:if test="${idInstituicao != null}">
+				INNER JOIN pc.transicoes tp
+		</j:if>
+			WHERE 1=1
+		<j:if test="${inserirDataHoraInicio != null and inserirDataHoraInicio}">	
+			AND	a.dataHoraInicio is not null
+		</j:if>
+		<j:if test="${idInstituicao != null}">
+			    AND tp.instituicao.idInstituicao  = <bancoob:valorOql valor="${idInstituicao}"  tipo="Integer" />
+		</j:if>
+		<j:if test="${idPessoa != null}">
+			    AND pc.pessoa.idPessoa         	  = <bancoob:valorOql valor="${idPessoa}"  tipo="Integer" />
+		</j:if>
+		<j:if test="${id != null}">
+			    AND a.idTelefonePessoa         	  = <bancoob:valorOql valor="${id}"  tipo="Long" />
+		</j:if>
+			]]>
+		</command>
+	</query>
+	
+	<query name="PESQUISAR_TELEFONE_PESSOA">
+		<use-case name="Pesquisar Telefone Pessoa"></use-case>
+		<description>Pesquisa os telefones da pessoa</description>
+		<command>
+			<![CDATA[
+			SELECT 
+			   new br.com.sicoob.capes.api.negocio.vo.TelefonePessoaVO(
+			     t.idTelefonePessoa as idTelefone,
+				 t.dataHoraInicio as dataHoraInicio,
+				 t.ddd as ddd,
+				 t.telefone as telefone,
+				 t.ramal as ramal,
+				 tt.codigo as codigoTipoTelefone,
+				 tt.descricao as descricaoTipoTelefone
+			   )
+			FROM br.com.sicoob.capes.negocio.entidades.vigente.Telefone t
+			INNER JOIN t.pessoaCompartilhamento pc
+			INNER JOIN t.tipoTelefone tt
+			INNER JOIN pc.transicoes tp
+			WHERE t.dataHoraInicio is not null
+			AND tp.instituicao.idInstituicao  = <bancoob:valorOql valor="${criterios.filtro.idInstituicao}" tipo="Integer" />
+			AND pc.pessoa.idPessoa = <bancoob:valorOql valor="${criterios.filtro.idPessoa}" tipo="Integer" />
+			
+			<j:if test="${criterios.filtro.ddd != null}">
+				AND t.ddd = <bancoob:valorOql valor="${criterios.filtro.ddd}" tipo="String" />
+			</j:if>
+			
+			<j:if test="${criterios.filtro.telefone != null}">
+				AND t.telefone = <bancoob:valorOql valor="${criterios.filtro.telefone}" tipo="String" />
+			</j:if>
+			
+			<j:if test="${criterios.filtro.ramal != null}">
+				AND t.ramal = <bancoob:valorOql valor="${criterios.filtro.ramal}" tipo="String" />
+			</j:if>
+			
+			<j:if test="${criterios.filtro.codigoTipoTelefone != null}">
+				AND tt.codigo = <bancoob:valorOql valor="${criterios.filtro.codigoTipoTelefone}" tipo="Short" />
+			</j:if>
+		
+			]]>
+		</command>
+	</query>
+  
+	<query name="CONSULTAR_EMAIL_PESSOA">
+		<use-case name="Pesquisar Email Pessoa"></use-case>
+		<description>Pesquisa os emails da pessoa</description>
+		<command>
+			<![CDATA[
+			SELECT 
+				new br.com.sicoob.capes.api.negocio.vo.EmailPessoaVO(
+				  a.idEmail as idEmail,
+				  a.dataHoraInicio as dataHoraInicio,
+				  a.descricao as descricaoEmail,
+				  b.codigo as codigoTipoEmail,
+				  b.descricao as descricaoTipoEmail
+			    )
+			FROM br.com.sicoob.capes.negocio.entidades.vigente.Email a
+				INNER JOIN a.pessoaCompartilhamento pc
+				INNER JOIN a.tipoEmail b
+		<j:if test="${idInstituicao != null}">
+				INNER JOIN pc.transicoes tp
+		</j:if>
+			WHERE 1=1
+		<j:if test="${inserirDataHoraInicio != null and inserirDataHoraInicio}">	
+			AND a.dataHoraInicio is not null
+		</j:if>
+		<j:if test="${idInstituicao != null}">
+			    AND tp.instituicao.idInstituicao  = <bancoob:valorOql valor="${idInstituicao}"  tipo="Integer" />
+		</j:if>
+		<j:if test="${idPessoa != null}">
+			    AND pc.pessoa.idPessoa         	  = <bancoob:valorOql valor="${idPessoa}"  tipo="Integer" />
+		</j:if>
+		<j:if test="${id != null}">
+			    AND a.idEmail         	  		  = <bancoob:valorOql valor="${id}"  tipo="Long" />
+		</j:if>
+			]]>
+		</command>
+	</query>
+	
+	<query name="PESQUISAR_EMAIL_PESSOA">
+		<use-case name="Pesquisar Email Pessoa"></use-case>
+		<description>Pesquisa os emails da pessoa</description>
+		<command>
+		<![CDATA[
+			SELECT 
+				new br.com.sicoob.capes.api.negocio.vo.EmailPessoaVO (
+				  e.idEmail as idEmail,
+				  e.dataHoraInicio as dataHoraInicio,
+				  e.descricao as descricaoEmail,
+				  t.codigo as codigoTipoEmail,
+				  t.descricao as descricaoTipoEmail
+			    )
+			FROM br.com.sicoob.capes.negocio.entidades.vigente.Email e
+			INNER JOIN e.pessoaCompartilhamento pc
+			INNER JOIN e.tipoEmail T
+			INNER JOIN pc.transicoes tp
+			WHERE e.dataHoraInicio is not null
+			AND tp.instituicao.idInstituicao = <bancoob:valorOql valor="${criterios.filtro.idInstituicao}" tipo="Integer" />
+			AND pc.pessoa.idPessoa = <bancoob:valorOql valor="${criterios.filtro.idPessoa}" tipo="Integer" />
+			
+			<j:if test="${criterios.filtro.descricao != null}">
+			    AND e.descricao = <bancoob:valorOql valor="${criterios.filtro.descricao}"  tipo="String" />
+			</j:if>
+			
+			<j:if test="${criterios.filtro.codigoTipoEmail != null}">
+			    AND t.codigo = <bancoob:valorOql valor="${criterios.filtro.codigoTipoEmail}" tipo="Short" />
+			</j:if>
+		]]>
+		</command>
+	</query>
+	
+	<query name="PESQUISAR_QUANTIDADE_EMAIL_PESSOA">
+		<use-case name="Pesquisar Email Pessoa"></use-case>
+		<description>Pesquisa os emails da pessoa</description>
+		<command>
+		<![CDATA[
+			SELECT COUNT(*)
+			FROM br.com.sicoob.capes.negocio.entidades.vigente.Email e
+			INNER JOIN e.pessoaCompartilhamento pc
+			INNER JOIN e.tipoEmail T
+			INNER JOIN pc.transicoes tp
+			WHERE e.dataHoraInicio is not null
+			AND tp.instituicao.idInstituicao = <bancoob:valorOql valor="${criterios.filtro.idInstituicao}" tipo="Integer" />
+			AND pc.pessoa.idPessoa = <bancoob:valorOql valor="${criterios.filtro.idPessoa}" tipo="Integer" />
+			
+			<j:if test="${criterios.filtro.descricao != null}">
+			    AND e.descricao = <bancoob:valorOql valor="${criterios.filtro.descricao}"  tipo="String" />
+			</j:if>
+			
+			<j:if test="${criterios.filtro.codigoTipoEmail != null}">
+			    AND t.codigo = <bancoob:valorOql valor="${criterios.filtro.codigoTipoEmail}" tipo="Short" />
+			</j:if>
+		]]>
+		</command>
+	</query>
+  
+	<query name="CONSULTA_ENDERECO_PESSOA">
+		<use-case name="Pesquisar Endereco Pessoa"></use-case>
+		<description>Pesquisa os endereços da pessoa</description>
+		<command>
+			<![CDATA[
+			SELECT 
+				new br.com.sicoob.capes.api.negocio.vo.EnderecoPessoaVO(
+				  a.idEndereco as idEndereco,
+				  a.dataHoraInicio as dataHoraInicio,
+				  a.descricao as descricao,
+				  a.numero as numero,
+				  a.complemento as complemento,
+				  a.bairro as bairro,
+				  a.cep as cep,
+				  b.codigo as codigoTipoEndereco,
+				  b.descricao as descricaoTipoEndereco,
+				  a.tipoLogradouro.idTipoLogradouro as idTipoLogradouro,
+				  a.localidade.idLocalidade as idLocalidade
+			   )
+			FROM br.com.sicoob.capes.negocio.entidades.vigente.Endereco a
+				INNER JOIN a.pessoaCompartilhamento pc
+				INNER JOIN a.tipoEndereco b
+		<j:if test="${idInstituicao != null}">
+				INNER JOIN pc.transicoes tp
+		</j:if>
+			WHERE 1=1
+		<j:if test="${inserirDataHoraInicio != null and inserirDataHoraInicio}">	
+			AND a.dataHoraInicio is not null
+		</j:if>			
+		<j:if test="${idInstituicao != null}">
+			    AND tp.instituicao.idInstituicao  = <bancoob:valorOql valor="${idInstituicao}"  tipo="Integer" />
+		</j:if>
+		<j:if test="${idPessoa != null}">
+			    AND pc.pessoa.idPessoa         	  = <bancoob:valorOql valor="${idPessoa}"  tipo="Integer" />
+		</j:if>
+		<j:if test="${id != null}">
+			    AND a.idEndereco    	  		  = <bancoob:valorOql valor="${id}"  tipo="Long" />
+		</j:if>
+			]]>
+		</command>
+	</query>
+	
+	<query name="PESQUISAR_ENDERECO_PESSOA">
+		<use-case name="Pesquisar Endereco Pessoa"></use-case>
+		<description>Pesquisa os endereços da pessoa</description>
+		<command>
+			<![CDATA[
+				SELECT 
+					new br.com.sicoob.capes.api.negocio.vo.EnderecoPessoaVO (
+					  e.idEndereco as idEndereco,
+					  e.dataHoraInicio as dataHoraInicio,
+					  e.descricao as descricao,
+					  e.numero as numero,
+					  e.complemento as complemento,
+					  e.bairro as bairro,
+					  e.cep as cep,
+					  te.codigo as codigoTipoEndereco,
+					  te.descricao as descricaoTipoEndereco,
+					  e.tipoLogradouro.idTipoLogradouro as idTipoLogradouro,
+					  e.localidade.idLocalidade as idLocalidade
+				   )
+				FROM br.com.sicoob.capes.negocio.entidades.vigente.Endereco e
+					INNER JOIN e.pessoaCompartilhamento pc
+					INNER JOIN e.tipoEndereco te
+				<j:if test="${criterios.filtro.idInstituicao != null}">
+					INNER JOIN pc.transicoes tp
+				</j:if>
+					WHERE e.dataHoraInicio is not null
+				<j:if test="${criterios.filtro.idInstituicao != null}">
+					AND tp.instituicao.idInstituicao = <bancoob:valorOql valor="${criterios.filtro.idInstituicao}" tipo="Integer" />
+				</j:if>
+				<j:if test="${criterios.filtro.idPessoa != null}">
+					AND pc.pessoa.idPessoa = <bancoob:valorOql valor="${criterios.filtro.idPessoa}" tipo="Integer" />
+				</j:if>
+				
+				<j:if test="${criterios.filtro.descricao != null}">
+					AND REPLACE(e.descricao, ' ', '') = REPLACE(<bancoob:valorOql valor="${criterios.filtro.descricao}" tipo="String" />, ' ', '')
+				</j:if>
+				
+				<j:if test="${criterios.filtro.numero != null}">
+					AND REPLACE(e.numero, ' ', '') = REPLACE(<bancoob:valorOql valor="${criterios.filtro.numero}" tipo="String" />, ' ', '')
+				</j:if>
+				
+				<j:if test="${criterios.filtro.cep != null}">
+					AND REPLACE(e.cep, ' ', '') = REPLACE(<bancoob:valorOql valor="${criterios.filtro.cep}" tipo="String" />, ' ', '')
+				</j:if>
+				
+				<j:if test="${criterios.filtro.bairro != null}">
+					AND REPLACE(e.bairro, ' ', '') = REPLACE(<bancoob:valorOql valor="${criterios.filtro.bairro}" tipo="String" />, ' ', '')
+				</j:if>
+				
+				<j:if test="${criterios.filtro.idLocalidade != null}">
+					AND e.localidade.idLocalidade = <bancoob:valorOql valor="${criterios.filtro.idLocalidade}" tipo="Integer" />
+				</j:if>
+			]]>
+		</command>
+	</query>
+	
+	<query name="PESQUISAR_QUANTIDADE_ENDERECO_PESSOA">
+		<use-case name="Pesquisar Quantidade Endereco Pessoa"></use-case>
+		<description>Pesquisa a quantidade de endereços da pessoa</description>
+		<command>
+			<![CDATA[
+				SELECT COUNT(*)
+				FROM br.com.sicoob.capes.negocio.entidades.vigente.Endereco e
+					INNER JOIN e.pessoaCompartilhamento pc
+					INNER JOIN e.tipoEndereco te
+				<j:if test="${criterios.filtro.idInstituicao != null}">
+					INNER JOIN pc.transicoes tp
+				</j:if>
+					WHERE e.dataHoraInicio is not null
+				<j:if test="${criterios.filtro.idInstituicao != null}">
+					AND tp.instituicao.idInstituicao = <bancoob:valorOql valor="${criterios.filtro.idInstituicao}" tipo="Integer" />
+				</j:if>
+				<j:if test="${criterios.filtro.idPessoa != null}">
+					AND pc.pessoa.idPessoa = <bancoob:valorOql valor="${criterios.filtro.idPessoa}" tipo="Integer" />
+				</j:if>
+				
+				<j:if test="${criterios.filtro.descricao != null}">
+					AND REPLACE(e.descricao, ' ', '') = REPLACE(<bancoob:valorOql valor="${criterios.filtro.descricao}" tipo="String" />, ' ', '')
+				</j:if>
+				
+				<j:if test="${criterios.filtro.numero != null}">
+					AND REPLACE(e.numero, ' ', '') = REPLACE(<bancoob:valorOql valor="${criterios.filtro.numero}" tipo="String" />, ' ', '')
+				</j:if>
+				
+				<j:if test="${criterios.filtro.cep != null}">
+					AND REPLACE(e.cep, ' ', '') = REPLACE(<bancoob:valorOql valor="${criterios.filtro.cep}" tipo="String" />, ' ', '')
+				</j:if>
+				
+				<j:if test="${criterios.filtro.bairro != null}">
+					AND REPLACE(e.bairro, ' ', '') = REPLACE(<bancoob:valorOql valor="${criterios.filtro.bairro}" tipo="String" />, ' ', '')
+				</j:if>
+				
+				<j:if test="${criterios.filtro.idLocalidade != null}">
+					AND e.localidade.idLocalidade = <bancoob:valorOql valor="${criterios.filtro.idLocalidade}" tipo="Integer" />
+				</j:if>
+			]]>
+		</command>
+	</query>
+  
+	<query name="PESQUISAR_ENDERECO_CORRESPONDENCIA_PESSOA">
+		<use-case name="Pesquisar Endereco Correspondencia Pessoa"></use-case>
+		<description>Pesquisa o endereço de correspondencia da pessoa</description>
+		<command>
+			<![CDATA[
+			SELECT 
+	           new br.com.sicoob.capes.api.negocio.vo.EnderecoPessoaVO(
+                  a.idEndereco as idEndereco,
+                  a.dataHoraInicio as dataHoraInicio,
+                  a.descricao as descricao,
+                  a.numero as numero,
+                  a.complemento as complemento,
+                  a.bairro as bairro,
+                  a.cep as cep,
+                  b.codigo as codigoTipoEndereco,
+                  b.descricao as descricaoTipoEndereco,
+                  a.tipoLogradouro.idTipoLogradouro as idTipoLogradouro,
+                  a.localidade.idLocalidade as idLocalidade
+			   )
+			FROM br.com.sicoob.capes.negocio.entidades.vigente.Endereco a,
+				 br.com.sicoob.capes.negocio.entidades.EnderecoCorrespondencia ec
+				INNER JOIN a.pessoaCompartilhamento pc
+				INNER JOIN a.tipoEndereco b
+				INNER JOIN pc.transicoes tp
+			WHERE 
+				ec.endereco.idEndereco 			  = a.idEndereco
+				AND ec.idInstituicao 			  = tp.instituicao.idInstituicao
+				AND ec.pessoaCompartilhamento.idPessoaCompartilhamento = a.pessoaCompartilhamento.idPessoaCompartilhamento
+			    AND tp.instituicao.idInstituicao  = <bancoob:valorOql valor="${idInstituicao}"  tipo="Integer" />
+			    AND pc.pessoa.idPessoa         	  = <bancoob:valorOql valor="${idPessoa}"  tipo="Integer" />
+			    AND a.dataHoraInicio is not null
+			]]>
+		</command>
+	</query>
+  
+	<query name="CONSULTAR_FONTE_RENDA_PESSOA">
+		<use-case name="Pesquisar Fonte Renda Pessoa"></use-case>
+		<description>Pesquisa as fontes de renda da pessoa</description>
+		<command>
+			<![CDATA[
+			SELECT 
+				new br.com.sicoob.capes.api.negocio.vo.FonteRendaPessoaVO(
+				  a.idFonteRenda as idFonteRenda,
+				  a.dataHoraInicio as dataHoraInicio,
+				  a.bolRendaFixa as rendaFixa,
+				  a.dataValidadeRenda as dataValidadeRenda,
+				  a.valorReceitaBrutaMensal as valorReceitaBrutaMensal,
+				  a.descFonteRenda as descricao,
+				  b.codigo as codigoTipoFonteRenda,
+				  b.descricao as descricaoTipoFonteRenda,
+				  c.pessoa.idPessoa as idPessoaEmpregador
+			)
+			FROM br.com.sicoob.capes.negocio.entidades.vigente.FonteRenda a
+				INNER JOIN a.pessoaCompartilhamento pc
+				INNER JOIN a.tipoFonteRenda b
+				LEFT OUTER JOIN a.pessoaEmpregador c
+		<j:if test="${idInstituicao != null}">
+				INNER JOIN pc.transicoes tp
+		</j:if>
+			WHERE 1=1
+			AND a.dataHoraInicio is not null
+		<j:if test="${idInstituicao != null}">
+			    AND tp.instituicao.idInstituicao  = <bancoob:valorOql valor="${idInstituicao}"  tipo="Integer" />
+		</j:if>
+		<j:if test="${idPessoa != null}">
+			    AND pc.pessoa.idPessoa         	  = <bancoob:valorOql valor="${idPessoa}"  tipo="Integer" />
+		</j:if>
+		<j:if test="${id != null}">
+			    AND a.idFonteRenda    	  		  = <bancoob:valorOql valor="${id}"  tipo="Long" />
+		</j:if>
+			]]>
+		</command>
+	</query>
+	
+	<query name="PESQUISAR_FONTE_RENDA_PESSOA">
+		<use-case name="Pesquisar Fonte Renda Pessoa"></use-case>
+		<description>Pesquisa as fontes de renda da pessoa</description>
+		<command>
+			<![CDATA[
+				SELECT 
+					new br.com.sicoob.capes.api.negocio.vo.FonteRendaPessoaVO(
+					  f.idFonteRenda as idFonteRenda,
+					  f.dataHoraInicio as dataHoraInicio,
+					  f.bolRendaFixa as rendaFixa,
+					  f.dataValidadeRenda as dataValidadeRenda,
+					  f.valorReceitaBrutaMensal as valorReceitaBrutaMensal,
+					  f.descFonteRenda as descricao,
+					  tf.codigo as codigoTipoFonteRenda,
+					  tf.descricao as descricaoTipoFonteRenda,
+					  pe.pessoa.idPessoa as idPessoaEmpregador
+				)
+				FROM br.com.sicoob.capes.negocio.entidades.vigente.FonteRenda f
+				INNER JOIN f.pessoaCompartilhamento pc
+				INNER JOIN f.tipoFonteRenda tf
+				LEFT OUTER JOIN f.pessoaEmpregador pe
+				
+				<j:if test="${criterios.filtro.idInstituicao != null}">
+					INNER JOIN pc.transicoes tp
+				</j:if>
+				
+					WHERE 1=1
+					AND f.dataHoraInicio is not null
+					
+				<j:if test="${criterios.filtro.idInstituicao != null}">
+					AND tp.instituicao.idInstituicao = <bancoob:valorOql valor="${criterios.filtro.idInstituicao}" tipo="Integer" />
+				</j:if>
+				<j:if test="${criterios.filtro.idPessoa != null}">
+					AND pc.pessoa.idPessoa = <bancoob:valorOql valor="${criterios.filtro.idPessoa}" tipo="Integer" />
+				</j:if>
+				
+				<j:if test="${criterios.filtro.descricao != null}">
+					AND f.descFonteRenda = <bancoob:valorOql valor="${criterios.filtro.descricao}" tipo="String" />
+				</j:if>
+				
+				<j:if test="${criterios.filtro.dataValidadeRenda != null}">
+					AND f.dataValidadeRenda = <bancoob:valorOql valor="${criterios.filtro.dataValidadeRenda}" tipo="Date" />
+				</j:if>
+				
+				<j:if test="${criterios.filtro.rendaFixa != null}">
+					AND f.bolRendaFixa = <bancoob:valorOql valor="${criterios.filtro.rendaFixa}" tipo="Boolean" />
+				</j:if>
+				
+				<j:if test="${criterios.filtro.valorReceitaBrutaMensal != null}">
+					AND f.valorReceitaBrutaMensal = <bancoob:valorOql valor="${criterios.filtro.valorReceitaBrutaMensal}" tipo="BigDecimal" />
+				</j:if>
+				
+				<j:if test="${criterios.filtro.codigoTipoFonteRenda != null}">
+					AND tf.codigo = <bancoob:valorOql valor="${criterios.filtro.codigoTipoFonteRenda}" tipo="Short" />
+				</j:if>
+				
+				<j:if test="${criterios.filtro.idPessoaEmpregador != null}">
+					AND pe.pessoa.idPessoa = <bancoob:valorOql valor="${criterios.filtro.idPessoaEmpregador}" tipo="Integer" />
+				</j:if>
+			]]>
+		</command>
+	</query>
+	
+	<query name="PESQUISAR_QUANTIDADE_FONTE_RENDA_PESSOA">
+		<use-case name="Pesquisar Fonte Renda Pessoa"></use-case>
+		<description>Pesquisa as fontes de renda da pessoa</description>
+		<command>
+			<![CDATA[
+				SELECT COUNT (*)
+				FROM br.com.sicoob.capes.negocio.entidades.vigente.FonteRenda f
+				INNER JOIN f.pessoaCompartilhamento pc
+				INNER JOIN f.tipoFonteRenda tf
+				LEFT OUTER JOIN f.pessoaEmpregador pe
+				
+				<j:if test="${criterios.filtro.idInstituicao != null}">
+					INNER JOIN pc.transicoes tp
+				</j:if>
+				
+					WHERE 1=1
+					AND f.dataHoraInicio is not null
+					
+				<j:if test="${criterios.filtro.idInstituicao != null}">
+					AND tp.instituicao.idInstituicao = <bancoob:valorOql valor="${criterios.filtro.idInstituicao}" tipo="Integer" />
+				</j:if>
+				<j:if test="${criterios.filtro.idPessoa != null}">
+					AND pc.pessoa.idPessoa = <bancoob:valorOql valor="${criterios.filtro.idPessoa}" tipo="Integer" />
+				</j:if>
+				
+				<j:if test="${criterios.filtro.descricao != null}">
+					AND f.descFonteRenda = <bancoob:valorOql valor="${criterios.filtro.descricao}" tipo="String" />
+				</j:if>
+				
+				<j:if test="${criterios.filtro.dataValidadeRenda != null}">
+					AND f.dataValidadeRenda = <bancoob:valorOql valor="${criterios.filtro.dataValidadeRenda}" tipo="Date" />
+				</j:if>
+				
+				<j:if test="${criterios.filtro.rendaFixa != null}">
+					AND f.bolRendaFixa = <bancoob:valorOql valor="${criterios.filtro.rendaFixa}" tipo="Boolean" />
+				</j:if>
+				
+				<j:if test="${criterios.filtro.valorReceitaBrutaMensal != null}">
+					AND f.valorReceitaBrutaMensal = <bancoob:valorOql valor="${criterios.filtro.valorReceitaBrutaMensal}" tipo="BigDecimal" />
+				</j:if>
+				
+				<j:if test="${criterios.filtro.codigoTipoFonteRenda != null}">
+					AND tf.codigo = <bancoob:valorOql valor="${criterios.filtro.codigoTipoFonteRenda}" tipo="Short" />
+				</j:if>
+				
+				<j:if test="${criterios.filtro.idPessoaEmpregador != null}">
+					AND pe.pessoa.idPessoa = <bancoob:valorOql valor="${criterios.filtro.idPessoaEmpregador}" tipo="Integer" />
+				</j:if>
+			]]>
+		</command>
+	</query>
+  
+	<query name="PESQUISAR_CERTIDAO_PESSOA">
+		<use-case name="Pesquisar Certidão Pessoa"></use-case>
+		<description>Pesquisa as certidões da pessoa</description>
+		<command>
+			<![CDATA[
+			SELECT 
+				new br.com.sicoob.capes.api.negocio.vo.CertidaoPessoaVO(
+				  a.idCertidao as idCertidao,
+				  a.dataHoraInicio as dataHoraInicio,
+				  a.numero as numero,
+				  a.numeroCrea as numeroCrea,
+				  a.observacao as observacao,
+				  a.dataEmissao as dataEmissao,
+				  a.dataVencimento as dataVencimento,
+				  b.codigo as codigoTipoCertidao,
+				  b.sigla as siglaTipoCertidao,
+				  b.nome as nomeTipoCertidao,
+                  st.codigo as codigoSubTipoCertidao,
+                  st.descricao as descricaoSubTipoCertidao
+			)
+			FROM br.com.sicoob.capes.negocio.entidades.vigente.Certidao a
+				INNER JOIN a.pessoa pc
+				INNER JOIN a.tipoCertidao b
+                INNER JOIN b.subTipo st
+		<j:if test="${idInstituicao != null}">
+				INNER JOIN pc.transicoes tp
+		</j:if>
+			WHERE 1=1
+			AND a.dataHoraInicio is not null
+		<j:if test="${idInstituicao != null}">
+			    AND tp.instituicao.idInstituicao  = <bancoob:valorOql valor="${idInstituicao}"  tipo="Integer" />
+		</j:if>
+		<j:if test="${idPessoa != null}">
+			    AND pc.pessoa.idPessoa         	  = <bancoob:valorOql valor="${idPessoa}"  tipo="Integer" />
+		</j:if>
+		<j:if test="${id != null}">
+			    AND a.idCertidao    	  		  = <bancoob:valorOql valor="${id}"  tipo="Long" />
+		</j:if>
+			]]>
+		</command>
+	</query>
+  
+    <query name="PESQUISAR_ANOTACOES_POR_TIPO">
+      <use-case name="Pesquisar Anotações Pessoa"></use-case>
+      <description>Pesquisa as anotações vigentes da pessoa</description>
+      <command>
+        <![CDATA[
+        SELECT 
+          new br.com.sicoob.capes.api.negocio.vo.AnotacaoPessoaVO(
+            a.idAnotacao as idAnotacao,
+            b.codTipoAnotacao as codigoTipoAnotacao,
+            a.dataHoraOcorrencia as dataHoraOcorrencia,
+            a.dataHoraBaixa as dataHoraBaixa,
+            a.quantidade as quantidade,
+            a.valor as valor
+        )
+        FROM br.com.sicoob.capes.negocio.entidades.Anotacao a,
+             br.com.sicoob.capes.negocio.entidades.vigente.GrupoCompartilhamento gc
+          INNER JOIN a.pessoaCompartilhamento pc
+          INNER JOIN a.tipoAnotacao b
+          INNER JOIN a.origemInformacao d
+          INNER JOIN b.categoriaAnotacao c
+          LEFT  JOIN a.tipoBaixa t
+        WHERE 
+          <j:choose>
+            <j:when test="${dataBaixa == null}">
+              a.dataHoraBaixa is null
+            </j:when>
+            <j:otherwise>
+              a.dataHoraBaixa &gt;= <bancoob:valorOql valor="${dataBaixa}"  tipo="Date" />
+            </j:otherwise>
+          </j:choose>
+          AND pc.compartilhamento = gc.compartilhamentoCadastro
+          AND gc.idInstituicao  = <bancoob:valorOql valor="${idInstituicao}"  tipo="Integer" />
+          AND pc.pessoa.idPessoa = <bancoob:valorOql valor="${idPessoa}"  tipo="Integer" />
+          <j:if test="${idTipoAnotacao != null}">
+            AND b.codTipoAnotacao   = <bancoob:valorOql valor="${idTipoAnotacao}"  tipo="Integer" />
+          </j:if>
+          AND b.codTipoAnotacao IN (<bancoob:valorOql valor="${codigoTipoAnotacao}" />)
+        ]]>
+      </command>
+    </query>
+  
+	<query name="PESQUISAR_ANOTACOES_VIGENTES_PESSOA">
+		<use-case name="Pesquisar Anotações Pessoa"></use-case>
+		<description>Pesquisa as anotações vigentes da pessoa</description>
+		<command>
+			<![CDATA[
+			SELECT 
+				new br.com.sicoob.capes.api.negocio.vo.AnotacaoPessoaVO(
+				  a.idAnotacao as idAnotacao,
+				  a.quantidade as quantidade,
+				  a.valor as valor,
+				  a.descObservacao as observacao,
+				  a.flexibilidade as flexibilidade,
+				  b.codTipoAnotacao as codigoTipoAnotacao,
+				  b.descTipoAnotacao as descricaoTipoAnotacao,
+				  c.idCategoriaAnotacao as codigoCategoriaAnotacao,
+				  c.descCategoriaAnotacao as descricaoCategoriaAnotacao,
+				  d.idOrigemInfo as codigoOrigemInfo,
+				  d.descOrigemInfo as descricaoOrigemInfo,
+				  a.dataHoraAnotacao as dataHoraAnotacao,
+				  a.dataHoraOcorrencia as dataHoraOcorrencia,
+                  a.dataHoraBaixa as dataHoraBaixa,
+                  t.idTipoBaixa as idTipoBaixa,
+                  t.descTipoBaixa as descricaoTipoBaixa,
+                  tco.idTipoConsultaOrigem as codigoTipoConsultaOrigem,
+                  tco.descricaoTipoConsultaOrigem as descricaoTipoConsultaOrigem
+			)
+			FROM br.com.sicoob.capes.negocio.entidades.Anotacao a,
+				 br.com.sicoob.capes.negocio.entidades.vigente.GrupoCompartilhamento gc
+				INNER JOIN a.pessoaCompartilhamento pc
+				INNER JOIN a.tipoAnotacao b
+                INNER JOIN a.origemInformacao d
+				INNER JOIN b.categoriaAnotacao c
+				LEFT JOIN a.tipoConsultaOrigem tco
+                LEFT JOIN a.tipoBaixa t
+			WHERE
+				1=1
+				AND pc.compartilhamento = gc.compartilhamentoCadastro
+			    AND gc.idInstituicao = <bancoob:valorOql valor="${idInstituicao}" tipo="Integer" />
+			    
+			    <j:if test="${idPessoa != null}">
+			    	AND pc.pessoa.idPessoa = <bancoob:valorOql valor="${idPessoa}" tipo="Integer" />
+			    </j:if>
+				
+				<j:if test="${cpfCnpj != null}">
+				 	AND pc.pessoa.cpfCnpj = <bancoob:valorOql valor="${cpfCnpj}" tipo="String" /> 
+				</j:if>
+				
+				<j:if test="${idTipoAnotacao != null}">
+			  		AND b.codTipoAnotacao = <bancoob:valorOql valor="${idTipoAnotacao}" tipo="Integer" />
+			  	</j:if>
+			    
+			    <j:if test="${!baixadas}">
+			    	AND a.dataHoraBaixa IS NULL
+				</j:if>
+				
+				<j:if test="${baixadas}">
+			    	AND a.dataHoraBaixa IS NOT NULL
+				</j:if>
+			]]>
+		</command>
+	</query>
+	<query name="PESQUISAR_ANOTACOES_IMPEDITIVAS_PESSOA">
+		<use-case name="Pesquisar Anotações Pessoa"></use-case>
+		<description>Pesquisa as anotações impeditivas da pessoa</description>
+		<command>
+			<![CDATA[
+			SELECT 
+				new br.com.sicoob.capes.api.negocio.vo.AnotacaoPessoaVO(
+				  a.idAnotacao as idAnotacao,
+				  a.quantidade as quantidade,
+				  a.valor as valor,
+				  a.descObservacao as observacao,
+				  a.flexibilidade as flexibilidade,
+				  b.codTipoAnotacao as codigoTipoAnotacao,
+				  b.descTipoAnotacao as descricaoTipoAnotacao,
+				  c.idCategoriaAnotacao as codigoCategoriaAnotacao,
+				  c.descCategoriaAnotacao as descricaoCategoriaAnotacao,
+				  d.idOrigemInfo as codigoOrigemInfo,
+				  d.descOrigemInfo as descricaoOrigemInfo,
+				  a.dataHoraAnotacao as dataHoraAnotacao,
+				  a.dataHoraOcorrencia as dataHoraOcorrencia,
+                  a.dataHoraBaixa as dataHoraBaixa,
+                  t.idTipoBaixa as idTipoBaixa,
+                  t.descTipoBaixa as descricaoTipoBaixa
+			)
+			FROM br.com.sicoob.capes.negocio.entidades.Anotacao a,
+				 br.com.sicoob.capes.negocio.entidades.vigente.GrupoCompartilhamento gc
+				INNER JOIN a.pessoaCompartilhamento pc
+				INNER JOIN a.tipoAnotacao b
+				INNER JOIN a.origemInformacao d
+				INNER JOIN b.categoriaAnotacao c
+                LEFT JOIN a.tipoBaixa t
+			WHERE 
+				a.dataHoraBaixa is null
+				AND a.flexibilidade = false
+				AND b.categoriaAnotacao.idCategoriaAnotacao in (2,3)
+				AND pc.compartilhamento = gc.compartilhamentoCadastro
+			    AND gc.idInstituicao  = <bancoob:valorOql valor="${idInstituicao}"  tipo="Integer" />
+			    AND pc.pessoa.idPessoa         	  = <bancoob:valorOql valor="${idPessoa}"  tipo="Integer" />
+			]]>
+		</command>
+	</query>
+  
+	<query name="CONSULTAR_RELACIONAMENTOS_PESSOA">
+		<use-case name="Pesquisar Relacionamento Pessoa"></use-case>
+		<description>Pesquisa os relacionamentos da pessoa</description>
+		<command>
+			<![CDATA[
+			SELECT 
+				new br.com.sicoob.capes.api.negocio.vo.RelacionamentoPessoaVO(
+				  a.idRelacionamento as idRelacionamento,
+				  a.dataHoraInicio as dataHoraInicio,
+				  a.pessoa.idPessoa as idPessoa,
+				  a.pessoaRelacionada.idPessoa as idPessoaRelacionada,
+				  a.percentualCapitalEmpresa as percentualCapitalEmpresa,
+				  a.dataInicioRelacionamento as dataInicioRelacionamento,
+                  a.dataFimMandato as dataFimMandato,
+				  a.idInstituicao as idInstituicao,
+				  b.codigo as codigoTipoRelacionamento,
+				  b.descricao as descricaoTipoRelacionamento,
+				  b.habilitaDadosRegistro as habilitaDadosRegistro,
+				  b.habilitaPoderes as habilitaPoderes
+			)
+			FROM br.com.sicoob.capes.negocio.entidades.vigente.RelacionamentoPessoa a
+			INNER JOIN a.tipoRelacionamento b				
+			WHERE 1=1			
+			AND a.dataHoraInicio is not null
+		<j:if test="${idInstituicao != null}">
+			    AND a.idInstituicao  		= <bancoob:valorOql valor="${idInstituicao}"  tipo="Integer" />
+		</j:if>
+		<j:if test="${idPessoa != null}">
+			    AND a.pessoa.idPessoa       = <bancoob:valorOql valor="${idPessoa}"  tipo="Integer" />
+		</j:if>
+		<j:if test="${tiposRelacionamento != null}">
+			    AND b.codigo    			in(<bancoob:valorOql valor="${tiposRelacionamento}" />)
+		</j:if>
+		<j:if test="${id != null}">
+			    AND a.idRelacionamento    	= <bancoob:valorOql valor="${id}"  tipo="Long" />
+		</j:if>
+			]]>
+		</command>
+		<ordenacoes>
+			<ordenacao chave="idRelacionamento" default="true">
+				<![CDATA[order by a.idRelacionamento asc]]>
+			</ordenacao>
+		</ordenacoes>
+	</query>
+		
+	<query name="CONSULTAR_RELACIONAMENTOS_PESSOA_PODER">
+		<use-case name="Pesquisar Relacionamento Pessoa Poder"></use-case>
+		<description>Pesquisa os relacionamentos da pessoa Poder</description>
+		<command>
+			<![CDATA[
+			SELECT
+				new br.com.sicoob.capes.api.negocio.vo.RelacionamentoPessoaPoderVO(
+				  t.codigo as codigoPoder,
+				  t.descricao as descricaoPoder
+			    )
+			FROM br.com.sicoob.capes.negocio.entidades.TipoPoderRelacionamento t
+            INNER JOIN t.relacionamentoPessoa r
+            WHERE r.idRelacionamento = <bancoob:valorOql valor="${idRelacionamento}"  tipo="Long" />
+			]]>
+		</command>
+	</query>
+	
+	<query name="CONSULTAR_REGISTRO_RELACIONAMENTOS">
+		<use-case name="Pesquisar Registro Relacionamento"></use-case>
+		<description>Pesquisar Registro Relacionamento</description>
+		<command>
+			<![CDATA[
+			SELECT 
+				new br.com.sicoob.capes.api.negocio.vo.DadosRegistroVO(				 
+				  r.dadosRegistro.numeroRegistro as numeroRegistro,
+				  r.dadosRegistro.numeroLivro as numeroLivro,
+				  r.dadosRegistro.numeroFolha as numeroFolha,
+				  r.dadosRegistro.nomeCartorio as nomeCartorio
+			)
+			FROM br.com.sicoob.capes.negocio.entidades.vigente.RegistroRelacionamento r				
+			WHERE 1=1			
+		<j:if test="${idRelacionamento != null}">
+			    AND r.idRelacionamento  		= <bancoob:valorOql valor="${idRelacionamento}"  tipo="Long" />
+		</j:if>		
+			]]>
+		</command>		
+	</query>
+	
+	<query name="PESQUISAR_RELACIONAMENTOS_PESSOA">
+		<use-case name="Pesquisar Relacionamento Pessoa"></use-case>
+		<description>Pesquisa os relacionamentos da pessoa</description>
+		<command>
+			<![CDATA[
+			SELECT 
+				new br.com.sicoob.capes.api.negocio.vo.RelacionamentoPessoaVO(
+				  r.idRelacionamento as idRelacionamento,
+				  r.dataHoraInicio as dataHoraInicio,
+				  r.pessoa.idPessoa as idPessoa,
+				  r.pessoaRelacionada.idPessoa as idPessoaRelacionada,
+				  r.percentualCapitalEmpresa as percentualCapitalEmpresa,
+				  r.dataInicioRelacionamento as dataInicioRelacionamento,
+                  r.dataFimMandato as dataFimMandato,
+				  r.idInstituicao as idInstituicao,
+				  t.codigo as codigoTipoRelacionamento,
+				  t.descricao as descricaoTipoRelacionamento,
+				  t.habilitaDadosRegistro as habilitaDadosRegistro,
+				  t.habilitaPoderes as habilitaPoderes
+			)
+			FROM br.com.sicoob.capes.negocio.entidades.vigente.RelacionamentoPessoa r
+			INNER JOIN r.tipoRelacionamento t				
+			WHERE r.dataHoraInicio is not null			
+		    AND r.idInstituicao = <bancoob:valorOql valor="${criterios.filtro.idInstituicao}" tipo="Integer" />
+		    AND r.pessoa.idPessoa = <bancoob:valorOql valor="${criterios.filtro.idPessoa}" tipo="Integer" />
+		    
+		    <j:if test="${criterios.filtro.idPessoaRelacionada != null}">
+		    	AND r.pessoaRelacionada.idPessoa = <bancoob:valorOql valor="${criterios.filtro.idPessoaRelacionada}" tipo="Integer" />
+			</j:if>
+		    
+		    <j:if test="${criterios.filtro.percentualCapitalEmpresa != null}">
+		    	AND r.percentualCapitalEmpresa = <bancoob:valorOql valor="${criterios.filtro.percentualCapitalEmpresa}" tipo="BigDecimal" />
+			</j:if>
+		    
+		    <j:if test="${criterios.filtro.dataInicioRelacionamento != null}">
+		    	AND r.dataInicioRelacionamento = <bancoob:valorOql valor="${criterios.filtro.dataInicioRelacionamento}" tipo="Date" />
+			</j:if>
+		    
+		    <j:if test="${criterios.filtro.dataFimMandato != null}">
+		    	AND r.dataFimMandato = <bancoob:valorOql valor="${criterios.filtro.dataFimMandato}" tipo="Date" />
+			</j:if>
+		    
+		    <j:if test="${criterios.filtro.codigoTipoRelacionamento != null}">
+		    	AND t.codigo = <bancoob:valorOql valor="${criterios.filtro.codigoTipoRelacionamento}" tipo="Short" />
+			</j:if>
+		    
+		    <j:if test="${criterios.filtro.habilitaDadosRegistro != null}">
+		    	AND t.habilitaDadosRegistro = <bancoob:valorOql valor="${criterios.filtro.habilitaDadosRegistro}" tipo="Boolean" />
+			</j:if>
+		    
+		    <j:if test="${criterios.filtro.habilitaPoderes != null}">
+		    	AND rt.habilitaPoderes = <bancoob:valorOql valor="${criterios.filtro.habilitaPoderes}" tipo="Boolean" />
+			</j:if>
+			]]>
+		</command>
+	</query>
+	
+	<query name="PESQUISAR_QUANTIDADE_RELACIONAMENTOS_PESSOA">
+		<use-case name="Pesquisar Relacionamento Pessoa"></use-case>
+		<description>Pesquisa os relacionamentos da pessoa</description>
+		<command>
+			<![CDATA[
+			SELECT COUNT(*)
+			FROM br.com.sicoob.capes.negocio.entidades.vigente.RelacionamentoPessoa r
+			INNER JOIN r.tipoRelacionamento t				
+			WHERE r.dataHoraInicio is not null			
+		    AND r.idInstituicao = <bancoob:valorOql valor="${criterios.filtro.idInstituicao}" tipo="Integer" />
+		    AND r.pessoa.idPessoa = <bancoob:valorOql valor="${criterios.filtro.idPessoa}" tipo="Integer" />
+		    
+		    <j:if test="${criterios.filtro.idPessoaRelacionada != null}">
+		    	AND r.pessoaRelacionada.idPessoa = <bancoob:valorOql valor="${criterios.filtro.idPessoaRelacionada}" tipo="Integer" />
+			</j:if>
+		    
+		    <j:if test="${criterios.filtro.percentualCapitalEmpresa != null}">
+		    	AND r.percentualCapitalEmpresa = <bancoob:valorOql valor="${criterios.filtro.percentualCapitalEmpresa}" tipo="BigDecimal" />
+			</j:if>
+		    
+		    <j:if test="${criterios.filtro.dataInicioRelacionamento != null}">
+		    	AND r.dataInicioRelacionamento = <bancoob:valorOql valor="${criterios.filtro.dataInicioRelacionamento}" tipo="Date" />
+			</j:if>
+		    
+		    <j:if test="${criterios.filtro.dataFimMandato != null}">
+		    	AND r.dataFimMandato = <bancoob:valorOql valor="${criterios.filtro.dataFimMandato}" tipo="Date" />
+			</j:if>
+		    
+		    <j:if test="${criterios.filtro.codigoTipoRelacionamento != null}">
+		    	AND t.codigo = <bancoob:valorOql valor="${criterios.filtro.codigoTipoRelacionamento}" tipo="Short" />
+			</j:if>
+		    
+		    <j:if test="${criterios.filtro.habilitaDadosRegistro != null}">
+		    	AND t.habilitaDadosRegistro = <bancoob:valorOql valor="${criterios.filtro.habilitaDadosRegistro}" tipo="Boolean" />
+			</j:if>
+		    
+		    <j:if test="${criterios.filtro.habilitaPoderes != null}">
+		    	AND rt.habilitaPoderes = <bancoob:valorOql valor="${criterios.filtro.habilitaPoderes}" tipo="Boolean" />
+			</j:if>
+			]]>
+		</command>
+	</query>
+	
+	<query name="PESQUISAR_TRIBUTACAO_PESSOA">
+		<use-case name="Pesquisar Tributações Pessoa"></use-case>
+		<description>Pesquisa a tributação da pessoa</description>
+		<command>
+			<![CDATA[
+			SELECT 
+				new br.com.sicoob.capes.api.negocio.vo.TributacaoPessoaVO(
+				  a.dataHoraInicio as dataHoraInicio,
+				  a.cobrarIR as cobrarIR,
+				  a.cobrarIOF as cobrarIOF,
+				  a.cobrarCPMF as cobrarCPMF
+			)
+			FROM br.com.sicoob.capes.negocio.entidades.vigente.Tributacao a
+				INNER JOIN a.pessoaCompartilhamento pc
+				INNER JOIN pc.transicoes tp
+			WHERE 
+				tp.instituicao.idInstituicao  = <bancoob:valorOql valor="${idInstituicao}"  tipo="Integer" />
+				AND a.dataHoraInicio is not null
+			    AND pc.pessoa.idPessoa        = <bancoob:valorOql valor="${idPessoa}"  tipo="Integer" />
+			]]>
+		</command>
+	</query>
+  
+	<query name="PESQUISAR_MENSAGENS_ATIVAS_PESSOA">
+		<use-case name="Pesquisar Mensagens Ativas Pessoa"></use-case>
+		<description>Pesquisa as mensagens ativas da pessoa</description>
+		<command>
+			<![CDATA[
+			SELECT 
+				new br.com.sicoob.capes.api.negocio.vo.MensagemPessoaVO(
+				  a.idMensagem as idMensagem,
+				  a.mensagem as mensagem,
+				  a.dataHoraInicio as dataHoraInicio,
+				  a.validade as dataValidade,
+				  a.codigoTipoDestinoExibicao as codigoDestinoExibicao,
+				  a.codigoTipoMensagem as codigoTipoMensagem,
+				  a.pessoa.idPessoa,
+				  a.idUsuarioAprovacao
+			)
+			FROM br.com.sicoob.capes.negocio.entidades.Mensagem a
+			WHERE 
+				a.validade > CURRENT_DATE()
+			    AND a.idInstituicao  	= <bancoob:valorOql valor="${idInstituicao}"  tipo="Integer" />
+			    AND a.pessoa.idPessoa   = <bancoob:valorOql valor="${idPessoa}"  tipo="Integer" />
+			    
+				<j:if test="${codigoTipoMensagem != null}">
+				 	AND a.codigoTipoMensagem = <bancoob:valorOql valor="${codigoTipoMensagem}"  tipo="Short" />
+				</j:if>	
+			]]>
+		</command>
+	</query>
+  
+	<query name="PESQUISAR_DADOS_CLIENTE">
+		<use-case name="Pesquisar Dados Cliente"></use-case>
+		<description>Pesquisa as mensagens ativas da pessoa</description>
+		<command>
+			<![CDATA[
+			SELECT 
+				new br.com.sicoob.capes.api.negocio.vo.DadosClienteVO(
+				  a.idPessoaInstituicao as idPessoaInstituicao,
+				  a.dataHoraInicio as dataHoraInicio,
+				  a.idUnidadeInst as idUnidadeInst,
+				  a.funcionario.idFuncionario as idFuncionarioResponsavel,
+				  a.parecerGerencia as parecerGerencia,
+				  a.emiteAvisoLancamento as emiteAvisoLancamento,
+				  b.idNucleo as idNucleo,
+				  b.descricao as descricaoNucleo,
+				  b.numNucleo as numNucleo,
+				  c.pk.codPerfilTarifario as codigoPerfilTarifario,
+				  c.sigla as siglaPerfilTarifario,
+				  c.descricao as descricaoPerfilTarifario,
+				  c.valorPercentual as valorPercentualPerfilTarifario,
+				  c.codTipoPercentual as codTipoPercentualPerfilTarifario,
+				  c.codTipoPerfilConta as codTipoPerfilContaPerfilTarifario,
+				  c.codigoTipoPerfil as codigoTipoPerfilPerfilTarifario,
+				  c.isento as perfilTarifarioIsento,
+				  a.pessoa.idPessoa as idPessoa,
+				  a.dataCadastro as dataCadastro
+			)
+			FROM br.com.sicoob.capes.negocio.entidades.vigente.PessoaInstituicao a
+				INNER JOIN a.nucleo b
+				INNER JOIN a.perfilTarifario c
+			WHERE 
+			    a.idInstituicao  	= <bancoob:valorOql valor="${idInstituicao}"  tipo="Integer" />
+			    <j:if test="${idPessoa != null}">
+				     AND a.pessoa.idPessoa   	= <bancoob:valorOql valor="${idPessoa}"  tipo="Integer" />
+				</j:if>
+				<j:if test="${idFuncionario != null}">
+				     AND a.funcionario.idFuncionario   	= <bancoob:valorOql valor="${idFuncionario}"  tipo="Integer" />
+				</j:if>
+			    AND a.dataHoraInicio is not null
+			]]>
+		</command>
+	</query>
+  
+	<query name="PESQUISAR_FUNCIONARIO">
+		<use-case name="Pesquisar Funcionário"></use-case>
+		<description>Pesquisa os funcionários</description>
+		<command>
+			<![CDATA[
+			SELECT 
+				new br.com.sicoob.capes.api.negocio.vo.FuncionarioVO(
+				  a.idFuncionario as idFuncionario,
+				  a.matricula as matricula,
+				  a.dataAdmissao as dataAdmissao,
+				  a.dataDesligamento as dataDesligamento,
+				  a.instituicao.idUnidadeInst as idUnidadeInst,
+				  c.idFuncao as idFuncao,
+				  c.descricao as descricaoFuncao,
+				  b.idNucleo as idNucleo,
+				  b.descricao as descricaoNucleo,
+				  b.numNucleo as numNucleo,
+				  d.cpfCnpj as cpfCnpjPessoa,
+				  d.tipoPessoa.codTipoPessoa as codTipoPessoa,
+				  e.nomePessoa as nomePessoa
+			)
+			FROM br.com.sicoob.capes.negocio.entidades.Funcionario a
+				INNER JOIN a.nucleo b
+				INNER JOIN a.funcao c
+				INNER JOIN a.pessoa d
+				INNER JOIN d.compartilhamentos e
+				INNER JOIN e.transicoes f
+			WHERE 1=1
+				AND d.idPessoa = e.pessoa.idPessoa
+				AND e.idPessoaCompartilhamento = f.pessoaCompartilhamento.idPessoaCompartilhamento
+				AND f.instituicao.idInstituicao = a.instituicao.idInstituicao
+			<j:if test="${idInstituicao != null}">
+			    AND a.instituicao.idInstituicao  	= <bancoob:valorOql valor="${idInstituicao}"  tipo="Integer" />
+			</j:if>
+			<j:if test="${idPessoa != null}">
+			    AND d.idPessoa   					= <bancoob:valorOql valor="${idPessoa}"  tipo="Integer" />
+			</j:if>
+			<j:if test="${id != null}">
+			    AND a.idFuncionario   				= <bancoob:valorOql valor="${id}"  tipo="Integer" />
+			</j:if>
+			<j:if test="${cpf != null}">
+			    AND d.cpfCnpj   					= <bancoob:valorOql valor="${cpf}"  tipo="String" />
+			</j:if>
+			<j:if test="${idFuncao != null}">
+			    AND c.idFuncao   					= <bancoob:valorOql valor="${idFuncao}"  tipo="Short" />
+			</j:if>
+			<j:if test="${idUnidadeInst != null}">
+			    AND a.instituicao.idUnidadeInst  = <bancoob:valorOql valor="${idUnidadeInst}"  tipo="Integer" />
+			</j:if>
+			]]>
+		</command>
+        <ordenacoes>
+          <ordenacao chave="nomePessoa" default="true">
+            <![CDATA[order by e.nomePessoa asc]]>
+          </ordenacao>
+        </ordenacoes>
+	</query>
+
+	<query name="CONSULTAR_REFERENCIA_PESSOA">
+		<use-case name="Pesquisar referencias Pessoa"></use-case>
+		<description>Pesquisa as referencias da pessoa</description>
+		<command>
+			<![CDATA[
+			SELECT 
+				new br.com.sicoob.capes.api.negocio.vo.ReferenciaPessoaVO(		
+				  referencia.idReferenciaPessoa as idReferenciaPessoa, 
+                  pessoa.idPessoa as idPessoa,
+				  referencia.ddd as ddd, 
+                  referencia.telefone as telefone, 
+                  referencia.observacao as observacao,
+				  pessoaReferenciada.idPessoa as idPessoaReferencia, 
+                  referenciada.nomePessoa as nomePessoaReferencia,
+				  pessoaReferenciada.cpfCnpj as cpfCnpj, 
+                  referencia.tipoReferencia.codigo as codigoTipoReferencia,
+				  referencia.tipoReferencia.descricao as descricaoTipoReferencia, 
+                  referencia.numeroBanco as numeroBanco,
+				  referencia.numeroAgencia as numeroAgencia, 
+                  referencia.numeroConta as numeroConta
+			)
+			FROM br.com.sicoob.capes.negocio.entidades.vigente.Referencia referencia
+				INNER JOIN referencia.pessoa pc
+				INNER JOIN pc.pessoa pessoa
+				LEFT OUTER JOIN referencia.pessoaReferencia referenciada
+				LEFT OUTER JOIN referenciada.pessoa pessoaReferenciada
+		<j:if test="${idInstituicao != null}">
+				INNER JOIN pc.transicoes tp
+		</j:if>
+			WHERE 1=1
+			AND referencia.dataHoraInicio is not null
+		<j:if test="${idInstituicao != null}">
+			    AND tp.instituicao.idInstituicao  = <bancoob:valorOql valor="${idInstituicao}"  tipo="Integer" />
+		</j:if>
+		<j:if test="${idPessoa != null}">
+			    AND pc.pessoa.idPessoa         	  = <bancoob:valorOql valor="${idPessoa}"  tipo="Integer" />
+		</j:if>
+		<j:if test="${id != null}">
+			    AND referencia.idReferenciaPessoa    	  = <bancoob:valorOql valor="${id}"  tipo="Long" />
+		</j:if>
+			]]>
+		</command>
+	</query>
+	
+	<query name="PESQUISAR_REFERENCIA_PESSOA">
+		<use-case name="Pesquisar referencias Pessoa"></use-case>
+		<description>Pesquisa as referencias da pessoa</description>
+		<command>
+			<![CDATA[
+			SELECT 
+				new br.com.sicoob.capes.api.negocio.vo.ReferenciaPessoaVO(		
+				  referencia.idReferenciaPessoa as idReferenciaPessoa, 
+                  pessoa.idPessoa as idPessoa,
+				  referencia.ddd as ddd, 
+                  referencia.telefone as telefone, 
+                  referencia.observacao as observacao,
+				  pessoaReferenciada.idPessoa as idPessoaReferencia, 
+                  referenciada.nomePessoa as nomePessoaReferencia,
+				  pessoaReferenciada.cpfCnpj as cpfCnpj, 
+                  referencia.tipoReferencia.codigo as codigoTipoReferencia,
+				  referencia.tipoReferencia.descricao as descricaoTipoReferencia, 
+                  referencia.numeroBanco as numeroBanco,
+				  referencia.numeroAgencia as numeroAgencia, 
+                  referencia.numeroConta as numeroConta
+			)
+			FROM br.com.sicoob.capes.negocio.entidades.vigente.Referencia referencia
+			INNER JOIN referencia.pessoa pc
+			INNER JOIN pc.pessoa pessoa
+			LEFT OUTER JOIN referencia.pessoaReferencia referenciada
+			LEFT OUTER JOIN referenciada.pessoa pessoaReferenciada
+			INNER JOIN pc.transicoes tp
+			WHERE referencia.dataHoraInicio is not null
+		    AND tp.instituicao.idInstituicao = <bancoob:valorOql valor="${criterios.filtro.idInstituicao}" tipo="Integer" />
+		    AND pc.pessoa.idPessoa = <bancoob:valorOql valor="${criterios.filtro.idPessoa}" tipo="Integer" />
+		    
+		    <j:if test="${criterios.filtro.ddd != null}">
+			    AND referencia.ddd = <bancoob:valorOql valor="${criterios.filtro.ddd}" tipo="Short" />
+			</j:if>
+			
+			<j:if test="${criterios.filtro.telefone != null}">
+			    AND referencia.telefone = <bancoob:valorOql valor="${criterios.filtro.telefone}" tipo="String" />
+			</j:if>
+			
+			<j:if test="${criterios.filtro.observacao != null}">
+			    AND referencia.observacao = <bancoob:valorOql valor="${criterios.filtro.observacao}" tipo="String" />
+			</j:if>
+			
+			<j:if test="${criterios.filtro.idPessoaReferencia != null}">
+			    AND pessoaReferenciada.idPessoa = <bancoob:valorOql valor="${criterios.filtro.idPessoaReferencia}" tipo="Integer" />
+			</j:if>
+			
+			<j:if test="${criterios.filtro.nomePessoaReferencia != null}">
+			    AND referenciada.nomePessoa = <bancoob:valorOql valor="${criterios.filtro.nomePessoaReferencia}" tipo="String" />
+			</j:if>
+			
+			<j:if test="${criterios.filtro.cpfCnpjPessoaReferencia != null}">
+			    AND pessoaReferenciada.cpfCnpj = <bancoob:valorOql valor="${criterios.filtro.cpfCnpjPessoaReferencia}" tipo="String" />
+			</j:if>
+			
+			<j:if test="${criterios.filtro.codigoTipoReferencia != null}">
+			    AND referencia.tipoReferencia = <bancoob:valorOql valor="${criterios.filtro.codigoTipoReferencia}" tipo="Short" />
+			</j:if>
+		    
+			]]>
+		</command>
+	</query>
+	
+	<query name="PESQUISAR_QUANTIDADE_REFERENCIA_PESSOA">
+		<use-case name="Pesquisar referencias Pessoa"></use-case>
+		<description>Pesquisa as referencias da pessoa</description>
+		<command>
+			<![CDATA[
+			SELECT COUNT(*)
+			FROM br.com.sicoob.capes.negocio.entidades.vigente.Referencia referencia
+			INNER JOIN referencia.pessoa pc
+			INNER JOIN pc.pessoa pessoa
+			LEFT OUTER JOIN referencia.pessoaReferencia referenciada
+			LEFT OUTER JOIN referenciada.pessoa pessoaReferenciada
+			INNER JOIN pc.transicoes tp
+			WHERE referencia.dataHoraInicio is not null
+		    AND tp.instituicao.idInstituicao = <bancoob:valorOql valor="${criterios.filtro.idInstituicao}" tipo="Integer" />
+		    AND pc.pessoa.idPessoa = <bancoob:valorOql valor="${criterios.filtro.idPessoa}" tipo="Integer" />
+		    
+		    <j:if test="${criterios.filtro.ddd != null}">
+			    AND referencia.ddd = <bancoob:valorOql valor="${criterios.filtro.ddd}" tipo="Short" />
+			</j:if>
+			
+			<j:if test="${criterios.filtro.telefone != null}">
+			    AND referencia.telefone = <bancoob:valorOql valor="${criterios.filtro.telefone}" tipo="String" />
+			</j:if>
+			
+			<j:if test="${criterios.filtro.observacao != null}">
+			    AND referencia.observacao = <bancoob:valorOql valor="${criterios.filtro.observacao}" tipo="String" />
+			</j:if>
+			
+			<j:if test="${criterios.filtro.idPessoaReferencia != null}">
+			    AND pessoaReferenciada.idPessoa = <bancoob:valorOql valor="${criterios.filtro.idPessoaReferencia}" tipo="Integer" />
+			</j:if>
+			
+			<j:if test="${criterios.filtro.nomePessoaReferencia != null}">
+			    AND referenciada.nomePessoa = <bancoob:valorOql valor="${criterios.filtro.nomePessoaReferencia}" tipo="String" />
+			</j:if>
+			
+			<j:if test="${criterios.filtro.cpfCnpjPessoaReferencia != null}">
+			    AND pessoaReferenciada.cpfCnpj = <bancoob:valorOql valor="${criterios.filtro.cpfCnpjPessoaReferencia}" tipo="String" />
+			</j:if>
+			
+			<j:if test="${criterios.filtro.codigoTipoReferencia != null}">
+			    AND referencia.tipoReferencia = <bancoob:valorOql valor="${criterios.filtro.codigoTipoReferencia}" tipo="Short" />
+			</j:if>
+		    
+			]]>
+		</command>
+	</query>
+  
+	<query name="PESQUISAR_PESSOA_JURIDICA">
+		<use-case name="Pesquisar Pessoa Jurídica"></use-case>
+		<description>Pesquisa a pessoa jurídica</description>
+		<command>
+			<![CDATA[
+			SELECT 
+				new br.com.sicoob.capes.api.negocio.vo.PessoaJuridicaVO(
+				  p.dataConstituicao as dataConstituicao,
+				  p.valorCapitalSocial as valorCapitalSocial,
+                  p.inscricaoEstadual as inscricaoEstadual,
+                  p.inscricaoMunicipal as inscricaoMunicipal,
+                  p.codigoEsferaAdministrativa as codigoEsferaAdministrativa,
+                  p.numeroRegistroJuntaComercial as numeroRegistroJuntaComercial,
+                  p.dataRegistroJuntaComercial as dataRegistroJuntaComercial,
+                  p.numeroUltimaAlteracaoContratoSocial as numeroUltimaAlteracaoContratoSocial,
+                  p.dataUltimaAlteracaoContratoSocial as dataUltimaAlteracaoContratoSocial,
+                  p.numeroRegistroRepresentacao as numeroRegistroRepresentacao,
+                  p.dataRegistroRepresentacao as dataRegistroRepresentacao,
+                  te.codigo as codigoTipoEmpresa,
+                  te.descricao as descricaoTipoEmpresa,
+                  fc.codigo as codigoTipoFormaConstituicao,
+                  fc.descricao as descricaoTipoFormaConstituicao,
+                  pessoa.idPessoa as idPessoa,
+                  pessoa.cpfCnpj as cpfCnpj,
+                  p.nomePessoa as nomePessoa,
+                  p.nomeCompleto as nomeCompleto,
+                  p.importador,
+				  p.exportador                                    
+			)
+			FROM br.com.sicoob.capes.negocio.entidades.vigente.PessoaJuridica p
+				INNER JOIN p.pessoa pessoa
+				INNER JOIN p.transicoes tp
+				LEFT OUTER JOIN p.tipoEmpresa te
+				LEFT OUTER JOIN p.formaConstituicao fc
+			WHERE
+				tp.instituicao.idInstituicao  = <bancoob:valorOql valor="${idInstituicao}"  tipo="Integer" />
+			    AND pessoa.idPessoa         = <bancoob:valorOql valor="${idPessoa}"  tipo="Integer" />
+			    AND p.dataHoraInicio is not null
+			]]>
+		</command>
+	</query>
+  
+	<query name="PESQUISAR_PESSOA_FISICA">
+		<use-case name="Pesquisar Pessoa Fisica"></use-case>
+		<description>Pesquisa a pessoa fisica</description>
+		<command>
+			<![CDATA[
+			SELECT 
+				new br.com.sicoob.capes.api.negocio.vo.PessoaFisicaVO(
+				  p.dataNascimento as dataNascimento,
+				  p.menorEmancipado as menorEmancipado,
+                  p.nomePai as nomePai,
+                  p.nomeMae as nomeMae,
+                  p.numeroDocumento as numeroDocumento,
+                  p.orgaoExpedidorDocumento as orgaoExpedidorDocumento,
+                  p.ufOrgaoExpedidorDocumento as ufOrgaoExpedidorDocumento,
+                  p.dataEmissaoDocumento as dataEmissaoDocumento,
+                  p.tipoSexo as tipoSexo,
+                  p.quantidadeDependentes as quantidadeDependentes,
+                  p.descNaturalidade as descNaturalidade,
+                  p.idNaturalidade as idNaturalidade,
+                  td.codigo as codigoTipoDocumento,
+                  td.descricao as descricaoTipoDocumento,
+                  op.idOcupacaoProfissional as idOcupacaoProfissional,
+                  op.descricao as descricaoOcupacaoProfissional,
+                  ec.codigo as codigoEstadoCivil,
+                  ec.descricao as descricaoEstadoCivil,
+                  rc.codigo as codigoRegimeCasamento,
+                  rc.descricao as descricaoRegimeCasamento,
+                  gi.codigo as codigoGrauInstrucao,
+                  gi.descricao as descricaoGrauInstrucao,
+                  gi.codigoGrauInstrucaoBNDES as codigoGrauInstrucaoBNDES,
+                  ve.codigo as codigoVinculoEmpregaticio,
+                  ve.descricao as descricaoVinculoEmpregaticio,
+                  na.codigo as codigoNacionalidade,
+                  na.descricao as descricaoNacionalidade,
+                  p.uniaoEstavel as uniaoEstavel,
+                  op.codigo as codigoOcupacaoProfissional,
+                  pessoa.idPessoa as idPessoa,
+                  pessoa.cpfCnpj as cpfCnpj,
+                  p.nomePessoa as nomePessoa,
+                  p.nomeCompleto as nomeCompleto,
+				  cj.pessoa.idPessoa as idPessoaConjuge,
+				  p.importador,
+				  p.exportador
+			)
+			FROM br.com.sicoob.capes.negocio.entidades.vigente.PessoaFisica p
+				INNER JOIN p.pessoa pessoa
+				INNER JOIN p.transicoes tp
+				LEFT OUTER JOIN p.nacionalidade na
+				LEFT OUTER JOIN p.tipoDocumento td
+				LEFT OUTER JOIN p.ocupacaoProfissional op
+				LEFT OUTER JOIN p.estadoCivil ec
+				LEFT OUTER JOIN p.regimeCasamento rc
+				LEFT OUTER JOIN p.grauInstrucao gi
+				LEFT OUTER JOIN p.vinculoEmpregaticio ve
+				LEFT OUTER JOIN p.conjuge cj
+			WHERE p.dataHoraInicio is not null
+				<j:if test="${idInstituicao != null}">
+					AND tp.instituicao.idInstituicao  = <bancoob:valorOql valor="${idInstituicao}"  tipo="Integer" />
+				</j:if>
+				<j:if test="${idPessoa != null}">
+					AND pessoa.idPessoa = <bancoob:valorOql valor="${idPessoa}" tipo="Integer" />
+				</j:if>
+				<j:if test="${cpf != null}">
+					AND pessoa.cpfCnpj = <bancoob:valorOql valor="${cpf}" tipo="String" />
+				</j:if>
+			]]>
+		</command>
+	</query>
+
+	<query name="PESQUISAR_CLIENTE">
+		<use-case name="Pesquisar Cliente"></use-case>
+		<description>Pesquisa os clientes</description>
+		<command>
+			<![CDATA[
+            SELECT 
+              new br.com.sicoob.capes.api.negocio.vo.ClienteVO(
+                p.idPessoa as idPessoa,
+                p.cpfCnpj as cpfCnpj,
+                p.tipoPessoa.codTipoPessoa as codTipoPessoa,
+                pc.compartilhamento.codigo as codigoCompartilhamentoCadastro,
+                pc.nomePessoa as nomePessoa,
+                pc.nomeCompleto as nomeCompleto,
+                pc.nomeApelido as nomeApelido,
+                pc.descricao as descricaoObservacaoPessoa,
+                pc.atividadeEconomica.codigo as codigoAtividadeEconomica,
+                pc.cnae.codigo as codigoCnaeFiscal,
+                pc.dataInclusaoSistema as dataInclusaoSistema,
+                pc.autorizaConsultaBacen as autorizaConsultaBacen,
+                tp.idPessoaLegado as idPessoaLegado,
+                tp.instituicao.idInstituicao as idInstituicao,
+                pc.dataInclusaoSFN as dataInclusaoSFN
+            )
+			FROM br.com.sicoob.capes.negocio.entidades.Pessoa p
+				INNER JOIN p.compartilhamentos pc
+				INNER JOIN pc.transicoes tp
+				INNER JOIN p.instituicoesNegocio c
+			WHERE 
+				tp.instituicao.idInstituicao = c.idInstituicao
+				AND tp.instituicao.idInstituicao = <bancoob:valorOql valor="${criterios.filtro.idInstituicao}" tipo="Integer" />
+			<j:if test="${criterios.tipoProcura == 'POR NOME'}">
+				AND pc.nomePessoa like <bancoob:valorOql valor="${criterios.procurarPor}"  tipo="LikeDireita" />
+			</j:if>
+			<j:if test="${criterios.tipoProcura == 'POR APELIDO'}">
+				AND pc.nomeApelido like <bancoob:valorOql valor="${criterios.procurarPor}"  tipo="LikeDireita" />
+			</j:if>
+			]]>
+		</command>
+		<ordenacoes>
+			<ordenacao chave="nomePessoa" default="true">
+				<![CDATA[order by pc.nomePessoa asc]]>
+			</ordenacao>
+		</ordenacoes>
+	</query>
+
+    <query name="PESQUISAR_QUANTIDADE_CLIENTE">
+      <use-case name="Pesquisar Cliente"></use-case>
+      <description>Pesquisa a quantidade de clientes</description>
+      <command>
+        <![CDATA[
+        SELECT count(*)
+        FROM br.com.sicoob.capes.negocio.entidades.Pessoa p
+          INNER JOIN p.compartilhamentos pc
+          INNER JOIN pc.transicoes tp
+          INNER JOIN p.instituicoesNegocio c
+        WHERE 
+          tp.instituicao.idInstituicao = c.idInstituicao
+          AND tp.instituicao.idInstituicao = <bancoob:valorOql valor="${criterios.filtro.idInstituicao}" tipo="Integer" />
+        <j:if test="${criterios.tipoProcura == 'POR NOME'}">
+          AND pc.nomePessoa like <bancoob:valorOql valor="${criterios.procurarPor}"  tipo="LikeDireita" />
+        </j:if>
+        <j:if test="${criterios.tipoProcura == 'POR APELIDO'}">
+          AND pc.nomeApelido like <bancoob:valorOql valor="${criterios.procurarPor}"  tipo="LikeDireita" />
+        </j:if>
+        ]]>
+      </command>
+    </query>
+  
+	<query name="OBTER_CLIENTE">
+		<use-case name="Obter Cliente"></use-case>
+		<description>Obter um cliente</description>
+		<command>
+			<![CDATA[
+			SELECT 
+              new br.com.sicoob.capes.api.negocio.vo.ClienteVO(
+				  p.idPessoa as idPessoa,
+				  p.cpfCnpj as cpfCnpj,
+                  p.tipoPessoa.codTipoPessoa as codTipoPessoa,
+                  pc.compartilhamento.codigo as codigoCompartilhamentoCadastro,
+                  pc.nomePessoa as nomePessoa,
+                  pc.nomeCompleto as nomeCompleto,
+                  pc.nomeApelido as nomeApelido,
+                  pc.descricao as descricaoObservacaoPessoa,
+                  pc.atividadeEconomica.codigo as codigoAtividadeEconomica,
+                  pc.cnae.codigo as codigoCnaeFiscal,
+                  pc.dataInclusaoSistema as dataInclusaoSistema,
+       			  pc.autorizaConsultaBacen as autorizaConsultaBacen,
+       			  tp.idPessoaLegado as idPessoaLegado,
+       			  tp.instituicao.idInstituicao as idInstituicao,
+                  tp.instituicao.idUnidadeInst as idUnidadeInst,
+       			  pc.dataInclusaoSFN as dataInclusaoSFN
+			)
+			FROM br.com.sicoob.capes.negocio.entidades.Pessoa p
+				INNER JOIN p.compartilhamentos pc
+				INNER JOIN pc.transicoes tp
+				INNER JOIN p.instituicoesNegocio c
+			WHERE 
+				tp.instituicao.idInstituicao = c.idInstituicao
+				AND tp.instituicao.idInstituicao = <bancoob:valorOql valor="${criterios.filtro.idInstituicao}" tipo="Integer" />
+			<j:if test="${criterios.filtro.idPessoa != null}">
+				AND p.idPessoa = <bancoob:valorOql valor="${criterios.filtro.idPessoa}"  tipo="Integer" />
+			</j:if>
+			<j:if test="${criterios.filtro.idPessoaLegado != null}">
+			   	AND tp.idPessoaLegado = <bancoob:valorOql valor="${criterios.filtro.idPessoaLegado}"  tipo="Integer" />
+			</j:if>
+			<j:if test="${criterios.filtro.cpfCnpj != null}">
+			   	AND p.cpfCnpj = <bancoob:valorOql valor="${criterios.filtro.cpfCnpj}"  tipo="String" />
+			</j:if>
+			]]>
+		</command>
+	</query>	
+
+	<query name="LISTAR_DADOS_ETIQUETAS">
+		<use-case name="Listar dados etiquetas"></use-case>
+		<description>Lista os dados para as etiquetas</description>
+		<command>
+			<![CDATA[
+			 select t.IDPESSOALEGADO, 
+                    t.IDINSTITUICAO, 
+                    pc.NOMEPESSOA, 
+				    e.DESCLOGRADOURO, 
+                    e.DESCNUMERO, 
+                    e.DESCCOMPLEMENTO,
+				    e.NOMEBAIRRO, 
+                    e.CODCEP, 
+                    e.IDTIPOLOGRADOURO, 
+                    e.IDLOCALIDADE,
+				    te.CODTIPOENDERECO, 
+                    te.DESCTIPOENDERECO
+			FROM CLI.ENDERECOCORRESPONDENCIA ec
+				INNER JOIN cli.ENDERECOPESSOA e on ec.IDENDERECOPESSOA = e.IDENDERECOPESSOA 
+					AND ec.IDPESSOACOMPARTILHAMENTO = e.IDPESSOACOMPARTILHAMENTO 
+					AND ec.IDINSTITUICAO = <bancoob:valor valor="${idInstituicao}" />
+				LEFT JOIN cli.TIPOENDERECO te on e.CODTIPOENDERECO = te.CODTIPOENDERECO
+				RIGHT JOIN cli.PESSOACOMPARTILHAMENTO pc on e.IDPESSOACOMPARTILHAMENTO = pc.IDPESSOACOMPARTILHAMENTO
+				INNER JOIN cli.TRANSICAOPESSOA t on t.IDPESSOACOMPARTILHAMENTO = pc.IDPESSOACOMPARTILHAMENTO 
+			where T.IDINSTITUICAO = <bancoob:valor valor="${idInstituicao}" />
+				AND T.IDPESSOALEGADO IN (<bancoob:valor valor="${listaIdPessoaLegado}" />)
+				AND e.DATAHORAINICIO is not null
+			]]>
+		</command>
+	</query>
+  
+  <query name="DADOS_ETIQUETA_POR_PESSOA_LEGADO_INSTITUICAO">
+    <use-case name="Listar dados etiquetas"></use-case>
+    <description>Lista os dados para as etiquetas</description>
+    <command>
+     <![CDATA[
+           SELECT  P.IDPESSOA,
+                   P.CODTIPOPESSOA,
+                   P.NUMCPFCNPJ,
+                   PC.NOMEPESSOA,
+                   TP.IDUNIDADEINST,
+                   PF.CODTIPOSEXO,
+                   PF.DATANASCIMENTO,
+                   EP.IDTIPOLOGRADOURO,
+                   EP.DESCLOGRADOURO,
+                   EP.DESCNUMERO,
+                   EP.DESCCOMPLEMENTO,
+                   EP.NOMEBAIRRO,
+                   EP.IDLOCALIDADE,
+                   EP.CODCEP
+            FROM CLI.PESSOA P INNER JOIN CLI.PESSOACOMPARTILHAMENTO PC ON PC.IDPESSOA = P.IDPESSOA
+                              INNER JOIN CLI.TRANSICAOPESSOA TP ON TP.IDPESSOACOMPARTILHAMENTO = PC.IDPESSOACOMPARTILHAMENTO
+                              INNER JOIN CLI.ENDERECOPESSOA EP ON EP.IDPESSOACOMPARTILHAMENTO = PC.IDPESSOACOMPARTILHAMENTO
+                              INNER JOIN CLI.ENDERECOCORRESPONDENCIA EC ON EC.IDENDERECOPESSOA = EP.IDENDERECOPESSOA AND 
+                                                                           EC.IDINSTITUICAO = TP.IDINSTITUICAO
+                              LEFT JOIN CLI.PESSOAFISICA PF ON PF.IDPESSOACOMPARTILHAMENTO = PC.IDPESSOACOMPARTILHAMENTO
+                              LEFT JOIN CLI.PESSOAJURIDICA PJ ON PJ.IDPESSOACOMPARTILHAMENTO = PC.IDPESSOACOMPARTILHAMENTO                  
+            WHERE 1=1 
+				  AND TP.IDUNIDADEINST = 0
+				<j:if test="${idInstituicao != null}">
+				  AND TP.IDINSTITUICAO = <bancoob:valor valor="${idInstituicao}" />
+				</j:if>
+				<j:if test="${codTipoPessoa != null}">
+                  AND P.CODTIPOPESSOA = <bancoob:valor valor="${codTipoPessoa}" />
+				</j:if>
+				<j:if test="${mesDiaAniversarioInicio != null and mesDiaAniversarioFinal != null}">
+                  AND PF.DATANASCIMENTO IS NOT NULL AND VARCHAR_FORMAT(PF.DATANASCIMENTO,'MMDD') BETWEEN <bancoob:valor valor="${mesDiaAniversarioInicio}" /> AND <bancoob:valor valor="${mesDiaAniversarioFinal}" />
+				</j:if>
+				<j:if test="${dataNascimentoInicio != null and dataNascimentoFinal != null}">
+                  AND PF.DATANASCIMENTO IS NOT NULL AND PF.DATANASCIMENTO BETWEEN <bancoob:valor valor="${dataNascimentoInicio}" /> AND <bancoob:valor valor="${dataNascimentoFinal}" />
+				</j:if>
+				<j:if test="${tipoSexo != null}">
+                  AND PF.CODTIPOSEXO IS NOT NULL AND PF.CODTIPOSEXO = <bancoob:valor valor="${tipoSexo}" />
+				</j:if>
+      ]]>
+    </command>
+  </query>
+	
+	<query name="PESQUISAR_INFORMACOES_PROFISSIONAIS">
+		<use-case name="Pesquisar as informacoes profissionais"></use-case>
+		<description>Pesquisar as informacoes profissionais</description>
+		<command>
+			<![CDATA[
+			SELECT 
+              new br.com.sicoob.capes.api.negocio.vo.InformacaoProfissionalVO(
+				info.idInformacao as idInformacao, 
+                info.dataHoraInicio as dataHoraInicio,
+				info.idInstituicao as idInstituicao, 
+                info.pessoa.idPessoa as idPessoa,
+				info.pessoaEmpregador.idPessoa as idPessoaEmpregador, 
+                info.numMatricula as numMatricula,
+				tipoFuncionario.codigo as codigoTipoFuncionario, 
+                tipoFuncionario.descricao as descricaoTipoFuncionario,
+				tipoAfastamento.codigo as codigoTipoAfastamento, 
+                tipoAfastamento.descricao as descricaoTipoAfastamento,
+				info.codSituacao as codSituacaoFuncionario, 
+                info.cargo as cargo, 
+                info.dataAdmissao as dataAdmissao,
+				info.diaMesFerias as diaMesFerias, 
+                info.dataDesligamento as dataDesligamento,
+				conselhoRegional.codigo as codigoConselhoRegional, 
+                conselhoRegional.descricao as descricaoConselhoRegional,
+				info.ufConselho as ufConselho, 
+                info.numeroInscricaoConselho as numeroInscricaoConselho
+			)			
+			FROM br.com.sicoob.capes.negocio.entidades.vigente.InformacaoProfissional info
+				LEFT JOIN info.tipoFuncionario tipoFuncionario
+				LEFT JOIN info.tipoAfastamento tipoAfastamento
+				LEFT JOIN info.conselhoRegional conselhoRegional
+			WHERE
+				info.dataHoraInicio is not null
+		<j:if test="${id == null}">
+				AND info.pessoa.idPessoa = <bancoob:valorOql valor="${idPessoa}"  tipo="Integer" />
+				AND info.idInstituicao = <bancoob:valorOql valor="${idInstituicao}"  tipo="Integer" />		
+		</j:if>
+		<j:if test="${id != null}">
+				AND info.idInformacao = <bancoob:valorOql valor="${id}"  tipo="Integer" />
+		</j:if>
+			]]>
+		</command>
+		<ordenacoes>
+			<ordenacao chave="dataAdmissao" default="true">
+				<![CDATA[ORDER BY info.dataAdmissao]]>
+			</ordenacao>
+		</ordenacoes>		
+	</query>
+	
+	<query name="RECUPERAR_DATA_ULTIMA_ATUALIZACAO">
+		<use-case name="Pesquisar Pessoa"></use-case>
+		<description>Pesquisa a data da útlima atualização da Pessoa</description>
+		<command>
+			<![CDATA[
+                SELECT
+                    VC.DATAHORAULTIMAATUALIZACAO
+                FROM
+                    CLI.VALIDACAOCADASTRAL VC
+                INNER JOIN
+                    CLI.TRANSICAOPESSOA TP
+                ON
+                    TP.IDPESSOACOMPARTILHAMENTO = VC.IDPESSOACOMPARTILHAMENTO
+                INNER JOIN
+                    CLI.PESSOACOMPARTILHAMENTO PC
+                ON
+                    TP.IDPESSOACOMPARTILHAMENTO = PC.IDPESSOACOMPARTILHAMENTO
+                WHERE
+                    PC.IDPESSOA = <bancoob:valor valor="${idPessoa}" />
+                AND TP.IDINSTITUICAO = <bancoob:valor valor="${idInstituicao}" />
+			]]>
+		</command>			
+	</query>
+	
+	<query name="PESQUISAR_PRODUTOR">
+		<use-case name="Pesquisar Produtor"></use-case>
+		<description>Pesquisa os produtores</description>
+		<command>
+			<![CDATA[
+            SELECT 
+              new br.com.sicoob.capes.api.negocio.vo.ProdutorVO(
+                  p.idPessoa as idPessoa,
+                  p.cpfCnpj as cpfCnpj,
+                  p.tipoPessoa.codTipoPessoa as codTipoPessoa,
+                  pc.compartilhamento.codigo as codigoCompartilhamentoCadastro,
+                  pc.nomePessoa as nomePessoa,
+                  pc.nomeCompleto as nomeCompleto,
+                  pc.nomeApelido as nomeApelido,
+                  pc.descricao as descricaoObservacaoPessoa,
+                  pc.atividadeEconomica.codigo as codigoAtividadeEconomica,
+                  pc.cnae.codigo as codigoCnaeFiscal,
+                  pc.dataInclusaoSistema as dataInclusaoSistema,
+                  pc.autorizaConsultaBacen as autorizaConsultaBacen,
+                  tp.idPessoaLegado as idPessoaLegado,
+                  tp.instituicao.idInstituicao as idInstituicao,
+                  pc.dataInclusaoSFN as dataInclusaoSFN,
+                  tipoBeneficiario.codigo as codigoTipoBeneficiarioSicor,
+                  tipoBeneficiario.descricao as descricaoTipoBeneficiarioSicor
+            )
+			FROM br.com.sicoob.capes.negocio.entidades.vigente.Produtor prod
+                INNER JOIN prod.categoria cat
+				INNER JOIN prod.pessoaCompartilhamento pc
+				INNER JOIN pc.pessoa p				
+				INNER JOIN pc.transicoes tp	
+				LEFT JOIN prod.tipoBeneficiarioSicor tipoBeneficiario
+			WHERE 
+				tp.instituicao.idInstituicao = <bancoob:valorOql valor="${criterios.filtro.idInstituicao}" tipo="Integer" />
+            <j:if test="${criterios.filtro.pesquisarPorCategoriaAtiva == 'TRUE'}">
+                AND cat.ativo = <bancoob:valorOql valor="${criterios.filtro.pesquisarPorCategoriaAtiva}" tipo="Boolean" />
+            </j:if>
+			<j:if test="${criterios.tipoProcura == 'POR NOME'}">
+				AND pc.nomePessoa like <bancoob:valorOql valor="${criterios.procurarPor}"  tipo="LikeDireita" />
+			</j:if>
+			<j:if test="${criterios.tipoProcura == 'POR APELIDO'}">
+				AND pc.nomeApelido like <bancoob:valorOql valor="${criterios.procurarPor}"  tipo="LikeDireita" />
+			</j:if>
+			]]>
+		</command>
+		<ordenacoes>
+			<ordenacao chave="nomePessoa" default="true">
+				<![CDATA[order by pc.nomePessoa asc]]>
+			</ordenacao>
+		</ordenacoes>
+	</query>
+  
+    <query name="PESQUISAR_QUANTIDADE_PRODUTOR">
+      <use-case name="Pesquisar Produtor"></use-case>
+      <description>Pesquisa a quantidade produtores</description>
+      <command>
+            <![CDATA[
+            SELECT count(*)
+			FROM br.com.sicoob.capes.negocio.entidades.vigente.Produtor prod
+                INNER JOIN prod.categoria cat
+				INNER JOIN prod.pessoaCompartilhamento pc
+				INNER JOIN pc.pessoa p				
+				INNER JOIN pc.transicoes tp	
+			WHERE 
+				tp.instituicao.idInstituicao = <bancoob:valorOql valor="${criterios.filtro.idInstituicao}" tipo="Integer" />
+            <j:if test="${criterios.filtro.pesquisarPorCategoriaAtiva == 'TRUE'}">
+                AND cat.ativo = <bancoob:valorOql valor="${criterios.filtro.pesquisarPorCategoriaAtiva}" tipo="Boolean" />
+            </j:if>
+			<j:if test="${criterios.tipoProcura == 'POR NOME'}">
+				AND pc.nomePessoa like <bancoob:valorOql valor="${criterios.procurarPor}"  tipo="LikeDireita" />
+			</j:if>
+			<j:if test="${criterios.tipoProcura == 'POR APELIDO'}">
+				AND pc.nomeApelido like <bancoob:valorOql valor="${criterios.procurarPor}"  tipo="LikeDireita" />
+			</j:if>
+            ]]>
+      </command>
+    </query>
+    
+    <query name="CONSULTAR_PESSOA_POSSUEM_AUTORIZACAO_BACEN">
+      <use-case name="Consultar Pessoa Possuem Autorizacao Bacen"></use-case>
+      <description>Consultar Pessoa Possuem Autorizacao Bacen</description>
+      <command>
+            <![CDATA[
+                SELECT P.NUMCPFCNPJ as NUMCPFCNPJ
+                FROM CLI.PESSOA P INNER JOIN CLI.PESSOACOMPARTILHAMENTO PC ON PC.IDPESSOA = P.IDPESSOA
+                                  INNER JOIN CLI.TRANSICAOPESSOA TP ON TP.IDPESSOACOMPARTILHAMENTO = PC.IDPESSOACOMPARTILHAMENTO
+                WHERE TP.IDINSTITUICAO            = <bancoob:valor valor="${idInstituicao}" />
+                  AND PC.BOLAUTORIZACONSULTABACEN = 1
+                  AND P.NUMCPFCNPJ IN (<bancoob:valor valor="${listaCpfCnpj}" />)
+            ]]>
+      </command>
+    </query>
+  
+	<query name="OBTER_PRODUTOR">
+		<use-case name="Obter Produtor"></use-case>
+		<description>Obter um produtor</description>
+		<command>
+			<![CDATA[
+			SELECT 
+              new br.com.sicoob.capes.api.negocio.vo.ProdutorVO(
+				  p.idPessoa as idPessoa,
+                  p.cpfCnpj as cpfCnpj,
+                  p.tipoPessoa.codTipoPessoa as codTipoPessoa,
+                  pc.compartilhamento.codigo as codigoCompartilhamentoCadastro,
+                  pc.nomePessoa as nomePessoa,
+                  pc.nomeCompleto as nomeCompleto,
+                  pc.nomeApelido as nomeApelido,
+                  pc.descricao as descricaoObservacaoPessoa,
+                  pc.atividadeEconomica.codigo as codigoAtividadeEconomica,
+                  pc.cnae.codigo as codigoCnaeFiscal,
+                  pc.dataInclusaoSistema as dataInclusaoSistema,
+                  pc.autorizaConsultaBacen as autorizaConsultaBacen,
+                  tp.idPessoaLegado as idPessoaLegado,
+                  tp.instituicao.idInstituicao as idInstituicao,
+                  pc.dataInclusaoSFN as dataInclusaoSFN,
+                  prod.dataHoraInicio as dataHoraInicio,
+                  prod.codigoInscricao as codigoInscricao,
+                  cat.codigo as codigoCategoria,
+                  cat.descricao as descricaoCategoria,
+                  tipoBeneficiario.codigo as codigoTipoBeneficiarioSicor,
+                  tipoBeneficiario.descricao as descricaoTipoBeneficiarioSicor
+			)
+			FROM br.com.sicoob.capes.negocio.entidades.vigente.Produtor prod
+                INNER JOIN prod.categoria cat
+				INNER JOIN prod.pessoaCompartilhamento pc
+				INNER JOIN pc.pessoa p				
+				INNER JOIN pc.transicoes tp
+				LEFT JOIN prod.tipoBeneficiarioSicor tipoBeneficiario
+        
+                <j:if test="${criterios.filtro.cliente == 'TRUE'}">
+                  INNER JOIN p.instituicoesNegocio pi
+                </j:if>
+			WHERE 
+				tp.instituicao.idInstituicao = <bancoob:valorOql valor="${criterios.filtro.idInstituicao}" tipo="Integer" />
+			<j:if test="${criterios.filtro.idPessoa != null}">
+				AND p.idPessoa = <bancoob:valorOql valor="${criterios.filtro.idPessoa}" tipo="Integer" />
+			</j:if>
+			<j:if test="${criterios.filtro.idPessoaLegado != null}">
+			   	AND tp.idPessoaLegado = <bancoob:valorOql valor="${criterios.filtro.idPessoaLegado}" tipo="Integer" />
+			</j:if>
+			<j:if test="${criterios.filtro.cpfCnpj != null}">
+			   	AND p.cpfCnpj = <bancoob:valorOql valor="${criterios.filtro.cpfCnpj}" tipo="String" />
+			</j:if>
+            <j:if test="${criterios.filtro.cliente == 'TRUE'}">
+	           AND pi.idInstituicao = <bancoob:valorOql valor="${criterios.filtro.idInstituicao}" tipo="Integer" />
+            </j:if>
+                
+			]]>
+		</command>
+	</query>	
+	
+	<query name="OBTER_RESPONSAVEL">
+		<use-case name="Obter Responsável"></use-case>
+		<description>Obter um responsável</description>
+		<command>
+			<![CDATA[
+			SELECT new br.com.sicoob.capes.api.negocio.vo.InstituicaoResponsavelVO(
+				  p.idPessoa as idPessoa,
+				  r.idInstituicao as idInstituicao
+			  )
+			FROM br.com.sicoob.capes.negocio.entidades.vigente.ResponsavelCadastro r
+				INNER JOIN r.pessoa pc				
+				INNER JOIN pc.pessoa p
+			WHERE 
+				
+			<j:if test="${criterios.filtro.codCompartilhamentoCadastro != null}">
+				pc.codCompartilhamentoCadastro = <bancoob:valorOql valor="${criterios.filtro.codCompartilhamentoCadastro}"  tipo="Short" />
+			</j:if>
+			<j:if test="${criterios.filtro.cpfCnpj != null}">
+			   	AND p.cpfCnpj = <bancoob:valorOql valor="${criterios.filtro.cpfCnpj}"  tipo="String" />
+			</j:if>			
+			]]>
+		</command>
+	</query>
+  
+    <query name="OBTER_RESPONSAVEL_UNICO">
+      <use-case name="Obter Responsável"></use-case>
+      <description>Obter um responsável</description>
+      <command>
+        <![CDATA[
+        SELECT new br.com.sicoob.capes.api.negocio.vo.InstituicaoResponsavelVO(
+            p.idPessoa as idPessoa,
+            r.idInstituicao as idInstituicao
+        )
+        FROM br.com.sicoob.capes.negocio.entidades.vigente.ResponsavelCadastro r
+          INNER JOIN r.pessoa pc        
+          INNER JOIN pc.pessoa p
+          INNER JOIN pc.compartilhamento gc
+        WHERE
+          gc.codigo = 1
+          AND p.cpfCnpj = <bancoob:valorOql valor="${cpfCnpj}"  tipo="String" />
+        ]]>
+      </command>
+    </query>
+	
+	<query name="PESQUISAR_GRUPO_ECONOMICO">
+		<use-case name="Pesquisar Grupo Econômico"></use-case>
+		<description>Pesquisa os grupos econômicos da pessoa</description>
+		<command>
+			<![CDATA[
+			SELECT 
+				new br.com.sicoob.capes.api.negocio.vo.GrupoEconomicoVO(
+				   p.pessoa.idPessoa as idPessoa,
+			       p.idInstituicao as idInstituicao,
+			       ge.idGrupoEconomicoPessoa as idGrupoEconomicoPessoa,
+			       ge.dataHoraInicio as dataHoraInicio,
+			       g.idGrupoEconomico as idGrupoEconomico,
+			       g.descricao as descricaoGrupo,
+			       g.dataHoraCadastro as dataHoraCadastro
+			)
+			FROM br.com.sicoob.capes.negocio.entidades.vigente.PessoaInstituicao p
+				INNER JOIN p.gruposEconomicos ge
+				INNER JOIN ge.grupoEconomico g
+			WHERE 
+			    p.idInstituicao 	= <bancoob:valorOql valor="${idInstituicao}"  tipo="Integer" />
+			    AND p.pessoa.idPessoa   	= <bancoob:valorOql valor="${idPessoa}"  tipo="Integer" />
+			    AND p.dataHoraInicio is not null
+			]]>
+		</command>
+	</query>
+	
+	<query name="PESQUISAR_POSSES_BEM">
+      <use-case name="Pesquisar posses de um bem"></use-case>
+      <description>Pesquisa as posses de um bem</description>
+      <command>
+        <![CDATA[
+          SELECT
+            new br.com.sicoob.capes.api.negocio.vo.BemPosseVO(
+                p.idBemPosse as idBemPosse,
+                b.idBem as idBem,
+                t.codigo as codigoTipoPosse,
+                t.descricao as descricaoTipoPosse,
+                p.area as area
+            )
+          FROM br.com.sicoob.capes.negocio.entidades.bemantigo.BemPosse p
+                INNER JOIN p.bem b
+                INNER JOIN p.tipoPosseBem t
+                WHERE b.idBem = <bancoob:valorOql valor="${idBem}" tipo="Long" />
+        ]]>
+      </command>
+    </query>
+
+    <query name="LISTAR_NUCLEOS">
+      <use-case name="Listar nucleos por id instituicao"></use-case>
+      <description>Listar nucleos por id instituicao</description>
+      <command>
+          <![CDATA[
+            SELECT new br.com.sicoob.capes.api.negocio.vo.NucleoVO(
+                  n.idNucleo as id,
+                  n.idInstituicao as idInstituicao,
+                  n.numNucleo as numero,
+                  n.descricao as descricao
+              )
+            FROM br.com.sicoob.capes.negocio.entidades.Nucleo n
+            WHERE n.idInstituicao = <bancoob:valorOql valor="${idInstituicao}" tipo="Integer" />
+          ]]>
+      </command>
+    </query>
+  
+    <query name="CONSULTAR_DATAS_ULTIMA_ATUALIZACAO_DATA_REFERENCIA_PESSOAS">
+      <use-case name="API"/>
+      <description>Recupera a última data de alteração de pessoas que tenham sido atualizadas no mesmo dia ou depois da data de referencia</description>
+        <command>
+          <![CDATA[
+            SELECT new br.com.sicoob.capes.comum.negocio.vo.DataUltimaAtualizacaoVO(
+                p.idPessoa, p.cpfCnpj, pc.nomePessoa, vc.dataHoraUltimaAtualizacao
+            )
+            FROM
+                br.com.sicoob.capes.negocio.entidades.ValidacaoCadastral vc,
+                br.com.sicoob.capes.negocio.entidades.Pessoa p
+                INNER JOIN p.compartilhamentos pc
+                INNER JOIN pc.transicoes tp
+            WHERE
+                pc.idPessoaCompartilhamento = vc.idPessoaCompartilhamento
+            AND tp.instituicao.idInstituicao = <bancoob:valorOql valor="${idInstituicao}" tipo="Integer" />
+            AND vc.dataHoraUltimaAtualizacao >= <bancoob:valorOql valor="${dataReferencia}" tipo="Date" />
+            AND p.idPessoa IN (<bancoob:valor valor="${idsPessoas}" />)
+          ]]>
+        </command>
+    </query>
+    
+    <query name="OBTER_ANOTACAO_POR_ID">
+      <use-case name="Anotação"></use-case>
+      <description>Obtém a anotação por ID</description>
+      <command>
+          <![CDATA[
+            SELECT 
+              new br.com.sicoob.capes.api.negocio.vo.AnotacaoPessoaVO(
+               anotacao.idAnotacao as idAnotacao,
+               anotacao.quantidade as quantidade,
+               anotacao.valor as valor,
+               anotacao.descObservacao as observacao,
+               anotacao.flexibilidade as flexibilidade,
+               tipoAnotacao.codTipoAnotacao as codigoTipoAnotacao,
+               tipoAnotacao.descTipoAnotacao as descricaoTipoAnotacao,
+               categoriaAnotacao.idCategoriaAnotacao as codigoCategoriaAnotacao,
+               categoriaAnotacao.descCategoriaAnotacao as descricaoCategoriaAnotacao,
+               origemInformacao.idOrigemInfo as codigoOrigemInfo,
+               origemInformacao.descOrigemInfo as descricaoOrigemInfo,
+               anotacao.dataHoraAnotacao as dataHoraAnotacao,
+               anotacao.dataHoraOcorrencia as dataHoraOcorrencia,
+               anotacao.dataHoraBaixa as dataHoraBaixa,
+               tipoBaixa.idTipoBaixa as idTipoBaixa,
+               tipoBaixa.descTipoBaixa as descricaoTipoBaixa
+            )
+            FROM br.com.sicoob.capes.negocio.entidades.Anotacao anotacao
+            INNER JOIN anotacao.tipoAnotacao tipoAnotacao
+            INNER JOIN tipoAnotacao.categoriaAnotacao categoriaAnotacao
+            INNER JOIN anotacao.origemInformacao origemInformacao
+            LEFT JOIN anotacao.tipoBaixa tipoBaixa
+            WHERE anotacao.idAnotacao = <bancoob:valorOql valor="${id}" tipo="Long" />
+          ]]>
+      </command>
+    </query>
+    
+    <query name="OBTER_TIPOS_ANOTACAO">
+      <use-case name="Obter tipos de anotacao"></use-case>
+      <description>Obter tipos de anotacao</description>
+      <command>
+          <![CDATA[
+            SELECT 
+              new br.com.sicoob.capes.api.negocio.vo.TipoAnotacaoVO(
+                  tipoAnotacao.codTipoAnotacao as codigo,
+                  tipoAnotacao.descTipoAnotacao as descricao,
+                  categoriaAnotacao.descCategoriaAnotacao as categoria,
+                  tipoCaptura.descTipoCaptura as tipoCaptura,
+                  periodicidadeAnotacao.descPeriodicidadeAnotacao as periocidade
+            )
+            FROM br.com.sicoob.capes.negocio.entidades.TipoAnotacao tipoAnotacao
+            INNER JOIN tipoAnotacao.tipoCaptura tipoCaptura
+            INNER JOIN tipoAnotacao.categoriaAnotacao categoriaAnotacao
+            INNER JOIN tipoAnotacao.periodicidadeAnotacao periodicidadeAnotacao
+            WHERE tipoAnotacao.ativo = true
+            
+            <j:if test="${idTipoAnotacao != null}">
+	           AND tipoAnotacao.codTipoAnotacao = <bancoob:valorOql valor="${idTipoAnotacao}" tipo="Integer" />
+            </j:if>
+          ]]>
+      </command>
+    </query>
+    
+    <query name="OBTER_GERENTE">
+      <use-case name="" />
+      <description></description>
+      <command>
+          <![CDATA[
+            SELECT
+              new br.com.sicoob.capes.api.negocio.vo.FuncionarioVO(
+                funcionario.idFuncionario as idFuncionario,
+                funcionario.matricula as matricula,
+                funcionario.dataAdmissao as dataAdmissao,
+                funcionario.dataDesligamento as dataDesligamento,
+                funcionario.instituicao.idUnidadeInst as idUnidadeInst,
+                funcao.idFuncao as idFuncao,
+                funcao.descricao as descricaoFuncao,
+                nucleo.idNucleo as idNucleo,
+                nucleo.descricao as descricaoNucleo,
+                nucleo.numNucleo as numNucleo,
+                pessoa.cpfCnpj as cpfCnpjPessoa,
+                pessoa.tipoPessoa.codTipoPessoa as codTipoPessoa,
+                compartilhamentos.nomePessoa as nomePessoa
+              )
+            FROM br.com.sicoob.capes.negocio.entidades.vigente.PessoaInstituicao pessoaInstituicao
+              INNER JOIN pessoaInstituicao.funcionario funcionario
+              INNER JOIN funcionario.nucleo nucleo
+              INNER JOIN funcionario.funcao funcao
+              INNER JOIN funcionario.pessoa pessoa
+              INNER JOIN pessoa.compartilhamentos compartilhamentos
+              INNER JOIN compartilhamentos.transicoes transicoes
+            WHERE 1=1
+              AND compartilhamentos.idPessoaCompartilhamento = transicoes.pessoaCompartilhamento.idPessoaCompartilhamento
+              AND transicoes.instituicao.idInstituicao = pessoaInstituicao.idInstituicao 
+              AND pessoaInstituicao.pessoa.idPessoa = <bancoob:valorOql valor="${idPessoa}" tipo="Integer" /> 
+              AND pessoaInstituicao.idInstituicao = <bancoob:valorOql valor="${idInstituicao}" tipo="Integer" />
+          ]]>
+      </command>
+    </query>
+    
+    <query name="OBTER_MATRIZ_FILIAIS">
+      <use-case name="Pessoa Jurídica" />
+      <description>Obtém a matriz e filiais de uma determinada raiz de um CNPJ</description>
+      <command>
+          <![CDATA[
+          	SELECT 
+				new br.com.sicoob.capes.api.negocio.vo.PessoaJuridicaVO(
+				  p.dataConstituicao as dataConstituicao,
+				  p.valorCapitalSocial as valorCapitalSocial,
+                  p.inscricaoEstadual as inscricaoEstadual,
+                  p.inscricaoMunicipal as inscricaoMunicipal,
+                  p.codigoEsferaAdministrativa as codigoEsferaAdministrativa,
+                  p.numeroRegistroJuntaComercial as numeroRegistroJuntaComercial,
+                  p.dataRegistroJuntaComercial as dataRegistroJuntaComercial,
+                  p.numeroUltimaAlteracaoContratoSocial as numeroUltimaAlteracaoContratoSocial,
+                  p.dataUltimaAlteracaoContratoSocial as dataUltimaAlteracaoContratoSocial,
+                  p.numeroRegistroRepresentacao as numeroRegistroRepresentacao,
+                  p.dataRegistroRepresentacao as dataRegistroRepresentacao,
+                  te.codigo as codigoTipoEmpresa,
+                  te.descricao as descricaoTipoEmpresa,
+                  fc.codigo as codigoTipoFormaConstituicao,
+                  fc.descricao as descricaoTipoFormaConstituicao,
+                  pessoa.idPessoa as idPessoa,
+                  pessoa.cpfCnpj as cpfCnpj,
+                  p.nomePessoa as nomePessoa,
+                  p.nomeCompleto as nomeCompleto,          
+                  p.importador,
+				  p.exportador                  
+			)
+			FROM br.com.sicoob.capes.negocio.entidades.vigente.PessoaJuridica p
+				INNER JOIN p.pessoa pessoa
+				INNER JOIN p.transicoes tp
+				INNER JOIN pessoa.tipoPessoa tipoPessoa
+				LEFT OUTER JOIN p.tipoEmpresa te
+				LEFT OUTER JOIN p.formaConstituicao fc
+			WHERE
+				tp.instituicao.idInstituicao = <bancoob:valorOql valor="${idInstituicao}" tipo="Integer" />
+			    AND pessoa.cpfCnpj like <bancoob:valorOql valor="${raizCNPJ}" tipo="LikeDireita" />
+			    AND p.dataHoraInicio is not null
+			    AND tipoPessoa.codTipoPessoa = 1
+          ]]>
+      </command>
+    </query>
+    
+    <query name="OBTER_PESSOAS_PROVA_VIDA_POR_TIPO_ANOTACAO_PERIODO">
+      <use-case name="Anotação" />
+      <description>Obtém o CPF/CNPJ das pessoas que possuíam anotação em determinada data.</description>
+      <command>
+          <![CDATA[
+          	SELECT P.NUMCPFCNPJ AS CPFCNPJ, 
+			CASE
+				WHEN A.IDTIPOANOTACAO IS NULL THEN 0
+			ELSE 1
+			END AS PROVA_VIDA
+			FROM CLI.PESSOA P
+			INNER JOIN CLI.PESSOACOMPARTILHAMENTO PC ON PC.IDPESSOA = P.IDPESSOA
+			LEFT JOIN CLI.ANOTACAO A ON A.IDPESSOACOMPARTILHAMENTO = PC.IDPESSOACOMPARTILHAMENTO
+			AND A.IDTIPOANOTACAO = <bancoob:valor valor="${idTipoAnotacao}" tipo="Integer" />
+			AND DATE(A.DATAHORAANOTACAO) &gt;= <bancoob:valor valor="${dataAnotacao}" tipo="Date" />
+			AND A.DATAHORABAIXA IS NULL
+			WHERE P.NUMCPFCNPJ IN (<bancoob:valor valor="${listaCpfCnpj}" />)
+			AND PC.CODCOMPARTILHAMENTOCADASTRO = 1
+			GROUP BY P.NUMCPFCNPJ, A.IDTIPOANOTACAO
+          ]]>
+      </command>
+    </query>
+    
+    <query name="OBTER_PESSOAS_POR_TIPO_ANOTACAO_PERIODO">
+      <use-case name="Anotação" />
+      <description>Obtém o CPF/CNPJ das pessoas que possuíam anotação em determinada data.</description>
+      <command>
+          <![CDATA[
+          	SELECT 
+          		new br.com.sicoob.capes.api.negocio.vo.AnotacaoPeriodoVO(
+          			p.cpfCnpj
+          		)
+          	FROM br.com.sicoob.capes.negocio.entidades.Anotacao a
+          	INNER JOIN a.tipoAnotacao t
+          	INNER JOIN a.pessoaCompartilhamento pc
+          	INNER JOIN pc.pessoa p
+          	WHERE DATE(a.dataHoraAnotacao) = <bancoob:valorOql valor="${dataAnotacao}" tipo="Date" />
+          	AND t.codTipoAnotacao = <bancoob:valorOql valor="${idTipoAnotacao}" tipo="Integer" />
+          	AND a.dataHoraBaixa IS NULL
+          	AND pc.codCompartilhamentoCadastro = 1
+          	GROUP BY p.cpfCnpj
+          ]]>
+      </command>
+    </query>
+    
+    <query name="OBTER_PESSOAS_GRUPO_ECONOMICO">
+      <use-case name="Grupo Econômico" />
+      <description>Obtém as pessoas de um grupo econômico</description>
+      <command>
+          <![CDATA[
+          	SELECT P.IDPESSOA, P.NUMCPFCNPJ, PC.NOMEPESSOA, GEP.IDGRUPOECONOMICO, GE.DESCGRUPOECONOMICO
+			FROM CLI.PESSOAINSTITUICAO PI
+			INNER JOIN CLI.GRUPOECONOMICOPESSOA GEP ON GEP.IDPESSOAINSTITUICAO = PI.IDPESSOAINSTITUICAO
+			INNER JOIN CLI.GRUPOECONOMICO GE ON GE.IDGRUPOECONOMICO = GEP.IDGRUPOECONOMICO
+			INNER JOIN CLI.GRUPOECONOMICOPESSOA GEPP ON GEPP.IDGRUPOECONOMICO = GEP.IDGRUPOECONOMICO
+			INNER JOIN CLI.PESSOAINSTITUICAO PIR ON PIR.IDPESSOAINSTITUICAO = GEPP.IDPESSOAINSTITUICAO
+			INNER JOIN CLI.PESSOACOMPARTILHAMENTO PC ON PC.IDPESSOA = PIR.IDPESSOA
+			INNER JOIN CLI.TRANSICAOPESSOA TP ON TP.IDPESSOACOMPARTILHAMENTO = PC.IDPESSOACOMPARTILHAMENTO AND TP.IDINSTITUICAO = PI.IDINSTITUICAO
+			INNER JOIN CLI.PESSOA P ON PC.IDPESSOA = P.IDPESSOA
+			WHERE PI.IDINSTITUICAO = <bancoob:valor valor="${idInstituicao}" tipo="Integer" />
+			AND PI.IDPESSOA = <bancoob:valor valor="${idPessoa}" tipo="Integer" />
+          ]]>
+      </command>
+    </query>
+    
+    <query name="OBTER_CODIGOS_CNAEFISCAL">
+      <use-case name="CNAE Fiscal"/>
+      <description>Obtém registros da tabela CNAEFISCAL</description>
+      <command>
+		<![CDATA[
+			SELECT
+				new br.com.sicoob.capes.api.negocio.vo.CnaeFiscalVO(
+					cnaeFiscal.codigo as codigo,
+					cnaeFiscal.descricao as descricao,
+					cnaeFiscal.tipoClassificacao as tipoClassificacao,
+					cnaeFiscal.cnaePai.codigo as codigoCnaePai
+				)
+			FROM br.com.sicoob.capes.negocio.entidades.CnaeFiscal cnaeFiscal
+			WHERE 
+				1=1
+			<j:if test="${codigoCnae != null}">
+				AND cnaeFiscal.codigo = <bancoob:valorOql valor="${codigoCnae}" tipo="String" />
+			</j:if>
+			
+			<j:if test="${descricaoCnae != null}">
+				AND cnaeFiscal.descricao like <bancoob:valorOql valor="${descricaoCnae}" tipo="LikeDireita" />
+			</j:if>
+          ]]>
+      </command>
+    </query>
+    
+    <query name="OBTER_TIPO_BENEFICIARIOS_SICOR">
+      <use-case name="Produtor"/>
+      <description>Obtém os tipos de beneficiários do SICOR</description>
+      <command>
+		<![CDATA[
+			SELECT new br.com.sicoob.capes.api.negocio.vo.TipoBeneficiarioSicorVO(
+				tbs.codigo as codigo,
+				tbs.descricao as descricao
+			)
+			FROM br.com.sicoob.capes.negocio.entidades.TipoBeneficiarioSicor tbs
+          ]]>
+      </command>
+    </query>
+    
+    <query name="PESQUISAR_GRUPO_COMPARTILHAMENTO">
+		<use-case name="Pesquisar Grupo compartilhamento"></use-case>
+		<description>Pesquisa o grupo de compartilhamento da instituição</description>
+		<command>
+			<![CDATA[
+			SELECT 
+				new br.com.sicoob.capes.api.negocio.vo.GrupoCompartilhamentoVO(
+					g.idGrupoCompartilhamento, 
+					g.idInstituicao, 
+					g.compartilhamentoCadastro.codigo, 
+					g.dataHoraInicio,
+					g.integracaoSrf
+				)
+			FROM br.com.sicoob.capes.negocio.entidades.vigente.GrupoCompartilhamento g
+			WHERE 1=1
+			<j:if test="${idInstituicao != null}">
+			    AND g.idInstituicao = <bancoob:valorOql valor="${idInstituicao}" tipo="Integer" />
+			</j:if>
+			]]>
+		</command>
+	</query>
+	
+	<query name="PESQUISAR_OCUPACAO_PROFISSIONAL">
+		<use-case name="Pesquisar ocupação profissional"></use-case>
+		<description>Pesquisa as ocupações profissionais</description>
+		<command>
+			<![CDATA[
+			SELECT 
+				new br.com.sicoob.capes.api.negocio.vo.OcupacaoProfissionalVO(
+					o.idOcupacaoProfissional,
+					o.codigo,
+					o.codigoPai,
+					o.descricao,
+					o.codigoTipoOcupacao,
+					o.ativo
+				)
+			FROM br.com.sicoob.capes.negocio.entidades.OcupacaoProfissional o
+			WHERE 1=1
+			
+			<j:if test="${criterios.filtro.idOcupacaoProfissional != null}">
+			    AND o.idOcupacaoProfissional = <bancoob:valorOql valor="${criterios.filtro.idOcupacaoProfissional}" tipo="Integer" />
+			</j:if>
+			
+			<j:if test="${criterios.filtro.codigo != null}">
+			    AND o.codigo = <bancoob:valorOql valor="${criterios.filtro.codigo}" tipo="String" />
+			</j:if>
+			
+			<j:if test="${criterios.filtro.codigoPai != null}">
+			    AND o.codigoPai = <bancoob:valorOql valor="${criterios.filtro.codigoPai}" tipo="String" />
+			</j:if>
+			
+			<j:if test="${criterios.filtro.descricao != null}">
+			    AND o.descricao like <bancoob:valorOql valor="${criterios.filtro.descricao}" tipo="LikeDireita" />
+			</j:if>
+			
+			<j:if test="${criterios.filtro.codigoTipoOcupacao != null}">
+			    AND o.codigoTipoOcupacao = <bancoob:valorOql valor="${criterios.filtro.codigoTipoOcupacao}" tipo="Short" />
+			</j:if>
+			
+			<j:if test="${criterios.filtro.ativo != null}">
+			    AND o.ativo = <bancoob:valorOql valor="${criterios.filtro.ativo}" tipo="Boolean" />
+			</j:if>
+			]]>
+		</command>
+	</query>
+	
+	<query name="PESQUISAR_QUANTIDADE_OCUPACAO_PROFISSIONAL">
+		<use-case name="Pesquisar quantidade ocupação profissional"></use-case>
+		<description>Pesquisa a quantidade de ocupações profissionais</description>
+		<command>
+			<![CDATA[
+			SELECT COUNT(*)
+			FROM br.com.sicoob.capes.negocio.entidades.OcupacaoProfissional o
+			WHERE 1=1
+			
+			<j:if test="${criterios.filtro.idOcupacaoProfissional != null}">
+			    AND o.idOcupacaoProfissional = <bancoob:valorOql valor="${criterios.filtro.idOcupacaoProfissional}" tipo="Integer" />
+			</j:if>
+			
+			<j:if test="${criterios.filtro.codigo != null}">
+			    AND o.codigo = <bancoob:valorOql valor="${criterios.filtro.codigo}" tipo="String" />
+			</j:if>
+			
+			<j:if test="${criterios.filtro.codigoPai != null}">
+			    AND o.codigoPai = <bancoob:valorOql valor="${criterios.filtro.codigoPai}" tipo="String" />
+			</j:if>
+			
+			<j:if test="${criterios.filtro.descricao != null}">
+			    AND o.descricao like <bancoob:valorOql valor="${criterios.filtro.descricao}" tipo="LikeDireita" />
+			</j:if>
+			
+			<j:if test="${criterios.filtro.codigoTipoOcupacao != null}">
+			    AND o.codigoTipoOcupacao = <bancoob:valorOql valor="${criterios.filtro.codigoTipoOcupacao}" tipo="Short" />
+			</j:if>
+			
+			<j:if test="${criterios.filtro.ativo != null}">
+			    AND o.ativo = <bancoob:valorOql valor="${criterios.filtro.ativo}" tipo="Boolean" />
+			</j:if>
+			]]>
+		</command>
+	</query>
+	
+	<query name="CONSULTAR_EMAIL_PESSOA_POR_IDPESSOALEGADO_E_IDINSITITUICAO">
+		<use-case name="Pesquisar Email pessoa por idpessoalegado e idinstituicao"></use-case>
+		<description>Pesquisar Email pessoa por idpessoalegado e idinstituicao</description>
+		<command>
+			<![CDATA[
+			SELECT EP.IDEMAILPESSOA, EP.CODTIPOEMAIL, EP.DATAHORAINICIO, EP.DESCEMAIL FROM CLI.EMAILPESSOA EP
+		        INNER JOIN CLI.PESSOACOMPARTILHAMENTO PC ON PC.IDPESSOACOMPARTILHAMENTO = EP.IDPESSOACOMPARTILHAMENTO
+		        INNER JOIN CLI.TRANSICAOPESSOA TP ON TP.IDPESSOACOMPARTILHAMENTO = PC.IDPESSOACOMPARTILHAMENTO
+			WHERE 1=1
+			<j:if test="${idPessoaLegado != null}">
+				AND TP.IDPESSOALEGADO = <bancoob:valor valor="${idPessoaLegado}" tipo="Integer" />
+			</j:if>
+			<j:if test="${idInstituicao != null}">
+				AND TP.IDINSTITUICAO = <bancoob:valor valor="${idInstituicao}" tipo="Integer" />
+			</j:if>
+			]]>
+		</command>
+	</query>
+	
+	<query name="CONSULTAR_TELEFONE_PESSOA_POR_IDPESSOALEGADO_E_IDINSITITUICAO">
+		<use-case name="Consultar Telefone Pessoa"></use-case>
+		<description>Consultar Telefone Pessoa</description>
+		<command>
+			<![CDATA[
+			SELECT  TP.IDTELEFONEPESSOA, TP.CODTIPOTELEFONE, 
+					TP.DATAHORAINICIO, TP.NUMDDD, 
+					TP.NUMTELEFONE, TP.NUMRAMAL, 
+					TP.DESCOBSERVACAO 
+			FROM CLI.TELEFONEPESSOA TP
+			        INNER JOIN CLI.PESSOACOMPARTILHAMENTO PC ON PC.IDPESSOACOMPARTILHAMENTO = TP.IDPESSOACOMPARTILHAMENTO
+			        INNER JOIN CLI.TRANSICAOPESSOA TP2 ON TP2.IDPESSOACOMPARTILHAMENTO = PC.IDPESSOACOMPARTILHAMENTO			        
+			WHERE TP2.IDPESSOALEGADO = <bancoob:valor valor="${idPessoaLegado}" tipo="Integer"/> 
+			AND TP2.IDINSTITUICAO = <bancoob:valor valor="${idInstituicao}" tipo="Integer"/>
+			]]>
+		</command>
+	</query>
+	
+	<query name="LISTAR_TIPO_EMAIL">
+		<use-case name="Listar Tipo Email"></use-case>
+		<description>Listar Tipo Email</description>
+		<command>
+			<![CDATA[
+				SELECT CODTIPOEMAIL, DESCTIPOEMAIL FROM CLI.TIPOEMAIL
+			]]>
+		</command>
+	</query>
+	
+	<query name="LISTAR_TIPO_TELEFONE">
+		<use-case name="Listar Tipo Telefone"></use-case>
+		<description>Listar Tipo Telefone</description>
+		<command>
+			<![CDATA[
+				SELECT T.CODTIPOTELEFONE, T.DESCTIPOTELEFONE 
+				FROM CLI.TIPOTELEFONE T
+				WHERE T.BOLATIVO = 1
+			]]>
+		</command>
+	</query>
+	
+	<query name="LISTAR_TIPO_EMPRESA">
+		<use-case name="Listar Tipo Empresa"></use-case>
+		<description>Listar Tipo Empresa</description>
+		<command>
+			<![CDATA[
+				SELECT CODTIPOEMPRESA, DESTIPOEMPRESA, VALORLIMITEINFERIORFATURAMENTO, 
+				VALORLIMITESUPERIORFATURAMENTO, BOLHABILITASIMPLESNACIONAL, 
+				BOLHABILITAPOSSUIATIVO 
+				FROM CLI.TIPOEMPRESA TP
+				WHERE TP.BOLATIVO = 1
+			]]>
+		</command>
+	</query>
+	
+	<query name="CONSULTAR_FONTE_RENDA_POR_IDPESSOALEGADO_IDINSITITUICAO">
+		<use-case name="Consultar Fonte Renda Pessoa"></use-case>
+		<description>Consultar Fonte Renda Pessoa</description>
+		<command>
+			<![CDATA[
+			SELECT FR.IDFONTERENDA, FR.CODTIPOFONTERENDA, TFR.DESCTIPOFONTERENDA, 
+				FR.BOLRENDAFIXA, FR.DATAVALIDADERENDA, FR.VALORRECEITABRUTAMENSAL,
+				FR.DESCFONTERENDA, EMPREGADOR.IDPESSOA AS IDPESSOAEMPREGADOR, 
+				FR.DATAHORAINICIO, FR.BOLSIMPLESNACIONAL, FR.BOLPOSSUIATIVO
+			FROM CLI.FONTERENDA FR
+	        INNER JOIN CLI.PESSOACOMPARTILHAMENTO PC ON PC.IDPESSOACOMPARTILHAMENTO = FR.IDPESSOACOMPARTILHAMENTO
+	        LEFT JOIN CLI.PESSOACOMPARTILHAMENTO EMPREGADOR ON EMPREGADOR.IDPESSOACOMPARTILHAMENTO = FR.IDPESSOACOMPARTILHAMENTOEMPREGADOR
+	        INNER JOIN CLI.TRANSICAOPESSOA TP ON TP.IDPESSOACOMPARTILHAMENTO = PC.IDPESSOACOMPARTILHAMENTO
+	        INNER JOIN CLI.TIPOFONTERENDA TFR ON TFR.CODTIPOFONTERENDA = FR.CODTIPOFONTERENDA
+			WHERE TP.IDPESSOALEGADO = <bancoob:valor valor="${idPessoaLegado}" tipo="Integer"/> 
+			AND TP.IDINSTITUICAO = <bancoob:valor valor="${idInstituicao}" tipo="Integer"/>
+			AND FR.DATAHORAINICIO IS NOT NULL
+			]]>
+		</command>
+	</query>
+	
+	<query name="LISTAR_TIPO_FONTE_RENDA">
+		<use-case name="Listar Tipo Fonte Renda"></use-case>
+		<description>Listar Tipo Fonte Renda</description>
+		<command>
+			<![CDATA[
+			SELECT TF.CODTIPOFONTERENDA, TF.DESCTIPOFONTERENDA, TPFR.CODTIPOPESSOA, TF.BOLVALOROBRIGATORIO
+			FROM CLI.TIPOFONTERENDA TF
+			INNER JOIN CLI.TIPOPESSOAFONTERENDA TPFR ON TPFR.CODTIPOFONTERENDA = TF.CODTIPOFONTERENDA
+			WHERE 1=1
+			
+			<j:if test="${codigoTipoPessoa != null}">
+				AND TPFR.CODTIPOPESSOA = <bancoob:valor valor="${codigoTipoPessoa}" tipo="Short" />
+			</j:if>
+
+			]]>
+		</command>
+	</query>
+	
+	<query name="LISTAR_TIPO_ENDERECO">
+		<use-case name="Listar Tipo Endereco"></use-case>
+		<description>Listar Tipo Endereco</description>
+		<command>
+			<![CDATA[
+			SELECT TE.CODTIPOENDERECO, TE.DESCTIPOENDERECO, TE.IDTIPOPESSOACONTATO 
+			FROM CLI.TIPOENDERECO TE
+			]]>
+		</command>
+	</query>
+	
+	<query name="PESQUISAR_RELACIONAMENTOS_PESSOA_ESPECIFICO">
+		<use-case name="Pesquisar Relacionamento Pessoa"></use-case>
+		<description>Pesquisa os relacionamentos da pessoa</description>
+		<command>
+			<![CDATA[
+			SELECT 
+				new br.com.sicoob.capes.api.negocio.vo.RelacionamentoPessoaVO(
+				  r.idRelacionamento as idRelacionamento,
+				  r.dataHoraInicio as dataHoraInicio,
+				  r.pessoa.idPessoa as idPessoa,
+				  r.pessoaRelacionada.idPessoa as idPessoaRelacionada,
+				  r.percentualCapitalEmpresa as percentualCapitalEmpresa,
+				  r.dataInicioRelacionamento as dataInicioRelacionamento,
+                  r.dataFimMandato as dataFimMandato,
+				  r.idInstituicao as idInstituicao,
+				  t.codigo as codigoTipoRelacionamento,
+				  t.descricao as descricaoTipoRelacionamento,
+				  t.habilitaDadosRegistro as habilitaDadosRegistro,
+				  t.habilitaPoderes as habilitaPoderes
+			)
+			FROM br.com.sicoob.capes.negocio.entidades.vigente.RelacionamentoPessoa r
+			INNER JOIN r.tipoRelacionamento t
+			INNER JOIN r.pessoaCompartilhamento pc
+			INNER JOIN pc.transicoes tp
+			WHERE r.dataHoraInicio is not null
+			AND tp.instituicao.idInstituicao = <bancoob:valorOql valor="${criterios.filtro.idInstituicao}" tipo="Integer" />
+		    AND r.pessoa.idPessoa = <bancoob:valorOql valor="${criterios.filtro.idPessoa}" tipo="Integer" />
+		    <j:if test="${criterios.filtro.codigoTipoRelacionamento != null}">
+		    	AND t.codigo = <bancoob:valorOql valor="${criterios.filtro.codigoTipoRelacionamento}" tipo="Short" />
+			</j:if>
+			AND (
+					(t.permiteCompartilhamento = 1	) OR (r.idInstituicao = <bancoob:valorOql valor="${criterios.filtro.idInstituicao}" tipo="Integer" />
+					AND t.permiteCompartilhamento = 0) 
+				)					
+			]]>
+		</command>
+	</query>
+	
+	<query name="PESQUISAR_QUANTIDADE_RELACIONAMENTOS_PESSOA_ESPECIFICO">
+		<use-case name="Pesquisar Relacionamento Pessoa"></use-case>
+		<description>Pesquisa os relacionamentos da pessoa</description>
+		<command>
+			<![CDATA[
+			SELECT COUNT(*)
+			FROM br.com.sicoob.capes.negocio.entidades.vigente.RelacionamentoPessoa r
+			INNER JOIN r.tipoRelacionamento t
+			INNER JOIN r.pessoaCompartilhamento pc
+			INNER JOIN pc.transicoes tp
+			WHERE r.dataHoraInicio is not null
+			AND tp.instituicao.idInstituicao = <bancoob:valorOql valor="${criterios.filtro.idInstituicao}" tipo="Integer" />
+		    AND r.pessoa.idPessoa = <bancoob:valorOql valor="${criterios.filtro.idPessoa}" tipo="Integer" />
+		    <j:if test="${criterios.filtro.codigoTipoRelacionamento != null}">
+		    	AND t.codigo = <bancoob:valorOql valor="${criterios.filtro.codigoTipoRelacionamento}" tipo="Short" />
+			</j:if>
+			AND (
+					(t.permiteCompartilhamento = 1	) OR (r.idInstituicao = <bancoob:valorOql valor="${criterios.filtro.idInstituicao}" tipo="Integer" />
+					AND t.permiteCompartilhamento = 0) 
+				)			
+			]]>
+		</command>
+	</query>
+	
+	<query name="PESQUISAR_BEM">
+		<use-case name="Bem"></use-case>
+		<description>Pesquisa os bens de uma pessoa.</description>
+		<command>
+			<![CDATA[
+			SELECT B.IDBEM,
+				B.CODTIPOCLASSIFICACAOBEM,
+				TCB.DESCTIPOCLASSIFICACAOBEM,
+				B.BOLBEMINTERNO,
+				B.DESCBEM,
+				B.VALORBEM,
+				B.BOLVALORBEMNAOINFORMADO,
+				B.MESRENOVACAOSEGURO,
+				BPC.PERCPROPRIETARIO,
+				CASE WHEN (TI.IDINFORMACAOPESSOA IS NOT NULL) THEN 1
+				ELSE 0
+				END AS EM_GARANTIA
+			FROM CLI.BEM B
+			INNER JOIN CLI.TIPOCLASSIFICACAOBEM TCB ON TCB.CODTIPOCLASSIFICACAOBEM = B.CODTIPOCLASSIFICACAOBEM
+			INNER JOIN CLI.BEMPESSOACOMPARTILHAMENTO BPC ON BPC.IDBEM = B.IDBEM
+			INNER JOIN CLI.PESSOACOMPARTILHAMENTO PC ON PC.IDPESSOACOMPARTILHAMENTO = BPC.IDPESSOACOMPARTILHAMENTO
+			INNER JOIN CLI.TRANSICAOPESSOA TP ON TP.IDPESSOACOMPARTILHAMENTO = PC.IDPESSOACOMPARTILHAMENTO
+			LEFT JOIN CLI.TIPOINFUTILIZAINFPESSOA TI ON TI.IDINFORMACAOPESSOA = B.IDBEM AND TI.IDUTILIZAINFORMACAOPESSOA = 4 AND TI.IDTIPOINFORMACAOPESSOA = 6
+			WHERE B.DATAHORAINICIO IS NOT NULL 
+			AND PC.IDPESSOA = <bancoob:valor valor="${idPessoa}" tipo="Integer" />
+			AND TP.IDINSTITUICAO = <bancoob:valor valor="${idInstituicao}" tipo="Integer" />
+			]]>
+		</command>
+	</query>
+	
+	<query name="PESQUISAR_BEM_POR_ID">
+		<use-case name="Bem"></use-case>
+		<description>Pesquisa os bens de uma pessoa.</description>
+		<command>
+			<![CDATA[
+			SELECT B.IDBEM,
+				B.CODTIPOCLASSIFICACAOBEM,
+				TCB.DESCTIPOCLASSIFICACAOBEM,
+				B.BOLBEMINTERNO,
+				B.DESCBEM,
+				B.VALORBEM,
+				B.BOLVALORBEMNAOINFORMADO,
+				B.MESRENOVACAOSEGURO,
+				CASE WHEN (TI.IDINFORMACAOPESSOA IS NOT NULL) THEN 1
+				ELSE 0
+				END AS EM_GARANTIA
+			FROM CLI.BEM B
+			INNER JOIN CLI.TIPOCLASSIFICACAOBEM TCB ON TCB.CODTIPOCLASSIFICACAOBEM = B.CODTIPOCLASSIFICACAOBEM
+			LEFT JOIN CLI.TIPOINFUTILIZAINFPESSOA TI ON TI.IDINFORMACAOPESSOA = B.IDBEM AND TI.IDUTILIZAINFORMACAOPESSOA = 4 AND TI.IDTIPOINFORMACAOPESSOA = 6
+			WHERE B.DATAHORAINICIO IS NOT NULL
+			AND B.IDBEM = <bancoob:valor valor="${idBem}" tipo="Long" />
+			]]>
+		</command>
+	</query>
+	
+	<query name="PESQUISAR_BEM_IMOVEL">
+		<use-case name="Bem"></use-case>
+		<description>Pesquisa os bens imóveis de uma pessoa.</description>
+		<command>
+			<![CDATA[
+				SELECT B.IDBEM,
+			        B.CODTIPOCLASSIFICACAOBEM,
+			        TCB.DESCTIPOCLASSIFICACAOBEM,
+			        B.BOLBEMINTERNO,
+			        B.DESCBEM,
+			        B.VALORBEM,
+			        B.BOLVALORBEMNAOINFORMADO,
+			        B.MESRENOVACAOSEGURO,
+			        B.IDUSUARIOAPROV,
+			        
+			        <j:if test="${idBem == null}">
+			        	BPC.PERCPROPRIETARIO,
+					</j:if>
+			        
+			        BI.CODUNIDADEMEDIDA,
+			        UM.DESCUNIDADEMEDIDA,
+			        BI.CODTIPOLOCALIZACAOBEM,
+			        TLB.DESCTIPOLOCALIZACAOBEM,
+			        BI.CODTIPOBEMIMOVEL,
+			        TBI.DESCTIPOBEMIMOVEL,
+			        BI.CODTIPOUSOBEM,
+			        TUB.DESCTIPOUSOBEM,
+			        BI.DESCINFORMACAOGERAL,
+			        BI.DESCDENOMINACAO,
+			        BI.AREATOTALIMOVEL,
+			        BI.DESCMATRICULA,
+			        PCC.IDPESSOA AS IDPESSOACARTORIO,
+			        BI.DESCNIRF,
+			        BI.DESCINCRA,
+			        BI.DESCNUMERO,
+			        BI.DESCCOMPLEMENTO,
+			        BI.DESCROTEIRO,
+			        BI.VALORLATITUDE,
+			        BI.VALORLONGITUDE,
+			        BI.IDLOCALIDADE,
+			        BI.IDLOGRADOURO,
+			        BIA.VALORCOMPRAVENDA,
+			        BIA.DATACOMPRAVENDA,
+			        BIA.VALORAVALIACAO,
+			        BIA.DATAAVALIACAO,
+			        PCA.IDPESSOA AS IDPESSOAAVALIADOR,
+			        BIA.BOLEMPROCESSOAQUISICAO,
+			        BIAR.DESCBENFEITORIA,
+			        BIAR.VALORBENFEITORIA,
+			        BIAU.CODTIPOIMPLANTACAOBEMIMOVEL,
+			        TIBI.DESCTIPOIMPLANTACAOBEMIMOVEL,
+			        BIAU.CODTIPOESTADOCONSERVACAOBEM,
+			        TECB.DESCTIPOESTADOCONSERVACAOBEM,
+			        BIAU.CODTIPOPADRAOACABAMENTOBEMIMOVEL,
+			        TPABI.DESCTIPOPADRAOACABAMENTOBEMIMOVEL,
+			        BIAU.CODTIPOSERVICOCONDOMINIALBEMIMOVEL,
+			        TSCBI.DESCTIPOSERVICOCONDOMINIALBEMIMOVEL,
+			        BIAU.AREAPRIVATIVA,
+			        BIAU.QTDDORMITORIO,
+			        BIAU.QTDVAGAGARAGEM,
+			        BIAU.AREATERRENO,
+			        BIAU.AREATESTADA,
+			        CASE WHEN (TI.IDINFORMACAOPESSOA IS NOT NULL) THEN 1
+					ELSE 0
+					END AS EM_GARANTIA
+			FROM CLI.BEM B
+			INNER JOIN CLI.BEMIMOVEL BI ON BI.IDBEM = B.IDBEM
+			
+			<j:choose>
+				<j:when test="${avaliacao == true}">
+					INNER JOIN CLI.BEMIMOVELAVALIACAO BIA ON BIA.IDBEM = B.IDBEM
+				</j:when>
+				<j:otherwise>
+					LEFT JOIN CLI.BEMIMOVELAVALIACAO BIA ON BIA.IDBEM = B.IDBEM
+				</j:otherwise>
+			</j:choose>
+			
+			LEFT JOIN CLI.BEMIMOVELAVALIACAORURAL BIAR ON BIAR.IDBEM = B.IDBEM
+			LEFT JOIN CLI.BEMIMOVELAVALIACAOURBANO BIAU ON BIAU.IDBEM = B.IDBEM
+			LEFT JOIN CLI.UNIDADEMEDIDA UM ON UM.CODUNIDADEMEDIDA = BI.CODUNIDADEMEDIDA
+			LEFT JOIN CLI.TIPOLOCALIZACAOBEM TLB ON TLB.CODTIPOLOCALIZACAOBEM = BI.CODTIPOLOCALIZACAOBEM AND TLB.CODTIPOLOCALIZACAOBEM = 1
+			LEFT JOIN CLI.TIPOBEMIMOVEL TBI ON TBI.CODTIPOBEMIMOVEL = BI.CODTIPOBEMIMOVEL
+			LEFT JOIN CLI.TIPOUSOBEM TUB ON TUB.CODTIPOUSOBEM = BI.CODTIPOUSOBEM
+			LEFT JOIN CLI.TIPOIMPLANTACAOBEMIMOVEL TIBI ON TIBI.CODTIPOIMPLANTACAOBEMIMOVEL = BIAU.CODTIPOIMPLANTACAOBEMIMOVEL
+			LEFT JOIN CLI.TIPOESTADOCONSERVACAOBEM TECB ON TECB.CODTIPOESTADOCONSERVACAOBEM = BIAU.CODTIPOESTADOCONSERVACAOBEM AND TECB.BOLBEMIMOVEL = 1
+			LEFT JOIN CLI.TIPOPADRAOACABAMENTOBEMIMOVEL TPABI ON TPABI.CODTIPOPADRAOACABAMENTOBEMIMOVEL = BIAU.CODTIPOPADRAOACABAMENTOBEMIMOVEL
+			LEFT JOIN CLI.TIPOSERVICOCONDOMINIALBEMIMOVEL TSCBI ON TSCBI.CODTIPOSERVICOCONDOMINIALBEMIMOVEL = BIAU.CODTIPOSERVICOCONDOMINIALBEMIMOVEL
+			INNER JOIN CLI.TIPOCLASSIFICACAOBEM TCB ON TCB.CODTIPOCLASSIFICACAOBEM = B.CODTIPOCLASSIFICACAOBEM
+			
+			<j:if test="${idBem == null}">
+				LEFT JOIN CLI.BEMPESSOACOMPARTILHAMENTO BPC ON BPC.IDBEM = B.IDBEM
+				LEFT JOIN CLI.PESSOACOMPARTILHAMENTO PC ON PC.IDPESSOACOMPARTILHAMENTO = BPC.IDPESSOACOMPARTILHAMENTO
+				LEFT JOIN CLI.TRANSICAOPESSOA TP ON TP.IDPESSOACOMPARTILHAMENTO = PC.IDPESSOACOMPARTILHAMENTO
+			</j:if>
+			
+			LEFT JOIN CLI.PESSOACOMPARTILHAMENTO PCC ON PCC.IDPESSOACOMPARTILHAMENTO = BI.IDPESSOACOMPARTILHAMENTOCARTORIO
+			LEFT JOIN CLI.PESSOACOMPARTILHAMENTO PCA ON PCA.IDPESSOACOMPARTILHAMENTO = BIA.IDPESSOACOMPARTILHAMENTOAVALIADOR
+			LEFT JOIN CLI.TIPOINFUTILIZAINFPESSOA TI ON TI.IDINFORMACAOPESSOA = B.IDBEM AND TI.IDUTILIZAINFORMACAOPESSOA = 4 AND TI.IDTIPOINFORMACAOPESSOA = 6
+			WHERE B.CODTIPOCLASSIFICACAOBEM = 1
+			AND B.DATAHORAINICIO IS NOT NULL
+			
+			<j:choose>
+				<j:when test="${idBem != null}">
+					AND B.IDBEM = <bancoob:valor valor="${idBem}" tipo="Long" />
+				</j:when>
+				<j:otherwise>
+					AND PC.IDPESSOA = <bancoob:valor valor="${idPessoa}" tipo="Integer" />
+					AND TP.IDINSTITUICAO = <bancoob:valor valor="${idInstituicao}" tipo="Integer" />
+				</j:otherwise>
+			</j:choose>
+			
+			<j:choose>
+				<j:when test="${avancado == true}">
+			        AND ((BI.CODTIPOLOCALIZACAOBEM = 1 AND BI.IDPESSOACOMPARTILHAMENTOCARTORIO IS NOT NULL AND BI.DESCMATRICULA IS NOT NULL)
+					OR (BI.CODTIPOLOCALIZACAOBEM = 2 AND (BI.DESCNIRF IS NOT NULL AND BI.DESCINCRA IS NOT NULL) OR BI.DESCROTEIRO IS NOT NULL))
+				</j:when>
+			</j:choose>
+			
+			<j:if test="${codigoTipoBem != null}">
+			  AND BI.CODTIPOBEMIMOVEL = <bancoob:valor valor="${codigoTipoBem}" tipo="Short" /> 
+			</j:if>
+			]]>
+		</command>
+	</query>
+	
+	<query name="PESQUISAR_BEM_MOVEL">
+		<use-case name="Bem"></use-case>
+		<description>Pesquisa os bens móveis de uma pessoa.</description>
+		<command>
+			<![CDATA[
+				SELECT B.IDBEM,
+			        B.CODTIPOCLASSIFICACAOBEM,
+			        TCB.DESCTIPOCLASSIFICACAOBEM,
+			        B.BOLBEMINTERNO,
+			        B.DESCBEM,
+			        B.VALORBEM,
+			        B.BOLVALORBEMNAOINFORMADO,
+			        B.MESRENOVACAOSEGURO,
+			        B.IDUSUARIOAPROV,
+			        
+			        <j:if test="${idBem == null}">
+			        	BPC.PERCPROPRIETARIO,
+					</j:if>
+					
+			        BM.CODTIPOBEMMOVEL,
+			        TBM.DESCTIPOBEMMOVEL,
+			        BM.CODTIPOCHASSIBEM,
+			        TCB.DESCTIPOCHASSIBEM,
+			        BM.NUMCHASSI,
+			        BM.NUMRENAVAN,
+			        BM.ANOFABRICACAOAUTOMOVEL,
+			        BM.ANOMODELOAUTOMOVEL,
+			        BM.DESCINCRICAOEMBARCACAO,
+			        BM.ANOCONSTRUCAOEMBARCACAO,
+			        BM.DESCMATRICULAAERONAVE,
+			        BM.CODTIPOCORAUTOMOVEL,
+			        TCA.DESCTIPOCORAUTOMOVEL,
+			        BM.SIGLAUF,
+			        BM.DESCPLACA,
+			        BM.ANOCONSTRUCAOAERONAVE,
+			        BMA.VALORCOMPRAVENDA,
+			        BMA.DATACOMPRAVENDA,
+			        BMA.VALORAVALIACAO,
+			        BMA.DATAAVALIACAO,
+			        PCA.IDPESSOA AS IDPESSOAAVALIADOR,
+			        BMA.BOLEMPROCESSOAQUISICAO,
+			        BMA.CODTIPOESTADOCONSERVACAOBEM,
+			        TEC.DESCTIPOESTADOCONSERVACAOBEM,
+			        CASE WHEN (TI.IDINFORMACAOPESSOA IS NOT NULL) THEN 1
+					ELSE 0
+					END AS EM_GARANTIA
+				FROM CLI.BEM B
+				INNER JOIN CLI.BEMMOVEL BM ON BM.IDBEM = B.IDBEM
+				
+				<j:choose>
+					<j:when test="${avaliacao == true}">
+						INNER JOIN CLI.BEMMOVELAVALIACAO BMA ON BMA.IDBEM = B.IDBEM
+					</j:when>
+					<j:otherwise>
+						LEFT JOIN CLI.BEMMOVELAVALIACAO BMA ON BMA.IDBEM = B.IDBEM
+					</j:otherwise>
+				</j:choose>
+				
+				LEFT JOIN CLI.TIPOBEMMOVEL TBM ON TBM.CODTIPOBEMMOVEL = BM.CODTIPOBEMMOVEL
+				LEFT JOIN CLI.TIPOCHASSIBEM TCB ON TCB.CODTIPOCHASSIBEM = BM.CODTIPOCHASSIBEM
+				LEFT JOIN CLI.TIPOCORAUTOMOVEL TCA ON TCA.CODTIPOCORAUTOMOVEL = BM.CODTIPOCORAUTOMOVEL
+				LEFT JOIN CLI.TIPOESTADOCONSERVACAOBEM TEC ON TEC.CODTIPOESTADOCONSERVACAOBEM = BMA.CODTIPOESTADOCONSERVACAOBEM AND TEC.BOLBEMIMOVEL = 0
+				INNER JOIN CLI.TIPOCLASSIFICACAOBEM TCB ON TCB.CODTIPOCLASSIFICACAOBEM = B.CODTIPOCLASSIFICACAOBEM
+				
+				<j:if test="${idBem == null}">
+					LEFT JOIN CLI.BEMPESSOACOMPARTILHAMENTO BPC ON BPC.IDBEM = B.IDBEM
+					LEFT JOIN CLI.PESSOACOMPARTILHAMENTO PC ON PC.IDPESSOACOMPARTILHAMENTO = BPC.IDPESSOACOMPARTILHAMENTO
+					LEFT JOIN CLI.TRANSICAOPESSOA TP ON TP.IDPESSOACOMPARTILHAMENTO = PC.IDPESSOACOMPARTILHAMENTO
+				</j:if>
+				
+				LEFT JOIN CLI.PESSOACOMPARTILHAMENTO PCA ON PCA.IDPESSOACOMPARTILHAMENTO = BMA.IDPESSOACOMPARTILHAMENTOAVALIADOR
+				LEFT JOIN CLI.TIPOINFUTILIZAINFPESSOA TI ON TI.IDINFORMACAOPESSOA = B.IDBEM AND TI.IDUTILIZAINFORMACAOPESSOA = 4 AND TI.IDTIPOINFORMACAOPESSOA = 6
+				WHERE B.CODTIPOCLASSIFICACAOBEM = 2 
+				AND B.DATAHORAINICIO IS NOT NULL
+				
+				<j:choose>
+					<j:when test="${idBem != null}">
+						AND B.IDBEM = <bancoob:valor valor="${idBem}" tipo="Long" />
+					</j:when>
+					<j:otherwise>
+						AND PC.IDPESSOA = <bancoob:valor valor="${idPessoa}" tipo="Integer" />
+						AND TP.IDINSTITUICAO = <bancoob:valor valor="${idInstituicao}" tipo="Integer" />
+					</j:otherwise>
+				</j:choose>
+				
+				<j:choose>
+					<j:when test="${avancado == true}">
+						AND (BM.NUMCHASSI IS NOT NULL OR BM.DESCINCRICAOEMBARCACAO IS NOT NULL OR BM.DESCMATRICULAAERONAVE IS NOT NULL)
+					</j:when>
+				</j:choose>
+				
+				<j:if test="${codigoTipoBem != null}">
+					AND BM.CODTIPOBEMMOVEL = <bancoob:valor valor="${codigoTipoBem}" tipo="Short" /> 
+				</j:if>
+			]]>
+		</command>
+	</query>
+
+	<query name="OBTER_CLASSIFICACOES_BEM">
+		<use-case name="Bem"></use-case>
+		<description>Obtém as classificações do bem</description>
+		<command>
+			<![CDATA[
+				SELECT new br.com.sicoob.capes.api.negocio.vo.TipoClassificacaoBemVO(
+					t.codigo, t.descricao
+				)
+				FROM br.com.sicoob.capes.negocio.entidades.bem.TipoClassificacaoBem t
+			]]>
+		</command>
+	</query>
+
+	<query name="OBTER_TIPOS_BEM_POR_CLASSIFICACAO">
+		<use-case name="Bem"></use-case>
+		<description>Obtém os tipos do bem por classificacao</description>
+		<command>
+			<![CDATA[
+				<j:choose>
+					<j:when test="${bemImovel == true}">
+						SELECT new br.com.sicoob.capes.api.negocio.vo.TipoBemVO(
+							t.codigo, t.descricao
+						)
+						FROM br.com.sicoob.capes.negocio.entidades.bem.TipoBemImovel t
+					</j:when>
+					<j:otherwise>
+						SELECT new br.com.sicoob.capes.api.negocio.vo.TipoBemVO(
+							t.codigo, t.descricao, t.possuiDadosAvancados
+						)
+						FROM br.com.sicoob.capes.negocio.entidades.bem.TipoBemMovel t
+					</j:otherwise>
+				</j:choose>
+			]]>
+		</command>
+	</query>
+
+	<query name="OBTER_TIPO_FONTE_RENDA">
+		<use-case name="Bem"></use-case>
+		<description>Obtém os tipos do bem por classificacao</description>
+		<command>
+			<![CDATA[
+				SELECT new br.com.sicoob.capes.api.negocio.vo.TipoFonteRendaVO(
+					tipoRenda.codigo, tipoRenda.descricao, tipoRenda.valorObrigatorio
+				)
+				FROM br.com.sicoob.capes.negocio.entidades.TipoFonteRenda tipoRenda
+				WHERE tipoRenda.codigo = <bancoob:valorOql valor="${codigoTipoRenda}" tipo="Short" />
+			]]>
+		</command>
+	</query>
+	
+	<query name="OBTER_PROPRIETARIOS_BEM">
+		<use-case name="Bem" />
+		<description>Pesquisa de proprietários do bem</description>
+		<command>
+			<![CDATA[
+				SELECT new br.com.sicoob.capes.api.negocio.vo.BemProprietarioVO(
+					pessoa.idPessoa,
+					pessoa.cpfCnpj,
+					pessoaCompartilhamento.nomePessoa,
+					pessoa.tipoPessoa.codTipoPessoa,
+					bemPessoaCompartilhamento.percentualProprietario,
+					bemPessoaCompartilhamento.areaPosse
+				)
+				FROM br.com.sicoob.capes.negocio.entidades.bem.BemPessoaCompartilhamento bemPessoaCompartilhamento
+				INNER JOIN bemPessoaCompartilhamento.bem bem
+				INNER JOIN bemPessoaCompartilhamento.pessoaCompartilhamento pessoaCompartilhamento
+				INNER JOIN pessoaCompartilhamento.pessoa pessoa
+				WHERE bem.idBem = <bancoob:valorOql valor="${idBem}" tipo="Long" />
+			]]>
+		</command>
+	</query>
+	
+	<query name="PESQUISAR_BEM_IMOVEL_POR_FILTRO">
+		<use-case name="Bem" />
+		<description>Pesquisa os bens imóveis por filtro</description>
+		<command>
+			<![CDATA[
+		        SELECT B.IDBEM,
+		                B.CODTIPOCLASSIFICACAOBEM,
+		                TCB.DESCTIPOCLASSIFICACAOBEM,
+		                B.BOLBEMINTERNO,
+		                B.DESCBEM,
+		                B.VALORBEM,
+		                B.BOLVALORBEMNAOINFORMADO,
+		                B.MESRENOVACAOSEGURO,
+		                B.IDUSUARIOAPROV,
+		                BI.CODUNIDADEMEDIDA,
+		                UM.DESCUNIDADEMEDIDA,
+		                BI.CODTIPOLOCALIZACAOBEM,
+		                TLB.DESCTIPOLOCALIZACAOBEM,
+		                BI.CODTIPOBEMIMOVEL,
+		                TBI.DESCTIPOBEMIMOVEL,
+		                BI.CODTIPOUSOBEM,
+		                TUB.DESCTIPOUSOBEM,
+		                BI.DESCINFORMACAOGERAL,
+		                BI.DESCDENOMINACAO,
+		                BI.AREATOTALIMOVEL,
+		                BI.DESCMATRICULA,
+		                PCC.IDPESSOA AS IDPESSOACARTORIO,
+		                BI.DESCNIRF,
+		                BI.DESCINCRA,
+		                BI.DESCNUMERO,
+		                BI.DESCCOMPLEMENTO,
+		                BI.DESCROTEIRO,
+		                BI.VALORLATITUDE,
+		                BI.VALORLONGITUDE,
+		                BI.IDLOCALIDADE,
+		                BI.IDLOGRADOURO,
+		                BIA.VALORCOMPRAVENDA,
+		                BIA.DATACOMPRAVENDA,
+		                BIA.VALORAVALIACAO,
+		                BIA.DATAAVALIACAO,
+		                PCA.IDPESSOA AS IDPESSOAAVALIADOR,
+		                BIA.BOLEMPROCESSOAQUISICAO,
+		                BIAR.DESCBENFEITORIA,
+		                BIAR.VALORBENFEITORIA,
+		                BIAU.CODTIPOIMPLANTACAOBEMIMOVEL,
+		                TIBI.DESCTIPOIMPLANTACAOBEMIMOVEL,
+		                BIAU.CODTIPOESTADOCONSERVACAOBEM,
+		                TECB.DESCTIPOESTADOCONSERVACAOBEM,
+		                BIAU.CODTIPOPADRAOACABAMENTOBEMIMOVEL,
+		                TPABI.DESCTIPOPADRAOACABAMENTOBEMIMOVEL,
+		                BIAU.CODTIPOSERVICOCONDOMINIALBEMIMOVEL,
+		                TSCBI.DESCTIPOSERVICOCONDOMINIALBEMIMOVEL,
+		                BIAU.AREAPRIVATIVA,
+		                BIAU.QTDDORMITORIO,
+		                BIAU.QTDVAGAGARAGEM,
+		                BIAU.AREATERRENO,
+		                BIAU.AREATESTADA,
+		                CASE 
+		                WHEN (TI.IDINFORMACAOPESSOA IS NOT NULL) THEN 1      
+		                ELSE 0      
+		                END AS EM_GARANTIA
+		        FROM CLI.BEM B    
+		        INNER JOIN CLI.BEMIMOVEL BI ON BI.IDBEM = B.IDBEM    
+		        LEFT JOIN CLI.BEMIMOVELAVALIACAO BIA ON BIA.IDBEM = B.IDBEM    
+		        LEFT JOIN CLI.BEMIMOVELAVALIACAORURAL BIAR ON BIAR.IDBEM = B.IDBEM    
+		        LEFT JOIN CLI.BEMIMOVELAVALIACAOURBANO BIAU ON BIAU.IDBEM = B.IDBEM    
+		        LEFT JOIN CLI.UNIDADEMEDIDA UM ON UM.CODUNIDADEMEDIDA = BI.CODUNIDADEMEDIDA    
+		        LEFT JOIN CLI.TIPOLOCALIZACAOBEM TLB ON TLB.CODTIPOLOCALIZACAOBEM = BI.CODTIPOLOCALIZACAOBEM AND TLB.CODTIPOLOCALIZACAOBEM = 1    
+		        LEFT JOIN CLI.TIPOBEMIMOVEL TBI ON TBI.CODTIPOBEMIMOVEL = BI.CODTIPOBEMIMOVEL    
+		        LEFT JOIN CLI.TIPOUSOBEM TUB ON TUB.CODTIPOUSOBEM = BI.CODTIPOUSOBEM    
+		        LEFT JOIN CLI.TIPOIMPLANTACAOBEMIMOVEL TIBI ON TIBI.CODTIPOIMPLANTACAOBEMIMOVEL = BIAU.CODTIPOIMPLANTACAOBEMIMOVEL    
+		        LEFT JOIN CLI.TIPOESTADOCONSERVACAOBEM TECB ON TECB.CODTIPOESTADOCONSERVACAOBEM = BIAU.CODTIPOESTADOCONSERVACAOBEM AND TECB.BOLBEMIMOVEL = 1    
+		        LEFT JOIN CLI.TIPOPADRAOACABAMENTOBEMIMOVEL TPABI ON TPABI.CODTIPOPADRAOACABAMENTOBEMIMOVEL = BIAU.CODTIPOPADRAOACABAMENTOBEMIMOVEL    
+		        LEFT JOIN CLI.TIPOSERVICOCONDOMINIALBEMIMOVEL TSCBI ON TSCBI.CODTIPOSERVICOCONDOMINIALBEMIMOVEL = BIAU.CODTIPOSERVICOCONDOMINIALBEMIMOVEL    
+		        INNER JOIN CLI.TIPOCLASSIFICACAOBEM TCB ON TCB.CODTIPOCLASSIFICACAOBEM = B.CODTIPOCLASSIFICACAOBEM    
+		        LEFT JOIN CLI.PESSOACOMPARTILHAMENTO PCC ON PCC.IDPESSOACOMPARTILHAMENTO = BI.IDPESSOACOMPARTILHAMENTOCARTORIO    
+		        LEFT JOIN CLI.PESSOACOMPARTILHAMENTO PCA ON PCA.IDPESSOACOMPARTILHAMENTO = BIA.IDPESSOACOMPARTILHAMENTOAVALIADOR    
+		        LEFT JOIN CLI.TIPOINFUTILIZAINFPESSOA TI ON TI.IDINFORMACAOPESSOA = B.IDBEM AND TI.IDUTILIZAINFORMACAOPESSOA = 4 AND TI.IDTIPOINFORMACAOPESSOA = 6    
+		        WHERE B.CODTIPOCLASSIFICACAOBEM = 1 AND B.DATAHORAINICIO IS NOT NULL
+	
+				<j:if test="${criterios.filtro.idBem != null}">
+					AND BI.IDBEM = <bancoob:valor valor="${criterios.filtro.idBem}" tipo="Long" />
+				</j:if>
+				
+				<j:if test="${criterios.filtro.codigoTipoBem != null}">
+		        	AND TBI.CODTIPOBEMIMOVEL = <bancoob:valor valor="${criterios.filtro.codigoTipoBem}" tipo="Short" />
+		        </j:if>
+		        
+		        <j:if test="${criterios.filtro.codigoTipoLocalizacaoBem != null}">
+		        	AND TLB.CODTIPOLOCALIZACAOBEM = <bancoob:valor valor="${criterios.filtro.codigoTipoLocalizacaoBem}" tipo="Short" />
+		        </j:if>
+		        
+		        <j:if test="${criterios.filtro.codigoTipoUsoBem != null}">
+		        	AND TUB.CODTIPOUSOBEM = <bancoob:valor valor="${criterios.filtro.codigoTipoUsoBem}" tipo="Short" />
+		        </j:if>
+				
+				<j:if test="${criterios.filtro.descricao != null}">
+					AND B.DESCBEM LIKE <bancoob:valor valor="${criterios.filtro.descricao}" tipo="LikeDireita" />
+				</j:if>
+				
+				<j:if test="${criterios.filtro.denominacao != null}">
+					AND BI.DESCDENOMINACAO LIKE <bancoob:valor valor="${criterios.filtro.denominacao}" tipo="LikeDireita" />
+				</j:if>
+				
+				<j:if test="${criterios.filtro.matricula != null}">
+					AND BI.DESCMATRICULA = <bancoob:valor valor="${criterios.filtro.matricula}" tipo="String" />
+				</j:if>
+				
+				<j:if test="${criterios.filtro.nirf != null}">
+					AND BI.DESCNIRF = <bancoob:valor valor="${criterios.filtro.nirf}" tipo="String" />
+				</j:if>
+				
+				<j:if test="${criterios.filtro.incra != null}">
+					AND BI.DESCINCRA = <bancoob:valor valor="${criterios.filtro.incra}" tipo="String" />
+				</j:if>
+			]]>
+		</command>
+	</query>
+		
+	<query name="PESQUISAR_BEM_IMOVEL_POR_FILTRO_PAGINADO">
+		<use-case name="Bem" />
+		<description>Pesquisa os bens imóveis por filtro</description>
+		<command>
+			<![CDATA[
+				SELECT * 
+				FROM(
+				        SELECT ROWNUMBER() OVER() AS ROWNUMBER,
+				                B.IDBEM,
+				                B.CODTIPOCLASSIFICACAOBEM,
+				                TCB.DESCTIPOCLASSIFICACAOBEM,
+				                B.BOLBEMINTERNO,
+				                B.DESCBEM,
+				                B.VALORBEM,
+				                B.BOLVALORBEMNAOINFORMADO,
+				                B.MESRENOVACAOSEGURO,
+				                B.IDUSUARIOAPROV,
+				                BI.CODUNIDADEMEDIDA,
+				                UM.DESCUNIDADEMEDIDA,
+				                BI.CODTIPOLOCALIZACAOBEM,
+				                TLB.DESCTIPOLOCALIZACAOBEM,
+				                BI.CODTIPOBEMIMOVEL,
+				                TBI.DESCTIPOBEMIMOVEL,
+				                BI.CODTIPOUSOBEM,
+				                TUB.DESCTIPOUSOBEM,
+				                BI.DESCINFORMACAOGERAL,
+				                BI.DESCDENOMINACAO,
+				                BI.AREATOTALIMOVEL,
+				                BI.DESCMATRICULA,
+				                PCC.IDPESSOA AS IDPESSOACARTORIO,
+				                BI.DESCNIRF,
+				                BI.DESCINCRA,
+				                BI.DESCNUMERO,
+				                BI.DESCCOMPLEMENTO,
+				                BI.DESCROTEIRO,
+				                BI.VALORLATITUDE,
+				                BI.VALORLONGITUDE,
+				                BI.IDLOCALIDADE,
+				                BI.IDLOGRADOURO,
+				                BIA.VALORCOMPRAVENDA,
+				                BIA.DATACOMPRAVENDA,
+				                BIA.VALORAVALIACAO,
+				                BIA.DATAAVALIACAO,
+				                PCA.IDPESSOA AS IDPESSOAAVALIADOR,
+				                BIA.BOLEMPROCESSOAQUISICAO,
+				                BIAR.DESCBENFEITORIA,
+				                BIAR.VALORBENFEITORIA,
+				                BIAU.CODTIPOIMPLANTACAOBEMIMOVEL,
+				                TIBI.DESCTIPOIMPLANTACAOBEMIMOVEL,
+				                BIAU.CODTIPOESTADOCONSERVACAOBEM,
+				                TECB.DESCTIPOESTADOCONSERVACAOBEM,
+				                BIAU.CODTIPOPADRAOACABAMENTOBEMIMOVEL,
+				                TPABI.DESCTIPOPADRAOACABAMENTOBEMIMOVEL,
+				                BIAU.CODTIPOSERVICOCONDOMINIALBEMIMOVEL,
+				                TSCBI.DESCTIPOSERVICOCONDOMINIALBEMIMOVEL,
+				                BIAU.AREAPRIVATIVA,
+				                BIAU.QTDDORMITORIO,
+				                BIAU.QTDVAGAGARAGEM,
+				                BIAU.AREATERRENO,
+				                BIAU.AREATESTADA,
+				                CASE 
+				                WHEN (TI.IDINFORMACAOPESSOA IS NOT NULL) THEN 1      
+				                ELSE 0      
+				                END AS EM_GARANTIA
+				        FROM CLI.BEM B    
+				        INNER JOIN CLI.BEMIMOVEL BI ON BI.IDBEM = B.IDBEM    
+				        LEFT JOIN CLI.BEMIMOVELAVALIACAO BIA ON BIA.IDBEM = B.IDBEM    
+				        LEFT JOIN CLI.BEMIMOVELAVALIACAORURAL BIAR ON BIAR.IDBEM = B.IDBEM    
+				        LEFT JOIN CLI.BEMIMOVELAVALIACAOURBANO BIAU ON BIAU.IDBEM = B.IDBEM    
+				        LEFT JOIN CLI.UNIDADEMEDIDA UM ON UM.CODUNIDADEMEDIDA = BI.CODUNIDADEMEDIDA    
+				        LEFT JOIN CLI.TIPOLOCALIZACAOBEM TLB ON TLB.CODTIPOLOCALIZACAOBEM = BI.CODTIPOLOCALIZACAOBEM AND TLB.CODTIPOLOCALIZACAOBEM = 1    
+				        LEFT JOIN CLI.TIPOBEMIMOVEL TBI ON TBI.CODTIPOBEMIMOVEL = BI.CODTIPOBEMIMOVEL    
+				        LEFT JOIN CLI.TIPOUSOBEM TUB ON TUB.CODTIPOUSOBEM = BI.CODTIPOUSOBEM    
+				        LEFT JOIN CLI.TIPOIMPLANTACAOBEMIMOVEL TIBI ON TIBI.CODTIPOIMPLANTACAOBEMIMOVEL = BIAU.CODTIPOIMPLANTACAOBEMIMOVEL    
+				        LEFT JOIN CLI.TIPOESTADOCONSERVACAOBEM TECB ON TECB.CODTIPOESTADOCONSERVACAOBEM = BIAU.CODTIPOESTADOCONSERVACAOBEM AND TECB.BOLBEMIMOVEL = 1    
+				        LEFT JOIN CLI.TIPOPADRAOACABAMENTOBEMIMOVEL TPABI ON TPABI.CODTIPOPADRAOACABAMENTOBEMIMOVEL = BIAU.CODTIPOPADRAOACABAMENTOBEMIMOVEL    
+				        LEFT JOIN CLI.TIPOSERVICOCONDOMINIALBEMIMOVEL TSCBI ON TSCBI.CODTIPOSERVICOCONDOMINIALBEMIMOVEL = BIAU.CODTIPOSERVICOCONDOMINIALBEMIMOVEL    
+				        INNER JOIN CLI.TIPOCLASSIFICACAOBEM TCB ON TCB.CODTIPOCLASSIFICACAOBEM = B.CODTIPOCLASSIFICACAOBEM    
+				        LEFT JOIN CLI.PESSOACOMPARTILHAMENTO PCC ON PCC.IDPESSOACOMPARTILHAMENTO = BI.IDPESSOACOMPARTILHAMENTOCARTORIO    
+				        LEFT JOIN CLI.PESSOACOMPARTILHAMENTO PCA ON PCA.IDPESSOACOMPARTILHAMENTO = BIA.IDPESSOACOMPARTILHAMENTOAVALIADOR    
+				        LEFT JOIN CLI.TIPOINFUTILIZAINFPESSOA TI ON TI.IDINFORMACAOPESSOA = B.IDBEM AND TI.IDUTILIZAINFORMACAOPESSOA = 4 AND TI.IDTIPOINFORMACAOPESSOA = 6    
+				        WHERE B.CODTIPOCLASSIFICACAOBEM = 1 AND B.DATAHORAINICIO IS NOT NULL
+			
+						<j:if test="${criterios.filtro.idBem != null}">
+							AND BI.IDBEM = <bancoob:valor valor="${criterios.filtro.idBem}" tipo="Long" />
+						</j:if>
+						
+						<j:if test="${criterios.filtro.codigoTipoBem != null}">
+				        	AND TBI.CODTIPOBEMIMOVEL = <bancoob:valor valor="${criterios.filtro.codigoTipoBem}" tipo="Short" />
+				        </j:if>
+				        
+				        <j:if test="${criterios.filtro.codigoTipoLocalizacaoBem != null}">
+				        	AND TLB.CODTIPOLOCALIZACAOBEM = <bancoob:valor valor="${criterios.filtro.codigoTipoLocalizacaoBem}" tipo="Short" />
+				        </j:if>
+				        
+				        <j:if test="${criterios.filtro.codigoTipoUsoBem != null}">
+				        	AND TUB.CODTIPOUSOBEM = <bancoob:valor valor="${criterios.filtro.codigoTipoUsoBem}" tipo="Short" />
+				        </j:if>
+						
+						<j:if test="${criterios.filtro.descricao != null}">
+							AND B.DESCBEM LIKE <bancoob:valor valor="${criterios.filtro.descricao}" tipo="LikeDireita" />
+						</j:if>
+						
+						<j:if test="${criterios.filtro.denominacao != null}">
+							AND BI.DESCDENOMINACAO LIKE <bancoob:valor valor="${criterios.filtro.denominacao}" tipo="LikeDireita" />
+						</j:if>
+						
+						<j:if test="${criterios.filtro.matricula != null}">
+							AND BI.DESCMATRICULA = <bancoob:valor valor="${criterios.filtro.matricula}" tipo="String" />
+						</j:if>
+						
+						<j:if test="${criterios.filtro.nirf != null}">
+							AND BI.DESCNIRF = <bancoob:valor valor="${criterios.filtro.nirf}" tipo="String" />
+						</j:if>
+						
+						<j:if test="${criterios.filtro.incra != null}">
+							AND BI.DESCINCRA = <bancoob:valor valor="${criterios.filtro.incra}" tipo="String" />
+						</j:if>
+	        ) AS TEMP_
+				WHERE ROWNUMBER BETWEEN <bancoob:valor valor="${linhaInicial}" tipo="Integer" /> AND <bancoob:valor valor="${linhaFinal}" tipo="Integer" />
+			]]>
+		</command>
+	</query>
+	
+	<query name="CONTAR_BEM_IMOVEL_POR_FILTRO">
+		<use-case name="Bem" />
+		<description>Pesquisa os bens imóveis por filtro</description>
+		<command>
+			<![CDATA[
+				SELECT COUNT(*)
+				FROM CLI.BEM B
+				INNER JOIN CLI.BEMIMOVEL BI ON BI.IDBEM = B.IDBEM
+				LEFT JOIN CLI.BEMIMOVELAVALIACAO BIA ON BIA.IDBEM = B.IDBEM
+				LEFT JOIN CLI.BEMIMOVELAVALIACAORURAL BIAR ON BIAR.IDBEM = B.IDBEM
+				LEFT JOIN CLI.BEMIMOVELAVALIACAOURBANO BIAU ON BIAU.IDBEM = B.IDBEM
+				LEFT JOIN CLI.UNIDADEMEDIDA UM ON UM.CODUNIDADEMEDIDA = BI.CODUNIDADEMEDIDA
+				LEFT JOIN CLI.TIPOLOCALIZACAOBEM TLB ON TLB.CODTIPOLOCALIZACAOBEM = BI.CODTIPOLOCALIZACAOBEM AND TLB.CODTIPOLOCALIZACAOBEM = 1
+				LEFT JOIN CLI.TIPOBEMIMOVEL TBI ON TBI.CODTIPOBEMIMOVEL = BI.CODTIPOBEMIMOVEL
+				LEFT JOIN CLI.TIPOUSOBEM TUB ON TUB.CODTIPOUSOBEM = BI.CODTIPOUSOBEM
+				LEFT JOIN CLI.TIPOIMPLANTACAOBEMIMOVEL TIBI ON TIBI.CODTIPOIMPLANTACAOBEMIMOVEL = BIAU.CODTIPOIMPLANTACAOBEMIMOVEL
+				LEFT JOIN CLI.TIPOESTADOCONSERVACAOBEM TECB ON TECB.CODTIPOESTADOCONSERVACAOBEM = BIAU.CODTIPOESTADOCONSERVACAOBEM AND TECB.BOLBEMIMOVEL = 1
+				LEFT JOIN CLI.TIPOPADRAOACABAMENTOBEMIMOVEL TPABI ON TPABI.CODTIPOPADRAOACABAMENTOBEMIMOVEL = BIAU.CODTIPOPADRAOACABAMENTOBEMIMOVEL
+				LEFT JOIN CLI.TIPOSERVICOCONDOMINIALBEMIMOVEL TSCBI ON TSCBI.CODTIPOSERVICOCONDOMINIALBEMIMOVEL = BIAU.CODTIPOSERVICOCONDOMINIALBEMIMOVEL
+				INNER JOIN CLI.TIPOCLASSIFICACAOBEM TCB ON TCB.CODTIPOCLASSIFICACAOBEM = B.CODTIPOCLASSIFICACAOBEM
+				LEFT JOIN CLI.PESSOACOMPARTILHAMENTO PCC ON PCC.IDPESSOACOMPARTILHAMENTO = BI.IDPESSOACOMPARTILHAMENTOCARTORIO
+				LEFT JOIN CLI.PESSOACOMPARTILHAMENTO PCA ON PCA.IDPESSOACOMPARTILHAMENTO = BIA.IDPESSOACOMPARTILHAMENTOAVALIADOR
+				LEFT JOIN CLI.TIPOINFUTILIZAINFPESSOA TI ON TI.IDINFORMACAOPESSOA = B.IDBEM AND TI.IDUTILIZAINFORMACAOPESSOA = 4 AND TI.IDTIPOINFORMACAOPESSOA = 6
+				WHERE B.CODTIPOCLASSIFICACAOBEM = 1
+				AND B.DATAHORAINICIO IS NOT NULL
+				
+				<j:if test="${criterios.filtro.idBem != null}">
+		        	AND BI.IDBEM = <bancoob:valor valor="${criterios.filtro.idBem}" tipo="Long" />
+		        </j:if>
+		        
+		        <j:if test="${criterios.filtro.codigoTipoBem != null}">
+		        	AND TBI.CODTIPOBEMIMOVEL = <bancoob:valor valor="${criterios.filtro.codigoTipoBem}" tipo="Short" />
+		        </j:if>
+		        
+		        <j:if test="${criterios.filtro.codigoTipoLocalizacaoBem != null}">
+		        	AND TLB.CODTIPOLOCALIZACAOBEM = <bancoob:valor valor="${criterios.filtro.codigoTipoLocalizacaoBem}" tipo="Short" />
+		        </j:if>
+		        
+		        <j:if test="${criterios.filtro.codigoTipoUsoBem != null}">
+		        	AND TUB.CODTIPOUSOBEM = <bancoob:valor valor="${criterios.filtro.codigoTipoUsoBem}" tipo="Short" />
+		        </j:if>
+		        
+		        <j:if test="${criterios.filtro.descricao != null}">
+		        	AND B.DESCBEM LIKE <bancoob:valor valor="${criterios.filtro.descricao}" tipo="LikeDireita" />
+		        </j:if>
+		        
+		        <j:if test="${criterios.filtro.denominacao != null}">
+		        	AND BI.DESCDENOMINACAO LIKE <bancoob:valor valor="${criterios.filtro.denominacao}" tipo="LikeDireita" />
+		        </j:if>
+		        
+		        <j:if test="${criterios.filtro.matricula != null}">
+		        	AND BI.DESCMATRICULA = <bancoob:valor valor="${criterios.filtro.matricula}" tipo="String" />
+		        </j:if>
+		        
+		        <j:if test="${criterios.filtro.nirf != null}">
+		        	AND BI.DESCNIRF = <bancoob:valor valor="${criterios.filtro.nirf}" tipo="String" />
+		        </j:if>
+		        
+		        <j:if test="${criterios.filtro.incra != null}">
+		        	AND BI.DESCINCRA = <bancoob:valor valor="${criterios.filtro.incra}" tipo="String" />
+		        </j:if>
+			]]>
+		</command>
+	</query>
+	
+	<query name="PESQUISAR_BEM_MOVEL_POR_FILTRO">
+		<use-case name="Bem"></use-case>
+		<description>Pesquisa os bens móveis de uma pessoa.</description>
+		<command>
+			<![CDATA[
+				SELECT B.IDBEM,
+			        B.CODTIPOCLASSIFICACAOBEM,
+			        TCB.DESCTIPOCLASSIFICACAOBEM,
+			        B.BOLBEMINTERNO,
+			        B.DESCBEM,
+			        B.VALORBEM,
+			        B.BOLVALORBEMNAOINFORMADO,
+			        B.MESRENOVACAOSEGURO,
+					B.IDUSUARIOAPROV,
+			        BM.CODTIPOBEMMOVEL,
+			        TBM.DESCTIPOBEMMOVEL,
+			        BM.CODTIPOCHASSIBEM,
+			        TCB.DESCTIPOCHASSIBEM,
+			        BM.NUMCHASSI,
+			        BM.NUMRENAVAN,
+			        BM.ANOFABRICACAOAUTOMOVEL,
+			        BM.ANOMODELOAUTOMOVEL,
+			        BM.DESCINCRICAOEMBARCACAO,
+			        BM.ANOCONSTRUCAOEMBARCACAO,
+			        BM.DESCMATRICULAAERONAVE,
+			        BM.CODTIPOCORAUTOMOVEL,
+			        TCA.DESCTIPOCORAUTOMOVEL,
+			        BM.SIGLAUF,
+			        BM.DESCPLACA,
+			        BM.ANOCONSTRUCAOAERONAVE,
+			        BMA.VALORCOMPRAVENDA,
+			        BMA.DATACOMPRAVENDA,
+			        BMA.VALORAVALIACAO,
+			        BMA.DATAAVALIACAO,
+			        PCA.IDPESSOA AS IDPESSOAAVALIADOR,
+			        BMA.BOLEMPROCESSOAQUISICAO,
+			        BMA.CODTIPOESTADOCONSERVACAOBEM,
+			        TEC.DESCTIPOESTADOCONSERVACAOBEM,
+			        CASE WHEN (TI.IDINFORMACAOPESSOA IS NOT NULL) THEN 1
+					ELSE 0
+					END AS EM_GARANTIA
+				FROM CLI.BEM B
+				INNER JOIN CLI.BEMMOVEL BM ON BM.IDBEM = B.IDBEM
+				LEFT JOIN CLI.BEMMOVELAVALIACAO BMA ON BMA.IDBEM = B.IDBEM
+				LEFT JOIN CLI.TIPOBEMMOVEL TBM ON TBM.CODTIPOBEMMOVEL = BM.CODTIPOBEMMOVEL
+				LEFT JOIN CLI.TIPOCHASSIBEM TCB ON TCB.CODTIPOCHASSIBEM = BM.CODTIPOCHASSIBEM
+				LEFT JOIN CLI.TIPOCORAUTOMOVEL TCA ON TCA.CODTIPOCORAUTOMOVEL = BM.CODTIPOCORAUTOMOVEL
+				LEFT JOIN CLI.TIPOESTADOCONSERVACAOBEM TEC ON TEC.CODTIPOESTADOCONSERVACAOBEM = BMA.CODTIPOESTADOCONSERVACAOBEM AND TEC.BOLBEMIMOVEL = 0
+				INNER JOIN CLI.TIPOCLASSIFICACAOBEM TCB ON TCB.CODTIPOCLASSIFICACAOBEM = B.CODTIPOCLASSIFICACAOBEM
+				LEFT JOIN CLI.PESSOACOMPARTILHAMENTO PCA ON PCA.IDPESSOACOMPARTILHAMENTO = BMA.IDPESSOACOMPARTILHAMENTOAVALIADOR
+				LEFT JOIN CLI.TIPOINFUTILIZAINFPESSOA TI ON TI.IDINFORMACAOPESSOA = B.IDBEM AND TI.IDUTILIZAINFORMACAOPESSOA = 4 AND TI.IDTIPOINFORMACAOPESSOA = 6
+				WHERE B.CODTIPOCLASSIFICACAOBEM = 2 
+				AND B.DATAHORAINICIO IS NOT NULL
+				
+				<j:if test="${criterios.filtro.idBem != null}">
+		        	AND BM.IDBEM = <bancoob:valor valor="${criterios.filtro.idBem}" tipo="Long" />
+		        </j:if>
+		        
+		        <j:if test="${criterios.filtro.codigoTipoBem != null}">
+		        	AND TBM.CODTIPOBEMMOVEL = <bancoob:valor valor="${criterios.filtro.codigoTipoBem}" tipo="Short" />
+		        </j:if>
+		        
+		         <j:if test="${criterios.filtro.descricao != null}">
+		        	AND B.DESCBEM LIKE <bancoob:valor valor="${criterios.filtro.descricao}" tipo="LikeDireita" />
+		        </j:if>
+		        
+		        <j:if test="${criterios.filtro.renavam != null}">
+		        	AND BM.NUMRENAVAN = <bancoob:valor valor="${criterios.filtro.renavam}" tipo="String" />
+		        </j:if>
+		        
+		        <j:if test="${criterios.filtro.numeroChassi != null}">
+		        	AND BM.NUMCHASSI = <bancoob:valor valor="${criterios.filtro.numeroChassi}" tipo="String" />
+		        </j:if>
+				
+				<j:if test="${criterios.filtro.placa != null}">
+		        	AND BM.DESCPLACA = <bancoob:valor valor="${criterios.filtro.placa}" tipo="String" />
+		        </j:if>
+				
+				<j:if test="${criterios.filtro.inscricaoEmbarcacao != null}">
+		        	AND BM.DESCINSCRICAOEMBARCACAO = <bancoob:valor valor="${criterios.filtro.inscricaoEmbarcacao}" tipo="String" />
+		        </j:if>
+		        
+		        <j:if test="${criterios.filtro.matriculaAeronave != null}">
+		        	AND BM.DESCMATRICULAAERONAVE = <bancoob:valor valor="${criterios.filtro.matriculaAeronave}" tipo="String" />
+		        </j:if>
+			]]>
+		</command>
+	</query>
+	
+	<query name="PESQUISAR_BEM_MOVEL_POR_FILTRO_PAGINADO">
+		<use-case name="Bem"></use-case>
+		<description>Pesquisa os bens móveis de uma pessoa.</description>
+		<command>
+			<![CDATA[
+				SELECT * 
+				FROM(
+				        SELECT ROWNUMBER() OVER() AS ROWNUMBER,
+								B.IDBEM,
+						        B.CODTIPOCLASSIFICACAOBEM,
+						        TCB.DESCTIPOCLASSIFICACAOBEM,
+						        B.BOLBEMINTERNO,
+						        B.DESCBEM,
+						        B.VALORBEM,
+						        B.BOLVALORBEMNAOINFORMADO,
+						        B.MESRENOVACAOSEGURO,
+								B.IDUSUARIOAPROV,
+						        BM.CODTIPOBEMMOVEL,
+						        TBM.DESCTIPOBEMMOVEL,
+						        BM.CODTIPOCHASSIBEM,
+						        TCB.DESCTIPOCHASSIBEM,
+						        BM.NUMCHASSI,
+						        BM.NUMRENAVAN,
+						        BM.ANOFABRICACAOAUTOMOVEL,
+						        BM.ANOMODELOAUTOMOVEL,
+						        BM.DESCINCRICAOEMBARCACAO,
+						        BM.ANOCONSTRUCAOEMBARCACAO,
+						        BM.DESCMATRICULAAERONAVE,
+						        BM.CODTIPOCORAUTOMOVEL,
+						        TCA.DESCTIPOCORAUTOMOVEL,
+						        BM.SIGLAUF,
+						        BM.DESCPLACA,
+						        BM.ANOCONSTRUCAOAERONAVE,
+						        BMA.VALORCOMPRAVENDA,
+						        BMA.DATACOMPRAVENDA,
+						        BMA.VALORAVALIACAO,
+						        BMA.DATAAVALIACAO,
+						        PCA.IDPESSOA AS IDPESSOAAVALIADOR,
+						        BMA.BOLEMPROCESSOAQUISICAO,
+						        BMA.CODTIPOESTADOCONSERVACAOBEM,
+						        TEC.DESCTIPOESTADOCONSERVACAOBEM,
+						        CASE WHEN (TI.IDINFORMACAOPESSOA IS NOT NULL) THEN 1
+								ELSE 0
+								END AS EM_GARANTIA
+							FROM CLI.BEM B
+							INNER JOIN CLI.BEMMOVEL BM ON BM.IDBEM = B.IDBEM
+							LEFT JOIN CLI.BEMMOVELAVALIACAO BMA ON BMA.IDBEM = B.IDBEM
+							LEFT JOIN CLI.TIPOBEMMOVEL TBM ON TBM.CODTIPOBEMMOVEL = BM.CODTIPOBEMMOVEL
+							LEFT JOIN CLI.TIPOCHASSIBEM TCB ON TCB.CODTIPOCHASSIBEM = BM.CODTIPOCHASSIBEM
+							LEFT JOIN CLI.TIPOCORAUTOMOVEL TCA ON TCA.CODTIPOCORAUTOMOVEL = BM.CODTIPOCORAUTOMOVEL
+							LEFT JOIN CLI.TIPOESTADOCONSERVACAOBEM TEC ON TEC.CODTIPOESTADOCONSERVACAOBEM = BMA.CODTIPOESTADOCONSERVACAOBEM AND TEC.BOLBEMIMOVEL = 0
+							INNER JOIN CLI.TIPOCLASSIFICACAOBEM TCB ON TCB.CODTIPOCLASSIFICACAOBEM = B.CODTIPOCLASSIFICACAOBEM
+							LEFT JOIN CLI.PESSOACOMPARTILHAMENTO PCA ON PCA.IDPESSOACOMPARTILHAMENTO = BMA.IDPESSOACOMPARTILHAMENTOAVALIADOR
+							LEFT JOIN CLI.TIPOINFUTILIZAINFPESSOA TI ON TI.IDINFORMACAOPESSOA = B.IDBEM AND TI.IDUTILIZAINFORMACAOPESSOA = 4 AND TI.IDTIPOINFORMACAOPESSOA = 6
+							WHERE B.CODTIPOCLASSIFICACAOBEM = 2 
+							AND B.DATAHORAINICIO IS NOT NULL
+							
+							<j:if test="${criterios.filtro.idBem != null}">
+					        	AND BM.IDBEM = <bancoob:valor valor="${criterios.filtro.idBem}" tipo="Long" />
+					        </j:if>
+					        
+					        <j:if test="${criterios.filtro.codigoTipoBem != null}">
+					        	AND TBM.CODTIPOBEMMOVEL = <bancoob:valor valor="${criterios.filtro.codigoTipoBem}" tipo="Short" />
+					        </j:if>
+					        
+					         <j:if test="${criterios.filtro.descricao != null}">
+					        	AND B.DESCBEM LIKE <bancoob:valor valor="${criterios.filtro.descricao}" tipo="LikeDireita" />
+					        </j:if>
+					        
+					        <j:if test="${criterios.filtro.renavam != null}">
+					        	AND BM.NUMRENAVAN = <bancoob:valor valor="${criterios.filtro.renavam}" tipo="String" />
+					        </j:if>
+					        
+					        <j:if test="${criterios.filtro.numeroChassi != null}">
+					        	AND BM.NUMCHASSI = <bancoob:valor valor="${criterios.filtro.numeroChassi}" tipo="String" />
+					        </j:if>
+							
+							<j:if test="${criterios.filtro.placa != null}">
+					        	AND BM.DESCPLACA = <bancoob:valor valor="${criterios.filtro.placa}" tipo="String" />
+					        </j:if>
+							
+							<j:if test="${criterios.filtro.inscricaoEmbarcacao != null}">
+					        	AND BM.DESCINSCRICAOEMBARCACAO = <bancoob:valor valor="${criterios.filtro.inscricaoEmbarcacao}" tipo="String" />
+					        </j:if>
+					        
+					        <j:if test="${criterios.filtro.matriculaAeronave != null}">
+					        	AND BM.DESCMATRICULAAERONAVE = <bancoob:valor valor="${criterios.filtro.matriculaAeronave}" tipo="String" />
+					        </j:if>
+			    ) AS TEMP_
+				WHERE ROWNUMBER BETWEEN <bancoob:valor valor="${linhaInicial}" tipo="Integer" /> AND <bancoob:valor valor="${linhaFinal}" tipo="Integer" />
+			]]>
+		</command>
+	</query>
+	
+	<query name="CONTAR_BEM_MOVEL_POR_FILTRO">
+		<use-case name="Bem"></use-case>
+		<description>Pesquisa os bens móveis de uma pessoa.</description>
+		<command>
+			<![CDATA[
+				SELECT COUNT(*)
+				FROM CLI.BEM B
+				INNER JOIN CLI.BEMMOVEL BM ON BM.IDBEM = B.IDBEM
+				LEFT JOIN CLI.BEMMOVELAVALIACAO BMA ON BMA.IDBEM = B.IDBEM
+				LEFT JOIN CLI.TIPOBEMMOVEL TBM ON TBM.CODTIPOBEMMOVEL = BM.CODTIPOBEMMOVEL
+				LEFT JOIN CLI.TIPOCHASSIBEM TCB ON TCB.CODTIPOCHASSIBEM = BM.CODTIPOCHASSIBEM
+				LEFT JOIN CLI.TIPOCORAUTOMOVEL TCA ON TCA.CODTIPOCORAUTOMOVEL = BM.CODTIPOCORAUTOMOVEL
+				LEFT JOIN CLI.TIPOESTADOCONSERVACAOBEM TEC ON TEC.CODTIPOESTADOCONSERVACAOBEM = BMA.CODTIPOESTADOCONSERVACAOBEM AND TEC.BOLBEMIMOVEL = 0
+				INNER JOIN CLI.TIPOCLASSIFICACAOBEM TCB ON TCB.CODTIPOCLASSIFICACAOBEM = B.CODTIPOCLASSIFICACAOBEM
+				LEFT JOIN CLI.PESSOACOMPARTILHAMENTO PCA ON PCA.IDPESSOACOMPARTILHAMENTO = BMA.IDPESSOACOMPARTILHAMENTOAVALIADOR
+				LEFT JOIN CLI.TIPOINFUTILIZAINFPESSOA TI ON TI.IDINFORMACAOPESSOA = B.IDBEM AND TI.IDUTILIZAINFORMACAOPESSOA = 4 AND TI.IDTIPOINFORMACAOPESSOA = 6
+				WHERE B.CODTIPOCLASSIFICACAOBEM = 2 
+				AND B.DATAHORAINICIO IS NOT NULL
+				
+				<j:if test="${criterios.filtro.idBem != null}">
+		        	AND BM.IDBEM = <bancoob:valor valor="${criterios.filtro.idBem}" tipo="Long" />
+		        </j:if>
+		        
+		        <j:if test="${criterios.filtro.codigoTipoBem != null}">
+		        	AND TBM.CODTIPOBEMMOVEL = <bancoob:valor valor="${criterios.filtro.codigoTipoBem}" tipo="Short" />
+		        </j:if>
+		        
+		         <j:if test="${criterios.filtro.descricao != null}">
+		        	AND B.DESCBEM LIKE <bancoob:valor valor="${criterios.filtro.descricao}" tipo="LikeDireita" />
+		        </j:if>
+		        
+		        <j:if test="${criterios.filtro.renavam != null}">
+		        	AND BM.NUMRENAVAN = <bancoob:valor valor="${criterios.filtro.renavam}" tipo="String" />
+		        </j:if>
+		        
+		        <j:if test="${criterios.filtro.numeroChassi != null}">
+		        	AND BM.NUMCHASSI = <bancoob:valor valor="${criterios.filtro.numeroChassi}" tipo="String" />
+		        </j:if>
+				
+				<j:if test="${criterios.filtro.placa != null}">
+		        	AND BM.DESCPLACA = <bancoob:valor valor="${criterios.filtro.placa}" tipo="String" />
+		        </j:if>
+				
+				<j:if test="${criterios.filtro.inscricaoEmbarcacao != null}">
+		        	AND BM.DESCINSCRICAOEMBARCACAO = <bancoob:valor valor="${criterios.filtro.inscricaoEmbarcacao}" tipo="String" />
+		        </j:if>
+		        
+		        <j:if test="${criterios.filtro.matriculaAeronave != null}">
+		        	AND BM.DESCMATRICULAAERONAVE = <bancoob:valor valor="${criterios.filtro.matriculaAeronave}" tipo="String" />
+		        </j:if>
+			]]>
+		</command>
+	</query>
+
+	<query name="OBTER_GRUPOS_ECONOMICOS_POR_CPF_CNPJ">
+		<use-case name="GRUPO ECONOMICO"></use-case>
+		<description>Obtém os grupos economicos por CPF/CNPJ</description>
+		<command>
+            <![CDATA[
+                SELECT P.NUMCPFCNPJ, GEP.IDGRUPOECONOMICO
+				FROM CLI.GRUPOECONOMICOPESSOA GEP
+				INNER JOIN CLI.PESSOAINSTITUICAO PI ON PI.IDPESSOAINSTITUICAO = GEP.IDPESSOAINSTITUICAO
+				INNER JOIN CLI.PESSOA P ON P.IDPESSOA = PI.IDPESSOA
+				WHERE P.NUMCPFCNPJ IN (<bancoob:valor valor="${listaCpfCnpj}" />)
+				AND PI.IDINSTITUICAO = <bancoob:valor valor="${idInstituicao}" />
+            ]]>
+		</command>
+	</query>
+
+	<query name="OBTER_PARTICIPANTES_BEM_IMOVEL">
+		<use-case name="BEM"></use-case>
+		<description>Obtém os participantes do bem imóvel</description>
+		<command>
+            <![CDATA[
+            SELECT new br.com.sicoob.capes.api.negocio.vo.BemImovelParticipanteVO(
+					tipoRelacionamento.codigo,
+					tipoRelacionamento.descricao,
+					pessoaCompartilhamento.pessoa.idPessoa,
+					participante.dataInicioRelacionamento,
+					participante.dataFimRelacionamento,
+					participante.areaPosse
+				)
+				FROM br.com.sicoob.capes.negocio.entidades.bem.BemImovelTipoRelacionamentoPessoa participante
+				INNER JOIN participante.tipoRelacionamento tipoRelacionamento
+				INNER JOIN participante.pessoaCompartilhamento pessoaCompartilhamento
+				WHERE participante.bemImovel.idBem = <bancoob:valorOql valor="${idBem}" tipo="Long" />
+            ]]>
+		</command>
+	</query>
+	
+	<query name="OBTER_BENS_ANTIGOS_PROPRIETARIO_E_PARTICIPANTE">
+		<use-case name="BEM"></use-case>
+		<description>Obtém os bens da pessoa como proprietário ou participante</description>
+		<command>
+            <![CDATA[
+            	WITH SOURCE AS (
+					SELECT
+				        B.IDBEMNOVO,
+				        PC.IDPESSOA,
+				        B.IDBEMPESSOA,
+				        B.DATAHORAINICIO,
+				        B.DESCBEMPESSOA,
+				        B.VALORATUALMERCADO,
+				        B.PERCPROPRIEDADE,
+				        B.VALORATUALMERCADO * B.PERCPROPRIEDADE/100 AS VALORPROPRIEDADE,
+				        B.NOMESEGURADORA,
+				        B.DATAVENCIMENTOSEGURO,
+				        B.VALORSEGURO,
+				        BI.CODLOCALIZACAO,
+				        BI.DESCBENFEITORIA,
+				        BI.VALORBENFEITORIA,
+				        BI.DESCDENOMINACAO,
+				        BI.DESCCOMARCA,
+				        BI.SIGLAUFCOMARCA,
+				        BI.IDLOCALIDADECOMARCA,
+				        BI.IDLOCALIDADEIMOVEL,
+				        BI.DESCMUNICIPIOIMOVEL,
+				        BI.SIGLAUFMUNICIPIOIMOVEL,
+				        BI.QTDAREAIMOVEL,
+				        UM.CODUNIDADEMEDIDA,
+				        UM.DESCUNIDADEMEDIDA,
+				        UM.SIGLAUNIDADEMEDIDA,
+				        SB.CODSITUACAOBEMPESSOA,
+				        SB.DESCSITUACAOBEMPESSOA,
+				        TB.CODTIPOBEM,
+				        TB.DESCTIPOBEM,
+				        STB.CODSUBTIPOBEM,
+				        STB.DESCSUBTIPOBEM,
+				        1 AS RELEVANCIA
+					FROM 
+				        CLI.BEMPESSOA B 
+				        LEFT OUTER JOIN CLI.BEMPESSOAIMOVEL BI ON B.IDBEMPESSOA = BI.IDBEMPESSOA 
+				        INNER JOIN CLI.PESSOACOMPARTILHAMENTO PC ON B.IDPESSOACOMPARTILHAMENTO = PC.IDPESSOACOMPARTILHAMENTO 
+				        INNER JOIN CLI.TRANSICAOPESSOA TP ON PC.IDPESSOACOMPARTILHAMENTO = TP.IDPESSOACOMPARTILHAMENTO 
+				        INNER JOIN CLI.SITUACAOBEMPESSOA SB ON B.CODSITUACAOBEMPESSOA = SB.CODSITUACAOBEMPESSOA 
+				        INNER JOIN CLI.SUBTIPOBEM STB ON B.CODSUBTIPOBEM = STB.CODSUBTIPOBEM 
+				        INNER JOIN CLI.TIPOBEM TB ON STB.CODTIPOBEM = TB.CODTIPOBEM 
+				        LEFT OUTER JOIN CLI.UNIDADEMEDIDA UM ON BI.CODUNIDADEMEDIDA = UM.CODUNIDADEMEDIDA 
+					WHERE (B.DATAHORAINICIO IS NOT NULL) 
+				        AND TP.IDINSTITUICAO = <bancoob:valor valor="${idInstituicao}" tipo="Integer" />
+				        AND PC.IDPESSOA = <bancoob:valor valor="${idPessoa}" tipo="Integer" />
+				
+					UNION
+				
+					SELECT
+				        B.IDBEMNOVO,
+				        PCP.IDPESSOA,
+				        B.IDBEMPESSOA,
+				        B.DATAHORAINICIO,
+				        B.DESCBEMPESSOA,
+				        B.VALORATUALMERCADO,
+				        B.PERCPROPRIEDADE,
+				        B.VALORATUALMERCADO * B.PERCPROPRIEDADE/100 AS VALORPROPRIEDADE,
+				        B.NOMESEGURADORA,
+				        B.DATAVENCIMENTOSEGURO,
+				        B.VALORSEGURO,
+				        BI.CODLOCALIZACAO,
+				        BI.DESCBENFEITORIA,
+				        BI.VALORBENFEITORIA,
+				        BI.DESCDENOMINACAO,
+				        BI.DESCCOMARCA,
+				        BI.SIGLAUFCOMARCA,
+				        BI.IDLOCALIDADECOMARCA,
+				        BI.IDLOCALIDADEIMOVEL,
+				        BI.DESCMUNICIPIOIMOVEL,
+				        BI.SIGLAUFMUNICIPIOIMOVEL,
+				        BI.QTDAREAIMOVEL,
+				        UM.CODUNIDADEMEDIDA,
+				        UM.DESCUNIDADEMEDIDA,
+				        UM.SIGLAUNIDADEMEDIDA,
+				        SB.CODSITUACAOBEMPESSOA,
+				        SB.DESCSITUACAOBEMPESSOA,
+				        TB.CODTIPOBEM,
+				        TB.DESCTIPOBEM,
+				        STB.CODSUBTIPOBEM,
+				        STB.DESCSUBTIPOBEM,
+				        2 AS RELEVANCIA 
+					FROM CLI.BEMPESSOA B 
+				        LEFT OUTER JOIN CLI.BEMPESSOAIMOVEL BI ON B.IDBEMPESSOA = BI.IDBEMPESSOA 
+				        INNER JOIN CLI.SITUACAOBEMPESSOA SB ON B.CODSITUACAOBEMPESSOA = SB.CODSITUACAOBEMPESSOA 
+				        INNER JOIN CLI.SUBTIPOBEM STB ON B.CODSUBTIPOBEM = STB.CODSUBTIPOBEM 
+				        INNER JOIN CLI.TIPOBEM TB ON STB.CODTIPOBEM = TB.CODTIPOBEM 
+				        LEFT OUTER JOIN CLI.UNIDADEMEDIDA UM ON BI.CODUNIDADEMEDIDA = UM.CODUNIDADEMEDIDA 
+				        INNER JOIN CLI.BEMPESSOAPOSSE BP ON BI.IDBEMPESSOA = BP.IDBEMPESSOA 
+				        INNER JOIN CLI.PESSOACOMPARTILHAMENTO PCP ON BP.IDPESSOACOMPARTILHAMENTOPARCEIRO = PCP.IDPESSOACOMPARTILHAMENTO
+				        INNER JOIN CLI.TRANSICAOPESSOA TP ON PCP.IDPESSOACOMPARTILHAMENTO = TP.IDPESSOACOMPARTILHAMENTO 
+					WHERE (B.DATAHORAINICIO IS NOT NULL) 
+				        AND TP.IDINSTITUICAO = <bancoob:valor valor="${idInstituicao}" tipo="Integer" />
+				        AND PCP.IDPESSOA = <bancoob:valor valor="${idPessoa}" tipo="Integer" />
+						
+				),
+				INPUT AS (SELECT R.*, ROW_NUMBER() OVER (PARTITION BY R.IDBEMNOVO, R.IDPESSOA ORDER BY RELEVANCIA) DIFF FROM SOURCE R)
+				SELECT * FROM INPUT WHERE DIFF=1
+            ]]>
+		</command>
+	</query>
+	
+	<query name="OBTER_ID_BEM_NOVO">
+		<use-case name="BEM"></use-case>
+		<description>Obtém o id do bem novo à partir do bem antigo.</description>
+		<command>
+            <![CDATA[
+            	SELECT B.IDBEMNOVO
+				FROM CLI.BEMPESSOA B
+				WHERE B.IDBEMPESSOA = <bancoob:valor valor="${idBemPessoa}" tipo="Long" />
+            ]]>
+		</command>
+	</query>
+	
+	<query name="OBTER_TODOS_OS_BENS_ASSOCIADOS">
+		<use-case name="BEM"></use-case>
+		<description>Obtém os participantes do bem imóvel</description>
+		<command>
+            <![CDATA[
+            SELECT B.IDBEM,
+			        B.CODTIPOCLASSIFICACAOBEM,
+			        TCB.DESCTIPOCLASSIFICACAOBEM,
+			        B.BOLBEMINTERNO,
+			        B.DESCBEM,
+			        B.VALORBEM,
+			        B.BOLVALORBEMNAOINFORMADO,
+			        B.MESRENOVACAOSEGURO,
+			        B.IDUSUARIOAPROV,
+			        BPC.PERCPROPRIETARIO,
+			        BI.CODUNIDADEMEDIDA,
+			        UM.DESCUNIDADEMEDIDA,
+			        BI.CODTIPOLOCALIZACAOBEM,
+			        TLB.DESCTIPOLOCALIZACAOBEM,
+			        BI.CODTIPOBEMIMOVEL,
+			        TBI.DESCTIPOBEMIMOVEL,
+			        BI.CODTIPOUSOBEM,
+			        TUB.DESCTIPOUSOBEM,
+			        BI.DESCINFORMACAOGERAL,
+			        BI.DESCDENOMINACAO,
+			        BI.AREATOTALIMOVEL,
+			        BI.DESCMATRICULA,
+			        PCC.IDPESSOA AS IDPESSOACARTORIO,
+			        BI.DESCNIRF,
+			        BI.DESCINCRA,
+			        BI.DESCNUMERO,
+			        BI.DESCCOMPLEMENTO,
+			        BI.DESCROTEIRO,
+			        BI.VALORLATITUDE,
+			        BI.VALORLONGITUDE,
+			        BI.IDLOCALIDADE,
+			        BI.IDLOGRADOURO,
+			        BIA.VALORCOMPRAVENDA,
+			        BIA.DATACOMPRAVENDA,
+			        BIA.VALORAVALIACAO,
+			        BIA.DATAAVALIACAO,
+			        PCA.IDPESSOA AS IDPESSOAAVALIADOR,
+			        BIA.BOLEMPROCESSOAQUISICAO,
+			        BIAR.DESCBENFEITORIA,
+			        BIAR.VALORBENFEITORIA,
+			        BIAU.CODTIPOIMPLANTACAOBEMIMOVEL,
+			        TIBI.DESCTIPOIMPLANTACAOBEMIMOVEL,
+			        BIAU.CODTIPOESTADOCONSERVACAOBEM,
+			        TECB.DESCTIPOESTADOCONSERVACAOBEM,
+			        BIAU.CODTIPOPADRAOACABAMENTOBEMIMOVEL,
+			        TPABI.DESCTIPOPADRAOACABAMENTOBEMIMOVEL,
+			        BIAU.CODTIPOSERVICOCONDOMINIALBEMIMOVEL,
+			        TSCBI.DESCTIPOSERVICOCONDOMINIALBEMIMOVEL,
+			        BIAU.AREAPRIVATIVA,
+			        BIAU.QTDDORMITORIO,
+			        BIAU.QTDVAGAGARAGEM,
+			        BIAU.AREATERRENO,
+			        BIAU.AREATESTADA,
+			        CASE WHEN (TI.IDINFORMACAOPESSOA IS NOT NULL) THEN 1
+			                ELSE 0
+			                END AS EM_GARANTIA
+			FROM CLI.BEM B
+			INNER JOIN CLI.BEMIMOVEL BI ON BI.IDBEM = B.IDBEM
+			LEFT JOIN CLI.BEMIMOVELAVALIACAO BIA ON BIA.IDBEM = B.IDBEM
+			LEFT JOIN CLI.BEMIMOVELAVALIACAORURAL BIAR ON BIAR.IDBEM = B.IDBEM
+			LEFT JOIN CLI.BEMIMOVELAVALIACAOURBANO BIAU ON BIAU.IDBEM = B.IDBEM
+			LEFT JOIN CLI.UNIDADEMEDIDA UM ON UM.CODUNIDADEMEDIDA = BI.CODUNIDADEMEDIDA
+			LEFT JOIN CLI.TIPOLOCALIZACAOBEM TLB ON TLB.CODTIPOLOCALIZACAOBEM = BI.CODTIPOLOCALIZACAOBEM AND TLB.CODTIPOLOCALIZACAOBEM = 1
+			LEFT JOIN CLI.TIPOBEMIMOVEL TBI ON TBI.CODTIPOBEMIMOVEL = BI.CODTIPOBEMIMOVEL
+			LEFT JOIN CLI.TIPOUSOBEM TUB ON TUB.CODTIPOUSOBEM = BI.CODTIPOUSOBEM
+			LEFT JOIN CLI.TIPOIMPLANTACAOBEMIMOVEL TIBI ON TIBI.CODTIPOIMPLANTACAOBEMIMOVEL = BIAU.CODTIPOIMPLANTACAOBEMIMOVEL
+			LEFT JOIN CLI.TIPOESTADOCONSERVACAOBEM TECB ON TECB.CODTIPOESTADOCONSERVACAOBEM = BIAU.CODTIPOESTADOCONSERVACAOBEM AND TECB.BOLBEMIMOVEL = 1
+			LEFT JOIN CLI.TIPOPADRAOACABAMENTOBEMIMOVEL TPABI ON TPABI.CODTIPOPADRAOACABAMENTOBEMIMOVEL = BIAU.CODTIPOPADRAOACABAMENTOBEMIMOVEL
+			LEFT JOIN CLI.TIPOSERVICOCONDOMINIALBEMIMOVEL TSCBI ON TSCBI.CODTIPOSERVICOCONDOMINIALBEMIMOVEL = BIAU.CODTIPOSERVICOCONDOMINIALBEMIMOVEL
+			INNER JOIN CLI.TIPOCLASSIFICACAOBEM TCB ON TCB.CODTIPOCLASSIFICACAOBEM = B.CODTIPOCLASSIFICACAOBEM
+			LEFT JOIN CLI.BEMPESSOACOMPARTILHAMENTO BPC ON BPC.IDBEM = B.IDBEM
+			LEFT JOIN CLI.PESSOACOMPARTILHAMENTO PC ON PC.IDPESSOACOMPARTILHAMENTO = BPC.IDPESSOACOMPARTILHAMENTO
+			LEFT JOIN CLI.TRANSICAOPESSOA TP ON TP.IDPESSOACOMPARTILHAMENTO = PC.IDPESSOACOMPARTILHAMENTO
+			LEFT JOIN CLI.PESSOACOMPARTILHAMENTO PCC ON PCC.IDPESSOACOMPARTILHAMENTO = BI.IDPESSOACOMPARTILHAMENTOCARTORIO
+			LEFT JOIN CLI.PESSOACOMPARTILHAMENTO PCA ON PCA.IDPESSOACOMPARTILHAMENTO = BIA.IDPESSOACOMPARTILHAMENTOAVALIADOR
+			LEFT JOIN CLI.TIPOINFUTILIZAINFPESSOA TI ON TI.IDINFORMACAOPESSOA = B.IDBEM AND TI.IDUTILIZAINFORMACAOPESSOA = 4 AND TI.IDTIPOINFORMACAOPESSOA = 6
+			WHERE B.CODTIPOCLASSIFICACAOBEM = 1
+			AND B.DATAHORAINICIO IS NOT NULL
+			AND PC.IDPESSOA = <bancoob:valor valor="${idPessoa}" tipo="Integer" />
+			AND TP.IDINSTITUICAO = <bancoob:valor valor="${idInstituicao}" tipo="Integer" />
+			
+			UNION
+			
+			SELECT B.IDBEM,
+			        B.CODTIPOCLASSIFICACAOBEM,
+			        TCB.DESCTIPOCLASSIFICACAOBEM,
+			        B.BOLBEMINTERNO,
+			        B.DESCBEM,
+			        B.VALORBEM,
+			        B.BOLVALORBEMNAOINFORMADO,
+			        B.MESRENOVACAOSEGURO,
+			        B.IDUSUARIOAPROV,
+			        NULL,
+			        BI.CODUNIDADEMEDIDA,
+			        UM.DESCUNIDADEMEDIDA,
+			        BI.CODTIPOLOCALIZACAOBEM,
+			        TLB.DESCTIPOLOCALIZACAOBEM,
+			        BI.CODTIPOBEMIMOVEL,
+			        TBI.DESCTIPOBEMIMOVEL,
+			        BI.CODTIPOUSOBEM,
+			        TUB.DESCTIPOUSOBEM,
+			        BI.DESCINFORMACAOGERAL,
+			        BI.DESCDENOMINACAO,
+			        BI.AREATOTALIMOVEL,
+			        BI.DESCMATRICULA,
+			        PCC.IDPESSOA AS IDPESSOACARTORIO,
+			        BI.DESCNIRF,
+			        BI.DESCINCRA,
+			        BI.DESCNUMERO,
+			        BI.DESCCOMPLEMENTO,
+			        BI.DESCROTEIRO,
+			        BI.VALORLATITUDE,
+			        BI.VALORLONGITUDE,
+			        BI.IDLOCALIDADE,
+			        BI.IDLOGRADOURO,
+			        BIA.VALORCOMPRAVENDA,
+			        BIA.DATACOMPRAVENDA,
+			        BIA.VALORAVALIACAO,
+			        BIA.DATAAVALIACAO,
+			        PCA.IDPESSOA AS IDPESSOAAVALIADOR,
+			        BIA.BOLEMPROCESSOAQUISICAO,
+			        BIAR.DESCBENFEITORIA,
+			        BIAR.VALORBENFEITORIA,
+			        BIAU.CODTIPOIMPLANTACAOBEMIMOVEL,
+			        TIBI.DESCTIPOIMPLANTACAOBEMIMOVEL,
+			        BIAU.CODTIPOESTADOCONSERVACAOBEM,
+			        TECB.DESCTIPOESTADOCONSERVACAOBEM,
+			        BIAU.CODTIPOPADRAOACABAMENTOBEMIMOVEL,
+			        TPABI.DESCTIPOPADRAOACABAMENTOBEMIMOVEL,
+			        BIAU.CODTIPOSERVICOCONDOMINIALBEMIMOVEL,
+			        TSCBI.DESCTIPOSERVICOCONDOMINIALBEMIMOVEL,
+			        BIAU.AREAPRIVATIVA,
+			        BIAU.QTDDORMITORIO,
+			        BIAU.QTDVAGAGARAGEM,
+			        BIAU.AREATERRENO,
+			        BIAU.AREATESTADA,
+			        CASE WHEN (TI.IDINFORMACAOPESSOA IS NOT NULL) THEN 1
+			                ELSE 0
+			                END AS EM_GARANTIA
+			FROM CLI.BEM B
+			INNER JOIN CLI.BEMIMOVEL BI ON BI.IDBEM = B.IDBEM
+			LEFT JOIN CLI.BEMIMOVELAVALIACAO BIA ON BIA.IDBEM = B.IDBEM
+			LEFT JOIN CLI.BEMIMOVELAVALIACAORURAL BIAR ON BIAR.IDBEM = B.IDBEM
+			LEFT JOIN CLI.BEMIMOVELAVALIACAOURBANO BIAU ON BIAU.IDBEM = B.IDBEM
+			LEFT JOIN CLI.UNIDADEMEDIDA UM ON UM.CODUNIDADEMEDIDA = BI.CODUNIDADEMEDIDA
+			LEFT JOIN CLI.TIPOLOCALIZACAOBEM TLB ON TLB.CODTIPOLOCALIZACAOBEM = BI.CODTIPOLOCALIZACAOBEM AND TLB.CODTIPOLOCALIZACAOBEM = 1
+			LEFT JOIN CLI.TIPOBEMIMOVEL TBI ON TBI.CODTIPOBEMIMOVEL = BI.CODTIPOBEMIMOVEL
+			LEFT JOIN CLI.TIPOUSOBEM TUB ON TUB.CODTIPOUSOBEM = BI.CODTIPOUSOBEM
+			LEFT JOIN CLI.TIPOIMPLANTACAOBEMIMOVEL TIBI ON TIBI.CODTIPOIMPLANTACAOBEMIMOVEL = BIAU.CODTIPOIMPLANTACAOBEMIMOVEL
+			LEFT JOIN CLI.TIPOESTADOCONSERVACAOBEM TECB ON TECB.CODTIPOESTADOCONSERVACAOBEM = BIAU.CODTIPOESTADOCONSERVACAOBEM AND TECB.BOLBEMIMOVEL = 1
+			LEFT JOIN CLI.TIPOPADRAOACABAMENTOBEMIMOVEL TPABI ON TPABI.CODTIPOPADRAOACABAMENTOBEMIMOVEL = BIAU.CODTIPOPADRAOACABAMENTOBEMIMOVEL
+			LEFT JOIN CLI.TIPOSERVICOCONDOMINIALBEMIMOVEL TSCBI ON TSCBI.CODTIPOSERVICOCONDOMINIALBEMIMOVEL = BIAU.CODTIPOSERVICOCONDOMINIALBEMIMOVEL
+			INNER JOIN CLI.TIPOCLASSIFICACAOBEM TCB ON TCB.CODTIPOCLASSIFICACAOBEM = B.CODTIPOCLASSIFICACAOBEM
+			LEFT JOIN CLI.BEMIMOVELTIPORELACIONAMENTOPESSOA BITRP ON BITRP.IDBEM = B.IDBEM
+			LEFT JOIN CLI.PESSOACOMPARTILHAMENTO PC ON PC.IDPESSOACOMPARTILHAMENTO = BITRP.IDPESSOACOMPARTILHAMENTO
+			LEFT JOIN CLI.TRANSICAOPESSOA TP ON TP.IDPESSOACOMPARTILHAMENTO = PC.IDPESSOACOMPARTILHAMENTO
+			LEFT JOIN CLI.PESSOACOMPARTILHAMENTO PCC ON PCC.IDPESSOACOMPARTILHAMENTO = BI.IDPESSOACOMPARTILHAMENTOCARTORIO
+			LEFT JOIN CLI.PESSOACOMPARTILHAMENTO PCA ON PCA.IDPESSOACOMPARTILHAMENTO = BIA.IDPESSOACOMPARTILHAMENTOAVALIADOR
+			LEFT JOIN CLI.TIPOINFUTILIZAINFPESSOA TI ON TI.IDINFORMACAOPESSOA = B.IDBEM AND TI.IDUTILIZAINFORMACAOPESSOA = 4 AND TI.IDTIPOINFORMACAOPESSOA = 6
+			WHERE B.CODTIPOCLASSIFICACAOBEM = 1
+			AND B.DATAHORAINICIO IS NOT NULL
+			AND PC.IDPESSOA = <bancoob:valor valor="${idPessoa}" tipo="Integer" />
+			AND TP.IDINSTITUICAO = <bancoob:valor valor="${idInstituicao}" tipo="Integer" />
+            ]]>
+		</command>
+	</query>
+	
+	<query name="OBTER_PESSOAS_POR_GRUPO_ECONOMICO">
+      <use-case name="Grupo Econômico" />
+      <description>Obtém as pessoas de um grupo econômico</description>
+      <command>
+          <![CDATA[
+          	SELECT P.IDPESSOA, P.NUMCPFCNPJ, PC.NOMEPESSOA, GE.IDGRUPOECONOMICO, GE.DESCGRUPOECONOMICO
+			FROM CLI.PESSOAINSTITUICAO PI
+			INNER JOIN CLI.GRUPOECONOMICOPESSOA GEP ON GEP.IDPESSOAINSTITUICAO = PI.IDPESSOAINSTITUICAO
+			INNER JOIN CLI.GRUPOECONOMICO GE ON GE.IDGRUPOECONOMICO = GEP.IDGRUPOECONOMICO
+			INNER JOIN CLI.PESSOACOMPARTILHAMENTO PC ON PC.IDPESSOA = PI.IDPESSOA
+			INNER JOIN CLI.TRANSICAOPESSOA TP ON TP.IDPESSOACOMPARTILHAMENTO = PC.IDPESSOACOMPARTILHAMENTO AND TP.IDINSTITUICAO = PI.IDINSTITUICAO
+			INNER JOIN CLI.PESSOA P ON P.IDPESSOA = PC.IDPESSOA
+			WHERE GE.IDGRUPOECONOMICO = <bancoob:valor valor="${idGrupoEconomico}" tipo="Integer" />
+          ]]>
+      </command>
+    </query>
+    
+    <query name="OBTER_GRUPO_ECONOMICO_NOVO">
+		<use-case name="Grupo Econômico Novo"></use-case>
+		<description>Pesquisa o grupo econômico da pessoa</description>
+		<command>
+			<![CDATA[
+WITH GRUPO as (
+        SELECT
+                    P.IDPESSOA                        AS IDPESSOA,
+	            GI.IDINSTITUICAO                  AS IDINSTITUICAO,
+	            GMP.IDGRUPOECONOMICOMANUALPESSOA  AS IDGRUPOECONOMICOPESSOA,
+	            GMP.DATAHORAINICIO                AS DATAHORAINICIO,
+	            GE.IDGRUPOECONOMICOCENTRALIZADO   AS IDGRUPOECONOMICO,
+	            GE.NOMEGRUPOECONOMICOCENTRALIZADO AS DESCGRUPOECONOMICO,
+	            GE.DATAHORACADASTRO               AS DATAHORACADASTRO
+        FROM CLI.GRUPOECONOMICOCENTRALIZADO AS GE
+        INNER JOIN CLI.GRUPOECONOMICOMANUALPESSOA AS GMP ON  GE.IDGRUPOECONOMICOCENTRALIZADO = GMP.IDGRUPOECONOMICOCENTRALIZADO 
+        INNER JOIN CLI.GRUPOECONOMICOINSTITUICAO  AS GI  ON  GI.IDGRUPOECONOMICOCENTRALIZADO = GE.IDGRUPOECONOMICOCENTRALIZADO
+        INNER JOIN CLI.PESSOACOMPARTILHAMENTO     AS PC  ON  GMP.IDPESSOACOMPARTILHAMENTO    = PC.IDPESSOACOMPARTILHAMENTO
+        INNER JOIN CLI.PESSOA                     AS P   ON  PC.IDPESSOA                     = P.IDPESSOA
+        WHERE GMP.IDGRUPOECONOMICOAUTOMATICO IS NULL
+	<j:if test="${idInstituicao != null}">
+		AND gi.IDINSTITUICAO = <bancoob:valor valor="${idInstituicao}" />
+	</j:if>
+	<j:if test="${numCpfCnpj != null}">
+		AND p.NUMCPFCNPJ = <bancoob:valor valor="${numCpfCnpj}" />
+	</j:if>
+	<j:if test="${listaCpfCnpj != null}">
+		AND p.NUMCPFCNPJ IN (<bancoob:valor valor="${listaCpfCnpj}" />)
+	</j:if>
+	<j:if test="${idPessoa != null}">
+		AND p.idPessoa = <bancoob:valor valor="${idPessoa}" />
+	</j:if>
+        UNION ALL
+        SELECT
+                    P.IDPESSOA                            AS IDPESSOA,
+	            GI.IDINSTITUICAO                      AS IDINSTITUICAO,
+	            GAP.IDGRUPOECONOMICOAUTOMATICOPESSOA  AS IDGRUPOECONOMICOPESSOA,
+	            GAP.DATAHORAINICIO                    AS DATAHORAINICIO,
+	            GE.IDGRUPOECONOMICOCENTRALIZADO       AS IDGRUPOECONOMICO,
+	            GE.NOMEGRUPOECONOMICOCENTRALIZADO     AS DESCGRUPOECONOMICO,
+	            GE.DATAHORACADASTRO                   AS DATAHORACADASTRO
+        FROM CLI.GRUPOECONOMICOCENTRALIZADO AS GE
+        INNER JOIN CLI.GRUPOECONOMICOAUTOMATICOPESSOA AS GAP ON  GE.IDGRUPOECONOMICOCENTRALIZADO = GAP.IDGRUPOECONOMICOCENTRALIZADO 
+        INNER JOIN CLI.GRUPOECONOMICOINSTITUICAO      AS GI  ON  GI.IDGRUPOECONOMICOCENTRALIZADO = GE.IDGRUPOECONOMICOCENTRALIZADO
+        INNER JOIN CLI.PESSOACOMPARTILHAMENTO         AS PC  ON  GAP.IDPESSOACOMPARTILHAMENTO    = PC.IDPESSOACOMPARTILHAMENTO
+        INNER JOIN CLI.PESSOA                         AS P   ON  PC.IDPESSOA                     = P.IDPESSOA
+        WHERE 1=1
+        and NOT EXISTS (SELECT 1
+                          FROM CLI.GRUPOECONOMICOMANUALPESSOA GMP
+                          INNER JOIN CLI.GRUPOECONOMICOINSTITUICAO      AS GI2  ON  GMP.IDGRUPOECONOMICOCENTRALIZADO = GI2.IDGRUPOECONOMICOCENTRALIZADO
+                          WHERE GE.IDGRUPOECONOMICOCENTRALIZADO = GMP.IDGRUPOECONOMICOAUTOMATICO  and GI.IDINSTITUICAO = GI2.IDINSTITUICAO
+                          )
+          AND GAP.IDGRUPOECONOMICOAUTOMATICOPESSOA = (SELECT MAX(GAP2.IDGRUPOECONOMICOAUTOMATICOPESSOA)
+                                                      FROM CLI.GRUPOECONOMICOAUTOMATICOPESSOA GAP2
+                                                      WHERE GAP.IDPESSOACOMPARTILHAMENTO = GAP2.IDPESSOACOMPARTILHAMENTO)
+	<j:if test="${idInstituicao != null}">
+		AND gi.IDINSTITUICAO = <bancoob:valor valor="${idInstituicao}" />
+	</j:if>
+	<j:if test="${numCpfCnpj != null}">
+		AND p.NUMCPFCNPJ = <bancoob:valor valor="${numCpfCnpj}" />
+	</j:if>
+	<j:if test="${listaCpfCnpj != null}">
+		AND p.NUMCPFCNPJ IN (<bancoob:valor valor="${listaCpfCnpj}" />)
+	</j:if>
+	<j:if test="${idPessoa != null}">
+		AND p.idPessoa = <bancoob:valor valor="${idPessoa}" />
+	</j:if>
+        union all
+        SELECT      
+                    P.IDPESSOA                            AS IDPESSOA,
+	            GI.IDINSTITUICAO                      AS IDINSTITUICAO,
+	            GAP.IDGRUPOECONOMICOAUTOMATICOPESSOA  AS IDGRUPOECONOMICOPESSOA,
+	            GMP.DATAHORAINICIO                    AS DATAHORAINICIO,
+	            GE.IDGRUPOECONOMICOCENTRALIZADO       AS IDGRUPOECONOMICO,
+	            GE.NOMEGRUPOECONOMICOCENTRALIZADO     AS DESCGRUPOECONOMICO,
+	            GE.DATAHORACADASTRO                   AS DATAHORACADASTRO
+        FROM CLI.GRUPOECONOMICOMANUALPESSOA AS GMP
+        INNER JOIN CLI.GRUPOECONOMICOAUTOMATICOPESSOA AS GAP ON  GAP.IDGRUPOECONOMICOCENTRALIZADO = GMP.IDGRUPOECONOMICOAUTOMATICO
+        INNER JOIN CLI.GRUPOECONOMICOCENTRALIZADO     AS GE  ON  GE.IDGRUPOECONOMICOCENTRALIZADO  = GMP.IDGRUPOECONOMICOCENTRALIZADO
+        INNER JOIN CLI.GRUPOECONOMICOINSTITUICAO      AS GI  ON  GI.IDGRUPOECONOMICOCENTRALIZADO  = GE.IDGRUPOECONOMICOCENTRALIZADO
+        INNER JOIN CLI.PESSOACOMPARTILHAMENTO         AS PC  ON  GAP.IDPESSOACOMPARTILHAMENTO     = PC.IDPESSOACOMPARTILHAMENTO
+        INNER JOIN CLI.PESSOA                         AS P   ON  PC.IDPESSOA                      = P.IDPESSOA
+        WHERE 1=1
+        and GAP.IDGRUPOECONOMICOAUTOMATICOPESSOA = (SELECT MAX(GAP2.IDGRUPOECONOMICOAUTOMATICOPESSOA)
+                                                      FROM CLI.GRUPOECONOMICOAUTOMATICOPESSOA GAP2
+                                                      WHERE GAP.IDPESSOACOMPARTILHAMENTO = GAP2.IDPESSOACOMPARTILHAMENTO)
+        AND GMP.IDGRUPOECONOMICOMANUALPESSOA = (SELECT MAX(GMP2.IDGRUPOECONOMICOMANUALPESSOA)
+                                                  FROM CLI.GRUPOECONOMICOMANUALPESSOA GMP2
+                                                  WHERE GMP.IDGRUPOECONOMICOCENTRALIZADO = GMP2.IDGRUPOECONOMICOCENTRALIZADO
+                                                  AND   GMP.IDGRUPOECONOMICOAUTOMATICO = GMP2.IDGRUPOECONOMICOAUTOMATICO
+                                                  )
+	<j:if test="${idInstituicao != null}">
+		AND gi.IDINSTITUICAO = <bancoob:valor valor="${idInstituicao}" />
+	</j:if>
+	<j:if test="${numCpfCnpj != null}">
+		AND p.NUMCPFCNPJ = <bancoob:valor valor="${numCpfCnpj}" />
+	</j:if>
+	<j:if test="${listaCpfCnpj != null}">
+		AND p.NUMCPFCNPJ IN (<bancoob:valor valor="${listaCpfCnpj}" />)
+	</j:if>
+	<j:if test="${idPessoa != null}">
+		AND p.idPessoa = <bancoob:valor valor="${idPessoa}" />
+	</j:if>
+)
+SELECT 
+	IDPESSOA,
+	IDINSTITUICAO,
+	IDGRUPOECONOMICOPESSOA,
+	DATAHORAINICIO,
+	IDGRUPOECONOMICO,
+	DESCGRUPOECONOMICO,
+	DATAHORACADASTRO
+FROM GRUPO
+			]]>
+		</command>
+	</query>
+    
+    <query name="OBTER_PESSOAS_POR_GRUPO_ECONOMICO_NOVO">
+      <use-case name="Grupo Econômico" />
+      <description>Obtém as pessoas de um grupo econômico</description>
+      <command>
+          <![CDATA[
+with GRUPO as (-- selecionar o grupo
+        SELECT
+	            GE.IDGRUPOECONOMICOCENTRALIZADO   AS IDGRUPOECONOMICO,
+	            GE.NOMEGRUPOECONOMICOCENTRALIZADO AS DESCGRUPOECONOMICO,
+	            GE.DATAHORACADASTRO               AS DATAHORACADASTRO,
+	            GE.CODTIPOGRUPOECONOMICO          AS CODTIPOGRUPOECONOMICO
+        FROM CLI.GRUPOECONOMICOCENTRALIZADO AS GE
+        INNER JOIN CLI.GRUPOECONOMICOMANUALPESSOA AS GMP ON  GE.IDGRUPOECONOMICOCENTRALIZADO = GMP.IDGRUPOECONOMICOCENTRALIZADO 
+        INNER JOIN CLI.GRUPOECONOMICOINSTITUICAO  AS GI  ON  GI.IDGRUPOECONOMICOCENTRALIZADO = GE.IDGRUPOECONOMICOCENTRALIZADO
+        INNER JOIN CLI.PESSOACOMPARTILHAMENTO     AS PC  ON  GMP.IDPESSOACOMPARTILHAMENTO    = PC.IDPESSOACOMPARTILHAMENTO
+        INNER JOIN CLI.PESSOA                     AS P   ON  PC.IDPESSOA                     = P.IDPESSOA
+        WHERE GMP.IDGRUPOECONOMICOAUTOMATICO IS NULL
+	<j:if test="${cpfCnpj != null}">
+		AND p.NUMCPFCNPJ = <bancoob:valor valor="${cpfCnpj}" />
+	</j:if>
+	<j:if test="${listaCpfCnpj != null}">
+		AND p.NUMCPFCNPJ IN (<bancoob:valor valor="${listaCpfCnpj}" />)
+	</j:if>
+	<j:if test="${idPessoa != null}">
+		AND p.idPessoa = <bancoob:valor valor="${idPessoa}" />
+	</j:if>
+	<j:if test="${idInstituicao != null}">
+		AND gi.IDINSTITUICAO = <bancoob:valor valor="${idInstituicao}" />
+	</j:if>
+	<j:if test="${idGrupo != null}">
+		AND ge.IDGRUPOECONOMICOCENTRALIZADO = <bancoob:valor valor="${idGrupo}" />
+	</j:if>
+        UNION ALL
+        SELECT
+	            GE.IDGRUPOECONOMICOCENTRALIZADO   AS IDGRUPOECONOMICO,
+	            GE.NOMEGRUPOECONOMICOCENTRALIZADO AS DESCGRUPOECONOMICO,
+	            GE.DATAHORACADASTRO               AS DATAHORACADASTRO,
+	            GE.CODTIPOGRUPOECONOMICO          AS CODTIPOGRUPOECONOMICO
+        FROM CLI.GRUPOECONOMICOCENTRALIZADO AS GE
+        INNER JOIN CLI.GRUPOECONOMICOAUTOMATICOPESSOA AS GAP ON  GE.IDGRUPOECONOMICOCENTRALIZADO = GAP.IDGRUPOECONOMICOCENTRALIZADO 
+        INNER JOIN CLI.GRUPOECONOMICOINSTITUICAO      AS GI  ON  GI.IDGRUPOECONOMICOCENTRALIZADO = GE.IDGRUPOECONOMICOCENTRALIZADO
+        INNER JOIN CLI.PESSOACOMPARTILHAMENTO         AS PC  ON  GAP.IDPESSOACOMPARTILHAMENTO    = PC.IDPESSOACOMPARTILHAMENTO
+        INNER JOIN CLI.PESSOA                         AS P   ON  PC.IDPESSOA                     = P.IDPESSOA
+        WHERE 1=1
+        and NOT EXISTS (SELECT 1
+                          FROM CLI.GRUPOECONOMICOMANUALPESSOA GMP
+                          INNER JOIN CLI.GRUPOECONOMICOINSTITUICAO      AS GI2  ON  GMP.IDGRUPOECONOMICOCENTRALIZADO = GI2.IDGRUPOECONOMICOCENTRALIZADO
+                          WHERE GE.IDGRUPOECONOMICOCENTRALIZADO = GMP.IDGRUPOECONOMICOAUTOMATICO  and GI.IDINSTITUICAO = GI2.IDINSTITUICAO
+                          )
+          AND GAP.IDGRUPOECONOMICOAUTOMATICOPESSOA = (SELECT MAX(GAP2.IDGRUPOECONOMICOAUTOMATICOPESSOA)
+                                                      FROM CLI.GRUPOECONOMICOAUTOMATICOPESSOA GAP2
+                                                      WHERE GAP.IDPESSOACOMPARTILHAMENTO = GAP2.IDPESSOACOMPARTILHAMENTO)
+	<j:if test="${cpfCnpj != null}">
+		AND p.NUMCPFCNPJ = <bancoob:valor valor="${cpfCnpj}" />
+	</j:if>
+	<j:if test="${listaCpfCnpj != null}">
+		AND p.NUMCPFCNPJ IN (<bancoob:valor valor="${listaCpfCnpj}" />)
+	</j:if>
+	<j:if test="${idPessoa != null}">
+		AND p.idPessoa = <bancoob:valor valor="${idPessoa}" />
+	</j:if>
+	<j:if test="${idInstituicao != null}">
+		AND gi.IDINSTITUICAO = <bancoob:valor valor="${idInstituicao}" />
+	</j:if>
+	<j:if test="${idGrupo != null}">
+		AND ge.IDGRUPOECONOMICOCENTRALIZADO = <bancoob:valor valor="${idGrupo}" />
+	</j:if>
+        union all
+        SELECT      
+	            GE.IDGRUPOECONOMICOCENTRALIZADO   AS IDGRUPOECONOMICO,
+	            GE.NOMEGRUPOECONOMICOCENTRALIZADO AS DESCGRUPOECONOMICO,
+	            GE.DATAHORACADASTRO               AS DATAHORACADASTRO,
+	            GE.CODTIPOGRUPOECONOMICO          AS CODTIPOGRUPOECONOMICO
+        FROM CLI.GRUPOECONOMICOMANUALPESSOA AS GMP
+        INNER JOIN CLI.GRUPOECONOMICOAUTOMATICOPESSOA AS GAP ON  GAP.IDGRUPOECONOMICOCENTRALIZADO = GMP.IDGRUPOECONOMICOAUTOMATICO
+        INNER JOIN CLI.GRUPOECONOMICOCENTRALIZADO     AS GE  ON  GE.IDGRUPOECONOMICOCENTRALIZADO  = GMP.IDGRUPOECONOMICOCENTRALIZADO
+        INNER JOIN CLI.GRUPOECONOMICOINSTITUICAO      AS GI  ON  GI.IDGRUPOECONOMICOCENTRALIZADO  = GE.IDGRUPOECONOMICOCENTRALIZADO
+        INNER JOIN CLI.PESSOACOMPARTILHAMENTO         AS PC  ON  GAP.IDPESSOACOMPARTILHAMENTO     = PC.IDPESSOACOMPARTILHAMENTO
+        INNER JOIN CLI.PESSOA                         AS P   ON  PC.IDPESSOA                      = P.IDPESSOA
+        WHERE 1=1
+        and GAP.IDGRUPOECONOMICOAUTOMATICOPESSOA = (SELECT MAX(GAP2.IDGRUPOECONOMICOAUTOMATICOPESSOA)
+                                                      FROM CLI.GRUPOECONOMICOAUTOMATICOPESSOA GAP2
+                                                      WHERE GAP.IDPESSOACOMPARTILHAMENTO = GAP2.IDPESSOACOMPARTILHAMENTO)
+        AND GMP.IDGRUPOECONOMICOMANUALPESSOA = (SELECT MAX(GMP2.IDGRUPOECONOMICOMANUALPESSOA)
+                                                  FROM CLI.GRUPOECONOMICOMANUALPESSOA GMP2
+                                                  WHERE GMP.IDGRUPOECONOMICOCENTRALIZADO = GMP2.IDGRUPOECONOMICOCENTRALIZADO
+                                                  AND   GMP.IDGRUPOECONOMICOAUTOMATICO = GMP2.IDGRUPOECONOMICOAUTOMATICO
+                                                  )
+	<j:if test="${cpfCnpj != null}">
+		AND p.NUMCPFCNPJ = <bancoob:valor valor="${cpfCnpj}" />
+	</j:if>
+	<j:if test="${listaCpfCnpj != null}">
+		AND p.NUMCPFCNPJ IN (<bancoob:valor valor="${listaCpfCnpj}" />)
+	</j:if>
+	<j:if test="${idPessoa != null}">
+		AND p.idPessoa = <bancoob:valor valor="${idPessoa}" />
+	</j:if>
+	<j:if test="${idInstituicao != null}">
+		AND gi.IDINSTITUICAO = <bancoob:valor valor="${idInstituicao}" />
+	</j:if>
+	<j:if test="${idGrupo != null}">
+		AND ge.IDGRUPOECONOMICOCENTRALIZADO = <bancoob:valor valor="${idGrupo}" />
+	</j:if>
+), PESSOA_GRUPO AS ( -- selecionar as pessoas
+        SELECT
+        		p.IDPESSOA                        AS IDPESSOA,
+	        	p.NUMCPFCNPJ                      AS NUMCPFCNPJ,
+	        	pc.NOMEPESSOA                     AS NOMEPESSOA,
+	        	GE.IDGRUPOECONOMICOCENTRALIZADO   AS IDGRUPOECONOMICO,
+	            GE.NOMEGRUPOECONOMICOCENTRALIZADO AS DESCGRUPOECONOMICO
+        FROM CLI.GRUPOECONOMICOCENTRALIZADO AS GE
+        INNER JOIN CLI.GRUPOECONOMICOMANUALPESSOA AS GMP ON  GE.IDGRUPOECONOMICOCENTRALIZADO = GMP.IDGRUPOECONOMICOCENTRALIZADO 
+        INNER JOIN CLI.GRUPOECONOMICOINSTITUICAO  AS GI  ON  GI.IDGRUPOECONOMICOCENTRALIZADO = GE.IDGRUPOECONOMICOCENTRALIZADO
+        INNER JOIN CLI.PESSOACOMPARTILHAMENTO     AS PC  ON  GMP.IDPESSOACOMPARTILHAMENTO    = PC.IDPESSOACOMPARTILHAMENTO
+        INNER JOIN CLI.PESSOA                     AS P   ON  PC.IDPESSOA                     = P.IDPESSOA
+        WHERE GMP.IDGRUPOECONOMICOAUTOMATICO IS NULL
+        AND exists (
+        	select null from GRUPO as g where g.IDGRUPOECONOMICO = GE.IDGRUPOECONOMICOCENTRALIZADO
+        )
+    <j:if test="${idInstituicao != null}">
+		AND gi.IDINSTITUICAO = <bancoob:valor valor="${idInstituicao}" />
+	</j:if>
+	<j:if test="${listaCpfCnpj != null and forcarFiltro}">
+		AND p.NUMCPFCNPJ IN (<bancoob:valor valor="${listaCpfCnpj}" />)
+	</j:if>
+	<j:if test="${cpfCnpj != null and forcarFiltro}">
+		AND p.NUMCPFCNPJ = <bancoob:valor valor="${cpfCnpj}" />
+	</j:if>
+	<j:if test="${idPessoa != null and forcarFiltro}">
+		AND p.idPessoa = <bancoob:valor valor="${idPessoa}" />
+	</j:if>
+        UNION ALL
+        SELECT
+	            p.IDPESSOA                        AS IDPESSOA,
+	        	p.NUMCPFCNPJ                      AS NUMCPFCNPJ,
+	        	pc.NOMEPESSOA                     AS NOMEPESSOA,
+	        	GE.IDGRUPOECONOMICOCENTRALIZADO   AS IDGRUPOECONOMICO,
+	            GE.NOMEGRUPOECONOMICOCENTRALIZADO AS DESCGRUPOECONOMICO
+        FROM CLI.GRUPOECONOMICOCENTRALIZADO AS GE
+        INNER JOIN CLI.GRUPOECONOMICOAUTOMATICOPESSOA AS GAP ON  GE.IDGRUPOECONOMICOCENTRALIZADO = GAP.IDGRUPOECONOMICOCENTRALIZADO 
+        INNER JOIN CLI.GRUPOECONOMICOINSTITUICAO      AS GI  ON  GI.IDGRUPOECONOMICOCENTRALIZADO = GE.IDGRUPOECONOMICOCENTRALIZADO
+        INNER JOIN CLI.PESSOACOMPARTILHAMENTO         AS PC  ON  GAP.IDPESSOACOMPARTILHAMENTO    = PC.IDPESSOACOMPARTILHAMENTO
+        INNER JOIN CLI.PESSOA                         AS P   ON  PC.IDPESSOA                     = P.IDPESSOA
+        WHERE 1=1
+        and NOT EXISTS (SELECT 1
+                          FROM CLI.GRUPOECONOMICOMANUALPESSOA GMP
+                          INNER JOIN CLI.GRUPOECONOMICOINSTITUICAO      AS GI2  ON  GMP.IDGRUPOECONOMICOCENTRALIZADO = GI2.IDGRUPOECONOMICOCENTRALIZADO
+                          WHERE GE.IDGRUPOECONOMICOCENTRALIZADO = GMP.IDGRUPOECONOMICOAUTOMATICO  and GI.IDINSTITUICAO = GI2.IDINSTITUICAO
+                          )
+          AND GAP.IDGRUPOECONOMICOAUTOMATICOPESSOA = (SELECT MAX(GAP2.IDGRUPOECONOMICOAUTOMATICOPESSOA)
+                                                      FROM CLI.GRUPOECONOMICOAUTOMATICOPESSOA GAP2
+                                                      WHERE GAP.IDPESSOACOMPARTILHAMENTO = GAP2.IDPESSOACOMPARTILHAMENTO)
+          AND exists (
+        	select null from GRUPO as g where g.IDGRUPOECONOMICO = GE.IDGRUPOECONOMICOCENTRALIZADO
+        )
+    <j:if test="${idInstituicao != null}">
+		AND gi.IDINSTITUICAO = <bancoob:valor valor="${idInstituicao}" />
+	</j:if>
+	<j:if test="${listaCpfCnpj != null and forcarFiltro }">
+		AND p.NUMCPFCNPJ IN (<bancoob:valor valor="${listaCpfCnpj}" />)
+	</j:if>
+	<j:if test="${cpfCnpj != null and forcarFiltro}">
+		AND p.NUMCPFCNPJ = <bancoob:valor valor="${cpfCnpj}" />
+	</j:if>
+	<j:if test="${idPessoa != null and forcarFiltro}">
+		AND p.idPessoa = <bancoob:valor valor="${idPessoa}" />
+	</j:if>
+        union all
+        SELECT      
+	            p.IDPESSOA                        AS IDPESSOA,
+	        	p.NUMCPFCNPJ                      AS NUMCPFCNPJ,
+	        	pc.NOMEPESSOA                     AS NOMEPESSOA,
+	        	GE.IDGRUPOECONOMICOCENTRALIZADO   AS IDGRUPOECONOMICO,
+	            GE.NOMEGRUPOECONOMICOCENTRALIZADO AS DESCGRUPOECONOMICO
+        FROM CLI.GRUPOECONOMICOMANUALPESSOA AS GMP
+        INNER JOIN CLI.GRUPOECONOMICOAUTOMATICOPESSOA AS GAP ON  GAP.IDGRUPOECONOMICOCENTRALIZADO = GMP.IDGRUPOECONOMICOAUTOMATICO
+        INNER JOIN CLI.GRUPOECONOMICOCENTRALIZADO     AS GE  ON  GE.IDGRUPOECONOMICOCENTRALIZADO  = GMP.IDGRUPOECONOMICOCENTRALIZADO
+        INNER JOIN CLI.GRUPOECONOMICOINSTITUICAO      AS GI  ON  GI.IDGRUPOECONOMICOCENTRALIZADO  = GE.IDGRUPOECONOMICOCENTRALIZADO
+        INNER JOIN CLI.PESSOACOMPARTILHAMENTO         AS PC  ON  GAP.IDPESSOACOMPARTILHAMENTO     = PC.IDPESSOACOMPARTILHAMENTO
+        INNER JOIN CLI.PESSOA                         AS P   ON  PC.IDPESSOA                      = P.IDPESSOA
+        WHERE 1=1
+        and GAP.IDGRUPOECONOMICOAUTOMATICOPESSOA = (SELECT MAX(GAP2.IDGRUPOECONOMICOAUTOMATICOPESSOA)
+                                                      FROM CLI.GRUPOECONOMICOAUTOMATICOPESSOA GAP2
+                                                      WHERE GAP.IDPESSOACOMPARTILHAMENTO = GAP2.IDPESSOACOMPARTILHAMENTO)
+        AND GMP.IDGRUPOECONOMICOMANUALPESSOA = (SELECT MAX(GMP2.IDGRUPOECONOMICOMANUALPESSOA)
+                                                  FROM CLI.GRUPOECONOMICOMANUALPESSOA GMP2
+                                                  WHERE GMP.IDGRUPOECONOMICOCENTRALIZADO = GMP2.IDGRUPOECONOMICOCENTRALIZADO
+                                                  AND   GMP.IDGRUPOECONOMICOAUTOMATICO = GMP2.IDGRUPOECONOMICOAUTOMATICO
+                                                  )
+		AND exists (
+        	select null from GRUPO as g where g.IDGRUPOECONOMICO = GE.IDGRUPOECONOMICOCENTRALIZADO
+        )
+    <j:if test="${idInstituicao != null}">
+		AND gi.IDINSTITUICAO = <bancoob:valor valor="${idInstituicao}" />
+	</j:if>
+	<j:if test="${listaCpfCnpj != null and forcarFiltro }">
+		AND p.NUMCPFCNPJ IN (<bancoob:valor valor="${listaCpfCnpj}" />)
+	</j:if>
+	<j:if test="${cpfCnpj != null and forcarFiltro}">
+		AND p.NUMCPFCNPJ = <bancoob:valor valor="${cpfCnpj}" />
+	</j:if>
+	<j:if test="${idPessoa != null and forcarFiltro}">
+		AND p.idPessoa = <bancoob:valor valor="${idPessoa}" />
+	</j:if>
+)
+SELECT 
+	IDPESSOA,
+	NUMCPFCNPJ,
+	NOMEPESSOA,
+	IDGRUPOECONOMICO,
+	DESCGRUPOECONOMICO
+FROM PESSOA_GRUPO
+          ]]>
+      </command>
+    </query>
+
+</queries>
